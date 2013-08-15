@@ -1,0 +1,100 @@
+/*
+* Header----------------------------
+*/
+.header {
+	background: url("../images/header_seperator.png") no-repeat scroll 184px 0 transparent;
+	height:69px;
+}
+.main-title {
+	font-family: freeroadregular;
+	font-size: 1.21em;
+	padding-top: 15px;
+	color:#383838;
+}
+
+.header .three {
+	height: 69px;
+}
+
+.header .service-client {
+    padding-top: 6px;
+}
+
+.header .chat {
+	background: url("../images/chat.png") no-repeat scroll 0 0 transparent;
+	height: 69px;
+	padding-left: 141px;
+}
+.header .rapeler {
+	background: url("../images/rapeler.png") no-repeat scroll 20px 0 transparent;
+	height: 69px;
+	padding-left: 100px;
+}
+
+.header .last-2 {
+	font-weight: bold;
+	font-size: 0.8em;
+	padding-top: 8px;
+}
+.header .last-2 span{
+	color: #3FAFE7;
+    display: block;
+    font: normal normal normal 1.4em freeroadregular;
+}
+
+
+/*
+* Nav & footer----------------------
+*/
+.navigation,.main-footer {
+	background: url("../images/gradient_bg.png") repeat-x scroll 0 0 transparent;
+	height:59px;
+	color:#fff;
+}
+.navigation {
+	padding:8px;
+}
+.main-footer {
+	padding-top: 12px;
+}
+.main-footer .four{
+	height: 28px;
+    padding-top: 8px;
+    font-family: freeroadregular;
+}
+
+.main-footer .paiement {
+	background: url("../images/paiement_icon.png") no-repeat scroll 70px 0 transparent;
+}
+.main-footer .livraison {
+	background: url("../images/livraison_icon.png") no-repeat scroll 68px 0 transparent;
+}
+.main-footer .souscription {
+	background: url("../images/souscription_icon.png") no-repeat scroll 25px 0 transparent;
+	padding-left: 30px;
+}
+
+.below-footer {
+	text-align: center;
+	color:#bdbdbd;
+	font-size: 0.7em;
+	margin-top: 15px;
+}
+
+/*
+* Main section - Left & Right----------------------
+*/
+.left-content {
+	height: 300px;
+}
+.right-content {
+	height: 300px;
+	background-color: #9ac447;
+}
+
+.left-content .etapes { 
+	margin-top: 20px;
+}
+.etapes li { 
+	height:80px;
+}
