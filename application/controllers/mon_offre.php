@@ -14,15 +14,16 @@ class Mon_offre extends MY_Controller {
     }
     public function wsdl()
     {
-        $this->nusoap_client = new nusoap_client("http://192.168.64.46/WebserviceAboweb/Service.asmx?wsdl");
-
+        $this->nusoap_client = new nusoap_client("http://192.168.64.46/WebserviceAboweb/Service.asmx?wsdl",true);
+        echo "<pre>";
+        print_r($this->nusoap_client);
+        echo "</pre>";
         if($this->nusoap_client->fault)
         {
             $text = 'Error: '.$this->nusoap_client->fault;
         }
         else
         {
-
             if ($this->nusoap_client->getError())
             {
                 $text = 'Error: '.$this->nusoap_client->getError();
@@ -34,6 +35,7 @@ class Mon_offre extends MY_Controller {
                 print_r($row);
             }
         }
+        
     }
 }
 
