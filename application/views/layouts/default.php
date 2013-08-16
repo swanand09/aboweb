@@ -23,17 +23,19 @@
         echo css('ie7.css');
   ?>
    <![endif]-->
+
   <?php
         echo js('modernizr.foundation.js');
+         echo js('jquery.js');
+         echo js('jquery.blockUI.js');
   ?> 
-  <script>
-    Modernizr.addTest("boxsizing", function() {
-      return Modernizr.testAllProps("boxSizing") && (document.documentMode === undefined || document.documentMode > 7);
-    });
-  </script>
+
   <style>
       .highli{
           font-weight:bold;
+      }
+      #prlodtxt{
+          display:none;
       }
   </style>
 </head>
@@ -91,10 +93,11 @@
   <!-- END OF FOOTER-->
   
   <!-- Included JS Files (Compressed) -->
-   <?php
-        echo js('jquery.js');
-        echo js('foundation.min.js');
+   <?php       
+        //echo js('foundation.min.js');
         echo js('app.js');
-  ?> 
+        echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
+   ?> 
+  <h3 id="prlodtxt">Veuillez patienter...</h3 
 </body>
 </html>

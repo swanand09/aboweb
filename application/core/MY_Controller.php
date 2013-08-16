@@ -45,6 +45,16 @@ class MY_Controller extends CI_Controller {
                   break;
               }
            }
+           $this->data['num_tel'] = array('name' => 'num_tel',
+                    'id' => 'num_tel',
+                    'type' => 'text',
+                    'value' => $this->data["prenum"]
+            );
+            $this->data['test_eligb_butt'] = array('name' => 'test_eligb_butt',
+                    'id' => 'test_eligb_butt',
+                    'type' => 'submit',
+                    'value' => 'Tester'
+            );
            $this->data["pageid"] ="page_1";
            $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
