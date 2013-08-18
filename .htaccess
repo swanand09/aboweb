@@ -14,3 +14,20 @@ RewriteCond $1 !^(index\.php|assets/|robots\.txt)
 #   Toutes les autres URL vont être redirigées vers le fichier index.php.
 RewriteRule ^(.*)$ index.php/$1 [L]
 #php_value date.timezone America/Guadeloupe
+
+#RewriteRule  ^/?ajax/(.*)$	ajax.php?$1 [NC,QSA,L]
+#Options -Indexes
+#<IfModule mod_rewrite.c>
+#	RewriteEngine On
+
+	#	If you are having problems with the rewrite rules, remove the "#" from the
+	#	line that begins "RewriteBase" below. You will also have to change the path
+	#	of the rewrite to reflect the path to your base path.
+	#RewriteBase /
+
+#RewriteCond $1 !^(index\.php|assets/|robots\.txt)
+#RewriteRule ^(.*)$ index.php/$1 [L]
+#RewriteRule  ^/?ajax/(.*)$	ajax.php?$1 [NC,QSA,L]
+
+
+#</IfModule>

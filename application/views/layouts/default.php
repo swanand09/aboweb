@@ -61,17 +61,20 @@
   <!--MAIN SECTION-->
   <section class='row main-content'>
     <section class='eight columns left-content'>
-      <ul class="block-grid four-up etapes">
-        <li <?php echo ($pageid=="page_1")?"class='highli'":""; ?>><span>1</span> Mon offre</li>
-        <li <?php echo ($pageid=="page_2")?"class='highli'":""; ?>><span>2</span> Mes coordonnées</li>
-        <li <?php echo ($pageid=="page_3")?"class='highli'":""; ?>><span>3</span> Mon récapitulatif</li>
-        <li <?php echo ($pageid=="page_4")?"class='highli'":""; ?>><span>4</span> Paiement</li>
+      <ul class="block-grid four-up etapes">        
+        <li class='etape1 <?php echo ($pageid=="page_1")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>1</span> Mon offre</a></li>
+        <li class='etape2 <?php echo ($pageid=="page_2")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>2</span> Mes coordonnées</a></li>
+        <li class='etape3 <?php echo ($pageid=="page_3")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>3</span> Mon récapitulatif</a></li>
+        <li class='etape4 <?php echo ($pageid=="page_4")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
       </ul>
       <div>
            <?php echo $template['partials']['test_eligib_contenu'];?>
       </div>    
     </section>
-    <section class='four columns right-content'></section>
+    <section class='four columns right-content'>
+        <div class='ligne'>        
+         </div>
+    </section>
   </section>
   <!--END OF MAIN SECTION-->
 
@@ -94,9 +97,10 @@
   
   <!-- Included JS Files (Compressed) -->
    <?php       
-        //echo js('foundation.min.js');
+      //  echo js('foundation.min.js');
         echo js('app.js');
-        echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
+        echo js('custom.js');
+       // echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 
   <h3 id="prlodtxt">Veuillez patienter...</h3 
 </body>

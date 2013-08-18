@@ -50,11 +50,13 @@ class MY_Controller extends CI_Controller {
                     'type' => 'text',
                     'value' => $this->data["prenum"]
             );
-            $this->data['test_eligb_butt'] = array('name' => 'test_eligb_butt',
-                    'id' => 'test_eligb_butt',
-                    'type' => 'submit',
-                    'value' => 'Tester'
-            );
+            $this->data['test_eligb_butt'] = array(
+                                                    'class'=>'rmv-std-btn btn-green',
+                                                    'name' => 'test_eligb_butt',
+                                                    'id' => 'test_eligb_butt',
+                                                    'type' => 'submit',
+                                                    'value' => 'TESTER'
+                                                  );
            $this->data["pageid"] ="page_1";
            $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
