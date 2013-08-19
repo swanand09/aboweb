@@ -1,10 +1,14 @@
-<script>
-          $(document).ready(function() {
-          //$(function() {             
-           
-            var cont_monoff = $('#cont_mon_off').html();   
-           // $( "#cont_mon_off" ).html(cont_monoff);  
-            $("form").submit(function(){
+<style>
+    .prev_next
+    {
+        float:left;
+        margin-right:50px;
+    }
+</style>
+<script>  
+          $(function() {             
+            var cont_monoff = $('#cont_mon_off').html(); 
+              $("form").submit(function(){
                  $.blockUI({ 
                     message:$("#prlodtxt"), 
                     css: { 
@@ -22,20 +26,31 @@
                         num_tel : $("#num_tel").val()                                                                                  
                      },
                     function(data){
-                       var content = $(data+'<div><a href="javascript:void(0);" id="butt_prev">Précédent</a></div>');                    
-                       $( "#cont_mon_off" ).html(content);   
+                     //  var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+                       
+                       var content = data+
+                                     "<div><div class='prev_next'><input type='button' id='precedent' onclick='javascript:precedEtat("+cont_monoff+")' value='Précédent'></div>"+
+                                     "<div class='prev_next'><a href='javascript:void(0);' id='choose_forfait'>Choisr Mon fortait</a></div></div>";
+                       $("#cont_mon_off").empty();
+                       $("#cont_mon_off").prepend(content);
+                       //content.prependTo("#cont_mon_off");   
                        $.unblockUI();
                     }
                 );
                 return false;    
             });    
           
-             $("#butt_prev").click(function(){ 
+             $("#precedent").click(function(){     
                  alert('TOTO');
                 $( "#cont_mon_off" ).html(cont_monoff); 
             });
           
-          });   
+          });       
+          
+          function precedEtat(cont_monoff)
+          {
+               alert(cont_monoff);
+          }
 </script>
 <div class='left-etape-content' id="cont_mon_off">
     <?php  echo form_open('mon_offre/ajax_proc_interogeligib',array('class'=>'border-gray frm-etape-tester columns twelve')); ?>        

@@ -5,7 +5,7 @@ class Mon_offre extends MY_Controller {
     public function __construct()
     {
             parent::__construct();
-            //var $mycont = MY_Controller();
+            $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib');    
     }  
     public function index()
     {
@@ -15,47 +15,17 @@ class Mon_offre extends MY_Controller {
     
     public function ajax_proc_interogeligib()
     {
-       $num_tel       = $this->input->post('num_tel');  
-       if($num_tel!="")
-       {
-           $this->nusoap_client = new nusoap_client("http://192.168.64.46/WebserviceAboweb/Service.asmx?wsdl",true);           
-           $htmlContent = "test eligibilité en cours";
-           if($this->nusoap_client->fault)
-           {
-               $htmlContent = 'Error: '.$this->nusoap_client->fault;
-           } else
-           {
-                if ($this->nusoap_client->getError())
-                {
-                    $htmlContent = 'Error: '.$this->nusoap_client->getError();
-                }
-                else
-                {
-                    $soapEligib = $this->nusoap_client->serializeEnvelope('
-                                    <interrogeEligibilite xmlns="msvaboweb">
-                                      <_numero>'.$num_tel.'</_numero>
-                                    </interrogeEligibilite>','',array(),'document', 'literal'); 
-                    $this->nusoap_client->operation = "msvaboweb/interrogeEligibilite";
-                    $result = $this->nusoap_client->send($soapEligib,'msvaboweb/interrogeEligibilite');
-                  $htmlContent ="";
-//                    foreach($result["interrogeEligibiliteResult"]["Ligne"] as $key=>$val)
-//                    {
-//                        if($val!=true || $val!=false)
-//                        $htmlContent.=$val."<br>";
-//                    }
-                    $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
-                    $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
-                    $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>";                    
-                    $htmlContent .= "<p>Eligibilé ADSL: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
-                    $htmlContent .= "<p>Eligibilé TV: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
-                }
-           }           
-           
-       }else
-       {
-            $htmlContent = "<p>Veuillez ajouter votre numero de tel</p>";
-       }
-       echo utf8_encode(utf8_decode($htmlContent));
+       $num_tel       = $this->input->post('num_tel'); 
+       $htmlContent = "";
+       $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
+       $this->session->set_userdata($result);
+       $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
+                   $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
+                   $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>";                    
+                   $htmlContent .= "<p>Eligibilé ADSL: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
+                   $htmlContent .= "<p>Eligibilé TV: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
+      
+       echo utf8_encode(utf8_decode($htmlContent));       
     }
     
     public function wsdl()
