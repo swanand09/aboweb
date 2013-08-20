@@ -6,6 +6,7 @@ class Mon_offre extends MY_Controller {
     {
             parent::__construct();
             $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib');    
+            $this->load->library('phpsession');
     }  
     public function index()
     {
@@ -15,10 +16,11 @@ class Mon_offre extends MY_Controller {
     
     public function ajax_proc_interogeligib()
     {
+       
        $num_tel       = $this->input->post('num_tel'); 
        $htmlContent = "";
-       $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
-       $this->session->set_userdata($result);
+       $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);          
+       $this->phpsession->save('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);
        $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
                    $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
                    $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>";                    
@@ -28,34 +30,22 @@ class Mon_offre extends MY_Controller {
        echo utf8_encode(utf8_decode($htmlContent));       
     }
     
-    public function wsdl()
-    {
-        $this->nusoap_client = new nusoap_client("http://192.168.64.46/WebserviceAboweb/Service.asmx?wsdl",true);
-               
-        if($this->nusoap_client->fault)
+    public function forfait()
+    {   
+        $produit =  $this->phpsession->get("produit");
+        $htmlContent ="";
+        foreach($produit as $key=>$val)
         {
-            $text = 'Error: '.$this->nusoap_client->fault;
+             $htmlContent.="<div>";
+             $htmlContent.="<h3>FORFAIT N&deg;".($key+1)."</h3>";  
+             $htmlContent.="<p>";
+             $htmlContent .=$val["Libelle"]."&nbsp;&nbsp;";
+             $htmlContent .=$val["Tarif"]."&euro;";
+             $htmlContent.="</p>"; 
+             $htmlContent.="</div>";        
         }
-        else
-        {
-            if ($this->nusoap_client->getError())
-            {
-                $text = 'Error: '.$this->nusoap_client->getError();
-            }
-            else
-            {
-                $soapEligib = $this->nusoap_client->serializeEnvelope('
-                                <interrogeEligibilite xmlns="msvaboweb">
-				  <_numero>0590998670</_numero>
-				</interrogeEligibilite>','',array(),'document', 'literal'); 
-                $result = $this->nusoap_client->send($soapEligib,'msvaboweb/interrogeEligibilite');
-                echo "<pre>";
-                print_r($result);
-                echo "</pre>";    
-            }
-        }
-        
-    }
+        echo utf8_encode($htmlContent);     
+    } 
 }
 
 /* End of file mon_offre.php */

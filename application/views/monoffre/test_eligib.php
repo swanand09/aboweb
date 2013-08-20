@@ -6,8 +6,8 @@
     }
 </style>
 <script>  
-          $(function() {             
-            var cont_monoff = $('#cont_mon_off').html(); 
+          $(function() {                
+         
               $("form").submit(function(){
                  $.blockUI({ 
                     message:$("#prlodtxt"), 
@@ -26,32 +26,38 @@
                         num_tel : $("#num_tel").val()                                                                                  
                      },
                     function(data){
-                     //  var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+                      //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                        
                        var content = data+
-                                     "<div><div class='prev_next'><input type='button' id='precedent' onclick='javascript:precedEtat("+cont_monoff+")' value='Précédent'></div>"+
-                                     "<div class='prev_next'><a href='javascript:void(0);' id='choose_forfait'>Choisr Mon fortait</a></div></div>";
-                       $("#cont_mon_off").empty();
-                       $("#cont_mon_off").prepend(content);
-                       //content.prependTo("#cont_mon_off");   
-                       $.unblockUI();
+                                     "<div>"+
+                                     '<div class="prev_next"><?php echo anchor('mon_offre',"PRECEDENT");?></div>'+
+                                     '<div class="prev_next"><a href="javascript:retrieveForfait();">CHOISIR MON FORFAIT</a></div>'+
+                                     "</div>";
+                      $("#cont_mon_off").empty().prepend(content); 
+                      $.unblockUI();                    
                     }
                 );
                 return false;    
-            });    
-          
-             $("#precedent").click(function(){     
-                 alert('TOTO');
-                $( "#cont_mon_off" ).html(cont_monoff); 
-            });
-          
-          });       
-          
-          function precedEtat(cont_monoff)
-          {
-               alert(cont_monoff);
-          }
+            });  
+          });    
+         function retrieveForfait()
+         {
+            $.blockUI({ 
+                    message:$("#prlodtxt"), 
+                    css: { 
+                    border: 'none', 
+                    padding: '15px', 
+                    backgroundColor: '#000', 
+                   '-webkit-border-radius': '10px', 
+                    '-moz-border-radius': '10px', 
+                    opacity: .5, 
+                    color: '#fff'                  
+                } });   
+            $("#cont_mon_off").empty().load('mon_offre/forfait');
+            $.unblockUI(); 
+         }         
 </script>
+
 <div class='left-etape-content' id="cont_mon_off">
     <?php  echo form_open('mon_offre/ajax_proc_interogeligib',array('class'=>'border-gray frm-etape-tester columns twelve')); ?>        
             <div class='seven columns'>
@@ -70,4 +76,4 @@
           <div class='columns six text-left'><a class='button secondary' href='#'>CONTACTER LE SERVICE COMMERCIAL</a></div>
         </div>
 </div>
-                
+ 

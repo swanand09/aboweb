@@ -9,6 +9,8 @@ class MY_Controller extends CI_Controller {
 		parent::__construct();     
                // $this->load->model('User_model','user');    
               // $this->userdata = $this->session->all_userdata();
+               //$this->load->file(FCPATH.'ajaxfw.php');
+               
 	}  	
         
         public function get_department()
@@ -58,6 +60,8 @@ class MY_Controller extends CI_Controller {
                                                     'value' => 'TESTER'
                                                   );
            $this->data["pageid"] ="page_1";
+//            $ajax  = ajax();
+//           $ajax->test_eligb_butt = $ajax->form('mon_offre/ajax_proc_interogeligib');
            $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Mon Offre')

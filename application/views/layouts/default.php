@@ -28,6 +28,7 @@
         echo js('modernizr.foundation.js');
          echo js('jquery.js');
          echo js('jquery.blockUI.js');
+      // echo ajax()->init();
   ?> 
 
   <style>
@@ -102,6 +103,6 @@
         echo js('custom.js');
        // echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 
-  <h3 id="prlodtxt">Veuillez patienter...</h3 
+  <h3 id="prlodtxt">Veuillez patienter...</h3> 
 </body>
 </html>
