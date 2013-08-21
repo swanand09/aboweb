@@ -6,20 +6,24 @@
     }
 </style>
 <script>  
+        var preload = function(){ 
+                      $.blockUI({                    
+                    message:$("#displayBox"),
+                      css: { border: 'none',
+                        padding: '15px',
+                        backgroundColor: '#fff',
+                        width: '60px',
+                        '-webkit-border-radius': '10px', 
+                        '-moz-border-radius': '10px',
+                        'border-radius': '10px',
+                        opacity: .5
+                         } 
+                 }); 
+              }
           $(function() {                
-         
+              
               $("form").submit(function(){
-                 $.blockUI({ 
-                    message:$("#prlodtxt"), 
-                    css: { 
-                    border: 'none', 
-                    padding: '15px', 
-                    backgroundColor: '#000', 
-                   '-webkit-border-radius': '10px', 
-                    '-moz-border-radius': '10px', 
-                    opacity: .5, 
-                    color: '#fff'                  
-                } }); 
+                preload();
                 $.post(
                     '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>',
                      {
@@ -27,35 +31,47 @@
                      },
                     function(data){
                       //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                       
-                       var content = data+
-                                     "<div>"+
-                                     '<div class="prev_next"><?php echo anchor('mon_offre',"PRECEDENT");?></div>'+
-                                     '<div class="prev_next"><a href="javascript:retrieveForfait();">CHOISIR MON FORFAIT</a></div>'+
-                                     "</div>";
-                      $("#cont_mon_off").empty().prepend(content); 
+                      
+                      $("#cont_mon_off").empty().prepend(data); 
                       $.unblockUI();                    
                     }
                 );
                 return false;    
             });  
+              
           });    
-         function retrieveForfait()
-         {
-            $.blockUI({ 
-                    message:$("#prlodtxt"), 
-                    css: { 
-                    border: 'none', 
-                    padding: '15px', 
-                    backgroundColor: '#000', 
-                   '-webkit-border-radius': '10px', 
-                    '-moz-border-radius': '10px', 
-                    opacity: .5, 
-                    color: '#fff'                  
-                } });   
-            $("#cont_mon_off").empty().load('mon_offre/forfait');
-            $.unblockUI(); 
-         }         
+          function retrieveForfait()
+          {           
+              preload();
+              var redu_facture = "false";
+              var consv_num_tel = "false";
+                if($("#redu_facture").is(":checked"))
+                {
+                    redu_facture = "true";
+                }
+                if($("#consv_num_tel").is(":checked"))
+                {
+                    consv_num_tel = "true";
+                }
+                $.post(
+                    '<?php echo base_url('mon_offre/forfait');?>',
+                     {
+                        redu_facture : redu_facture,
+                        consv_num_tel : consv_num_tel
+                     },
+                    function(data){
+                      //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+                      
+                      $("#cont_mon_off").empty().prepend(data); 
+                      $.unblockUI();                    
+                    }
+                  );
+             // $("#cont_mon_off").empty().load('mon_offre/forfait'); 
+          }  
+          function prevState()
+          {               
+              $("#cont_mon_off").empty().load('mon_offre/prevState');
+          }
 </script>
 
 <div class='left-etape-content' id="cont_mon_off">

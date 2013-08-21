@@ -101,7 +101,7 @@
       //  echo js('foundation.min.js');
         echo js('app.js');
         echo js('custom.js');
-       // echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
+        echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 
   <h3 id="prlodtxt">Veuillez patienter...</h3> 
 </body>
