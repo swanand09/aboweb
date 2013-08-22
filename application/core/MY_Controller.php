@@ -10,7 +10,6 @@ class MY_Controller extends CI_Controller {
                // $this->load->model('User_model','user');    
               // $this->userdata = $this->session->all_userdata();
                //$this->load->file(FCPATH.'ajaxfw.php');
-               
 	}  	
         
         public function get_department()
@@ -18,13 +17,13 @@ class MY_Controller extends CI_Controller {
             $this->userdata["user_geolocalisation"] = $_SESSION["user_geolocalisation"];
         }
         
-        public function controller_test_eligib_vue($data=array())
+        public function controller_test_eligib_vue()
         {
            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
           $this->data["prenum"] = "";
-           if(!empty($data))
+           if(!empty($this->data))
            {
-              switch($data['department'])
+              switch($this->data['department'])
               {
                   case "Martinique":
                       $this->data["prenum"] = "0201";
@@ -53,7 +52,7 @@ class MY_Controller extends CI_Controller {
                                                     'type' => 'text',
                                                     'value' => $this->data["prenum"]
                                             );
-            $this->data['test_eligb_butt'] = array(
+           $this->data['test_eligb_butt'] = array(
                                                     'class'=>'rmv-std-btn btn-green',
                                                     'name' => 'test_eligb_butt',
                                                     'id' => 'test_eligb_butt',
@@ -61,12 +60,13 @@ class MY_Controller extends CI_Controller {
                                                     'value' => 'TESTER'
                                               );
            $this->data["pageid"] ="page_1";
-//            $ajax  = ajax();
-//           $ajax->test_eligb_butt = $ajax->form('mon_offre/ajax_proc_interogeligib');
+           
+           
            $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Mon Offre')
-                            ->set_partial('test_eligib_contenu', 'monoffre/test_eligib')
+                            ->set_partial('contenu_gauche', 'monoffre/test_eligib')
+                             ->set_partial('contenu_droit', 'monoffre/module_recap')    
                             ->build('page',$this->data);
         }
 }

@@ -1,5 +1,5 @@
-$(function(){
 
+$(function(){    
 	carousel('.etapes li.etape1','.etape1');
 	carousel('.etapes li.etape2','.etape2');
 	carousel('.etapes li.etape3','.etape3');

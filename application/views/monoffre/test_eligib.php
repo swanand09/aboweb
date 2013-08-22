@@ -32,9 +32,10 @@
                     function(data){
                       //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                       
-                      $("#cont_mon_off").empty().prepend(data); 
+                      $("#cont_mon_off").empty().prepend(data.htmlContent); 
+                      $("#recap_contenu").empty().prepend(data.contenuDroit);                     
                       $.unblockUI();                    
-                    }
+                    }, "json"
                 );
                 return false;    
             });  
@@ -60,17 +61,16 @@
                         consv_num_tel : consv_num_tel
                      },
                     function(data){
-                      //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                      
                       $("#cont_mon_off").empty().prepend(data); 
                       $.unblockUI();                    
                     }
-                  );
-             // $("#cont_mon_off").empty().load('mon_offre/forfait'); 
+                  );             
           }  
           function prevState()
           {               
-              $("#cont_mon_off").empty().load('mon_offre/prevState');
+                preload();
+                $("#cont_mon_off").empty().load('mon_offre/prevState');
+                $.unblockUI(); 
           }
 </script>
 

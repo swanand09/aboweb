@@ -10,9 +10,11 @@ class Mon_offre extends MY_Controller {
     }  
     public function index($param="")
     {
-        $this->data["department"] = $this->session->userdata("user_geolocalisation"); 
+        //$this->data["department"] = $this->session->userdata("user_geolocalisation"); 
+        $this->data["department"] = "TEST";
+        
         (!$this->session->_session_id_expired())?$this->session->destroy():"";
-        return $this->controller_test_eligib_vue($this->data["department"]);                
+        return $this->controller_test_eligib_vue();                
     }
     
     public function ajax_proc_interogeligib()
@@ -22,6 +24,12 @@ class Mon_offre extends MY_Controller {
         $htmlContent   = "";
         if($num_tel!="")
         {
+             $this->data["racap_num"] = array(
+                                                'name' => 'recap_num',
+                                                'id' => 'recap_num',
+                                                'type' => 'text',
+                                                'value' => $num_tel
+                                            );
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);  
             if(!empty($result))
             {               
@@ -62,8 +70,19 @@ class Mon_offre extends MY_Controller {
                                               );
                     $htmlContent .= '<div class="prev_next">'.form_submit($choix_forfait).'</div>';
                     $htmlContent .= "</form>";
-                $htmlContent .= "</div>";                
+                $htmlContent .= "</div>";  
+                
+                $contenuDroit  = '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
+                $contenuDroit .= form_input($this->data["racap_num"]);
+                $contenuDroit .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;">Modifier</a>';   
+    
                 $this->session->set_userdata('prevState',$htmlContent);
+               
+                $htmlContent = array(
+                                "htmlContent"  => $htmlContent,
+                                
+                                "contenuDroit" => $contenuDroit    
+                 );
             }else
             {
                 $htmlContent .="Le webservice retourne aucune valeur pour ce numéro: ".$num_tel; 
@@ -78,7 +97,8 @@ class Mon_offre extends MY_Controller {
                 $htmlContent .= '<div class="prev_next">'.anchor('mon_offre',"PRECEDENT").'</div>';
                 $htmlContent .= "</div>";
         }
-       echo utf8_encode(utf8_decode($htmlContent));       
+        
+       echo utf8_encode(utf8_decode(json_encode($htmlContent)));       
     }
     
     public function forfait()

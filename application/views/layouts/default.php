@@ -69,11 +69,12 @@
         <li class='etape4 <?php echo ($pageid=="page_4")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
       </ul>
       <div>
-           <?php echo $template['partials']['test_eligib_contenu'];?>
+           <?php echo $template['partials']['contenu_gauche'];?>
       </div>    
     </section>
     <section class='four columns right-content'>
-        <div class='ligne'>        
+        <div class='ligne'> 
+             <?php echo $template['partials']['contenu_droit'];?>   
          </div>
     </section>
   </section>
