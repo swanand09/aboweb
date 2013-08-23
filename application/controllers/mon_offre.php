@@ -5,15 +5,14 @@ class Mon_offre extends MY_Controller {
     public function __construct()
     {
             parent::__construct();
-            $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib');    
-           // $this->load->library('phpsession');
+            $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib'); 
     }  
-    public function index($param="")
+    
+    public function index()
     {
-        //$this->data["department"] = $this->session->userdata("user_geolocalisation"); 
-        $this->data["department"] = "TEST";
-        
-        (!$this->session->_session_id_expired())?$this->session->destroy():"";
+        $this->data["department"] = $this->session->userdata("user_geolocalisation"); 
+        $this->data["userdata"] = $this->session->all_userdata();
+      
         return $this->controller_test_eligib_vue();                
     }
     
@@ -22,6 +21,8 @@ class Mon_offre extends MY_Controller {
        
         $num_tel       = $this->input->post('num_tel'); 
         $htmlContent   = "";
+        $contenuDroit = "";
+        
         if($num_tel!="")
         {
              $this->data["racap_num"] = array(
@@ -59,7 +60,7 @@ class Mon_offre extends MY_Controller {
                     $htmlContent .= '<p>'.form_checkbox($input2).' Vous pouvez aussi conserver votre numéro de téléphone</p>';
                 $htmlContent .= "</div>";
                 $htmlContent .= "<div>";
-                    $htmlContent .= '<div class="prev_next">'.anchor('mon_offre',"PRECEDENT").'</div>';
+                    $htmlContent .= '<div class="prev_next">'.anchor('mon_offre/redirectToMonOffre',"PRECEDENT").'</div>';
                     $choix_forfait = array(
                                                     'class'=>'rmv-std-btn btn-green',
                                                     'name' => 'choix_forfait',
@@ -72,17 +73,13 @@ class Mon_offre extends MY_Controller {
                     $htmlContent .= "</form>";
                 $htmlContent .= "</div>";  
                 
-                $contenuDroit  = '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
+                $contenuDroit  .= '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
                 $contenuDroit .= form_input($this->data["racap_num"]);
                 $contenuDroit .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;">Modifier</a>';   
     
-                $this->session->set_userdata('prevState',$htmlContent);
+                
                
-                $htmlContent = array(
-                                "htmlContent"  => $htmlContent,
-                                
-                                "contenuDroit" => $contenuDroit    
-                 );
+               
             }else
             {
                 $htmlContent .="Le webservice retourne aucune valeur pour ce numéro: ".$num_tel; 
@@ -94,10 +91,15 @@ class Mon_offre extends MY_Controller {
         {
                 $htmlContent .="Veuillez saisir une valeur pour le numéro téléphone"; 
                 $htmlContent .= "<div>";
-                $htmlContent .= '<div class="prev_next">'.anchor('mon_offre',"PRECEDENT").'</div>';
+                $htmlContent .= '<div class="prev_next">'.anchor('mon_offre/redirectToMonOffre',"PRECEDENT").'</div>';
                 $htmlContent .= "</div>";
         }
-        
+      $htmlContent = array(
+                                "htmlContent"  => $htmlContent,
+                                
+                                "contenuDroit" => $contenuDroit    
+                 );  
+      $this->session->set_userdata('prevState',$htmlContent);
        echo utf8_encode(utf8_decode(json_encode($htmlContent)));       
     }
     
@@ -127,8 +129,9 @@ class Mon_offre extends MY_Controller {
     
     public function prevState()
     {
-        $htmlContent =  $this->session->userdata("prevState"); 
+        $prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
+        $htmlContent = $prevState["htmlContent"];
         if($redu_facture=="true")
         {
             $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
@@ -138,7 +141,17 @@ class Mon_offre extends MY_Controller {
         {
             $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />',$htmlContent);
         }
+       
         echo utf8_encode(utf8_decode($htmlContent));   
+    }
+    
+    public function redirectToMonOffre()
+    {
+        $this->session->destroy();
+        //$this->session-> regenerate_id();
+        
+      //  exit();
+        redirect("mon_offre");
     }
 }
 

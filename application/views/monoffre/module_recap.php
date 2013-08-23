@@ -18,5 +18,9 @@
     }    
 </script>
 <div id="recap_contenu">
-   
+   <?php
+       if(array_key_exists("prevState",$userdata)){
+           echo $userdata["prevState"]["contenuDroit"];
+       }
+    ?>
 </div>

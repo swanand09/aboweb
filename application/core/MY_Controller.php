@@ -69,6 +69,8 @@ class MY_Controller extends CI_Controller {
                              ->set_partial('contenu_droit', 'monoffre/module_recap')    
                             ->build('page',$this->data);
         }
+        
+        
 }
 
 /* End of file MY_Controller.php */

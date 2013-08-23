@@ -70,6 +70,11 @@ class CI_Session {
         session_write_close();
     }
     
+    function all_userdata()
+    {
+        return $_SESSION;
+    }
+    
     /**
     * Destroys the session and erases session storage
     */
