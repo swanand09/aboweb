@@ -25,9 +25,11 @@
                          } 
                  }); 
               }
-          $(function() {                
-              
-              $("form").submit(function(){
+          
+          function procTestEligib()
+          {
+                alert("procTestEligib");
+            
                 preload();
                 $.post(
                     '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>',
@@ -42,10 +44,9 @@
                       $.unblockUI();                    
                     }, "json"
                 );
-                return false;    
-            });  
-              
-          });    
+                return false; 
+          }
+          
           function retrieveForfait()
           {           
               preload();
@@ -69,7 +70,8 @@
                       $("#cont_mon_off").empty().prepend(data); 
                       $.unblockUI();                    
                     }
-                  );             
+                  );   
+                      return false;
           }  
           function prevState()
           {               
@@ -96,7 +98,7 @@
             }
             echo utf8_encode(utf8_decode($htmlContent)); 
        }else {?>
-           <?php  echo form_open('mon_offre/ajax_proc_interogeligib',array('class'=>'border-gray frm-etape-tester columns twelve')); ?>        
+           <?php  echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve','onsubmit'=>'javascript:procTestEligib();return false;')); ?>        
             <div class='seven columns'>
                      <label>
                         <strong>SAISISEZ VOTRE NUM&Eacute;RO DE T&Eacute;L&Eacute;PHONE</strong>

@@ -34,18 +34,24 @@ class Mon_offre extends MY_Controller {
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);  
             if(!empty($result))
             {               
-                $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);
+                //$this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);
+                $this->session->set_userdata('produit',$result["Produits"]);
                 $htmlContent .= "<p>VOICI LES RESULTATS D'ELIGIBILITE LIES A VOTRE LIGNE</p>";
                 $htmlContent .= "<h3>VOTRE DEBIT ADSL</h3>";
-                $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
-                $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
-                $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>"; 
+//                $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
+//                $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
+//                $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>";
+                $htmlContent .= "<p>Numero: ".$result["Ligne"]["Numero"]."</p>";
+                $htmlContent .= "<p>Debit emmission: ".$result["Ligne"]["Debit_emmission"]."</p>";
+                $htmlContent .= "<p>Debit reception: ".$result["Ligne"]["Debit_de_reception"]."</p>";
                 $htmlContent .= "<h3>LES SERVICES MEDIASERV</h3>";
-                $htmlContent .= "<p>Eligibilé ADSL: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
-                $htmlContent .= "<p>Eligibilé TV: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
+//                $htmlContent .= "<p>Eligibilé ADSL: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
+//                $htmlContent .= "<p>Eligibilé TV: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
+                $htmlContent .= "<p>Eligibilé ADSL: ".($result["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
+                $htmlContent .= "<p>Eligibilé TV: ".($result["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
                 $htmlContent .= "<h3>CE QUE NOUS POUVONS AUSSI VOUS PROPOSER:</h3>";
                 $htmlContent .= "<div>";
-                $htmlContent .= "<form>";
+                $htmlContent .= "<form action='#' onsubmit='javascript:retrieveForfait();return false;'>";
                 $input1 = array(
                                 'name' => 'redu_facture',
                                 'id' => 'redu_facture',                                
@@ -58,7 +64,7 @@ class Mon_offre extends MY_Controller {
                                 'value' => 'true'
                          );   
                     $htmlContent .= '<p>'.form_checkbox($input2).' Vous pouvez aussi conserver votre numéro de téléphone</p>';
-                $htmlContent .= "</div>";
+                
                 $htmlContent .= "<div>";
                     $htmlContent .= '<div class="prev_next">'.anchor('mon_offre/redirectToMonOffre',"PRECEDENT").'</div>';
                     $choix_forfait = array(
@@ -66,11 +72,12 @@ class Mon_offre extends MY_Controller {
                                                     'name' => 'choix_forfait',
                                                     'id' => 'choix_forfait',
                                                     'type' => 'submit',
-                                                    'onclick'=>'javascript:retrieveForfait();',    
+                                                   // 'onclick'=>'javascript:retrieveForfait();',    
                                                     'value' => 'CHOISIR MON FORFAIT'
                                               );
                     $htmlContent .= '<div class="prev_next">'.form_submit($choix_forfait).'</div>';
                     $htmlContent .= "</form>";
+                    $htmlContent .= "</div>";
                 $htmlContent .= "</div>";  
                 
                 $contenuDroit  .= '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
