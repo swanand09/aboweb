@@ -34,21 +34,15 @@ class Mon_offre extends MY_Controller {
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);  
             if(!empty($result))
             {               
-                //$this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);
-                $this->session->set_userdata('produit',$result["Produits"]);
+                $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);        
                 $htmlContent .= "<p>VOICI LES RESULTATS D'ELIGIBILITE LIES A VOTRE LIGNE</p>";
                 $htmlContent .= "<h3>VOTRE DEBIT ADSL</h3>";
-//                $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
-//                $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
-//                $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>";
-                $htmlContent .= "<p>Numero: ".$result["Ligne"]["Numero"]."</p>";
-                $htmlContent .= "<p>Debit emmission: ".$result["Ligne"]["Debit_emmission"]."</p>";
-                $htmlContent .= "<p>Debit reception: ".$result["Ligne"]["Debit_de_reception"]."</p>";
+                $htmlContent .= "<p>Numero: ".$result["interrogeEligibiliteResult"]["Ligne"]["Numero"]."</p>";
+                $htmlContent .= "<p>Debit emmission: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"]."</p>";
+                $htmlContent .= "<p>Debit reception: ".$result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"]."</p>";
                 $htmlContent .= "<h3>LES SERVICES MEDIASERV</h3>";
-//                $htmlContent .= "<p>Eligibilé ADSL: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
-//                $htmlContent .= "<p>Eligibilé TV: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
-                $htmlContent .= "<p>Eligibilé ADSL: ".($result["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
-                $htmlContent .= "<p>Eligibilé TV: ".($result["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
+                $htmlContent .= "<p>Eligibilé ADSL: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non")."</p>";
+                $htmlContent .= "<p>Eligibilé TV: ".($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non")."</p>";
                 $htmlContent .= "<h3>CE QUE NOUS POUVONS AUSSI VOUS PROPOSER:</h3>";
                 $htmlContent .= "<div>";
                 $htmlContent .= "<form action='#' onsubmit='javascript:retrieveForfait();return false;'>";
@@ -82,10 +76,7 @@ class Mon_offre extends MY_Controller {
                 
                 $contenuDroit  .= '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
                 $contenuDroit .= form_input($this->data["racap_num"]);
-                $contenuDroit .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;">Modifier</a>';   
-    
-                
-               
+                $contenuDroit .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;">Modifier</a>';  
                
             }else
             {

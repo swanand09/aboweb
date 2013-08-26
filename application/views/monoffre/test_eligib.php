@@ -28,8 +28,6 @@
           
           function procTestEligib()
           {
-                alert("procTestEligib");
-            
                 preload();
                 $.post(
                     '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>',
