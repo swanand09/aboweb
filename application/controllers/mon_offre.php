@@ -46,17 +46,40 @@ class Mon_offre extends MY_Controller {
                 $htmlContent .= "<h3>CE QUE NOUS POUVONS AUSSI VOUS PROPOSER:</h3>";
                 $htmlContent .= "<div>";
                 $htmlContent .= "<form action='#' onsubmit='javascript:retrieveForfait();return false;'>";
-                $input1 = array(
+                $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
+                if($disable_checkbox ==false){
+                    $input1 = array(
                                 'name' => 'redu_facture',
                                 'id' => 'redu_facture',                                
-                                'value' => 'true'
+                                'value' => 'true',
+                                'checked'=> 'checked'                               
                          );
-                    $htmlContent .= '<p>'.form_checkbox($input1).' Réduisez votre facture en résiliant votre abonnement<br>car vous êtes en zone dégroupée</p>';
-                 $input2 = array(
+                      $input2 = array(
                                 'name' => 'consv_num_tel',
                                 'id' => 'consv_num_tel',                              
-                                'value' => 'true'
+                                'value' => 'true',
+                                'disabled'=> 'disabled'
                          );   
+                }else
+                {
+                    $input1 = array(
+                                'name' => 'redu_facture',
+                                'id' => 'redu_facture',                                
+                                'value' => 'true',
+                                'checked'=> 'checked',
+                                'disabled'=> 'disabled'
+                         );
+                     $input2 = array(
+                                'name' => 'consv_num_tel',
+                                'id' => 'consv_num_tel',                              
+                                'value' => 'true',
+                                'checked'=> 'checked'
+                         
+                         ); 
+                }
+                
+                    $htmlContent .= '<p>'.form_checkbox($input1).' Réduisez votre facture en résiliant votre abonnement<br>car vous êtes en zone dégroupée</p>';
+               
                     $htmlContent .= '<p>'.form_checkbox($input2).' Vous pouvez aussi conserver votre numéro de téléphone</p>';
                 
                 $htmlContent .= "<div>";
@@ -108,7 +131,7 @@ class Mon_offre extends MY_Controller {
         $consv_num_tel = $this->input->post('consv_num_tel'); 
         $this->session->set_userdata("consv_num_tel",$consv_num_tel);
         $produit =  $this->session->userdata("produit");
-        $htmlContent ="";
+       $htmlContent ="";
         foreach($produit as $key=>$val)
         {
              $htmlContent.="<div>";
@@ -122,7 +145,16 @@ class Mon_offre extends MY_Controller {
         $htmlContent .= "<div>";
         $htmlContent .= '<div class="prev_next"><a href="javascript:prevState();">PRECEDENT</a></div>';
         $htmlContent .= "</div>";
-        echo utf8_encode($htmlContent);     
+        $prevState = $this->session->userdata("prevState");
+        $contenuDroit = $prevState["contenuDroit"];
+        $contenuDroit .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
+        $contenuDroit .='<h3 style="color:#fff;font-size:12px;">Choisissez une offre...</h3>';
+        $htmlContent2 = array(
+                                "htmlContent"  => $htmlContent,
+                                
+                                "contenuDroit" => $contenuDroit    
+                 );  
+       echo utf8_encode(utf8_decode(json_encode($htmlContent2)));  
     } 
     
     public function prevState()
@@ -133,11 +165,17 @@ class Mon_offre extends MY_Controller {
         if($redu_facture=="true")
         {
             $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
+        }else
+        {
+            $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />',$htmlContent);
         }
         $consv_num_tel = $this->session->userdata("consv_num_tel");
         if($consv_num_tel=="true")
         {
             $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />',$htmlContent);
+        }else
+        {
+            $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel" checked="checked"  />','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
         }
        
         echo utf8_encode(utf8_decode($htmlContent));   
@@ -145,10 +183,8 @@ class Mon_offre extends MY_Controller {
     
     public function redirectToMonOffre()
     {
+      //  $this->session-> regenerate_id();
         $this->session->destroy();
-        //$this->session-> regenerate_id();
-        
-      //  exit();
         redirect("mon_offre");
     }
 }

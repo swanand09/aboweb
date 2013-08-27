@@ -65,9 +65,10 @@
                         consv_num_tel : consv_num_tel
                      },
                     function(data){
-                      $("#cont_mon_off").empty().prepend(data); 
+                      $("#cont_mon_off").empty().prepend(data.htmlContent); 
+                      $("#recap_contenu").empty().prepend(data.contenuDroit);   
                       $.unblockUI();                    
-                    }
+                    },"json"
                   );   
                       return false;
           }  
