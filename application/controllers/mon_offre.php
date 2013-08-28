@@ -140,7 +140,7 @@ class Mon_offre extends MY_Controller {
              $htmlContent .="<div>";
              $htmlContent .="<h3>FORFAIT N&deg;".$counter."</h3>";  
              $htmlContent .="<p>";
-             $htmlContent .=utf8_encode($val["Libelle"])."&nbsp;&nbsp;";              
+             $htmlContent .=utf8_encode(utf8_decode($val["Libelle"]))."&nbsp;&nbsp;";              
              $htmlContent .= $val["Tarif"]."&euro;";  
              $choixArr = array(
                 'name' => 'button',
@@ -194,6 +194,11 @@ class Mon_offre extends MY_Controller {
        
         echo utf8_encode(utf8_decode($htmlContent));   
     }
+    
+    public function refreshRecapCol()
+    {
+        
+    }       
     
     public function redirectToMonOffre()
     {
