@@ -36,7 +36,6 @@
                      },
                     function(data){
                       //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                      
                       $("#cont_mon_off").empty().prepend(data.htmlContent); 
                       $("#recap_contenu").empty().prepend(data.contenuDroit);                     
                       $.unblockUI();                    
@@ -77,6 +76,12 @@
                 preload();
                 $("#cont_mon_off").empty().load('mon_offre/prevState');
                 $.unblockUI(); 
+          }
+          
+          function choixForfait(id)
+          {
+              alert(id);
+              return false;
           }
 </script>
 

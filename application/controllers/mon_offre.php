@@ -131,19 +131,26 @@ class Mon_offre extends MY_Controller {
         $consv_num_tel = $this->input->post('consv_num_tel'); 
         $this->session->set_userdata("consv_num_tel",$consv_num_tel);
         $produit =  $this->session->userdata("produit");
-       $htmlContent ="";
+       $htmlContent =" ";
+       $counter = 1;
         foreach($produit as $key=>$val)
         {
-             $htmlContent.="<div>";
-             $htmlContent.="<h3>FORFAIT N&deg;".($key+1)."</h3>";  
-             $htmlContent.="<p>";
-             $htmlContent .=$val["Libelle"]."&nbsp;&nbsp;";
-             $htmlContent .=$val["Tarif"]."&euro;";
-             $htmlContent.="</p>"; 
-             $htmlContent.="</div>";        
+           if($val["Categorie"]=="FORFAIT")
+           {
+             $htmlContent .="<div>";
+             $htmlContent .="<h3>FORFAIT N&deg;".$counter."</h3>";  
+             $htmlContent .="<p>";
+             $htmlContent .=utf8_encode($val["Libelle"])."&nbsp;&nbsp;";              
+             $htmlContent .= $val["Tarif"]."&euro;";  
+              $htmlContent .="&nbsp;&nbsp;".anchor("#","CHOISIR",array("onclick"=>"javascript:choixForfait('".$val["Id_web"]."_".$val["Id_crm"]."');"));  
+             $htmlContent .="</p>"; 
+             $htmlContent .="</div>";    
+             $counter++;
+           }
+           
         }
         $htmlContent .= "<div>";
-        $htmlContent .= '<div class="prev_next"><a href="javascript:prevState();">PRECEDENT</a></div>';
+        $htmlContent .= "<div class='prev_next'><a href='javascript:prevState();'>PRECEDENT</a></div>";
         $htmlContent .= "</div>";
         $prevState = $this->session->userdata("prevState");
         $contenuDroit = $prevState["contenuDroit"];
@@ -153,8 +160,8 @@ class Mon_offre extends MY_Controller {
                                 "htmlContent"  => $htmlContent,
                                 
                                 "contenuDroit" => $contenuDroit    
-                 );  
-       echo utf8_encode(utf8_decode(json_encode($htmlContent2)));  
+                 ); 
+      echo utf8_encode(utf8_decode(json_encode($htmlContent2)));  
     } 
     
     public function prevState()
