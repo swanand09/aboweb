@@ -80,8 +80,18 @@
           
           function choixForfait(id)
           {
-              alert(id);
-              return false;
+              preload();
+                $.post(
+                    '<?php echo base_url('mon_offre/forfait');?>',
+                     {
+                        id_crm : id
+                     },
+                    function(data){
+                     // $("#cont_mon_off").empty().prepend(data.htmlContent); 
+                      $("#recap_contenu").empty().prepend(data.contenuDroit);   
+                      $.unblockUI();                    
+                    },"json"
+                  ); 
           }
 </script>
 

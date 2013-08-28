@@ -126,7 +126,7 @@ class Mon_offre extends MY_Controller {
     
     public function forfait()
     {   
-        $redu_facture  = $this->input->post('redu_facture'); 
+       $redu_facture  = $this->input->post('redu_facture'); 
         $this->session->set_userdata("redu_facture",$redu_facture);
         $consv_num_tel = $this->input->post('consv_num_tel'); 
         $this->session->set_userdata("consv_num_tel",$consv_num_tel);
@@ -142,7 +142,14 @@ class Mon_offre extends MY_Controller {
              $htmlContent .="<p>";
              $htmlContent .=utf8_encode($val["Libelle"])."&nbsp;&nbsp;";              
              $htmlContent .= $val["Tarif"]."&euro;";  
-              $htmlContent .="&nbsp;&nbsp;".anchor("#","CHOISIR",array("onclick"=>"javascript:choixForfait('".$val["Id_web"]."_".$val["Id_crm"]."');"));  
+             $choixArr = array(
+                'name' => 'button',
+                'id' => 'butt_'.$counter,
+                "onclick" => "javascript:choixForfait(".$val["Id_crm"].")",               
+                'content' => 'CHOISIR',
+             );
+
+             $htmlContent .="&nbsp;&nbsp;".form_button($choixArr);  
              $htmlContent .="</p>"; 
              $htmlContent .="</div>";    
              $counter++;
@@ -161,7 +168,7 @@ class Mon_offre extends MY_Controller {
                                 
                                 "contenuDroit" => $contenuDroit    
                  ); 
-      echo utf8_encode(utf8_decode(json_encode($htmlContent2)));  
+      echo json_encode($htmlContent2);   
     } 
     
     public function prevState()
