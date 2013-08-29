@@ -9,13 +9,13 @@ $(function(){
 
 
 var carousel = function(selector,inverse) {
-	$(selector).mouseover( function()
-	{
-		$(selector).addClass("etape-active");
-		$('.etapes li:not('+inverse+')').removeClass("etape-active");
-	}).mouseout(function(){
-
-		$(selector).removeClass("etape-active");
-	});
+//	$(selector).mouseover( function()
+//	{
+//		$(selector).addClass("etape-active");
+//		$('.etapes li:not('+inverse+')').removeClass("etape-active");
+//	}).mouseout(function(){
+//
+//		$(selector).removeClass("etape-active");
+//	});
 }
 

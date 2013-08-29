@@ -32,6 +32,12 @@ class Mon_offre extends MY_Controller {
                                                 'value' => $num_tel
                                             );
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);  
+//            $htmlContent = array(
+//                                "htmlContent"  =>  "<pre>".print_r($result)."</pre>",
+//                                
+//                                "contenuDroit" => ""    
+//                 );  
+//            echo utf8_encode(utf8_decode(json_encode($htmlContent))); exit();
             if(!empty($result))
             {               
                 $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);        
@@ -99,7 +105,7 @@ class Mon_offre extends MY_Controller {
                 
                 $contenuDroit  .= '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
                 $contenuDroit .= form_input($this->data["racap_num"]);
-                $contenuDroit .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;">Modifier</a>';  
+                $contenuDroit .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;text-decoration:underline;margin-left:250px;font-size:12px;margin-bottom:10px;">Modifier</a>';  
                
             }else
             {
@@ -133,49 +139,56 @@ class Mon_offre extends MY_Controller {
         $produit =  $this->session->userdata("produit");
        $htmlContent =" ";
        $counter = 1;
+       $iadArr = array("Libelle"=>"","Tarif"=>"","Tarif_promo"=>"","Duree_mois_promo"=>"");
         foreach($produit as $key=>$val)
         {
            if($val["Categorie"]=="FORFAIT")
            {
-             $htmlContent .="<div>";
+             $htmlContent .="<div style='margin:10px 0px 30px 0px;'>";
              $htmlContent .="<h3>FORFAIT N&deg;".$counter."</h3>";  
-             $htmlContent .="<p>";
-             $htmlContent .=utf8_encode(utf8_decode($val["Libelle"]))."&nbsp;&nbsp;";              
-             $htmlContent .= $val["Tarif"]."&euro;";  
+             $htmlContent .="<div style='width:300px;float:left;margin-top:5px;'>";
+             $htmlContent .=utf8_encode($val["Libelle"])."&nbsp;&nbsp;";              
+             $htmlContent .= $val["Tarif"]."&euro;<br><br><span style='font-size:11px;'><strong>Promo: </strong>".utf8_encode($val["Valeurs"]["WS_Produit_Valeur"][0]["Libelle"]["string"])."</span></div>";  
              $choixArr = array(
+                 'class'=>'rmv-std-btn btn-green',
                 'name' => 'button',
                 'id' => 'butt_'.$counter,
                 "onclick" => "javascript:choixForfait(".$val["Id_crm"].")",               
                 'content' => 'CHOISIR',
              );
-
-             $htmlContent .="&nbsp;&nbsp;".form_button($choixArr);  
-             $htmlContent .="</p>"; 
+             
+             
+             $htmlContent .="<div style='clear:right;margin-top:5px;'>".form_button($choixArr);  
+             $htmlContent .="</div>"; 
              $htmlContent .="</div>";    
              $counter++;
            }
-           
+           if($val["Categorie"]=="IAD")
+             {
+                 $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"]);
+             }
         }
         $htmlContent .= "<div>";
+        if($iadArr["Libelle"]!="")
+        {
+            $htmlContent .="<div><input type='checkbox' checked='checked' disabled='disabled'>".$iadArr["Libelle"]."&nbsp;&nbsp;".$iadArr["Tarif"]."&euro;</div>";
+        }
         $htmlContent .= "<div class='prev_next'><a href='javascript:prevState();'>PRECEDENT</a></div>";
         $htmlContent .= "</div>";
         $prevState = $this->session->userdata("prevState");
         $contenuDroit = $prevState["contenuDroit"];
         $contenuDroit .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
         $contenuDroit .='<h3 style="color:#fff;font-size:12px;">Choisissez une offre...</h3>';
-        $htmlContent2 = array(
-                                "htmlContent"  => $htmlContent,
-                                
-                                "contenuDroit" => $contenuDroit    
-                 ); 
-      echo json_encode($htmlContent2);   
+    
+      echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit" => $contenuDroit));   
     } 
     
     public function prevState()
     {
         $prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
-        $htmlContent = $prevState["htmlContent"];
+        $htmlContent = utf8_encode(utf8_decode($prevState["htmlContent"]));
+        
         if($redu_facture=="true")
         {
             $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
@@ -190,14 +203,45 @@ class Mon_offre extends MY_Controller {
         }else
         {
             $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel" checked="checked"  />','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
+           //$htmlContent = str_replace('<input type="checkbox" id="consv_num_tel" checked="checked" value="true" name="consv_num_tel">','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
         }
        
-        echo utf8_encode(utf8_decode($htmlContent));   
+        //echo utf8_encode(utf8_decode($htmlContent));   
+        echo $htmlContent;
     }
     
     public function refreshRecapCol()
     {
-        
+         $id_crm = $this->input->post("id_crm");
+         $produit =  $this->session->userdata("produit");
+         $prevState = $this->session->userdata("prevState");
+         $contenuDroit = $prevState["contenuDroit"];
+         $tarif = "";
+         $libele = "";
+         foreach($produit as $key=>$val)
+         {
+           if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
+           {
+               $tarif  = '<div style="color:#fff;margin-top:20px;">
+                            <span style="font-size:14px;">VOTRE OFFRE MEDIASERV</span>
+                            <span style="margin-left:60px;font-size:13px;">'.$val["Tarif"].'&euro;</span>
+                         </div>';
+               $libele = '<div>
+                            <div style="font-size:13px;color:#fff;margin-top:20px;">
+                                Forfait
+                                <span style="font-size:12px;margin-left:210px;">
+                                    <a href="javascript:void(0);" style="color:#fff;text-decoration:underline;">Modifier</a>
+                                </span>
+                            </div>   
+                            <div style="font-size:12px;color:#000;margin-bottom:10px;margin-top:10px;">
+                             '
+                            .utf8_encode($val["Libelle"]).
+                            '<div> 
+                        </div>';
+           }            
+         }
+         
+         echo json_encode(array("tarif"=>$tarif,"libelle"=>$libele,"contenuDroit"=>$contenuDroit));
     }       
     
     public function redirectToMonOffre()

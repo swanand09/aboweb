@@ -82,13 +82,15 @@
           {
               preload();
                 $.post(
-                    '<?php echo base_url('mon_offre/forfait');?>',
+                    '<?php echo base_url('mon_offre/refreshRecapCol');?>',
                      {
                         id_crm : id
                      },
                     function(data){
                      // $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit);   
+                      $("#recap_contenu").empty().prepend(data.contenuDroit);
+                      $("#recap_contenu").append(data.tarif);
+                      $("#recap_contenu").append(data.libelle);   
                       $.unblockUI();                    
                     },"json"
                   ); 
