@@ -20,10 +20,12 @@
   <link rel="stylesheet" href="stylesheets/foundation.min.css">
   <link rel="stylesheet" href="stylesheets/app.css">
   <link rel="stylesheet" href="stylesheets/main.css">
+  <link rel="stylesheet" href="stylesheets/etape.css">
   <link rel="stylesheet" href="stylesheets/font.css">
   <!--[if IE 7]> <link rel="stylesheet" href="stylesheets/ie7.css">   <![endif]-->
+  <!--[if IE 8]> <link rel="stylesheet" href="stylesheets/ie8.css">   <![endif]-->
   <script src="javascripts/modernizr.foundation.js"></script>
-
+  <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
 

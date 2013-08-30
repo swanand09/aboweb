@@ -37,7 +37,7 @@
                     function(data){
                       //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                       $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit);                     
+                      $("#recap_contenu").empty().prepend(data.contenuDroit1);                     
                       $.unblockUI();                    
                     }, "json"
                 );
@@ -65,7 +65,8 @@
                      },
                     function(data){
                       $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit);   
+                      $("#recap_contenu").empty().prepend(data.contenuDroit1);   
+                      $("#recap_contenu").append(data.contenuDroit2);
                       $.unblockUI();                    
                     },"json"
                   );   
@@ -88,9 +89,9 @@
                      },
                     function(data){
                      // $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit);
-                      $("#recap_contenu").append(data.tarif);
-                      $("#recap_contenu").append(data.libelle);   
+                      $("#recap_contenu").empty().prepend(data.contenuDroit1);
+                      $("#recap_contenu").append(data.contenuDroit2);
+                      $("#recap_contenu").append(data.contenuDroit3);   
                       $.unblockUI();                    
                     },"json"
                   ); 

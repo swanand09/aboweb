@@ -86,7 +86,15 @@ class CI_Session {
         {
               setcookie(session_name(), '', time()-42000, '/');
         }
-        session_destroy();
+        //modif reddy 2013 08 30
+        $tmp = error_reporting(0);
+        session_destroy(); 
+        error_reporting($tmp);
+        log_message('ERROR', __METHOD__. ': Only a warning - hope to find a fix soon :)');
+        unset($tmp); 
+        //fin modif
+        
+        //session_destroy();
     }
     
     /**

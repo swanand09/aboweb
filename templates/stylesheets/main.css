@@ -1,14 +1,68 @@
 /*
 * Misc CSS
 */
+hr.sexy {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsla(0,0%,0%,0)), color-stop(30%,hsla(0,0%,0%,.30)), color-stop(100%,hsla(0,0%,0%,0)));
+    background: -webkit-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.30) 30%, hsla(0,0%,0%,0) 100%);
+    background:    -moz-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.30) 30%, hsla(0,0%,0%,0) 100%);
+    background:     -ms-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.30) 30%, hsla(0,0%,0%,0) 100%);
+    background:      -o-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.30) 30%, hsla(0,0%,0%,0) 100%);
+    background:         linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.30) 30%, hsla(0,0%,0%,0) 100%);
+}
+.box-o-shadow {
+    -webkit-box-shadow: 0px 0px 2px #AEAEAE;
+    -moz-box-shadow:    0px 0px 2px #AEAEAE;
+    box-shadow:         0px 0px 2px #AEAEAE;
+}
+.p10 {
+	padding:0 10px;
+}
+.custom-column{
+	float: left;
+    min-height: 1px;
+    position: relative;
+}
 .border-gray { 
 	border:1px solid #d0d0d0;  
+}
+.border-left-gray {
+	border-left:1px solid #d0d0d0;  
 }
 .rmv-std-btn {
 	background-color: transparent;
     border: medium none;
 }
-.btn-green {
+.btn-valider {
+	background: url("../images/valider_btn.png") no-repeat scroll 0 0 transparent;
+	color: #FFFFFF;
+    height: 52px;
+    width: 220px;
+}
+.btn-valider:hover {
+	cursor: pointer;
+}
+.btn-verifier {
+ 	background: url("../images/verifier_btn.png") no-repeat scroll 0 0 transparent;
+    color: #000000;
+    display: block;
+    height: 42px;
+    margin-top: -6px;
+    text-align: center;
+    width: 98px;
+}
+.btn-confirmer {
+	background: url("../images/confirmer_btn.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    height: 45px;
+    width: 233px;
+}
+.btn-confirmer:hover {
+	cursor: pointer;
+}
+.btn-green,.btn-forward {
 	background: url("../images/btn_green.png") no-repeat scroll 0 0 transparent;
     color: #FFFFFF;
     font-weight: bold;
@@ -16,18 +70,59 @@
     text-align: center;
     width: 161px;
 }
-.btn-green:hover {
+.btn-green:hover,.btn-forward:hover {
 	background-position: 0 -42px;
 	cursor: pointer;
 }
-
 .lbl-white {
 	color: #fff;
 	margin-bottom:4px;
 }
-
 .link {
 	color:#fff;
+	text-decoration: underline;
+}
+.no-margin {
+	margin:0;
+}
+.no-margin-top {
+	margin-top: 0;
+}
+.precedent {
+	background: url("../images/precedent_btn.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 42px;
+    padding-top: 13px;
+    text-align: center;
+    width: 98px;
+    color:#000;
+}
+.precedent:hover,.btn-verifier:hover {
+	color:#9ac447;
+	cursor:pointer;
+}
+.top-10 {
+	margin-top: 10px;
+}
+.bottom-10, .row.bottom-10 {
+	margin-bottom:10px;
+}
+.top-20 {
+	margin-top: 20px;
+}
+.bottom-20 {
+	margin-bottom: 20px;
+}
+.green-text {
+	color:#9ac447;
+}
+.input-info {
+	display: block;
+    font-size: 0.8em;
+    margin-top: -10px;
+}
+a.mail-link {
+	color: #9ac447;
 	text-decoration: underline;
 }
 /*
@@ -121,61 +216,10 @@ body {
 	background: url("../images/radial_shadow.png") no-repeat scroll center 128px transparent;
 	color:#2b2b2b;
 }
-.left-content {
-	
-}
+
 .right-content {
 	background-color: #9ac447;
 	min-height: 100px;
-}
-
-.left-content .etapes { 
-	margin: 20px 0 0 0;
-	height: 108px;
-}
-
-.left-content .block-grid.etapes li{ 
-	margin-left: -22px;
-	margin-top: 6px;
-	padding: 0;
-	position: relative;
-	height:80px;
-}
-.left-content .block-grid.etapes li:hover {
-	cursor: pointer;
-}
-.left-content .block-grid.etapes li a {
-	font-size: 20px;
-    left: 34px;
-    position: absolute;
-    z-index: 10;
-}
-.left-content .block-grid.etapes li a span {
-
-}
-.left-content .block-grid.etapes li img { 
-
-}
-.left-content .block-grid.etapes .etape1 {
-    z-index: 5;
-}
-.left-content .block-grid.etapes .etape2 {
-	z-index: 4;
-}
-.left-content .block-grid.etapes .etape3 {
-	z-index: 3;
-}
-.left-content .block-grid.etapes .etape4 {
-	z-index: 2;
-}
-.left-content .block-grid.etapes li.page-active {
-	color: #98c347;
-}
-.left-content .block-grid.etapes li.etape-active {
-	margin: 0;
-    width: 198px;
-    z-index: 5;
-    height:108px;
 }
 
 /*
@@ -205,32 +249,162 @@ body {
     margin-top: -1px;
     position: absolute;
 }
+.frm-etape-tester .misc-custom-3 { 
+	margin-bottom:25px;
+	display: block;
+}
 .debit-adsl {
 	background: url("../images/vsep.png") no-repeat scroll center 29px transparent;
     height: 207px;
 }
 .frm-options {
 	margin-top: 10px;
+	margin-bottom:10px;
 }
-.services-mediaserv li{
+.services-mediaserv li {
+	background: url("../images/services_mediaserv.png") no-repeat scroll 0 0 transparent;
+	height: 53px;
+	list-style: none outside none;
+	margin-bottom: 10px;
+	color:#9ac447;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+.services-mediaserv li.not-available {
+	background-position: 0 -56px;
+	font-weight: normal;
+	color:#7b7b7b;
 
 }
-.services-mediaserv li.available{
+.services-mediaserv li span {
+	display: block;
+	float: left;
+	font-family: freeroadregular;
+	height: 40px;
+	padding-top: 16px;
+	width: 250px;
+	color:#2b2b2b;
+}
+.services-mediaserv li span img {
+	border-right: 1px solid #E1E1E1;
+	float: left;
+	margin-right: 10px;
+	margin-top: -4px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+/*
+* Main content -first step - 2
+*/
+.forfait {
+	height: 145px;
+	margin-bottom: 20px;
+}
+.frm-choisir-offre {
 
 }
-.services-mediaserv li.not-available{
+.forfait .three {
+	height: 33px;
+    padding-left: 44px;
+    font-family: freeroadregular;
+}
+.forfait .three span{
+	font-size: 0.8em;
+}
+.forfait .telephone {
+	background: url("../images/tel.png") no-repeat scroll 0 0 transparent;
 
 }
-.services-mediaserv li.telephone span{
-
+.forfait .internet {
+	background: url("../images/net.png") no-repeat scroll 0 0 transparent;
 }
-.services-mediaserv li.internet span{
-
+.forfait .television {
+	background: url("../images/tv.png") no-repeat scroll 0 0 transparent;
+	padding-top:8px;
+}
+.forfait .television.not-available{
+	background: url("../images/tv_disable.png") no-repeat scroll 0 0 transparent;
+	color: #c9c9c9;
+}
+.forfait .telephone,.forfait .internet,.forfait .television {
+	margin-top: 15px;
+}
+.forfait .tarifs {
+	padding-left: 0;
+	text-align: center;
+}
+.forfait .tarifs span {
+	font-size: 1.9em;
+}
+.forfait .tarifs span sup {
+	font-size: 0.7em;
+}
+.frm-choisir-offre .modem-sagem {
+	float: left;
+    padding: 15px;
+    width: 100%;
+}
+.frm-choisir-offre .modem-sagem input {
+	margin-right: 40px;
+    margin-top: 37px;
+}
+.frm-choisir-offre .modem-sagem img {
+	margin-top: 8px;
+}
+.frm-choisir-offre .modem-sagem .plus {
+	margin-left: 48px;
+	margin-top: 30px;
+}
+.frm-choisir-offre .modem-sagem .plus span.green-text {
+	float: left;
+    font-size: 3.5em;
+    margin-right: 33px;
+     margin-top: -9px;
+}
+.frm-choisir-offre .modem-sagem .trf {
+  	color: #90918F;
+    margin-left: 45px;
+    margin-top: 18px;
+}
+.frm-choisir-offre .modem-sagem .trf span {
+	font-size: 1.9em;
+}
+.misc-custom-4 {
+	float: left;
+	font-size: 0.9em;
+	width: 119px;
 }
 
-.services-mediaserv li.television span{
-
+/*
+* Main content - First step 3 ( TV CHAINES)
+*/
+ul.bqt { 
+    border: 1px solid #E3E3E3;
+    padding: 7px;
+    margin:0;
 }
+ul.bqt  li{
+    display: inline;
+    list-style: none outside none;
+}
+
+.options_tab {
+ 	background: url("../images/options_tab.png") no-repeat scroll 0 0 transparent;
+	height: 113px;
+}
+
+/*
+* Main content - Mon recapitulatif
+*/
+.left-etape-content.recapitulatif h4 {
+	color: #0094d1;
+	font-size: 1em;
+}
+.conditions strong {
+	width:95%;
+}
+
 /*
 * Left main content
 */
@@ -241,7 +415,7 @@ body {
     height: 30px;
     padding-left: 10px;
     padding-top: 10px;
-    margin:0;
+    margin-bottom:20px;
 }
 
 /*
@@ -249,4 +423,56 @@ body {
 */
 .right-content {
 	padding-top:10px;
+	color: #fff;
+}
+
+.forpro h3 {
+	color:#fff;
+	font-size: 1.1em;
+}
+.forpro h3 a {
+	color: #FFFFFF;
+    font-size: 0.8em;
+    font-weight: normal;
+    text-decoration: underline;
+}
+.forpro ul {
+	list-style: none outside none;
+}
+.forpro ul li {
+	color:#000;
+	padding-left: 25px;
+	font-size: 0.9em;
+}
+.forpro ul li strong {
+	font-size: 1.0em;
+}
+.forpro ul li.small-icon-internet {
+	background: url("../images/small_icon_internet.png") no-repeat scroll 0 5px transparent;
+}
+.forpro ul li.small-icon-telephone {
+	background: url("../images/small_icon_telephone.png") no-repeat scroll 0 2px transparent;
+}
+.forpro ul li.small-icon-location {
+	background: url("../images/small_icon_location.png") no-repeat scroll 0 2px transparent;
+}
+.forpro ul li.small-icon-appel{
+	background: url("../images/small_icon_appel.png") no-repeat scroll 0 3px transparent;
+}
+.frm-parrain {
+	background: url("../images/small_icon_parrainage.png") no-repeat scroll 0 3px transparent;	
+	padding-left: 22px;
+	float: left;
+}
+.modem-deco h3{
+	color: #FFFFFF;
+    font-size: 1.1em;
+}
+.modem-deco,.total {
+	width: 100%;
+}
+.total h3{
+	color: #FFFFFF;
+    font-size: 1.1em;
+    font-weight: normal;
 }

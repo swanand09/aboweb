@@ -1,4 +1,11 @@
 /*
+* Misc
+*/
+input[type='text'] {
+	height:20px;
+}
+
+/*
 * Header
 */
 
@@ -20,20 +27,57 @@
 	height: 44px;
 }
 
+/*etape*/
+.block-grid.etapes .state-active a {
+	width: 170px !important;
+	margin-left:-17px !important;
+}
+.block-grid.etapes .state2 a  {
+	width:130px;
+}
+.block-grid.etapes .state2 a span,.etapes.block-grid .state3 a span,.etapes.block-grid .state4 a span {
+	line-height:1em;
+	margin-top:-3px;
+}
+
+.block-grid.etapes .state2 img,.block-grid.etapes .state3 img,.block-grid.etapes .state4 img {
+	width:180px;
+}
+.etapes.block-grid .state3 a {
+	width:120px;
+}
 /*
 * Main-content
 */
+.main-content .left-content {
+	width: 720px;
+}
 .main-content .right-content {
-	width:27.33%;
+	width:220px;
 }
 
 .left-etape-content h3 {
     height: 20px;
 }
 
+.frm-etape-tester.twelve{	
+	width:678px;
+}
+.frm-etape-tester .misc-custom-3 { 
+	margin-bottom:10px;
+	float: left;
+}
+.frm-etape-tester .seven.columns {
+	width:52.33%;
+}
+
+.left-etape-content .six {
+	width:330px;
+}
 /*
 * Footer
 */
 .main-footer .columns {
 	width:28.33%;
 }
+

@@ -1,0 +1,434 @@
+
+/*Contenu parrainage*/
+#c205 .cadre-content{ height:580px; border: 1px solid #E0E0E0; padding: 47px 10px 10px; width: 535px;}
+#parrainage_page{ 
+    background: url("../img/person.png") no-repeat scroll right 10px transparent;
+    float:left;
+}
+
+#parrainage_page h1{ margin:0.67em 0; }
+#parrainage_page h1 span{ 
+    background: none repeat scroll 0 0 #00B1E6;
+    color: #FFFFFF;
+    font-size: 49px;
+    line-height: 1;
+}
+#cadres{ float: left; width: 100%;}
+#cadres #parrain{margin-right: 29px;}
+#cadres .ca{ 
+    background: url("../img/cadre.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 140px;
+    width: 150px;
+}
+#cadres .ca h3{ 
+    border-bottom: 1px solid #FFFFFF;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 1px;
+    margin-top: 10px;
+    text-align: center;
+}
+#cadres .ca .prix{ color: #00B1E6;
+    font-size: 73px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.1em;
+}
+#cadres .ca .prix .eur{
+    font-size: 41px;
+    top: -0.5em;
+ }
+#cadres .ca .prix .ref{ 
+    font-size: 10px;
+    font-weight: normal;
+    top: -4.1em;
+ }
+#cadres .ca h3 span{ 
+    background: url("../img/green_arrow.png") no-repeat scroll 25px 0 transparent;
+    float: left;
+    font-size: 13px;
+    height: 14px;
+    padding-top: 2px;
+    width: 100%;
+ }
+#cadres #plus{
+    background: none repeat scroll 0 0 transparent;
+    font-size: 92px;
+    font-weight: bold;
+    width: 56px;
+}
+#cadres #offre h4{
+    font-size: 13px;
+    line-height: 0.9;
+    margin-top: 32px;
+    padding: 7px;
+    line-height: 1.4;
+}
+#parrainage_page #txt_content{
+   float: left;
+   font-size: 15px;
+   font-weight: bold;
+   line-height: 1.4;
+   width: 100%;
+}
+#cadres #offre h4 span{float: left;font-size: 39px;}
+#parrainage_page h5{ color:#00b1e6; margin-bottom: 0;font-size: 15px; line-height: 1.4;margin-top: 25px;}
+span#confi{
+    float: left;
+    font-size: 11px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+#c206 #formulaire{
+padding-bottom: 0;
+}
+
+#c206 form input[type="text"],#c206 form textarea{
+    width:260px;
+    border:1px solid #c9cacb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 3px #cfcfcf;
+    -moz-box-shadow:    0px 0px 3px #cfcfcf;
+    box-shadow:         0px 0px 3px #cfcfcf;
+    padding:3px;
+}
+#c206 form input[type="text"]{ height:22px; }
+#c206 form input[type="submit"]{ 
+  background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #FFFFFF;
+    display: block;
+    font-family: freeroadbold;
+    font-size: 23px;
+    height: 40px;
+    margin-top: 29px;
+    position: relative;
+    width: 242px;
+ }
+ .message{
+      line-height: 18px;
+    margin-left: 30px;
+    padding: 5px;
+    width: 255px;
+    font-size: 12px;
+ }
+.message.status{
+    background-color: #EBF3E6;
+    border: 1px solid;
+    color: #6FB63C;
+}
+.message.error{
+    background-color: #F6EAEA;
+    border: 1px solid #EEC8C8;
+    color: #CE4C4C;
+}
+
+/*
+* PAGE TV
+*/
+#page_tv{ line-height:1.4; }
+#section-news{ clear:both;}
+#section-news #blackbox{   
+    background: url("../img/pagetv/blackbox.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    font-size: 13px;
+    height: 173px;
+    margin-bottom: 20px;
+    padding-left: 148px;
+    padding-top: 8px;
+    text-align: left;
+}
+#section-news #blackbox h1{font-size: 13px;}
+#section-news .sqr{
+    -webkit-box-shadow: 0px 0px 2px #AEAEAE;
+    -moz-box-shadow:    0px 0px 2px #AEAEAE;
+    box-shadow:         0px 0px 2px #AEAEAE;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    float: left;
+    font-size: 11px;
+    font-weight:bold;
+    height: 90px;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 95px;
+    width: 137px;
+    border: 1px solid #E8E8E8;
+    text-align: left;
+}
+#section-news .sqr span{ color:#93c241; }
+
+.tab-content{text-align: left;}
+#section-news .sqr.mg{margin-right: 10px; margin-left: 45px;}
+#section-news #interface{background: url("../img/pagetv/sqr1.png") no-repeat scroll 0 0 transparent;}
+#section-news #guide{background: url("../img/pagetv/sqr2.png") no-repeat scroll 0 0 transparent;}
+#section-news #fonctions{background: url("../img/pagetv/sqr3.png") no-repeat scroll 0 0 transparent;}
+#section-news #hd{background: url("../img/pagetv/sqr4.png") no-repeat scroll 0 0 transparent;}
+#section-news .sqr a,.afficher a{ 
+    background: url("../img/pagetv/expand.png") no-repeat scroll 0 0 transparent;
+    color: #000000;
+    float: left;
+    font-size: 14px;
+    padding-left: 29px;
+    text-decoration: none;
+    width: 100%;
+    height:20px;
+}
+#page_tv h2{ margin-bottom: 0; font-size: 29px}
+#page_tv p.subtitle{ margin-top: 0; font-size: 13px;}
+
+#offre-basique{ float:left; width:100%; margin-top: 10px;}
+.offre h4{
+    color: #656565;
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0;
+}
+.bqt ul{ 
+    border: 1px solid #E3E3E3;
+    padding: 7px;
+    margin:0;
+}
+.bqt ul li{
+     display: inline;
+    list-style: none outside none;
+}
+
+.offre.r1 .row,.offre.r2 .row{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left:0;
+}
+.offre.r1 .bqt{ float:left;}
+.offre.r1 #generaliste{ width:100%;}
+.offre.r1 #generaliste li{ padding-left: 4px; }
+.offre.r1 #locales-et-regionales{width: 388px;}
+.offre.r1 #locales-et-regionales li{ padding-left: 0px; }
+.offre.r1 #info-et-societe{ margin-left:20px;width: 176px;}
+.offre.r1 #info-et-societe li{padding-left: 0px;  }
+.offre.r1 #decouverte{width:96px;}
+.offre.r1 #sport{margin-left:20px; width:67px;}
+.offre.r1 #musique{margin-left:20px; width:230px;}
+.offre.r1 #jeunesse{margin-left:20px; width:131px;}
+
+.offre.r2 .bqt{ float:left;}
+.offre.r2 #generaliste1{ margin-left:20px;}
+.offre.r2 #locales-et-regionales1{width: 360px;}
+.offre.r2 #info-et-societe1{ margin-left:20px;}
+.offre.r2 #decouverte1{width:80px;}
+.offre.r2 #sport1{ width:400px; }
+.offre.r2 #musique1{margin-left:20px; width:130px; }
+.offre.r2 #info1{margin-left:20px; }
+.offre.r2 #charme{margin-left:20px; }
+.offre.r2 #cinema{margin-left:20px; width:105px;}
+.offre.r2 #cinema2{ width:227px;}
+.offre.r2 #generaliste2{margin-left:20px; width: 71px; }
+.offre.r2 #sport2{margin-left:20px; width:79px; }
+.offre.r2 #jeunesse1{ width:212px; }
+.offre.r2 #info1{ width:76px; }
+.offre.r2 #jeunesse2{margin-left:20px; width:112px; }
+.offre.r2 #decouverte_et_art_de_vivre1{ width:425px; }
+.offre.r2 #generaliste1{ width:138px; }
+.offre.r2 #eden{margin-left:20px; }
+
+#mega{
+    zoom:1;
+    filter: alpha(opacity=20);
+    opacity: 0.2;
+}
+#giga{
+    margin-top: 20px;
+    zoom: 1;
+    filter: alpha(opacity=20);
+    opacity: 0.2;
+}
+#ultra{
+    zoom: 1;
+    filter: alpha(opacity=20);
+    opacity: 0.2;
+}
+#bouquets-television{
+    float: left;
+    margin-top: 30px;
+    width: 100%;
+}
+
+
+
+/*
+* Options Tab
+*/
+#options_tab
+{
+    background:url("../img/pagetv/options_bg.png") no-repeat scroll 0 0 transparent;
+    height:119px;
+    width: 100%;
+    float:left;
+}
+#options_tab ul{
+    margin: 0;
+    padding: 0;
+    list-style: none outside none;
+}
+#options_tab ul li{
+    display: inline;
+    float: left;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 35px;
+    width: 184px;
+}
+#options_tab ul li .nombres_chaines{
+    border-right: 1px solid #E0E0E0;
+    float: left;
+    height: 53px;
+    margin-right: 5px;
+    padding-right: 5px;
+    width: 50px;
+    line-height:1.4;
+}
+#options_tab ul li .nombres_chaines .plus{
+    font-size: 23px;
+    position: relative;
+    top: -6px
+}
+#options_tab ul li .nombres_chaines .nc{
+    font-size: 28px;
+}
+#options_tab ul li .nombres_chaines .chaines{
+    float: left;
+    font-size: 12px;
+    position: relative;
+    top: -9px;
+}
+#options_tab ul li:hover{cursor: pointer;}
+#options_tab ul li.active,#options_tab ul li:hover{color:#93c241;}
+#options_tab ul li .titre_chaines{ font-size:13px; margin-top: 11px;}
+#options_tab ul li .prix{ font-size:13px; }
+#options_tab ul li .afficher{ float:left;}
+#offre-basique1{
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+}
+#ultra #bein{width:143px;margin-right: 40px;}
+#ultra #eden{width:317px;}
+
+/*
+* Chaines MODAL
+*/
+.chaines-mdl .modal-body{}
+.chaines-mdl { width:645px; padding-bottom: 15px;}
+.chaines-mdl .row { margin:0;}
+.chaines-mdl .bqt{ float:left; margin-right:20px;}
+.modal h4{ 
+color: #000000;
+font-size: 12px;
+font-weight: normal;
+}
+
+/*Chaine reunion*/
+.offre.r1.reunion #locales-et-regionales{ width:auto;}
+.offre.r1.reunion #info-et-societe{width:auto;}
+.offre.r1.reunion #cinema3{width:auto; margin-left:20px;}
+.offre.r2.reunion #jeunesse1{width:auto;}
+.offre.r2.reunion #musique1{width:auto;}
+.offre.r2.reunion #musique1 ul{ padding-left:15px;}
+
+/* Navigation */
+.navigation ul.nav > li:nth-child(2) .dropdown-menu li a{
+    padding: 10px 0;
+    text-align: center;
+    font-weight: normal;
+    font-family:freeroadregular;
+}
+.navigation ul.nav > li:nth-child(2) .dropdown-menu li a:hover{
+    color:#fff;
+}
+
+/*
+* Page Notre Offre
+*/
+body.notre_offre{
+      background: url("../img/pagenotreoffre/home_background.png") no-repeat scroll center 70px transparent;
+      height: 1000px;
+}
+.pagenotreoffre-reunion{ margin:auto;}
+.pagenotreoffre-reunion .box_souscrire{ width:390px; height:165px; border:1px solid #ebebeb;}
+.pagenotreoffre-reunion .row .rbox{clear: both; float: left; margin-top: 20px; width: 645px; }
+.pagenotreoffre-reunion .row .rbox .icon{  border: 1px solid #ebebeb; float: left; height: 63px; width: 66px; }
+.pagenotreoffre-reunion .row .rbox .title{ font-family:freeroadregular; font-size:1.3em; border-bottom: 1px solid #ebebeb; border-right: 1px solid #ebebeb; border-top: 1px solid #ebebeb; float: left; height: 63px; width: 576px;  text-align: center; color: #535353;}
+.pagenotreoffre-reunion .row .rbox .sub-title{
+    border-bottom: 1px solid #EBEBEB;
+    border-left: 1px solid #EBEBEB;
+    border-right: 1px solid #EBEBEB;
+    color: #93C240;
+    float: left;
+    font-family: freeroad;
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1.7;
+    text-align: center;
+    width: 643px;
+}
+.pagenotreoffre-reunion .row{ 
+    margin-left: auto;
+    margin-right: auto; 
+    width: 645px;
+}
+.pagenotreoffre-reunion .row .rbox .desc{ 
+    color: #535353;
+    float: left;
+    font-size: 0.9em;
+    margin-right: 10px;
+    margin-top: 7px;
+    text-align: center;
+    width: 490px;
+ }
+.pagenotreoffre-reunion .row .rbox .detail{ float: left; margin-top:7px;}
+.pagenotreoffre-reunion .row .rbox .detail a{ background: url("../img/pagenotreoffre/detail_btn.png") repeat-x scroll 0 0 transparent;color: #FFFFFF; display: block; font-size: 0.8em; height: 17px; padding-top: 3px; text-align: center; text-decoration: none; width: 144px; }
+.row .rw_tel.rbox .title:hover,.row .rw_int.rbox .title:hover{ color: #92C248; font-family:freeroadregular; }
+.row .rw_tel.rbox .title .destination{ font-size: 30px; }
+.row .rw_int.rbox .title{
+    font-size: 1.5em;
+    font-weight: bold;
+    height: 47px;
+    padding-top: 16px;
+}
+
+
+.pagenotreoffre-reunion .row .rbox .title h3{ text-align:left;}
+
+/*
+* Page notre offre reunion = Bouquet TV
+*/
+ul.bqttv-options{  margin: 0 0 0 10px; }
+ul.bqttv-options li{ display: inline; float: left; margin-right: 2px; width: 137px; }
+ul.bqttv-options li a{olor: #C5C3C3; font-size: 0.7em;}
+ul.bqttv-options li a:hover{ text-decoration: none; color: #93c240;text-shadow: 0 0 10px;}
+ul.bqttv-options li a:hover span{background-color: #93c240;}
+ul.bqttv-options li.basique a span{font-size: 14px;}
+ul.bqttv-options li.mega_re a span{ font-size: 16px;height: 16px; margin-top: -3px; padding-top: 2px;}
+ul.bqttv-options li.giga_re a span{  font-size: 23px;height: 18px;margin-top: -7px;padding-top: 4px;}
+ul.bqttv-options li.ultra_re a span{font-size: 26px;height: 21px;margin-top: -11px;padding-top: 5px;}
+ul.bqttv-options li a span{  background-color: #c6c6c6; color: #fff; display:block;}
+
+.row-fluid.img-modem{ padding-top: 40px; text-align: center; }
+.row-fluid.copyright p{ text-align: center;font-size: 9px;}
+
+.detail_tv_pop.offre.r1{}
+.detail_tv_pop.offre.r1 #info-et-societe,
+.detail_tv_pop.offre.r1.reunion #cinema3,
+.detail_tv_pop.offre.r1 #sport,
+.detail_tv_pop.offre.r1 #musique,
+.detail_tv_pop.offre.r1 #jeunesse
+{ 
+    margin-left:0;
+}
+.detail_tv_pop.offre.r1 #jeunesse{ width:131px; margin-right:0; }
