@@ -9,7 +9,8 @@
                      },
                     function(data){
                       $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit);                      
+                      $("#recap_contenu").empty().prepend(data.contenuDroit1);  
+                       $("#recap_contenu").append(data.contenuDroit2);
                       $.unblockUI();                    
                     }, "json"  
             );
@@ -18,7 +19,12 @@
 <div id="recap_contenu">
    <?php
        if(array_key_exists("prevState",$userdata)){
-           echo $userdata["prevState"]["contenuDroit"];
+//           echo "<pre>";
+//           print_r($userdata["prevState"]);
+//           echo "</pre>";
+           echo $userdata["prevState"]["contenuDroit1"];
+           echo $userdata["prevState"]["contenuDroit2"];
+           echo $userdata["prevState"]["contenuDroit3"];
        }
     ?>
 </div>

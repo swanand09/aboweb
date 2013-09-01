@@ -124,14 +124,9 @@ class Mon_offre extends MY_Controller {
                 $htmlContent .= '<div class="prev_next">'.anchor('mon_offre/redirectToMonOffre',"PRECEDENT").'</div>';
                 $htmlContent .= "</div>";
         }
-      $htmlContent = array(
-                                "htmlContent"  => $htmlContent,                                
-                                "contenuDroit1" => $contenuDroit1,
-                                "contenuDroit2" => $contenuDroit2,
-                                "contenuDroit3" => $contenuDroit3
-                 );  
-      $this->session->set_userdata('prevState',$htmlContent);
-       echo utf8_encode(utf8_decode(json_encode($htmlContent)));       
+     
+      $this->session->set_userdata('prevState',array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+       echo utf8_encode(utf8_decode(json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3))));       
     }
     
     public function forfait()
@@ -182,18 +177,30 @@ class Mon_offre extends MY_Controller {
         $prevState = $this->session->userdata("prevState");
         $contenuDroit1 = $prevState["contenuDroit1"];
         $contenuDroit2 = $prevState["contenuDroit2"];
-        $contenuDroit2 .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
-        $contenuDroit2 .='<h3 style="color:#fff;font-size:12px;">Choisissez une offre...</h3>';
-    
-      echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2));   
+        $contenuDroit3 = $prevState["contenuDroit3"];
+        if($contenuDroit2=="")
+        {
+            $contenuDroit2 .= ($redu_facture=="true")?"<p style='#000;>Produit dégroupage total desiré</p>":"<p style='#000;'>Produit dégroupage partiel souscris</p>";
+        }
+        if($contenuDroit3=="")
+        {
+            $contenuDroit3 .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
+            $contenuDroit3 .='<h3 style="color:#fff;font-size:12px;">Choisissez une offre...</h3>';
+        }      
+       $prevState["contenuDroit2"] =  $contenuDroit2;
+       $prevState["contenuDroit3"] =  $contenuDroit3;
+       $this->session->set_userdata('prevState',$prevState);
+      echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));   
     } 
     
     public function prevState()
     {
         $prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
-        $htmlContent = $prevState["htmlContent"];
-        
+        $htmlContent   = $prevState["htmlContent"];
+        $contenuDroit1 = $prevState["contenuDroit1"];
+        $contenuDroit2 = $prevState["contenuDroit2"];
+        $contenuDroit3 = $prevState["contenuDroit3"];
         if($redu_facture=="true")
         {
             $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
@@ -209,8 +216,9 @@ class Mon_offre extends MY_Controller {
         {
            $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
         }
-       
-        echo utf8_encode(utf8_decode($htmlContent));   
+       //$this->session->set_userdata('prevState',array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+       //echo json_encode($htmlContent);     
+        echo utf8_encode(utf8_decode($htmlContent));
         //echo $htmlContent;
     }
     
@@ -220,6 +228,7 @@ class Mon_offre extends MY_Controller {
          $produit =  $this->session->userdata("produit");
          $prevState = $this->session->userdata("prevState");
          $contenuDroit1 = $prevState["contenuDroit1"];
+         $contenuDroit2 = $prevState["contenuDroit2"];
          $tarif = "";
          $libele = "";
          foreach($produit as $key=>$val)
@@ -244,8 +253,16 @@ class Mon_offre extends MY_Controller {
                         </div>';
            }            
          }
-         
-         echo json_encode(array("contenuDroit1"=>$contenuDroit1,"contenuDroit2"=>$tarif,"contenuDroit3"=>$libele));
+         $htmlContent = array( 
+                                "htmlContent"   => $prevState["htmlContent"],
+                                "contenuDroit1"  => $contenuDroit1,                                                             
+                                "contenuDroit2" => $contenuDroit2,
+                                "contenuDroit3" => $tarif.$libele
+                 ); 
+         $prevState["contenuDroit2"] = $contenuDroit2;
+         $prevState["contenuDroit3"] = $tarif.$libele;
+         $this->session->set_userdata('prevState',$prevState);
+         echo json_encode($htmlContent);
     }       
     
     public function redirectToMonOffre()
