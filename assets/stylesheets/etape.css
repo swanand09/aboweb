@@ -1,0 +1,127 @@
+
+/*General*/
+
+.block-grid.etapes { 
+	margin: 20px 0 0 0;
+	height: 108px;
+}
+
+.block-grid.etapes li{ 
+	margin-left: -22px;
+	margin-top: 6px;
+	padding: 0;
+	position: relative;
+}
+
+.block-grid.etapes li a {
+  font-size: 20px;
+  left: 34px;
+  position: absolute;
+  line-height: 0.9em;
+  color: #90918E;
+}
+
+/*Etape 1*/
+.block-grid.etapes .etape1 {
+  margin-left:0;
+}
+
+/*Etape 2*/
+.block-grid.etapes .state2 {
+	z-index: 4;
+	margin-top: 9px;
+
+}
+.block-grid.etapes .state2 img {
+	height: 98px;
+}
+.block-grid.etapes .state2 a {
+	font-size: 1.2em;
+  height: 66px;
+  margin-left: -23px;
+  padding-left: 24px;
+  padding-top: 16px;
+  width: 160px;
+}
+.block-grid.etapes .state2 a span {
+	float: left;
+  font-size: 2.1em;
+  height: 37px;
+  margin-right: 6px;
+  margin-top: 8px;
+}
+
+/*Etape 3*/
+.block-grid.etapes .state3 {
+	z-index: 3;
+	margin-top: 12px;
+}
+.block-grid.etapes .state3 img {
+	height: 90px;
+}
+.block-grid.etapes .state3 a {
+	font-size: 1.1em;
+  height: 60px;
+  margin-left: -21px;
+  padding-left: 30px;
+  padding-top: 14px;
+  width: 158px;	
+}
+.block-grid.etapes .state3 a span {
+	float: left;
+  font-size: 2.3em;
+  height: 27px;
+  margin-right: 6px;
+  margin-top: 9px;
+}
+
+/*Etape 4*/
+.block-grid.etapes .state4 {
+	z-index: 2;
+	margin-top: 15px;
+}
+.block-grid.etapes .state4 img {
+  height: 82px;
+  width: 180px;
+}
+.block-grid.etapes .state4 a {
+  font-size: 1em;
+  height: 55px;
+  margin-left: -21px;
+  padding-top: 16px;
+  text-align: center;
+  width: 146px;
+}
+.block-grid.etapes .state4 a span {
+  font-size: 1.9em;
+}
+
+/* Active Etape */
+.block-grid.etapes li.state-active {
+  width: 220px;
+  z-index: 5;
+}
+.block-grid.etapes li.state-active img {
+
+}
+.block-grid.etapes li.state-active a {
+  color: #98C447;
+ 	height: 72px;
+	margin-left: -12px;
+	padding-left: 18px;
+	padding-top: 18px;
+	width: 187px;
+}
+.block-grid.etapes li.state-active a span {
+  float: left;
+  font-size: 2.7em;
+  height: 47px;
+  line-height: 1em;
+  margin-right: 3px;
+  margin-top: -11px;
+}
+
+/*adjustments*/
+.block-grid.etapes etape1.state4 a span {
+  float: left;
+}

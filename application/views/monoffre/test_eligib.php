@@ -65,9 +65,12 @@
                      },
                     function(data){
                       $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit1);   
-                      $("#recap_contenu").append(data.contenuDroit2);
-                      $("#recap_contenu").append(data.contenuDroit3);
+                      $("#recap_contenu").empty().html(data.contenuDroit1+data.contenuDroit2+data.contenuDroit3);   
+//                      alert("contenuDroit1: "+data.contenuDroit1);
+//                      $("#recap_contenu").append(data.contenuDroit2);
+//                      alert("contenuDroit2: "+data.contenuDroit2);
+//                      $("#recap_contenu").append(data.contenuDroit3);
+//                      alert("contenuDroit3: "+data.contenuDroit3);
                       $.unblockUI();                    
                     },"json"
                   );   
@@ -75,9 +78,9 @@
           }  
           function prevState()
           {               
-                preload();
+                //preload();
                 $("#cont_mon_off").empty().load('mon_offre/prevState');
-                $.unblockUI(); 
+                //$.unblockUI(); 
           }
           
           function choixForfait(id)
