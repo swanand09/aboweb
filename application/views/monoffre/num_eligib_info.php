@@ -1,45 +1,47 @@
+<hr/> 
 <?php
     if(!empty($num_tel)){
          if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
          {   
-?>
-<p>VOICI LES RESULTATS D'ELIGIBILITE LIES A VOTRE LIGNE</p>
-<h3>VOTRE DEBIT ADSL</h3>
-<p>Numero: <?php echo $result["interrogeEligibiliteResult"]["Ligne"]["Numero"]; ?></p>
-<p>Debit emmission: <?php echo $result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"];?></p>
-<p>Debit reception: <?php echo $result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"];?></p>
-<h3>LES SERVICES MEDIASERV</h3>
-<p>Eligibilé ADSL: <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"Oui":"Non");?></p>
-<p>Eligibilé TV: <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"Oui":"Non");?></p>
-<h3>CE QUE NOUS POUVONS AUSSI VOUS PROPOSER:</h3>
+?>       
+<p><strong>Voici les résultats d’éligibilité liés à votre ligne</strong></p>
+<div class='debit-adsl'>
+  <h3>VOTRE DEBIT ADSL</h3>
+  <p>Debit emmission: <?php echo $result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"];?></p>
+  <p>Debit reception: <?php echo $result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"];?></p>
+</div>
 <div>
-    <form action='#' onsubmit='javascript:retrieveForfait();return false'>
-        <p><?php echo form_checkbox($input1); ?> Réduisez votre facture en résiliant votre abonnement<br>car vous êtes en zone dégroupée</p>
-        <p><?php echo form_checkbox($input2);?> Vous pouvez aussi conserver votre numéro de téléphone</p>
-        <div>
-            <div class="prev_next"><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT");?></div>
-            <div class="prev_next"><?php echo form_submit($choix_forfait);?></div>
-       </div>
-    </form>
- </div>
+<h3 style='margin-top:0px;'>LES SERVICES MEDIASERV <span class='misc-custom-2'><a href='#'><img class='border-gray' src='images/info_icon.png' title='Plus info' alt='Plus info'></a></span></h3>
+<ul class='services-mediaserv'>
+  <li class='telephone not-available'><span><img src='images/tel.png'/>T&Eacute;L&Eacute;PHONE</span> Chez Médiaserv vous disposerez de l’ensemble des options sur la téléphonie.</li>
+  <li class='internet <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]?"available":"not-available");?>'><span><img src='images/net.png'/>INTERNET</span> Chez Médiaserv vous disposerez de l’ensemble des options sur la téléphonie.</li>
+  <li class='television <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]?"available":"not-available");?>'><span><img src='images/tv.png'/>T&Eacute;L&Eacute;VISION</span> Vous ne pourrez malheureusement pas bénéficier de notre offreTV car votre débit est trop faible.</li>
+</ul>
+</div>
+<div>
+<h3>CE QUE NOUS POUVONS AUSSI VOUS PROPOSER</h3>
+<form class='frm-options' action='#' onsubmit='javascript:retrieveForfait();return false'> 
+  <label for="checkbox3"><?php echo form_checkbox($input1); ?> Réduisez votre facture en résiliant votre abonnement car vous êtes en zone dégroupée <span><a href='#'><img class='border-gray' src='images/info_icon.png' title='Plus info' alt='Plus info'></a></span></label>
+  <label for="checkbox3"><?php echo form_checkbox($input2);?> Vous pouvez aussi conserver votre numéro de téléphone <span><a href='#'><img class='border-gray' src='images/info_icon.png' title='Plus info' alt='Plus info'></a></span></label>
+  <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent"));?></div>
+  <div class='top-20 six custom-column text-right'><?php echo form_submit($choix_forfait);?></div>
+</form>
+</div>
 <?php
             }else{
                 ?>
                     <p>Le webservice retourne aucune valeur pour ce numéro: <?php echo $num_tel;?> 
                     <div>
-                        <div class="prev_next">
-                             <?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT");?>
-                        </div>
+                       <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent"));?></div>
                      </div>                
            <?php
             }
     }else{?>
          <p>Veuillez saisir une valeur pour le numéro téléphone</p>
            <div>
-               <div class="prev_next">
-                    <?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT");?>
-                </div>
+              <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent"));?></div>
             </div>
     <?php
     }
 ?>
+

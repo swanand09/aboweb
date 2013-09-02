@@ -76,17 +76,18 @@ class Mon_offre extends MY_Controller {
                 $data["input1"] = $input1;
                 $data["input2"] = $input2;                
                 $choix_forfait = array(
-                                            'class'=>'rmv-std-btn btn-green',
+                                            'class'=> 'rmv-std-btn btn-forward',
+                                            //'class'=>'rmv-std-btn btn-green',
                                             'name' => 'choix_forfait',
                                             'id' => 'choix_forfait',
                                             'type' => 'submit',
                                            // 'onclick'=>'javascript:retrieveForfait();',    
-                                            'value' => 'CHOISIR MON FORFAIT'
+                                            'value' => 'Choisir mon forfait'
                                           );   
                 $data["choix_forfait"] = $choix_forfait; 
                 $contenuDroit1 .= '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
                 $contenuDroit1 .= form_input($this->data["racap_num"]);
-                $contenuDroit1 .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;text-decoration:underline;margin-left:250px;font-size:12px;margin-bottom:10px;">Modifier</a>';  
+                $contenuDroit1 .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;text-decoration:underline;margin-left:175px;font-size:12px;margin-bottom:10px;">Modifier</a>';  
             }
       }  
       $htmlContent .= $this->load->view("monoffre/num_eligib_info",$data,true);
