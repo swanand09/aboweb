@@ -59,7 +59,7 @@ class MY_Controller extends CI_Controller {
                                                     'type' => 'submit',
                                                     'value' => 'TESTER'
                                               );
-           $this->data["pageid"] ="page_1";
+           $this->data["pageid"] ="page-etape-1";
            
            
            $this->template

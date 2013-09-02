@@ -121,8 +121,8 @@
        }else {?>
            <?php  echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve','onsubmit'=>'javascript:procTestEligib();return false;')); ?>        
             <div class='seven columns'>
-                     <label>
-                        <strong>SAISISEZ VOTRE NUM&Eacute;RO DE T&Eacute;L&Eacute;PHONE</strong>
+                     <label class='misc-custom-3'>
+                        <strong class='left'>SAISISEZ VOTRE NUM&Eacute;RO DE T&Eacute;L&Eacute;PHONE</strong>
                         <span class='right'><a href='#'><?php echo image('info_icon.png',NULL,array('class'=>'border-gray','title'=>'Plus info','alt'=>'Plus info'));?></a></span>
                      </label>
                 <?php  echo form_input($num_tel);?>     

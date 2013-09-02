@@ -16,14 +16,11 @@
         echo css('foundation.min.css');
         echo css('app.css'); 
         echo css('main.css'); 
+        echo css('etape.css');
         echo css('font.css'); 
   ?>
-   <!--[if IE 7]> 
-  <?php       
-        echo css('ie7.css');
-  ?>
-   <![endif]-->
-
+   <!--[if IE 7]><?php echo css('ie7.css');?><![endif]-->
+  <!--[if IE 8]><?php echo css('ie8.css');?><![endif]-->
   <?php
         echo js('modernizr.foundation.js');
          echo js('jquery.js');
@@ -62,17 +59,17 @@
   <!--MAIN SECTION-->
   <section class='row main-content'>
     <section class='eight columns left-content'>
-      <ul class="block-grid four-up etapes">        
-        <li class='etape1 <?php echo ($pageid=="page_1")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>1</span> Mon offre</a></li>
-        <li class='etape2 <?php echo ($pageid=="page_2")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>2</span> Mes coordonnées</a></li>
-        <li class='etape3 <?php echo ($pageid=="page_3")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>3</span> Mon récapitulatif</a></li>
-        <li class='etape4 <?php echo ($pageid=="page_4")?"page-active etape-active":""; ?>'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
+      <ul class="block-grid four-up etapes <?php echo $pageid; ?>">        
+        <li class='etape1 state1'><?php echo image('etape.png');?><a href='#'><span>1</span> Mon offre</a></li>
+        <li class='etape2 state2'><?php echo image('etape.png');?><a href='#'><span>2</span> Mes coordonnées</a></li>
+        <li class='etape3 state3'><?php echo image('etape.png');?><a href='#'><span>3</span> Mon récapitulatif</a></li>
+        <li class='etape4 state4'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
       </ul>
       <div>
            <?php echo $template['partials']['contenu_gauche'];?>
       </div>    
     </section>
-    <section class='four columns right-content'>
+    <section class='three columns right-content'>
         <div class='ligne'> 
              <?php echo $template['partials']['contenu_droit'];?>   
          </div>
