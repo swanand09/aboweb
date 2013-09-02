@@ -58,12 +58,12 @@
 
   <!--MAIN SECTION-->
   <section class='row main-content'>
-    <section class='eight columns left-content'>
+    <section class='nine columns left-content'>
       <ul class="block-grid four-up etapes <?php echo $pageid; ?>">        
-        <li class='etape1 state1'><?php echo image('etape.png');?><a href='#'><span>1</span> Mon offre</a></li>
-        <li class='etape2 state2'><?php echo image('etape.png');?><a href='#'><span>2</span> Mes coordonnées</a></li>
-        <li class='etape3 state3'><?php echo image('etape.png');?><a href='#'><span>3</span> Mon récapitulatif</a></li>
-        <li class='etape4 state4'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
+        <li class='etape1 state1'><?php echo image('etape.png');?><a href='#'><span>1</span> Mon<br/>offre</a></li>
+        <li class='etape2'><?php echo image('etape.png');?><a href='#'><span>2</span> Mes<br/>coordonnées</a></li>
+        <li class='etape3'><?php echo image('etape.png');?><a href='#'><span>3</span> Mon<br/>récapitulatif</a></li>
+        <li class='etape4'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
       </ul>
       <div>
            <?php echo $template['partials']['contenu_gauche'];?>
