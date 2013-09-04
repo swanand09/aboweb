@@ -272,6 +272,13 @@ body {
 	background: url("../images/vsep.png") no-repeat scroll center 29px transparent;
     height: 207px;
 }
+.debit_emission {
+	background: url("../images/debit_emission.png") no-repeat scroll 38px 40px transparent;
+}
+.debit_reception {
+	background: url("../images/debit_reception.png") no-repeat scroll 38px 40px transparent;	
+}
+
 .frm-options {
 	margin-top: 10px;
 	margin-bottom:10px;
@@ -385,6 +392,44 @@ body {
 .frm-choisir-offre .modem-sagem .trf span {
 	font-size: 1.9em;
 }
+
+/*
+* Reddy changes
+*/
+ .modem-sagem {
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+ .modem-sagem input {
+ margin-right: 40px;
+    margin-top: 37px;
+}
+ .modem-sagem img {
+ margin-top: 8px;
+}
+ .modem-sagem .plus {
+ margin-left: 48px;
+ margin-top: 30px;
+}
+ .modem-sagem .plus span.green-text {
+ float: left;
+    font-size: 3.5em;
+    margin-right: 33px;
+     margin-top: -9px;
+}
+ .modem-sagem .trf {
+   color: #90918F;
+    margin-left: 45px;
+    margin-top: 18px;
+}
+ .modem-sagem .trf span {
+ font-size: 1.9em;
+}
+/*
+* End of Reddy changes
+*/
+
 .misc-custom-4 {
 	float: left;
 	font-size: 0.9em;
@@ -451,7 +496,6 @@ ul.bqt  li{
     height: 30px;
     padding-left: 10px;
     padding-top: 10px;
-    margin-bottom:20px;
 }
 
 /*

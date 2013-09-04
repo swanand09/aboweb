@@ -69,10 +69,8 @@
            <?php echo $template['partials']['contenu_gauche'];?>
       </div>    
     </section>
-    <section class='three columns right-content'>
-        <div class='ligne'> 
-             <?php echo $template['partials']['contenu_droit'];?>   
-         </div>
+    <section class='three columns right-content'>       
+         <?php echo $template['partials']['contenu_droit'];?>           
     </section>
   </section>
   <!--END OF MAIN SECTION-->
@@ -98,6 +96,8 @@
    <?php       
       //  echo js('foundation.min.js');
         echo js('app.js');
+        echo js('raphael.2.1.0.min.js');
+        echo js('justgage.1.0.1.min.js');
         echo js('custom.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 

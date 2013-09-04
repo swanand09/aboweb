@@ -35,6 +35,10 @@ class Mon_offre extends MY_Controller {
                                                 'value' => $num_tel
                                             );
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
+//            echo "<pre>";
+//            print_r($result);
+//            echo "</pre>";
+//            exit();
             $data["result"] = $result;
 
             if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
@@ -85,9 +89,7 @@ class Mon_offre extends MY_Controller {
                                             'value' => 'Choisir mon forfait'
                                           );   
                 $data["choix_forfait"] = $choix_forfait; 
-                $contenuDroit1 .= '<h3 style="color:#fff;font-size:15px;">VOTRE LIGNE</h3>';
-                $contenuDroit1 .= form_input($this->data["racap_num"]);
-                $contenuDroit1 .= '<a href="javascript:modif_num();" id="modif_num" style="color:#fff;text-decoration:underline;margin-left:175px;font-size:12px;margin-bottom:10px;">Modifier</a>';  
+                $contenuDroit1 .= $this->load->view("monoffre/colonne_droit1",$data,true);
             }
       }  
       $htmlContent .= $this->load->view("monoffre/num_eligib_info",$data,true);
@@ -139,12 +141,14 @@ class Mon_offre extends MY_Controller {
         $contenuDroit2 = $prevState["contenuDroit2"];
         $contenuDroit3 = $prevState["contenuDroit3"];
 
-        $contenuDroit2 = ($redu_facture=="true")?"<p style='#000;'>Produit dégroupage total desiré</p>":"<p style='#000;'>Produit dégroupage partiel souscris</p>";
-
+        $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
+        $contenuDroit2 .= $this->load->view("monoffre/colonne_droit2",$data,true);
         if($contenuDroit3=="")
         {
-            $contenuDroit3 .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
-            $contenuDroit3 .='<h3 style="color:#fff;font-size:12px;">Choisissez une offre...</h3>';
+           // $contenuDroit3 .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
+            //$contenuDroit3 .='<h3 style="color:#fff;font-size:12px;">Choisissez une offre...</h3>';
+            $data["text"]  = '<p>Choisissez une offre...</p>';
+            $contenuDroit3 = $this->load->view("monoffre/colonne_droit3",$data,true);
         }      
        $prevState["contenuDroit2"] =  $contenuDroit2;
        $prevState["contenuDroit3"] =  $contenuDroit3;
@@ -175,10 +179,7 @@ class Mon_offre extends MY_Controller {
         {
            $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
         }
-       //$this->session->set_userdata('prevState',array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
-       //echo json_encode($htmlContent);     
         echo utf8_encode(utf8_decode($htmlContent));
-        //echo $htmlContent;
     }
     
     public function refreshRecapCol()
@@ -194,7 +195,7 @@ class Mon_offre extends MY_Controller {
            if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
            {
                $data["val"]    = $val;
-               $contenuDroit3 .= $this->load->view("monoffre/colonne_droit",$data,true);
+               $contenuDroit3 .= $this->load->view("monoffre/colonne_droit3",$data,true);
 
            }            
          }         

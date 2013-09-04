@@ -17,11 +17,10 @@
     }    
 </script>
 <div id="recap_contenu">
+     <div class='ligne'> 
+     </div>
    <?php
        if(array_key_exists("prevState",$userdata)){
-//           echo "<pre>";
-//           print_r($userdata["prevState"]);
-//           echo "</pre>";
            echo $userdata["prevState"]["contenuDroit1"];
            echo $userdata["prevState"]["contenuDroit2"];
            echo $userdata["prevState"]["contenuDroit3"];
