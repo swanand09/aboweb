@@ -138,11 +138,11 @@ class Mon_offre extends MY_Controller {
 
         $prevState = $this->session->userdata("prevState");
         $contenuDroit1 = $prevState["contenuDroit1"];
-        $contenuDroit2 = $prevState["contenuDroit2"];
+        //$contenuDroit2 = $prevState["contenuDroit2"];
         $contenuDroit3 = $prevState["contenuDroit3"];
 
         $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
-        $contenuDroit2 .= $this->load->view("monoffre/colonne_droit2",$data,true);
+        $contenuDroit2 = $this->load->view("monoffre/colonne_droit2",$data,true);
         if($contenuDroit3=="")
         {
            // $contenuDroit3 .='<h3 style="color:#fff;font-size:15px;">VOTRE OFFRE MEDIASERV</h3>';
