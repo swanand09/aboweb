@@ -35,17 +35,13 @@ class Mon_offre extends MY_Controller {
                                                 'value' => $num_tel
                                             );
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
-//            echo "<pre>";
-//            print_r($result);
-//            echo "</pre>";
-//            exit();
             $data["result"] = $result;
 
             if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
             {
                 $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-
-
+                $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
+               
                 $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                 if($disable_checkbox ==false){
                     $input1 = array(
@@ -104,7 +100,8 @@ class Mon_offre extends MY_Controller {
         $consv_num_tel = $this->input->post('consv_num_tel'); 
         $this->session->set_userdata("consv_num_tel",$consv_num_tel);
         $produit =  $this->session->userdata("produit");
-       $htmlContent =" ";
+        $data["promo_libelle"] = $this->session->userdata("promo");
+       $htmlContent = $this->load->view("monoffre/forfait_info3",$data,true);
        $counter = 1;
        $iadArr = array("Libelle"=>"","Tarif"=>"","Tarif_promo"=>"","Duree_mois_promo"=>"");
        $data["produit"] = $produit;
@@ -124,7 +121,7 @@ class Mon_offre extends MY_Controller {
 
              $data["val"] = $val;
              $data["choixArr"] = $choixArr;
-             $data["counter"] = $counter;
+             $data["counter"] = $counter;          
              $htmlContent .= $this->load->view("monoffre/forfait_info1",$data,true);
              $counter++;
            }
@@ -204,6 +201,11 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata('prevState',$prevState);
          echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $contenuDroit1, "contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
     }       
+    
+    public function bouquetTv()
+    {
+        
+    }
     
     public function redirectToMonOffre()
     {

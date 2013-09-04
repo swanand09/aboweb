@@ -77,11 +77,6 @@
          {   
 ?>       
 <p><strong>Voici les résultats d’éligibilité liés à votre ligne</strong></p>
-<!--<div class='debit-adsl'>
-  <h3>VOTRE DEBIT ADSL</h3>
-  <p>Debit emmission: <?php //echo $result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"];?></p>
-  <p>Debit reception: <?php //echo $result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"];?></p>
-</div>-->
  <div class='row debit-adsl'>
     <div class='column twelve'><h3 class='no-margin-bottom'>VOTRE DEBIT ADSL</h3></div>
     <div class='column six debit_emission'><div id="g1"></div></div><div class='column six debit_reception'><div id="g2"></div></div>
@@ -91,7 +86,7 @@
 <ul class='services-mediaserv'>
   <li class='telephone not-available'><span><?php echo image('tel.png');?>T&Eacute;L&Eacute;PHONE</span> Chez Médiaserv vous disposerez de l’ensemble des options sur la téléphonie.</li>
   <li class='internet <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]=="true"?"available":"not-available");?>'><span><?php echo image('net.png');?>INTERNET</span> Chez Médiaserv vous disposerez de l’ensemble des options sur la téléphonie.</li>
-  <li class='television <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]=="true"?"available":"not-available");?>'><span><?php echo image('tv.png');?>T&Eacute;L&Eacute;VISION</span> Vous ne pourrez malheureusement pas bénéficier de notre offreTV car votre débit est trop faible.</li>
+  <li class='television <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]=="true"?"available":"not-available");?>'><span><?php echo image('tv.png');?>T&Eacute;L&Eacute;VISION</span><?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]=="true"?" Vous disposerez notre offreTV.":" Vous ne pourrez malheureusement pas bénéficier de notre offreTV car votre débit est trop faible.");?></li>
 </ul>
 </div>
 <div>
