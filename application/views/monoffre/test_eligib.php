@@ -92,7 +92,7 @@
                         id_crm : id
                      },
                     function(data){
-                     // $("#cont_mon_off").empty().prepend(data.htmlContent); 
+                      $("#cont_mon_off").empty().prepend(data.htmlContent); 
                       $("#recap_contenu").empty().prepend(data.contenuDroit1);
                       $("#recap_contenu").append(data.contenuDroit2);
                       $("#recap_contenu").append(data.contenuDroit3);   

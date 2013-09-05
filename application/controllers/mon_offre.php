@@ -198,13 +198,17 @@ class Mon_offre extends MY_Controller {
          }         
          $prevState["contenuDroit2"] = $contenuDroit2;
          $prevState["contenuDroit3"] = $contenuDroit3;
-         $this->session->set_userdata('prevState',$prevState);
+          $prevState["htmlContent"] = $this->load->view("monoffre/bouqet_tv",$data,true);   
+        // $this->session->set_userdata('prevState',$prevState);
          echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $contenuDroit1, "contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
     }       
     
     public function bouquetTv()
     {
+        $prevState = $this->session->userdata("prevState");
+        $prevState["htmlContent"] = $this->load->view("monoffre/bouquet_tv",data,true);
         
+        echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $prevState["contenuDroit1"], "contenuDroit2" => $prevState["contenuDroit2"],"contenuDroit3" => $prevState["contenuDroit3"]));
     }
     
     public function redirectToMonOffre()
