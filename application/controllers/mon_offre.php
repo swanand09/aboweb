@@ -198,18 +198,44 @@ class Mon_offre extends MY_Controller {
          }         
          $prevState["contenuDroit2"] = $contenuDroit2;
          $prevState["contenuDroit3"] = $contenuDroit3;
-          $prevState["htmlContent"] = $this->load->view("monoffre/bouqet_tv",$data,true);   
+         
+         $produit = $this->session->userdata("produit");
+         $data["tarif_ultra"] = 0;
+         $data["tarif_giga"] = 0;
+         $data["tarif_mega"] = 0;
+         $count_tv = 0;
+         foreach($produit as $key=>$val)
+         {
+            if($val["Categorie"]=="BOUQUET_TV"){
+                switch(utf8_encode($val["Libelle"]))
+                {
+                    case "Bouquet Ultra":
+                        $data["tarif_ultra"] = $val["Tarif"];
+                        break;
+                     case "Bouquet Giga":
+                         $data["tarif_giga"] = $val["Tarif"];
+                        break;
+                     case "Bouquet Méga":
+                         $data["tarif_mega"] = $val["Tarif"];
+                        break;
+                }
+                $count_tv++;
+            }
+         }
+         //Go to bouquet tv or mes coordonnes         
+          $prevState["htmlContent"] = ($count_tv>0)?$this->load->view("monoffre/bouqet_tv",$data,true):$this->load->view("mes_coord/mes_coordonnes",$data,true);   
+         
         // $this->session->set_userdata('prevState',$prevState);
          echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $contenuDroit1, "contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
     }       
     
-    public function bouquetTv()
-    {
-        $prevState = $this->session->userdata("prevState");
-        $prevState["htmlContent"] = $this->load->view("monoffre/bouquet_tv",data,true);
-        
-        echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $prevState["contenuDroit1"], "contenuDroit2" => $prevState["contenuDroit2"],"contenuDroit3" => $prevState["contenuDroit3"]));
-    }
+//    public function bouquetTv()
+//    {
+//        $prevState = $this->session->userdata("prevState");
+//        $prevState["htmlContent"] = $this->load->view("monoffre/bouquet_tv",data,true);
+//        
+//        echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $prevState["contenuDroit1"], "contenuDroit2" => $prevState["contenuDroit2"],"contenuDroit3" => $prevState["contenuDroit3"]));
+//    }
     
     public function redirectToMonOffre()
     {

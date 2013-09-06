@@ -42,6 +42,8 @@
    {
        $max_recu = 30;
    }
+   $max_emis = 10;
+   $max_recu = 30;
 ?>
 <script>
     $(function(){    

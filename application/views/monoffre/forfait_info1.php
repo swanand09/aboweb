@@ -4,6 +4,7 @@
 ?>
 <div class="forfait">
     <h3>Forfait n&deg;<?php echo $counter; ?></h3>
+<!--     <label><?php //echo $val["promo_libelle"]; ?></label>-->
     <div class="three columns telephone">Téléphone<br><span class="green-text"><?php echo $label[0];?></span></div>
     <div class="three columns internet">Internet<br><span class="green-text"><?php echo $label[1];?></span></div>
     <!-- If television is not available, add 'not-available' to its class -->
@@ -15,7 +16,7 @@
 </div>  
 
 <!--<div class="forfait">
-    <h3>FORFAIT N&deg;"<?php echo $counter; ?></h3>
+    <h3>FORFAIT N&deg;"<?php //echo $counter; ?></h3>
     <div style='width:300px;float:left;margin-top:5px;'>
     <?php //echo utf8_encode($val["Libelle"])."&nbsp;&nbsp;"; ?>           
     <?php //echo $val["Tarif"];?>&euro;<br><br><span style='font-size:11px;'>
