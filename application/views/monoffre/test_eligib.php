@@ -76,10 +76,10 @@
                   );   
                       return false;
           }  
-          function prevState()
+          function prevState(page)
           {               
                 //preload();
-                $("#cont_mon_off").empty().load('mon_offre/prevState');
+                $("#cont_mon_off").empty().load('mon_offre/prevState/'+page);
                 //$.unblockUI(); 
           }
           

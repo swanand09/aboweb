@@ -112,7 +112,7 @@
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
               <div class="column eight">
                 bouquet mega<br><?php echo $tarif_mega; ?> € 
-                <label><input type="radio" value="mega" name="bouguet"><span>Sélectionner</span></label>
+                <label><input type="radio" value="mega" name="bouguet" checked="checked"><span>Sélectionner</span></label>
               </div>
             </div>
             <!--option giga-->
@@ -225,7 +225,7 @@
         </div>
 
         <div class="row">
-          <div class="top-20 column six back-button left"><a alt="Précédent" href="javascript:prevState();" class="precedent">Précédent</a></div>
+          <div class="top-20 column six back-button left"><a alt="Précédent" href="javascript:prevState('forfait');" class="precedent">Précédent</a></div>
           <div class="top-20 column six text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
         </div>
 
