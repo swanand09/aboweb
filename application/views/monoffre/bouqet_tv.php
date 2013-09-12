@@ -1,3 +1,29 @@
+<script>       
+  $(function(){
+      $("#bouquet_mega").attr("Disabled","Disabled");
+      $("#bouquet_giga").attr("Disabled","Disabled");
+      $("#bouquet_ultra").attr("Disabled","Disabled");
+      $("#beneficier").click(function(){          
+        if($(this).is(":checked")){          
+           $("#decodeur_tv_netgem").attr("Checked","Checked");
+            $("#bouquet_mega").removeAttr("Disabled");
+           $("#bouquet_giga").removeAttr("Disabled");
+           $("#bouquet_ultra").removeAttr("Disabled");
+           
+       }else{          
+           $("#decodeur_tv_netgem").removeAttr("Checked");
+           $("#bouquet_mega").removeAttr("checked");
+           $("#bouquet_giga").removeAttr("checked");
+           $("#bouquet_ultra").removeAttr("checked");
+           $("#bouquet_mega").attr("Disabled","Disabled");
+           $("#bouquet_giga").attr("Disabled","Disabled");
+           $("#bouquet_ultra").attr("Disabled","Disabled");           
+       }  
+      }); 
+        
+  });       
+</script>
+
 <form action="mes-cordonnees.php" class="frm-tv">
 
         <div class="row">
@@ -97,7 +123,7 @@
 
           </div>
           <div class="column four">
-            <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur-tv-netgem" value="decodeur-tv-netgem" id="decodeur-tv-netgem"><strong>DÉCODEUR TV NETGEM</strong></label>
+            <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur_tv_netgem" value="decodeur-tv-netgem" disabled="disabled" id="decodeur_tv_netgem"><strong>DÉCODEUR TV NETGEM</strong></label>
               <?php echo image("decodeur_tv_netgem.png",NULL,array("alt"=>"Décodeur TV netgem"));?>
             <strong class="left"> + DE 35 CHAÎNES INCLUSES 3,50€ TTC/MOIS</strong>
           </div>
@@ -112,7 +138,7 @@
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
               <div class="column eight">
                 bouquet mega<br><?php echo $tarif_mega; ?> € 
-                <label><input type="radio" value="mega" name="bouguet" checked="checked"><span>Sélectionner</span></label>
+                <label><input type="radio" value="mega" id="bouquet_mega" name="bouquet"><span>Sélectionner</span></label>
               </div>
             </div>
             <!--option giga-->
@@ -120,7 +146,7 @@
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
               <div class="column eight">
                 bouquet giga<br><?php echo $tarif_giga; ?> € 
-                <label><input type="radio" value="giga" name="bouguet"><span>Sélectionner</span></label>
+                <label><input type="radio" value="giga" id="bouquet_giga" name="bouquet"><span>Sélectionner</span></label>
               </div>
             </div>
             <!--option ultra -->
@@ -128,7 +154,7 @@
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+33</h4> chaines</div>
               <div class="column eight">
                 bouquet ultra<br><?php echo $tarif_ultra; ?> € 
-                <label><input type="radio" value="ultra" name="bouguet"><span>Sélectionner</span></label>
+                <label><input type="radio" value="ultra" id="bouquet_ultra" name="bouquet"><span>Sélectionner</span></label>
               </div>
             </div>
           </div>
