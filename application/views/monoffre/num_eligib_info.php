@@ -50,8 +50,10 @@
     /*------------------------------------------------
 	* Jquery Meter Gauge
 	------------------------------------------------*/
+if($('.debit_emission').length > 0 )
+  {
+  var g1 = new JustGage({
 
-	var g1 = new JustGage({
           id: "g1", 
           value: <?php echo $debit_emis;?>, 
           min: 0,
@@ -60,6 +62,7 @@
           label: "Mbps",
           levelColors: ['95bc46','95bc46'],
         });
+
 
 	var g2 = new JustGage({
 	      id: "g2", 
@@ -70,7 +73,9 @@
 	      label: "Mbps",
 	      levelColors: ['95bc46','95bc46'],
 	    });
+    }
 });
+
 </script>
 <hr/> 
 <?php
