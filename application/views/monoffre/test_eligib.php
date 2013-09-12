@@ -92,11 +92,15 @@
                         id_crm : id
                      },
                     function(data){
-                      $("#cont_mon_off").empty().prepend(data.htmlContent); 
-                      $("#recap_contenu").empty().prepend(data.contenuDroit1);
-                      $("#recap_contenu").append(data.contenuDroit2);
-                      $("#recap_contenu").append(data.contenuDroit3);   
-                      $.unblockUI();                    
+                      if(data.htmlContent!="redirect to mes coordonnees"){
+                        $("#cont_mon_off").empty().prepend(data.htmlContent); 
+                        $("#recap_contenu").empty().prepend(data.contenuDroit1);
+                        $("#recap_contenu").append(data.contenuDroit2);
+                        $("#recap_contenu").append(data.contenuDroit3);   
+                        $.unblockUI();               
+                      }else{
+                          $(location).attr('href',"mes_coordonnees");
+                        }                          
                     },"json"
                   ); 
           }

@@ -83,6 +83,6 @@
           <hr class="sexy">
 
           <!--back and submit buttom -->
-          <div class="six custom-column back-button left"><a alt="Précédent" href="javascript:prevState();" class="precedent">Précédent</a></div>
+          <div class="six custom-column back-button left"><a alt="Précédent" href="mon_offre" class="precedent">Précédent</a></div>
           <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
         </form>

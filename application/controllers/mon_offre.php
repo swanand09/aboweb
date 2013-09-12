@@ -8,12 +8,12 @@ class Mon_offre extends MY_Controller {
             $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib'); 
     }  
     
-    public function index()
+    public function index($num_tel="")
     {
         $this->data["department"] = $this->session->userdata("user_geolocalisation"); 
         $this->data["userdata"] = $this->session->all_userdata();
-      
-        return $this->controller_test_eligib_vue();                
+        
+        return $this->controller_test_eligib_vue($num_tel);                
     }
     
     public function ajax_proc_interogeligib()
@@ -189,8 +189,8 @@ class Mon_offre extends MY_Controller {
          $prevState["htmlContent"] = $this->session->userdata("htmlContent_forfait");
          $this->session->set_userdata('prevState',$prevState);
          //Go to bouquet tv or mes coordonnes         
-          $prevState["htmlContent"] = ($count_tv>0)?$this->load->view("monoffre/bouqet_tv",$data,true):$this->load->view("mes_coord/mes_coordonnes",$data,true);   
-         
+         //$prevState["htmlContent"] = ($count_tv>0)? $this->load->view("monoffre/bouqet_tv",$data,true):$this->load->view("mes_coord/mes_coordonnes",$data,true);   
+         $prevState["htmlContent"] = ($count_tv>0)? $this->load->view("monoffre/bouqet_tv",$data,true):"redirect to mes coordonnees";   
         // $this->session->set_userdata('prevState',$prevState);
          echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $contenuDroit1, "contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
     }       
