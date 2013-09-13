@@ -17,7 +17,7 @@ class MY_Controller extends CI_Controller {
             $this->userdata["user_geolocalisation"] = $_SESSION["user_geolocalisation"];
         }
         
-        public function controller_test_eligib_vue($num_tel="")
+        public function controller_test_eligib_vue()
         {
            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
           $this->data["prenum"] = "";
@@ -60,29 +60,20 @@ class MY_Controller extends CI_Controller {
                                                     'value' => 'TESTER'
                                               );
            $this->data["pageid"] ="page-etape-1";
-           
-           if(!empty($num_tel)){
-               $this->template
+           $this->data["etapes_url"][0] = "#";
+           $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Mon Offre')
-                            ->set_partial('contenu_gauche', 'monoffre/retriev_num_result')
+                            ->set_partial('contenu_gauche', 'monoffre/test_eligib')
                              ->set_partial('contenu_droit', 'monoffre/module_recap')    
                             ->build('page',$this->data);
-           }else{               
            
-                $this->template
-                                 ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
-                                 ->title('title', 'Mon Offre')
-                                 ->set_partial('contenu_gauche', 'monoffre/test_eligib')
-                                  ->set_partial('contenu_droit', 'monoffre/module_recap')    
-                                 ->build('page',$this->data);
-           }
         }
-        
+     
         public function controller_mes_coord_vue()
         {
             $this->data["pageid"] ="page-etape-2";
-            
+            $this->data["etapes_url"][0] = "mon_offre";
             $this->template
                                  ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                                  ->title('title', 'Mon Offre')

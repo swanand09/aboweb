@@ -12,14 +12,18 @@ class Mon_offre extends MY_Controller {
     {
         $this->data["department"] = $this->session->userdata("user_geolocalisation"); 
         $this->data["userdata"] = $this->session->all_userdata();
-        
+        if(!empty($num_tel)){
+           
+             return $this->ajax_proc_interogeligib($num_tel);
+        }
         return $this->controller_test_eligib_vue($num_tel);                
     }
-    
-    public function ajax_proc_interogeligib()
+          
+    public function ajax_proc_interogeligib($num_tel="")
     {
-       
-        $num_tel       = $this->input->post('num_tel'); 
+        $from_sitebox  = false;   
+       (empty($num_tel))?$num_tel   = $this->input->post('num_tel'):$from_sitebox  = true;
+        
         $htmlContent   = "";
         $contenuDroit1 = "";
         $contenuDroit2 = "";
@@ -55,6 +59,10 @@ class Mon_offre extends MY_Controller {
       $htmlContent .= $this->load->view("monoffre/num_eligib_info",$data,true);
       $this->session->set_userdata("htmlContent_testeligib",$htmlContent);
       $this->session->set_userdata('prevState',array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+      if($from_sitebox)
+      {
+         redirect("mon_offre");
+      }
       echo utf8_encode(utf8_decode(json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3))));       
     }
     
