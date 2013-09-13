@@ -10,19 +10,27 @@ class Mon_offre extends MY_Controller {
     
     public function index($num_tel="")
     {
-        $this->data["department"] = $this->session->userdata("user_geolocalisation"); 
+        $this->data["department"] = $this->determine_location(); 
         $this->data["userdata"] = $this->session->all_userdata();
+       
         if(!empty($num_tel)){
            
              return $this->ajax_proc_interogeligib($num_tel);
         }
         return $this->controller_test_eligib_vue($num_tel);                
     }
-          
+   
+    public function determine_location()
+    {
+        $this->load->database();
+        $this->load->model('geolocalisation_model','geoloca'); 
+       return $this->geoloca->getDepartment();
+    }
+    
     public function ajax_proc_interogeligib($num_tel="")
     {
         $from_sitebox  = false;   
-       (empty($num_tel))?$num_tel   = $this->input->post('num_tel'):$from_sitebox  = true;
+       (empty($num_tel))?$num_tel = $this->input->post('num_tel'):$from_sitebox = true;
         
         $htmlContent   = "";
         $contenuDroit1 = "";
@@ -43,11 +51,11 @@ class Mon_offre extends MY_Controller {
                 $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                 if($disable_checkbox ==false){
                     $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
-                      $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
+                    $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
                 }else
                 {
                     $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked','disabled'=> 'disabled');
-                     $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','checked'=> 'checked'); 
+                    $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','checked'=> 'checked'); 
                 }
                 $data["input1"] = $input1;
                 $data["input2"] = $input2;                

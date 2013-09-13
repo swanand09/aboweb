@@ -11,12 +11,7 @@ class MY_Controller extends CI_Controller {
               // $this->userdata = $this->session->all_userdata();
                //$this->load->file(FCPATH.'ajaxfw.php');
 	}  	
-        
-        public function get_department()
-        {
-            $this->userdata["user_geolocalisation"] = $_SESSION["user_geolocalisation"];
-        }
-        
+               
         public function controller_test_eligib_vue()
         {
            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -33,7 +28,7 @@ class MY_Controller extends CI_Controller {
                       $this->data["prenum"] = "0302";
                   break;
               
-                  case "Réunion":
+                  case "Reunion":
                       $this->data["prenum"] = "0403";
                   break;
                   
@@ -44,8 +39,11 @@ class MY_Controller extends CI_Controller {
                   case "Iles du Nord":
                       $this->data["prenum"] = "0605";
                   break;
+                  default: $this->data["prenum"] = "0302";
               }
            }
+           
+           
            $this->data['num_tel']          = array(
                                                     'name' => 'num_tel',
                                                     'id' => 'num_tel',
