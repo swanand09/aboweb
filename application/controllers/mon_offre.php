@@ -37,31 +37,34 @@ class Mon_offre extends MY_Controller {
         $contenuDroit2 = "";
         $contenuDroit3 = "";
         $data["num_tel"] = $num_tel; 
+        $data["result"] = "";
         if($num_tel!="")
         {       
             $this->data["racap_num"] = array('name' => 'recap_num','id' => 'recap_num','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
-            $data["result"] = $result;
-
-            if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+            if(!empty($result))
             {
-                $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-                $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
-               
-                $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
-                if($disable_checkbox ==false){
-                    $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
-                    $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
-                }else
+                $data["result"] = $result;
+                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
                 {
-                    $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked','disabled'=> 'disabled');
-                    $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','checked'=> 'checked'); 
+                    $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
+                    $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
+
+                    $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
+                    if($disable_checkbox ==false){
+                        $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
+                        $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
+                    }else
+                    {
+                        $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked','disabled'=> 'disabled');
+                        $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','checked'=> 'checked'); 
+                    }
+                    $data["input1"] = $input1;
+                    $data["input2"] = $input2;                
+                    $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
+                    $data["choix_forfait"] = $choix_forfait; 
+                    $contenuDroit1 .= $this->load->view("monoffre/colonne_droit1",$data,true);
                 }
-                $data["input1"] = $input1;
-                $data["input2"] = $input2;                
-                $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
-                $data["choix_forfait"] = $choix_forfait; 
-                $contenuDroit1 .= $this->load->view("monoffre/colonne_droit1",$data,true);
             }
       }  
       $htmlContent .= $this->load->view("monoffre/num_eligib_info",$data,true);
