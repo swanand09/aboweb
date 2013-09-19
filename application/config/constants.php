@@ -37,5 +37,7 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+/*****Base url for stb*******/
+define('BASEPATH_STB','http://192.168.54.34/stb/');
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

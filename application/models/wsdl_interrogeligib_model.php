@@ -28,6 +28,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                     </interrogeEligibilite>','',array(),'document', 'literal'); 
         $this->nusoap_client->operation = "msvaboweb/interrogeEligibilite";
         $result = $this->nusoap_client->send($soapEligib,'msvaboweb/interrogeEligibilite');
+         return  $result;
         /*
         $result = 
                     Array
@@ -802,7 +803,7 @@ class Wsdl_interrogeligib_model extends CI_Model
 
                                 )
 
-                        )
+                        ),
 
                     "Autorise_parrainage" => "false",
                     "Promo_id_web" => "0"
@@ -812,6 +813,6 @@ class Wsdl_interrogeligib_model extends CI_Model
 
         );*/
         
-        return  $result;
+       
     }
 }

@@ -13,12 +13,13 @@ class Geolocalisation_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->database();
     }
     
     public function getDepartment()
     {
         $this->ip = explode('.', $this->input->ip_address());
-        //$this->ip = explode('.','46.36.199.131');
+        //$this->ip = explode('.','46.36.199.131'); //reunion
         $this->ipToNumber = $this->ip[0]*256*256*256 +  $this->ip[1]*256*256 + $this->ip[2]*256 + $this->ip[3]; 
         
         $sql = "SELECT * FROM user_geolocalisation_ip_to_country2 WHERE begin_ip_num <= ? AND end_ip_num >= ?";

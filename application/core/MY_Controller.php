@@ -21,25 +21,25 @@ class MY_Controller extends CI_Controller {
               switch($this->data['department'])
               {
                   case "Martinique":
-                      $this->data["prenum"] = "0201";
+                      $this->data["prenum"] = "0596";
                   break;
               
                   case "Guadeloupe":
-                      $this->data["prenum"] = "0302";
+                      $this->data["prenum"] = "0590";
                   break;
               
                   case "Reunion":
-                      $this->data["prenum"] = "0403";
+                      $this->data["prenum"] = "0262";
                   break;
                   
                   case "Guyane":
-                      $this->data["prenum"] = "0504";
+                      $this->data["prenum"] = "0594";
                   break;
                   
                   case "Iles du Nord":
                       $this->data["prenum"] = "0605";
                   break;
-                  default: $this->data["prenum"] = "0302";
+                  default: $this->data["prenum"] = "0590";
               }
            }
            

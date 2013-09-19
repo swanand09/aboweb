@@ -86,5 +86,21 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 
+$db['stb']['hostname'] = '192.168.54.34';
+$db['stb']['username'] = 'webteam';
+$db['stb']['password'] = 'WebTeam279!';
+$db['stb']['database'] = 'stb_wb';
+$db['stb']['dbdriver'] = 'mysql';
+$db['stb']['dbprefix'] = '';
+$db['stb']['pconnect'] = TRUE;
+$db['stb']['db_debug'] = TRUE;
+$db['stb']['cache_on'] = FALSE;
+$db['stb']['cachedir'] = '';
+$db['stb']['char_set'] = 'utf8';
+$db['stb']['dbcollat'] = 'utf8_general_ci';
+$db['stb']['swap_pre'] = '';
+$db['stb']['autoinit'] = TRUE;
+$db['stb']['stricton'] = FALSE;
+
 /* End of file database.php */
 /* Location: ./application/config/database.php */

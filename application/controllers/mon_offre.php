@@ -11,8 +11,7 @@ class Mon_offre extends MY_Controller {
     public function index($num_tel="")
     {
         $this->data["department"] = $this->determine_location(); 
-        $this->data["userdata"] = $this->session->all_userdata();
-       
+        $this->data["userdata"] = $this->session->all_userdata();       
         if(!empty($num_tel)){
            
              return $this->ajax_proc_interogeligib($num_tel);
@@ -22,8 +21,7 @@ class Mon_offre extends MY_Controller {
    
     public function determine_location()
     {
-        $this->load->database();
-        $this->load->model('geolocalisation_model','geoloca'); 
+       $this->load->model('geolocalisation_model','geoloca'); 
        return $this->geoloca->getDepartment();
     }
     
@@ -49,6 +47,7 @@ class Mon_offre extends MY_Controller {
                 {
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
+                    $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
 
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                     if($disable_checkbox ==false){
@@ -209,6 +208,9 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata('prevState',$prevState);
          //Go to bouquet tv or mes coordonnes         
          //$prevState["htmlContent"] = ($count_tv>0)? $this->load->view("monoffre/bouqet_tv",$data,true):$this->load->view("mes_coord/mes_coordonnes",$data,true);   
+         $this->load->model('stb_model','stb'); 
+         $data["base_url_stb"] = BASEPATH_STB;
+         $data["bouquet_list"] = $this->stb->retrievChainesList();
          $prevState["htmlContent"] = ($count_tv>0)? $this->load->view("monoffre/bouqet_tv",$data,true):"redirect to mes coordonnees";   
         // $this->session->set_userdata('prevState',$prevState);
          echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $contenuDroit1, "contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));

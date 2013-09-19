@@ -1,3 +1,66 @@
+<?php
+//    echo "<pre>";
+//    print_r($bouquet_list);
+//    echo "</pre>";
+//    exit();
+function widthCol($size)
+{
+   /* switch($size)
+    {
+        case 1: 
+            return "one";
+        break;
+        
+        case 2: 
+            return "three";
+        break;
+    
+        case 3: 
+            return "four";
+        break;
+        
+        case 4: 
+            return "five";
+        break;
+    
+        case 5: 
+            return "five";
+        break;
+    
+        case 6: 
+            return "six";
+        break;
+    
+         case 7: 
+            return "seven";
+        break;
+    
+        case 8: 
+            return "eight";
+        break;
+    
+        case 9: 
+            return "nine";
+        break;
+        
+        case 10: 
+            return "ten";
+        break;
+    
+        case 11: 
+            return "eleven";
+        break;
+    
+        case 12: 
+            return "twelve";
+        break;
+        default:return "twelve";
+   
+    } 
+    */
+    return "twelve";
+}
+?>
 <script>       
   $(function(){
       $("#bouquet_mega").attr("Disabled","Disabled");
@@ -35,92 +98,22 @@
         <div class="row chaines-tv">
           <h3>MA TV <a href="#" class="en-savoir-plus right">En savoir +</a></h3>
           <div class="column eight">
+            <!-- BASIQUE -->
+            <?php 
+            $counter =0;
+            foreach($bouquet_list["BASIQUE"] as $key=> $val){ ?>
             <!--Generaliste new row-->
-            <div class=" column twelve">
-              <h4>Généraliste</h4>
+            <div class=" column <?php echo widthCol(sizeof($val)); if($counter>0){echo " top-10";}?>">
+              <h4><?php echo $key; ?></h4>
               <ul class="bqt">
-                  <li><?php echo image("chaines/tf1.png",NULL,array("alt"=>"TF1"));?></li>
-                  <li><?php echo image("chaines/france2.png",NULL,array("alt"=>"France 2"));?></li>
-                  <li><?php echo image("chaines/france3.png",NULL,array("alt"=>"France 3"));?></li>
-                  <li><?php echo image("chaines/france4.png",NULL,array("alt"=>"France 4"));?></li>
-                  <li><?php echo image("chaines/france5.png",NULL,array("alt"=>"France 5"));?></li>
-                  <li><?php echo image("chaines/france0.png",NULL,array("alt"=>"France 0"));?></li>
-                  <li><?php echo image("chaines/canalplus.png",NULL,array("alt"=>"Canal+"));?></li>
-                  <li><?php echo image("chaines/m6.png",NULL,array("alt"=>"M6"));?></li>
-                  <li><?php echo image("chaines/arte.png",NULL,array("alt"=>"Arte"));?></li>
-                  <li><?php echo image("chaines/tv5monde.png",NULL,array("alt"=>"TV5 monde"));?></li>
-                  <li><?php echo image("chaines/d8.png",NULL,array("alt"=>"D8"));?></li>
-                  <li><?php echo image("chaines/w9.png",NULL,array("alt"=>"W9"));?></li>
-                  <li><?php echo image("chaines/nrj_12.png",NULL,array("alt"=>"NRJ 12"));?></li>
-                  <li><?php echo image("chaines/nt1.png",NULL,array("alt"=>"NT1"));?></li>
-                  <li><?php echo image("chaines/tmc.png",NULL,array("alt"=>"TMC"));?></li>
-                  <li><?php echo image("chaines/teva.png",NULL,array("alt"=>"Téva"));?></li>
+                    <?php foreach($val as $key2=>$val2){?>
+                         <li><img src="<?php echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php echo $val2->nom_chaines; ?>" /></li>                  
+                    <?php } ?>
               </ul>
             </div>
-            <!--Locales et régionales new row-->
-            <div class=" column twelve top-10">
-              <h4>Locales et régionales</h4>
-              <ul class="bqt">
-                  <li><?php echo image("chaines/guadeloupe_radio_tv_internet.png",NULL,array("alt"=>"Guadeloupe Radio Télévision Internet"));?></li>
-                  <li><?php echo image("chaines/martinique_radio_tv_internet.png",NULL,array("alt"=>"Martinique Radio Télévision Internet"));?></li>
-                  <li><?php echo image("chaines/guyane_radio_tv_internet.png",NULL,array("alt"=>"Guyane Radio Télévision Internet"));?></li>
-                  <li><?php echo image("chaines/gtv_guadeloupe_television.png",NULL,array("alt"=>"GTV"));?></li>
-                  <li><?php echo image("chaines/atv_cest_ma_tele.png",NULL,array("alt"=>"ATV c'est ma télé"));?></li>
-                  <li><?php echo image("chaines/tropik_tv.png",NULL,array("alt"=>"Tropik Musik TV"));?></li>
-                  <li><?php echo image("chaines/kmt.png",NULL,array("alt"=>"KMT"));?></li>
-                  <li><?php echo image("chaines/canal10.png",NULL,array("alt"=>"Canal 10"));?></li>
-                  <li><?php echo image("chaines/etv.png",NULL,array("alt"=>"ETV"));?></li>
-              </ul>
-            </div>
-            <!--Infos et société new row-->
-            <div class=" column seven top-10">
-              <h4>Infos et société</h4>
-              <ul class="bqt">
-                  <li><?php echo image("chaines/france24.png",NULL,array("alt"=>"France 24"));?></li>
-                  <li><?php echo image("chaines/kot_television_catholique.png",NULL,array("alt"=>"KTO - Télévision catholique"));?></li>
-                  <li><?php echo image("chaines/itele.png",NULL,array("alt"=>"iTele"));?></li>
-                  <li><?php echo image("chaines/bfm.png",NULL,array("alt"=>"BFM TV"));?></li>
-                  <li><?php echo image("chaines/lcp_assemblee_nationale.png",NULL,array("alt"=>"LCP Assemblée Nationale"));?></li>
-              </ul>
-            </div>
-            <!--Découverte-->
-            <div class=" column three top-10">
-              <h4>Découverte</h4>
-              <ul class="bqt">
-                  <li><?php echo image("chaines/nrj_paris.png",NULL,array("alt"=>"NRJ"));?></li>
-                  <li><?php echo image("chaines/stylia.png",NULL,array("alt"=>"Stylia"));?></li>
-              </ul>
-            </div>
-            <!--Sport-->
-            <div class=" column two top-10">
-              <h4>Sport</h4>
-              <ul class="bqt">
-                  <li><?php echo image("chaines/ms.png",NULL,array("alt"=>"MS"));?></li>
-              </ul>
-            </div>
-
-            <!--Musique-->
-            <div class="column seven top-10">
-              <h4>Musique</h4>
-              <ul class="bqt">
-                  <li><?php echo image("chaines/d17.png",NULL,array("alt"=>"D17"));?></li>
-                  <li><?php echo image("chaines/nrj_hits.png",NULL,array("alt"=>"NRJ"));?></li>
-                  <li><?php echo image("chaines/blex.png",NULL,array("alt"=>"Blex"));?></li>
-                  <li><?php echo image("chaines/mcm.png",NULL,array("alt"=>"MCM"));?></li>
-                  <li><?php echo image("chaines/tropikmuziktv.png",NULL,array("alt"=>"Tropik Muzik"));?></li>
-              </ul>
-            </div>
-
-            <!--Jeunesse-->
-            <div class="column five top-10">
-              <h4>Jeunesse</h4>
-              <ul class="bqt">
-                  <li><?php echo image("chaines/gulli.png",NULL,array("alt"=>"Gulli"));?></li>
-                  <li><?php echo image("chaines/soleil.png",NULL,array("alt"=>"Soleil"));?></li>
-                  <li><?php echo image("chaines/gameone.png",NULL,array("alt"=>"Game one"));?></li>
-              </ul>
-            </div>
-
+            <?php 
+             $counter++;   
+             }?>
           </div>
           <div class="column four">
             <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur_tv_netgem" value="decodeur-tv-netgem" disabled="disabled" id="decodeur_tv_netgem"><strong>DÉCODEUR TV NETGEM</strong></label>

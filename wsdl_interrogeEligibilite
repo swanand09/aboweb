@@ -1565,3 +1565,1386 @@ Array
         )
 
 )
+
+
+Array
+(
+    [0] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 71
+            [nom_chaines] => Tropik TV Muzik
+            [img_logo] => uploads/1311609729.gif
+            [img_icon] => uploads/1311609779.gif
+        )
+
+    [1] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 37
+            [nom_chaines] => Game One
+            [img_logo] => uploads/1310573219.png
+            [img_icon] => uploads/1310573221.png
+        )
+
+    [2] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 6
+            [nom_chaines] => M6
+            [img_logo] => uploads/1310583585.png
+            [img_icon] => uploads/1310583587.png
+        )
+
+    [3] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 3
+            [nom_categorie] => Infos et société
+            [chain_uid] => 18
+            [nom_chaines] => BFM TV
+            [img_logo] => uploads/1310399135.png
+            [img_icon] => uploads/1310399137.png
+        )
+
+    [4] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 9
+            [nom_chaines] => W9
+            [img_logo] => uploads/1310584823.png
+            [img_icon] => uploads/1310584825.png
+        )
+
+    [5] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 39
+            [nom_chaines] => Guadeloupe 1
+            [img_logo] => uploads/1310573369.png
+            [img_icon] => uploads/1310573371.png
+        )
+
+    [6] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 3
+            [nom_categorie] => Infos et société
+            [chain_uid] => 44
+            [nom_chaines] => LCP 
+            [img_logo] => uploads/1310573912.png
+            [img_icon] => uploads/1310573914.png
+        )
+
+    [7] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 50
+            [nom_chaines] => Martinique 1
+            [img_logo] => uploads/1310583997.png
+            [img_icon] => uploads/1310583999.png
+        )
+
+    [8] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 55
+            [nom_chaines] => NT1
+            [img_logo] => uploads/1310584348.png
+            [img_icon] => uploads/1310584350.png
+        )
+
+    [9] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 2
+            [nom_chaines] => France 2
+            [img_logo] => uploads/1310572819.png
+            [img_icon] => uploads/1310572821.png
+        )
+
+    [10] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 72
+            [nom_chaines] => Guyane 1
+            [img_logo] => uploads/1311683823.gif
+            [img_icon] => uploads/1311683825.gif
+        )
+
+    [11] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 7
+            [nom_chaines] => Arte
+            [img_logo] => uploads/1310583324.png
+            [img_icon] => uploads/1310583326.png
+        )
+
+    [12] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 23
+            [nom_chaines] => Canal 10
+            [img_logo] => uploads/1310570737.png
+            [img_icon] => uploads/1310570739.png
+        )
+
+    [13] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 40
+            [nom_chaines] => Gulli
+            [img_logo] => uploads/1310573453.png
+            [img_icon] => uploads/1310573455.png
+        )
+
+    [14] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 45
+            [nom_chaines] => ATV
+            [img_logo] => uploads/1310583404.png
+            [img_icon] => uploads/1310583406.png
+        )
+
+    [15] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 52
+            [nom_chaines] => NRJ 12
+            [img_logo] => uploads/1310584119.png
+            [img_icon] => uploads/1310584121.png
+        )
+
+    [16] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 4
+            [nom_categorie] => Découverte
+            [chain_uid] => 56
+            [nom_chaines] => Stylia
+            [img_logo] => uploads/1310584446.png
+            [img_icon] => uploads/1310584448.png
+        )
+
+    [17] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 3
+            [nom_chaines] => France 3
+            [img_logo] => uploads/1310573007.png
+            [img_icon] => uploads/1310573009.png
+        )
+
+    [18] => stdClass Object
+        (
+            [dept_ids] => 1,3
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 4
+            [nom_chaines] => Canal +
+            [img_logo] => logos/canal-plus.jpg
+            [img_icon] => uploads/1311607825.png
+        )
+
+    [19] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 8
+            [nom_chaines] => Direct 8
+            [img_logo] => uploads/1310571521.png
+            [img_icon] => uploads/1310571523.png
+        )
+
+    [20] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 3
+            [nom_categorie] => Infos et société
+            [chain_uid] => 35
+            [nom_chaines] => France 24
+            [img_logo] => uploads/1310572952.png
+            [img_icon] => uploads/1310572954.png
+        )
+
+    [21] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 46
+            [nom_chaines] => France O
+            [img_logo] => uploads/1310583511.png
+            [img_icon] => uploads/1310583513.png
+        )
+
+    [22] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 53
+            [nom_chaines] => NRJ Hits
+            [img_logo] => uploads/1310584228.png
+            [img_icon] => uploads/1310584230.png
+        )
+
+    [23] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 59
+            [nom_chaines] => TV5 Monde
+            [img_logo] => uploads/1310584755.png
+            [img_icon] => uploads/1310584757.png
+        )
+
+    [24] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 5
+            [nom_chaines] => France 5
+            [img_logo] => uploads/1310573137.png
+            [img_icon] => uploads/1310573139.png
+        )
+
+    [25] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 10
+            [nom_chaines] => TMC
+            [img_logo] => uploads/1310584634.png
+            [img_icon] => uploads/1310584636.png
+        )
+
+    [26] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 30
+            [nom_chaines] => Guadeloupe TV
+            [img_logo] => uploads/1310571592.png
+            [img_icon] => uploads/1310571594.png
+        )
+
+    [27] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 36
+            [nom_chaines] => France 4
+            [img_logo] => uploads/1310573085.png
+            [img_icon] => uploads/1310573087.png
+        )
+
+    [28] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 3
+            [nom_categorie] => Infos et société
+            [chain_uid] => 43
+            [nom_chaines] => KTO
+            [img_logo] => uploads/1310573820.png
+            [img_icon] => uploads/1310573822.png
+        )
+
+    [29] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 48
+            [nom_chaines] => MCM
+            [img_logo] => uploads/1310583718.png
+            [img_icon] => uploads/1310583720.png
+        )
+
+    [30] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 4
+            [nom_categorie] => Découverte
+            [chain_uid] => 54
+            [nom_chaines] => NRJ Paris
+            [img_logo] => uploads/1310584289.png
+            [img_icon] => uploads/1310584291.png
+        )
+
+    [31] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 1
+            [nom_chaines] => TF1
+            [img_logo] => uploads/1310584600.png
+            [img_icon] => uploads/1310584602.png
+        )
+
+    [32] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 1
+            [nom_bouquet] => BASIQUE
+            [cat_uid] => 2
+            [nom_categorie] => Locales et régionales
+            [chain_uid] => 63
+            [nom_chaines] => KMT
+            [img_logo] => uploads/1310586819.png
+            [img_icon] => uploads/1310586821.png
+        )
+
+    [33] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 8
+            [nom_bouquet] => beIN SPORT
+            [cat_uid] => 12
+            [nom_categorie] => Option Bein
+            [chain_uid] => 88
+            [nom_chaines] => beIN Sport1
+            [img_logo] => uploads/1342706717.png
+            [img_icon] => uploads/1342706719.png
+        )
+
+    [34] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 8
+            [nom_bouquet] => beIN SPORT
+            [cat_uid] => 12
+            [nom_categorie] => Option Bein
+            [chain_uid] => 89
+            [nom_chaines] => beIN Sport2
+            [img_logo] => uploads/1342707047.png
+            [img_icon] => uploads/1342707049.png
+        )
+
+    [35] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 4
+            [nom_bouquet] => EDEN
+            [cat_uid] => 13
+            [nom_categorie] => Option Eden
+            [chain_uid] => 32
+            [nom_chaines] => Dorcel TV
+            [img_logo] => uploads/1310572529.png
+            [img_icon] => uploads/1310572531.png
+        )
+
+    [36] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 4
+            [nom_bouquet] => EDEN
+            [cat_uid] => 13
+            [nom_categorie] => Option Eden
+            [chain_uid] => 29
+            [nom_chaines] => Daring! TV 
+            [img_logo] => uploads/1310571454.png
+            [img_icon] => uploads/1310571456.png
+        )
+
+    [37] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 4
+            [nom_bouquet] => EDEN
+            [cat_uid] => 13
+            [nom_categorie] => Option Eden
+            [chain_uid] => 41
+            [nom_chaines] => Hustler TV
+            [img_logo] => uploads/1310573581.png
+            [img_icon] => uploads/1310573583.png
+        )
+
+    [38] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 8
+            [nom_categorie] => Infos
+            [chain_uid] => 76
+            [nom_chaines] => LCI
+            [img_logo] => uploads/1342707663.png
+            [img_icon] => uploads/1342707665.png
+        )
+
+    [39] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 65
+            [nom_chaines] => MTV Idol
+            [img_logo] => uploads/1310586974.png
+            [img_icon] => uploads/1310586976.png
+        )
+
+    [40] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 21
+            [nom_chaines] => AB Moteurs
+            [img_logo] => uploads/1310399279.png
+            [img_icon] => uploads/1310399281.png
+        )
+
+    [41] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 9
+            [nom_categorie] => Cinéma
+            [chain_uid] => 26
+            [nom_chaines] => Polar
+            [img_logo] => uploads/1377273017.png
+            [img_icon] => uploads/1377273019.png
+        )
+
+    [42] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 74
+            [nom_chaines] => Eurosport2
+            [img_logo] => uploads/1342705353.png
+            [img_icon] => uploads/1342705355.png
+        )
+
+    [43] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 86
+            [nom_chaines] => Ushuaïa TV
+            [img_logo] => uploads/1342709314.png
+            [img_icon] => uploads/1342709316.png
+        )
+
+    [44] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 64
+            [nom_chaines] => MTV Base
+            [img_logo] => uploads/1310586916.png
+            [img_icon] => uploads/1310586918.png
+        )
+
+    [45] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 22
+            [nom_chaines] => AB1
+            [img_logo] => uploads/1310399383.png
+            [img_icon] => uploads/1310399385.png
+        )
+
+    [46] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 9
+            [nom_categorie] => Cinéma
+            [chain_uid] => 25
+            [nom_chaines] => Cine FX
+            [img_logo] => uploads/1377274054.png
+            [img_icon] => uploads/1377273277.png
+        )
+
+    [47] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 33
+            [nom_chaines] => Escales
+            [img_logo] => uploads/1310572674.png
+            [img_icon] => uploads/1310572676.png
+        )
+
+    [48] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 51
+            [nom_chaines] => Nickelodeon
+            [img_logo] => uploads/1310584060.png
+            [img_icon] => uploads/1310584062.png
+        )
+
+    [49] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 73
+            [nom_chaines] => Eurosport
+            [img_logo] => uploads/1342705281.png
+            [img_icon] => uploads/1342705283.png
+        )
+
+    [50] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 61
+            [nom_chaines] => Fashion TV
+            [img_logo] => uploads/1310586712.png
+            [img_icon] => uploads/1310586714.png
+        )
+
+    [51] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 38
+            [nom_chaines] => Golf Channel
+            [img_logo] => uploads/1310573300.png
+            [img_icon] => uploads/1310573302.png
+        )
+
+    [52] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 85
+            [nom_chaines] => Histoire
+            [img_logo] => uploads/1377273476.png
+            [img_icon] => uploads/1342705635.png
+        )
+
+    [53] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 47
+            [nom_chaines] => Mangas
+            [img_logo] => uploads/1310583661.png
+            [img_icon] => uploads/1310583663.png
+        )
+
+    [54] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 60
+            [nom_chaines] => Encyclo
+            [img_logo] => uploads/1310586671.png
+            [img_icon] => uploads/1310586673.png
+        )
+
+    [55] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 11
+            [nom_categorie] => Charme 
+            [chain_uid] => 17
+            [nom_chaines] => Blue Hustler
+            [img_logo] => uploads/1310399061.png
+            [img_icon] => uploads/1310399063.png
+        )
+
+    [56] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 75
+            [nom_chaines] => TvBreizh
+            [img_logo] => uploads/1342709026.png
+            [img_icon] => uploads/1342709028.png
+        )
+
+    [57] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 66
+            [nom_chaines] => MTV Pulse
+            [img_logo] => uploads/1310587026.png
+            [img_icon] => uploads/1310587028.png
+        )
+
+    [58] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 6
+            [nom_bouquet] => GIGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 20
+            [nom_chaines] => Animaux
+            [img_logo] => uploads/1310399237.png
+            [img_icon] => uploads/1310399239.png
+        )
+
+    [59] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 74
+            [nom_chaines] => Eurosport2
+            [img_logo] => uploads/1342705353.png
+            [img_icon] => uploads/1342705355.png
+        )
+
+    [60] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 86
+            [nom_chaines] => Ushuaïa TV
+            [img_logo] => uploads/1342709314.png
+            [img_icon] => uploads/1342709316.png
+        )
+
+    [61] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 64
+            [nom_chaines] => MTV Base
+            [img_logo] => uploads/1310586916.png
+            [img_icon] => uploads/1310586918.png
+        )
+
+    [62] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 22
+            [nom_chaines] => AB1
+            [img_logo] => uploads/1310399383.png
+            [img_icon] => uploads/1310399385.png
+        )
+
+    [63] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 9
+            [nom_categorie] => Cinéma
+            [chain_uid] => 25
+            [nom_chaines] => Cine FX
+            [img_logo] => uploads/1377274054.png
+            [img_icon] => uploads/1377273277.png
+        )
+
+    [64] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 33
+            [nom_chaines] => Escales
+            [img_logo] => uploads/1310572674.png
+            [img_icon] => uploads/1310572676.png
+        )
+
+    [65] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 51
+            [nom_chaines] => Nickelodeon
+            [img_logo] => uploads/1310584060.png
+            [img_icon] => uploads/1310584062.png
+        )
+
+    [66] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 73
+            [nom_chaines] => Eurosport
+            [img_logo] => uploads/1342705281.png
+            [img_icon] => uploads/1342705283.png
+        )
+
+    [67] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 38
+            [nom_chaines] => Golf Channel
+            [img_logo] => uploads/1310573300.png
+            [img_icon] => uploads/1310573302.png
+        )
+
+    [68] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 85
+            [nom_chaines] => Histoire
+            [img_logo] => uploads/1377273476.png
+            [img_icon] => uploads/1342705635.png
+        )
+
+    [69] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 47
+            [nom_chaines] => Mangas
+            [img_logo] => uploads/1310583661.png
+            [img_icon] => uploads/1310583663.png
+        )
+
+    [70] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 60
+            [nom_chaines] => Encyclo
+            [img_logo] => uploads/1310586671.png
+            [img_icon] => uploads/1310586673.png
+        )
+
+    [71] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 11
+            [nom_categorie] => Charme 
+            [chain_uid] => 17
+            [nom_chaines] => Blue Hustler
+            [img_logo] => uploads/1310399061.png
+            [img_icon] => uploads/1310399063.png
+        )
+
+    [72] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 75
+            [nom_chaines] => TvBreizh
+            [img_logo] => uploads/1342709026.png
+            [img_icon] => uploads/1342709028.png
+        )
+
+    [73] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 66
+            [nom_chaines] => MTV Pulse
+            [img_logo] => uploads/1310587026.png
+            [img_icon] => uploads/1310587028.png
+        )
+
+    [74] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 20
+            [nom_chaines] => Animaux
+            [img_logo] => uploads/1310399237.png
+            [img_icon] => uploads/1310399239.png
+        )
+
+    [75] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 8
+            [nom_categorie] => Infos
+            [chain_uid] => 76
+            [nom_chaines] => LCI
+            [img_logo] => uploads/1342707663.png
+            [img_icon] => uploads/1342707665.png
+        )
+
+    [76] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 65
+            [nom_chaines] => MTV Idol
+            [img_logo] => uploads/1310586974.png
+            [img_icon] => uploads/1310586976.png
+        )
+
+    [77] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 21
+            [nom_chaines] => AB Moteurs
+            [img_logo] => uploads/1310399279.png
+            [img_icon] => uploads/1310399281.png
+        )
+
+    [78] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 9
+            [nom_categorie] => Cinéma
+            [chain_uid] => 26
+            [nom_chaines] => Polar
+            [img_logo] => uploads/1377273017.png
+            [img_icon] => uploads/1377273019.png
+        )
+
+    [79] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 5
+            [nom_bouquet] => MEGA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 61
+            [nom_chaines] => Fashion TV
+            [img_logo] => uploads/1310586712.png
+            [img_icon] => uploads/1310586714.png
+        )
+
+    [80] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 66
+            [nom_chaines] => MTV Pulse
+            [img_logo] => uploads/1310587026.png
+            [img_icon] => uploads/1310587028.png
+        )
+
+    [81] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 75
+            [nom_chaines] => TvBreizh
+            [img_logo] => uploads/1342709026.png
+            [img_icon] => uploads/1342709028.png
+        )
+
+    [82] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 13
+            [nom_categorie] => Option Eden
+            [chain_uid] => 41
+            [nom_chaines] => Hustler TV
+            [img_logo] => uploads/1310573581.png
+            [img_icon] => uploads/1310573583.png
+        )
+
+    [83] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 20
+            [nom_chaines] => Animaux
+            [img_logo] => uploads/1310399237.png
+            [img_icon] => uploads/1310399239.png
+        )
+
+    [84] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 8
+            [nom_categorie] => Infos
+            [chain_uid] => 76
+            [nom_chaines] => LCI
+            [img_logo] => uploads/1342707663.png
+            [img_icon] => uploads/1342707665.png
+        )
+
+    [85] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 12
+            [nom_categorie] => Option Bein
+            [chain_uid] => 89
+            [nom_chaines] => beIN Sport2
+            [img_logo] => uploads/1342707047.png
+            [img_icon] => uploads/1342707049.png
+        )
+
+    [86] => stdClass Object
+        (
+            [dept_ids] => 1,2,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 65
+            [nom_chaines] => MTV Idol
+            [img_logo] => uploads/1310586974.png
+            [img_icon] => uploads/1310586976.png
+        )
+
+    [87] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 21
+            [nom_chaines] => AB Moteurs
+            [img_logo] => uploads/1310399279.png
+            [img_icon] => uploads/1310399281.png
+        )
+
+    [88] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 9
+            [nom_categorie] => Cinéma
+            [chain_uid] => 26
+            [nom_chaines] => Polar
+            [img_logo] => uploads/1377273017.png
+            [img_icon] => uploads/1377273019.png
+        )
+
+    [89] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 74
+            [nom_chaines] => Eurosport2
+            [img_logo] => uploads/1342705353.png
+            [img_icon] => uploads/1342705355.png
+        )
+
+    [90] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 86
+            [nom_chaines] => Ushuaïa TV
+            [img_logo] => uploads/1342709314.png
+            [img_icon] => uploads/1342709316.png
+        )
+
+    [91] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 6
+            [nom_categorie] => Musique
+            [chain_uid] => 64
+            [nom_chaines] => MTV Base
+            [img_logo] => uploads/1310586916.png
+            [img_icon] => uploads/1310586918.png
+        )
+
+    [92] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 1
+            [nom_categorie] => Généraliste
+            [chain_uid] => 22
+            [nom_chaines] => AB1
+            [img_logo] => uploads/1310399383.png
+            [img_icon] => uploads/1310399385.png
+        )
+
+    [93] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 9
+            [nom_categorie] => Cinéma
+            [chain_uid] => 25
+            [nom_chaines] => Cine FX
+            [img_logo] => uploads/1377274054.png
+            [img_icon] => uploads/1377273277.png
+        )
+
+    [94] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 13
+            [nom_categorie] => Option Eden
+            [chain_uid] => 29
+            [nom_chaines] => Daring! TV 
+            [img_logo] => uploads/1310571454.png
+            [img_icon] => uploads/1310571456.png
+        )
+
+    [95] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 33
+            [nom_chaines] => Escales
+            [img_logo] => uploads/1310572674.png
+            [img_icon] => uploads/1310572676.png
+        )
+
+    [96] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 51
+            [nom_chaines] => Nickelodeon
+            [img_logo] => uploads/1310584060.png
+            [img_icon] => uploads/1310584062.png
+        )
+
+    [97] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 73
+            [nom_chaines] => Eurosport
+            [img_logo] => uploads/1342705281.png
+            [img_icon] => uploads/1342705283.png
+        )
+
+    [98] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 61
+            [nom_chaines] => Fashion TV
+            [img_logo] => uploads/1310586712.png
+            [img_icon] => uploads/1310586714.png
+        )
+
+    [99] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 5
+            [nom_categorie] => Sport
+            [chain_uid] => 38
+            [nom_chaines] => Golf Channel
+            [img_logo] => uploads/1310573300.png
+            [img_icon] => uploads/1310573302.png
+        )
+
+    [100] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 85
+            [nom_chaines] => Histoire
+            [img_logo] => uploads/1377273476.png
+            [img_icon] => uploads/1342705635.png
+        )
+
+    [101] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 7
+            [nom_categorie] => Jeunesse
+            [chain_uid] => 47
+            [nom_chaines] => Mangas
+            [img_logo] => uploads/1310583661.png
+            [img_icon] => uploads/1310583663.png
+        )
+
+    [102] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 12
+            [nom_categorie] => Option Bein
+            [chain_uid] => 88
+            [nom_chaines] => beIN Sport1
+            [img_logo] => uploads/1342706717.png
+            [img_icon] => uploads/1342706719.png
+        )
+
+    [103] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 10
+            [nom_categorie] => Découverte et art de vivre
+            [chain_uid] => 60
+            [nom_chaines] => Encyclo
+            [img_logo] => uploads/1310586671.png
+            [img_icon] => uploads/1310586673.png
+        )
+
+    [104] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 11
+            [nom_categorie] => Charme 
+            [chain_uid] => 17
+            [nom_chaines] => Blue Hustler
+            [img_logo] => uploads/1310399061.png
+            [img_icon] => uploads/1310399063.png
+        )
+
+    [105] => stdClass Object
+        (
+            [dept_ids] => 1,2,3,4
+            [bouq_uid] => 7
+            [nom_bouquet] => ULTRA
+            [cat_uid] => 13
+            [nom_categorie] => Option Eden
+            [chain_uid] => 32
+            [nom_chaines] => Dorcel TV
+            [img_logo] => uploads/1310572529.png
+            [img_icon] => uploads/1310572531.png
+        )
+
+)
