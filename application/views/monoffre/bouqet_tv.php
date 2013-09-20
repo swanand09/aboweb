@@ -1,66 +1,3 @@
-<?php
-//    echo "<pre>";
-//    print_r($bouquet_list);
-//    echo "</pre>";
-//    exit();
-function widthCol($size)
-{
-   /* switch($size)
-    {
-        case 1: 
-            return "one";
-        break;
-        
-        case 2: 
-            return "three";
-        break;
-    
-        case 3: 
-            return "four";
-        break;
-        
-        case 4: 
-            return "five";
-        break;
-    
-        case 5: 
-            return "five";
-        break;
-    
-        case 6: 
-            return "six";
-        break;
-    
-         case 7: 
-            return "seven";
-        break;
-    
-        case 8: 
-            return "eight";
-        break;
-    
-        case 9: 
-            return "nine";
-        break;
-        
-        case 10: 
-            return "ten";
-        break;
-    
-        case 11: 
-            return "eleven";
-        break;
-    
-        case 12: 
-            return "twelve";
-        break;
-        default:return "twelve";
-   
-    } 
-    */
-    return "twelve";
-}
-?>
 <script>       
   $(function(){
       $("#bouquet_mega").attr("Disabled","Disabled");
@@ -103,7 +40,7 @@ function widthCol($size)
             $counter =0;
             foreach($bouquet_list["BASIQUE"] as $key=> $val){ ?>
             <!--Generaliste new row-->
-            <div class=" column <?php echo widthCol(sizeof($val)); if($counter>0){echo " top-10";}?>">
+            <div class=" column six<?php if($counter>0){echo " top-10";}?>">
               <h4><?php echo $key; ?></h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){?>
@@ -155,89 +92,18 @@ function widthCol($size)
 
           <!--Bouquet chaines depending on options-->
         <div class="row chaines-tv">
-          <!--jeunesse new row-->
-          <div class="column four">
-            <h4>Jeunesse</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/nickelodeon.png",NULL,array("alt"=>"Nickelodeon"));?></li>
-                <li1><?php echo image("chaines/nickelodeon_junior.png",NULL,array("alt"=>"Nickelodeon Junior"));?></li>
-                <li><?php echo image("chaines/manga.png",NULL,array("alt"=>"manga"));?></li>
-            </ul>
-          </div>
-
-          <!--Musique-->
-          <div class="column four">
-            <h4>Musique</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/mtv_music.png",NULL,array("alt"=>"MTV Music"));?></li>
-                <li><?php echo image("chaines/mtv_base.png",NULL,array("alt"=>"MTV Base"));?></li>
-                <li><?php echo image("chaines/mtv_idol.png",NULL,array("alt"=>"MTV Idol"));?></li>
-                <li><?php echo image("chaines/mtv_pulse.png",NULL,array("alt"=>"MTV Pulse"));?></li>
-            </ul>
-          </div>
-
-          <!--Info-->
-          <div class="column two">
-            <h4>Infos</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/lci.png",NULL,array("alt"=>"LCI"));?></li>
-            </ul>
-          </div>
-
-          <!--Cinema-->
-          <div class="column two">
-            <h4>Cinéma</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/cine_polar.png",NULL,array("alt"=>"Cine Polar"));?></li>
-                <li><?php echo image("chaines/cine_fx.png",NULL,array("alt"=>"Cine FX"));?></li>
-            </ul>
-          </div>
-
-          <!--Découverte et art de vivre new row-->
-          <div class="column nine">
-            <h4>Découverte et art de vivre</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/histoire.png",NULL,array("alt"=>"Histoire"));?></li>
-                <li><?php echo image("chaines/encyclo.png",NULL,array("alt"=>"Encyclo"));?></li>
-                <li><?php echo image("chaines/chasse_et_peche.png",NULL,array("alt"=>"Chasse et Pêche"));?></li>
-                <li><?php echo image("chaines/animaux.png",NULL,array("alt"=>"Animaux"));?></li>
-                <li><?php echo image("chaines/escales.png",NULL,array("alt"=>"Escales"));?></li>
-                <li><?php echo image("chaines/fashion.png",NULL,array("alt"=>"Fashion TV"));?></li>
-                <li><?php echo image("chaines/ushuaia_tv.png",NULL,array("alt"=>"Ushuaia TV"));?></li>
-            </ul>
-          </div>
-
-          <!--Generaliste-->
-          <div class="column three">
-            <h4>Généraliste</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/rtl9.png",NULL,array("alt"=>"RTL9"));?></li>
-                <li><?php echo image("chaines/ab1.png",NULL,array("alt"=>"AB1"));?></li>
-                <li><?php echo image("chaines/tv_breizh.png",NULL,array("alt"=>"TV breizh"));?></li>
-            </ul>
-          </div>
-
-          <!--Sport new row-->
-          <div class="column nine">
-            <h4>Sport</h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/eurosport.png",NULL,array("alt"=>"Eurosport"));?></li>
-                <li><?php echo image("chaines/eurosport_2.png",NULL,array("alt"=>"Eurosport 2"));?></li>
-                <li><?php echo image("chaines/abmotors.png",NULL,array("alt"=>"AB Moteurs"));?></li>
-                <li><?php echo image("chaines/equidia.png",NULL,array("alt"=>"Equidia live"));?></li>
-                <li><?php echo image("chaines/golf_channel.png",NULL,array("alt"=>"Golf Channel"));?></li>
-                <li><?php echo image("chaines/msc_extreme.png",NULL,array("alt"=>"MSC Extreme"));?></li>
-            </ul>
-          </div>
-
-          <!--Charme-->
-          <div class="column three bottom-20">
-            <h4>Charme <?php echo image("picto-16.png",NULL,array("alt"=>""));?></h4>
-            <ul class="bqt">
-                <li><?php echo image("chaines/blue_hustler.png",NULL,array("alt"=>"Blue Hustler"));?></li>
-            </ul>
-          </div>
-
+          <!-- MEGA -->
+            <?php foreach($bouquet_list["MEGA"] as $key=> $val){ ?>
+            <!--Generaliste new row-->
+            <div class="column four">
+              <h4><?php echo $key; ?></h4>
+              <ul class="bqt">
+                    <?php foreach($val as $key2=>$val2){?>
+                         <li><img src="<?php echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php echo $val2->nom_chaines; ?>" /></li>                  
+                    <?php } ?>
+              </ul>
+            </div>
+            <?php }?>  
           <hr class="sexy">
           <hr class="sexy">
 
