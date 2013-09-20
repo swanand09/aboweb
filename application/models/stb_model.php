@@ -52,6 +52,7 @@ class Stb_model extends CI_Model
          $prevBouquet = "";
          $prevCategorie = "";
          $counter =0;
+        
          foreach($query->result() as $key=>$val)
          {
              if(($prevBouquet==""&&$prevCategorie=="")||($prevBouquet==$val->nom_bouquet&&$prevCategorie!=$val->nom_categorie))
@@ -62,8 +63,16 @@ class Stb_model extends CI_Model
                                    
               $counter++;
          }
-        
-       }
+         echo "<pre>";
+         print_r($this->maTv["ULTRA"]);
+         echo "</pre>";
+       $this->maTv["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
+        echo "<pre>";
+         print_r($this->maTv["ULTRA"]);
+         echo "</pre>";
+         exit();
+       
+         }
        return $this->maTv;
     }
     
@@ -84,5 +93,26 @@ class retrieveBouquet
     {
         if($i->nom_bouquet==$this->bouquet&&$i->nom_categorie==$this->categorie)
         return $i;
+    }
+ }
+ 
+ class retrieveUnikChaine
+ {
+   
+    private $giga = array();
+    function __construct($giga)
+    {
+         $this->giga = $giga;      
+    }
+
+    function filterUnique($i) 
+    {
+        foreach($this->giga as $val)
+        {
+            if(!in_array($i,$val->chain_uid)){
+                return $i;
+            }
+        }
+        
     }
  }
