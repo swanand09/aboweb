@@ -1,8 +1,3 @@
-<?php
-//    echo "<pre>";
-//    print_r($userdata);
-//    echo "</pre>";
-?>
 <style>
     .prev_next
     {

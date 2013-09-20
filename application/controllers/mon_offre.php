@@ -102,9 +102,9 @@ class Mon_offre extends MY_Controller {
              $counter++;
            }
            if($val["Categorie"]=="IAD")
-             {
-                 $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"]);
-             }
+            {
+                $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"]);
+            }
         }
          $data["iadArr"] = $iadArr;
          $htmlContent .= $this->load->view("monoffre/forfait_info2",$data,true);

@@ -24,7 +24,7 @@
   });       
 </script>
 
-<form action="mes-cordonnees.php" class="frm-tv">
+<form action="mes_coordonnees.html" method="post" class="frm-tv">
 
         <div class="row">
           <div class="column twelve">
@@ -103,7 +103,33 @@
                     <?php } ?>
               </ul>
             </div>
-            <?php }?>  
+            <?php }?>
+            
+            <!-- GIGA -->
+<!--            <?php //foreach($bouquet_list["GIGA"] as $key=> $val){ ?>
+            Generaliste new row
+            <div class="column four">
+              <h4><?php //echo $key; ?></h4>
+              <ul class="bqt">
+                    <?php //foreach($val as $key2=>$val2){?>
+                         <li><img src="<?php //echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php //echo $val2->nom_chaines; ?>" /></li>                  
+                    <?php //} ?>
+              </ul>
+            </div>-->
+            <?php //}?>
+            
+            <!-- ULTRA -->
+            <?php foreach($bouquet_list["ULTRA"] as $key=> $val){ ?>
+            <!--Generaliste new row-->
+            <div class="column four">
+              <h4><?php echo $key; ?></h4>
+              <ul class="bqt">
+                    <?php foreach($val as $key2=>$val2){?>
+                         <li><img src="<?php echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php echo $val2->nom_chaines; ?>" /></li>                  
+                    <?php } ?>
+              </ul>
+            </div>
+            <?php }?>
           <hr class="sexy">
           <hr class="sexy">
 
