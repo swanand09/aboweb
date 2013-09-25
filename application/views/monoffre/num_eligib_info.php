@@ -1,5 +1,6 @@
 <?php
-if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+//if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+if(!empty($result)){
 $debit_emis = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"],2);
 $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"],2);
 /*
@@ -86,7 +87,8 @@ if($('.debit_emission').length > 0 )
 <?php
 }
     if(!empty($num_tel)){
-         if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+        // if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+         if(!empty($result))
          {   
 ?>       
 <p><strong>Voici les résultats d’éligibilité liés à votre ligne</strong></p>
@@ -114,7 +116,7 @@ if($('.debit_emission').length > 0 )
 <?php
             }else{
                 ?>
-                    <p>Le webservice retourne aucune valeur pour ce numéro: <?php echo $num_tel;?> 
+                    <p>Le webservice ne retourne aucune valeur pour ce numéro: <?php echo $num_tel;?> 
                     <div>
                        <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent"));?></div>
                      </div>                

@@ -43,8 +43,8 @@ class Mon_offre extends MY_Controller {
             if(!empty($result))
             {
                 $data["result"] = $result;
-                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
-                {
+//                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+//                {
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
@@ -63,7 +63,7 @@ class Mon_offre extends MY_Controller {
                     $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
                     $data["choix_forfait"] = $choix_forfait; 
                     $contenuDroit1 .= $this->load->view("monoffre/colonne_droit1",$data,true);
-                }
+//                }
             }
       }  
       $htmlContent .= $this->load->view("monoffre/num_eligib_info",$data,true);
