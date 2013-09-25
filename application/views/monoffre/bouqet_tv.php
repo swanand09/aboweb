@@ -44,7 +44,7 @@
               <h4><?php echo $key; ?></h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){?>
-                         <li><img src="<?php echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php echo $val2->nom_chaines; ?>" /></li>                  
+                         <li><img src="<?php echo BASEPATH_STB.$val2["img_icon"]; ?>" alt ="<?php echo $val2["nom_chaines"]; ?>" /></li>                  
                     <?php } ?>
               </ul>
             </div>
@@ -99,37 +99,49 @@
               <h4><?php echo $key; ?></h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){?>
-                         <li><img src="<?php echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php echo $val2->nom_chaines; ?>" /></li>                  
+                         <li><img src="<?php echo BASEPATH_STB.$val2["img_icon"]; ?>" alt ="<?php echo $val2["nom_chaines"]; ?>" /></li>                  
                     <?php } ?>
               </ul>
             </div>
             <?php }?>
             
-            <!-- GIGA -->
-<!--            <?php //foreach($bouquet_list["GIGA"] as $key=> $val){ ?>
-            Generaliste new row
-            <div class="column four">
-              <h4><?php //echo $key; ?></h4>
-              <ul class="bqt">
-                    <?php //foreach($val as $key2=>$val2){?>
-                         <li><img src="<?php //echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php //echo $val2->nom_chaines; ?>" /></li>                  
-                    <?php //} ?>
-              </ul>
-            </div>-->
-            <?php //}?>
             
-            <!-- ULTRA -->
-            <?php foreach($bouquet_list["ULTRA"] as $key=> $val){ ?>
-            <!--Generaliste new row-->
+            <!-- GIGA -->
+            <?php foreach($bouquet_list["GIGA"] as $key=> $val){ ?>
+            <!-- Generaliste new row-->
             <div class="column four">
               <h4><?php echo $key; ?></h4>
               <ul class="bqt">
-                    <?php foreach($val as $key2=>$val2){?>
-                         <li><img src="<?php echo BASEPATH_STB.$val2->img_icon; ?>" alt ="<?php echo $val2->nom_chaines; ?>" /></li>                  
-                    <?php } ?>
+                    <?php foreach($val as $key2=>$val2){
+                         if(empty($bouquet_list["MEGA"][$key][$key2])||!empty($bouquet_list["MEGA"][$key][$key2])&&$bouquet_list["MEGA"][$key][$key2]["nom_chaines"]!=$val2["nom_chaines"]){
+                     ?>
+                         <li><img src="<?php echo BASEPATH_STB.$val2["img_icon"]; ?>" alt ="<?php echo $val2["nom_chaines"]; ?>" /></li>                  
+                    <?php                             
+                            }
+                         }
+                    ?>
               </ul>
             </div>
             <?php }?>
+            
+            <!-- ULTRA -->
+          <?php foreach($bouquet_list["ULTRA"] as $key=> $val){ ?>
+            <!--Generaliste new row-->
+          <div class="column four">
+              <h4><?php echo $key; ?></h4>
+              <ul class="bqt">
+                    <?php foreach($val as $key2=>$val2){
+                            if(empty($bouquet_list["GIGA"][$key][$key2])||!empty($bouquet_list["GIGA"][$key][$key2])&&$bouquet_list["GIGA"][$key][$key2]["nom_chaines"]!=$val2["nom_chaines"]){
+                    ?>
+                         <li><img src="<?php echo BASEPATH_STB.$val2["img_icon"]; ?>" alt ="<?php echo $val2["nom_chaines"]; ?>" /></li>                  
+                    <?php 
+                            }
+                        }
+                    ?>
+              </ul>
+            </div> 
+            <?php }?>
+          
           <hr class="sexy">
           <hr class="sexy">
 

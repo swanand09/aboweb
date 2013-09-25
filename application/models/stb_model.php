@@ -16,8 +16,6 @@ class Stb_model extends CI_Model
         $this->load->database('stb');
     }
     
-   
-    
     public function retrievChainesList()
     {
         $this->localite = $this->session->userdata("localite");   
@@ -36,47 +34,48 @@ class Stb_model extends CI_Model
                 $this->deptId = 4;
             break;
         }
-        $sql = "	
+        $sql1 = "	
                 select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
                   (
-                     select E.dept_ids, E.bouq_uid, E.cat_uid, F.nom as nom_categorie,F.order, E.chain_uid, G.designation as nom_chaines, G.logo,G.icon FROM `m_m_bouq_chain` E, `mod_wa_categories` F, `mod_wa_chaines` G WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 order by F.order
+                     select E.dept_ids, E.bouq_uid, E.cat_uid, F.nom as nom_categorie,F.order, E.chain_uid, G.designation as nom_chaines, G.logo,G.icon FROM `m_m_bouq_chain` E, `mod_wa_categories` F, `mod_wa_chaines` G 
+                     WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 ORDER BY F.order
                   ) C
                  INNER JOIN `mod_wa_bouquets` D
-                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' ORDER BY D.designation,C.order
+                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
         
-        $query = $this->db->query($sql, array($this->deptId)); 
-        
-       if($query->num_rows() > 0)
+       $query1 = $this->db->query($sql1, array($this->deptId)); 
+       
+       if($query1->num_rows() > 0)
        {
          $prevBouquet = "";
          $prevCategorie = "";
          $counter =0;
-        
-         foreach($query->result() as $key=>$val)
+         $chaineArr = array();
+         
+         foreach($query1->result() as $key=>$val)
          {
-             if(($prevBouquet==""&&$prevCategorie=="")||($prevBouquet==$val->nom_bouquet&&$prevCategorie!=$val->nom_categorie))
-              $this->maTv[$val->nom_bouquet][$val->nom_categorie] = array_filter($query->result(),array(new retrieveBouquet($val->nom_bouquet,$val->nom_categorie),'isBouquet'));
-              
+             if(($counter==0)||($prevBouquet == $val->nom_bouquet&&$prevCategorie ==  $val->nom_categorie)){
+              array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon));
+            }   
+            
+            if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie))){
+                $this->maTv[$prevBouquet][$prevCategorie] = $chaineArr;    
+                $chaineArr = array();
+                array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon)); 
+            }
               $prevBouquet   = $val->nom_bouquet;
               $prevCategorie = $val->nom_categorie;
-                                   
+            
               $counter++;
          }
-         echo "<pre>";
-         print_r($this->maTv["ULTRA"]);
-         echo "</pre>";
-       $this->maTv["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
-        echo "<pre>";
-         print_r($this->maTv["ULTRA"]);
-         echo "</pre>";
-         exit();
-       
+            $this->maTv["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
+            $this->maTv["GIGA"] = array_filter($this->maTv["GIGA"],array(new retrieveUnikChaine($this->maTv["MEGA"]),'filterUnique'));
          }
        return $this->maTv;
     }
     
-    
+   
 }
 
 class retrieveBouquet 
@@ -99,20 +98,17 @@ class retrieveBouquet
  class retrieveUnikChaine
  {
    
-    private $giga = array();
-    function __construct($giga)
+    private $bouquet = array();
+    function __construct($bouquet)
     {
-         $this->giga = $giga;      
+         $this->bouquet = $bouquet;      
     }
 
     function filterUnique($i) 
     {
-        foreach($this->giga as $val)
-        {
-            if(!in_array($i,$val->chain_uid)){
-                return $i;
-            }
-        }
-        
+        if(!in_array($i,$this->bouquet)){
+            return $i;
+          }
+     
     }
  }
