@@ -66,7 +66,8 @@
 //                      alert("contenuDroit2: "+data.contenuDroit2);
 //                      $("#recap_contenu").append(data.contenuDroit3);
 //                      alert("contenuDroit3: "+data.contenuDroit3);
-                      $.unblockUI();                    
+                      $.unblockUI();     
+                      $( "html,body" ).scrollTop(0);
                     },"json"
                   );   
                       return false;
@@ -92,7 +93,8 @@
                         $("#recap_contenu").empty().prepend(data.contenuDroit1);
                         $("#recap_contenu").append(data.contenuDroit2);
                         $("#recap_contenu").append(data.contenuDroit3);   
-                        $.unblockUI();               
+                        $.unblockUI();  
+                        $( "html,body" ).scrollTop(0);
                       }else{
                           $(location).attr('href',"mes_coordonnees");
                         }                          

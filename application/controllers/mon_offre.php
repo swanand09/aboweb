@@ -45,6 +45,7 @@ class Mon_offre extends MY_Controller {
                 $data["result"] = $result;
 //                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
 //                {
+                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
@@ -97,13 +98,15 @@ class Mon_offre extends MY_Controller {
 
              $data["val"] = $val;
              $data["choixArr"] = $choixArr;
-             $data["counter"] = $counter;          
+             $data["counter"] = $counter; 
+             $data["eligible_tv"] = $this->session->userdata("eligible_tv");
              $htmlContent .= $this->load->view("monoffre/forfait_info1",$data,true);
              $counter++;
            }
            if($val["Categorie"]=="IAD")
             {
                 $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"]);
+                $this->session->set_userdata('tarifLocTvMod',$val["Tarif"]);
             }
         }
          $data["iadArr"] = $iadArr;
@@ -176,6 +179,7 @@ class Mon_offre extends MY_Controller {
            if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
            {
                $data["val"]    = $val;
+               $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                $contenuDroit3 .= $this->load->view("monoffre/colonne_droit3",$data,true);
            }            
          }         
