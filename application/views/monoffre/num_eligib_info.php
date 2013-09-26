@@ -1,7 +1,4 @@
 <?php
-//echo "<pre>";
-//print_r($result);
-//echo "</pre>";
 if(!empty($result)){
 $debit_emis = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"],2);
 $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"],2);
@@ -101,7 +98,7 @@ if($('.debit_emission').length > 0 )
                  $msgtv = "Votre ligne n'est malheureusement pas éligible à la TV.";
              }
              
-             $msgtel = "Chez Médiaserv vous disposerez de l’ensemble des options sur la téléphonie.";
+             $msgtel = "Chez Mediaserv vous disposerez de l’ensemble des options sur la téléphonie.";
             
              if($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]=="false"){
                   $msgtel = "Votre ligne n'est pas éligible pour la telephonie et l'adsl";

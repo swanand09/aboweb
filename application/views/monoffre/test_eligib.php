@@ -118,7 +118,8 @@
             {
                 $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />',$htmlContent);
             }
-            echo utf8_encode(utf8_decode($htmlContent)); 
+           // echo utf8_encode(utf8_decode($htmlContent)); 
+            echo $htmlContent;
        }else {?>
            <?php  echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve','onsubmit'=>'javascript:procTestEligib();return false;')); ?>        
             <div class='seven columns'>

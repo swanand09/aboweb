@@ -43,6 +43,7 @@ class Mon_offre extends MY_Controller {
             if(!empty($result))
             {
                 $data["result"] = $result;
+                ///$data["kint"]   = $this->kint->dump($result);
 //                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
 //                {
                      $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
@@ -74,7 +75,8 @@ class Mon_offre extends MY_Controller {
       {
          redirect("mon_offre");
       }
-      echo utf8_encode(utf8_decode(json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3))));       
+      echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+     // echo utf8_encode(utf8_decode(json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3))));       
     }
     
     public function forfait()
@@ -132,7 +134,7 @@ class Mon_offre extends MY_Controller {
     
     public function prevState($page='')
     {
-        $prevState =  $this->session->userdata("prevState"); 
+        //$prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
         
         switch($page)
