@@ -815,4 +815,24 @@ class Wsdl_interrogeligib_model extends CI_Model
         
        
     }
+    
+   public function saveInfo(){
+        
+       $soapEligib = $this->nusoap_client->serializeEnvelope('
+                                    <enregistreSouscription xmlns="msvaboweb">
+                                      <_produits_souscris>
+                                        <_adresse_installation></_adresse_installation>
+                                        <_adresse_livraison></_adresse_livraison >
+                                        <_adresse_facturation></_adresse_facturation>
+                                      </_produits_souscris>
+                                      <_email></_email>
+                                      <_renonce_delai_retractation></_renonce_delai_retractation> 
+                                      <_information_contact></_information_contact> 
+                                      <_cartebleue></_cartebleue>
+                                      <_rib></_rib>
+                                    </enregistreSouscription>','',array(),'document', 'literal'); 
+        $this->nusoap_client->operation = "msvaboweb/enregistreSouscription";
+        $result = $this->nusoap_client->send($soapEligib,'msvaboweb/enregistreSouscription');
+        return  $result;
+   }
 }

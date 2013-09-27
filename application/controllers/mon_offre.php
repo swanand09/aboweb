@@ -228,6 +228,14 @@ class Mon_offre extends MY_Controller {
         $this->session->destroy();
         redirect("mon_offre");
     }
+    
+    public function saveInfo()
+    {
+         $result = $this->Wsdl_interrogeligib->saveInfo($num_tel);
+         echo "<pre>";
+         print_r($result);
+         echo "</pre>";
+    }
 }
 
 /* End of file mon_offre.php */
