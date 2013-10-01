@@ -21,14 +21,39 @@
        }  
       }); 
         
-  });       
+      
+  });  
+function choixTv()
+{    
+    
+    preload();    
+    var beneficierTv = "";
+    if($("#beneficier").is(":checked"))
+    {
+        beneficierTv = $("#beneficier").val();       
+        $.post(
+            '<?php echo base_url('mon_offre/refreshRecapCol');?>',
+             {
+                beneficierTv : beneficierTv                   
+             },
+            function(data){                 
+              $("#recap_contenu").append(data.contenuDroit4);                 
+              $.unblockUI(); 
+            },"json"
+       ); 
+    }else{
+         $("#recap_contenu").children("#coldr_4").remove();
+         $.unblockUI();
+    }
+    
+}
 </script>
 
-<form action="mes_coordonnees.html" method="post" class="frm-tv">
+<form class="frm-tv">
 
         <div class="row">
           <div class="column twelve">
-            <label for="beneficier"><input type="checkbox" id="beneficier" value="beneficier" name="beneficier"> Je souhaite bénéficier de la TV avec 35 chaînes incluses.</label>
+            <label for="beneficier"><input type="checkbox" id="beneficier" onclick="javascript: choixTv();" value="3.50" name="beneficier"> Je souhaite bénéficier de la TV avec 35 chaînes incluses.</label>
           </div>
         </div>
 

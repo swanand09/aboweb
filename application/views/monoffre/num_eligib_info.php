@@ -1,50 +1,8 @@
 <?php
-if(!empty($result)){
+if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+//if(!empty($result)){
 $debit_emis = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"],2);
 $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"],2);
-/*
-   $max_emis = 1;
-   $max_recu = 1;
-   
-   if($debit_emis > 1.00 && $debit_emis <= 5.00)
-   {
-       $max_emis = 5;
-   }
-   
-   if($debit_emis > 5.00 && $debit_emis <= 10.00)
-   {
-       $max_emis = 10;
-   }
-   
-   if($debit_recu > 1.00 && $debit_recu <= 5.00)
-   {
-       $max_recu = 5;
-   }
-   
-   if($debit_recu > 5.00 && $debit_recu <= 10.00)
-   {
-       $max_recu = 10;
-   }
-   
-   if($debit_recu > 10.00 && $debit_recu <= 15.00)
-   {
-       $max_recu = 15;
-   }
-   
-   if($debit_recu > 15.00 && $debit_recu <= 20.00)
-   {
-       $max_recu = 20;
-   }
-   
-   if($debit_recu > 20.00 && $debit_recu <= 25.00)
-   {
-       $max_recu = 25;
-   }
-   
-   if($debit_recu > 25.00 && $debit_recu <= 30.00)
-   {
-       $max_recu = 30;
-   }*/
    $max_emis = 10;
    $max_recu = 30;
    
@@ -78,6 +36,8 @@ if($('.debit_emission').length > 0 )
 	      levelColors: ['95bc46','95bc46'],
 	    });
     }
+    
+    
 });
 
 </script>
@@ -86,9 +46,8 @@ if($('.debit_emission').length > 0 )
 <?php
 }
     if(!empty($num_tel)){
-        // if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
-         if(!empty($result))
-         {   
+        if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+         //if(!empty($result))      
              $msgtv = "Vous disposerez notre offreTV.";
              if($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]=="false"&&$result["interrogeEligibiliteResult"]["Ligne"]["Debit_tv_ok"]=="false"){
                  $msgtv = "Vous ne pourrez malheureusement pas bénéficier de notre offreTV car votre débit est trop faible.";

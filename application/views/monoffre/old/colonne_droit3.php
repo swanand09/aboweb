@@ -9,7 +9,7 @@
 if(!empty($tarifLocTvMod)){
     ?>
     <div class="votre-offre p10">
-    <span class="left">Location box et décodeur TV</span>
+    <span class="left">Location box et modem</span>
     <span class="right">
         <strong><?php echo $tarifLocTvMod."€";?></strong>
     </span>

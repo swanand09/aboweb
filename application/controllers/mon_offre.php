@@ -10,30 +10,68 @@ class Mon_offre extends MY_Controller {
     
     public function index($num_tel="")
     {
-        $this->data["department"] = $this->determine_location(); 
+        
         $this->data["userdata"] = $this->session->all_userdata();       
+        $data['num_tel'] = array(
+                                        'name' => 'num_tel',
+                                        'id' => 'num_tel',
+                                        'type' => 'text',
+                                        'value' => $this->determine_location()  //recuperation department 
+                                     );
+        $data['test_eligb_butt'] = array(
+                                            'class'=>'rmv-std-btn btn-green',
+                                            'name' => 'test_eligb_butt',
+                                            'id' => 'test_eligb_butt',
+                                            'type' => 'submit',
+                                            'value' => 'TESTER'
+                                      );
+        
+        $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/saisie_num",$data,true);
+        
+        //verifie si numero tel est saisi depuis la site box
         if(!empty($num_tel)){
            
              return $this->ajax_proc_interogeligib($num_tel);
         }
+       
         return $this->controller_test_eligib_vue($num_tel);                
     }
    
+    //geolocalisation basant sur ip
     public function determine_location()
     {
        $this->load->model('geolocalisation_model','geoloca'); 
-       return $this->geoloca->getDepartment();
+       switch($this->geoloca->getDepartment()){
+            case "Martinique":
+                return "0596";
+            break;
+
+            case "Guadeloupe":
+                return "0590";
+            break;
+
+            case "Reunion":
+                return "0262";
+            break;
+
+            case "Guyane":
+                return "0594";
+            break;
+
+            case "Iles du Nord":
+               return "0605";
+            break;
+            default: return "0590";
+       }
+       
     }
     
+    //connection avec le webservice fontionalite interrogeEligibilite - ajax
     public function ajax_proc_interogeligib($num_tel="")
     {
         $from_sitebox  = false;   
        (empty($num_tel))?$num_tel = $this->input->post('num_tel'):$from_sitebox = true;
         
-        $htmlContent   = "";
-        $contenuDroit1 = "";
-        $contenuDroit2 = "";
-        $contenuDroit3 = "";
         $data["num_tel"] = $num_tel; 
         $data["result"] = "";
         if($num_tel!="")
@@ -42,10 +80,9 @@ class Mon_offre extends MY_Controller {
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
             if(!empty($result))
             {
-                $data["result"] = $result;
-                ///$data["kint"]   = $this->kint->dump($result);
-//                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
-//                {
+                $data["result"] = $result;               
+               if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+               {
                      $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
@@ -63,20 +100,20 @@ class Mon_offre extends MY_Controller {
                     $data["input1"] = $input1;
                     $data["input2"] = $input2;                
                     $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
-                    $data["choix_forfait"] = $choix_forfait; 
-                    $contenuDroit1 .= $this->load->view("monoffre/colonne_droit1",$data,true);
-//                }
+                    $data["choix_forfait"] = $choix_forfait;                    
+                    $this->colonneDroite["form_test_ligne"] = $this->load->view("general/form_test_ligne",$data,true);
+                }
             }
       }  
-      $htmlContent .= $this->load->view("monoffre/num_eligib_info",$data,true);
-      $this->session->set_userdata("htmlContent_testeligib",$htmlContent);
-      $this->session->set_userdata('prevState',array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+      $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/num_eligib_info",$data,true);     
+      $this->session->set_userdata("htmlContent_testeligib",$this->contenuGauche["contenu_html"]);      
+      $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
       if($from_sitebox)
       {
          redirect("mon_offre");
       }
-      echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
-     // echo utf8_encode(utf8_decode(json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3))));       
+      //echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+     echo json_encode(array($this->contenuGauche,$this->colonneDroite));
     }
     
     public function forfait()
@@ -87,7 +124,7 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata("consv_num_tel",$consv_num_tel);
         $produit =  $this->session->userdata("produit");
         $data["promo_libelle"] = $this->session->userdata("promo");
-       $htmlContent = $this->load->view("monoffre/forfait_info3",$data,true);
+       $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/forfait/ma_promo",$data,true);
        $counter = 1;
        $iadArr = array("Libelle"=>"","Tarif"=>"","Tarif_promo"=>"","Duree_mois_promo"=>"");
        $data["produit"] = $produit;
@@ -102,7 +139,7 @@ class Mon_offre extends MY_Controller {
              $data["choixArr"] = $choixArr;
              $data["counter"] = $counter; 
              $data["eligible_tv"] = $this->session->userdata("eligible_tv");
-             $htmlContent .= $this->load->view("monoffre/forfait_info1",$data,true);
+             $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/liste",$data,true);
              $counter++;
            }
            if($val["Categorie"]=="IAD")
@@ -112,24 +149,21 @@ class Mon_offre extends MY_Controller {
             }
         }
          $data["iadArr"] = $iadArr;
-         $htmlContent .= $this->load->view("monoffre/forfait_info2",$data,true);
-         $this->session->set_userdata('htmlContent_forfait',$htmlContent);
+         $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
+         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
         $prevState = $this->session->userdata("prevState");
-        $contenuDroit1 = $prevState["contenuDroit1"];
-        //$contenuDroit2 = $prevState["contenuDroit2"];
-        $contenuDroit3 = $prevState["contenuDroit3"];
+        $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
 
         $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
-        $contenuDroit2 = $this->load->view("monoffre/colonne_droit2",$data,true);
-        if($contenuDroit3=="")
+        $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
+        if($this->colonneDroite["offre_mediaserv"]=="")
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
-            $contenuDroit3 = $this->load->view("monoffre/colonne_droit3",$data,true);
+            $this->colonneDroite["offre_mediaserv"] = $this->load->view("general/offre_mediaserv",$data,true);
         }      
-       $prevState["contenuDroit2"] =  $contenuDroit2;
-       $prevState["contenuDroit3"] =  $contenuDroit3;
-       $this->session->set_userdata('prevState',$prevState);
-      echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));   
+       
+       $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
+      echo json_encode(array($this->contenuGauche,$this->colonneDroite));   
     } 
     
     public function prevState($page='')
@@ -170,56 +204,67 @@ class Mon_offre extends MY_Controller {
     
     public function refreshRecapCol()
     {
-         $id_crm = $this->input->post("id_crm");
-         $produit =  $this->session->userdata("produit");
+         $beneficierTv =  $this->input->post("beneficierTv");
          $prevState = $this->session->userdata("prevState");
-         $contenuDroit1 = $prevState["contenuDroit1"];
-         $contenuDroit2 = $prevState["contenuDroit2"];
-         $contenuDroit3 = "";       
-         foreach($produit as $key=>$val)
-         {
-           if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
-           {
-               $data["val"]    = $val;
-               $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
-               $contenuDroit3 .= $this->load->view("monoffre/colonne_droit3",$data,true);
-           }            
-         }         
-         $prevState["contenuDroit2"] = $contenuDroit2;
-         $prevState["contenuDroit3"] = $contenuDroit3;         
-        
-         $data["tarif_ultra"] = 0;
-         $data["tarif_giga"] = 0;
-         $data["tarif_mega"] = 0;
-         $count_tv = 0;
-         foreach($produit as $key=>$val)
-         {
-            if($val["Categorie"]=="BOUQUET_TV"){
-                switch(utf8_encode($val["Libelle"]))
-                {
-                    case "Bouquet Ultra":
-                        $data["tarif_ultra"] = $val["Tarif"];
-                        break;
-                     case "Bouquet Giga":
-                         $data["tarif_giga"] = $val["Tarif"];
-                        break;
-                     case "Bouquet Méga":
-                         $data["tarif_mega"] = $val["Tarif"];
-                        break;
-                }
-                $count_tv++;
+         if($beneficierTv==false){
+            $id_crm = $this->input->post("id_crm");
+            $produit =  $this->session->userdata("produit");           
+            $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
+            $this->colonneDroite["donnee_degroupage"] = $prevState[1]["donnee_degroupage"];                  
+            foreach($produit as $key=>$val)
+            {
+              if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
+              {
+                  $data["val"]    = $val;
+                  $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
+                  
+                  $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
+              }            
+            }         
+            
+            $data["tarif_ultra"] = 0;
+            $data["tarif_giga"] = 0;
+            $data["tarif_mega"] = 0;
+            $count_tv = 0;
+            foreach($produit as $key=>$val)
+            {
+               if($val["Categorie"]=="BOUQUET_TV"){
+                   switch(utf8_encode($val["Libelle"]))
+                   {
+                       case "Bouquet Ultra":
+                           $data["tarif_ultra"] = $val["Tarif"];
+                           break;
+                        case "Bouquet Giga":
+                            $data["tarif_giga"] = $val["Tarif"];
+                           break;
+                        case "Bouquet Méga":
+                            $data["tarif_mega"] = $val["Tarif"];
+                           break;
+                   }
+                   $count_tv++;
+               }
             }
+            
+            //Go to bouquet tv or mes coordonnes 
+            if($count_tv>0){
+                 $this->load->model('stb_model','stb'); 
+                 $data["base_url_stb"] = BASEPATH_STB;
+                 $data["bouquet_list"] = $this->stb->retrievChainesList();
+                 $data["location_decodeur"] = $prevState[1]["location_decodeur"];
+                $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
+                $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
+            }else{
+                $this->contenuGauche["contenu_html"] = "redirect to mes coordonnees";
+                $this->session->set_userdata('prevState',array(array("contenu_html"=>$this->session->userdata("htmlContent_forfait")),$this->colonneDroite));                
+            }
+            
+            echo json_encode(array($this->contenuGauche,$this->colonneDroite));
+         }else{
+             $data["beneficierTv"] = $beneficierTv;
+             $prevState[1]["location_decodeur"] = $this->load->view("general/location_decodeur",$data,true);
+             $this->session->set_userdata('prevState',$prevState);
+             echo json_encode(array("location_decodeur"=>$prevState[1]["location_decodeur"]));
          }
-         $prevState["htmlContent"] = $this->session->userdata("htmlContent_forfait");
-         $this->session->set_userdata('prevState',$prevState);
-         //Go to bouquet tv or mes coordonnes         
-         //$prevState["htmlContent"] = ($count_tv>0)? $this->load->view("monoffre/bouqet_tv",$data,true):$this->load->view("mes_coord/mes_coordonnes",$data,true);   
-         $this->load->model('stb_model','stb'); 
-         $data["base_url_stb"] = BASEPATH_STB;
-         $data["bouquet_list"] = $this->stb->retrievChainesList();
-         $prevState["htmlContent"] = ($count_tv>0)? $this->load->view("monoffre/bouqet_tv",$data,true):"redirect to mes coordonnees";   
-        // $this->session->set_userdata('prevState',$prevState);
-         echo json_encode(array("htmlContent"   => $prevState["htmlContent"],"contenuDroit1"  => $contenuDroit1, "contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
     }       
     
     
