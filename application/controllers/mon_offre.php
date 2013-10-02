@@ -182,7 +182,6 @@ class Mon_offre extends MY_Controller {
             break;
         }
         
-
         if($redu_facture=="true")
         {
             $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
@@ -251,6 +250,9 @@ class Mon_offre extends MY_Controller {
                  $data["base_url_stb"] = BASEPATH_STB;
                  $data["bouquet_list"] = $this->stb->retrievChainesList();
                  $data["location_decodeur"] = $prevState[1]["location_decodeur"];
+                 if(!empty($prevState[1]["location_decodeur"])){
+                  $this->colonneDroite["location_decodeur"] =   $prevState[1]["location_decodeur"];
+                 }
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
             }else{
@@ -262,7 +264,7 @@ class Mon_offre extends MY_Controller {
          }else{
              $data["beneficierTv"] = $beneficierTv;
              $prevState[1]["location_decodeur"] = $this->load->view("general/location_decodeur",$data,true);
-             $this->session->set_userdata('prevState',$prevState);
+             $this->session->set_userdata('prevState',$prevState);            
              echo json_encode(array("location_decodeur"=>$prevState[1]["location_decodeur"]));
          }
     }       

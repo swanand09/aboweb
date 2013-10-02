@@ -52,22 +52,16 @@ var preload = function(){
                      },
                     function(data){                      
                       $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                     
-//                      for (var i = 0; i < data[1].length; i++) {                          
-//                          if(i==0){                             
-//                              $("#recap_contenu").empty();
-//                          }
-//                         $("#recap_contenu").append(data[1][i]);
-//                      }
-                        i = 0;
-                        for(val in data[1]){
-                             if(i==0){                             
-                              $("#recap_contenu").empty();
+                   
+                      var key, count = 0;
+                      for(key in data[1]) {
+                          if(count==0) {
+                            $("#recap_contenu").empty();                                                    
                           }
-                         $("#recap_contenu").append(val);
-                         i++
-                        }
-                       
+                          $("#recap_contenu").append(data[1][key]);
+                          count++;
+                      }
+                     
                       $.unblockUI();     
                       $( "html,body" ).scrollTop(0);
                     },"json"
@@ -92,11 +86,13 @@ var preload = function(){
                     function(data){
                          if(data[0].contenu_html!="redirect to mes coordonnees"){
                             $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                            for (var i = 0; i < data[1].length; i++) {
-                              if(i==0){
-                                  $("#recap_contenu").empty();
-                              }
-                             $("#recap_contenu").append(data[1][i]);
+                             var key, count = 0;
+                            for(key in data[1]) {
+                                if(count==0) {
+                                  $("#recap_contenu").empty();                                                    
+                                }
+                                $("#recap_contenu").append(data[1][key]);
+                                count++;
                             }
 
                             $.unblockUI();  
