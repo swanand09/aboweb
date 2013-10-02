@@ -263,7 +263,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(array($this->contenuGauche,$this->colonneDroite));
          }else{
              $data["beneficierTv"] = $beneficierTv;
-             $prevState[1]["location_decodeur"] = $this->load->view("general/location_decodeur",$data,true);
+             $prevState[1]["location_decodeur"] = (($data["beneficierTv"]!="uncheck")?$this->load->view("general/location_decodeur",$data,true):"");
              $this->session->set_userdata('prevState',$prevState);            
              echo json_encode(array("location_decodeur"=>$prevState[1]["location_decodeur"]));
          }

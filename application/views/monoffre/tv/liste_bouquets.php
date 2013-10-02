@@ -41,9 +41,19 @@ function choixTv()
               $.unblockUI(); 
             },"json"
        ); 
-    }else{
-         $("#recap_contenu").children("#coldr_4").remove();
-         $.unblockUI();
+    }else{         
+         beneficierTv = "uncheck";       
+         $.post(
+                '<?php echo base_url('mon_offre/refreshRecapCol');?>',
+                 {
+                    beneficierTv : beneficierTv                   
+                 },
+                function(data){                 
+                  //$("#recap_contenu").append(data.location_decodeur);                 
+                  $("#recap_contenu").children("#coldr_4").remove();
+                  $.unblockUI(); 
+                },"json"
+           );         
     }
     
 }
