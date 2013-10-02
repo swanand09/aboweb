@@ -1,4 +1,7 @@
 <?php
+//echo "<pre>";
+//print_r($result);
+//echo "</pre>";
 if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
 //if(!empty($result)){
 $debit_emis = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"],2);

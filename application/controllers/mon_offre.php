@@ -242,17 +242,24 @@ class Mon_offre extends MY_Controller {
                    }
                    $count_tv++;
                }
+                if($val["Categorie"]=="TELEVISION")
+                {
+                    foreach($val["Valeurs"]["WS_Produit_Valeur"] as $val2){
+                        if($val2["Categorie"]=="STB"&&$val2["Type"]=="RECURRENT"){
+                             $data["tarif_loca_decod"] = $val2["Tarif"];
+                        }
+                    }
+                   
+                }
             }
             
             //Go to bouquet tv or mes coordonnes 
             if($count_tv>0){
-                 $this->load->model('stb_model','stb'); 
-                 $data["base_url_stb"] = BASEPATH_STB;
-                 $data["bouquet_list"] = $this->stb->retrievChainesList();
-                 $data["location_decodeur"] = $prevState[1]["location_decodeur"];
-                 if(!empty($prevState[1]["location_decodeur"])){
-                  $this->colonneDroite["location_decodeur"] =   $prevState[1]["location_decodeur"];
-                 }
+                $this->load->model('stb_model','stb'); 
+                $data["base_url_stb"] = BASEPATH_STB;
+                $data["bouquet_list"] = $this->stb->retrievChainesList();
+                $data["location_decodeur"] = $prevState[1]["location_decodeur"];                
+                $this->colonneDroite["location_decodeur"] =  (!empty($prevState[1]["location_decodeur"])?$prevState[1]["location_decodeur"]:"");                
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
             }else{
