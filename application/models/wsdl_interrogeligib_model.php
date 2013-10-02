@@ -27,7 +27,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                       <_numero>'.$num_tel.'</_numero>
                                     </interrogeEligibilite>','',array(),'document', 'literal'); 
         $this->nusoap_client->operation = "msvaboweb/interrogeEligibilite";
-        $result = $this->nusoap_client->send($soapEligib,'msvaboweb/interrogeEligibilite');
+        $result = $this->nusoap_client->send($soapEligib,$this->nusoap_client->operation);
          return  $result;
         /*
         $result = 
@@ -816,7 +816,8 @@ class Wsdl_interrogeligib_model extends CI_Model
        
     }
     
-   public function saveInfo(){
+   public function saveInfo()
+   {
         
        $soapEligib = $this->nusoap_client->serializeEnvelope('
                                     <enregistreSouscription xmlns="msvaboweb">
@@ -835,4 +836,17 @@ class Wsdl_interrogeligib_model extends CI_Model
         $result = $this->nusoap_client->send($soapEligib,'msvaboweb/enregistreSouscription');
         return  $result;
    }
+   
+  public function verifEmail($email_msv)
+  {
+       $soapEligib = $this->nusoap_client->serializeEnvelope('
+                                    <VerifieEmailDisponibilite xmlns="msvaboweb">
+                                        <_email>'.$email_msv.'@mediaserv.net</_email>
+                                    </VerifieEmailDisponibilite>
+                                    ','',array(),'document', 'literal');
+       $this->nusoap_client->operation = "msvaboweb/VerifieEmailDisponibilite";
+       $result = $this->nusoap_client->send($soapEligib,$this->nusoap_client->operation);
+       return  $result["VerifieEmailDisponibiliteResult"];
+  }
+          
 }

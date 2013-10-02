@@ -10,10 +10,16 @@ class Mes_coordonnees extends MY_Controller {
     
     public function index()
     {
-        $this->data["department"] = $this->session->userdata("user_geolocalisation"); 
         $this->data["userdata"] = $this->session->all_userdata();
         
         return $this->controller_mes_coord_vue();                
+    }
+    
+    public function verifEmail(){
+        $email_msv = $this->input->post("email_msv");
+        $resultVerifEmail =$this->Wsdl_interrogeligib->verifEmail($email_msv);
+        echo json_encode(array("msg"=>(empty($resultVerifEmail["Error"])?"Cet email est disponible":"Cet email n'est pas disponible"),"error"=>($resultVerifEmail["Disponible"]=="false"?"401":"0")));
+        
     }
 }
 /* End of file mes_coordonnees.php */
