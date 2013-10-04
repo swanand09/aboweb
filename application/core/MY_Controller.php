@@ -17,13 +17,14 @@ class MY_Controller extends CI_Controller {
                                        "forfait_choisi"    => "",
                                        "location_modem"    => "",
                                        "promo"             => "",
+                                       "parrainage"        => "",
                                        "location_decodeur" => "",
                                        "Options_tv"        => ""
             );   
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";
 	}  	
-        //configuration de la vue principal       
+        //configuration de la vue principal contenu droit et gauche       
         public function controller_test_eligib_vue()
         {
            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -43,10 +44,12 @@ class MY_Controller extends CI_Controller {
         public function controller_mes_coord_vue()
         {
             $this->data["pageid"] ="page-etape-2";
-            $this->data["etapes_url"][0] = "mon_offre";
+            $this->data["etapes_url"][0] = "mon_offre";           
+            $this->data["colonneDroite"] = $this->colonneDroite;           
+            $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
                                  ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
-                                 ->title('title', 'Mon Offre')
+                                 ->title('title', 'Mes coordonnés')
                                  ->set_partial('contenu_gauche', 'mes_coord/mes_coordonnes')
                                   ->set_partial('contenu_droit', 'general/module_recap')    
                                  ->build('page',$this->data);

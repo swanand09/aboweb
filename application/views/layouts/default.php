@@ -18,12 +18,15 @@
         echo css('main.css'); 
         echo css('etape.css');
         echo css('font.css'); 
+        echo css('validationEngine.jquery.css');
+        echo css('jquery-ui.css');
   ?>
    <!--[if IE 7]><?php echo css('ie7.css');?><![endif]-->
   <!--[if IE 8]><?php echo css('ie8.css');?><![endif]-->
   <?php
         echo js('modernizr.foundation.js');
          echo js('jquery.js');
+         echo js('jquery-ui.js');
          echo js('jquery.blockUI.js');
       // echo ajax()->init();
   ?> 
@@ -97,7 +100,10 @@
       //  echo js('foundation.min.js');
         echo js('app.js');
         echo js('raphael.2.1.0.min.js');
-        echo js('justgage.1.0.1.min.js');
+        echo js('justgage.1.0.1.min.js');        
+        echo js('jquery.maskedinput.min.js');
+        echo js('jquery.validationEngine.js');
+        echo js('languages/jquery.validationEngine-fr.js');
         echo js('custom.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 

@@ -16,9 +16,7 @@
             );
     }    
 </script>
-<div id="recap_contenu">
-     <div class='ligne'> 
-     </div>
+<div id="recap_contenu">    
    <?php
         if(array_key_exists("prevState",$userdata)){
             foreach($userdata["prevState"][1] as $val){
@@ -26,4 +24,6 @@
             }
        }
     ?>
+   
 </div>
+ <div id="stopScroll"></div>

@@ -3,9 +3,9 @@
     <span class="left">Votre offre Mediaserv</span>
     <span class="right">
         <strong><?php echo (!empty($text))?$text:$val["Tarif"]."€";?></strong>
-       
     </span>
 </div>
+<!--FORFAIT-->
 <?php 
 if(!empty($tarifLocTvMod)){
     ?>
@@ -28,3 +28,4 @@ if(empty($text)){
     </ul>
 </div>
 <?php }?>
+<!--END OF FORFAIT-->

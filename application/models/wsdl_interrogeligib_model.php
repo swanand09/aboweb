@@ -848,5 +848,18 @@ class Wsdl_interrogeligib_model extends CI_Model
        $result = $this->nusoap_client->send($soapEligib,$this->nusoap_client->operation);
        return  $result["VerifieEmailDisponibiliteResult"];
   }
-          
+ 
+  public function verifParain($parrain_id_parcour,$parrain_num_tel)
+  {
+      $soapEligib = $this->nusoap_client->serializeEnvelope('
+                                    <rechercheParrain xmlns="msvaboweb">
+                                        <_id>'.$parrain_id_parcour.'</_id>
+                                        <_numero_tel>'.$parrain_num_tel.'</_numero_tel> 
+                                        <_numero_contrat>2145</_numero_contrat>    
+                                    </rechercheParrain>
+                                    ','',array(),'document', 'literal');
+       $this->nusoap_client->operation = "msvaboweb/rechercheParrain";
+       $result = $this->nusoap_client->send($soapEligib,$this->nusoap_client->operation);
+       return  $result;
+  }
 }

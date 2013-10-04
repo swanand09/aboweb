@@ -1,3 +1,4 @@
-<div class="degroupage custom-column top-20 bottom-20">
-   <strong style="color:#000;"> <?php echo $degrouper;?></strong>
+<!--DEGROUPAGE-->
+<div class="degroupage p10 custom-column top-20 bottom-20 twelve">
+   <strong> <?php echo $degrouper;?></strong>
 </div>

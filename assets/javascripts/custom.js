@@ -1,4 +1,6 @@
+
 $(function(){
+
 
 	//Set initial active state
 	currentEtape();
@@ -45,11 +47,73 @@ $(function(){
 		}
 	});
 
+	/*-------------------------------------/
+	* Masked Input for Phone Number TODO : 
+	--------------------------------------*/
+	$('#ligne').mask("?99 99 99 99 99",{placeholder:" "});
 
-	
+	/*-------------------------------------/
+	* Validation Engine
+	--------------------------------------*/
+	$("#mes-coordonnees").validationEngine();
+	$("#frm-paiement").validationEngine();
+	$(".frm-etape-tester").validationEngine({
+		'custom_error_messages': {
+			'#ligne': {
+				'minSize': {'message' :" * 10 caractères requis"},
+				'maxSize': {'message' :" * 10 caractères requis"}
+			}
+		}
+	});
 
-	//End of document.ready
+	/*-------------------------------------/
+	* Right sidebar scroll ( PANIER )
+	--------------------------------------*/
+
+	var $sidebar   = $(".right-content"), 
+	    $window    = $(window),
+	    offset     = $sidebar.offset(),
+	    topPadding = 0;
+	var footerPosition = $('.main-footer').offset().top;
+	var stopScroll;
+
+
+	var lastScrollTop = 0;
+	$(window).scroll(function(event){
+		//console.clear();
+	   var st = $(this).scrollTop();
+	   if (st > lastScrollTop){ // IF scrolling Down
+
+	       if ($window.scrollTop() > offset.top ) 
+	       {
+	      	    stopScroll = $('#stopScroll').offset().top;
+
+	      	    if( stopScroll < footerPosition )
+	      	    {
+	      	    		$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) + topPadding });
+	      	    }
+	       } 
+	   } 
+	   else //if scrolling UP
+	   {
+
+	   	if( $window.scrollTop() > offset.top ) {
+
+	      $sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) });
+	  	}
+
+	   }
+	   lastScrollTop = st;
+
+	   console.log("stopScroll:"+stopScroll);
+	   console.log("offset top:"+offset.top);
+	   console.log("Window :"+$window.scrollTop());
+	   console.log("footerPosition:"+footerPosition);
+	});
+
 });
+
+
 
 //Get the current "Etape" and reinitialise state
 var currentEtape = function(){
@@ -88,4 +152,35 @@ var etape4 = function() {
 	$('li.etape2').removeClass().addClass('etape2 state3');
 	$('li.etape3').removeClass().addClass('etape3 state2');
 	$('li.etape4').removeClass().addClass('etape4 state-active');
+}
+
+/*------------------------------------------------
+* Jquery Meter Gauge
+------------------------------------------------*/
+window.onload = function () {
+
+	if($('.debit_emission').length > 0 )
+	{
+		var g1, g2;
+		var g1 = new JustGage({
+	          id: "g1", 
+	          value: 0.4, 
+	          min: 0,
+	          max: 1,
+	          title: "Débit d’émission",
+	          label: "Mbps",
+	          levelColors: ['95bc46','95bc46'],
+	        });
+
+		var g2 = new JustGage({
+		      id: "g2", 
+		      value: 17.5, 
+		      min: 0,
+		      max: 20,
+		      title: "Débit de réception",
+		      label: "Mbps",
+		      levelColors: ['95bc46','95bc46'],
+		    });	
+
+	}
 }

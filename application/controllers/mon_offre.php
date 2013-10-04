@@ -14,7 +14,7 @@ class Mon_offre extends MY_Controller {
         $this->data["userdata"] = $this->session->all_userdata();       
         $data['num_tel'] = array(
                                         'name' => 'num_tel',
-                                        'id' => 'num_tel',
+                                        'id' => 'ligne',
                                         'type' => 'text',
                                         'value' => $this->determine_location()  //recuperation department 
                                      );
@@ -70,13 +70,13 @@ class Mon_offre extends MY_Controller {
     public function ajax_proc_interogeligib($num_tel="")
     {
         $from_sitebox  = false;   
-       (empty($num_tel))?$num_tel = $this->input->post('num_tel'):$from_sitebox = true;
+       (empty($num_tel))?$num_tel = str_replace(' ', '', $this->input->post('num_tel')):$from_sitebox = true;
         
         $data["num_tel"] = $num_tel; 
         $data["result"] = "";
         if($num_tel!="")
         {       
-            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'recap_num','type' => 'text','value' => $num_tel);
+            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
             if(!empty($result))
             {

@@ -19,7 +19,7 @@ var preload = function(){
                 $.post(
                     ajax_proc_interogeligib,
                      {
-                        num_tel : $("#num_tel").val()                                                                                  
+                        num_tel : $("#ligne").val()                                                                                  
                      },
                     function(data){
                       //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
