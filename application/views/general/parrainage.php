@@ -16,8 +16,6 @@
         );
  }
 
-   });
- 
 </script>
 <hr>
 <!-- PARRAINAGE -->
