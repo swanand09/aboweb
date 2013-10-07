@@ -1,23 +1,4 @@
-<?php echo js('main_functions.js');?>
-<script>
-    function verifMailWebSev(){
-        preload();
-        $.post(                   
-            '<?php echo base_url('mes_coordonnees/verifEmail');?>',
-             {
-                email_msv : $("#email_mediaserv").val()
-             },
-            function(data){                 
-              alert(data.msg);             
-              switch(data.error){
-                  case "401":
-                      $("#email_mediaserv").val("").focus();
-                  break;
-              }
-              $.unblockUI(); 
-            },"json"
-       ); 
-    }
+<script>    
    $(function() {
         var villeLst=["BASSE TERRE","POINTE A PITRE","MORNE A L'EAU","GRAND BOURG","GOURBEYRE","TROIS RIVIERES","SAINTE ROSE","POINTE NOIRE","PORT LOUIS","SAINT FRANCOIS","VIEUX HABITANTS","SAINT CLAUDE","ANSE BERTRAND","BAIE-MAHAULT","BAILLIF","BOUILLANTE","DESHAIES","LA DESIRADE","GOYAVE","LAMENTIN","BANANIER","CAPESTERRE BELLE EAU","SAINTE MARIE","LES MANGLES","PETIT CANAL","BOUILLANTE","PIGEON","SAINT BARTHELEMY","SAINT LOUIS","TERRE DE BAS","TERRE DE HAUT","LES ABYMES","CAPESTERRE DE MARIE GALANTE","VIEUX FORT","LES ABYMES","SAINT MARTIN","LE MOULE","PETIT BOURG","DOUVILLE","SAINTE ANNE","LE GOSIER","FORT DE FRANCE","RIVIERE PILOTE","SAINT JOSEPH","GROS MORNE","LE LORRAIN","PETIT BOURG","RIVIERE SALEE","L'AJOUPA BOUILLON","LES ANSES D'ARLETS","BASSE POINTE","GRAND RIVIERE","MACOUBA","LA TRINITE","LE CARBET","BELLEFONTAINE","CASE PILOTE","LE DIAMANT","DUCOS","LE MARIGOT","LE MORNE VERT","SAINTE ANNE","SAINTE LUCE","LES TROIS ILETS","MORNE DES ESSES","SAINTE MARIE","LE ROBERT","VERT PRE","LE LAMENTIN","SCHOELCHER","FORT DE FRANCE","LE FRANCOIS","FONDS ST DENIS","LE PRECHEUR","SAINT PIERRE","LE MORNE ROUGE","SAINT ESPRIT","LE VAUCLIN","LE MARIN","CAYENNE","KOUROU","ROURA","ST ELIE","ST GEORGES","SAUL","SINNAMARY","PAPAICHTON","APATOU","JAVOUHEY","AWALA YALIMAPO","ST LAURENT DU MARONI","CAMOPI","GRAND SANTI","POMPIDOU PAPA ICHTON","IRACOUBO","MATOURY","CACAO","KAW","REMIRE MONTJOLY","MACOURIA","MACOURIA TONATE","MONTSINERY TONNEGRANDE","MANA","MARIPASOULA","OUANARY","REGINA","BELLE PIERRE","LE BRULE","ST DENIS","ST FRANCOIS","BASSE TERRE","GRAND BOIS","MONT VERT","ST PIERRE","TERRE SAINTE","BOIS DE NEFLES ST PAUL","BRAS PANON","RIVIERE DU MAT","CILAOS","PALMISTE ROUGE","ENTRE DEUX","LA CHALOUPE","LA MONTAGNE","ST BERNARD","ST DENIS","LA PLAINE DES CAFRES","LA POSSESSION","LA RIVIERE DES GALETS","LE DOS D ANE","SAINT DENIS","STE THERESE","LE PORT","LA RIVIERE","LES MAKES","LA SALINE","LE GUILLAUME","LE PITON ST LEU","LE PLATE","LES AVIRONS","TEVELAVE","LES TROIS BASSINS","TROIS BASSINS","L ETANG SALE","L ETANG SALE LES BAINS","PETITE ILE","LE TAMPON","LES TROIS MARES","PONT D YVES","TAMPON 14EME KM","LA PLAINE DES PALMISTES","RAVINE DES CABRIS","HELL BOURG","LA POSSESSION","SALAZIE","LA SALINE LES BAINS","ST GILLES LES BAINS","BERNICA","ST GILLES LES HAUTS","TAN ROUGE","ST LEU","STE ANNE","RIVIERE DES PLUIES","ROLAND GARROS AEROPORT","STE MARIE","LE PITON STE ROSE","STE ROSE","CAMBUSTON","LA CRESSONNIERE","ST ANDRE","STE SUZANNE","BASSE VALLEE","ST PHILIPPE","ST LOUIS","BELLEMENE","ST PAUL","ST BENOIT","LES LIANES","ST JOSEPH","VINCENDO","BOIS DE NEFLES ST DENIS","LA BRETAGNE","MOUFIA","STE CLOTILDE"];
         $( "#ville" ).autocomplete({
@@ -30,13 +11,13 @@
 });
 </script>
 <div class="left-etape-content">
-    <form action="mon-recapitulatif.php" method="POST" id="mes-coordonnees">
+    <form action="recapitulatif" method="POST" id="mes-coordonnees">
       <!--Adresse coordonnées-->
       <h3>Coordonnées (adresse abonnement) :</h3>
       <div class="row bottom-10">
         <div class="columns five"><label>Civilité :</label></div><div class="seven columns">
-          <label class="left"><input type="radio" value="monsieur" name="civilite" class="validate[required]">Monsieur</label>
-          <label class="left"><input type="radio" value="madame" name="civilite" class="validate[required]">Madame</label>
+          <label class="left"><input type="radio" value="M." name="civilite" class="validate[required]">Monsieur</label>
+          <label class="left"><input type="radio" value="Mme" name="civilite" class="validate[required]">Madame</label>
         </div>
       </div>
       <div class="row">
@@ -101,7 +82,7 @@
           <span class="postfix">@mediaserv.net</span>
         </div>
         <div class="column three"> 
-          <input type="button" onclick ="javascript:verifMailWebSev();" name="VerifierEmail" value="Vérifier" class="rmv-std-btn btn-verifier">
+          <input type="button" onclick ="javascript:verifMailWebServ();" name="VerifierEmail" value="Vérifier" class="rmv-std-btn btn-verifier">
         </div>
         <div class="column twelve top-20">
           <label>Veuillez précisez une autre adresse de messagerie</label>

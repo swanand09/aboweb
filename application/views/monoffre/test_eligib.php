@@ -1,13 +1,7 @@
-<script>
-    var ajax_proc_interogeligib = '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>';
-    var forfait = '<?php echo base_url('mon_offre/forfait');?>';
-    var refreshRecapCol = '<?php echo base_url('mon_offre/refreshRecapCol');?>';
-</script>
-<?php echo js('main_functions.js');?>
 <div class='left-etape-content' id="cont_mon_off">
  
 <?php 
-    if(array_key_exists("prevState",$userdata)){
+    if(!empty($userdata["idParcours"])&&array_key_exists("prevState",$userdata)){
             $redu_facture = $this->session->userdata("redu_facture");
             $htmlContent = $userdata["prevState"][0]["contenu_html"];
             if($redu_facture=="true")

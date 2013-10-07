@@ -82,8 +82,9 @@ class Mon_offre extends MY_Controller {
             {
                 $data["result"] = $result;               
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
-               {
-                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
+               {                   
+                    $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);
+                    $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
@@ -117,8 +118,9 @@ class Mon_offre extends MY_Controller {
     }
     
     public function forfait()
-    {   
-       $redu_facture  = $this->input->post('redu_facture'); 
+    { 
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";         
+        $redu_facture  = $this->input->post('redu_facture'); 
         $this->session->set_userdata("redu_facture",$redu_facture);
         $consv_num_tel = $this->input->post('consv_num_tel'); 
         $this->session->set_userdata("consv_num_tel",$consv_num_tel);
@@ -168,6 +170,7 @@ class Mon_offre extends MY_Controller {
     
     public function prevState($page='')
     {
+        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         //$prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
         
@@ -203,6 +206,7 @@ class Mon_offre extends MY_Controller {
     
     public function refreshRecapCol()
     {
+         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
          $beneficierTv =  $this->input->post("beneficierTv");
          $prevState = $this->session->userdata("prevState");
          if($beneficierTv==false){

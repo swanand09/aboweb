@@ -103,3 +103,88 @@ var preload = function(){
                     },"json"
                   ); 
           }
+          
+          function choixTv()
+          {    
+
+                preload();    
+                var beneficierTv = "";
+                if($("#beneficier").is(":checked"))
+                {
+                    beneficierTv = $("#beneficier").val();       
+                    $.post(
+                        refreshRecapCol,
+                         {
+                            beneficierTv : beneficierTv                   
+                         },
+                        function(data){                 
+                          $("#recap_contenu").append(data.location_decodeur);                 
+                          $.unblockUI(); 
+                        },"json"
+                   ); 
+                }else{         
+                     beneficierTv = "uncheck";       
+                     $.post(
+                            refreshRecapCol,
+                             {
+                                beneficierTv : beneficierTv                   
+                             },
+                            function(data){                 
+                              //$("#recap_contenu").append(data.location_decodeur);                 
+                              $("#recap_contenu").children("#coldr_4").remove();
+                              $.unblockUI(); 
+                            },"json"
+                       );         
+                }
+
+            }
+          
+          function verifMailWebServ(){
+            preload();
+            $.post(                   
+               verifEmail,
+                 {
+                    email_msv : $("#email_mediaserv").val()
+                 },
+                function(data){                 
+                  alert(data.msg);             
+                  switch(data.error){
+                      case "401":
+                          $("#email_mediaserv").val("").focus();
+                      break;
+                  }
+                  $.unblockUI(); 
+                },"json"
+           ); 
+        }
+          
+          function verifParainWebServ()
+          {
+                 preload();
+                   $.post(
+                        verifParain,
+                        {
+                           parrain_num_contrat : $("#parrain_num_contrat").val(),
+                           parrain_num_tel    : $("#parrain_num_tel").val()
+                        },
+                       function(data){
+                         //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+                         if(!data.Error.ErrorMessage)
+                         {
+                             alert("Erreur Webservice. Veuillez re-essayer plus tard");
+                         }else
+                         {
+                            alert(data.Error.ErrorMessage);   
+                         }
+                         if($("#parrain_num_tel").val()==="")
+                         {
+                             $("#parrain_num_tel").focus();
+                         }
+                         if($("#parrain_num_contrat").val()==="")
+                         {
+                             $("#parrain_num_contrat").focus();
+                         }
+                         $.unblockUI();                    
+                       }, "json"
+                   );
+            }

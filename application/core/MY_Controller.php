@@ -7,6 +7,7 @@ class MY_Controller extends CI_Controller {
         var $colonneDroite = array();
         var $prenum;
         var $contenuGauche = array();
+        var $idParcours;
         public function __construct()
 	{
             parent::__construct(); 
@@ -23,7 +24,22 @@ class MY_Controller extends CI_Controller {
             );   
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";
+            $this->idParcours = "";
 	}  	
+        
+        //verification expiration de la session
+        public function controller_verifySessExp()
+        {
+          $this->idParcours = $this->session->userdata("idParcours");
+          if(empty($this->idParcours)){
+              $this->session->destroy();
+             return true;
+          }else{
+             return  false;
+          }
+          
+        }
+        
         //configuration de la vue principal contenu droit et gauche       
         public function controller_test_eligib_vue()
         {
@@ -48,11 +64,26 @@ class MY_Controller extends CI_Controller {
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
-                                 ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
-                                 ->title('title', 'Mes coordonnés')
-                                 ->set_partial('contenu_gauche', 'mes_coord/mes_coordonnes')
-                                  ->set_partial('contenu_droit', 'general/module_recap')    
-                                 ->build('page',$this->data);
+                            ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
+                            ->title('title', 'Mes coordonnés')
+                            ->set_partial('contenu_gauche', 'mes_coord/mes_coordonnes')
+                             ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->build('page',$this->data);
+        }
+        
+        public function controller_recap_vue()
+        {
+            $this->data["pageid"] ="page-etape-3";
+            $this->data["etapes_url"][0] = "mon_offre";     
+            $this->data["etapes_url"][1] = "mes_coordonnees";
+            $this->data["colonneDroite"] = $this->colonneDroite;           
+            $this->data["contenuGauche"] = $this->contenuGauche;
+            $this->template
+                            ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
+                            ->title('title', 'Recapitulatif')
+                            ->set_partial('contenu_gauche', 'recap/recapitulatif')
+                             ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->build('page',$this->data);
         }
 }
 

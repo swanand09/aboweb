@@ -23,40 +23,7 @@
         
       
   });  
-function choixTv()
-{    
-    
-    preload();    
-    var beneficierTv = "";
-    if($("#beneficier").is(":checked"))
-    {
-        beneficierTv = $("#beneficier").val();       
-        $.post(
-            '<?php echo base_url('mon_offre/refreshRecapCol');?>',
-             {
-                beneficierTv : beneficierTv                   
-             },
-            function(data){                 
-              $("#recap_contenu").append(data.location_decodeur);                 
-              $.unblockUI(); 
-            },"json"
-       ); 
-    }else{         
-         beneficierTv = "uncheck";       
-         $.post(
-                '<?php echo base_url('mon_offre/refreshRecapCol');?>',
-                 {
-                    beneficierTv : beneficierTv                   
-                 },
-                function(data){                 
-                  //$("#recap_contenu").append(data.location_decodeur);                 
-                  $("#recap_contenu").children("#coldr_4").remove();
-                  $.unblockUI(); 
-                },"json"
-           );         
-    }
-    
-}
+
 
 function gotoMesCoord(){
    $(location).attr('href',"mes_coordonnees");

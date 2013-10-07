@@ -58,7 +58,14 @@
     </div>
   </nav>
   <!--END OF NAV-->
-
+ <script>
+    var ajax_proc_interogeligib = '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>';
+    var forfait = '<?php echo base_url('mon_offre/forfait');?>';
+    var refreshRecapCol = '<?php echo base_url('mon_offre/refreshRecapCol');?>';   
+    var verifEmail = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
+    var verifParain = '<?php echo base_url('mes_coordonnees/verifParain');?>';
+</script>
+<?php echo js('main_functions.js');?>
   <!--MAIN SECTION-->
   <section class='row main-content'>
     <section class='nine columns left-content'>
