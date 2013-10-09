@@ -71,9 +71,9 @@
     <section class='nine columns left-content'>
       <ul class="block-grid four-up etapes <?php echo $pageid; ?>">        
         <li class='etape1 state1'><?php echo image('etape.png');?><a href='<?php echo $etapes_url[0]; ?>'><span>1</span> Mon<br/>offre</a></li>
-        <li class='etape2'><?php echo image('etape.png');?><a href='#'><span>2</span> Mes<br/>coordonnées</a></li>
-        <li class='etape3'><?php echo image('etape.png');?><a href='#'><span>3</span> Mon<br/>récapitulatif</a></li>
-        <li class='etape4'><?php echo image('etape.png');?><a href='#'><span>4</span> Paiement</a></li>
+        <li class='etape2'><?php echo image('etape.png');?><a href='<?php echo $etapes_url[1]; ?>'><span>2</span> Mes<br/>coordonnées</a></li>
+        <li class='etape3'><?php echo image('etape.png');?><a href='<?php echo $etapes_url[2]; ?>'><span>3</span> Mon<br/>récapitulatif</a></li>
+        <li class='etape4'><?php echo image('etape.png');?><a href='<?php echo $etapes_url[3]; ?>'><span>4</span> Paiement</a></li>
       </ul>
       <div>
            <?php echo $template['partials']['contenu_gauche'];?>

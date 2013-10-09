@@ -1,3 +1,6 @@
+<?php 
+echo validation_errors();
+?>
 <script>    
    $(function() {
         var villeLst=["BASSE TERRE","POINTE A PITRE","MORNE A L'EAU","GRAND BOURG","GOURBEYRE","TROIS RIVIERES","SAINTE ROSE","POINTE NOIRE","PORT LOUIS","SAINT FRANCOIS","VIEUX HABITANTS","SAINT CLAUDE","ANSE BERTRAND","BAIE-MAHAULT","BAILLIF","BOUILLANTE","DESHAIES","LA DESIRADE","GOYAVE","LAMENTIN","BANANIER","CAPESTERRE BELLE EAU","SAINTE MARIE","LES MANGLES","PETIT CANAL","BOUILLANTE","PIGEON","SAINT BARTHELEMY","SAINT LOUIS","TERRE DE BAS","TERRE DE HAUT","LES ABYMES","CAPESTERRE DE MARIE GALANTE","VIEUX FORT","LES ABYMES","SAINT MARTIN","LE MOULE","PETIT BOURG","DOUVILLE","SAINTE ANNE","LE GOSIER","FORT DE FRANCE","RIVIERE PILOTE","SAINT JOSEPH","GROS MORNE","LE LORRAIN","PETIT BOURG","RIVIERE SALEE","L'AJOUPA BOUILLON","LES ANSES D'ARLETS","BASSE POINTE","GRAND RIVIERE","MACOUBA","LA TRINITE","LE CARBET","BELLEFONTAINE","CASE PILOTE","LE DIAMANT","DUCOS","LE MARIGOT","LE MORNE VERT","SAINTE ANNE","SAINTE LUCE","LES TROIS ILETS","MORNE DES ESSES","SAINTE MARIE","LE ROBERT","VERT PRE","LE LAMENTIN","SCHOELCHER","FORT DE FRANCE","LE FRANCOIS","FONDS ST DENIS","LE PRECHEUR","SAINT PIERRE","LE MORNE ROUGE","SAINT ESPRIT","LE VAUCLIN","LE MARIN","CAYENNE","KOUROU","ROURA","ST ELIE","ST GEORGES","SAUL","SINNAMARY","PAPAICHTON","APATOU","JAVOUHEY","AWALA YALIMAPO","ST LAURENT DU MARONI","CAMOPI","GRAND SANTI","POMPIDOU PAPA ICHTON","IRACOUBO","MATOURY","CACAO","KAW","REMIRE MONTJOLY","MACOURIA","MACOURIA TONATE","MONTSINERY TONNEGRANDE","MANA","MARIPASOULA","OUANARY","REGINA","BELLE PIERRE","LE BRULE","ST DENIS","ST FRANCOIS","BASSE TERRE","GRAND BOIS","MONT VERT","ST PIERRE","TERRE SAINTE","BOIS DE NEFLES ST PAUL","BRAS PANON","RIVIERE DU MAT","CILAOS","PALMISTE ROUGE","ENTRE DEUX","LA CHALOUPE","LA MONTAGNE","ST BERNARD","ST DENIS","LA PLAINE DES CAFRES","LA POSSESSION","LA RIVIERE DES GALETS","LE DOS D ANE","SAINT DENIS","STE THERESE","LE PORT","LA RIVIERE","LES MAKES","LA SALINE","LE GUILLAUME","LE PITON ST LEU","LE PLATE","LES AVIRONS","TEVELAVE","LES TROIS BASSINS","TROIS BASSINS","L ETANG SALE","L ETANG SALE LES BAINS","PETITE ILE","LE TAMPON","LES TROIS MARES","PONT D YVES","TAMPON 14EME KM","LA PLAINE DES PALMISTES","RAVINE DES CABRIS","HELL BOURG","LA POSSESSION","SALAZIE","LA SALINE LES BAINS","ST GILLES LES BAINS","BERNICA","ST GILLES LES HAUTS","TAN ROUGE","ST LEU","STE ANNE","RIVIERE DES PLUIES","ROLAND GARROS AEROPORT","STE MARIE","LE PITON STE ROSE","STE ROSE","CAMBUSTON","LA CRESSONNIERE","ST ANDRE","STE SUZANNE","BASSE VALLEE","ST PHILIPPE","ST LOUIS","BELLEMENE","ST PAUL","ST BENOIT","LES LIANES","ST JOSEPH","VINCENDO","BOIS DE NEFLES ST DENIS","LA BRETAGNE","MOUFIA","STE CLOTILDE"];
@@ -21,34 +24,34 @@
         </div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Nom :</label></div><div class="seven columns"><input type="text" id="nom" name="nom" class="validate[required]"></div>
+        <div class="columns five"><label>Nom :</label></div><div class="seven columns"><input type="text" id="nom" name="nom" class="validate[required]" value="<?php echo set_value("nom",$nom);?>"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Prénom :</label></div><div class="seven columns"><input type="text" id="prenom" name="prenom" class="validate[required,custom[onlyLetterNumber]]"></div>
+        <div class="columns five"><label>Prénom :</label></div><div class="seven columns"><input type="text" id="prenom" name="prenom" value="<?php echo set_value("prenom",$prenom);?>" class="validate[required,custom[onlyLetterNumber]]"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Numéro de mobile :</label></div><div class="seven columns"><input type="text" id="mobile" name="mobile" class="validate[required,custom[onlyNumberSp]]"></div>
+        <div class="columns five"><label>Numéro de mobile :</label></div><div class="seven columns"><input type="text" id="mobile" name="mobile" value="<?php echo set_value("mobile",$mobile);?>" class="validate[required,custom[onlyNumberSp]]"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Adresse email :</label></div><div class="seven columns"><input type="text" id="email" name="email" class="validate[required,custom[email]]"></div>
+        <div class="columns five"><label>Adresse email :</label></div><div class="seven columns"><input type="text" id="email" name="email" value="<?php echo set_value("email",$email);?>"  class="validate[required,custom[email]]"></div>
       </div>
 
       <!--Adresse d'installation-->
       <h3>Adresse d'installation :</h3>
       <div class="row">
-        <div class="columns five"><label>Numéro :</label></div><div class="seven columns"><input type="text" id="numero" name="numero" class="validate[required,custom[onlyNumberSp]]"></div>
+        <div class="columns five"><label>Numéro :</label></div><div class="seven columns"><input type="text" id="numero" name="numero" value="<?php echo set_value("numero",$numero);?>" class="validate[required,custom[onlyNumberSp]]"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Nom de la voie :</label></div><div class="seven columns"><input type="text" id="nomdelavoie" name="NomDeLaVoie" class="validate[required]"></div>
+        <div class="columns five"><label>Nom de la voie :</label></div><div class="seven columns"><input type="text" id="nomdelavoie" name="NomDeLaVoie" value="<?php echo set_value("NomDeLaVoie",$nomDeLaVoie);?>" class="validate[required]"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Complement d'adresse, étage, digicode... :</label></div><div class="seven columns"><input type="text" id="complement" name="complement" class="validate[required]"></div>
+        <div class="columns five"><label>Complement d'adresse, étage, digicode... :</label></div><div class="seven columns"><input type="text" id="complement" name="complement" value="<?php echo set_value("complement",$complement);?>"  class="validate[required]"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Code postal :</label></div><div class="seven columns"><input type="text" id="codepostal" name="codepostal" class="validate[required]"></div>
+        <div class="columns five"><label>Code postal :</label></div><div class="seven columns"><input type="text" id="codepostal" name="codepostal" value="<?php echo set_value("codepostal",$codepostal);?>" class="validate[required]"></div>
       </div>
       <div class="row">
-        <div class="columns five"><label>Ville :</label></div><div class="seven columns"><input type="text" id="ville" name="ville" class="validate[required]"></div>
+        <div class="columns five"><label>Ville :</label></div><div class="seven columns"><input type="text" id="ville" name="ville" value="<?php echo set_value("ville",$ville);?>" class="validate[required]"></div>
       </div>
 
       <!--Adresse de livraison-->
@@ -76,7 +79,7 @@
           <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
         </div>
         <div class="column six"> 
-          <input type="text" id="email_mediaserv" name="email_mediaserv" class="validate[required]"><span class="input-info">rassurez-vous, nous n'aimons pas non plus le SPAM</span>
+          <input type="text" id="email_mediaserv" name="email_mediaserv" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" class="validate[required]"><span class="input-info">rassurez-vous, nous n'aimons pas non plus le SPAM</span>
         </div>
         <div class="column three"> 
           <span class="postfix">@mediaserv.net</span>
@@ -86,7 +89,7 @@
         </div>
         <div class="column twelve top-20">
           <label>Veuillez précisez une autre adresse de messagerie</label>
-          <input type="text" name="email" class="validate[required,custom[email]] six">
+          <input type="text" name="emailAutre" class="validate[required,custom[email]] six">
         </div>
       </div>
 

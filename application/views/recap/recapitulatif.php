@@ -2,18 +2,18 @@
     <div class="row">
       <div class="column twelve bottom-20">
         <label class="top-20"><strong>Vos coordonnées</strong></label>
-        <span class="val">Madame Martine Durand</span>
+        <span class="val"><?php echo $civilite." ".$prenom." ".$nom;?></span>
         <label class="top-20"><strong>Adresse d'installation</strong></label>
-        <span class="val">12 Avneur des Lilas <br>97262 Fort de France</span>
+        <span class="val"><?php echo $numero." ".$nomDeLaVoie." ".$complement; ?><br><?php echo $codepostal." ".$ville; ?></span>
         <label class="top-20"><strong>Vos coordonnées</strong></label>
         <span class="val">Vous souhaitez une livraison express</span>
-        <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:martine.durand@mediaserv.net" class="mail-link">martine.durand@mediaserv.net</a></label>
+        <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:<?php echo $email_mediaserv; ?>" class="mail-link"><?php echo $email_mediaserv; ?></a></label>
       </div>
     </div>
     <hr class="sexy">
     <div class="row">
       <div class="column twelve"><label><strong>Vous profitez en plus de :</strong></label></div>
-      <div class="column six top-20"><?php echo image('promo_nouveau_forfait',NULL,array("title"=>"Nouveau Forfaite 49,99€ TTC par mois", "alt"=>"Nouveau Forfaite 49,99€ TTC par mois")); ?></div>
+      <div class="column six top-20"><?php echo image('promo_nouveau_forfait.png',NULL,array("title"=>"Nouveau Forfaite 49,99€ TTC par mois", "alt"=>"Nouveau Forfaite 49,99€ TTC par mois")); ?></div>
       <div class="column six top-20 border-left-gray">
         <h4>PARRAINEZ C'EST GAGNEZ</h4>
         <p><strong>Parrainez vos proches et bénéficiez de 25 € d'avoir pour chaque filleul devenu client </strong></p>

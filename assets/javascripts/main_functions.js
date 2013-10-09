@@ -169,13 +169,9 @@ var preload = function(){
                         },
                        function(data){
                          //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                         if(!data.Error.ErrorMessage)
-                         {
-                             alert("Erreur Webservice. Veuillez re-essayer plus tard");
-                         }else
-                         {
-                            alert(data.Error.ErrorMessage);   
-                         }
+                        
+                         alert(data.Error.ErrorMessage);   
+                         
                          if($("#parrain_num_tel").val()==="")
                          {
                              $("#parrain_num_tel").focus();

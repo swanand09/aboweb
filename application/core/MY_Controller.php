@@ -46,6 +46,9 @@ class MY_Controller extends CI_Controller {
            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
            $this->data["pageid"] ="page-etape-1";
            $this->data["etapes_url"][0] = "#";
+           $this->data["etapes_url"][1] = "#";
+           $this->data["etapes_url"][2] = "#";
+           $this->data["etapes_url"][3] = "#";
            $this->data["colonneDroite"] = $this->colonneDroite;           
            $this->data["contenuGauche"] = $this->contenuGauche;
            $this->template
@@ -60,7 +63,10 @@ class MY_Controller extends CI_Controller {
         public function controller_mes_coord_vue()
         {
             $this->data["pageid"] ="page-etape-2";
-            $this->data["etapes_url"][0] = "mon_offre";           
+            $this->data["etapes_url"][0] = "mon_offre";
+            $this->data["etapes_url"][1] = "#";
+            $this->data["etapes_url"][2] = "#";
+            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -76,6 +82,8 @@ class MY_Controller extends CI_Controller {
             $this->data["pageid"] ="page-etape-3";
             $this->data["etapes_url"][0] = "mon_offre";     
             $this->data["etapes_url"][1] = "mes_coordonnees";
+            $this->data["etapes_url"][2] = "#";
+            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -83,6 +91,23 @@ class MY_Controller extends CI_Controller {
                             ->title('title', 'Recapitulatif')
                             ->set_partial('contenu_gauche', 'recap/recapitulatif')
                              ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->build('page',$this->data);
+        }
+        
+        public function controller_paiement_vue()
+        {
+            $this->data["pageid"] ="page-etape-4";
+            $this->data["etapes_url"][0] = "mon_offre";     
+            $this->data["etapes_url"][1] = "mes_coordonnees";
+            $this->data["etapes_url"][2] = "recapitulatif";
+            $this->data["etapes_url"][3] = "#";
+            $this->data["colonneDroite"] = $this->colonneDroite;           
+            $this->data["contenuGauche"] = $this->contenuGauche;
+            $this->template
+                            ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
+                            ->title('title', 'Paiement')
+                            ->set_partial('contenu_gauche', 'paiement/paiement')
+                            ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
         }
 }

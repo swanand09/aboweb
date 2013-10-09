@@ -853,7 +853,7 @@ class Wsdl_interrogeligib_model extends CI_Model
   {
       $soapEligib = $this->nusoap_client->serializeEnvelope('
                                     <rechercheParrain xmlns="msvaboweb">
-                                        <_id>'.$parrain_id_parcour.'</_id>
+                                        <_offreparrainage_id>'.$parrain_id_parcour.'</_offreparrainage_id>
                                         <_numero_tel>'.$parrain_num_tel.'</_numero_tel> 
                                         <_numero_contrat>'.$parrain_num_contrat.'</_numero_contrat>    
                                     </rechercheParrain>
