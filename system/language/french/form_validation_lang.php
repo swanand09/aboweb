@@ -26,6 +26,6 @@ $lang['less_than_equal_to']		= "Le champ %s doit contenir un nombre inf&eacute;r
 $lang['greater_than']			= "Le champ %s doit contenir un nombre sup&eacute;rieur &agrave; %s.";
 $lang['greater_than_equal_to']	= "Le champ %s doit contenir un nombre sup&eacute;rieur ou &eacute;gal &agrave; %s.";
 
-
+$lang['is_dispo']  = "";
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/french/form_validation_lang.php */

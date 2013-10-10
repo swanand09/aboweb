@@ -16,6 +16,7 @@ class Mon_offre extends MY_Controller {
                                         'name' => 'num_tel',
                                         'id' => 'ligne',
                                         'type' => 'text',
+                                        'class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]',
                                         'value' => $this->determine_location()  //recuperation department 
                                      );
         $data['test_eligb_butt'] = array(
@@ -159,10 +160,12 @@ class Mon_offre extends MY_Controller {
 
         $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
         $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
-        if($this->colonneDroite["offre_mediaserv"]=="")
+        $this->colonneDroite["libelles_promo"] = $this->load->view("general/new_libelles_promo",$data,true);
+        if($this->colonneDroite["forfait"]=="")
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
-            $this->colonneDroite["offre_mediaserv"] = $this->load->view("general/offre_mediaserv",$data,true);
+           // $this->colonneDroite["offre_mediaserv"] = $this->load->view("general/offre_mediaserv",$data,true);
+            $this->colonneDroite["forfait"] = $this->load->view("general/new_forfait",$data,true);
         }      
        
        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
@@ -219,10 +222,12 @@ class Mon_offre extends MY_Controller {
             {
               if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
               {
-                  $data["val"]    = $val;
+                  $data["donne_forfait"]    = $val;
                   $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                   
-                  $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
+                 // $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
+                  $this->colonneDroite["forfait"] = $this->load->view("general/new_forfait",$data,true);
+                 
               }            
             }         
             

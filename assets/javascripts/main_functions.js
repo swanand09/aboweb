@@ -15,20 +15,24 @@ var preload = function(){
           
           function procTestEligib()
           {
-                preload();
-                $.post(
-                    ajax_proc_interogeligib,
-                     {
-                        num_tel : $("#ligne").val()                                                                                  
-                     },
-                    function(data){
-                      //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                      $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                      $("#recap_contenu").empty().prepend(data[1].form_test_ligne);                     
-                      $.unblockUI();                    
-                    }, "json"
-                );
-                return false; 
+               if($("#ligne").val().replace(/\s+/g, "").length==10){               
+                    preload();
+                    $.post(
+                        ajax_proc_interogeligib,
+                         {
+                            num_tel : $("#ligne").val()                                                                                  
+                         },
+                        function(data){
+                          //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+                          $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
+                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne);                     
+                          $.unblockUI();                    
+                        }, "json"
+                    );
+                    return false; 
+               }else{
+                    return false; 
+                }
           }
           
           function retrieveForfait()

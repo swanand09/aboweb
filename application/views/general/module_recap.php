@@ -20,7 +20,15 @@
    <?php
         if(array_key_exists("prevState",$userdata)){
             foreach($userdata["prevState"][1] as $val){
-                echo $val;
+              if(!empty($val)){
+                if(!is_array($val)){
+                 echo $val;
+                }else{                    
+                    foreach($val as $val2){
+                        echo $val2;
+                    }
+                }
+              }
             }
        }
     ?>

@@ -14,10 +14,9 @@ class MY_Controller extends CI_Controller {
             $this->colonneDroite = array(
                                        "form_test_ligne"    => "",
                                        "donnee_degroupage"  => "",
-                                       "offre_mediaserv"   => "",
-                                       "forfait_choisi"    => "",
+                                       "forfait"            => "",                                       
                                        "location_modem"    => "",
-                                       "promo"             => "",
+                                       "libelles_promo"    => "",
                                        "parrainage"        => "",
                                        "location_decodeur" => "",
                                        "Options_tv"        => ""
