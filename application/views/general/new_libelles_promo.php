@@ -8,7 +8,9 @@
   </ul>
   <?php }else{?>
   <h3>Promotion</h3>
-  <p><?php echo $promo_libelle; ?></p>
+    <ul class="bottom-20">
+        <li><strong><?php echo $promo_libelle; ?></strong></li>
+    </ul>
 <?php }?>
 </div>
 <!--END OF PROMOTION-->

@@ -121,8 +121,9 @@ var preload = function(){
                          {
                             beneficierTv : beneficierTv                   
                          },
-                        function(data){                 
-                          $("#recap_contenu").append(data.location_decodeur);                 
+                        function(data){     
+                          $("#recap_contenu").children("#location").remove();  
+                          $("#recap_contenu").append(data.location_equipements);                 
                           $.unblockUI(); 
                         },"json"
                    ); 
@@ -135,7 +136,9 @@ var preload = function(){
                              },
                             function(data){                 
                               //$("#recap_contenu").append(data.location_decodeur);                 
-                              $("#recap_contenu").children("#coldr_4").remove();
+                              //$("#recap_contenu#location").children("#decod_tv").remove();
+                              $("#recap_contenu").children("#location").remove();  
+                              $("#recap_contenu").append(data.location_equipements);   
                               $.unblockUI(); 
                             },"json"
                        );         

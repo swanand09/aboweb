@@ -1,10 +1,10 @@
 <div class="votre-offre p10">
     <span class="left">Votre offre Mediaserv <?php echo (!empty($text))?"<br>".$text:""; ?></span>  
     <?php if(!empty($donne_forfait)){ ?>
-    <span class="right"><strong><?php echo $donne_forfait["Tarif"]."€";?></strong></span>
+    <span class="right"><strong><?php echo (($donne_forfait["Tarif_promo"]>0)?$donne_forfait["Tarif_promo"]:$donne_forfait["Tarif"])."€";?></strong></span>
     <?php } ?>
 </div>
-<?php 
+<?php     
     if(!empty($donne_forfait)){
      $label = explode("@",utf8_encode($donne_forfait["Libelle"]));
 ?>

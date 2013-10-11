@@ -17,8 +17,8 @@ class Mes_coordonnees extends MY_Controller {
         //re initialise session pour le panier partie parrainage
         $prevState = $this->session->userdata("prevState");
         $data["test"] = "test";
-        $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);        
-        $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);        
+        $this->colonneDroite["parrainage"] = $this->load->view("general/new_parrainage",$data,true);        
+        $prevState[1]["parrainage"] = $this->load->view("general/new_parrainage",$data,true);        
         $this->session->set_userdata('prevState',$prevState);
         
         //configuring rules
@@ -113,7 +113,7 @@ class Mes_coordonnees extends MY_Controller {
         if(empty($parrain_num_contrat)||empty($parrain_num_tel)){
             echo json_encode(array("Error"=>array("ErrorMessage"=>"Veuillez saisir le numéro de contrat et le numéro de téléphone de votre parrain!")));
         }else{
-            $resultVerifParain =$this->Wsdl_interrogeligib->verifParain($this->session->userdata("idParcours"),$parrain_num_contrat,$parrain_num_tel);
+            $resultVerifParain =$this->Wsdl_interrogeligib->verifParain($this->session->userdata("offreparrainage_id"),$parrain_num_contrat,$parrain_num_tel);
             //echo json_encode(array("faultstring"=>"Le serveur n'a pas pu lire la demande. ---> Il existe une erreur dans le document XML (3, 52). ---> Le format de la chaîne d'entrée est incorrect."));
            if(!empty($resultVerifParain["Error"])){
                $resultVerifParain["Error"]["ErrorMessage"] = utf8_encode($resultVerifParain["Error"]["ErrorMessage"]);

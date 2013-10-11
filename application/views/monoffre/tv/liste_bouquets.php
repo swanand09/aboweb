@@ -34,7 +34,7 @@ function gotoMesCoord(){
 
         <div class="row">
           <div class="column twelve">
-            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_decodeur)?"checked=checked":""); ?> onclick="javascript: choixTv();" value="<?php echo $tarif_loca_decod; ?>" name="beneficier"> Je souhaite bénéficier de la TV avec 35 chaînes incluses.</label>
+            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();" value="<?php echo $tarif_loca_decod; ?>" name="beneficier"> Je souhaite bénéficier de la TV avec 35 chaînes incluses.</label>
           </div>
         </div>
 

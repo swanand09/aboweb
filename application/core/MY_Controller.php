@@ -12,14 +12,19 @@ class MY_Controller extends CI_Controller {
 	{
             parent::__construct(); 
             $this->colonneDroite = array(
-                                       "form_test_ligne"    => "",
-                                       "donnee_degroupage"  => "",
-                                       "forfait"            => "",                                       
-                                       "location_modem"    => "",
-                                       "libelles_promo"    => "",
-                                       "parrainage"        => "",
-                                       "location_decodeur" => "",
-                                       "Options_tv"        => ""
+                                       "form_test_ligne"        => "",
+                                       "donnee_degroupage"      => "",
+                                       "forfait"                => "",   
+                                       "libelles_promo"         => "", 
+                                       "option"                 => "",
+                                       "parrainage"             => "",
+                                       "location_equipements"   => "",
+                                       "frais_one_shot"         => "",
+                                       "caution"                => "",
+                                       "total_par_mois"         => "",
+                                       "location_modem"         => "",
+                                       "location_decodeur"      => "",
+                                       "Options_tv"             => ""
             );   
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";

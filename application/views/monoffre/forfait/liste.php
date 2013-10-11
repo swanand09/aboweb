@@ -16,8 +16,8 @@
     <div class="three columns television <?php echo ($eligible_tv=='false'?'not-available':'available');?>">Télé</div>
     <div class="three columns tarifs">
         <?php if(!empty($tarifPromo)){?>
-            <div class="promo"><div class="prix"><?php echo $tarif["0"]; ?>€<sup><?php echo $tarif["1"]; ?></sup> <span>TTC/mois</span></div><img src="images/prix_bare.png"></div>
-            <span class="green-text"><?php echo $tarifPromo[0]; ?>€<sup><?php echo $tarifPromo[1]; ?></sup></span>TTC/mois<strong>*</strong>
+            <div class="promo"><div class="prix"><?php echo $tarif["0"]; ?>€<sup><?php echo $tarif["1"]; ?></sup> <span>TTC/mois</span></div><?php echo image('prix_bare.png'); ?></div>
+            <span class="green-text"><?php echo $tarifPromo[0]; ?>€<sup><?php echo (!empty($tarifPromo[1])?$tarifPromo[1]:"00"); ?></sup></span>TTC/mois<strong>*</strong>
         <?php }else{?>
         <span class="green-text"><?php echo $tarif["0"]; ?>€<sup><?php echo $tarif["1"]; ?></sup></span>TTC/mois<strong>*</strong>
         <?php }

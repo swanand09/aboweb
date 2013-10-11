@@ -77,20 +77,22 @@ class Mon_offre extends MY_Controller {
         $data["result"] = "";
         if($num_tel!="")
         {       
-            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','type' => 'text','value' => $num_tel);
+            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
             if(!empty($result))
             {
                 $data["result"] = $result;               
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
-               {                   
+               {                  
+                    $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
                     $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);
+                    $this->session->set_userdata('offreparrainage_id',$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]);
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     $this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-                    $this->session->set_userdata('promo',$result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
+                    $this->session->set_userdata('promo',  utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
-
+                        
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                     if($disable_checkbox ==false){
                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
@@ -152,15 +154,16 @@ class Mon_offre extends MY_Controller {
                 $this->session->set_userdata('tarifLocTvMod',$val["Tarif"]);
             }
         }
-         $data["iadArr"] = $iadArr;
-         $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
-         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
+        $data["iadArr"] = $iadArr;
+        $this->session->set_userdata('iad',$iadArr);
+        $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
+        $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
         $prevState = $this->session->userdata("prevState");
         $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
 
         $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
         $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
-        $this->colonneDroite["libelles_promo"] = $this->load->view("general/new_libelles_promo",$data,true);
+        
         if($this->colonneDroite["forfait"]=="")
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
@@ -213,6 +216,9 @@ class Mon_offre extends MY_Controller {
          $this->controller_verifySessExp()? redirect('mon_offre'):""; 
          $beneficierTv =  $this->input->post("beneficierTv");
          $prevState = $this->session->userdata("prevState");
+         $data["promo_libelle"] = $this->session->userdata("promo");
+         $data["iad"] = $this->session->userdata("iad");
+         $localite    = $this->session->userdata("localite");
          if($beneficierTv==false){
             $id_crm = $this->input->post("id_crm");
             $produit =  $this->session->userdata("produit");           
@@ -226,8 +232,12 @@ class Mon_offre extends MY_Controller {
                   $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                   
                  // $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
-                  $this->colonneDroite["forfait"] = $this->load->view("general/new_forfait",$data,true);
-                 
+                  $this->colonneDroite["forfait"]               = $this->load->view("general/new_forfait",$data,true);
+                  $this->colonneDroite["libelles_promo"]        = $this->load->view("general/new_libelles_promo",$data,true);
+                  //location modem
+                  //if($data["iad"]["Tarif"]>0){
+                      $this->colonneDroite["location_equipements"]  = $this->load->view("general/new_location_equipements",$data,true);
+                  //}
               }            
             }         
             
@@ -255,8 +265,15 @@ class Mon_offre extends MY_Controller {
                 if($val["Categorie"]=="TELEVISION")
                 {
                     foreach($val["Valeurs"]["WS_Produit_Valeur"] as $val2){
-                        if($val2["Categorie"]=="STB"&&$val2["Type"]=="RECURRENT"){
+                        
+                        if($val2["Categorie"]=="STB"&&$val2["Type"]=="RECURRENT"&&$localite!="RE"){
                              $data["tarif_loca_decod"] = $val2["Tarif"];
+                             $data["tarif_activ_servicetv"] = 0;
+                        }
+                        
+                        if($val2["Categorie"]=="STB"&&$val2["Type"]=="ONESHOT"&&$localite=="RE"){
+                             $data["tarif_loca_decod"] = 0;
+                             $data["tarif_activ_servicetv"] = $val2["Tarif"];
                         }
                     }
                    
@@ -268,8 +285,10 @@ class Mon_offre extends MY_Controller {
                 $this->load->model('stb_model','stb'); 
                 $data["base_url_stb"] = BASEPATH_STB;
                 $data["bouquet_list"] = $this->stb->retrievChainesList();
-                $data["location_decodeur"] = $prevState[1]["location_decodeur"];                
-                $this->colonneDroite["location_decodeur"] =  (!empty($prevState[1]["location_decodeur"])?$prevState[1]["location_decodeur"]:"");                
+                $data["location_equipements"] = $prevState[1]["location_equipements"];                
+              //  $this->colonneDroite["location_decodeur"] =  (!empty($prevState[1]["location_decodeur"])?$prevState[1]["location_decodeur"]:"");                
+               $this->colonneDroite["location_equipements"] =  (!empty($prevState[1]["location_equipements"])?$prevState[1]["location_equipements"]:"");
+                
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
             }else{
@@ -280,9 +299,10 @@ class Mon_offre extends MY_Controller {
             echo json_encode(array($this->contenuGauche,$this->colonneDroite));
          }else{
              $data["beneficierTv"] = $beneficierTv;
-             $prevState[1]["location_decodeur"] = (($data["beneficierTv"]!="uncheck")?$this->load->view("general/location_decodeur",$data,true):"");
+            /// $prevState[1]["location_decodeur"] = (($data["beneficierTv"]!="uncheck")?$this->load->view("general/location_decodeur",$data,true):"");
+             $prevState[1]["location_equipements"] = $this->load->view("general/new_location_equipements",$data,true);
              $this->session->set_userdata('prevState',$prevState);            
-             echo json_encode(array("location_decodeur"=>$prevState[1]["location_decodeur"]));
+             echo json_encode(array("location_equipements"=>$prevState[1]["location_equipements"]));
          }
     }       
     
