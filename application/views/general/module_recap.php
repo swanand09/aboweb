@@ -34,4 +34,5 @@
     ?>
    
 </div>
+<div id ="total_mois"></div>
  <div id="stopScroll"></div>

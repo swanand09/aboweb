@@ -95,7 +95,7 @@ var preload = function(){
                                 if(count==0) {
                                   $("#recap_contenu").empty();                                                    
                                 }
-                                $("#recap_contenu").append(data[1][key]);
+                              (key!="total_par_mois")?$("#recap_contenu").append(data[1][key]):$("#total_mois").empty().append(data[1][key]);                            
                                 count++;
                             }
 
@@ -112,33 +112,39 @@ var preload = function(){
           {    
 
                 preload();    
-                var beneficierTv = "";
+//                var beneficierTv = "";
+               var beneficierTv = $("#beneficier").val();                
                 if($("#beneficier").is(":checked"))
                 {
-                    beneficierTv = $("#beneficier").val();       
+//                    beneficierTv = $("#beneficier").val(); 
+                      
                     $.post(
                         refreshRecapCol,
                          {
-                            beneficierTv : beneficierTv                   
+                            beneficierTv : beneficierTv,  
+                            decoder_tv   : "check"
                          },
                         function(data){     
                           $("#recap_contenu").children("#location").remove();  
-                          $("#recap_contenu").append(data.location_equipements);                 
+                          $("#recap_contenu").append(data.location_equipements);                          
+                          $("#total_mois").empty().append(data.total_par_mois);  
                           $.unblockUI(); 
                         },"json"
                    ); 
                 }else{         
-                     beneficierTv = "uncheck";       
+//                     beneficierTv = "uncheck";       
                      $.post(
                             refreshRecapCol,
                              {
-                                beneficierTv : beneficierTv                   
+                                beneficierTv : beneficierTv,
+                                decoder_tv   : "uncheck"
                              },
                             function(data){                 
                               //$("#recap_contenu").append(data.location_decodeur);                 
                               //$("#recap_contenu#location").children("#decod_tv").remove();
                               $("#recap_contenu").children("#location").remove();  
-                              $("#recap_contenu").append(data.location_equipements);   
+                              $("#recap_contenu").append(data.location_equipements);  
+                              $("#total_mois").empty().append(data.total_par_mois);  
                               $.unblockUI(); 
                             },"json"
                        );         

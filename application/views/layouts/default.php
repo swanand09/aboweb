@@ -75,9 +75,9 @@
         <li class='etape3'><?php echo image('etape.png');?><a href='<?php echo $etapes_url[2]; ?>'><span>3</span> Mon<br/>récapitulatif</a></li>
         <li class='etape4'><?php echo image('etape.png');?><a href='<?php echo $etapes_url[3]; ?>'><span>4</span> Paiement</a></li>
       </ul>
-      <div>
+<!--      <div>-->
            <?php echo $template['partials']['contenu_gauche'];?>
-      </div>    
+<!--      </div>    -->
     </section>
     <section class='three columns right-content'>       
          <?php echo $template['partials']['contenu_droit'];?>           

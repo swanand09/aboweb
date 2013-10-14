@@ -215,6 +215,7 @@ class Mon_offre extends MY_Controller {
     {
          $this->controller_verifySessExp()? redirect('mon_offre'):""; 
          $beneficierTv =  $this->input->post("beneficierTv");
+         $decoder_tv   =  $this->input->post('decoder_tv');
          $prevState = $this->session->userdata("prevState");
          $data["promo_libelle"] = $this->session->userdata("promo");
          $data["iad"] = $this->session->userdata("iad");
@@ -229,6 +230,7 @@ class Mon_offre extends MY_Controller {
               if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
               {
                   $data["donne_forfait"]    = $val;
+                  $this->session->set_userdata("donne_forfait",$val);
                   $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                   
                  // $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
@@ -236,8 +238,9 @@ class Mon_offre extends MY_Controller {
                   $this->colonneDroite["libelles_promo"]        = $this->load->view("general/new_libelles_promo",$data,true);
                   //location modem
                   //if($data["iad"]["Tarif"]>0){
-                      $this->colonneDroite["location_equipements"]  = $this->load->view("general/new_location_equipements",$data,true);
+                  $this->colonneDroite["location_equipements"]  = $this->load->view("general/new_location_equipements",$data,true);
                   //}
+                  $this->colonneDroite["total_par_mois"]  = $this->load->view("general/new_total_mois",$data,true);    
               }            
             }         
             
@@ -287,7 +290,7 @@ class Mon_offre extends MY_Controller {
                 $data["bouquet_list"] = $this->stb->retrievChainesList();
                 $data["location_equipements"] = $prevState[1]["location_equipements"];                
               //  $this->colonneDroite["location_decodeur"] =  (!empty($prevState[1]["location_decodeur"])?$prevState[1]["location_decodeur"]:"");                
-               $this->colonneDroite["location_equipements"] =  (!empty($prevState[1]["location_equipements"])?$prevState[1]["location_equipements"]:"");
+             //  $this->colonneDroite["location_equipements"] =  (!empty($prevState[1]["location_equipements"])?$prevState[1]["location_equipements"]:"");
                 
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
@@ -298,11 +301,15 @@ class Mon_offre extends MY_Controller {
             
             echo json_encode(array($this->contenuGauche,$this->colonneDroite));
          }else{
-             $data["beneficierTv"] = $beneficierTv;
+             $data["beneficierTv"]  = $beneficierTv;
+             $data["decoder_tv"]    = $decoder_tv; 
+             $data["donne_forfait"] = $this->session->userdata("donne_forfait"); 
+             $data["iad"]           = $this->session->userdata("iad");
             /// $prevState[1]["location_decodeur"] = (($data["beneficierTv"]!="uncheck")?$this->load->view("general/location_decodeur",$data,true):"");
              $prevState[1]["location_equipements"] = $this->load->view("general/new_location_equipements",$data,true);
+             $prevState[1]["total_par_mois"]       = $this->load->view("general/new_total_mois",$data,true);
              $this->session->set_userdata('prevState',$prevState);            
-             echo json_encode(array("location_equipements"=>$prevState[1]["location_equipements"]));
+             echo json_encode(array("location_equipements"=>$prevState[1]["location_equipements"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
          }
     }       
     
