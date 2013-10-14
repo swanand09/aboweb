@@ -3,7 +3,7 @@
   <soap:Body>
     <interrogeEligibiliteResponse xmlns="msvaboweb">
       <interrogeEligibiliteResult>
-        <Id>2645</Id>
+        <Id>2731</Id>
         <Localite>GP</Localite>
         <Ligne>
           <Numero>0590825785</Numero>
@@ -33,11 +33,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3599</Id_crm>
-                  <Dummy>13</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>BOUQUET_TV</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Télévision mediaserv;Bouquet Mega</string>
+                    <string>Mega</string>
                   </Libelle>
                   <Tarif>10</Tarif>
                 </WS_Produit_Valeur>
@@ -59,11 +59,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3598</Id_crm>
-                  <Dummy>13</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>BOUQUET_TV</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Télévision mediaserv;Bouquet Giga</string>
+                    <string>Giga</string>
                   </Libelle>
                   <Tarif>20</Tarif>
                 </WS_Produit_Valeur>
@@ -85,11 +85,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3600</Id_crm>
-                  <Dummy>13</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>BOUQUET_TV</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Télévision mediaserv;Bouquet Ultra</string>
+                    <string>Ultra</string>
                   </Libelle>
                   <Tarif>25</Tarif>
                 </WS_Produit_Valeur>
@@ -111,11 +111,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3611</Id_crm>
-                  <Dummy>0</Dummy>
+                  <Dummy>6</Dummy>
                   <Categorie>FACTURATION</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Envoi des Factures;Facture papier simple</string>
+                    <string>Facture papier</string>
                   </Libelle>
                   <Tarif>1.50</Tarif>
                 </WS_Produit_Valeur>
@@ -137,11 +137,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3613</Id_crm>
-                  <Dummy>0</Dummy>
+                  <Dummy>6</Dummy>
                   <Categorie>FACTURATION</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Envoi des Factures;Facture électronique</string>
+                    <string>Facture électronique</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
@@ -163,7 +163,8 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3583</Id_crm>
-                  <Categorie>FORFAIT</Categorie>
+                  <Dummy>2</Dummy>
+                  <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
                     <string>Promotion spéciale souscription web 1 mois offert</string>
@@ -173,7 +174,7 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3583</Id_crm>
-                  <Dummy>12</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>FORFAIT</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
@@ -200,7 +201,8 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3584</Id_crm>
-                  <Categorie>FORFAIT</Categorie>
+                  <Dummy>2</Dummy>
+                  <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
                     <string>Promotion spéciale souscription web 1 mois offert</string>
@@ -210,7 +212,7 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3584</Id_crm>
-                  <Dummy>12</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>FORFAIT</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
@@ -237,7 +239,8 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3656</Id_crm>
-                  <Categorie>FORFAIT</Categorie>
+                  <Dummy>2</Dummy>
+                  <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
                     <string>Promotion spéciale souscription web 1 mois offert</string>
@@ -247,11 +250,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3656</Id_crm>
-                  <Dummy>12</Dummy>
+                  <Dummy>1</Dummy>
                   <Categorie>FORFAIT</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Forfait Internet;débit max</string>
+                    <string>Forfait Internet;jusqu'à 20 Méga</string>
                     <string>Forfait Téléphonie;illimitée vers 53 destinations 24h/24</string>
                   </Libelle>
                   <Tarif>44.99</Tarif>
@@ -274,7 +277,8 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3588</Id_crm>
-                  <Categorie>FORFAIT</Categorie>
+                  <Dummy>2</Dummy>
+                  <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
                     <string>Promotion spéciale souscription web 1 mois offert</string>
@@ -284,11 +288,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3588</Id_crm>
-                  <Dummy>12</Dummy>
+                  <Dummy>1</Dummy>
                   <Categorie>FORFAIT</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Forfait Internet;débit max</string>
+                    <string>Forfait Internet;jusqu'à 20 Méga</string>
                     <string>Forfait Téléphonie;illimitée 53 dest. 24h/24 + mobile local/métropole 24h/24</string>
                   </Libelle>
                   <Tarif>54.99</Tarif>
@@ -311,11 +315,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3591</Id_crm>
-                  <Dummy>100</Dummy>
+                  <Dummy>4</Dummy>
                   <Categorie>IAD</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Location modem ADSL;box mediaserv</string>
+                    <string>Modem</string>
                   </Libelle>
                   <Tarif>3.50</Tarif>
                 </WS_Produit_Valeur>
@@ -337,11 +341,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3606</Id_crm>
-                  <Dummy>1</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>OPTION_TV</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Option;Eden</string>
+                    <string>Eden</string>
                   </Libelle>
                   <Tarif>9</Tarif>
                 </WS_Produit_Valeur>
@@ -363,11 +367,11 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3603</Id_crm>
-                  <Dummy>1</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>OPTION_TV</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Option;BeIN Sport</string>
+                    <string>BeIN Sport</string>
                   </Libelle>
                   <Tarif>9</Tarif>
                 </WS_Produit_Valeur>
@@ -403,28 +407,29 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3650</Id_crm>
-                  <Dummy>13</Dummy>
+                  <Dummy>1</Dummy>
                   <Categorie>TELEVISION</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Télévision mediaserv;Bouquet de base</string>
+                    <string>TV</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3654</Id_crm>
+                  <Dummy>5</Dummy>
                   <Categorie>STB</Categorie>
                   <Type>CAUTION</Type>
                   <Libelle>
-                    <string>Caution Décodeur;TV mediaserv</string>
+                    <string>Caution décodeur</string>
                   </Libelle>
                   <Tarif>50</Tarif>
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3654</Id_crm>
-                  <Dummy>100</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>STB</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
@@ -435,17 +440,18 @@
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3615</Id_crm>
+                  <Dummy>3</Dummy>
                   <Categorie>VOD_PVR</Categorie>
                   <Type>ONESHOT</Type>
                   <Libelle>
-                    <string>Option enregistreur numérique</string>
+                    <string>Enregistreur numérique</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3616</Id_crm>
-                  <Dummy>0</Dummy>
+                  <Dummy>3</Dummy>
                   <Categorie>VOD_PVR</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
