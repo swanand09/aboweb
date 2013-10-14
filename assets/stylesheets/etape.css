@@ -19,6 +19,7 @@
   position: absolute;
   line-height: 0.9em;
   color: #90918E;
+  top:0;
 }
 
 /*Etape 1*/
@@ -100,9 +101,6 @@
 .block-grid.etapes li.state-active {
   width: 220px;
   z-index: 5;
-}
-.block-grid.etapes li.state-active img {
-
 }
 .block-grid.etapes li.state-active a {
   color: #98C447;
