@@ -90,7 +90,7 @@ class Mon_offre extends MY_Controller {
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     $this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-                    $this->session->set_userdata('promo',  utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
+                    $this->session->set_userdata('promo',  $result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]);
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
                         
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
