@@ -92,7 +92,9 @@ class Mon_offre extends MY_Controller {
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo', utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
-                        
+                    $this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]));
+                    
+                    
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                     if($disable_checkbox ==false){
                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
@@ -168,7 +170,7 @@ class Mon_offre extends MY_Controller {
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
            // $this->colonneDroite["offre_mediaserv"] = $this->load->view("general/offre_mediaserv",$data,true);
-            $this->colonneDroite["forfait"] = $this->load->view("general/new_forfait",$data,true);
+            $this->colonneDroite["forfait"] = $this->load->view("general/forfait_dummy1",$data,true);
         }      
        
        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
@@ -234,13 +236,14 @@ class Mon_offre extends MY_Controller {
                   $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                   
                  // $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
-                  $this->colonneDroite["forfait"]               = $this->load->view("general/new_forfait",$data,true);
-                  $this->colonneDroite["libelles_promo"]        = $this->load->view("general/new_libelles_promo",$data,true);
+                  $data["dummyPanier"] = $this->session->userdata("dummyPanier");
+                  $this->colonneDroite["forfait"]               = $this->load->view("general/forfait_dummy1",$data,true);
+                  $this->colonneDroite["libelles_promo"]        = $this->load->view("general/libelles_promo_dummy2",$data,true);
                   //location modem
                   //if($data["iad"]["Tarif"]>0){
-                  $this->colonneDroite["location_equipements"]  = $this->load->view("general/new_location_equipements",$data,true);
+                  $this->colonneDroite["location_equipements"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
                   //}
-                  $this->colonneDroite["total_par_mois"]  = $this->load->view("general/new_total_mois",$data,true);    
+                  $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);    
               }            
             }         
             
@@ -306,8 +309,8 @@ class Mon_offre extends MY_Controller {
              $data["donne_forfait"] = $this->session->userdata("donne_forfait"); 
              $data["iad"]           = $this->session->userdata("iad");
             /// $prevState[1]["location_decodeur"] = (($data["beneficierTv"]!="uncheck")?$this->load->view("general/location_decodeur",$data,true):"");
-             $prevState[1]["location_equipements"] = $this->load->view("general/new_location_equipements",$data,true);
-             $prevState[1]["total_par_mois"]       = $this->load->view("general/new_total_mois",$data,true);
+             $prevState[1]["location_equipements"] = $this->load->view("general/location_equipements_dummy4",$data,true);
+             $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
              $this->session->set_userdata('prevState',$prevState);            
              echo json_encode(array("location_equipements"=>$prevState[1]["location_equipements"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
          }
@@ -326,6 +329,67 @@ class Mon_offre extends MY_Controller {
          echo "<pre>";
          print_r($result);
          echo "</pre>";
+    }
+    
+    public function testDummy($num_tel)
+    {
+        $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
+         if(!empty($result))
+         {                        
+            if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+            {               
+                 $produit = $result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"];
+  
+                foreach($produit as $val1){
+                  if(!empty($val1["Valeurs"]["WS_Produit_Valeur"])){
+                   foreach($val1["Valeurs"]["WS_Produit_Valeur"] as $key=>$val2){
+                       if(is_array($val2)){
+                           foreach($val2 as $key=>$val3){
+                            switch($key){
+                                 case "Dummy":
+                                      echo "Dummy: ".$val3."<br>";
+                                 break;
+                                 case "Categorie":
+                                      echo "Categorie: ".$val3.", ";
+                                 break;
+                                 case "Type":
+                                      echo "Type: ".$val3.", ";
+                                 break;
+                                 case "Libelle":
+                                     if(is_array($val3["string"])){
+                                         foreach($val3["string"] as $val4){
+                                              echo "Libelle: ".$val4.", ";
+                                         }
+                                     }else{
+                                      echo "Libelle: ".$val3["string"].", ";
+                                     }
+                                 break;
+                                 case "Tarif":
+                                     echo "Tarif: ".$val3."<br>";
+                                 break;
+                             }
+                           }
+                       }else{
+                           switch($key){
+                               case "Dummy":
+                                    echo "Dummy: ".$val2."<br>";
+                               break;
+                               case "Categorie":
+                                    echo "Categorie: ".$val2.", ";
+                               break;
+                               case "Tarif":
+                                   echo "Tarif: ".$val2."<br>";
+                               break;
+                           }
+
+                       }
+                   }
+                  }
+                }   
+            }
+         }
+        
+        
     }
 }
 

@@ -1,4 +1,6 @@
+<hr>
 <!-- PARRAINAGE -->
+<!--<form method="POST">-->
 <div class="custom-column p10 bottom-20">
     <div class="custom-column six"><strong>Avez-vous un parrain ?</strong></div>
     <div class="custom-column six">
@@ -12,4 +14,3 @@
      </div>
 </div>
 <!-- END OF PARRAINAGE -->
-<hr>
