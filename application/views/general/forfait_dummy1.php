@@ -4,6 +4,19 @@
     <span class="right"><strong><?php echo (($donne_forfait["Tarif_promo"]>0)?$donne_forfait["Tarif_promo"]:$donne_forfait["Tarif"])."€";?></strong></span>
     <?php } ?>
 </div>
+<?php 
+  if(isset($dum1_degroup_tarif)){
+    ?>
+       <!--degroupage-->
+        <div class="votre-offre p10">
+            <span class="left" style="width:50px;"><?php echo utf8_encode($dum1_degroup_libelle); ?></span>
+            <span class="right"><strong><?php echo $dum1_degroup_tarif."€"; ?></strong></span>
+        </div>
+        <!--end degroupage--> 
+    <?php
+  }
+?>
+
 <?php     
     if(!empty($donne_forfait)){
      $label = explode("@",utf8_encode($donne_forfait["Libelle"]));

@@ -126,7 +126,9 @@ var preload = function(){
                          },
                         function(data){     
                           $("#recap_contenu").children("#location").remove();  
-                          $("#recap_contenu").append(data.location_equipements);                          
+                          $("#recap_contenu").append(data.location_equipements_dummy4);
+                          $("#recap_contenu").children("#oneshot").remove();  
+                          $("#recap_contenu").append(data.frais_activation_facture_dummy7);
                           $("#total_mois").empty().append(data.total_par_mois);  
                           $.unblockUI(); 
                         },"json"
@@ -142,9 +144,11 @@ var preload = function(){
                             function(data){                 
                               //$("#recap_contenu").append(data.location_decodeur);                 
                               //$("#recap_contenu#location").children("#decod_tv").remove();
-                              $("#recap_contenu").children("#location").remove();  
-                              $("#recap_contenu").append(data.location_equipements);  
-                              $("#total_mois").empty().append(data.total_par_mois);  
+                              $("#recap_contenu").children("#location").remove();
+                              $("#recap_contenu").append(data.location_equipements_dummy4);
+                              $("#recap_contenu").children("#oneshot").remove(); 
+                              $("#recap_contenu").append(data.frais_activation_facture_dummy7);  
+                               $("#total_mois").empty().append(data.total_par_mois);  
                               $.unblockUI(); 
                             },"json"
                        );         

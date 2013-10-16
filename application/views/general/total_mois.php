@@ -6,6 +6,30 @@
              $total += (double)$beneficierTv;
         }
     }
+    
+    //degroupage dummy 1
+    if(isset($dum1_degroup_tarif)){
+         $total +=(double)$dum1_degroup_tarif;
+    }
+    
+    //facturation dummy 6
+    if(isset($dummyPanier["dummy6"])){
+        foreach($dummyPanier["dummy6"] as $val){
+            $total += (double)$val["Tarif"];
+        }
+    }
+    
+    // caution dummy 5
+    if(isset($caution_dummy5)){
+        $total += (double)$caution_dummy5;
+    }
+    
+    //oneshot dummy7
+    if(isset($oneshot_dummy7)&&$oneshot_dummy7!=""&&!empty($decoder_tv)){
+        if($decoder_tv!="uncheck"){
+            $total += (double)$oneshot_dummy7;
+        }
+    }
 ?>
 <!--TOTAL-->
 <div class="custom-column p10 total">

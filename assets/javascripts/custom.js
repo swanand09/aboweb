@@ -90,7 +90,7 @@ $(function(){
 
 	      	    if( stopScroll < footerPosition )
 	      	    {
-	      	    		$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) + topPadding });
+	      	    		//$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) + topPadding });
 	      	    }
 	       } 
 	   } 
@@ -99,7 +99,7 @@ $(function(){
 
 	   	if( $window.scrollTop() > offset.top ) {
 
-	      $sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) });
+	     // $sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) });
 	  	}
 
 	   }

@@ -12,19 +12,18 @@ class MY_Controller extends CI_Controller {
 	{
             parent::__construct(); 
             $this->colonneDroite = array(
-                                       "form_test_ligne"        => "",
-                                       "donnee_degroupage"      => "",
-                                       "forfait"                => "",   
-                                       "libelles_promo"         => "", 
-                                       "option"                 => "",
-                                       "parrainage"             => "",
-                                       "location_equipements"   => "",
-                                       "frais_one_shot"         => "",
-                                       "caution"                => "",
-                                       "total_par_mois"         => "",
-                                       "location_modem"         => "",
-                                       "location_decodeur"      => "",
-                                       "Options_tv"             => ""
+                                       "form_test_ligne"                    => "",
+                                       "donnee_degroupage"                  => "",
+                                       "forfait_dummy1"                     => "",   
+                                       "libelles_promo_dummy2"              => "", 
+                                       "options_dummy3"                     => "",
+                                       "parrainage"                         => "",
+                                       "location_equipements_dummy4"        => "",                                      
+                                       "caution_decodeur_dummy5"            => "",
+                                       "envoie_facture_dummy6"              => "",
+                                       "frais_activation_facture_dummy7"    => "",
+                                       "total_par_mois"                     => ""
+                                      
             );   
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";

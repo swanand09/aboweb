@@ -166,11 +166,11 @@ class Mon_offre extends MY_Controller {
         $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
         $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
         
-        if($this->colonneDroite["forfait"]=="")
+        if($this->colonneDroite["forfait_dummy1"]=="")
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
            // $this->colonneDroite["offre_mediaserv"] = $this->load->view("general/offre_mediaserv",$data,true);
-            $this->colonneDroite["forfait"] = $this->load->view("general/forfait_dummy1",$data,true);
+            $this->colonneDroite["forfait_dummy1"] = $this->load->view("general/forfait_dummy1",$data,true);
         }      
        
        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
@@ -222,6 +222,42 @@ class Mon_offre extends MY_Controller {
          $data["promo_libelle"] = $this->session->userdata("promo");
          $data["iad"] = $this->session->userdata("iad");
          $localite    = $this->session->userdata("localite");
+         $dummyPanier = $this->session->userdata("dummyPanier");
+         $data["dummyPanier"] = $dummyPanier;
+        
+         foreach($dummyPanier as $key=>$val){
+            if(!empty($val)){
+                switch($key){
+                    case "dummy1":
+                           foreach($val as $val2){
+                              if($val2["Categorie"]=="DEGROUPAGE"){ 
+                                  $data["dum1_degroup_tarif"] = $val2["Tarif"];
+                                  $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];                                 
+                              }  
+                           }
+                    break;
+                    case "dummy4":
+                           foreach($val as $val2){
+                                  $data["tarif_loca_decod"] = "dummy4_".$val2["Tarif"];
+                                  $data["tarif_activ_servicetv"] = 0;
+                           }
+                    break;
+                    case "dummy5":
+                           foreach($val as $val2){
+                                  $data["caution_dummy5"] = $val2["Tarif"];   
+                                  $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
+                           }
+                    break;
+                    case "dummy7":
+                           foreach($val as $val2){
+                                  $data["tarif_loca_decod"] = 0;
+                                  $data["tarif_activ_servicetv"] = "dummy7_".$val2["Tarif"];
+                           }
+                    break;
+                }
+             }
+         }
+          
          if($beneficierTv==false){
             $id_crm = $this->input->post("id_crm");
             $produit =  $this->session->userdata("produit");           
@@ -235,14 +271,15 @@ class Mon_offre extends MY_Controller {
                   $this->session->set_userdata("donne_forfait",$val);
                   $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                   
-                 // $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);
-                  $data["dummyPanier"] = $this->session->userdata("dummyPanier");
-                  $this->colonneDroite["forfait"]               = $this->load->view("general/forfait_dummy1",$data,true);
-                  $this->colonneDroite["libelles_promo"]        = $this->load->view("general/libelles_promo_dummy2",$data,true);
+                 // $this->colonneDroite["offre_mediaserv"] .= $this->load->view("general/offre_mediaserv",$data,true);    
+                      
+                  $this->colonneDroite["forfait_dummy1"]               = $this->load->view("general/forfait_dummy1",$data,true);
+                  $this->colonneDroite["libelles_promo_dummy2"]        = $this->load->view("general/libelles_promo_dummy2",$data,true);
                   //location modem
                   //if($data["iad"]["Tarif"]>0){
-                  $this->colonneDroite["location_equipements"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
+                  $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
                   //}
+                  $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
                   $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);    
               }            
             }         
@@ -268,22 +305,7 @@ class Mon_offre extends MY_Controller {
                    }
                    $count_tv++;
                }
-                if($val["Categorie"]=="TELEVISION")
-                {
-                    foreach($val["Valeurs"]["WS_Produit_Valeur"] as $val2){
-                        
-                        if($val2["Categorie"]=="STB"&&$val2["Type"]=="RECURRENT"&&$localite!="RE"){
-                             $data["tarif_loca_decod"] = $val2["Tarif"];
-                             $data["tarif_activ_servicetv"] = 0;
-                        }
-                        
-                        if($val2["Categorie"]=="STB"&&$val2["Type"]=="ONESHOT"&&$localite=="RE"){
-                             $data["tarif_loca_decod"] = 0;
-                             $data["tarif_activ_servicetv"] = $val2["Tarif"];
-                        }
-                    }
-                   
-                }
+               
             }
             
             //Go to bouquet tv or mes coordonnes 
@@ -291,7 +313,7 @@ class Mon_offre extends MY_Controller {
                 $this->load->model('stb_model','stb'); 
                 $data["base_url_stb"] = BASEPATH_STB;
                 $data["bouquet_list"] = $this->stb->retrievChainesList();
-                $data["location_equipements"] = $prevState[1]["location_equipements"];                
+                $data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];                
               //  $this->colonneDroite["location_decodeur"] =  (!empty($prevState[1]["location_decodeur"])?$prevState[1]["location_decodeur"]:"");                
              //  $this->colonneDroite["location_equipements"] =  (!empty($prevState[1]["location_equipements"])?$prevState[1]["location_equipements"]:"");
                 
@@ -304,15 +326,27 @@ class Mon_offre extends MY_Controller {
             
             echo json_encode(array($this->contenuGauche,$this->colonneDroite));
          }else{
-             $data["beneficierTv"]  = $beneficierTv;
+             $beneficierTv  = explode("_",$beneficierTv);             
              $data["decoder_tv"]    = $decoder_tv; 
              $data["donne_forfait"] = $this->session->userdata("donne_forfait"); 
-             $data["iad"]           = $this->session->userdata("iad");
-            /// $prevState[1]["location_decodeur"] = (($data["beneficierTv"]!="uncheck")?$this->load->view("general/location_decodeur",$data,true):"");
-             $prevState[1]["location_equipements"] = $this->load->view("general/location_equipements_dummy4",$data,true);
+             switch($beneficierTv[0]){
+                 case "dummy4":
+                        $data["beneficierTv"]  = $beneficierTv[1];
+                        $data["oneshot_dummy7"] = "";
+                        $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
+                        $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
+                 break;
+                 case "dummy7":
+                        $data["beneficierTv"]  = "";
+                        $data["oneshot_dummy7"] = $beneficierTv[1];
+                        $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
+                        $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
+                 break;
+             }
+             
              $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
              $this->session->set_userdata('prevState',$prevState);            
-             echo json_encode(array("location_equipements"=>$prevState[1]["location_equipements"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+             echo json_encode(array("location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],"frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
          }
     }       
     
@@ -329,6 +363,16 @@ class Mon_offre extends MY_Controller {
          echo "<pre>";
          print_r($result);
          echo "</pre>";
+    }
+    
+    public function testDummyPanier()
+    {
+        $dummyPanier = $this->session->userdata("dummyPanier");
+        echo "<pre>";
+        print_r($dummyPanier["dummy4"]);
+        print_r($dummyPanier["dummy5"]);
+        print_r($dummyPanier["dummy7"]);
+        echo "</pre>";
     }
     
     public function testDummy($num_tel)
