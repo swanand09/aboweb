@@ -5,7 +5,7 @@
            $.post(
                  '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>',
                      {
-                        num_tel : $("#recap_num").val()                                                                                  
+                        num_tel : $("#ligne").val()                                                                                  
                      },
                     function(data){
                       $("#cont_mon_off").empty().prepend(data.htmlContent); 
