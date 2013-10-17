@@ -241,8 +241,8 @@ class Mon_offre extends MY_Controller {
                     break;
                     case "dummy4":
                            foreach($val as $val2){
-                                  $data["tarif_loca_decod"] = "dummy4_".$val2["Tarif"];
-                                  $data["tarif_activ_servicetv"] = "dummy7_";
+                                $data["tarif_loca_decod"] = ($val2["Categorie"]=="STB")?"dummy4_".$val2["Tarif"]:"dummy4_0";                                
+                                $data["tarif_activ_servicetv"] = "dummy7_";
                            }
                     break;
                     case "dummy5":
@@ -373,6 +373,7 @@ class Mon_offre extends MY_Controller {
     {
         $dummyPanier = $this->session->userdata("dummyPanier");
         echo "<pre>";
+        print_r($dummyPanier["dummy3"]);
         print_r($dummyPanier["dummy4"]);
         print_r($dummyPanier["dummy5"]);
         print_r($dummyPanier["dummy7"]);
