@@ -217,6 +217,9 @@ class Mon_offre extends MY_Controller {
     {
          $this->controller_verifySessExp()? redirect('mon_offre'):""; 
          $beneficierTv =  $this->input->post("beneficierTv");
+         if($beneficierTv==false){
+             $beneficierTv="";
+         }
          $decoder_tv   =  $this->input->post('decoder_tv');
          $prevState = $this->session->userdata("prevState");
          $data["promo_libelle"] = $this->session->userdata("promo");
@@ -239,7 +242,7 @@ class Mon_offre extends MY_Controller {
                     case "dummy4":
                            foreach($val as $val2){
                                   $data["tarif_loca_decod"] = "dummy4_".$val2["Tarif"];
-                                  $data["tarif_activ_servicetv"] = 0;
+                                  $data["tarif_activ_servicetv"] = "dummy7_";
                            }
                     break;
                     case "dummy5":
@@ -250,7 +253,7 @@ class Mon_offre extends MY_Controller {
                     break;
                     case "dummy7":
                            foreach($val as $val2){
-                                  $data["tarif_loca_decod"] = 0;
+                                  $data["tarif_loca_decod"] = "dummy4_";
                                   $data["tarif_activ_servicetv"] = "dummy7_".$val2["Tarif"];
                            }
                     break;
@@ -258,7 +261,7 @@ class Mon_offre extends MY_Controller {
              }
          }
           
-         if($beneficierTv==false){
+         if(empty($beneficierTv)){
             $id_crm = $this->input->post("id_crm");
             $produit =  $this->session->userdata("produit");           
             $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
@@ -279,6 +282,7 @@ class Mon_offre extends MY_Controller {
                   //if($data["iad"]["Tarif"]>0){
                   $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
                   //}
+                  $this->colonneDroite["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
                   $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
                   $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);    
               }            
