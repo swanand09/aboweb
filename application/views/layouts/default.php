@@ -64,6 +64,7 @@
     var refreshRecapCol = '<?php echo base_url('mon_offre/refreshRecapCol');?>';   
     var verifEmail = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain = '<?php echo base_url('mes_coordonnees/verifParain');?>';
+    var updateOptions = '<?php echo base_url('mon_offre/updateOptions');?>';    
 </script>
 <?php echo js('main_functions.js');?>
   <!--MAIN SECTION-->

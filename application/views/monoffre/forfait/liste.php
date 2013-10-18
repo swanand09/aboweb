@@ -3,7 +3,7 @@
  $tarif = explode(".",$val["Tarif"]);
  $tarifPromo = array();
  $dureePromo = $val["Duree_mois_promo"];
- if($val["Tarif_promo"]>0){
+ if($val["Tarif_promo"]>0&&$val["Tarif_promo"]!=$val["Tarif"]){
     $tarifPromo = explode(".",$val["Tarif_promo"]);   
  }
 ?>

@@ -9,7 +9,6 @@
             $("#bouquet_mega").removeAttr("Disabled");
            $("#bouquet_giga").removeAttr("Disabled");
            $("#bouquet_ultra").removeAttr("Disabled");
-           
        }else{          
            $("#decodeur_tv_netgem").removeAttr("Checked");
            $("#bouquet_mega").removeAttr("checked");
@@ -20,14 +19,10 @@
            $("#bouquet_ultra").attr("Disabled","Disabled");           
        }  
       }); 
-        
-      
   });  
-
 
 function gotoMesCoord(){
    $(location).attr('href',"mes_coordonnees");
-   
 }
 </script>
 <?php
@@ -87,7 +82,7 @@ function gotoMesCoord(){
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
               <div class="column eight">
                 bouquet mega<br><?php echo $tarif_mega; ?> € 
-                <label><input type="radio" value="mega" id="bouquet_mega" name="bouquet"><span>Sélectionner</span></label>
+                <label><input type="radio" value="mega_<?php echo $tarif_mega; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
               </div>
             </div>
             <!--option giga-->
@@ -95,7 +90,7 @@ function gotoMesCoord(){
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
               <div class="column eight">
                 bouquet giga<br><?php echo $tarif_giga; ?> € 
-                <label><input type="radio" value="giga" id="bouquet_giga" name="bouquet"><span>Sélectionner</span></label>
+                <label><input type="radio" value="giga_<?php echo $tarif_giga; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
               </div>
             </div>
             <!--option ultra -->
@@ -103,7 +98,7 @@ function gotoMesCoord(){
               <div class="column four"><h4 class="no-margin-bottom no-margin-top">+33</h4> chaines</div>
               <div class="column eight">
                 bouquet ultra<br><?php echo $tarif_ultra; ?> € 
-                <label><input type="radio" value="ultra" id="bouquet_ultra" name="bouquet"><span>Sélectionner</span></label>
+                <label><input type="radio" value="ultra_<?php echo $tarif_ultra; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
               </div>
             </div>
           </div>

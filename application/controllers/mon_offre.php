@@ -96,14 +96,24 @@ class Mon_offre extends MY_Controller {
                     
                     
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
+                    
                     if($disable_checkbox ==false){
                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
-                        $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
+                       // $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
                     }else
                     {
                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked','disabled'=> 'disabled');
-                        $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','checked'=> 'checked'); 
+                        //$input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','checked'=> 'checked'); 
                     }
+                    
+                    //PRODUIT PORTABILITE
+                     $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled'); 
+                     foreach($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"] as $key=>$val){
+                        if($val["Categorie"]=="PORTABILITE"){
+                            $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
+                        }
+                    }
+                    
                     $data["input1"] = $input1;
                     $data["input2"] = $input2;                
                     $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
@@ -163,7 +173,8 @@ class Mon_offre extends MY_Controller {
         $prevState = $this->session->userdata("prevState");
         $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
 
-        $data["degrouper"] = ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
+        $data["degrouper"]   =  ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
+        $data["portabilite"] =  ($consv_num_tel=="true"&&$redu_facture=="true")?"Produit portabilité souscris ":"Un autre numéro est desiré";   
         $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
         
         if($this->colonneDroite["forfait_dummy1"]=="")
@@ -353,8 +364,19 @@ class Mon_offre extends MY_Controller {
              echo json_encode(array("location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],"frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
          }
     }       
-    
-    
+    //dummy3 update bouquet
+    public function updateOptions(){
+        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+        $bouquetTv =  $this->input->post("bouquetTv");
+        $data["bouquetTv"] = $bouquetTv;
+        $data["iad"] = $this->session->userdata("iad");
+        $data["donne_forfait"] = $this->session->userdata("donne_forfait"); 
+        $prevState = $this->session->userdata("prevState");
+        $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
+        $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
+        echo json_encode(array("options_dummy3"=>$prevState[1]["options_dummy3"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+    }
+            
     public function redirectToMonOffre()
     {
         $this->session->destroy();
@@ -369,14 +391,32 @@ class Mon_offre extends MY_Controller {
          echo "</pre>";
     }
     
-    public function testDummyPanier()
+    public function testFlux()
     {
+        //dummy
+        /*
         $dummyPanier = $this->session->userdata("dummyPanier");
         echo "<pre>";
-        print_r($dummyPanier["dummy3"]);
+        print_r($dummyPanier["dummy1"]);
         print_r($dummyPanier["dummy4"]);
         print_r($dummyPanier["dummy5"]);
         print_r($dummyPanier["dummy7"]);
+        echo "</pre>";*/
+        //produit degroupage
+        /*
+        $produit = $this->session->userdata("produit");
+        foreach($produit as $key=>$val){
+            if($val["Categorie"]=="PORTABILITE"){
+            echo "<pre>";
+            print_r($val);
+            echo "</pre>";
+            }
+        }*/
+        
+        //promo
+        $promo = $this->session->userdata("promo");
+        echo "<pre>";
+        print_r($promo);
         echo "</pre>";
     }
     

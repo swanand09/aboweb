@@ -30,6 +30,12 @@
             $total += (double)$oneshot_dummy7;
         }
     }
+     //options dummy3
+    if(isset($bouquetTv)&&!empty($bouquetTv)){
+       $bouquetTv = explode("_",$bouquetTv);       
+       $total += (double)$bouquetTv[1];
+      
+    }
 ?>
 <!--TOTAL-->
 <div class="custom-column p10 total">

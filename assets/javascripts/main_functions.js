@@ -155,7 +155,29 @@ var preload = function(){
                 }
 
             }
-          
+            
+          function choixBouquet(id)
+          {    
+
+                preload();    
+//                var beneficierTv = "";
+               var bouquet = $("#"+id).val();  
+               
+                $.post(
+                    updateOptions,
+                     {
+                        bouquetTv : bouquet
+                     },
+                    function(data){                          
+                      $("#recap_contenu").children("#options").remove();  
+                      $("#recap_contenu").append(data.options_dummy3);
+                      $("#total_mois").empty().append(data.total_par_mois);  
+                      $.unblockUI(); 
+                    },"json"
+               ); 
+
+            }
+            
           function verifMailWebServ(){
             preload();
             $.post(                   

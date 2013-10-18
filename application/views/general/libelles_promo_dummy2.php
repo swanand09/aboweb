@@ -1,3 +1,4 @@
+<?php if(isset($promo_libelle)&&!empty($promo_libelle)){ ?>
 <!--PROMOTION-->
 <div class="custom-column forpro promotion top-20 p10">
     <?php if(is_array($promo_libelle)){?>
@@ -15,3 +16,4 @@
 </div>
 <!--END OF PROMOTION-->
 <hr>
+<?php } ?>
