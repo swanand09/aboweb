@@ -3,11 +3,13 @@
 class MY_Controller extends CI_Controller {
 
 	var $data;
-	var  $userdata;  
+	var $userdata;  
         var $colonneDroite = array();
         var $prenum;
         var $contenuGauche = array();
         var $idParcours;
+        var $totalParMois;
+        var $iad;
         public function __construct()
 	{
             parent::__construct(); 
@@ -28,6 +30,8 @@ class MY_Controller extends CI_Controller {
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";
             $this->idParcours = "";
+            $this->totalParMois = "";
+            $this->iad = "";
 	}  	
         
         //verification expiration de la session

@@ -77,6 +77,7 @@ var preload = function(){
             //preload();
             $("#cont_mon_off").empty().load('mon_offre/prevState/'+page);
             //$.unblockUI(); 
+            $( "html,body" ).scrollTop(0);
           }
           
           function choixForfait(id)
@@ -119,7 +120,7 @@ var preload = function(){
 //                    beneficierTv = $("#beneficier").val(); 
                       
                     $.post(
-                        refreshRecapCol,
+                        updateTvDecodeur,
                          {
                             beneficierTv : beneficierTv,  
                             decoder_tv   : "check"
@@ -131,12 +132,15 @@ var preload = function(){
                           $("#recap_contenu").append(data.frais_activation_facture_dummy7);
                           $("#total_mois").empty().append(data.total_par_mois);  
                           $.unblockUI(); 
+                          $('html, body').animate({
+                            scrollTop: $(".options_tab").offset().top
+                          }, 500);
                         },"json"
                    ); 
                 }else{         
 //                     beneficierTv = "uncheck";       
                      $.post(
-                            refreshRecapCol,
+                            updateTvDecodeur,
                              {
                                 beneficierTv : beneficierTv,
                                 decoder_tv   : "uncheck"
@@ -148,8 +152,11 @@ var preload = function(){
                               $("#recap_contenu").append(data.location_equipements_dummy4);
                               $("#recap_contenu").children("#oneshot").remove(); 
                               $("#recap_contenu").append(data.frais_activation_facture_dummy7);  
-                               $("#total_mois").empty().append(data.total_par_mois);  
+                              $("#total_mois").empty().append(data.total_par_mois);  
                               $.unblockUI(); 
+                              $('html, body').animate({
+                                    scrollTop: $(".options_tab").offset().top
+                              }, 500);
                             },"json"
                        );         
                 }

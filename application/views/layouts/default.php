@@ -60,11 +60,12 @@
   <!--END OF NAV-->
  <script>
     var ajax_proc_interogeligib = '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>';
-    var forfait = '<?php echo base_url('mon_offre/forfait');?>';
-    var refreshRecapCol = '<?php echo base_url('mon_offre/refreshRecapCol');?>';   
-    var verifEmail = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
-    var verifParain = '<?php echo base_url('mes_coordonnees/verifParain');?>';
-    var updateOptions = '<?php echo base_url('mon_offre/updateOptions');?>';    
+    var forfait                 = '<?php echo base_url('mon_offre/forfait');?>';
+    var refreshRecapCol         = '<?php echo base_url('mon_offre/refreshRecapCol');?>'; 
+    var updateTvDecodeur        = '<?php echo base_url('mon_offre/updateTvDecodeur');?>'; 
+    var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
+    var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
+    var updateOptions           = '<?php echo base_url('mon_offre/updateOptions');?>';    
 </script>
 <?php echo js('main_functions.js');?>
   <!--MAIN SECTION-->
