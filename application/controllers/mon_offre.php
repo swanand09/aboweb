@@ -349,12 +349,18 @@ class Mon_offre extends MY_Controller {
     public function updateTvDecodeur()
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+        $prevState = $this->session->userdata("prevState");
         $beneficierTv =  $this->input->post("beneficierTv");
-        $decoder_tv   =  $this->input->post('decoder_tv');
-        //$data["totalParMois"] =  $this->session->userdata('totalParMois');
+        $decoder_tv   =  $this->input->post('decoder_tv');     
         $beneficierTv  = explode("_",$beneficierTv);             
         $data["decoder_tv"]    = $decoder_tv; 
         $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
+        $tarifBouqTv = $this->session->userdata("tarifBouqTv");
+        if(!empty($tarifBouqTv)){
+           $data["totalParMois"] = $this->getTotal(-$tarifBouqTv); 
+           $this->session->set_userdata("tarifBouqTv","");
+        }
+        
         $data["iad"] = $this->session->userdata("iad");
         switch($beneficierTv[0]){
             case "dummy4":
@@ -372,7 +378,8 @@ class Mon_offre extends MY_Controller {
         }
 
         $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
-        $this->session->set_userdata('prevState',$prevState);            
+        $prevState[0]["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);
+        //$this->session->set_userdata('prevState',$prevState);            
         echo json_encode(array("location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],"frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
     }
     
@@ -385,13 +392,12 @@ class Mon_offre extends MY_Controller {
             $bouquetTv = explode("_",$bouquetTv); 
             $tarifBouqTv = $this->session->userdata("tarifBouqTv");
             if(!empty($tarifBouqTv)){
-             $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);
+              $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);
+              $this->session->set_userdata("tarifBouqTv","");
             }
             $data["totalParMois"] = $this->getTotal($bouquetTv[1]);
             $this->session->set_userdata("tarifBouqTv",$bouquetTv[1]);           
          }
-//        $data["iad"] = $this->session->userdata("iad");
-//        $data["donne_forfait"] = $this->session->userdata("donne_forfait"); 
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);

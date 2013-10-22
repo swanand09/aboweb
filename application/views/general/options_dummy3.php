@@ -5,7 +5,7 @@ if(isset($bouquetTv)&&!empty($bouquetTv)){
 ?>
 <!--OPTIONS DUMMY 3-->
 <div class=" custom-column forpro forfait top-20 p10">
-  <h3>Options <span class="right" style="margin-left:50px;"><?php echo $bouquetTv[1]."€/mois"; ?><br><a href="javascript:prevState('forfait');">Modifier</a></span></h3>
+  <h3>Options <span class="right" style="margin-left:50px;"><?php echo number_format($bouquetTv[1],2,'.',' ')."€/mois"; ?><br><a href="javascript:prevState('forfait');">Modifier</a></span></h3>
   <ul class="bottom-20">
     <li><strong><?php echo $bouquetTv[0]; ?></strong></li>
   </ul>

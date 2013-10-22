@@ -50,7 +50,7 @@ input[type='text'] {
 * Main-content
 */
 .main-content .left-content {
-	width: 720px;
+	width: 720px !important;
 }
 .main-content .right-content {
 	width:220px;
@@ -107,3 +107,9 @@ input[type='text'] {
 	width:28.33%;
 }
 
+/*
+* first page
+*/
+.frm-etape-tester #ligne{
+	width:323px;
+}

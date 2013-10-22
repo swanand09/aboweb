@@ -117,7 +117,6 @@ var preload = function(){
                var beneficierTv = $("#beneficier").val();                
                 if($("#beneficier").is(":checked"))
                 {
-//                    beneficierTv = $("#beneficier").val(); 
                       
                     $.post(
                         updateTvDecodeur,
@@ -133,7 +132,7 @@ var preload = function(){
                           $("#total_mois").empty().append(data.total_par_mois);  
                           $.unblockUI(); 
                           $('html, body').animate({
-                            scrollTop: $(".options_tab").offset().top
+                            scrollTop: $(".second").offset().top
                           }, 500);
                         },"json"
                    ); 
@@ -145,17 +144,16 @@ var preload = function(){
                                 beneficierTv : beneficierTv,
                                 decoder_tv   : "uncheck"
                              },
-                            function(data){                 
-                              //$("#recap_contenu").append(data.location_decodeur);                 
-                              //$("#recap_contenu#location").children("#decod_tv").remove();
+                            function(data){
                               $("#recap_contenu").children("#location").remove();
+                               $("#recap_contenu").children("#options").remove();  // removes any bouquet if any
                               $("#recap_contenu").append(data.location_equipements_dummy4);
                               $("#recap_contenu").children("#oneshot").remove(); 
                               $("#recap_contenu").append(data.frais_activation_facture_dummy7);  
                               $("#total_mois").empty().append(data.total_par_mois);  
                               $.unblockUI(); 
                               $('html, body').animate({
-                                    scrollTop: $(".options_tab").offset().top
+                                    scrollTop: $(".second").offset().top
                               }, 500);
                             },"json"
                        );         

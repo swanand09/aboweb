@@ -113,6 +113,7 @@
         echo js('jquery.maskedinput.min.js');
         echo js('jquery.validationEngine.js');
         echo js('languages/jquery.validationEngine-fr.js');
+        echo js('tv_option.js');
         echo js('custom.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 

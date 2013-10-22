@@ -150,6 +150,8 @@ var addUltraOptions = function() {
 
   $("input[name='bein']").prop('checked', true);
   $("input[name='bein']").attr('disabled', true);
+  //change 9€ to INCLUS
+  $('.prix_option').html('INCLUS');
 }
 
 // Uncheck Ultra options ( Bein & Eden )
@@ -160,6 +162,8 @@ var removeUltraoptions = function() {
 
   $("input[name='bein']").prop('checked', false);
   $("input[name='bein']").attr('disabled', false);
+  //change INCLUS to 9€
+  $('.prix_option').html('9€');
 }
 
 //retain Opacity and active label of Bouquet depending on value of checked Radio button while MOUSEOUT

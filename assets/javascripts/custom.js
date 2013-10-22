@@ -1,6 +1,4 @@
-
-$(function(){
-
+$(function () {
 
 	//Set initial active state
 	currentEtape();
@@ -51,6 +49,7 @@ $(function(){
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
 	$('#ligne').mask("?99 99 99 99 99",{placeholder:" "});
+	$('.numero').mask("99999");
 
 	/*-------------------------------------/
 	* Validation Engine
@@ -90,7 +89,7 @@ $(function(){
 
 	      	    if( stopScroll < footerPosition )
 	      	    {
-	      	    		//$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) + topPadding });
+	      	    	//$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) + topPadding });
 	      	    }
 	       } 
 	   } 
@@ -99,17 +98,83 @@ $(function(){
 
 	   	if( $window.scrollTop() > offset.top ) {
 
-	     // $sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) });
+	      //$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) });
 	  	}
 
 	   }
 	   lastScrollTop = st;
 
-	   console.log("stopScroll:"+stopScroll);
+	   /*console.log("stopScroll:"+stopScroll);
 	   console.log("offset top:"+offset.top);
 	   console.log("Window :"+$window.scrollTop());
-	   console.log("footerPosition:"+footerPosition);
+	   console.log("footerPosition:"+footerPosition);*/
 	});
+
+	/*--------------------------------
+	*  Page paiement toggle
+	---------------------------------*/
+	//intial state
+	$('.prelevement .automatique').addClass('box-shadow');
+	$('.section-automatique').show();
+	$('.section-carte-bancaire').hide();
+
+	$('.prelevement .automatique').click( function(){
+		$('.prelevement div').removeClass('box-shadow');
+		$(this).addClass('box-shadow');
+		$('.section-automatique').show();
+		$('.section-carte-bancaire').hide();
+	});
+	$('.prelevement .cartebancaire').click( function(){
+		$('.prelevement div').removeClass('box-shadow');
+		$(this).addClass('box-shadow');
+		$('.section-automatique').hide();
+		$('.section-carte-bancaire').show();
+	});
+
+	/*------------------------------------
+	* Page TV checkbox event
+	------------------------------------*/
+	$('.frm-tv #beneficier').click(function(){
+		if($(this).is(":checked"))
+		{
+			$("input#decodeur-tv-netgem").prop('checked', true);
+			$('.accordion .first').addClass('active');	
+			$('.accordion .first .content').css({ display: 'block'});
+		}
+		else
+		{
+			$("input#decodeur-tv-netgem").prop('checked', false);
+			$('.accordion .first').removeClass('active');	
+			$('.accordion .second').removeClass('active');
+			$('.accordion .first .content').css({ display: 'none'});
+			$('.accordion .second .content').css({ display: 'none'});
+		}
+		
+	});
+
+	/*------------------------------------
+	* Page Mes coordonées checkbox event
+	------------------------------------*/
+	$('#check-adresse-facturation').click(function(){
+		if($(this).is(":checked")) {
+			$('.adresse-facturation').addClass('hide');
+		}
+		else
+		{
+			$('.adresse-facturation').removeClass('hide');
+		}
+	});
+
+	$('#check-adresse-livraison').click(function(){
+		if($(this).is(":checked")) {
+			$('.adresse-livraison').addClass('hide');
+		}
+		else
+		{
+			$('.adresse-livraison').removeClass('hide');
+		}
+	});
+
 
 });
 
@@ -124,7 +189,6 @@ var currentEtape = function(){
 	if($('ul.etapes').hasClass('page-etape-4')){ etape4(); }
 }
 
-
 //Etape1 active
 var etape1 = function() {
 	$('li.etape1').removeClass().addClass('etape1 state-active');
@@ -132,6 +196,7 @@ var etape1 = function() {
 	$('li.etape3').removeClass().addClass('etape3 state3');
 	$('li.etape4').removeClass().addClass('etape4 state4');
 }
+
 //Etape2 active	
 var etape2 = function() {
 	$('li.etape1').removeClass().addClass('etape1 state2');
@@ -139,6 +204,7 @@ var etape2 = function() {
 	$('li.etape3').removeClass().addClass('etape3 state2');
 	$('li.etape4').removeClass().addClass('etape4 state3');
 }
+
 //Etape3 active
 var etape3 = function() {
 	$('li.etape1').removeClass().addClass('etape1 state3');
@@ -146,6 +212,7 @@ var etape3 = function() {
 	$('li.etape3').removeClass().addClass('etape3 state-active');
 	$('li.etape4').removeClass().addClass('etape4 state2');
 }
+
 //Etape4 active
 var etape4 = function() {
 	$('li.etape1').removeClass().addClass('etape1 state4');
@@ -161,26 +228,25 @@ window.onload = function () {
 
 	if($('.debit_emission').length > 0 )
 	{
-		var g1, g2;
+		//var g1, g2;
 		var g1 = new JustGage({
-	          id: "g1", 
-	          value: 0.4, 
-	          min: 0,
-	          max: 1,
-	          title: "Débit d’émission",
-	          label: "Mbps",
-	          levelColors: ['95bc46','95bc46'],
-	        });
+	        id: "g1", 
+	        value: 0.4, 
+	        min: 0,
+	        max: 1,
+	        title: "Débit d’émission",
+	        label: "Mbps",
+	        levelColors: ['95bc46','95bc46']
+	    });
 
 		var g2 = new JustGage({
-		      id: "g2", 
-		      value: 17.5, 
-		      min: 0,
-		      max: 20,
-		      title: "Débit de réception",
-		      label: "Mbps",
-		      levelColors: ['95bc46','95bc46'],
-		    });	
-
+		    id: "g2", 
+		    value: 17.5, 
+		    min: 0,
+		    max: 20,
+		    title: "Débit de réception",
+		    label: "Mbps",
+		    levelColors: ['95bc46','95bc46']
+		});	
 	}
 }

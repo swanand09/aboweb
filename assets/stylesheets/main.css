@@ -76,6 +76,9 @@ hr.sexy {
 	background-color: transparent;
     border: medium none;
 }
+.pleft35 {
+	padding-left: 35px;
+}
 .btn-valider {
 	background: url("../images/valider_btn.png") no-repeat scroll 0 0 transparent;
 	color: #FFFFFF;
@@ -572,6 +575,38 @@ ul.bqt  li{
 	font-size: 12px;
 	font-weight: normal;
 }
+
+/*
+* Main content - Mes coordonnées
+*/
+#mes-coordonnees label {
+	font-size: 13px;
+    font-weight: bold;
+    padding-top: 15px;
+	color:#000;
+}
+#mes-coordonnees .row {
+	padding-left: 28px;
+}
+#mes-coordonnees h3 {
+	font-size: 13px;
+    padding-left: 20px;
+    padding-top: 7px;
+}
+
+.lfsection_space {
+	margin-top: 30px;
+}
+#mes-coordonnees input.prenom { width: 260px; }
+#mes-coordonnees input.adresse_suite { width: 227px; }
+#mes-coordonnees input.ensemble { width: 257px; }
+#mes-coordonnees input.batiment { width: 254px; }
+#mes-coordonnees input.escalier { width: 261px; }
+#mes-coordonnees input.logo { width: 108px; }
+#mes-coordonnees input.etage { width: 75px; }
+#mes-coordonnees input.ville { width: 180px; }
+#mes-coordonnees input.comp_numero { width: 153px; }
+#mes-coordonnees input.voie { width: 227px; }
 /*
 * Main content - Mon recapitulatif
 */
@@ -590,7 +625,12 @@ ul.bqt  li{
 	margin-left: 16px;
     width: 95%;
 }
-
+.box-shadow {
+    -webkit-box-shadow: 0px 0px 6px #AEAEAE;
+    -moz-box-shadow:    0px 0px 6px #AEAEAE;
+    box-shadow:         0px 0px 6px #AEAEAE;
+}
+.prelevement .automatique:hover,.prelevement .cartebancaire:hover { cursor: pointer; }
 /*
 * Main content - Merci
 */
@@ -613,7 +653,17 @@ ul.bqt  li{
 .page-merci .shadow.four.no-margin {
 	margin-right: 0;
 }
-
+.prelevement .automatique,.prelevement .cartebancaire {
+    float: left;
+    height: 80px;
+    margin-left: 50px;
+    padding: 10px;
+    width: 500px;
+    margin-top:20px;
+}
+.prelevement .cartebancaire .nine{
+	padding-top: 20px;
+}
 /*
 * Left main content
 */
@@ -671,11 +721,13 @@ ul.bqt  li{
 .forpro ul li.small-icon-appel{
 	background: url("../images/small_icon_appel.png") no-repeat scroll 0 3px transparent;
 }
-.frm-parrain {
-	background: url("../images/small_icon_parrainage.png") no-repeat scroll 0 3px transparent;	
-	padding-left: 22px;
-	float: left;
+.forpro ul li.small-icon-cross{
+	background: url("../images/small_icon_cross.png") no-repeat scroll 0 3px transparent;
 }
+.forpro ul li.small-icon-heart{
+	background: url("../images/small_icon_heart.png") no-repeat scroll 0 3px transparent;
+}
+
 .modem-deco h3{
 	color: #FFFFFF;
     font-size: 1.1em;
@@ -699,4 +751,42 @@ ul.bqt  li{
     font-size: 1.1em;
     font-weight: bold;
     padding-left: 35px;
+}
+
+/*
+* Auto complete
+*/
+.ui-autocomplete li a { font-size: 12px; }
+.ui-autocomplete {
+    max-height: 180px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+  * html .ui-autocomplete {
+    height: 100px;
+  }
+
+/*
+* Parrainage
+*/
+.parrainage strong, .parrainage label {
+	color:#000;
+	font-weight:bold;
+	font-size:13px;
+}
+.parrainage {
+	background: url("../images/small_icon_parrainage.png") no-repeat scroll 0 3px transparent;	
+	padding-left: 22px;
+	float: left;
+	margin-left: 10px;
+}
+/*
+* Sidebar options
+*/
+.forpro.options li, .forpro.promotion ul {
+	margin-bottom: 0;
 }

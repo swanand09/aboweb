@@ -10,7 +10,7 @@
        <!--degroupage-->
         <div class="votre-offre p10">
             <span class="left" style="width:50px;"><?php echo utf8_encode($dum1_degroup_libelle); ?></span>
-            <span class="right"><strong><?php echo $dum1_degroup_tarif."€"; ?></strong></span>
+            <span class="right"><strong><?php echo number_format($dum1_degroup_tarif,2,'.',' ')."€"; ?></strong></span>
         </div>
         <!--end degroupage--> 
     <?php
