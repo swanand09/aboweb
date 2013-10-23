@@ -9,6 +9,9 @@
             $("#bouquet_mega").removeAttr("Disabled");
            $("#bouquet_giga").removeAttr("Disabled");
            $("#bouquet_ultra").removeAttr("Disabled");
+           
+           $('.accordion .first').addClass('active');	
+	   $('.accordion .first .content').css({ display: 'block'});
        }else{          
            $("#decodeur-tv-netgem").removeAttr("Checked");
            $("#bouquet_mega").removeAttr("checked");
@@ -16,7 +19,12 @@
            $("#bouquet_ultra").removeAttr("checked");
            $("#bouquet_mega").attr("Disabled","Disabled");
            $("#bouquet_giga").attr("Disabled","Disabled");
-           $("#bouquet_ultra").attr("Disabled","Disabled");           
+           $("#bouquet_ultra").attr("Disabled","Disabled");     
+           
+           $('.accordion .first').removeClass('active');	
+            $('.accordion .second').removeClass('active');
+            $('.accordion .first .content').css({ display: 'none'});
+            $('.accordion .second .content').css({ display: 'none'});
        }  
       }); 
   });  
@@ -48,7 +56,7 @@
             <!-- first accordion -->
             <li class="first">
               <div class="title"><h5>MA TV </h5></div>
-              <div class="content" style="display: block;">
+              <div class="content">
         <div class="row chaines-tv">
           <div class="column eight">
             <!-- BASIQUE -->
@@ -88,24 +96,24 @@
          <div class="column four bouquet mega">
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
             <div class="column eight">
-              <a href="#" id="link-mega">bouquet mega<br><?php echo $tarif_mega; ?> €</a> 
-              <label><input type="radio" value="mega_<?php echo $tarif_mega; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
+              <a href="#" id="link-mega">bouquet mega<br><?php echo $bouqTvArr[0]["Mega"]; ?> €</a> 
+              <label><input type="radio" value="mega_<?php echo $bouqTvArr[0]["Mega"]; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option giga-->
           <div class="column four bouquet giga">
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+33</h4> chaines</div>
             <div class="column eight">
-              <a href="#" id="link-giga">bouquet giga<br><?php echo $tarif_giga; ?> € </a>
-              <label><input type="radio" value="giga_<?php echo $tarif_giga; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
+              <a href="#" id="link-giga">bouquet giga<br><?php echo $bouqTvArr[1]["Giga"]; ?> € </a>
+              <label><input type="radio" value="giga_<?php echo $bouqTvArr[1]["Giga"]; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option ultra -->
           <div class="column four bouquet ultra">
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+38</h4> chaines</div>
             <div class="column eight">
-              <a href="#" id="link-ultra">bouquet ultra<br><?php echo $tarif_ultra; ?> € </a>
-              <label><input type="radio" value="ultra_<?php echo $tarif_ultra; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
+              <a href="#" id="link-ultra">bouquet ultra<br><?php echo $bouqTvArr[2]["Ultra"]; ?> € </a>
+              <label><input type="radio" value="ultra_<?php echo $bouqTvArr[2]["Ultra"]; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
             </div>
           </div>
            
@@ -157,7 +165,7 @@
           <?php foreach($bouquet_list["ULTRA"] as $key=> $val){ ?>
             <!--Generaliste new row-->
           <div class="column four">
-              <h4><?php echo $key; ?></h4>
+              <h4><?php echo $key." "; ?><?php echo (strpos($key,"Eden")!==false)?$optionTvArr[0]["Eden"]:$optionTvArr[1]["BeIN Sport"];?>€</h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){
                             if(empty($bouquet_list["GIGA"][$key][$key2])||!empty($bouquet_list["GIGA"][$key][$key2])&&$bouquet_list["GIGA"][$key][$key2]["nom_chaines"]!=$val2["nom_chaines"]){
@@ -168,7 +176,7 @@
                         }
                     ?>
               </ul>
-               <label class="top-10"><input type="checkbox" value="bein" name="<?php echo $key; ?>"><strong>Sélectionner</strong></label>
+               <label class="top-10"><input type="checkbox" value="<?php echo (strpos($key,"Eden")!==false)?$optionTvArr[0]["Eden"]:$optionTvArr[1]["BeIN Sport"]; ?>" name="<?php echo $key; ?>" onclick="javascript: alert('<?php echo $key; ?>');"><strong>Sélectionner</strong></label>
             </div> 
             <?php }?>
             </div>

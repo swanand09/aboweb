@@ -10,13 +10,21 @@ class Mon_offre extends MY_Controller {
     
     public function index($num_tel="")
     {
+         //verificaition session
+        $prevState = $this->session->userdata("prevState");
+        if(isset($prevState[1]["parrainage"])&&!empty($prevState[1]["parrainage"])){
+            $prevState[1]["parrainage"] = "";
+            $this->session->set_userdata('prevState',$prevState);
+        }
         
-        $this->data["userdata"] = $this->session->all_userdata();       
+        $this->data["userdata"] = $this->session->all_userdata();  
+        
+       
         $data['num_tel'] = array(
                                         'name' => 'num_tel',
                                         'id' => 'ligne',
                                         'type' => 'text',
-                                        'class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]',
+                                        'class' => 'validate[required,custom[onlyNumberSp],minSize[10],maxSize[10]]',
                                         'value' => $this->determine_location()  //recuperation department 
                                      );
         $data['test_eligb_butt'] = array(
@@ -34,6 +42,9 @@ class Mon_offre extends MY_Controller {
            
              return $this->ajax_proc_interogeligib($num_tel);
         }
+        
+        
+       
        
         return $this->controller_test_eligib_vue($num_tel);                
     }
@@ -241,7 +252,7 @@ class Mon_offre extends MY_Controller {
             }
          }
          $data["dummyPanier"] = $dummyPanier;
-        
+         $bouqTvArr = array(); $optionTvArr = array();
          foreach($dummyPanier as $key=>$val){
             if(!empty($val)){
                 switch($key){
@@ -252,6 +263,18 @@ class Mon_offre extends MY_Controller {
                                   $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];   
                                   $data["totalParMois"] = $this->getTotal($val2["Tarif"]);
                               }  
+                           }
+                    break;
+                    case "dummy3":
+                           foreach($val as $val2){
+                               switch($val2["Categorie"]){
+                                   case "BOUQUET_TV":
+                                       array_push($bouqTvArr, array($val2["Libelle"]["string"]=>$val2["Tarif"]));
+                                   break;
+                                   case "OPTION_TV":
+                                       array_push($optionTvArr, array($val2["Libelle"]["string"]=>$val2["Tarif"]));
+                                   break;
+                               }
                            }
                     break;
                     case "dummy4":
@@ -276,6 +299,8 @@ class Mon_offre extends MY_Controller {
                 }
              }
          }
+         
+         $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr;
           
 
             $id_crm = $this->input->post("id_crm");
@@ -302,7 +327,7 @@ class Mon_offre extends MY_Controller {
                   $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);    
               }            
             }         
-            
+            /*
             $data["tarif_ultra"] = 0;
             $data["tarif_giga"] = 0;
             $data["tarif_mega"] = 0;
@@ -326,9 +351,10 @@ class Mon_offre extends MY_Controller {
                }
                
             }
-            
+            */
             //Go to bouquet tv or mes coordonnes 
-            if($count_tv>0){
+            //if($count_tv>0){
+            if(!empty($bouqTvArr)){
                 $this->load->model('stb_model','stb'); 
                 $data["base_url_stb"] = BASEPATH_STB;
                 $data["bouquet_list"] = $this->stb->retrievChainesList();
@@ -407,9 +433,13 @@ class Mon_offre extends MY_Controller {
     }
     
     //got to mes coordonnes
-    public function gotoMesCoord()
+    public function mesCoordonnes()
     {
-        
+         $data["test"] = "ok";   
+         $prevState = $this->session->userdata("prevState");
+         $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);
+         $this->session->set_userdata('prevState',$prevState);
+         echo json_encode(array("test"=>$data["test"]));
     }
             
     public function redirectToMonOffre()
@@ -437,14 +467,11 @@ class Mon_offre extends MY_Controller {
     public function testFlux()
     {
         //dummy
-        /*
+        
         $dummyPanier = $this->session->userdata("dummyPanier");
         echo "<pre>";
-        print_r($dummyPanier["dummy1"]);
-        print_r($dummyPanier["dummy4"]);
-        print_r($dummyPanier["dummy5"]);
-        print_r($dummyPanier["dummy7"]);
-        echo "</pre>";*/
+        print_r($dummyPanier["dummy3"]);        
+        echo "</pre>";
         //produit degroupage
         /*
         $produit = $this->session->userdata("produit");

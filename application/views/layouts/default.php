@@ -64,7 +64,7 @@
     var forfait                 = '<?php echo base_url('mon_offre/forfait');?>';
     var refreshRecapCol         = '<?php echo base_url('mon_offre/refreshRecapCol');?>'; 
     var updateTvDecodeur        = '<?php echo base_url('mon_offre/updateTvDecodeur');?>'; 
-    var gotoMesCoord            = '<?php echo base_url('mon_offre/gotoMesCoord');?>';     
+    var mesCoordonnes            = '<?php echo base_url('mon_offre/mesCoordonnes');?>';     
     var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
     var updateOptions           = '<?php echo base_url('mon_offre/updateOptions');?>';    
@@ -117,6 +117,7 @@
         echo js('languages/jquery.validationEngine-fr.js');
         echo js('tv_option.js');
         echo js('custom.js');
+        echo js('custom_autocomplete');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 
   <h3 id="prlodtxt">Veuillez patienter...</h3> 

@@ -16,96 +16,241 @@ echo validation_errors();
 <div class="left-etape-content">
     <form action="recapitulatif" method="POST" id="mes-coordonnees">
       <!--Adresse coordonnées-->
-      <h3>Coordonnées (adresse abonnement) :</h3>
-      <div class="row bottom-10">
-        <div class="columns five"><label>Civilité :</label></div><div class="seven columns">
-          <label class="left"><input type="radio" value="M." name="civilite" class="validate[required]">Monsieur</label>
-          <label class="left"><input type="radio" value="Mme" name="civilite" class="validate[required]">Madame</label>
+        <div class="adresse-abonnement">
+          <h3>COORDONNÉES (ADRESSES ABONNEMENT):</h3>
+         <!-- Civilité-->
+          <div class="row">
+            <div class="columns bottom-10"><label>Civilité:</label></div>
+            <div class="columns bottom-10 end">
+              <label class="left"><input type="radio" value="M." name="civilite" class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite" class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite" class="validate[required]">Melle</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_aa" value="<?php echo set_value("nom",$nom);?>" class="validate[required,maxSize[30]] nom"></div>
+          </div>
+          <!--Prénom -->
+          <div class="row">
+            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_aa" value="<?php echo set_value("prenom",$prenom);?>" class="validate[required,maxSize[30]] prenom"></div>
+          </div>
+          <!--Numéro & Complément numéro-->
+          <div class="row">
+            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_aa" class="validate[required,maxSize[5]] numero"></div>
+            <div class="columns"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_aa" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
+          </div>
+          <!--Type Voie-->
+          <div class="row">
+            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_aa" class="type_voie ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Voie :</label></div><div class="three columns end"><input type="text" name="voie_aa" class="validate[required,maxSize[200]] voie"></div>
+          </div>
+          <!--Addresse suite-->
+          <div class="row">
+            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_aa" class="validate[maxSize[64]] adresse_suite"></div>
+          </div>
+          <!--Ensemble-->
+          <div class="row">
+            <div class="columns"><label>Ensemble</label></div><div class="columns five end"><input type="text" name="ensemble_aa" class="validate[maxSize[20]] ensemble"></div>
+          </div>
+          <!--Batiment-->
+          <div class="row">
+            <div class="columns"><label>Batiment :</label></div><div class="columns five end"><input type="text" name="batiment_aa" class="validate[maxSize[4]] batiment"></div>
+          </div>
+          <!--Escalier & Etage-->
+          <div class="row">
+            <div class="columns"><label>Escalier :</label></div><div class="columns five"><input type="text" size="2" name="escalier_aa" class="validate[maxSize[2]] escalier"></div>
+            <div class="columns"><label>Etage :</label></div><div class="columns two end"><input type="text" size="2" name="etage_aa" class="validate[maxSize[2]] etage"></div>
+          </div>
+          <!--Porte & logo-->
+          <div class="row">
+            <div class="columns"><label>Porte :</label></div><div class="columns two"><input type="text" name="porte_aa" class="validate[maxSize[5]] porte"></div>
+            <div class="columns"><label>Logo :</label></div><div class="columns three end"><input type="text" name="logo_aa" class="validate[maxSize[5]] logo"></div>
+          </div>
+          <!--Code postal & Ville -->
+          <div class="row">
+            <div class="columns"><label>Code postal :</label></div>
+            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal" name="code_postal_aa" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Ville :</label></div>
+            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville" name="ville_aa" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
+          </div>
+          <h3 class="lfsection_space">TÉLÉPHONES</h3>
+          <div class="row">
+            <div class="columns"><label>Téléphone portable :</label></div><div class="columns end"><input type="text" name="telephone_portable" class="validate[required] telephone telephone_portable"></div>
+          </div>
+          <div class="row">
+            <div class="columns"><label>Téléphone de bureau :</label></div><div class="columns end"><input type="text" name="telephone_bureau" class="telephone_bureau telephone"></div>
+          </div>
+          <div class="row">
+            <div class="columns"><label>Téléphone du domicile :</label></div><div class="columns end"><input type="text" name="telephone_domicile" class="telephone_domicile telephone"></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Nom :</label></div><div class="seven columns"><input type="text" id="nom" name="nom" class="validate[required]" value="<?php echo set_value("nom",$nom);?>"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Prénom :</label></div><div class="seven columns"><input type="text" id="prenom" name="prenom" value="<?php echo set_value("prenom",$prenom);?>" class="validate[required,custom[onlyLetterNumber]]"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Numéro de mobile :</label></div><div class="seven columns"><input type="text" id="mobile" name="mobile" value="<?php echo set_value("mobile",$mobile);?>" class="validate[required,custom[onlyNumberSp]]"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Adresse email :</label></div><div class="seven columns"><input type="text" id="email" name="email" value="<?php echo set_value("email",$email);?>"  class="validate[required,custom[email]]"></div>
-      </div>
+      <!--adresse de facturation-->
+        <h3 class="lfsection_space">Adresse de facturation</h3>
+        <div class="row">
+          <div class="column twelve bottom-10">
+            <label>
+              <input type="checkbox" value="identique" name="check-adresse-facturation" checked="checked" id="check-adresse-facturation">
+              Identique à l'adresse d'installation
+            </label>
+          </div>
+        </div>
 
-      <!--Adresse d'installation-->
-      <h3>Adresse d'installation :</h3>
-      <div class="row">
-        <div class="columns five"><label>Numéro :</label></div><div class="seven columns"><input type="text" id="numero" name="numero" value="<?php echo set_value("numero",$numero);?>" class="validate[required,custom[onlyNumberSp]]"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Nom de la voie :</label></div><div class="seven columns"><input type="text" id="nomdelavoie" name="NomDeLaVoie" value="<?php echo set_value("NomDeLaVoie",$nomDeLaVoie);?>" class="validate[required]"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Complement d'adresse, étage, digicode... :</label></div><div class="seven columns"><input type="text" id="complement" name="complement" value="<?php echo set_value("complement",$complement);?>"  class="validate[required]"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Code postal :</label></div><div class="seven columns"><input type="text" id="codepostal" name="codepostal" value="<?php echo set_value("codepostal",$codepostal);?>" class="validate[required]"></div>
-      </div>
-      <div class="row">
-        <div class="columns five"><label>Ville :</label></div><div class="seven columns"><input type="text" id="ville" name="ville" value="<?php echo set_value("ville",$ville);?>" class="validate[required]"></div>
-      </div>
+        <div class="adresse-facturation hide">
+         <!-- Civilité-->
+          <div class="row">
+            <div class="columns bottom-10"><label>Civilité:</label></div>
+            <div class="columns bottom-10 end">
+              <label class="left"><input type="radio" value="M." name="civilite_af" class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_af" class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_af" class="validate[required]">Melle</label>
+            </div>
+          </div>
+          <!-- Nom -->
+          <div class="row">
+            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_af" class="validate[required,maxSize[30]] nom"></div>
+          </div>
+          <!--Prénom -->
+          <div class="row">
+            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_af" class="validate[required,maxSize[30]] prenom"></div>
+          </div>
+          <!--Numéro & Complément numéro-->
+          <div class="row">
+            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_af" class="numero"></div>
+            <div class="columns"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_af" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
+          </div>
+          <!--Type Voie & Voie-->
+          <div class="row">
+            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_af" class="validate[required] type_voie ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Voie :</label></div><div class="three columns end"><input type="text" name="voie_af" class="validate[required,maxSize[32]] voie"></div>
+          </div>
+          <!--Addresse suite-->
+          <div class="row">
+            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_af" class="validate[maxSize[30]] adresse_suite"></div>
+          </div>
+          <!--Code postal & Ville -->
+          <div class="row">
+            <div class="columns"><label>Code postal :</label></div>
+            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal2" name="code_postal_af" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Ville :</label></div>
+            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville2" name="ville_af" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
+          </div>
+        </div>
 
-      <!--Adresse de livraison-->
-      <h3>Adresse de livraison :</h3>
-      <div class="row">
-        <div class="column twelve bottom-10">
-        <label>
-          <input type="checkbox" value="identique" name="identique" checked ="checked">
-          Identique à l'adresse d'abonnement
-        </label>
-        </div>
-        <div class="column twelve bottom-10">
-        <label>
-          <input type="checkbox" value="identique" name="identique" class="left">
-          Je souhaite bénéficier gratuitement d'une livraison express(72 heures à partir du traitement de votre commande).<br>
-        </label>
-        <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>
-      </div>
-    </div>
 
-      <!--adresse principale-->
-      <h3>Adresse de messagerie principale :</h3>
-      <div class="row">
-        <div class="column twelve bottom-10">
-          <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
+        <!--Adresse de livraison-->
+        <h3 class="lfsection_space">Adresse de livraison :</h3>
+        <div class="row">
+          <div class="column twelve bottom-10">
+            <label>
+              <input type="checkbox" value="check-adresse-livraison" name="check-adresse-livraison" checked="checked" id="check-adresse-livraison">
+              Identique à l'adresse d'installation
+            </label>
+          </div>
         </div>
-        <div class="column six"> 
-          <input type="text" id="email_mediaserv" name="email_mediaserv" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" class="validate[required]"><span class="input-info">rassurez-vous, nous n'aimons pas non plus le SPAM</span>
+        <!--adresse de livraison-->
+        <div class="adresse-livraison hide">
+         <!-- Civilité-->
+          <div class="row">
+            <div class="columns bottom-10"><label>Civilité:</label></div>
+            <div class="five columns bottom-10 end">
+              <label class="left"><input type="radio" value="M." name="civilite_al" class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_al" class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_al" class="validate[required]">Melle</label>
+            </div>
+          </div>
+          <!-- Nom -->
+          <div class="row">
+            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_al" class="validate[required,maxSize[30]] nom"></div>
+          </div>
+          <!--Prénom -->
+          <div class="row">
+            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_al" class="validate[required,maxSize[30]] prenom"></div>
+          </div>
+          <!--Numéro & Complément numéro-->
+          <div class="row">
+            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_al" class="numero"></div>
+            <div class="columns"><label>Complément numéro:</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_al" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
+          </div>
+          <!--Type Voie-->
+          <div class="row">
+            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_al" class="validate[required] type_voie ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Voie :</label></div><div class="columns end"><input type="text" name="voie_al" class="validate[requiredmaxSize[200]] voie"></div>
+          </div>
+          <!--Addresse suite-->
+          <div class="row">
+            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_al" class="validate[maxSize[64]] adresse_suite"></div>
+          </div>
+          <!--Ensemble-->
+          <div class="row">
+            <div class="columns"><label>Ensemble</label></div><div class="columns five end"><input type="text" name="ensemble_al" class="validate[maxSize[20]] ensemble"></div>
+          </div>
+          <!--Batiment-->
+          <div class="row">
+            <div class="columns"><label>Batiment :</label></div><div class="columns five end"><input type="text" name="batiment_al" class="validate[maxSize[4]] batiment"></div>
+          </div>
+          <!--Escalier & Etage-->
+          <div class="row">
+            <div class="columns"><label>Escalier :</label></div><div class="columns five"><input type="text" name="escalier_al" class="validate[maxSize[2]] escalier"></div>
+            <div class="columns"><label>Etage :</label></div><div class="columns two end"><input type="text" name="etage_al" class="validate[maxSize[2]] etage"></div>
+          </div>
+          <!--Porte & logo-->
+          <div class="row">
+            <div class="columns"><label>Porte :</label></div><div class="columns two"><input type="text" name="porte_al" class="validate[required,maxSize[30]] porte"></div>
+            <div class="columns"><label>Logo :</label></div><div class="columns three end"><input type="text" name="logo_al" class="validate[required,maxSize[30]] logo"></div>
+          </div>
+          <!--Code postal & Ville -->
+          <div class="row">
+            <div class="columns"><label>Code postal :</label></div>
+            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal3" name="code_postal_al" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Ville :</label></div>
+            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville3" name="ville_al" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
+          </div>
         </div>
-        <div class="column three"> 
-          <span class="postfix">@mediaserv.net</span>
+        <!--end of adresse de livraison-->
+        <div class="row">
+           <div class="column twelve bottom-10">
+            <label>
+              <input type="checkbox" value="oui" name="livraison_express" class="left">
+              Je souhaite bénéficier gratuitement d'une livraison express (72 heures à partir du traitement de votre commande).<br>
+            </label>
+            <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>
+          </div>
         </div>
-        <div class="column three"> 
-          <input type="button" onclick ="javascript:verifMailWebServ();" name="VerifierEmail" value="Vérifier" class="rmv-std-btn btn-verifier">
-        </div>
-        <div class="column twelve top-20">
-          <label>Veuillez précisez une autre adresse de messagerie</label>
-          <input type="text" name="emailAutre" class="validate[required,custom[email]] six">
-        </div>
-      </div>
 
-      <!--type de facturation-->
-      <h3>Type de facturation :</h3>
-      <div class="row">
-        <div class="column four"><label><input type="radio" value="Electronique" name="TypeDeFacturation" checked=""> Electronique (gratuit)</label></div>
-        <div class="column four"> <label><input type="radio" value="Papier" name="TypeDeFacturation"> Facture papier(1,5€)</label></div>
-        <div class="column four"> </div>
-      </div>
+          <!--adresse principale-->
+          <h3 class="lfsection_space">Adresse de messagerie principale :</h3>
+          <div class="row">
+            <div class="column twelve bottom-10">
+              <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
+            </div>
+            <div class="column six"> 
+              <input type="text" id="email_mediaserv" name="email_mediaserv" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" class="validate[required]"><span class="input-info">rassurez-vous, nous n'aimons pas non plus le SPAM</span>
+            </div>
+            <div class="column three"> 
+              <span class="postfix">@mediaserv.net</span>
+            </div>
+            <div class="column three"> 
+              <input type="button" name="VerifierEmail" onclick ="javascript:verifMailWebServ();" value="Vérifier" class="rmv-std-btn btn-verifier">
+            </div>
+            <div class="column twelve top-20">
+              <label>Veuillez précisez une autre adresse de messagerie</label>
+              <input type="text" name="email" class="validate[required,custom[email]] six">
+            </div>
+          </div>
 
-      <!-- Sexy line -->
-      <hr class="sexy">
+          <!--type de facturation-->
+          <h3>Type de facturation :</h3>
+          <div class="row">
+            <div class="column four"><label><input type="radio" value="Electronique" name="TypeDeFacturation" checked=""> Electronique (gratuit)</label></div>
+            <div class="column four"> <label><input type="radio" value="Papier" name="TypeDeFacturation"> Facture papier(1,5€)</label></div>
+            <div class="column four"> </div>
+          </div>
+          
+          <!-- Sexy line -->
+          <hr class="sexy">
 
-      <!--back and submit buttom -->
-      <div class="six custom-column back-button left"><a alt="Précédent" href="mon_offre" class="precedent">Précédent</a></div>
-      <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
-    </form>
+          <!--back and submit buttom -->
+          <div class="six custom-column back-button left"><a title="Précédent" href="#" class="precedent">Précédent</a></div>
+          <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
+        </form>
 </div>

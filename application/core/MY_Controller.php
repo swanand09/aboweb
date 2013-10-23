@@ -62,9 +62,8 @@ class MY_Controller extends CI_Controller {
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Mon Offre')
                             ->set_partial('contenu_gauche', 'monoffre/test_eligib')
-                             ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
-           
         }
      
         public function controller_mes_coord_vue()
