@@ -182,6 +182,18 @@ var preload = function(){
                ); 
 
             }
+          
+          function gotoMesCoord(){
+                $.post(
+                    gotoMesCoord,
+                     {
+
+                     },
+                   function(data){
+                       $(location).attr('href',"mes_coordonnees");
+                   },"json"
+                );
+           }
             
           function verifMailWebServ(){
             preload();

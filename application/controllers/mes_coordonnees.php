@@ -17,8 +17,8 @@ class Mes_coordonnees extends MY_Controller {
         //re initialise session pour le panier partie parrainage
         $prevState = $this->session->userdata("prevState");
         $data["test"] = "test";
-        $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);        
-        $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);        
+        /*$this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);        
+        $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true); */       
         $this->session->set_userdata('prevState',$prevState);
         
         //configuring rules

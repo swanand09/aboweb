@@ -5,12 +5,12 @@
       $("#bouquet_ultra").attr("Disabled","Disabled");
       $("#beneficier").click(function(){          
         if($(this).is(":checked")){          
-           $("#decodeur_tv_netgem").attr("Checked","Checked");
+           $("#decodeur-tv-netgem").attr("Checked","Checked");
             $("#bouquet_mega").removeAttr("Disabled");
            $("#bouquet_giga").removeAttr("Disabled");
            $("#bouquet_ultra").removeAttr("Disabled");
        }else{          
-           $("#decodeur_tv_netgem").removeAttr("Checked");
+           $("#decodeur-tv-netgem").removeAttr("Checked");
            $("#bouquet_mega").removeAttr("checked");
            $("#bouquet_giga").removeAttr("checked");
            $("#bouquet_ultra").removeAttr("checked");
@@ -21,9 +21,7 @@
       }); 
   });  
 
-function gotoMesCoord(){
-   $(location).attr('href',"mes_coordonnees");
-}
+
 </script>
 <?php
     $tarif_loca_decod      =  explode("_",$tarif_loca_decod);
@@ -71,7 +69,7 @@ function gotoMesCoord(){
              }?>
           </div>
           <div class="column four">
-            <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur_tv_netgem" value="decodeur-tv-netgem" <?php echo (!empty($location_decodeur)?"checked=checked":""); ?> disabled="disabled" id="decodeur_tv_netgem"><strong>DÉCODEUR TV NETGEM</strong></label>
+            <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur-tv-netgem" value="decodeur-tv-netgem" <?php echo (!empty($location_decodeur)?"checked=checked":""); ?> disabled="disabled" id="decodeur-tv-netgem"><strong>DÉCODEUR TV NETGEM</strong></label>
               <?php echo image("decodeur_tv_netgem.png",NULL,array("alt"=>"Décodeur TV netgem"));?>
             <strong class="left"> + DE 35 CHAÎNES INCLUSES 3,50€ TTC/MOIS</strong>
           </div>

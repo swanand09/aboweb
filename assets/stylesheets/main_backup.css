@@ -514,43 +514,55 @@ body {
 * Main content - First step 3 ( TV CHAINES)
 */
 ul.bqt { 
+    border: 1px solid #E3E3E3;
     padding: 7px;
     margin:0;
-    border: 1px solid #E3E3E3;
 }
 ul.bqt  li{
     display: inline;
     list-style: none outside none;
 }
 
+.options_tab {
+ 	background: url("../images/options_tab.png") no-repeat scroll 0 0 transparent;
+	height: 113px;
+}
+
+.options_tab .bouquet {
+	 margin-top: 33px;
+}
+.options_tab .bouquet a{
+	text-transform: uppercase;
+	color:#A3A3A3;
+	font-family: freeroadregular;
+	font-weight: bold;
+	font-size: 15px;
+}
+.options_tab .bouquet.active a{
+	color: #94c142;
+}
+
+.bouquet li {
+	color: #a3a3a3;
+}
+
+.chaines-tv h4 {
+	font-size: 1em;
+	font-weight: normal;
+	margin-bottom: 5px;
+}
 
 /*Active menu*/
 .bouquet.active, .bouquet.active h4 {
 	color:#93c241;
 }
 
-.chaines .row{
-	border-bottom:1px solid #ecebeb;
-	padding-top: 6px;
-}
-
-.chaines .row h4{
-	font-size: 17px;
-    font-weight: normal;
-    margin-bottom: 0;
-    margin-top:0;
-}
-.chaines-tv h4 {
-	font-size:1em;
-	font-weight: normal;
-}
 /*
 * Modal 
 */
 /*
 * Chaines MODAL
 */
-
 
 .chaines-mdl { 
 	padding-bottom: 15px;

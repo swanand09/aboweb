@@ -26,6 +26,7 @@
   <?php
         echo js('modernizr.foundation.js');
          echo js('jquery.js');
+         echo js('foundation.min.js');
          echo js('jquery-ui.js');
          echo js('jquery.blockUI.js');
       // echo ajax()->init();
@@ -63,6 +64,7 @@
     var forfait                 = '<?php echo base_url('mon_offre/forfait');?>';
     var refreshRecapCol         = '<?php echo base_url('mon_offre/refreshRecapCol');?>'; 
     var updateTvDecodeur        = '<?php echo base_url('mon_offre/updateTvDecodeur');?>'; 
+    var gotoMesCoord            = '<?php echo base_url('mon_offre/gotoMesCoord');?>';     
     var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
     var updateOptions           = '<?php echo base_url('mon_offre/updateOptions');?>';    

@@ -337,6 +337,8 @@ class Mon_offre extends MY_Controller {
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
             }else{
                 $this->contenuGauche["contenu_html"] = "redirect to mes coordonnees";
+                $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);
+                 
                 $this->session->set_userdata('prevState',array(array("contenu_html"=>$this->session->userdata("htmlContent_forfait")),$this->colonneDroite));                
             }
             
@@ -402,6 +404,12 @@ class Mon_offre extends MY_Controller {
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
         echo json_encode(array("options_dummy3"=>$prevState[1]["options_dummy3"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+    }
+    
+    //got to mes coordonnes
+    public function gotoMesCoord()
+    {
+        
     }
             
     public function redirectToMonOffre()
