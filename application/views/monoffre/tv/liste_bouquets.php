@@ -48,7 +48,7 @@ function gotoMesCoord(){
         <!--ACCORDION-->
         <ul class="accordion">
             <!-- first accordion -->
-            <li class="first active">
+            <li class="first">
               <div class="title"><h5>MA TV </h5></div>
               <div class="content" style="display: block;">
         <div class="row chaines-tv">
