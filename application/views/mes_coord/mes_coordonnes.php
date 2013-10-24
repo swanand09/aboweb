@@ -1,7 +1,9 @@
 <?php 
 echo validation_errors();
+
 ?>
-<script>    
+<script>  
+    /*
    $(function() {
         var villeLst=["BASSE TERRE","POINTE A PITRE","MORNE A L'EAU","GRAND BOURG","GOURBEYRE","TROIS RIVIERES","SAINTE ROSE","POINTE NOIRE","PORT LOUIS","SAINT FRANCOIS","VIEUX HABITANTS","SAINT CLAUDE","ANSE BERTRAND","BAIE-MAHAULT","BAILLIF","BOUILLANTE","DESHAIES","LA DESIRADE","GOYAVE","LAMENTIN","BANANIER","CAPESTERRE BELLE EAU","SAINTE MARIE","LES MANGLES","PETIT CANAL","BOUILLANTE","PIGEON","SAINT BARTHELEMY","SAINT LOUIS","TERRE DE BAS","TERRE DE HAUT","LES ABYMES","CAPESTERRE DE MARIE GALANTE","VIEUX FORT","LES ABYMES","SAINT MARTIN","LE MOULE","PETIT BOURG","DOUVILLE","SAINTE ANNE","LE GOSIER","FORT DE FRANCE","RIVIERE PILOTE","SAINT JOSEPH","GROS MORNE","LE LORRAIN","PETIT BOURG","RIVIERE SALEE","L'AJOUPA BOUILLON","LES ANSES D'ARLETS","BASSE POINTE","GRAND RIVIERE","MACOUBA","LA TRINITE","LE CARBET","BELLEFONTAINE","CASE PILOTE","LE DIAMANT","DUCOS","LE MARIGOT","LE MORNE VERT","SAINTE ANNE","SAINTE LUCE","LES TROIS ILETS","MORNE DES ESSES","SAINTE MARIE","LE ROBERT","VERT PRE","LE LAMENTIN","SCHOELCHER","FORT DE FRANCE","LE FRANCOIS","FONDS ST DENIS","LE PRECHEUR","SAINT PIERRE","LE MORNE ROUGE","SAINT ESPRIT","LE VAUCLIN","LE MARIN","CAYENNE","KOUROU","ROURA","ST ELIE","ST GEORGES","SAUL","SINNAMARY","PAPAICHTON","APATOU","JAVOUHEY","AWALA YALIMAPO","ST LAURENT DU MARONI","CAMOPI","GRAND SANTI","POMPIDOU PAPA ICHTON","IRACOUBO","MATOURY","CACAO","KAW","REMIRE MONTJOLY","MACOURIA","MACOURIA TONATE","MONTSINERY TONNEGRANDE","MANA","MARIPASOULA","OUANARY","REGINA","BELLE PIERRE","LE BRULE","ST DENIS","ST FRANCOIS","BASSE TERRE","GRAND BOIS","MONT VERT","ST PIERRE","TERRE SAINTE","BOIS DE NEFLES ST PAUL","BRAS PANON","RIVIERE DU MAT","CILAOS","PALMISTE ROUGE","ENTRE DEUX","LA CHALOUPE","LA MONTAGNE","ST BERNARD","ST DENIS","LA PLAINE DES CAFRES","LA POSSESSION","LA RIVIERE DES GALETS","LE DOS D ANE","SAINT DENIS","STE THERESE","LE PORT","LA RIVIERE","LES MAKES","LA SALINE","LE GUILLAUME","LE PITON ST LEU","LE PLATE","LES AVIRONS","TEVELAVE","LES TROIS BASSINS","TROIS BASSINS","L ETANG SALE","L ETANG SALE LES BAINS","PETITE ILE","LE TAMPON","LES TROIS MARES","PONT D YVES","TAMPON 14EME KM","LA PLAINE DES PALMISTES","RAVINE DES CABRIS","HELL BOURG","LA POSSESSION","SALAZIE","LA SALINE LES BAINS","ST GILLES LES BAINS","BERNICA","ST GILLES LES HAUTS","TAN ROUGE","ST LEU","STE ANNE","RIVIERE DES PLUIES","ROLAND GARROS AEROPORT","STE MARIE","LE PITON STE ROSE","STE ROSE","CAMBUSTON","LA CRESSONNIERE","ST ANDRE","STE SUZANNE","BASSE VALLEE","ST PHILIPPE","ST LOUIS","BELLEMENE","ST PAUL","ST BENOIT","LES LIANES","ST JOSEPH","VINCENDO","BOIS DE NEFLES ST DENIS","LA BRETAGNE","MOUFIA","STE CLOTILDE"];
         $( "#ville" ).autocomplete({
@@ -11,7 +13,8 @@ echo validation_errors();
       $( "#nomdelavoie" ).autocomplete({
         source: voieLst
          });
-});
+        
+}); */
 </script>
 <div class="left-etape-content">
     <form action="recapitulatif" method="POST" id="mes-coordonnees">
@@ -22,17 +25,17 @@ echo validation_errors();
           <div class="row">
             <div class="columns bottom-10"><label>Civilité:</label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite" class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite" class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite" class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="M." name="civilite_aa" class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_aa" class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_aa" class="validate[required]">Melle</label>
             </div>
           </div>
           <div class="row">
-            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_aa" value="<?php echo set_value("nom",$nom);?>" class="validate[required,maxSize[30]] nom"></div>
+            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_aa" value="<?php echo set_value("nom_aa",$nom_aa);?>" class="validate[required,maxSize[30]] nom"></div>
           </div>
           <!--Prénom -->
           <div class="row">
-            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_aa" value="<?php echo set_value("prenom",$prenom);?>" class="validate[required,maxSize[30]] prenom"></div>
+            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_aa" value="<?php echo set_value("prenom_aa",$prenom_aa);?>" class="validate[required,maxSize[30]] prenom"></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
@@ -69,9 +72,9 @@ echo validation_errors();
           <!--Code postal & Ville -->
           <div class="row">
             <div class="columns"><label>Code postal :</label></div>
-            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal" name="code_postal_aa" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal" name="code_postal_aa" value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
             <div class="columns"><label>Ville :</label></div>
-            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville" name="ville_aa" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville" name="ville_aa" value="<?php echo set_value("ville_aa",$ville_aa);?>" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
           </div>
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
@@ -89,7 +92,7 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="identique" name="check-adresse-facturation" checked="checked" id="check-adresse-facturation">
+              <input type="checkbox" value="identique" name="check_adresse_facturation" checked="checked" id="check-adresse-facturation">
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -142,7 +145,7 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="check-adresse-livraison" name="check-adresse-livraison" checked="checked" id="check-adresse-livraison">
+              <input type="checkbox" value="check-adresse-livraison" name="check_adresse_livraison" checked="checked" id="check-adresse-livraison">
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -241,8 +244,8 @@ echo validation_errors();
           <!--type de facturation-->
           <h3>Type de facturation :</h3>
           <div class="row">
-            <div class="column four"><label><input type="radio" value="Electronique" name="TypeDeFacturation" checked=""> Electronique (gratuit)</label></div>
-            <div class="column four"> <label><input type="radio" value="Papier" name="TypeDeFacturation"> Facture papier(1,5€)</label></div>
+            <div class="column four"><label><input type="radio" value="Electronique" name="type_de_facturation" checked=""> Electronique (gratuit)</label></div>
+            <div class="column four"> <label><input type="radio" value="Papier" name="type_de_facturation"> Facture papier(1,5€)</label></div>
             <div class="column four"> </div>
           </div>
           
@@ -250,7 +253,7 @@ echo validation_errors();
           <hr class="sexy">
 
           <!--back and submit buttom -->
-          <div class="six custom-column back-button left"><a title="Précédent" href="#" class="precedent">Précédent</a></div>
+          <div class="six custom-column back-button left"><a title="Précédent" href="mon_offre" class="precedent">Précédent</a></div>
           <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
         </form>
 </div>
