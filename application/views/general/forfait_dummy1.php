@@ -1,7 +1,7 @@
 <div class="votre-offre p10">
     <span class="left">Votre offre Mediaserv <?php echo (!empty($text))?"<br>".$text:""; ?></span>  
     <?php if(!empty($donne_forfait)){ ?>
-    <span class="right"><strong><?php echo (($donne_forfait["Tarif_promo"]>0)?$donne_forfait["Tarif_promo"]:$donne_forfait["Tarif"])."€";?></strong></span>
+    <span class="right"><strong><?php echo (($donne_forfait["Tarif_promo"]>0)?number_format($donne_forfait["Tarif_promo"],2,',',' '):number_format($donne_forfait["Tarif"],2,',',' '))."€";?></strong></span>
     <?php } ?>
 </div>
 <?php 
@@ -10,7 +10,7 @@
        <!--degroupage-->
         <div class="votre-offre p10">
             <span class="left" style="width:50px;"><?php echo utf8_encode($dum1_degroup_libelle); ?></span>
-            <span class="right"><strong><?php echo number_format($dum1_degroup_tarif,2,'.',' ')."€"; ?></strong></span>
+            <span class="right"><strong><?php echo number_format($dum1_degroup_tarif,2,',',' ')."€"; ?></strong></span>
         </div>
         <!--end degroupage--> 
     <?php

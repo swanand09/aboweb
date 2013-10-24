@@ -169,7 +169,7 @@ var preload = function(){
                var bouquet = $("#"+id).val();  
                
                 $.post(
-                    updateOptions,
+                    updateBouquet,
                      {
                         bouquetTv : bouquet
                      },
@@ -185,6 +185,31 @@ var preload = function(){
                ); 
 
             }
+          
+          function choixOption(id)
+          {    
+                preload();    
+                var optionTv   = $("#"+id).val(); 
+                var checkOption = "uncheck";
+                if($("#"+id).is(":checked"))
+                {
+                    checkOption = "check";
+                }
+                $.post(
+                    updateOptions,
+                     {
+                        optionTv      : optionTv,
+                        checkOption   : checkOption
+                     },
+                    function(data){                          
+                      $("#recap_contenu").children("#options").remove();  
+                      $("#recap_contenu").append(data.options_dummy3);
+                      $("#total_mois").empty().append(data.total_par_mois);  
+                      $.unblockUI();                       
+                    },"json"
+               ); 
+
+          }
           
           function gotoMesCoord(){
                 $.post(

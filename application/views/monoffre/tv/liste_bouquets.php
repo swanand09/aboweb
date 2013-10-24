@@ -3,6 +3,8 @@
       $("#bouquet_mega").attr("Disabled","Disabled");
       $("#bouquet_giga").attr("Disabled","Disabled");
       $("#bouquet_ultra").attr("Disabled","Disabled");
+      $("#option_eden").attr("Disabled","Disabled");
+      $("#option_bein").attr("Disabled","Disabled");
       $("#beneficier").click(function(){          
         if($(this).is(":checked")){          
            $("#decodeur-tv-netgem").attr("Checked","Checked");
@@ -12,6 +14,10 @@
            
            $('.accordion .first').addClass('active');	
 	   $('.accordion .first .content').css({ display: 'block'});
+           
+           $("#option_eden").removeAttr("Disabled");
+           $("#option_bein").removeAttr("Disabled");
+           
        }else{          
            $("#decodeur-tv-netgem").removeAttr("Checked");
            $("#bouquet_mega").removeAttr("checked");
@@ -25,6 +31,12 @@
             $('.accordion .second').removeClass('active');
             $('.accordion .first .content').css({ display: 'none'});
             $('.accordion .second .content').css({ display: 'none'});
+            
+           
+           $("#option_eden").removeAttr("checked");
+           $("#option_bein").removeAttr("checked");
+           $("#option_eden").attr("Disabled","Disabled");
+           $("#option_bein").attr("Disabled","Disabled");
        }  
       }); 
   });  
@@ -97,7 +109,7 @@
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-mega">bouquet mega<br><?php echo $bouqTvArr[0]["Mega"]; ?> €</a> 
-              <label><input type="radio" value="mega_<?php echo $bouqTvArr[0]["Mega"]; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
+              <label><input type="radio" value="mega_<?php echo $bouqTvArr[0]["Mega"]; ?>_25" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option giga-->
@@ -105,7 +117,7 @@
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+33</h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-giga">bouquet giga<br><?php echo $bouqTvArr[1]["Giga"]; ?> € </a>
-              <label><input type="radio" value="giga_<?php echo $bouqTvArr[1]["Giga"]; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
+              <label><input type="radio" value="giga_<?php echo $bouqTvArr[1]["Giga"]; ?>_33" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option ultra -->
@@ -113,7 +125,7 @@
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+38</h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-ultra">bouquet ultra<br><?php echo $bouqTvArr[2]["Ultra"]; ?> € </a>
-              <label><input type="radio" value="ultra_<?php echo $bouqTvArr[2]["Ultra"]; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
+              <label><input type="radio" value="ultra_<?php echo $bouqTvArr[2]["Ultra"]; ?>_38" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
             </div>
           </div>
            
@@ -176,7 +188,14 @@
                         }
                     ?>
               </ul>
-               <label class="top-10"><input type="checkbox" value="<?php echo (strpos($key,"Eden")!==false)?$optionTvArr[0]["Eden"]:$optionTvArr[1]["BeIN Sport"]; ?>" name="<?php echo $key; ?>" onclick="javascript: alert('<?php echo $key; ?>');"><strong>Sélectionner</strong></label>
+               <label class="top-10">
+                   <?php if(strpos($key,"Eden")!==false){ ?>
+                        <input type="checkbox" value="<?php echo "Eden_".$optionTvArr[0]["Eden"]; ?>" name="option_eden" id="option_eden" onclick="javascript: choixOption('option_eden');">
+                   <?php }else{?>
+                        <input type="checkbox" value="<?php echo "BeIN Sport_".$optionTvArr[1]["BeIN Sport"]; ?>" name="option_bein" id="option_bein" onclick="javascript: choixOption('option_bein');">
+                   <?php } ?>
+                   <strong>Sélectionner</strong>
+               </label>
             </div> 
             <?php }?>
             </div>

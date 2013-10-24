@@ -79,7 +79,7 @@ class MY_Controller extends CI_Controller {
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Mes coordonnés')
                             ->set_partial('contenu_gauche', 'mes_coord/mes_coordonnes')
-                             ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
         }
         
@@ -96,7 +96,7 @@ class MY_Controller extends CI_Controller {
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Recapitulatif')
                             ->set_partial('contenu_gauche', 'recap/recapitulatif')
-                             ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
         }
         
