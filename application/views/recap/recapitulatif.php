@@ -1,13 +1,43 @@
 <div class="left-etape-content recapitulatif">
     <div class="row">
       <div class="column twelve bottom-20">
-        <label class="top-20"><strong>Vos coordonnées</strong></label>
-        <span class="val"><?php echo $civilite." ".$prenom." ".$nom;?></span>
+        <label class="top-20"><strong>Vos coordonnées(adresse d'installation)</strong></label>
+        <span class="val"><?php echo $civilite_aa." ".$prenom_aa." ".$nom_aa;?></span>
         <label class="top-20"><strong>Adresse d'installation</strong></label>
-        <span class="val"><?php echo $numero." ".$nomDeLaVoie." ".$complement; ?><br><?php echo $codepostal." ".$ville; ?></span>
-        <label class="top-20"><strong>Vos coordonnées</strong></label>
+        <span class="val">
+            <?php echo $numero_aa." ".$comp_numero_aa." ".$type_voie_aa." ".$voie_aa; ?><br>
+            <?php echo $adresse_suite_aa." ".$ensemble_aa." ".$batiment_aa." ".$escalier_aa; ?><br>
+            <?php echo $etage_aa." ".$porte_aa." ".$logo_aa; ?><br>
+            <?php echo $code_postal_aa." ".$ville_aa; ?>
+        </span>
+        <label class="top-20"><strong>Téléphones</strong></label>
+        <span class="val">
+            <?php echo $telephone_portable." ".$telephone_bureau." ".$telephone_domicile; ?>
+        </span>
+        
+        <?php if(empty($check_adresse_facturation)){ ?>
+        <label class="top-20"><strong>Adresse de facturation)</strong></label>        
+        <span class="val">
+            <?php echo $civilite_af." ".$prenom_af." ".$nom_af; ?><br>
+            <?php echo $numero_af." ".$comp_numero_af." ".$type_voie_af." ".$voie_af; ?><br>
+            <?php echo $adresse_suite_af." ".$code_postal_af." ".$ville_af; ?><br>
+        </span>
+        
+        <?php }if(empty($check_adresse_livraison)){ ?>
+        <label class="top-20"><strong>Adresse de livraison</strong></label>        
+        <span class="val">
+            <?php echo $civilite_al." ".$prenom_al." ".$nom_al; ?><br>
+            <?php echo $numero_al." ".$comp_numero_al." ".$type_voie_al." ".$voie_al; ?><br>
+            <?php echo $adresse_suite_al." ".$ensemble_al." ".$batiment_al." ".$escalier_al; ?><br>
+            <?php echo $etage_al." ".$porte_al." ".$logo_al; ?><br>
+            <?php echo $code_postal_al." ".$ville_al; ?><br>
+        </span>
+        <?php }if(!empty($livraison_express)){ ?>
         <span class="val">Vous souhaitez une livraison express</span>
-        <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:<?php echo $email_mediaserv; ?>" class="mail-link"><?php echo $email_mediaserv; ?></a></label>
+        <?php }?>
+        <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>" class="mail-link"><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>
+         <label class="top-20"><strong>Type de facturation</strong></label>
+         <span class="val"><?php echo $type_de_facturation; ?></span>
       </div>
     </div>
     <hr class="sexy">

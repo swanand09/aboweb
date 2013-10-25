@@ -39,6 +39,12 @@
            $("#option_bein").attr("Disabled","Disabled");
        }  
       }); 
+       $("#bouquet_ultra").click(function(){  
+            if($("#bouquet_ultra").is(":checked")){   
+                $("#option_eden").attr("checked","checked");
+                $("#option_bein").attr("checked","checked");
+            }
+      });
   });  
 
 

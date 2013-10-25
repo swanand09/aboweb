@@ -129,6 +129,11 @@ class Mon_offre extends MY_Controller {
                     $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
                     $data["choix_forfait"] = $choix_forfait;                    
                     $this->colonneDroite["form_test_ligne"] = $this->load->view("general/form_test_ligne",$data,true);
+                    
+                    //to review
+                    $this->session->set_userdata('totalParMois',"");
+                    $data["totalParMois"] = "";
+                    $this->colonneDroite["total_par_mois"] =  $this->load->view("general/total_mois",$data,true);
                 }
             }
       }  

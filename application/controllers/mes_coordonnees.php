@@ -82,19 +82,19 @@ class Mes_coordonnees extends MY_Controller {
             $this->session->set_userdata('ensemble_aa',"");
         }                
         if(!array_key_exists("batiment_aa",$this->data['userdata'])){
-            $this->session->set_userdata('civilite_aa',"");
+            $this->session->set_userdata('batiment_aa',"");
         }
         if(!array_key_exists("escalier_aa",$this->data['userdata'])){
-            $this->session->set_userdata('nom_aa',"");
+            $this->session->set_userdata('escalier_aa',"");
         }
         if(!array_key_exists("etage_aa",$this->data['userdata'])){
-            $this->session->set_userdata('prenom_aa',"");
+            $this->session->set_userdata('etage_aa',"");
         }
         if(!array_key_exists("porte_aa",$this->data['userdata'])){
-            $this->session->set_userdata('numero_aa',"");
+            $this->session->set_userdata('porte_aa',"");
         }
-        if(!array_key_exists("comp_numero_aa",$this->data['userdata'])){
-            $this->session->set_userdata('comp_numero_aa',"");
+        if(!array_key_exists("logo_aa",$this->data['userdata'])){
+            $this->session->set_userdata('logo_aa',"");
         }
         if(!array_key_exists("code_postal_aa",$this->data['userdata'])){
             $this->session->set_userdata('code_postal_aa',$codePostal);
@@ -111,12 +111,103 @@ class Mes_coordonnees extends MY_Controller {
         if(!array_key_exists("telephone_domicile",$this->data['userdata'])){
             $this->session->set_userdata('telephone_domicile',"");
         }
+        
+        
         if(!array_key_exists("check_adresse_facturation",$this->data['userdata'])){
             $this->session->set_userdata('check_adresse_facturation',"");
         }
+        //Adresse de facturation
+        if(!array_key_exists("civilite_af",$this->data['userdata'])){
+            $this->session->set_userdata('civilite_af',"");
+        }
+        if(!array_key_exists("nom_af",$this->data['userdata'])){
+            $this->session->set_userdata('nom_af',"");
+        }
+        if(!array_key_exists("prenom_af",$this->data['userdata'])){
+            $this->session->set_userdata('prenom_af',"");
+        }
+        if(!array_key_exists("numero_af",$this->data['userdata'])){
+            $this->session->set_userdata('numero_af',"");
+        }
+        if(!array_key_exists("comp_numero_af",$this->data['userdata'])){
+            $this->session->set_userdata('comp_numero_af',"");
+        }
+        if(!array_key_exists("type_voie_af",$this->data['userdata'])){
+            $this->session->set_userdata('type_voie_af',"");
+        }
+        if(!array_key_exists("voie_af",$this->data['userdata'])){
+            $this->session->set_userdata('voie_af',"");
+        }
+        if(!array_key_exists("adresse_suite_af",$this->data['userdata'])){
+            $this->session->set_userdata('adresse_suite_af',"");
+        }
+        if(!array_key_exists("code_postal_af",$this->data['userdata'])){
+            $this->session->set_userdata('code_postal_af',"");
+        }
+        if(!array_key_exists("ville_af",$this->data['userdata'])){
+            $this->session->set_userdata('ville_af',"");
+        }
+        
+        
+        
         if(!array_key_exists("check_adresse_livraison",$this->data['userdata'])){
             $this->session->set_userdata('check_adresse_livraison',"");
         }
+        //Adresse de livraison
+        if(!array_key_exists("civilite_al",$this->data['userdata'])){
+            $this->session->set_userdata('civilite_al',"");
+        }
+        if(!array_key_exists("nom_al",$this->data['userdata'])){
+            $this->session->set_userdata('nom_al',"");
+        }
+        if(!array_key_exists("prenom_al",$this->data['userdata'])){
+            $this->session->set_userdata('prenom_al',"");
+        }
+        if(!array_key_exists("numero_al",$this->data['userdata'])){
+            $this->session->set_userdata('numero_al',"");
+        }
+        if(!array_key_exists("comp_numero_al",$this->data['userdata'])){
+            $this->session->set_userdata('comp_numero_al',"");
+        }
+        if(!array_key_exists("type_voie_al",$this->data['userdata'])){
+            $this->session->set_userdata('type_voie_al',"");
+        }
+        if(!array_key_exists("voie_al",$this->data['userdata'])){
+            $this->session->set_userdata('voie_al',"");
+        }
+        if(!array_key_exists("adresse_suite_al",$this->data['userdata'])){
+            $this->session->set_userdata('adresse_suite_al',"");
+        }
+        if(!array_key_exists("ensemble_al",$this->data['userdata'])){
+            $this->session->set_userdata('ensemble_al',"");
+        }
+        if(!array_key_exists("batiment_al",$this->data['userdata'])){
+            $this->session->set_userdata('batiment_al',"");
+        }
+        if(!array_key_exists("escalier_al",$this->data['userdata'])){
+            $this->session->set_userdata('escalier_al',"");
+        }
+        if(!array_key_exists("etage_al",$this->data['userdata'])){
+            $this->session->set_userdata('etage_al',"");
+        }
+        if(!array_key_exists("porte_al",$this->data['userdata'])){
+            $this->session->set_userdata('porte_al',"");
+        }
+        if(!array_key_exists("logo_al",$this->data['userdata'])){
+            $this->session->set_userdata('logo_al',"");
+        }
+        if(!array_key_exists("code_postal_al",$this->data['userdata'])){
+            $this->session->set_userdata('code_postal_al',"");
+        }
+        if(!array_key_exists("ville_al",$this->data['userdata'])){
+            $this->session->set_userdata('ville_al',"");
+        }
+        
+        
+        
+        if(!array_key_exists("livraison_express",$this->data['userdata'])){
+            $this->session->set_userdata('livraison_express',"");
+        }       
         if(!array_key_exists("email_mediaserv",$this->data['userdata'])){
             $this->session->set_userdata('email_mediaserv',"");
         }
@@ -128,7 +219,7 @@ class Mes_coordonnees extends MY_Controller {
         }
         
         
-        
+        //adresse installation
         $this->data["civilite_aa"] = $this->session->userdata('civilite_aa');
         $this->data["nom_aa"] = $this->session->userdata('nom_aa');
         $this->data["prenom_aa"] = $this->session->userdata('prenom_aa');
@@ -142,15 +233,46 @@ class Mes_coordonnees extends MY_Controller {
         $this->data["escalier_aa"] = $this->session->userdata('escalier_aa');
         $this->data["etage_aa"] = $this->session->userdata('etage_aa');
         $this->data["porte_aa"] = $this->session->userdata('porte_aa');
-        $this->data["comp_numero_aa"] = $this->session->userdata('comp_numero_aa');
-        
+        $this->data["logo_aa"] = $this->session->userdata('logo_aa');        
         $this->data["code_postal_aa"] = $this->session->userdata('code_postal_aa');
         $this->data["ville_aa"] = $this->session->userdata('ville_aa');
         $this->data["telephone_portable"] = $this->session->userdata('telephone_portable');
         $this->data["telephone_bureau"] = $this->session->userdata('telephone_bureau');
         $this->data["telephone_domicile"] = $this->session->userdata('telephone_domicile');
+        
+        //adresse facturation
         $this->data["check_adresse_facturation"] = $this->session->userdata('check_adresse_facturation');
+        $this->data["civilite_af"] = $this->session->userdata('civilite_af',"");
+        $this->data["nom_af"] = $this->session->userdata('nom_af',"");
+        $this->data["prenom_af"] = $this->session->userdata('prenom_af',"");
+        $this->data["numero_af"] = $this->session->userdata('numero_af',"");
+        $this->data["comp_numero_af"] = $this->session->userdata('comp_numero_af',"");
+        $this->data["type_voie_af"] = $this->session->userdata('type_voie_af',"");
+        $this->data["voie_af"] = $this->session->userdata('voie_af',"");
+        $this->data["adresse_suite_af"] = $this->session->userdata('adresse_suite_af',"");
+        $this->data["code_postal_af"] = $this->session->userdata('code_postal_af',"");
+        $this->data["ville_af"] = $this->session->userdata('ville_af',"");
+        
+        //adresse livraison
         $this->data["check_adresse_livraison"] = $this->session->userdata('check_adresse_livraison');
+        $this->data["civilite_al"] = $this->session->userdata('civilite_al',"");
+        $this->data["nom_al"] = $this->session->userdata('nom_al',"");
+        $this->data["prenom_al"] = $this->session->userdata('prenom_al',"");
+        $this->data["numero_al"] = $this->session->userdata('numero_al',"");
+        $this->data["comp_numero_al"] = $this->session->userdata('comp_numero_al',"");
+        $this->data["type_voie_al"] = $this->session->userdata('type_voie_al',"");
+        $this->data["voie_al"] = $this->session->userdata('voie_al',"");
+        $this->data["adresse_suite_al"] = $this->session->userdata('adresse_suite_al',"");
+        $this->data["ensemble_al"] = $this->session->userdata('ensemble_al',"");
+        $this->data["batiment_al"] = $this->session->userdata('batiment_al',"");
+        $this->data["escalier_al"] = $this->session->userdata('escalier_al',"");
+        $this->data["etage_al"] = $this->session->userdata('etage_al',"");
+        $this->data["porte_al"] = $this->session->userdata('porte_al',"");
+        $this->data["logo_al"] = $this->session->userdata('logo_al',"");
+        $this->data["code_postal_al"] = $this->session->userdata('code_postal_al',"");
+        $this->data["ville_al"] = $this->session->userdata('ville_al',"");
+
+        $this->data["livraison_express"] = $this->session->userdata('livraison_express');
         $this->data["email_mediaserv"] = $this->session->userdata('email_mediaserv');
         $this->data["email"] = $this->session->userdata('email');
         $this->data["type_de_facturation"] = $this->session->userdata('type_de_facturation');

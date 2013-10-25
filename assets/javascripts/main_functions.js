@@ -178,9 +178,9 @@ var preload = function(){
                       $("#recap_contenu").append(data.options_dummy3);
                       $("#total_mois").empty().append(data.total_par_mois);  
                       $.unblockUI(); 
-                      $('html, body').animate({
-                                    scrollTop: $(".sexy").offset().top
-                              }, 500);
+//                      $('html, body').animate({
+//                                    scrollTop: $(".sexy").offset().top
+//                              }, 500);
                     },"json"
                ); 
 

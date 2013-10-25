@@ -25,9 +25,9 @@ echo validation_errors();
           <div class="row">
             <div class="columns bottom-10"><label>Civilité:</label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite_aa" class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_aa" class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_aa" class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="M." name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Melle")?"checked='checked'":"";?> class="validate[required]">Melle</label>
             </div>
           </div>
           <div class="row">
@@ -39,35 +39,35 @@ echo validation_errors();
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_aa" class="validate[required,maxSize[5]] numero"></div>
-            <div class="columns"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_aa" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
+            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_aa" value="<?php echo set_value("numero_aa",$numero_aa);?>"  class="validate[required,maxSize[5]] numero"></div>
+            <div class="columns"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" name="comp_numero_aa" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
           </div>
           <!--Type Voie-->
           <div class="row">
-            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_aa" class="type_voie ui-autocomplete-input" autocomplete="off"></div>
-            <div class="columns"><label>Voie :</label></div><div class="three columns end"><input type="text" name="voie_aa" class="validate[required,maxSize[200]] voie"></div>
+            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("type_voie_aa",$type_voie_aa);?>" name="type_voie_aa" class="type_voie ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Voie :</label></div><div class="three columns end"><input type="text" name="voie_aa" value="<?php echo set_value("voie_aa",$voie_aa);?>" class="validate[required,maxSize[200]] voie"></div>
           </div>
           <!--Addresse suite-->
           <div class="row">
-            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_aa" class="validate[maxSize[64]] adresse_suite"></div>
+            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_aa" value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" class="validate[maxSize[64]] adresse_suite"></div>
           </div>
           <!--Ensemble-->
           <div class="row">
-            <div class="columns"><label>Ensemble</label></div><div class="columns five end"><input type="text" name="ensemble_aa" class="validate[maxSize[20]] ensemble"></div>
+            <div class="columns"><label>Ensemble</label></div><div class="columns five end"><input type="text" name="ensemble_aa" value="<?php echo set_value("ensemble_aa",$ensemble_aa);?>" class="validate[maxSize[20]] ensemble"></div>
           </div>
           <!--Batiment-->
           <div class="row">
-            <div class="columns"><label>Batiment :</label></div><div class="columns five end"><input type="text" name="batiment_aa" class="validate[maxSize[4]] batiment"></div>
+            <div class="columns"><label>Batiment :</label></div><div class="columns five end"><input type="text" name="batiment_aa" value="<?php echo set_value("batiment_aa",$batiment_aa);?>" class="validate[maxSize[4]] batiment"></div>
           </div>
           <!--Escalier & Etage-->
           <div class="row">
-            <div class="columns"><label>Escalier :</label></div><div class="columns five"><input type="text" size="2" name="escalier_aa" class="validate[maxSize[2]] escalier"></div>
-            <div class="columns"><label>Etage :</label></div><div class="columns two end"><input type="text" size="2" name="etage_aa" class="validate[maxSize[2]] etage"></div>
+            <div class="columns"><label>Escalier :</label></div><div class="columns five"><input type="text" size="2" name="escalier_aa" value="<?php echo set_value("escalier_aa",$escalier_aa);?>" class="validate[maxSize[2]] escalier"></div>
+            <div class="columns"><label>Etage :</label></div><div class="columns two end"><input type="text" size="2" name="etage_aa" value="<?php echo set_value("etage_aa",$etage_aa);?>" class="validate[maxSize[2]] etage"></div>
           </div>
           <!--Porte & logo-->
           <div class="row">
-            <div class="columns"><label>Porte :</label></div><div class="columns two"><input type="text" name="porte_aa" class="validate[maxSize[5]] porte"></div>
-            <div class="columns"><label>Logo :</label></div><div class="columns three end"><input type="text" name="logo_aa" class="validate[maxSize[5]] logo"></div>
+            <div class="columns"><label>Porte :</label></div><div class="columns two"><input type="text" name="porte_aa" value="<?php echo set_value("porte_aa",$porte_aa);?>" class="validate[maxSize[5]] porte"></div>
+            <div class="columns"><label>Logo :</label></div><div class="columns three end"><input type="text" name="logo_aa" value="<?php echo set_value("logo_aa",$logo_aa);?>" class="validate[maxSize[5]] logo"></div>
           </div>
           <!--Code postal & Ville -->
           <div class="row">
@@ -78,13 +78,13 @@ echo validation_errors();
           </div>
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
-            <div class="columns"><label>Téléphone portable :</label></div><div class="columns end"><input type="text" name="telephone_portable" class="validate[required] telephone telephone_portable"></div>
+            <div class="columns"><label>Téléphone portable :</label></div><div class="columns end"><input type="text" name="telephone_portable" value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class="validate[required] telephone telephone_portable"></div>
           </div>
           <div class="row">
-            <div class="columns"><label>Téléphone de bureau :</label></div><div class="columns end"><input type="text" name="telephone_bureau" class="telephone_bureau telephone"></div>
+            <div class="columns"><label>Téléphone de bureau :</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="telephone_bureau telephone"></div>
           </div>
           <div class="row">
-            <div class="columns"><label>Téléphone du domicile :</label></div><div class="columns end"><input type="text" name="telephone_domicile" class="telephone_domicile telephone"></div>
+            <div class="columns"><label>Téléphone du domicile :</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="telephone_domicile telephone"></div>
           </div>
         </div>
       <!--adresse de facturation-->
@@ -92,7 +92,7 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="identique" name="check_adresse_facturation" checked="checked" id="check-adresse-facturation">
+              <input type="checkbox" value="true" name="check_adresse_facturation" <?php //echo empty(set_value("check_adresse_facturation",$check_adresse_facturation))?"checked='checked'":"";?> checked="checked" id="check-adresse-facturation">
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -110,32 +110,32 @@ echo validation_errors();
           </div>
           <!-- Nom -->
           <div class="row">
-            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_af" class="validate[required,maxSize[30]] nom"></div>
+            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_af" value="<?php echo set_value("nom_af",$nom_af);?>" class="validate[required,maxSize[30]] nom"></div>
           </div>
           <!--Prénom -->
           <div class="row">
-            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_af" class="validate[required,maxSize[30]] prenom"></div>
+            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_af" value="<?php echo set_value("prenom_af",$prenom_af);?>" class="validate[required,maxSize[30]] prenom"></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_af" class="numero"></div>
-            <div class="columns"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_af" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
+            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class="numero"></div>
+            <div class="columns"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" name="comp_numero_af" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
           </div>
           <!--Type Voie & Voie-->
           <div class="row">
-            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_af" class="validate[required] type_voie ui-autocomplete-input" autocomplete="off"></div>
-            <div class="columns"><label>Voie :</label></div><div class="three columns end"><input type="text" name="voie_af" class="validate[required,maxSize[32]] voie"></div>
+            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("type_voie_af",$type_voie_af);?>" name="type_voie_af" class="validate[required] type_voie ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Voie :</label></div><div class="three columns end"><input type="text" name="voie_af" value="<?php echo set_value("voie_af",$voie_af);?>" class="validate[required,maxSize[32]] voie"></div>
           </div>
           <!--Addresse suite-->
           <div class="row">
-            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_af" class="validate[maxSize[30]] adresse_suite"></div>
+            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_af" value="<?php echo set_value("adresse_suite_af",$adresse_suite_af);?>" class="validate[maxSize[30]] adresse_suite"></div>
           </div>
           <!--Code postal & Ville -->
           <div class="row">
             <div class="columns"><label>Code postal :</label></div>
-            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal2" name="code_postal_af" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal2" name="code_postal_af" value="<?php echo set_value("code_postal_af",$code_postal_af);?>" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
             <div class="columns"><label>Ville :</label></div>
-            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville2" name="ville_af" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville2" name="ville_af" value="<?php echo set_value("ville_af",$ville_af);?>" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
           </div>
         </div>
 
@@ -145,7 +145,7 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="check-adresse-livraison" name="check_adresse_livraison" checked="checked" id="check-adresse-livraison">
+              <input type="checkbox" value="true" name="check_adresse_livraison" checked="checked" <?php //echo empty(set_value("check_adresse_livraison",$check_adresse_livraison))?"checked='checked'":"";?> id="check-adresse-livraison">
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -163,57 +163,57 @@ echo validation_errors();
           </div>
           <!-- Nom -->
           <div class="row">
-            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_al" class="validate[required,maxSize[30]] nom"></div>
+            <div class="columns"><label>Nom :</label></div><div class="five columns end"><input type="text" name="nom_al" value="<?php echo set_value("nom_al",$nom_al);?>" class="validate[required,maxSize[30]] nom"></div>
           </div>
           <!--Prénom -->
           <div class="row">
-            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_al" class="validate[required,maxSize[30]] prenom"></div>
+            <div class="columns"><label>Prénom :</label></div><div class="five columns end"><input type="text" name="prenom_al" value="<?php echo set_value("prenom_al",$prenom_al);?>" class="validate[required,maxSize[30]] prenom"></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_al" class="numero"></div>
-            <div class="columns"><label>Complément numéro:</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_al" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
+            <div class="columns"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_al" value="<?php echo set_value("numero_al",$numero_al);?>" class="numero"></div>
+            <div class="columns"><label>Complément numéro:</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="comp_numero_al" value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" class="comp_numero ui-autocomplete-input" autocomplete="off"></div>              
           </div>
           <!--Type Voie-->
           <div class="row">
-            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_al" class="validate[required] type_voie ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><label>Type de Voie :</label></div><div class="columns two"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="type_voie_al" value="<?php echo set_value("type_voie_al",$type_voie_al);?>" class="validate[required] type_voie ui-autocomplete-input" autocomplete="off"></div>
             <div class="columns"><label>Voie :</label></div><div class="columns end"><input type="text" name="voie_al" class="validate[requiredmaxSize[200]] voie"></div>
           </div>
           <!--Addresse suite-->
           <div class="row">
-            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_al" class="validate[maxSize[64]] adresse_suite"></div>
+            <div class="columns"><label>Adresse suite :</label></div><div class="five columns end"><input type="text" name="adresse_suite_al" value="<?php echo set_value("adresse_suite_al",$adresse_suite_al);?>" class="validate[maxSize[64]] adresse_suite"></div>
           </div>
           <!--Ensemble-->
           <div class="row">
-            <div class="columns"><label>Ensemble</label></div><div class="columns five end"><input type="text" name="ensemble_al" class="validate[maxSize[20]] ensemble"></div>
+            <div class="columns"><label>Ensemble</label></div><div class="columns five end"><input type="text" name="ensemble_al" value="<?php echo set_value("ensemble_al",$ensemble_al);?>" class="validate[maxSize[20]] ensemble"></div>
           </div>
           <!--Batiment-->
           <div class="row">
-            <div class="columns"><label>Batiment :</label></div><div class="columns five end"><input type="text" name="batiment_al" class="validate[maxSize[4]] batiment"></div>
+            <div class="columns"><label>Batiment :</label></div><div class="columns five end"><input type="text" name="batiment_al" value="<?php echo set_value("batiment_al",$batiment_al);?>" class="validate[maxSize[4]] batiment"></div>
           </div>
           <!--Escalier & Etage-->
           <div class="row">
-            <div class="columns"><label>Escalier :</label></div><div class="columns five"><input type="text" name="escalier_al" class="validate[maxSize[2]] escalier"></div>
-            <div class="columns"><label>Etage :</label></div><div class="columns two end"><input type="text" name="etage_al" class="validate[maxSize[2]] etage"></div>
+            <div class="columns"><label>Escalier :</label></div><div class="columns five"><input type="text" name="escalier_al" value="<?php echo set_value("escalier_al",$escalier_al);?>" class="validate[maxSize[2]] escalier"></div>
+            <div class="columns"><label>Etage :</label></div><div class="columns two end"><input type="text" name="etage_al" value="<?php echo set_value("etage_al",$etage_al);?>" class="validate[maxSize[2]] etage"></div>
           </div>
           <!--Porte & logo-->
           <div class="row">
-            <div class="columns"><label>Porte :</label></div><div class="columns two"><input type="text" name="porte_al" class="validate[required,maxSize[30]] porte"></div>
-            <div class="columns"><label>Logo :</label></div><div class="columns three end"><input type="text" name="logo_al" class="validate[required,maxSize[30]] logo"></div>
+            <div class="columns"><label>Porte :</label></div><div class="columns two"><input type="text" name="porte_al" value="<?php echo set_value("porte_al",$porte_al);?>" class="validate[required,maxSize[30]] porte"></div>
+            <div class="columns"><label>Logo :</label></div><div class="columns three end"><input type="text" name="logo_al" value="<?php echo set_value("logo_al",$logo_al);?>" class="validate[required,maxSize[30]] logo"></div>
           </div>
           <!--Code postal & Ville -->
           <div class="row">
             <div class="columns"><label>Code postal :</label></div>
-            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal3" name="code_postal_al" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="codepostal3" name="code_postal_al" value="<?php echo set_value("code_postal_al",$code_postal_al);?>" class="validate[required] code_postal ui-autocomplete-input" autocomplete="off"></div>
             <div class="columns"><label>Ville :</label></div>
-            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville3" name="ville_al" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
+            <div class="columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" id="ville3" name="ville_al" value="<?php echo set_value("ville_al",$ville_al);?>" class="validate[required] ville ui-autocomplete-input" autocomplete="off"></div>
           </div>
         </div>
         <!--end of adresse de livraison-->
         <div class="row">
            <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="oui" name="livraison_express" class="left">
+              <input type="checkbox" value="true" name="livraison_express" <?php //echo empty(set_value("livraison_express",$livraison_express))?"checked='checked'":"";?> class="left">
               Je souhaite bénéficier gratuitement d'une livraison express (72 heures à partir du traitement de votre commande).<br>
             </label>
             <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>
@@ -237,15 +237,15 @@ echo validation_errors();
             </div>
             <div class="column twelve top-20">
               <label>Veuillez précisez une autre adresse de messagerie</label>
-              <input type="text" name="email" class="validate[required,custom[email]] six">
+              <input type="text" name="email" value="<?php echo set_value("email",$email);?>" class="validate[required,custom[email]] six">
             </div>
           </div>
 
           <!--type de facturation-->
           <h3>Type de facturation :</h3>
           <div class="row">
-            <div class="column four"><label><input type="radio" value="Electronique" name="type_de_facturation" checked=""> Electronique (gratuit)</label></div>
-            <div class="column four"> <label><input type="radio" value="Papier" name="type_de_facturation"> Facture papier(1,5€)</label></div>
+            <div class="column four"><label><input type="radio" value="Electronique (gratuit)" name="type_de_facturation"  <?php echo (set_value("livraison_express",$livraison_express)=="Electronique (gratuit)")?"checked='checked'":"";?>> Electronique (gratuit)</label></div>
+            <div class="column four"> <label><input type="radio" value="papier(1,5€)" name="type_de_facturation" <?php echo (set_value("type_de_facturation",$type_de_facturation)=="papier(1,5€)")?"checked='checked'":"";?>> Facture papier(1,5€)</label></div>
             <div class="column four"> </div>
           </div>
           
