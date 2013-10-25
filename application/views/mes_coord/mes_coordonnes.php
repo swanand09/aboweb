@@ -1,5 +1,7 @@
 <?php 
 echo validation_errors();
+echo "ck add fac: ".$check_adresse_facturation."<br>";
+echo "ck add liv: ".$check_adresse_livraison."<br>";
 
 ?>
 <script>  
@@ -92,7 +94,11 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="true" name="check_adresse_facturation" <?php echo empty($check_adresse_facturation)?"checked='checked'":"";?> id="check-adresse-facturation">
+                <?php if(!empty($check_adresse_facturation)){ ?>
+              <input type="checkbox" value="check adresse facturation" name="check_adresse_facturation" <?php echo empty($check_adresse_facturation)?"checked='checked'":"";?> id="check-adresse-facturation">
+                <?php }else{ ?>
+              <input type="checkbox" value="check adresse facturation" name="check_adresse_facturation" checked="checked" id="check-adresse-facturation">
+                <?php } ?>
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -145,7 +151,11 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="true" name="check_adresse_livraison" <?php echo empty($check_adresse_livraison)?"checked='checked'":"";?> id="check-adresse-livraison">
+             <?php if(!empty($check_adresse_livraison)){ ?>
+              <input type="checkbox" value="check adresse livraison" name="check_adresse_livraison" <?php echo empty($check_adresse_livraison)?"checked='checked'":"";?> id="check-adresse-livraison">
+             <?php }else{ ?> 
+              <input type="checkbox" value="check adresse livraison" name="check_adresse_livraison" checked="checked" id="check-adresse-livraison">
+             <?php } ?>
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -213,7 +223,7 @@ echo validation_errors();
         <div class="row">
            <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="true" name="livraison_express" <?php echo !empty($livraison_express)?"checked='checked'":"";?> class="left">
+              <input type="checkbox" value="check livraison express" name="livraison_express" <?php echo !empty($livraison_express)?"checked='checked'":"";?> class="left">
               Je souhaite bénéficier gratuitement d'une livraison express (72 heures à partir du traitement de votre commande).<br>
             </label>
             <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>

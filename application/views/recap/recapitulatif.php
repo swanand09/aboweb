@@ -15,7 +15,7 @@
             <?php echo $telephone_portable." ".$telephone_bureau." ".$telephone_domicile; ?>
         </span>
         
-        <?php if(empty($check_adresse_facturation)){ ?>
+        <?php if(empty($check_adresse_facturation)&&!isset($check_adresse_facturation)){ ?>
         <label class="top-20"><strong>Adresse de facturation)</strong></label>        
         <span class="val">
             <?php echo $civilite_af." ".$prenom_af." ".$nom_af; ?><br>
@@ -23,7 +23,7 @@
             <?php echo $adresse_suite_af." ".$code_postal_af." ".$ville_af; ?><br>
         </span>
         
-        <?php }if(empty($check_adresse_livraison)){ ?>
+        <?php }if(empty($check_adresse_livraison)&&!isset($check_adresse_livraison)){ ?>
         <label class="top-20"><strong>Adresse de livraison</strong></label>        
         <span class="val">
             <?php echo $civilite_al." ".$prenom_al." ".$nom_al; ?><br>
@@ -32,8 +32,8 @@
             <?php echo $etage_al." ".$porte_al." ".$logo_al; ?><br>
             <?php echo $code_postal_al." ".$ville_al; ?><br>
         </span>
-        <?php }if(!empty($livraison_express)){ ?>
-        <span class="val">Vous souhaitez une livraison express</span>
+        <?php }if(!empty($livraison_express)&&isset($livraison_express)){ ?>
+        <label class="top-20"><strong>Vous souhaitez une livraison express</strong></label>
         <?php }?>
         <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>" class="mail-link"><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>
          <label class="top-20"><strong>Type de facturation</strong></label>
