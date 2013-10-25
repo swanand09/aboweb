@@ -92,7 +92,7 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="true" name="check_adresse_facturation" <?php //echo empty(set_value("check_adresse_facturation",$check_adresse_facturation))?"checked='checked'":"";?> checked="checked" id="check-adresse-facturation">
+              <input type="checkbox" value="true" name="check_adresse_facturation" <?php echo empty($check_adresse_facturation)?"checked='checked'":"";?> id="check-adresse-facturation">
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -145,7 +145,7 @@ echo validation_errors();
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="true" name="check_adresse_livraison" checked="checked" <?php //echo empty(set_value("check_adresse_livraison",$check_adresse_livraison))?"checked='checked'":"";?> id="check-adresse-livraison">
+              <input type="checkbox" value="true" name="check_adresse_livraison" <?php echo empty($check_adresse_livraison)?"checked='checked'":"";?> id="check-adresse-livraison">
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -213,7 +213,7 @@ echo validation_errors();
         <div class="row">
            <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="true" name="livraison_express" <?php //echo empty(set_value("livraison_express",$livraison_express))?"checked='checked'":"";?> class="left">
+              <input type="checkbox" value="true" name="livraison_express" <?php echo !empty($livraison_express)?"checked='checked'":"";?> class="left">
               Je souhaite bénéficier gratuitement d'une livraison express (72 heures à partir du traitement de votre commande).<br>
             </label>
             <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>
@@ -244,9 +244,14 @@ echo validation_errors();
           <!--type de facturation-->
           <h3>Type de facturation :</h3>
           <div class="row">
-            <div class="column four"><label><input type="radio" value="Electronique (gratuit)" name="type_de_facturation"  <?php echo (set_value("livraison_express",$livraison_express)=="Electronique (gratuit)")?"checked='checked'":"";?>> Electronique (gratuit)</label></div>
-            <div class="column four"> <label><input type="radio" value="papier(1,5€)" name="type_de_facturation" <?php echo (set_value("type_de_facturation",$type_de_facturation)=="papier(1,5€)")?"checked='checked'":"";?>> Facture papier(1,5€)</label></div>
-            <div class="column four"> </div>
+             <?php if(!empty($type_de_facturation)){ ?>
+            <div class="column four"><label><input type="radio" value="Electronique (gratuit)" name="type_de_facturation"  <?php echo (set_value("type_de_facturation",$type_de_facturation)=="Electronique (gratuit)")?"checked='checked'":"";?>> Electronique (gratuit)</label></div>
+            <div class="column four end"> <label><input type="radio" value="papier(1,5€)" name="type_de_facturation" <?php echo (set_value("type_de_facturation",$type_de_facturation)=="papier(1,5€)")?"checked='checked'":"";?>> Facture papier(1,5€)</label></div>            
+             <?php }else{ ?>
+            <div class="column four"><label><input type="radio" value="Electronique (gratuit)" name="type_de_facturation"  checked="checked"> Electronique (gratuit)</label></div>
+            <div class="column four end"> <label><input type="radio" value="papier(1,5€)" name="type_de_facturation"> Facture papier(1,5€)</label></div>            
+             <?php } ?>
+<!--            <div class="column four"> </div>-->
           </div>
           
           <!-- Sexy line -->
