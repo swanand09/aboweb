@@ -24,9 +24,14 @@ var preload = function(){
                          },
                         function(data){
                           //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+                          $.unblockUI(); 
+                         if(data.error==true){
+                              alert("Veuillez re-essayer votre numéro n'est pas éligible");                              
+                              return false;
+                          }
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
                           $("#recap_contenu").empty().prepend(data[1].form_test_ligne);                     
-                          $.unblockUI();                    
+                                            
                         }, "json"
                     );
                     return false; 

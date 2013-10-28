@@ -251,3 +251,4 @@
         </div>
 
         </form>
+<?php  echo js('tv_option.js'); ?>

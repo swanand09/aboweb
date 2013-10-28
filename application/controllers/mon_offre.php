@@ -43,8 +43,6 @@ class Mon_offre extends MY_Controller {
              return $this->ajax_proc_interogeligib($num_tel);
         }
         
-        
-       
        
         return $this->controller_test_eligib_vue($num_tel);                
     }
@@ -53,29 +51,19 @@ class Mon_offre extends MY_Controller {
     public function determine_location()
     {
        $this->load->model('geolocalisation_model','geoloca'); 
-       switch($this->geoloca->getDepartment()){
-            case "Martinique":
-                return "0596";
-            break;
-
-            case "Guadeloupe":
-                return "0590";
-            break;
-
-            case "Reunion":
-                return "0262";
-            break;
-
-            case "Guyane":
-                return "0594";
-            break;
-
-            case "Iles du Nord":
-               return "0605";
-            break;
-            default: return "0590";
-       }
-       
+        return $this->validPrefix[$this->geoloca->getDepartment()];
+    }
+    
+    //test prefix of numbers entered
+    public function validateNum($prefix_num)
+    {
+        $prefix_num = substr($prefix_num,0,4);
+        foreach($this->validPrefix as $key=>$val){
+            if($prefix_num==$val){
+                return true;
+            }
+        }
+        return false;
     }
     
     //connection avec le webservice fontionalite interrogeEligibilite - ajax
@@ -86,8 +74,10 @@ class Mon_offre extends MY_Controller {
         
         $data["num_tel"] = $num_tel; 
         $data["result"] = "";
-        if($num_tel!="")
+        $data["error"]  = true;
+        if($num_tel!=""&&$this->validateNum($num_tel))
         {       
+           
             $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
             if(!empty($result))
@@ -95,6 +85,7 @@ class Mon_offre extends MY_Controller {
                 $data["result"] = $result;               
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
                {                  
+                    $data["error"]  = false;
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
                     $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);
                     $this->session->set_userdata('offreparrainage_id',$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]);
@@ -145,7 +136,7 @@ class Mon_offre extends MY_Controller {
          redirect("mon_offre");
       }
       //echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
-     echo json_encode(array($this->contenuGauche,$this->colonneDroite));
+     echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"]));
     }
     
     public function forfait()

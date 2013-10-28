@@ -15,15 +15,15 @@
             <?php echo $telephone_portable." ".$telephone_bureau." ".$telephone_domicile; ?>
         </span>
         
-        <?php if(empty($check_adresse_facturation)&&!isset($check_adresse_facturation)){ ?>
-        <label class="top-20"><strong>Adresse de facturation)</strong></label>        
+        <?php if(empty($check_adresse_facturation)){ ?>
+        <label class="top-20"><strong>Adresse de facturation</strong></label>        
         <span class="val">
             <?php echo $civilite_af." ".$prenom_af." ".$nom_af; ?><br>
             <?php echo $numero_af." ".$comp_numero_af." ".$type_voie_af." ".$voie_af; ?><br>
             <?php echo $adresse_suite_af." ".$code_postal_af." ".$ville_af; ?><br>
         </span>
         
-        <?php }if(empty($check_adresse_livraison)&&!isset($check_adresse_livraison)){ ?>
+        <?php }if(empty($check_adresse_livraison)){ ?>
         <label class="top-20"><strong>Adresse de livraison</strong></label>        
         <span class="val">
             <?php echo $civilite_al." ".$prenom_al." ".$nom_al; ?><br>

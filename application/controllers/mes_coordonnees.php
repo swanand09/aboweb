@@ -114,7 +114,7 @@ class Mes_coordonnees extends MY_Controller {
         
         
         if(!array_key_exists("check_adresse_facturation",$this->data['userdata'])){
-            $this->session->set_userdata('check_adresse_facturation',"");
+            $this->session->set_userdata('check_adresse_facturation',"check adresse facturation");
         }
         //Adresse de facturation
         if(!array_key_exists("civilite_af",$this->data['userdata'])){
@@ -151,7 +151,7 @@ class Mes_coordonnees extends MY_Controller {
         
         
         if(!array_key_exists("check_adresse_livraison",$this->data['userdata'])){
-            $this->session->set_userdata('check_adresse_livraison',"");
+            $this->session->set_userdata('check_adresse_livraison',"check adresse livraison");
         }
         //Adresse de livraison
         if(!array_key_exists("civilite_al",$this->data['userdata'])){

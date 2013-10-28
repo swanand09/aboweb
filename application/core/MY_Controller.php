@@ -10,6 +10,7 @@ class MY_Controller extends CI_Controller {
         var $idParcours;
         var $totalParMois;
         var $iad;
+        var $validPrefix   = array();
         public function __construct()
 	{
             parent::__construct(); 
@@ -32,6 +33,12 @@ class MY_Controller extends CI_Controller {
             $this->idParcours = "";
             $this->totalParMois = "";
             $this->iad = "";
+            $this->validPrefix = array("Martinique"     =>  "0596",
+                                       "Guadeloupe"     =>  "0590",
+                                       "Reunion"        =>  "0262",
+                                       "Guyane"         =>  "0594",
+                                       "Iles du Nord"   =>  "0605"
+            );
 	}  	
         
         //verification expiration de la session

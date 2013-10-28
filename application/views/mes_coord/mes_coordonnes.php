@@ -1,8 +1,5 @@
 <?php 
 echo validation_errors();
-echo "ck add fac: ".$check_adresse_facturation."<br>";
-echo "ck add liv: ".$check_adresse_livraison."<br>";
-
 ?>
 <script>  
     /*
@@ -94,11 +91,11 @@ echo "ck add liv: ".$check_adresse_livraison."<br>";
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-                <?php if(!empty($check_adresse_facturation)){ ?>
-              <input type="checkbox" value="check adresse facturation" name="check_adresse_facturation" <?php echo empty($check_adresse_facturation)?"checked='checked'":"";?> id="check-adresse-facturation">
-                <?php }else{ ?>
-              <input type="checkbox" value="check adresse facturation" name="check_adresse_facturation" checked="checked" id="check-adresse-facturation">
-                <?php } ?>
+                <?php //if(empty($check_adresse_facturation)){ ?>
+              <input type="checkbox" value="check adresse facturation" name="check_adresse_facturation" <?php echo !empty($check_adresse_facturation)?"checked='checked'":"";?> id="check-adresse-facturation">
+                <?php //}else{ ?>
+        <!--  <input type="checkbox" value="check adresse facturation" name="check_adresse_facturation" checked="checked" id="check-adresse-facturation">-->
+                <?php //} ?>
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -109,9 +106,9 @@ echo "ck add liv: ".$check_adresse_livraison."<br>";
           <div class="row">
             <div class="columns bottom-10"><label>Civilité:</label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite_af" class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_af" class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_af" class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="M." name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Melle")?"checked='checked'":"";?> class="validate[required]">Melle</label>
             </div>
           </div>
           <!-- Nom -->
@@ -151,11 +148,11 @@ echo "ck add liv: ".$check_adresse_livraison."<br>";
         <div class="row">
           <div class="column twelve bottom-10">
             <label>
-             <?php if(!empty($check_adresse_livraison)){ ?>
-              <input type="checkbox" value="check adresse livraison" name="check_adresse_livraison" <?php echo empty($check_adresse_livraison)?"checked='checked'":"";?> id="check-adresse-livraison">
-             <?php }else{ ?> 
-              <input type="checkbox" value="check adresse livraison" name="check_adresse_livraison" checked="checked" id="check-adresse-livraison">
-             <?php } ?>
+             <?php //if(!empty($check_adresse_livraison)){ ?>
+              <input type="checkbox" value="check adresse livraison" name="check_adresse_livraison" <?php echo !empty($check_adresse_livraison)?"checked='checked'":"";?> id="check-adresse-livraison">
+             <?php //}else{ ?> 
+<!--              <input type="checkbox" value="check adresse livraison" name="check_adresse_livraison" checked="checked" id="check-adresse-livraison">-->
+             <?php ///} ?>
               Identique à l'adresse d'installation
             </label>
           </div>
@@ -166,9 +163,9 @@ echo "ck add liv: ".$check_adresse_livraison."<br>";
           <div class="row">
             <div class="columns bottom-10"><label>Civilité:</label></div>
             <div class="five columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite_al" class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_al" class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_al" class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="M." name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">Melle</label>
             </div>
           </div>
           <!-- Nom -->

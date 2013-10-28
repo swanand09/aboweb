@@ -39,20 +39,20 @@ class Recapitulatif extends MY_Controller {
         
         
 
-        $this->data['civilite_aa'] = $this->input->post("civilite_aa");
-        $this->data['nom_aa'] = $this->input->post("nom_aa");
-        $this->data['prenom_aa'] = $this->input->post("prenom_aa");
-        $this->data['numero_aa'] = $this->input->post("numero_aa");
-        $this->data['comp_numero_aa'] = $this->input->post("comp_numero_aa");
-        $this->data['type_voie_aa'] = $this->input->post("type_voie_aa");
-        $this->data['voie_aa'] = $this->input->post("voie_aa");
+        $this->data['civilite_aa']      = $this->input->post("civilite_aa");
+        $this->data['nom_aa']           = $this->input->post("nom_aa");
+        $this->data['prenom_aa']        = $this->input->post("prenom_aa");
+        $this->data['numero_aa']        = $this->input->post("numero_aa");
+        $this->data['comp_numero_aa']   = $this->input->post("comp_numero_aa");
+        $this->data['type_voie_aa']     = $this->input->post("type_voie_aa");
+        $this->data['voie_aa']          = $this->input->post("voie_aa");
         $this->data['adresse_suite_aa'] = $this->input->post("adresse_suite_aa");
-        $this->data['ensemble_aa'] = $this->input->post("ensemble_aa");
-        $this->data['batiment_aa'] = $this->input->post("batiment_aa");
-        $this->data['escalier_aa'] = $this->input->post("escalier_aa");
-        $this->data['etage_aa'] = $this->input->post("etage_aa");
-        $this->data['porte_aa'] = $this->input->post("porte_aa");
-        $this->data['logo_aa'] = $this->input->post("logo_aa");
+        $this->data['ensemble_aa']      = $this->input->post("ensemble_aa");
+        $this->data['batiment_aa']      = $this->input->post("batiment_aa");
+        $this->data['escalier_aa']      = $this->input->post("escalier_aa");
+        $this->data['etage_aa']         = $this->input->post("etage_aa");
+        $this->data['porte_aa']         = $this->input->post("porte_aa");
+        $this->data['logo_aa']          = $this->input->post("logo_aa");
         $this->data['code_postal_aa'] = $this->input->post("code_postal_aa");
         $this->data['ville_aa'] = $this->input->post("ville_aa");
         $this->data['telephone_portable'] = $this->input->post("telephone_portable");

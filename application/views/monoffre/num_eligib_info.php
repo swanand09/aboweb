@@ -12,30 +12,29 @@ $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_rec
     /*------------------------------------------------
 	* Jquery Meter Gauge
 	------------------------------------------------*/
-if($('.debit_emission').length > 0 )
-  {
-  var g1 = new JustGage({
+        if($('.debit_emission').length > 0 )
+        {
+          var g1 = new JustGage({
 
-          id: "g1", 
-          value: <?php echo $debit_emis;?>, 
-          min: 0,
-          max: <?php echo $max_emis; ?>,
-          title: "Débit d’émission",
-          label: "Mbps",
-          levelColors: ['95bc46','95bc46'],
-        });
+                  id: "g1", 
+                  value: <?php echo $debit_emis;?>, 
+                  min: 0,
+                  max: <?php echo $max_emis; ?>,
+                  title: "Débit d’émission",
+                  label: "Mbps",
+                  levelColors: ['95bc46','95bc46'],
+                });
 
-
-	var g2 = new JustGage({
-	      id: "g2", 
-	      value: <?php echo $debit_recu;?>, 
-	      min: 0,
-	      max: <?php echo $max_recu; ?>,
-	      title: "Débit de réception",
-	      label: "Mbps",
-	      levelColors: ['95bc46','95bc46'],
-	    });
-    }
+            var g2 = new JustGage({
+                  id: "g2", 
+                  value: <?php echo $debit_recu;?>, 
+                  min: 0,
+                  max: <?php echo $max_recu; ?>,
+                  title: "Débit de réception",
+                  label: "Mbps",
+                  levelColors: ['95bc46','95bc46'],
+                });
+         }
     
     
 });

@@ -116,9 +116,9 @@
         echo js('jquery.maskedinput.min.js');
         echo js('jquery.validationEngine.js');
         echo js('languages/jquery.validationEngine-fr.js');
-        echo js('tv_option.js');
+//        echo js('tv_option.js');
         echo js('custom.js');
-        echo js('custom_autocomplete');
+        echo js('custom_autocomplete.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 
   <h3 id="prlodtxt">Veuillez patienter...</h3> 
