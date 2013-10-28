@@ -168,28 +168,45 @@ $(function () {
 		
 	});
 
-	/*------------------------------------
-	* Page Mes coordonées checkbox event
-	------------------------------------*/
-	$('#check-adresse-facturation').click(function(){
-		if($(this).is(":checked")) {
-			$('.adresse-facturation').addClass('hide');
-		}
-		else
-		{
-			$('.adresse-facturation').removeClass('hide');
-		}
-	});
-
-	$('#check-adresse-livraison').click(function(){
-		if($(this).is(":checked")) {
-			$('.adresse-livraison').addClass('hide');
-		}
-		else
-		{
-			$('.adresse-livraison').removeClass('hide');
-		}
-	});
+        /*------------------------------------
+         * Page Mes coordonées checkbox event
+         ------------------------------------*/
+        //on click
+        $('#check-adresse-facturation').click(function() {
+            if ($(this).is(":checked")) {
+                $('.adresse-facturation').addClass('hide');
+            }
+            else
+            {
+                $('.adresse-facturation').removeClass('hide');
+            }
+        });
+        //on load
+        if ($('#check-adresse-facturation').is(":checked")) {
+            $('.adresse-facturation').addClass('hide');
+        }
+        else
+        {
+            $('.adresse-facturation').removeClass('hide');
+        }
+        //on click
+        $('#check-adresse-livraison').click(function() {
+            if ($(this).is(":checked")) {
+                $('.adresse-livraison').addClass('hide');
+            }
+            else
+            {
+                $('.adresse-livraison').removeClass('hide');
+            }
+        });
+        //on load
+        if ($('#check-adresse-livraison').is(":checked")) {
+            $('.adresse-livraison').addClass('hide');
+        }
+        else
+        {
+            $('.adresse-livraison').removeClass('hide');
+        }
 
 	/*---------------------------------
 	* JQuery Shuffle Plugin
