@@ -2,34 +2,50 @@ $(function () {
 
 	//Set initial active state
 	currentEtape();
+	$('.etapes li[data-nav="not-allowed"]').click(function(){
+		return false;
+	})
 
-	//Hover etape 1
-	$('li.etape1').mouseover(function(){
-		etape1();
-	}).mouseout(function(){
-		currentEtape();
-	});
+	if($('li.etape1').attr('data-nav') == 'allowed')
+	{
+		//Hover etape 1
+		$('li.etape1').mouseover(function(){
+			etape1();
+		}).mouseout(function(){
+			currentEtape();
+		});
+	}
 
-	//Hover etape 2
-	$('li.etape2').mouseover(function(){
-		etape2();
-	}).mouseout(function(){
-		currentEtape();
-	});
 
-	//Hover etape 3
-	$('li.etape3').mouseover(function(){
-		etape3();
-	}).mouseout(function(){
-		currentEtape();
-	});
+	if($('li.etape2').attr('data-nav') == 'allowed')
+	{
+		//Hover etape 2
+		$('li.etape2').mouseover(function(){
+			etape2();
+		}).mouseout(function(){
+			currentEtape();
+		});
+	}
 
+	if($('li.etape3').attr('data-nav') == 'allowed')
+	{
+		//Hover etape 3
+		$('li.etape3').mouseover(function(){
+			etape3();
+		}).mouseout(function(){
+			currentEtape();
+		});
+	}
+
+	if($('li.etape4').attr('data-nav') == 'allowed')
+	{
 	//Hover etape 4
-	$('li.etape4').mouseover(function(){
-		etape4();
-	}).mouseout(function(){
-		currentEtape();
-	});
+		$('li.etape4').mouseover(function(){
+			etape4();
+		}).mouseout(function(){
+			currentEtape();
+		});
+	}
 
 	//hide parrain textboxes on load
 	$('.parrain-section').hide();
@@ -49,6 +65,7 @@ $(function () {
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
 	$('.numero').mask("99999");
+	$('#ligne').mask("9999999999");
 
 	/*-------------------------------------/
 	* Validation Engine
@@ -175,10 +192,27 @@ $(function () {
 	});
 
 	/*---------------------------------
-	* JQuery filter
+	* JQuery Shuffle Plugin
 	-----------------------------------*/
-	 //$('#grid').mixitup();
 
+/*	$('.accordion li.second').click(function (e) {
+		e.preventDefault();
+		$('#filter a').removeClass('active');
+		$('#filter > li a').addClass('active');
+		$('.grid').shuffle('shuffle', 'mega' );
+	});
+
+	$('#filter a').click(function (e) {
+		e.preventDefault();
+		// set active class
+		$('#filter a').removeClass('active');
+		$(this).addClass('active');
+		// get group name from clicked item
+		var groupName = $(this).attr('data-group');
+		// reshuffle grid
+		$('.grid').shuffle('shuffle', groupName );
+	});
+*/
 });
 
 

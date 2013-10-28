@@ -13,6 +13,9 @@
 	position: relative;
 }
 
+.block-grid.etapes li[data-nav='not-allowed'] a {
+  cursor:default;
+}
 .block-grid.etapes li a {
   font-size: 20px;
   left: 34px;

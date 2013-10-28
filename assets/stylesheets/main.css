@@ -518,11 +518,82 @@ ul.bqt {
     margin:0;
     border: 1px solid #E3E3E3;
 }
-ul.bqt  li{
+ul.bqt li{
     display: inline;
     list-style: none outside none;
 }
 
+
+
+.accordion .second .content { padding-left: 0; padding-right: 0;  padding-bottom: 0; }
+.chaines ul.bqt{
+	border: medium none;
+	padding-left: 0;
+	padding-right: 0;
+}
+#filter {
+	list-style: none outside none;
+    margin-left: 0;
+}
+#filter .columns.five { margin-top: 9px;}
+#filter .columns.seven { margin-top: 22px;}
+#filter li.active span,#filter li.active label,#filter li:hover span,#filter li:hover label{
+	color: #9AC447;
+}
+#filter li.active, #filter li:hover {
+	color: #9AC447;
+	background-color: #f6f5f5;
+}
+
+#filter li{
+	border-bottom:1px solid #dde1d6;
+	background-color: #EAEAE9;
+	text-align:center;
+	font-family: freeroadregular;
+}
+#filter li a {
+	display: block;
+	height: 105px;
+	font-weight: bold;
+	color: #AAAAAA;
+}
+#filter li label { color:#AAA;}
+#filter li .five .nombre_chaines {
+	font-size: 42px;
+}
+#filter li .five label {
+	font-size: 19px;
+	margin-top: -18px;
+}
+#filter li .seven .prix {
+	font-size: 34px;
+}
+#filter li .seven label {
+	font-size: 18px;
+    margin-bottom: -10px;
+}
+
+.columns.eight.chaines {
+    color: #F6F5F5;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 20px !important;
+    background-color: #F6F5F5;
+}
+.accordion .second .content > .row {
+	width: 724px;
+}
+.accordion .second .content  .row .ultra {
+	background: none repeat scroll 0 0 #EDEDED;
+    margin-left: -19px;
+    padding-left: 19px;
+    width: 482px;
+}
+.accordion .second .content  .row .ultra.ufirst{
+	border-bottom: 1px solid;
+}
+.columns.four.bouquet {padding-right:0 !important;}
+.columns.eight.chaines .row{ margin: 0;}
 
 /*Active menu*/
 .bouquet.active, .bouquet.active h4 {
@@ -534,7 +605,7 @@ ul.bqt  li{
 	padding-top: 6px;
 }
 
-.chaines .row h4{
+.chaines .row h4 {
 	font-size: 17px;
     font-weight: normal;
     margin-bottom: 0;
@@ -544,6 +615,13 @@ ul.bqt  li{
 	font-size:1em;
 	font-weight: normal;
 }
+#grid {
+
+}
+#grid li {
+	
+}
+
 /*
 * Modal 
 */

@@ -11,6 +11,7 @@ class MY_Controller extends CI_Controller {
         var $totalParMois;
         var $iad;
         var $validPrefix   = array();
+        //var $etapes_url    = array();
         public function __construct()
 	{
             parent::__construct(); 
@@ -39,6 +40,8 @@ class MY_Controller extends CI_Controller {
                                        "Guyane"         =>  "0594",
                                        "Iles du Nord"   =>  "0605"
             );
+            //$this->etapes_url            = array("#","#","#","#");
+            
 	}  	
         
         //verification expiration de la session
@@ -57,12 +60,14 @@ class MY_Controller extends CI_Controller {
         //configuration de la vue principal contenu droit et gauche       
         public function controller_test_eligib_vue()
         {
-           $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-           $this->data["pageid"] ="page-etape-1";
-           $this->data["etapes_url"][0] = "#";
-           $this->data["etapes_url"][1] = "#";
-           $this->data["etapes_url"][2] = "#";
-           $this->data["etapes_url"][3] = "#";
+           $this->data['message']       = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+           $this->data["pageid"]        = "page-etape-1";
+           $this->data["etapes_url"]    = array("#","#","#","#");
+           $this->data["allow"]    = array("allowed","not-allowed","not-allowed","not-allowed");
+//           $this->data["etapes_url"][0] = "#";
+//           $this->data["etapes_url"][1] = "#";
+//           $this->data["etapes_url"][2] = "#";
+//           $this->data["etapes_url"][3] = "#";
            $this->data["colonneDroite"] = $this->colonneDroite;           
            $this->data["contenuGauche"] = $this->contenuGauche;
            $this->template
@@ -76,10 +81,12 @@ class MY_Controller extends CI_Controller {
         public function controller_mes_coord_vue()
         {
             $this->data["pageid"] ="page-etape-2";
-            $this->data["etapes_url"][0] = "mon_offre";
-            $this->data["etapes_url"][1] = "#";
-            $this->data["etapes_url"][2] = "#";
-            $this->data["etapes_url"][3] = "#";
+            $this->data["etapes_url"]    = array("mon_offre","#","#","#");
+            $this->data["allow"]    = array("allowed","allowed","not-allowed","not-allowed");
+//            $this->data["etapes_url"][0] = "mon_offre";
+//            $this->data["etapes_url"][1] = "#";
+//            $this->data["etapes_url"][2] = "#";
+//            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -93,10 +100,12 @@ class MY_Controller extends CI_Controller {
         public function controller_recap_vue()
         {
             $this->data["pageid"] ="page-etape-3";
-            $this->data["etapes_url"][0] = "mon_offre";     
-            $this->data["etapes_url"][1] = "mes_coordonnees";
-            $this->data["etapes_url"][2] = "#";
-            $this->data["etapes_url"][3] = "#";
+            $this->data["etapes_url"]    = array("mon_offre","mes_coordonnees","#","#");
+            $this->data["allow"]    = array("allowed","allowed","allowed","not-allowed");
+//            $this->data["etapes_url"][0] = "mon_offre";     
+//            $this->data["etapes_url"][1] = "mes_coordonnees";
+//            $this->data["etapes_url"][2] = "#";
+//            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -110,10 +119,12 @@ class MY_Controller extends CI_Controller {
         public function controller_paiement_vue()
         {
             $this->data["pageid"] ="page-etape-4";
-            $this->data["etapes_url"][0] = "mon_offre";     
-            $this->data["etapes_url"][1] = "mes_coordonnees";
-            $this->data["etapes_url"][2] = "recapitulatif";
-            $this->data["etapes_url"][3] = "#";
+            $this->data["etapes_url"]    = array("mon_offre","mes_coordonnees","recapitulatif","#");
+            $this->data["allow"]    = array("allowed","allowed","allowed","allowed");
+//            $this->data["etapes_url"][0] = "mon_offre";     
+//            $this->data["etapes_url"][1] = "mes_coordonnees";
+//            $this->data["etapes_url"][2] = "recapitulatif";
+//            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
