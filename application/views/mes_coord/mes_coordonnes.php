@@ -164,8 +164,8 @@ echo validation_errors();
             <div class="columns bottom-10"><label>Civilité:</label></div>
             <div class="five columns bottom-10 end">
               <label class="left"><input type="radio" value="M." name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
+              <label class="left"><input type="radio" value="Melle" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Melle")?"checked='checked'":"";?> class="validate[required]">Melle</label>
             </div>
           </div>
           <!-- Nom -->
