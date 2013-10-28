@@ -281,7 +281,7 @@ class Mon_offre extends MY_Controller {
                     case "dummy5":
                            foreach($val as $val2){
                                 $data["caution_dummy5"] = $val2["Tarif"];   
-                                $data["totalParMois"] = $this->getTotal($val2["Tarif"]);       
+                               // $data["totalParMois"] = $this->getTotal($val2["Tarif"]);       
                                 $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
                            }
                     break;
@@ -353,7 +353,11 @@ class Mon_offre extends MY_Controller {
         $decoder_tv   =  $this->input->post('decoder_tv');     
         $beneficierTv  = explode("_",$beneficierTv);             
         $data["decoder_tv"]    = $decoder_tv; 
-        $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
+//        if($beneficierTv[0]=="dummy4"){
+//            $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
+//        }
+        
+        //les tarifs bouquets
         $tarifBouqTv = $this->session->userdata("tarifBouqTv");
         if(!empty($tarifBouqTv)){
            $data["totalParMois"] = $this->getTotal(-$tarifBouqTv); 
@@ -367,12 +371,18 @@ class Mon_offre extends MY_Controller {
                    $data["oneshot_dummy7"] = "";
                    $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
                    $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
+                   
+                   //total par mois
+                   $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
             break;
             case "dummy7":
                    $data["beneficierTv"]  = "";
                    $data["oneshot_dummy7"] = $beneficierTv[1];
                    $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
                    $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
+                   
+                    //total par mois
+                   $data["totalParMois"] = $this->session->userdata('totalParMois');
             break;
         }
 
