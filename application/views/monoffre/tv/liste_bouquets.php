@@ -15,8 +15,8 @@
            $('.accordion .first').addClass('active');	
 	   $('.accordion .first .content').css({ display: 'block'});
            
-           $("#option_eden").removeAttr("Disabled");
-           $("#option_bein").removeAttr("Disabled");
+//           $("#option_eden").removeAttr("Disabled");
+//           $("#option_bein").removeAttr("Disabled");
            
        }else{          
            $("#decodeur-tv-netgem").removeAttr("Checked");
