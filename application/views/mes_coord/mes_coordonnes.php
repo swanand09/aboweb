@@ -17,6 +17,7 @@ echo validation_errors();
 </script>
 <div class="left-etape-content">
     <form action="recapitulatif" method="POST" id="mes-coordonnees">
+        <input type="hidden" name="page_3" value="mes_coordonnes" />
       <!--Adresse coordonnées-->
         <div class="adresse-abonnement">
           <h3>COORDONNÉES (ADRESSES ABONNEMENT):</h3>

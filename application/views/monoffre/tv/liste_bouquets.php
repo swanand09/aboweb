@@ -42,10 +42,10 @@
       var prix_option = "";
        $("#bouquet_ultra").click(function(){              
             if($("#bouquet_ultra").is(":checked")){   
-                $("#option_eden").attr("checked","checked");
                 $("#option_eden").attr("disabled","disabled");
-                $("#option_bein").attr("checked","checked");
+                $("#option_eden").attr("checked","checked");
                 $("#option_bein").attr("disabled","disabled");
+                $("#option_bein").attr("checked","checked");                
                 prix_option = $(".prix_opt").html();
                 $(".prix_opt").empty().append("inclus");
             }
