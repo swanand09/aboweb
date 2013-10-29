@@ -18,15 +18,14 @@ class Mon_offre extends MY_Controller {
         }
         
         $this->data["userdata"] = $this->session->all_userdata();  
-        
        
         $data['num_tel'] = array(
-                                        'name' => 'num_tel',
-                                        'id' => 'ligne',
-                                        'type' => 'text',
-                                        'class' => 'validate[required,custom[onlyNumberSp],minSize[10],maxSize[10]]',
-                                        'value' => $this->determine_location()  //recuperation department 
-                                     );
+                                    'name' => 'num_tel',
+                                    'id' => 'ligne',
+                                    'type' => 'text',
+                                    'class' => 'validate[required,custom[onlyNumberSp],minSize[10],maxSize[10]]',
+                                    'value' => $this->determine_location()  //recuperation department 
+                              );
         $data['test_eligb_butt'] = array(
                                             'class'=>'rmv-std-btn btn-green',
                                             'name' => 'test_eligb_butt',
@@ -39,11 +38,9 @@ class Mon_offre extends MY_Controller {
         
         //verifie si numero tel est saisi depuis la site box
         if(!empty($num_tel)){
-           
              return $this->ajax_proc_interogeligib($num_tel);
         }
         
-       
         return $this->controller_test_eligib_vue($num_tel);                
     }
    
@@ -76,8 +73,7 @@ class Mon_offre extends MY_Controller {
         $data["result"] = "";
         $data["error"]  = true;
         if($num_tel!=""&&$this->validateNum($num_tel))
-        {       
-           
+        {   
             $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
             if(!empty($result))
@@ -121,10 +117,7 @@ class Mon_offre extends MY_Controller {
                     $data["choix_forfait"] = $choix_forfait;                    
                     $this->colonneDroite["form_test_ligne"] = $this->load->view("general/form_test_ligne",$data,true);
                     
-                    //to review
-                    $this->session->set_userdata('totalParMois',"");
-                    $data["totalParMois"] = "";
-                    $this->colonneDroite["total_par_mois"] =  $this->load->view("general/total_mois",$data,true);
+                    
                 }
             }
       }  
@@ -189,6 +182,12 @@ class Mon_offre extends MY_Controller {
            // $this->colonneDroite["offre_mediaserv"] = $this->load->view("general/offre_mediaserv",$data,true);
             $this->colonneDroite["forfait_dummy1"] = $this->load->view("general/forfait_dummy1",$data,true);
         }      
+        
+        
+        //to review total
+        $this->session->set_userdata('totalParMois',"");
+//        $data["totalParMois"] = "";
+//        $this->colonneDroite["total_par_mois"] =  $this->load->view("general/total_mois",$data,true);
        
        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
       echo json_encode(array($this->contenuGauche,$this->colonneDroite));   
@@ -232,8 +231,14 @@ class Mon_offre extends MY_Controller {
     
     public function refreshRecapCol()
     {
-         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+         $this->controller_verifySessExp()? redirect('mon_offre'):"";
+         
+         //initialiser les tarrifs a zéro pour le panier
          $this->session->set_userdata('totalParMois',$this->totalParMois);
+         $this->session->set_userdata("tarifBouqTv","");
+         $this->session->set_userdata("tarifOptionEden","");
+         $this->session->set_userdata("tarifOptionBein","");
+          
          $prevState = $this->session->userdata("prevState");
          $data["promo_libelle"] = $this->session->userdata("promo");
          $this->iad = $this->session->userdata("iad");
@@ -387,8 +392,8 @@ class Mon_offre extends MY_Controller {
         }
 
         $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
-        $prevState[0]["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);
-        //$this->session->set_userdata('prevState',$prevState);            
+      //  $prevState[0]["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);
+        $this->session->set_userdata('prevState',$prevState);            
         echo json_encode(array("location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],"frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
     }
     
@@ -397,13 +402,23 @@ class Mon_offre extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $bouquetTv =  $this->input->post("bouquetTv");
         $data["bouquetTv"] = $bouquetTv;
-         if(!empty($bouquetTv)){
+         
+        //verifier si les options en session contiennent des valeurs
+        $tarifOptionEden = $this->session->userdata("tarifOptionEden"); 
+        $tarifOptionBein = $this->session->userdata("tarifOptionBein");
+                
+        if(!empty($bouquetTv)){
             $this->session->set_userdata("bouquetTv",$bouquetTv); 
             $bouquetTv = explode("_",$bouquetTv); 
             $tarifBouqTv = $this->session->userdata("tarifBouqTv");
             if(!empty($tarifBouqTv)){
               $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);
               $this->session->set_userdata("tarifBouqTv","");
+              $data["totalParMois"] = $this->getTotal(-$tarifOptionEden);
+              $this->session->set_userdata("tarifOptionEden",""); 
+              $data["totalParMois"] = $this->getTotal(-$tarifOptionBein);
+              $this->session->set_userdata("tarifOptionBein","");
+              
             }
             $data["totalParMois"] = $this->getTotal($bouquetTv[1]);
             $this->session->set_userdata("tarifBouqTv",$bouquetTv[1]);           
@@ -411,6 +426,7 @@ class Mon_offre extends MY_Controller {
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
+        $this->session->set_userdata("prevState",$prevState);
         echo json_encode(array("options_dummy3"=>$prevState[1]["options_dummy3"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
     }
     
@@ -453,6 +469,7 @@ class Mon_offre extends MY_Controller {
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
+        $this->session->set_userdata("prevState",$prevState);
         echo json_encode(array("options_dummy3"=>$prevState[1]["options_dummy3"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
     }
     

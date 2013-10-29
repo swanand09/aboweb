@@ -39,10 +39,33 @@
            $("#option_bein").attr("Disabled","Disabled");
        }  
       }); 
-       $("#bouquet_ultra").click(function(){  
+      var prix_option = "";
+       $("#bouquet_ultra").click(function(){              
             if($("#bouquet_ultra").is(":checked")){   
                 $("#option_eden").attr("checked","checked");
+                $("#option_eden").attr("disabled","disabled");
                 $("#option_bein").attr("checked","checked");
+                $("#option_bein").attr("disabled","disabled");
+                prix_option = $(".prix_opt").html();
+                $(".prix_opt").empty().append("inclus");
+            }
+      });
+       $("#bouquet_mega").click(function(){            
+            if($("#bouquet_mega").is(":checked")){   
+                $("#option_eden").removeAttr("checked");
+                $("#option_bein").removeAttr("checked");
+                $("#option_eden").removeAttr("disabled");
+                $("#option_bein").removeAttr("disabled");
+                $(".prix_opt").empty().append(prix_option);
+            }
+      });
+       $("#bouquet_giga").click(function(){            
+            if($("#bouquet_giga").is(":checked")){   
+                $("#option_eden").removeAttr("checked");
+                $("#option_bein").removeAttr("checked");
+                $("#option_eden").removeAttr("disabled");
+                $("#option_bein").removeAttr("disabled");
+                $(".prix_opt").empty().append(prix_option);
             }
       });
   });  
@@ -212,10 +235,13 @@
             <!-- ULTRA -->
             
             <div id="ultra">
-          <?php foreach($bouquet_list["ULTRA"] as $key=> $val){ ?>
+          <?php
+           
+            foreach($bouquet_list["ULTRA"] as $key=> $val){ 
+          ?>
             <!--Generaliste new row-->
           <div class="column four">
-              <h4><?php echo $key." "; ?><?php echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</h4>
+              <h4><?php echo $key." "; ?><span class="prix_opt"><?php echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</span></h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){
                             if(empty($bouquet_list["GIGA"][$key][$key2])||!empty($bouquet_list["GIGA"][$key][$key2])&&$bouquet_list["GIGA"][$key][$key2]["nom_chaines"]!=$val2["nom_chaines"]){
@@ -235,7 +261,10 @@
                    <strong>Sélectionner</strong>
                </label>
             </div> 
-            <?php }?>
+            <?php
+         
+                 }
+            ?>
             </div>
             
                 </div>

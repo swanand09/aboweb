@@ -584,10 +584,10 @@ ul.bqt li{
 	width: 724px;
 }
 .accordion .second .content  .row .ultra {
-	background: none repeat scroll 0 0 #EDEDED;
+/*	background: none repeat scroll 0 0 #EDEDED;*/
     margin-left: -19px;
     padding-left: 19px;
-    width: 482px;
+/*    width: 482px;*/
 }
 .accordion .second .content  .row .ultra.ufirst{
 	border-bottom: 1px solid;

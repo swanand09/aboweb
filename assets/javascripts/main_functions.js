@@ -30,8 +30,7 @@ var preload = function(){
                               return false;
                           }
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne);                     
-                                            
+                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne);                                          
                         }, "json"
                     );
                     return false; 
@@ -65,7 +64,8 @@ var preload = function(){
                       var key, count = 0;
                       for(key in data[1]) {
                           if(count==0) {
-                            $("#recap_contenu").empty();                                                    
+                            $("#recap_contenu").empty();      
+                            $("#total_mois").empty(); 
                           }
                           $("#recap_contenu").append(data[1][key]);
                           count++;
