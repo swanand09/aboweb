@@ -28,7 +28,7 @@ class Mes_coordonnees extends MY_Controller {
         
         //re initialise session pour le panier partie parrainage
         $prevState = $this->session->userdata("prevState");
-        $data["test"] = "test";
+        //$data["test"] = "test";
         /*$this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);        
         $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true); */       
         $this->session->set_userdata('prevState',$prevState);
@@ -54,10 +54,10 @@ class Mes_coordonnees extends MY_Controller {
         */
         
         //initialising form values
-        if(!array_key_exists("civilite_aa",$this->data['userdata'])){
+        if(!array_key_exists("civilite_aa",$this->session->all_userdata())){
             $this->session->set_userdata('civilite_aa',"");
         }
-        if(!array_key_exists("nom_aa",$this->data['userdata'])){
+        if(!array_key_exists("nom_aa",$this->session->all_userdata())){
             $this->session->set_userdata('nom_aa',"");
         }
         if(!array_key_exists("prenom_aa",$this->data['userdata'])){

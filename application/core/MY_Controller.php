@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller {
         var $totalParMois;
         var $iad;
         var $validPrefix   = array();
-        //var $etapes_url    = array();
+       
         public function __construct()
 	{
             parent::__construct(); 
@@ -40,7 +40,7 @@ class MY_Controller extends CI_Controller {
                                        "Guyane"         =>  "0594",
                                        "Iles du Nord"   =>  "0605"
             );
-            //$this->etapes_url            = array("#","#","#","#");
+            
             
 	}  	
         
@@ -64,10 +64,6 @@ class MY_Controller extends CI_Controller {
            $this->data["pageid"]        = "page-etape-1";
            $this->data["etapes_url"]    = array("#","#","#","#");
            $this->data["allow"]    = array("allowed","not-allowed","not-allowed","not-allowed");
-//           $this->data["etapes_url"][0] = "#";
-//           $this->data["etapes_url"][1] = "#";
-//           $this->data["etapes_url"][2] = "#";
-//           $this->data["etapes_url"][3] = "#";
            $this->data["colonneDroite"] = $this->colonneDroite;           
            $this->data["contenuGauche"] = $this->contenuGauche;
            $this->template
@@ -83,10 +79,6 @@ class MY_Controller extends CI_Controller {
             $this->data["pageid"] ="page-etape-2";
             $this->data["etapes_url"]    = array("mon_offre","#","#","#");
             $this->data["allow"]    = array("allowed","allowed","not-allowed","not-allowed");
-//            $this->data["etapes_url"][0] = "mon_offre";
-//            $this->data["etapes_url"][1] = "#";
-//            $this->data["etapes_url"][2] = "#";
-//            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -102,10 +94,6 @@ class MY_Controller extends CI_Controller {
             $this->data["pageid"] ="page-etape-3";
             $this->data["etapes_url"]    = array("mon_offre","mes_coordonnees","#","#");
             $this->data["allow"]    = array("allowed","allowed","allowed","not-allowed");
-//            $this->data["etapes_url"][0] = "mon_offre";     
-//            $this->data["etapes_url"][1] = "mes_coordonnees";
-//            $this->data["etapes_url"][2] = "#";
-//            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -121,10 +109,6 @@ class MY_Controller extends CI_Controller {
             $this->data["pageid"] ="page-etape-4";
             $this->data["etapes_url"]    = array("mon_offre","mes_coordonnees","recapitulatif","#");
             $this->data["allow"]    = array("allowed","allowed","allowed","allowed");
-//            $this->data["etapes_url"][0] = "mon_offre";     
-//            $this->data["etapes_url"][1] = "mes_coordonnees";
-//            $this->data["etapes_url"][2] = "recapitulatif";
-//            $this->data["etapes_url"][3] = "#";
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
@@ -133,6 +117,15 @@ class MY_Controller extends CI_Controller {
                             ->set_partial('contenu_gauche', 'paiement/paiement')
                             ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
+        }
+        public function controller_merci_vue()
+        {
+            $this->template->set_layout('merci');
+            $this->template
+                            ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
+                            ->title('title', 'Merci')
+                            ->set_partial('contenu', 'merci/merci')                          
+                            ->build('page');
         }
 }
 

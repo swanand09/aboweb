@@ -1,22 +1,22 @@
 <div class="left-etape-content recapitulatif">
     <div class="row prelevement">
-      <div class="column twelve"><h3>Le PAIEMENT DE VOTRE ABONNEMENT</h3></div>
+      <div class="column twelve"><h3>LE PAIEMENT DE VOTRE ABONNEMENT</h3></div>
       <div class="column twelve"><p><strong>Optez pour le mode de paiement de votre choix</strong></p></div>
       <div class="row automatique border-gray box-shadow">
-        <div class="column three"><?php echo image("automatique.png"); ?></div>
+        <div class="column three"><?php echo image("contenu/automatique.png"); ?></div>
         <div class="column nine">
           <strong>LE PRÉLÈVEMENT AUTOMATIQUE :</strong><br>
           <p>vous saisissez vos informations bancaires indiquées sur votre RIB.</p>
         </div>  
       </div>
       <div class="row cartebancaire border-gray">
-        <div class="column three"><?php echo image("bancaire.png"); ?></div>
+        <div class="column three"><?php echo image("contenu/bancaire.png"); ?></div>
         <div class="column nine"><strong>LE PAIEMENT PAR CARTE BANCAIRE</strong></div>
       </div>
     </div>
 
     <!--Form-->
-    <form action="merci.php" id="frm-paiement">
+    <form action="merci" method="post" id="frm-paiement">
     <div class="section-automatique">
     <div class="row">
       <div class="column twelve"><h3>LE PAIEMENT DE VOTRE ABONNEMENT</h3></div>
@@ -46,10 +46,10 @@
         <div class="column twelve"><p>Saisissez ci-dessous les informations relatives à la carte de paiement utilisée pour effectuer le dépôt de garantie :</p></div>
         <div class="column three">Type de carte</div>
         <div class="column nine">
-          <label class="left"><img src="images/contenu/cartebancaire.png"><input type="radio" value="cartebancaire" name="typedecarte" class="validate[required]"></label>
-          <label class="left"><img src="images/contenu/cartebleue.png"><input type="radio" value="cartebleue" name="typedecarte" class="validate[required]"></label>
-          <label class="left"><img src="images/contenu/visa.png"><input type="radio" value="visa" name="typedecarte" class="validate[required]"></label>
-          <label class="left"><img src="images/contenu/mastercard.png"><input type="radio" value="mastercard" name="typedecarte" class="validate[required]"></label>
+          <label class="left"><?php echo image("contenu/cartebancaire.png");?><input type="radio" value="cartebancaire" name="typedecarte" class="validate[required]"></label>
+          <label class="left"><?php echo image("contenu/cartebleue.png");?><input type="radio" value="cartebleue" name="typedecarte" class="validate[required]"></label>
+          <label class="left"><?php echo image("contenu/visa.png");?><input type="radio" value="visa" name="typedecarte" class="validate[required]"></label>
+          <label class="left"><?php echo image("contenu/mastercard.png");?><input type="radio" value="mastercard" name="typedecarte" class="validate[required]"></label>
         </div>
         <div class="column three top-10">Numéro de carte</div><div class="column nine top-10"><input type="text" id="numerodecarte" name="numerodecarte" class="validate[required,creditCard]"></div>
         <div class="column three">Date d'expiration</div>
@@ -93,7 +93,7 @@
       </div>
 
       <div class="column twelve top-20">
-        <p>Le remboursement du dépôt de garantie se fera lors de la résiliation de votre abonnement. Si vous ne voulez pas payer de dpôt de garantie, <a href="#">modifiez votre commande</a></p>
+        <p>Le remboursement du dépôt de garantie se fera lors de la résiliation de votre abonnement. Si vous ne voulez pas payer de dépôt de garantie, <a href="#">modifiez votre commande</a></p>
       </div>
     </div>
     <!---->
