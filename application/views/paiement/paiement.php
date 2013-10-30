@@ -99,7 +99,7 @@
     <!---->
 
      <div class="row">
-      <div class="six column back-button left top-20"><a alt="Précedent" href="recapitulatif" class="precedent">Précedent</a></div>
+      <div class="six column back-button left top-20"><?php echo anchor('recapitulatif','Précedent',array('title'=>'Précedent','class'=>'precedent','alt'=>'Précedent')); ?></div>
       <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon choix" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
     </div>
   </form>

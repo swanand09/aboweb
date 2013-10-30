@@ -58,7 +58,7 @@
 
         <!--back and submit buttom -->
         <div class="row">
-          <div class="six column back-button left top-20"><a alt="Modifier" href="mes_coordonnees" class="precedent">Modifier</a></div>
+          <div class="six column back-button left top-20"><?php echo anchor('mes_coordonnees','Modifier',array('title'=>'Modifier','class'=>'precedent','alt'=>'Modifier')); ?></div>
           <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon choix" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
         </div>
     </form>

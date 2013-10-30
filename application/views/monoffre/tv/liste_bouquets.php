@@ -115,6 +115,9 @@
         }
     }
     
+    $nombreChaineMega = sizeof($bouquet_list["MEGA"]);
+    $nombreChaineGiga = $nombreChaineMega + sizeof($bouquet_list["GIGA"]);
+    $nombreChaineUltra = $nombreChaineGiga + sizeof($bouquet_list["ULTRA"]);
 ?>
 <form class="frm-tv" onSubmit="javascript:gotoMesCoord();return false; ">
 
@@ -166,7 +169,7 @@
         <div class="column twelve options_tab">
  <!-- option mega -->
          <div class="column four bouquet mega">
-            <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+25</h4> chaines</div>
+            <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineMega; ?></h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-mega">bouquet mega<br><?php echo $tarif_mega; ?> €</a> 
               <label><input type="radio" value="mega_<?php echo $tarif_mega; ?>_25" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
@@ -174,7 +177,7 @@
           </div>
           <!--option giga-->
           <div class="column four bouquet giga">
-            <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+33</h4> chaines</div>
+            <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineGiga; ?></h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-giga">bouquet giga<br><?php echo $tarif_giga; ?> € </a>
               <label><input type="radio" value="giga_<?php echo $tarif_giga; ?>_33" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
@@ -182,7 +185,7 @@
           </div>
           <!--option ultra -->
           <div class="column four bouquet ultra">
-            <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+38</h4> chaines</div>
+            <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineUltra; ?></h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-ultra">bouquet ultra<br><?php echo $tarif_ultra; ?> € </a>
               <label><input type="radio" value="ultra_<?php echo $tarif_ultra; ?>_38" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
