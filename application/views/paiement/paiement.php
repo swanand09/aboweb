@@ -16,13 +16,13 @@
     </div>
 
     <!--Form-->
-    <form action="merci" method="post" id="frm-paiement">
+    <form action="paiement/enregistreSouscription" method="post" id="frm-paiement">
     <div class="section-automatique">
     <div class="row">
       <div class="column twelve"><h3>LE PAIEMENT DE VOTRE ABONNEMENT</h3></div>
       <div class="column twelve bottom-20">Saisissez ci-dessous les informations relatives au compte bancaire sur lequel sera prélevé votre abonnement mensuel:</div>
       <div class="column three"><label>Titulaire du compte</label></div><div class="column four bottom-20"><input type="text" name="nom" id="nom" class="validate[required]"><span>Nom</span></div><div class="column five bottom-20"><input type="text" name="prenom" id="prenom" class="validate[required]"><span>Prénom</span></div>
-
+      <div class="column three"><label>Domiciliation</label></div><div class="column nine bottom-20"><input type="text" name="domiciliation" id="domiciliation" class="validate[required,maxSize[30]]"></div>
       <div class="column three"><label>RIB</label></div>
       <div class="column two"><input type="text" name="banque" id="banque" class="validate[required]"><span>Banque</span></div>
       <div class="column two"><input type="text" name="guichet" id="guichet" class="validate[required]"><span>Guichet</span></div>

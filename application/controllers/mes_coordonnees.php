@@ -301,7 +301,10 @@ class Mes_coordonnees extends MY_Controller {
            if(!empty($resultVerifParain["Error"])){
                $resultVerifParain["Error"]["ErrorMessage"] = utf8_encode($resultVerifParain["Error"]["ErrorMessage"]);
            }
-            echo json_encode($resultVerifParain);
+           $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"Votre parrain existe. Merci!";
+           if(isset($resultVerifParain["Id_parrain"]))
+           $this->session->set_userdata("id_parrain",(isset($resultVerifParain["Id_parrain"])&&!empty($resultVerifParain["Id_parrain"]))?$resultVerifParain["Id_parrain"]:0);
+           echo json_encode($resultVerifParain);
         }
     }
 }

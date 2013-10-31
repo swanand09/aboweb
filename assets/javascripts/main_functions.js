@@ -13,7 +13,7 @@ var preload = function(){
                  }); 
               }
           
-          function procTestEligib()
+          function procTestEligib(where)
           {
                if($("#ligne").val().replace(/\s+/g, "").length==10){               
                     preload();
@@ -29,8 +29,13 @@ var preload = function(){
                               alert("Veuillez re-essayer votre numéro n'est pas éligible");                              
                               return false;
                           }
+                          if(where=="colonne droite"){
+                              preload();
+                               $(location).attr('href',"mon_offre");
+                          }
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne);                                          
+                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne); 
+                         
                         }, "json"
                     );
                     return false; 
@@ -259,17 +264,15 @@ var preload = function(){
                        function(data){
                          //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                         
-                         alert(data.Error.ErrorMessage);   
+                         alert(data.Error.ErrorMessage); 
+                         $.unblockUI(); 
+                         if(data.Error.ErrorMessage=="Votre parrain existe. Merci!"){
+                             return false;
+                         }
                          
-                         if($("#parrain_num_tel").val()==="")
-                         {
-                             $("#parrain_num_tel").focus();
-                         }
-                         if($("#parrain_num_contrat").val()==="")
-                         {
-                             $("#parrain_num_contrat").focus();
-                         }
-                         $.unblockUI();                    
+                        $("#parrain_num_tel").focus();
+                        $("#parrain_num_contrat").focus();
+                                     
                        }, "json"
                    );
             }

@@ -64,8 +64,14 @@ $(function () {
 	/*-------------------------------------/
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
-	$('.numero').mask("99999");
-	$('#ligne').mask("9999999999");
+         $('.numero').mask("99999");
+         $('#ligne,.telephone').mask("9999999999");
+         $('#cle').mask("99");
+         $('#banque').mask("99999");
+         $('#guichet').mask("99999");
+         $('#cryptogramme').mask("999");
+         $('#numerodecarte').mask("9999999999999999");
+         
 
 	/*-------------------------------------/
 	* Validation Engine

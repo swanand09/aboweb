@@ -1,5 +1,5 @@
  <?php
-echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve','onsubmit'=>'javascript:procTestEligib();return false;')); ?>
+echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve','onsubmit'=>'javascript:procTestEligib(\'contenu gauche\');return false;')); ?>
 <div class='seven columns'>
     <label class='misc-custom-3'>
        <strong class='left'>SAISISEZ VOTRE NUM&Eacute;RO DE T&Eacute;L&Eacute;PHONE</strong>

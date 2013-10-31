@@ -20,7 +20,7 @@ class Wsdl_interrogeligib_model extends CI_Model
         
     }
     
-    public function retrieveInfo($num_tel)
+    public function interrogeEligibilite($num_tel)
     {
         $soapEligib = $this->nusoap_client->serializeEnvelope('
                                     <interrogeEligibilite xmlns="msvaboweb">
@@ -99,22 +99,93 @@ class Wsdl_interrogeligib_model extends CI_Model
       return array("dummy1"=>$arrDum1,"dummy2"=>$arrDum2,"dummy3"=>$arrDum3,"dummy4"=>$arrDum4,"dummy5"=>$arrDum5,"dummy6"=>$arrDum6,"dummy7"=>$arrDum7);
     }
     
-   public function saveInfo()
-   {
-        
+   public function enregistreSouscription($dataArr)
+   {        
        $soapEligib = $this->nusoap_client->serializeEnvelope('
-                                    <enregistreSouscription xmlns="msvaboweb">
-                                      <_produits_souscris>
-                                        <_adresse_installation></_adresse_installation>
-                                        <_adresse_livraison></_adresse_livraison >
-                                        <_adresse_facturation></_adresse_facturation>
-                                      </_produits_souscris>
-                                      <_email></_email>
-                                      <_renonce_delai_retractation></_renonce_delai_retractation> 
-                                      <_information_contact></_information_contact> 
-                                      <_cartebleue></_cartebleue>
-                                      <_rib></_rib>
-                                    </enregistreSouscription>','',array(),'document', 'literal'); 
+                                                                <enregistreSouscription xmlns="msvaboweb">
+                                                                    <_id>0</_id>
+                                                                    <_con_id_parrainage>0</_con_id_parrainage>
+                                                                    <_produits_souscris>
+                                                                      <int>0</int>
+                                                                    </_produits_souscris>
+                                                                    <_adresse_installation>
+                                                                      <Civilite />
+                                                                      <Nom />
+                                                                      <Prenom />
+                                                                      <Numero />
+                                                                      <Complement />
+                                                                      <Type_voie />
+                                                                      <Voie />
+                                                                      <Voie_suite />
+                                                                      <Ensemble />
+                                                                      <Batiment />
+                                                                      <Escalier />
+                                                                      <Etage />
+                                                                      <Porte />
+                                                                      <Logo />
+                                                                      <Code_postal />
+                                                                      <Ville />
+                                                                    </_adresse_installation>
+                                                                    <_adresse_livraison>
+                                                                      <Civilite />
+                                                                      <Nom />
+                                                                      <Prenom />
+                                                                      <Numero />
+                                                                      <Complement />
+                                                                      <Type_voie />
+                                                                      <Voie />
+                                                                      <Voie_suite />
+                                                                      <Ensemble />
+                                                                      <Batiment />
+                                                                      <Escalier />
+                                                                      <Etage />
+                                                                      <Porte />
+                                                                      <Logo />
+                                                                      <Code_postal />
+                                                                      <Ville />
+                                                                    </_adresse_livraison>
+                                                                    <_adresse_facturation>
+                                                                      <Civilite />
+                                                                      <Nom />
+                                                                      <Prenom />
+                                                                      <Numero />
+                                                                      <Complement />
+                                                                      <Type_voie />
+                                                                      <Voie />
+                                                                      <Voie_suite />
+                                                                      <Ensemble />
+                                                                      <Batiment />
+                                                                      <Escalier />
+                                                                      <Etage />
+                                                                      <Porte />
+                                                                      <Logo />
+                                                                      <Code_postal />
+                                                                      <Ville />
+                                                                    </_adresse_facturation>
+                                                                    <_email />
+                                                                    <_renonce_delai_retractation>false</_renonce_delai_retractation>
+                                                                    <_information_contact>
+                                                                      <Email />
+                                                                      <Telephone_mobile />
+                                                                      <Telephone_bureau />
+                                                                      <Telephone_domicile />
+                                                                    </_information_contact>
+                                                                    <_cartebleue>
+                                                                      <Numero />
+                                                                      <Date_expiration />
+                                                                      <Cryptogramme />
+                                                                      <Titulaire />
+                                                                    </_cartebleue>
+                                                                    <_rib>
+                                                                      <Numero />
+                                                                      <Clef />
+                                                                      <Code_agence />
+                                                                      <Code_banque />
+                                                                      <Domiciliation />
+                                                                      <Titulaire />
+                                                                    </_rib>
+                                                                </enregistreSouscription>','',array(),'document', 'literal'
+                                                            ); 
         $this->nusoap_client->operation = "msvaboweb/enregistreSouscription";
         $result = $this->nusoap_client->send($soapEligib,'msvaboweb/enregistreSouscription');
         return  $result;

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <enregistreSouscription xmlns="msvaboweb">
+      <_id>0</_id>
+      <_con_id_parrainage>0</_con_id_parrainage>
+      <_produits_souscris>
+        <int>0</int>
+      </_produits_souscris>
+      <_adresse_installation>
+        <Civilite />
+        <Nom />
+        <Prenom />
+        <Numero />
+        <Complement />
+        <Type_voie />
+        <Voie />
+        <Voie_suite />
+        <Ensemble />
+        <Batiment />
+        <Escalier />
+        <Etage />
+        <Porte />
+        <Logo />
+        <Code_postal />
+        <Ville />
+      </_adresse_installation>
+      <_adresse_livraison>
+        <Civilite />
+        <Nom />
+        <Prenom />
+        <Numero />
+        <Complement />
+        <Type_voie />
+        <Voie />
+        <Voie_suite />
+        <Ensemble />
+        <Batiment />
+        <Escalier />
+        <Etage />
+        <Porte />
+        <Logo />
+        <Code_postal />
+        <Ville />
+      </_adresse_livraison>
+      <_adresse_facturation>
+        <Civilite />
+        <Nom />
+        <Prenom />
+        <Numero />
+        <Complement />
+        <Type_voie />
+        <Voie />
+        <Voie_suite />
+        <Ensemble />
+        <Batiment />
+        <Escalier />
+        <Etage />
+        <Porte />
+        <Logo />
+        <Code_postal />
+        <Ville />
+      </_adresse_facturation>
+      <_email />
+      <_renonce_delai_retractation>false</_renonce_delai_retractation>
+      <_information_contact>
+        <Email />
+        <Telephone_mobile />
+        <Telephone_bureau />
+        <Telephone_domicile />
+      </_information_contact>
+      <_cartebleue>
+        <Numero />
+        <Date_expiration />
+        <Cryptogramme />
+        <Titulaire />
+      </_cartebleue>
+      <_rib>
+        <Numero />
+        <Clef />
+        <Code_agence />
+        <Code_banque />
+        <Domiciliation />
+        <Titulaire />
+      </_rib>
+    </enregistreSouscription>
+  </soap:Body>
+</soap:Envelope>

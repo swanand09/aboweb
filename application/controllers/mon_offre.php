@@ -75,7 +75,7 @@ class Mon_offre extends MY_Controller {
         if($num_tel!=""&&$this->validateNum($num_tel))
         {   
             $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]','type' => 'text','value' => $num_tel);
-            $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);
+            $result = $this->Wsdl_interrogeligib->interrogeEligibilite($num_tel);
             if(!empty($result))
             {
                 $data["result"] = $result;               
@@ -83,8 +83,8 @@ class Mon_offre extends MY_Controller {
                {                  
                     $data["error"]  = false;
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
-                    $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);
-                    $this->session->set_userdata('offreparrainage_id',$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]);
+                    $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);                  
+                    $this->session->set_userdata('offreparrainage_id',($result["interrogeEligibiliteResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     $this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
@@ -339,6 +339,9 @@ class Mon_offre extends MY_Controller {
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
             }else{
                 $this->contenuGauche["contenu_html"] = "redirect to mes coordonnees";
+                
+                $offreparrainage_id = $this->session->userdata('offreparrainage_id');
+                if(!empty($offreparrainage_id))
                 $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);
                  
                 $this->session->set_userdata('prevState',array(array("contenu_html"=>$this->session->userdata("htmlContent_forfait")),$this->colonneDroite));                
@@ -478,7 +481,11 @@ class Mon_offre extends MY_Controller {
     {
          $data["test"] = "ok";   
          $prevState = $this->session->userdata("prevState");
+         $offreparrainage_id = $this->session->userdata('offreparrainage_id');
+         
+         if(!empty($offreparrainage_id))
          $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);
+         
          $this->session->set_userdata('prevState',$prevState);
          echo json_encode(array("test"=>$data["test"]));
     }
@@ -497,13 +504,7 @@ class Mon_offre extends MY_Controller {
         return $this->totalParMois;
     }
     
-    public function saveInfo()
-    {
-         $result = $this->Wsdl_interrogeligib->saveInfo($num_tel);
-         echo "<pre>";
-         print_r($result);
-         echo "</pre>";
-    }
+    
     
     public function testFlux()
     {
