@@ -285,9 +285,10 @@ class Mon_offre extends MY_Controller {
                     break;
                     case "dummy5":
                            foreach($val as $val2){
-                                $data["caution_dummy5"] = $val2["Tarif"];   
+                                //$data["caution_dummy5"] = $val2["Tarif"]; 
+                                $this->session->set_userdata("caution_dummy5",$val2["Tarif"]);
                                // $data["totalParMois"] = $this->getTotal($val2["Tarif"]);       
-                                $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
+                               // $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
                            }
                     break;
                     case "dummy7":
@@ -386,7 +387,7 @@ class Mon_offre extends MY_Controller {
                    $data["oneshot_dummy7"] = "";
                    $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
                    $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
-                   
+                                
                    //total par mois
                    $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
             break;
@@ -400,11 +401,25 @@ class Mon_offre extends MY_Controller {
                    $data["totalParMois"] = $this->session->userdata('totalParMois');
             break;
         }
-
+        
+        //caution decodeur
+        $prevState[1]["caution_decodeur_dummy5"] = "";
+        $data["caution_dummy5"] = $this->session->userdata("caution_dummy5");
+        if(!empty($data["caution_dummy5"])){    
+            
+            $prevState[1]["caution_decodeur_dummy5"] = ($decoder_tv=="uncheck")?"": $this->load->view("general/caution_dummy5",$data,true);  
+        }
+        
         $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
       //  $prevState[0]["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);
         $this->session->set_userdata('prevState',$prevState);            
-        echo json_encode(array("location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],"frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+        echo json_encode(array(
+                                "location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],
+                                "frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],
+                                "total_par_mois"=>$prevState[1]["total_par_mois"],
+                                "caution_decodeur_dummy5" => $prevState[1]["caution_decodeur_dummy5"]
+                              )
+                        );
     }
     
     //dummy3 update bouquet

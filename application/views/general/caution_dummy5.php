@@ -1,3 +1,4 @@
+<div id="caution">
 <?php 
     if(isset($caution_dummy5)){
 ?>
@@ -7,3 +8,4 @@
 <!-- END OF CAUTION -->
 <hr>
     <?php } ?>
+</div>

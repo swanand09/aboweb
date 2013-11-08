@@ -134,7 +134,11 @@ var preload = function(){
                             beneficierTv : beneficierTv,  
                             decoder_tv   : "check"
                          },
-                        function(data){     
+                        function(data){    
+                            
+                          $("#recap_contenu").children("#caution").remove();  
+                          $("#recap_contenu").append(data.caution_decodeur_dummy5);  
+                          
                           $("#recap_contenu").children("#location").remove();  
                           $("#recap_contenu").append(data.location_equipements_dummy4);
                           $("#recap_contenu").children("#oneshot").remove();  
@@ -155,8 +159,9 @@ var preload = function(){
                                 decoder_tv   : "uncheck"
                              },
                             function(data){
+                              $("#recap_contenu").children("#caution").remove(); 
                               $("#recap_contenu").children("#location").remove();
-                               $("#recap_contenu").children("#options").remove();  // removes any bouquet if any
+                              $("#recap_contenu").children("#options").remove();  // removes any bouquet if any
                               $("#recap_contenu").append(data.location_equipements_dummy4);
                               $("#recap_contenu").children("#oneshot").remove(); 
                               $("#recap_contenu").append(data.frais_activation_facture_dummy7);  
