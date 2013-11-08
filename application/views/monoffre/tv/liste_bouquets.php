@@ -39,14 +39,14 @@
            $("#option_bein").attr("Disabled","Disabled");
        }  
       }); 
-      var prix_option = "";
+      var prix_option = $(".prix_opt").html();
        $("#bouquet_ultra").click(function(){              
             if($("#bouquet_ultra").is(":checked")){   
                 $("#option_eden").attr("disabled","disabled");
                 $("#option_eden").attr("checked","checked");
                 $("#option_bein").attr("disabled","disabled");
                 $("#option_bein").attr("checked","checked");                
-                prix_option = $(".prix_opt").html();
+                //prix_option = $(".prix_opt").html();
                 $(".prix_opt").empty().append("inclus");
             }
       });
@@ -252,7 +252,7 @@
           ?>
             <!--Generaliste new row-->
           <div class="column four">
-              <h4><?php echo $key." "; ?><span class="prix_opt"><?php echo $tarif_bein;  //echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</span></h4>
+              <h4><?php echo $key." "; ?><span class="prix_opt"><?php echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</span></h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){
                             if(empty($bouquet_list["GIGA"][$key][$key2])||!empty($bouquet_list["GIGA"][$key][$key2])&&$bouquet_list["GIGA"][$key][$key2]["nom_chaines"]!=$val2["nom_chaines"]){
