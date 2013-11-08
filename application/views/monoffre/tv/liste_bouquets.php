@@ -252,7 +252,7 @@
           ?>
             <!--Generaliste new row-->
           <div class="column four">
-              <h4><?php echo $key." "; ?><span class="prix_opt"><?php echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</span></h4>
+              <h4><?php echo $key." "; ?><span class="prix_opt"><?php echo $tarif_bein;  //echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</span></h4>
               <ul class="bqt">
                     <?php foreach($val as $key2=>$val2){
                             if(empty($bouquet_list["GIGA"][$key][$key2])||!empty($bouquet_list["GIGA"][$key][$key2])&&$bouquet_list["GIGA"][$key][$key2]["nom_chaines"]!=$val2["nom_chaines"]){

@@ -464,9 +464,20 @@ body {
     margin-top: 18px;
 }
 .frm-choisir-offre .modem-sagem .trf span {
-	font-size: 1.9em;
+	font-size: 1.5em;
 }
 
+.modem-sagem .prix_bare {
+	margin-left: 44px;
+    margin-top: -20px !important;
+    width: 122px;
+}
+.modem-sagem .nopromo {
+	margin-top: 0 !important;
+}
+.modem-sagem .promo {
+	color:#000 !important;
+}
 /*
 * Reddy changes
 */
@@ -596,10 +607,10 @@ img.prix_bare{
 	width: 724px;
 }
 .accordion .second .content  .row .ultra {
-	background: none repeat scroll 0 0 #EDEDED;
+/*	background: none repeat scroll 0 0 #EDEDED;*/
     margin-left: -19px;
     padding-left: 19px;
-    width: 482px;
+/*    width: 482px;*/
 }
 .accordion .second .content  .row .ultra.ufirst{
 	border-bottom: 1px solid;
@@ -797,12 +808,7 @@ img.prix_bare{
 .forpro ul li.small-icon-telephone {
 	background: url("../images/small_icon_telephone.png") no-repeat scroll 0 2px transparent;
 }
-.forpro ul li.small-icon-location {
-	background: url("../images/small_icon_location.png") no-repeat scroll 0 2px transparent;
-}
-.forpro ul li.small-icon-appel{
-	background: url("../images/small_icon_appel.png") no-repeat scroll 0 3px transparent;
-}
+
 .forpro ul li.small-icon-cross{
 	background: url("../images/small_icon_cross.png") no-repeat scroll 0 3px transparent;
 }
@@ -874,5 +880,5 @@ img.prix_bare{
 }
 
 .forpro.promotion ul li{
-
+	background: url("../images/like.png") no-repeat scroll 0 3px transparent;
 }
