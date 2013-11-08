@@ -3,7 +3,7 @@
   <soap:Body>
     <interrogeEligibiliteResponse xmlns="msvaboweb">
       <interrogeEligibiliteResult>
-        <Id>2731</Id>
+        <Id>3171</Id>
         <Localite>GP</Localite>
         <Ligne>
           <Numero>0590825785</Numero>
@@ -167,14 +167,14 @@
                   <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
-                    <string>Promotion spéciale souscription web 1 mois offert</string>
+                    <string>1 mois de gratuité</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3583</Id_crm>
-                  <Dummy>3</Dummy>
+                  <Dummy>1</Dummy>
                   <Categorie>FORFAIT</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
@@ -205,14 +205,14 @@
                   <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
-                    <string>Promotion spéciale souscription web 1 mois offert</string>
+                    <string>1 mois de gratuité</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3584</Id_crm>
-                  <Dummy>3</Dummy>
+                  <Dummy>1</Dummy>
                   <Categorie>FORFAIT</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
@@ -243,7 +243,7 @@
                   <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
-                    <string>Promotion spéciale souscription web 1 mois offert</string>
+                    <string>1 mois de gratuité</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
@@ -281,7 +281,7 @@
                   <Categorie>PROMOTION</Categorie>
                   <Type>PROMOTION</Type>
                   <Libelle>
-                    <string>Promotion spéciale souscription web 1 mois offert</string>
+                    <string>1 mois de gratuité</string>
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
@@ -309,9 +309,20 @@
               <Ordre>1</Ordre>
               <Libelle>Location modem ADSL</Libelle>
               <Tarif>3.50</Tarif>
-              <Tarif_promo>3.50</Tarif_promo>
-              <Duree_mois_promo>0</Duree_mois_promo>
+              <Tarif_promo>0</Tarif_promo>
+              <Duree_mois_promo>1</Duree_mois_promo>
               <Valeurs>
+                <WS_Produit_Valeur>
+                  <Id_web>0</Id_web>
+                  <Id_crm>3591</Id_crm>
+                  <Dummy>2</Dummy>
+                  <Categorie>PROMOTION</Categorie>
+                  <Type>PROMOTION</Type>
+                  <Libelle>
+                    <string>Vos équipements gratuit pendant 1 mois</string>
+                  </Libelle>
+                  <Tarif>0</Tarif>
+                </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
                   <Id_crm>3591</Id_crm>
@@ -400,13 +411,13 @@
             <WS_Produit>
               <Ordre>1</Ordre>
               <Libelle>Bouquet de base</Libelle>
-              <Tarif>0</Tarif>
-              <Tarif_promo>0</Tarif_promo>
+              <Tarif>5</Tarif>
+              <Tarif_promo>5</Tarif_promo>
               <Duree_mois_promo>0</Duree_mois_promo>
               <Valeurs>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
-                  <Id_crm>3650</Id_crm>
+                  <Id_crm>3677</Id_crm>
                   <Dummy>1</Dummy>
                   <Categorie>TELEVISION</Categorie>
                   <Type>RECURRENT</Type>
@@ -417,7 +428,7 @@
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
-                  <Id_crm>3654</Id_crm>
+                  <Id_crm>3676</Id_crm>
                   <Dummy>5</Dummy>
                   <Categorie>STB</Categorie>
                   <Type>CAUTION</Type>
@@ -428,25 +439,14 @@
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
-                  <Id_crm>3654</Id_crm>
-                  <Dummy>3</Dummy>
+                  <Id_crm>3676</Id_crm>
+                  <Dummy>4</Dummy>
                   <Categorie>STB</Categorie>
                   <Type>RECURRENT</Type>
                   <Libelle>
-                    <string>Location Décodeur;TV mediaserv</string>
+                    <string>Decodeur TV</string>
                   </Libelle>
                   <Tarif>5</Tarif>
-                </WS_Produit_Valeur>
-                <WS_Produit_Valeur>
-                  <Id_web>0</Id_web>
-                  <Id_crm>3615</Id_crm>
-                  <Dummy>3</Dummy>
-                  <Categorie>VOD_PVR</Categorie>
-                  <Type>ONESHOT</Type>
-                  <Libelle>
-                    <string>Enregistreur numérique</string>
-                  </Libelle>
-                  <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
                 <WS_Produit_Valeur>
                   <Id_web>0</Id_web>
@@ -459,16 +459,27 @@
                   </Libelle>
                   <Tarif>0</Tarif>
                 </WS_Produit_Valeur>
+                <WS_Produit_Valeur>
+                  <Id_web>0</Id_web>
+                  <Id_crm>3615</Id_crm>
+                  <Dummy>3</Dummy>
+                  <Categorie>VOD_PVR</Categorie>
+                  <Type>ONESHOT</Type>
+                  <Libelle>
+                    <string>Enregistreur numérique</string>
+                  </Libelle>
+                  <Tarif>0</Tarif>
+                </WS_Produit_Valeur>
               </Valeurs>
               <Defaut>false</Defaut>
               <Modifiable>true</Modifiable>
               <Obligatoire>false</Obligatoire>
               <Categorie>TELEVISION</Categorie>
-              <Id_web>3650</Id_web>
-              <Id_crm>3650</Id_crm>
+              <Id_web>3677</Id_web>
+              <Id_crm>3677</Id_crm>
             </WS_Produit>
           </Produits>
-          <Promo_libelle>Promotion spéciale souscription web 1 mois offert</Promo_libelle>
+          <Promo_libelle>1 mois de gratuité</Promo_libelle>
           <Dependances>
             <WS_Produit_Dependance>
               <Libelle_selected>Bouquet Ultra</Libelle_selected>
@@ -531,35 +542,35 @@
               <Libelle_affecte>Bouquet de base</Libelle_affecte>
               <Type>REQ</Type>
               <Id_crm_selected>3599</Id_crm_selected>
-              <Id_crm_affecte>3650</Id_crm_affecte>
+              <Id_crm_affecte>3677</Id_crm_affecte>
             </WS_Produit_Dependance>
             <WS_Produit_Dependance>
               <Libelle_selected>Bouquet Giga</Libelle_selected>
               <Libelle_affecte>Bouquet de base</Libelle_affecte>
               <Type>REQ</Type>
               <Id_crm_selected>3598</Id_crm_selected>
-              <Id_crm_affecte>3650</Id_crm_affecte>
+              <Id_crm_affecte>3677</Id_crm_affecte>
             </WS_Produit_Dependance>
             <WS_Produit_Dependance>
               <Libelle_selected>Bouquet Ultra</Libelle_selected>
               <Libelle_affecte>Bouquet de base</Libelle_affecte>
               <Type>REQ</Type>
               <Id_crm_selected>3600</Id_crm_selected>
-              <Id_crm_affecte>3650</Id_crm_affecte>
+              <Id_crm_affecte>3677</Id_crm_affecte>
             </WS_Produit_Dependance>
             <WS_Produit_Dependance>
               <Libelle_selected>Option Eden</Libelle_selected>
               <Libelle_affecte>Bouquet de base</Libelle_affecte>
               <Type>REQ</Type>
               <Id_crm_selected>3606</Id_crm_selected>
-              <Id_crm_affecte>3650</Id_crm_affecte>
+              <Id_crm_affecte>3677</Id_crm_affecte>
             </WS_Produit_Dependance>
             <WS_Produit_Dependance>
               <Libelle_selected>Option BeIN Sport</Libelle_selected>
               <Libelle_affecte>Bouquet de base</Libelle_affecte>
               <Type>REQ</Type>
               <Id_crm_selected>3603</Id_crm_selected>
-              <Id_crm_affecte>3650</Id_crm_affecte>
+              <Id_crm_affecte>3677</Id_crm_affecte>
             </WS_Produit_Dependance>
           </Dependances>
           <Autorise_parrainage>false</Autorise_parrainage>

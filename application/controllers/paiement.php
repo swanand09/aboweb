@@ -32,6 +32,7 @@ class Paiement extends MY_Controller {
         $id_parrain =$this->session->userdata("id_parrain");
         $id_parrain = !empty($id_parrain)?$id_parrain:0;
         $dataArr = array(
+                           "id"                     => $this->session->userdata("idParcours"),
                            "con_id_parrainage"      => $id_parrain,
                            "adresse_installation"   => array(
                                                             "civilite"      => $this->session->userdata("civilite_aa"),
@@ -95,7 +96,9 @@ class Paiement extends MY_Controller {
                                                                 "telephone_bureau"      => $this->session->userdata("telephone_bureau"),
                                                                 "telephone_domicile"    => $this->session->userdata("telephone_domicile")
                                                                  
-                                                             )
+                                                             ),
+                           "renonce_delai_retractation" => $this->session->userdata("livraison_express"),                                
+                           "mode_paiement"          =>  array()
                     );
         if($this->input->post("mode_pay")=="rib"){
             /* 
@@ -105,7 +108,9 @@ class Paiement extends MY_Controller {
              $this->session->set_userdata('paiement_guichet',$this->input->post("guichet"));
              $this->session->set_userdata('paiement_num_compte',$this->input->post("numero_de_compte"));
              $this->session->set_userdata('paiement_cle',$this->input->post("cle"));*/
-               $arr = array(
+              
+               array_push($dataArr["mode_paiement"],
+                          array(
                               "mode_pay"         =>  "rib",
                               "titulaire"        =>  $this->input->post("nom")." ".$this->input->post("prenom"),                              
                               "code_banque"      =>  $this->input->post("banque"),
@@ -113,10 +118,8 @@ class Paiement extends MY_Controller {
                               "domiciliation"    =>  $this->input->post("domiciliation"),
                               "numero"           =>  $this->input->post("numero_de_compte"),
                               "clef"             =>  $this->input->post("cle")
+                             )
                         );
-               array_push(
-                    $arr ,
-                 $dataArr);
         }
         if($this->input->post("mode_pay")=="cartebleue"){
             /*
@@ -126,22 +129,23 @@ class Paiement extends MY_Controller {
             $this->session->set_userdata('paiement_date_expiration_annee',$this->input->post("date_expiration_annee"));
             $this->session->set_userdata('paiement_cryptogramme',$this->input->post("cryptogramme"));   
               */    
-            $arr = array(
+            
+            array_push($dataArr["mode_paiement"],
+                        array(
                               "mode_pay"         =>  "cartebleue",
                               "titulaire"        =>  $this->input->post("nom")." ".$this->input->post("prenom"),                              
                               "date_expiration"  =>  $this->input->post("date_expiration_mois")." ".$this->input->post("date_expiration_annee"),
                               "numero"           =>  $this->input->post("numerodecarte"),
                               "cryptogramme"     =>  $this->input->post("cryptogramme")
-                        );
-            array_push(
-                    $arr
-                    ,
-                  $dataArr);
+                        )
+                      );
         }
         
         
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
-         
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>"; 
     }
 }
 /* End of file paiement.php */

@@ -101,89 +101,118 @@ class Wsdl_interrogeligib_model extends CI_Model
     
    public function enregistreSouscription($dataArr)
    {        
+      echo "<pre>";
+      print_r($dataArr);
+      echo "</pre>";
+      $mode_paiment = "";
+       
+       switch($dataArr["mode_paiement"][0]["mode_pay"]){
+           case "rib":
+                      $mode_paiment .="<_rib>
+                                            <Numero>".$dataArr["mode_paiement"][0]["numero"]."</Numero>
+                                            <Clef>".$dataArr["mode_paiement"][0]["clef"]."</Clef>
+                                            <Code_agence>".$dataArr["mode_paiement"][0]["code_agence"]." </Code_agence>
+                                            <Code_banque>".$dataArr["mode_paiement"][0]["code_banque"]." </Code_banque>
+                                            <Domiciliation>".$dataArr["mode_paiement"][0]["domiciliation"]."</Domiciliation>
+                                            <Titulaire>".$dataArr["mode_paiement"][0]["titulaire"]."</Titulaire>
+                                       </_rib>
+                                       <_cartebleue>
+                                            <Numero></Numero>
+                                            <Date_expiration></Date_expiration>
+                                            <Cryptogramme></Cryptogramme>
+                                            <Titulaire></Titulaire>
+                                         </_cartebleue>
+                                      ";
+           break;
+           case "cartebleu":                        
+                       $mode_paiment .=" 
+                                      <_rib>
+                                            <Numero></Numero>
+                                            <Clef></Clef>
+                                            <Code_agence></Code_agence>
+                                            <Code_banque></Code_banque>
+                                            <Domiciliation></Domiciliation>
+                                            <Titulaire></Titulaire>
+                                       </_rib>
+                                        <_cartebleue>
+                                            <Numero>".$dataArr["mode_paiement"][0]["numero"]."</Numero>
+                                            <Date_expiration>".$dataArr["mode_paiement"][0]["date_expiration"]."</Date_expiration>
+                                            <Cryptogramme>".$dataArr["mode_paiement"][0]["cryptogramme"]."</Cryptogramme>
+                                            <Titulaire>".$dataArr["mode_paiement"][0]["titulaire"]."</Titulaire>
+                                         </_cartebleue>";
+           break;
+       }
+       
        $soapEligib = $this->nusoap_client->serializeEnvelope('
                                                                 <enregistreSouscription xmlns="msvaboweb">
-                                                                    <_id>0</_id>
-                                                                    <_con_id_parrainage>0</_con_id_parrainage>
+                                                                    <_id>'.$dataArr["id"].'</_id>
+                                                                    <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
                                                                     <_produits_souscris>
                                                                       <int>0</int>
                                                                     </_produits_souscris>
                                                                     <_adresse_installation>
-                                                                      <Civilite />
-                                                                      <Nom />
-                                                                      <Prenom />
-                                                                      <Numero />
-                                                                      <Complement />
-                                                                      <Type_voie />
-                                                                      <Voie />
-                                                                      <Voie_suite />
-                                                                      <Ensemble />
-                                                                      <Batiment />
-                                                                      <Escalier />
-                                                                      <Etage />
-                                                                      <Porte />
-                                                                      <Logo />
-                                                                      <Code_postal />
-                                                                      <Ville />
+                                                                      <Civilite>'.$dataArr["adresse_installation"]["civilite"].'</Civilite>
+                                                                      <Nom>'.$dataArr["adresse_installation"]["nom"].'</Nom>
+                                                                      <Prenom>'.$dataArr["adresse_installation"]["prenom"].'</Prenom>
+                                                                      <Numero>'.$dataArr["adresse_installation"]["numero"].'</Numero>
+                                                                      <Complement>'.$dataArr["adresse_installation"]["complement"].'</Complement>
+                                                                      <Type_voie>'.$dataArr["adresse_installation"]["type_voie"].'</Type_voie>
+                                                                      <Voie>'.$dataArr["adresse_installation"]["voie"].'</Voie>
+                                                                      <Voie_suite>'.$dataArr["adresse_installation"]["voie_suite"].'</Voie_suite>
+                                                                      <Ensemble>'.$dataArr["adresse_installation"]["ensemble"].'</Ensemble>
+                                                                      <Batiment>'.$dataArr["adresse_installation"]["batiment"].'</Batiment>
+                                                                      <Escalier>'.$dataArr["adresse_installation"]["escalier"].'</Escalier>
+                                                                      <Etage>'.$dataArr["adresse_installation"]["etage"].'</Etage>
+                                                                      <Porte>'.$dataArr["adresse_installation"]["porte"].'</Porte>
+                                                                      <Logo>'.$dataArr["adresse_installation"]["logo"].'</Logo>
+                                                                      <Code_postal>'.$dataArr["adresse_installation"]["code_postal"].'</Code_postal>
+                                                                      <Ville>'.$dataArr["adresse_installation"]["ville"].'</Ville>
                                                                     </_adresse_installation>
                                                                     <_adresse_livraison>
-                                                                      <Civilite />
-                                                                      <Nom />
-                                                                      <Prenom />
-                                                                      <Numero />
-                                                                      <Complement />
-                                                                      <Type_voie />
-                                                                      <Voie />
-                                                                      <Voie_suite />
-                                                                      <Ensemble />
-                                                                      <Batiment />
-                                                                      <Escalier />
-                                                                      <Etage />
-                                                                      <Porte />
-                                                                      <Logo />
-                                                                      <Code_postal />
-                                                                      <Ville />
+                                                                      <Civilite>'.$dataArr["adresse_livraison"]["civilite"].'</Civilite>
+                                                                      <Nom>'.$dataArr["adresse_livraison"]["nom"].'</Nom>
+                                                                      <Prenom>'.$dataArr["adresse_livraison"]["prenom"].'</Prenom>
+                                                                      <Numero>'.$dataArr["adresse_livraison"]["numero"].'</Numero>
+                                                                      <Complement>'.$dataArr["adresse_livraison"]["complement"].'</Complement>
+                                                                      <Type_voie>'.$dataArr["adresse_livraison"]["type_voie"].'</Type_voie>
+                                                                      <Voie>'.$dataArr["adresse_livraison"]["voie"].'</Voie>
+                                                                      <Voie_suite>'.$dataArr["adresse_livraison"]["voie_suite"].'</Voie_suite>
+                                                                      <Ensemble>'.$dataArr["adresse_livraison"]["ensemble"].'</Ensemble>
+                                                                      <Batiment>'.$dataArr["adresse_livraison"]["batiment"].'</Batiment>
+                                                                      <Escalier>'.$dataArr["adresse_livraison"]["escalier"].'</Escalier>
+                                                                      <Etage>'.$dataArr["adresse_livraison"]["etage"].'</Etage>
+                                                                      <Porte>'.$dataArr["adresse_livraison"]["porte"].'</Porte>
+                                                                      <Logo>'.$dataArr["adresse_livraison"]["logo"].'</Logo>
+                                                                      <Code_postal>'.$dataArr["adresse_livraison"]["code_postal"].'</Code_postal>
+                                                                      <Ville>'.$dataArr["adresse_livraison"]["ville"].'</Ville>
                                                                     </_adresse_livraison>
                                                                     <_adresse_facturation>
-                                                                      <Civilite />
-                                                                      <Nom />
-                                                                      <Prenom />
-                                                                      <Numero />
-                                                                      <Complement />
-                                                                      <Type_voie />
-                                                                      <Voie />
-                                                                      <Voie_suite />
-                                                                      <Ensemble />
-                                                                      <Batiment />
-                                                                      <Escalier />
-                                                                      <Etage />
-                                                                      <Porte />
-                                                                      <Logo />
-                                                                      <Code_postal />
-                                                                      <Ville />
+                                                                     <Civilite>'.$dataArr["adresse_facturation"]["civilite"].'</Civilite>
+                                                                      <Nom>'.$dataArr["adresse_facturation"]["nom"].'</Nom>
+                                                                      <Prenom>'.$dataArr["adresse_facturation"]["prenom"].'</Prenom>
+                                                                      <Numero>'.$dataArr["adresse_facturation"]["numero"].'</Numero>
+                                                                      <Complement>'.$dataArr["adresse_facturation"]["complement"].'</Complement>
+                                                                      <Type_voie>'.$dataArr["adresse_facturation"]["type_voie"].'</Type_voie>
+                                                                      <Voie>'.$dataArr["adresse_facturation"]["voie"].'</Voie>
+                                                                      <Voie_suite>'.$dataArr["adresse_facturation"]["voie_suite"].'</Voie_suite>
+                                                                      <Ensemble>'.$dataArr["adresse_facturation"]["ensemble"].'</Ensemble>
+                                                                      <Batiment>'.$dataArr["adresse_facturation"]["batiment"].'</Batiment>
+                                                                      <Escalier>'.$dataArr["adresse_facturation"]["escalier"].'</Escalier>
+                                                                      <Etage>'.$dataArr["adresse_facturation"]["etage"].'</Etage>
+                                                                      <Porte>'.$dataArr["adresse_facturation"]["porte"].'</Porte>
+                                                                      <Logo>'.$dataArr["adresse_facturation"]["logo"].'</Logo>
+                                                                      <Code_postal>'.$dataArr["adresse_facturation"]["code_postal"].'</Code_postal>
+                                                                      <Ville>'.$dataArr["adresse_facturation"]["ville"].'</Ville>
                                                                     </_adresse_facturation>
-                                                                    <_email />
-                                                                    <_renonce_delai_retractation>false</_renonce_delai_retractation>
+                                                                    <_email>'.$dataArr["email"].'@mediaserv.net</_email>
+                                                                    <_renonce_delai_retractation>'.$dataArr["renonce_delai_retractation"].'</_renonce_delai_retractation>
                                                                     <_information_contact>
-                                                                      <Email />
-                                                                      <Telephone_mobile />
-                                                                      <Telephone_bureau />
-                                                                      <Telephone_domicile />
+                                                                      <Email>'.$dataArr["information_contact"]["email"].'</Email>
+                                                                      <Telephone_mobile>'.$dataArr["information_contact"]["telephone_mobile"].'</Telephone_mobile>
+                                                                      <Telephone_bureau>'.$dataArr["information_contact"]["telephone_bureau"].'</Telephone_bureau>
+                                                                      <Telephone_domicile>'.$dataArr["information_contact"]["telephone_domicile"].'</Telephone_domicile>
                                                                     </_information_contact>
-                                                                    <_cartebleue>
-                                                                      <Numero />
-                                                                      <Date_expiration />
-                                                                      <Cryptogramme />
-                                                                      <Titulaire />
-                                                                    </_cartebleue>
-                                                                    <_rib>
-                                                                      <Numero />
-                                                                      <Clef />
-                                                                      <Code_agence />
-                                                                      <Code_banque />
-                                                                      <Domiciliation />
-                                                                      <Titulaire />
-                                                                    </_rib>
+                                                                    '.$mode_paiment.'
                                                                 </enregistreSouscription>','',array(),'document', 'literal'
                                                             ); 
         $this->nusoap_client->operation = "msvaboweb/enregistreSouscription";

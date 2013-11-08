@@ -17,6 +17,7 @@
 
     <!--Form-->
     <form action="paiement/enregistreSouscription" method="post" id="frm-paiement">
+        <input type="hidden" name="mode_pay" id="mode_pay" value="rib"/>
     <div class="section-automatique">
     <div class="row">
       <div class="column twelve"><h3>LE PAIEMENT DE VOTRE ABONNEMENT</h3></div>

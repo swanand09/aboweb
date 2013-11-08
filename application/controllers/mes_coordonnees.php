@@ -206,7 +206,7 @@ class Mes_coordonnees extends MY_Controller {
         
         
         if(!array_key_exists("livraison_express",$this->data['userdata'])){
-            $this->session->set_userdata('livraison_express',"");
+            $this->session->set_userdata('livraison_express',"false");
         }       
         if(!array_key_exists("email_mediaserv",$this->data['userdata'])){
             $this->session->set_userdata('email_mediaserv',"");

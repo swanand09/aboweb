@@ -223,7 +223,7 @@ a.mail-link {
 	padding-left: 141px;
 }
 .header .rapeler {
-	background: url("../images/rapeler.png") no-repeat scroll 20px 0 transparent;
+	background: url("../images/rapeler.png") no-repeat scroll 26px 8px transparent;
 	height: 69px;
 	padding-left: 100px;
 }
@@ -330,7 +330,7 @@ body {
 	display: block;
 }
 .left-etape-content .debit-adsl {
-	background: url("../images/vsep.png") no-repeat scroll center 43px transparent;
+	background: url("../images/vsep.png") no-repeat scroll center 0 transparent;
 	margin-bottom: -13px;
 }
 .debit_emission {
@@ -524,12 +524,24 @@ ul.bqt li{
 }
 
 
+.prix_dec{
+	color:gray;
+}
+img.prix_bare{
+ 	float: left;
+    margin-top: -17px;
+    width:102px;
+}
+.chaines-tv .prix_promo {
+	clear: both;
+}
 
 .accordion .second .content { padding-left: 0; padding-right: 0;  padding-bottom: 0; }
 .chaines ul.bqt{
 	border: medium none;
 	padding-left: 0;
 	padding-right: 0;
+	height:40px;
 }
 #filter {
 	list-style: none outside none;
@@ -584,10 +596,10 @@ ul.bqt li{
 	width: 724px;
 }
 .accordion .second .content  .row .ultra {
-/*	background: none repeat scroll 0 0 #EDEDED;*/
+	background: none repeat scroll 0 0 #EDEDED;
     margin-left: -19px;
     padding-left: 19px;
-/*    width: 482px;*/
+    width: 482px;
 }
 .accordion .second .content  .row .ultra.ufirst{
 	border-bottom: 1px solid;
@@ -859,4 +871,8 @@ ul.bqt li{
 */
 .forpro.options li, .forpro.promotion ul {
 	margin-bottom: 0;
+}
+
+.forpro.promotion ul li{
+
 }

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <interrogeEligibiliteResponse xmlns="msvaboweb">
+      <interrogeEligibiliteResult>
+        <Id>3163</Id>
+        <Localite>RE</Localite>
+        <Ligne>
+          <Numero>0262719366</Numero>
+          <Debit_emmission>0.74456393718719482</Debit_emmission>
+          <Debit_de_reception>2.5651993751525879</Debit_de_reception>
+          <Eligible_ADSL>true</Eligible_ADSL>
+          <Eligible_televison>false</Eligible_televison>
+          <Debit_tv_ok>false</Debit_tv_ok>
+          <Eligible_degroupage_partiel>false</Eligible_degroupage_partiel>
+          <Eligible_dégroupage_total>true</Eligible_dégroupage_total>
+        </Ligne>
+        <Villes>
+          <WS_Ville>
+            <Code_postal>97414</Code_postal>
+            <Code_ville>ENTRE DEUX</Code_ville>
+          </WS_Ville>
+        </Villes>
+        <Catalogue>
+          <Produits>
+            <WS_Produit>
+              <Ordre>1</Ordre>
+              <Libelle>Facture papier</Libelle>
+              <Tarif>1.50</Tarif>
+              <Tarif_promo>1.50</Tarif_promo>
+              <Duree_mois_promo>0</Duree_mois_promo>
+              <Valeurs>
+                <WS_Produit_Valeur>
+                  <Id_web>0</Id_web>
+                  <Id_crm>3514</Id_crm>
+                  <Dummy>6</Dummy>
+                  <Categorie>FACTURATION</Categorie>
+                  <Type>RECURRENT</Type>
+                  <Libelle>
+                    <string>Facture papier</string>
+                  </Libelle>
+                  <Tarif>1.50</Tarif>
+                </WS_Produit_Valeur>
+              </Valeurs>
+              <Defaut>false</Defaut>
+              <Modifiable>true</Modifiable>
+              <Obligatoire>true</Obligatoire>
+              <Categorie>FACTURATION</Categorie>
+              <Id_web>3514</Id_web>
+              <Id_crm>3514</Id_crm>
+            </WS_Produit>
+            <WS_Produit>
+              <Ordre>2</Ordre>
+              <Libelle>Facture electronique</Libelle>
+              <Tarif>0</Tarif>
+              <Tarif_promo>0</Tarif_promo>
+              <Duree_mois_promo>0</Duree_mois_promo>
+              <Valeurs>
+                <WS_Produit_Valeur>
+                  <Id_web>0</Id_web>
+                  <Id_crm>3516</Id_crm>
+                  <Dummy>6</Dummy>
+                  <Categorie>FACTURATION</Categorie>
+                  <Type>RECURRENT</Type>
+                  <Libelle>
+                    <string>Facture électronique</string>
+                  </Libelle>
+                  <Tarif>0</Tarif>
+                </WS_Produit_Valeur>
+              </Valeurs>
+              <Defaut>true</Defaut>
+              <Modifiable>true</Modifiable>
+              <Obligatoire>true</Obligatoire>
+              <Categorie>FACTURATION</Categorie>
+              <Id_web>3516</Id_web>
+              <Id_crm>3516</Id_crm>
+            </WS_Produit>
+            <WS_Produit>
+              <Ordre>2</Ordre>
+              <Libelle>53 destinations illimitées 24h/24 + appels illimités vers les mobiles en local &amp; métropole 24h/24@ Jusqu'à 20 Méga</Libelle>
+              <Tarif>49.99</Tarif>
+              <Tarif_promo>49.99</Tarif_promo>
+              <Duree_mois_promo>0</Duree_mois_promo>
+              <Valeurs>
+                <WS_Produit_Valeur>
+                  <Id_web>0</Id_web>
+                  <Id_crm>3564</Id_crm>
+                  <Dummy>1</Dummy>
+                  <Categorie>FORFAIT</Categorie>
+                  <Type>RECURRENT</Type>
+                  <Libelle>
+                    <string>Forfait Internet;jusqu'à 20 Méga</string>
+                    <string>Forfait Téléphonie;illimitée 53 dest. 24h/24 + mobile local/métropole 24h/24</string>
+                  </Libelle>
+                  <Tarif>49.99</Tarif>
+                </WS_Produit_Valeur>
+              </Valeurs>
+              <Defaut>false</Defaut>
+              <Modifiable>true</Modifiable>
+              <Obligatoire>true</Obligatoire>
+              <Categorie>FORFAIT</Categorie>
+              <Id_web>3564</Id_web>
+              <Id_crm>3564</Id_crm>
+            </WS_Produit>
+            <WS_Produit>
+              <Ordre>1</Ordre>
+              <Libelle>Location modem ADSL</Libelle>
+              <Tarif>0</Tarif>
+              <Tarif_promo>0</Tarif_promo>
+              <Duree_mois_promo>0</Duree_mois_promo>
+              <Valeurs>
+                <WS_Produit_Valeur>
+                  <Id_web>0</Id_web>
+                  <Id_crm>3509</Id_crm>
+                  <Dummy>4</Dummy>
+                  <Categorie>IAD</Categorie>
+                  <Type>RECURRENT</Type>
+                  <Libelle>
+                    <string>Modem</string>
+                  </Libelle>
+                  <Tarif>0</Tarif>
+                </WS_Produit_Valeur>
+              </Valeurs>
+              <Defaut>true</Defaut>
+              <Modifiable>true</Modifiable>
+              <Obligatoire>true</Obligatoire>
+              <Categorie>IAD</Categorie>
+              <Id_web>3509</Id_web>
+              <Id_crm>3509</Id_crm>
+            </WS_Produit>
+            <WS_Produit>
+              <Ordre>1</Ordre>
+              <Libelle>Vous pouvez aussi conserver votre numéro de téléphone</Libelle>
+              <Tarif>0</Tarif>
+              <Tarif_promo>0</Tarif_promo>
+              <Duree_mois_promo>0</Duree_mois_promo>
+              <Valeurs />
+              <Defaut>true</Defaut>
+              <Modifiable>true</Modifiable>
+              <Obligatoire>false</Obligatoire>
+              <Categorie>PORTABILITE</Categorie>
+              <Id_web>3457</Id_web>
+              <Id_crm>3457</Id_crm>
+            </WS_Produit>
+          </Produits>
+          <Promo_libelle>En marche vers la TV</Promo_libelle>
+          <Dependances />
+          <Autorise_parrainage>true</Autorise_parrainage>
+          <Offreparrainage_id>1002</Offreparrainage_id>
+          <Promo_id_web>0</Promo_id_web>
+        </Catalogue>
+      </interrogeEligibiliteResult>
+    </interrogeEligibiliteResponse>
+  </soap:Body>
+</soap:Envelope>

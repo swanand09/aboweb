@@ -154,7 +154,15 @@
           <div class="column four">
             <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur-tv-netgem" value="decodeur-tv-netgem" <?php echo (!empty($location_decodeur)?"checked=checked":""); ?> disabled="disabled" id="decodeur-tv-netgem"><strong>DÉCODEUR TV NETGEM</strong></label>
               <?php echo image("decodeur_tv_netgem.png",NULL,array("alt"=>"Décodeur TV netgem"));?>
-            <strong class="left"> + DE 35 CHAÎNES INCLUSES 3,50€ TTC/MOIS</strong>
+            <strong class="left"> + DE 35 CHAÎNES INCLUSES</strong>
+            <?php if($duree_mois_promo>0){ ?>
+            <div class="prix_dec"><strong><?php echo $decodeur_tv_tarif; ?>€ TTC/MOIS</strong></div>
+            <?php echo image('prix_bare.png',NULL,array("class"=>"prix_bare")); ?>          
+            <div class="prix_promo"><strong><?php echo $decodeur_tv_promo_tarif; ?>€ durant <?php echo $duree_mois_promo; ?>mois</strong></div>
+            <?php }else{?>
+                 <div class="prix_promo"><strong><?php echo $decodeur_tv_tarif; ?>€ TTC/MOIS</strong></div>
+          <?php  }
+?>
           </div>
         </div>
         </div> <!--end of accordion content-->  

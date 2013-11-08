@@ -145,12 +145,14 @@ $(function () {
 		$(this).addClass('box-shadow');
 		$('.section-automatique').show();
 		$('.section-carte-bancaire').hide();
+                $("input[id=mode_pay]").val("rib");              
 	});
 	$('.prelevement .cartebancaire').click( function(){
 		$('.prelevement div').removeClass('box-shadow');
 		$(this).addClass('box-shadow');
 		$('.section-automatique').hide();
 		$('.section-carte-bancaire').show();
+                $("input[id=mode_pay]").val("cartebleue");                 
 	});
 
 	/*------------------------------------

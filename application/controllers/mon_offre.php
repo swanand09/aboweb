@@ -160,10 +160,10 @@ class Mon_offre extends MY_Controller {
              $counter++;
            }
            if($val["Categorie"]=="IAD")
-            {
+           {
                 $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"]);
                 $this->session->set_userdata('tarifLocTvMod',$val["Tarif"]);
-            }
+           }
         }
         $data["iadArr"] = $iadArr;
         $this->session->set_userdata('iad',$iadArr);
@@ -233,7 +233,7 @@ class Mon_offre extends MY_Controller {
     {
          $this->controller_verifySessExp()? redirect('mon_offre'):"";
          
-         //initialiser les tarrifs a zéro pour le panier
+         //initialiser les tarifs a zéro pour le panier
          $this->session->set_userdata('totalParMois',$this->totalParMois);
          $this->session->set_userdata("tarifBouqTv","");
          $this->session->set_userdata("tarifOptionEden","");
@@ -325,7 +325,14 @@ class Mon_offre extends MY_Controller {
                   $this->colonneDroite["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
                   $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
                   $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);    
-              }            
+              }     
+              if($val["Categorie"]=="TELEVISION")
+              { 
+                  $data["duree_mois_promo"]         = $val["Duree_mois_promo"];
+                  $data["decodeur_tv_tarif"]        = $val["Tarif"];
+                  $data["decodeur_tv_promo_tarif"]  = $val["Tarif_promo"];
+                  
+              }
             }         
             
             //Go to bouquet tv or mes coordonnes 

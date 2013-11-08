@@ -221,7 +221,7 @@ echo validation_errors();
         <div class="row">
            <div class="column twelve bottom-10">
             <label>
-              <input type="checkbox" value="check livraison express" name="livraison_express" <?php echo !empty($livraison_express)?"checked='checked'":"";?> class="left">
+              <input type="checkbox" value="true" name="livraison_express" <?php echo ($livraison_express!="false")?"checked='checked'":"";?> class="left">
               Je souhaite bénéficier gratuitement d'une livraison express (72 heures à partir du traitement de votre commande).<br>
             </label>
             <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>
