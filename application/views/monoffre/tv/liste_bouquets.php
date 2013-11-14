@@ -115,9 +115,27 @@
         }
     }
     
+    //nombre des chaines
     $nombreChaineMega = sizeof($bouquet_list["MEGA"]);
     $nombreChaineGiga = $nombreChaineMega + sizeof($bouquet_list["GIGA"]);
     $nombreChaineUltra = $nombreChaineGiga + sizeof($bouquet_list["ULTRA"]);
+    
+    //VOD PVR
+    
+    $vodTarif      = "";
+    $numriquEnreg = "";
+ 
+    if(!empty($vodPvr)){
+        foreach($vodPvr as $key=>$val){
+            if(isset($val["Vidéo à la demande"])){
+                $vodTarif = ($val["Vidéo à la demande"]>0)?$val["Vidéo à la demande"]:"inclus";
+            }
+            if(isset($val["Enregistreur numérique"])){
+                $numriquEnreg = ($val["Enregistreur numérique"]>0)?$val["Enregistreur numérique"]:"inclus";
+            }
+        }
+    }
+   
 ?>
 <form class="frm-tv" onSubmit="javascript:gotoMesCoord();return false; ">
 
@@ -180,7 +198,7 @@
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineMega; ?></h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-mega">bouquet mega<br><?php echo $tarif_mega; ?> €</a> 
-              <label><input type="radio" value="mega_<?php echo $tarif_mega; ?>_25" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
+              <label><input type="radio" value="mega_<?php echo $tarif_mega; ?>_25_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option giga-->
@@ -188,7 +206,7 @@
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineGiga; ?></h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-giga">bouquet giga<br><?php echo $tarif_giga; ?> € </a>
-              <label><input type="radio" value="giga_<?php echo $tarif_giga; ?>_33" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
+              <label><input type="radio" value="giga_<?php echo $tarif_giga; ?>_33_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option ultra -->
@@ -196,7 +214,7 @@
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineUltra; ?></h4> chaines</div>
             <div class="column eight">
               <a href="#" id="link-ultra">bouquet ultra<br><?php echo $tarif_ultra; ?> € </a>
-              <label><input type="radio" value="ultra_<?php echo $tarif_ultra; ?>_38" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
+              <label><input type="radio" value="ultra_<?php echo $tarif_ultra; ?>_38_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
             </div>
           </div>
            

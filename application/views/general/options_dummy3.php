@@ -14,6 +14,12 @@ if(isset($bouquetTv)&&!empty($bouquetTv)){
       <?php } 
             if(!empty($tarifOptionBein)&&isset($tarifOptionBein)){ ?>    
               <li class="small-icon-heart"><strong>BeIN Sport</strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionBein,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
+      <?php } 
+             if(!empty($bouquetTv[3])&&isset($bouquetTv[3])){ ?> 
+              <li><strong>Vidéo à la demande</strong><span class="right" style="margin-left:50px;"><?php echo ($bouquetTv[3]=="inclus")?$bouquetTv[3]:number_format($bouquetTv[3],2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
+      <?php }
+             if(!empty($bouquetTv[4])&&isset($bouquetTv[4])){?>
+              <li><strong>Enregistreur numérique</strong><span class="right" style="margin-left:50px;"><?php echo ($bouquetTv[4]=="inclus")?$bouquetTv[4]:number_format($bouquetTv[4],2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>   
       <?php } ?>
     </ul>
 </div>

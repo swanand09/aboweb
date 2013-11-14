@@ -161,7 +161,7 @@ class Mon_offre extends MY_Controller {
            }
            if($val["Categorie"]=="IAD")
            {
-                $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"]);
+                $iadArr = array("Libelle"=>$val["Libelle"],"Tarif"=>$val["Tarif"],"Tarif_promo"=>$val["Tarif_promo"],"Duree_mois_promo"=>$val["Duree_mois_promo"],"Id_crm"=>$val["Id_crm"]);
                 $this->session->set_userdata('tarifLocTvMod',$val["Tarif"]);
            }
         }
@@ -246,13 +246,14 @@ class Mon_offre extends MY_Controller {
          $data["totalParMois"] = $this->getTotal($this->iad["Tarif"]);
          $localite    = $this->session->userdata("localite");
          $dummyPanier = $this->session->userdata("dummyPanier");
-          if(isset($dummyPanier["dummy6"])){
-            foreach($dummyPanier["dummy6"] as $val){
-                $data["totalParMois"] = $this->getTotal($val["Tarif"]);             
-            }
-         }
+         //facturation
+//         if(isset($dummyPanier["dummy6"])){
+//            foreach($dummyPanier["dummy6"] as $val){
+//                $data["totalParMois"] = $this->getTotal($val["Tarif"]);             
+//            }
+//         }
          $data["dummyPanier"] = $dummyPanier;
-         $bouqTvArr = array(); $optionTvArr = array();
+         $bouqTvArr = array(); $optionTvArr = array();$vodPvr = array();
          foreach($dummyPanier as $key=>$val){
             if(!empty($val)){
                 switch($key){
@@ -265,7 +266,7 @@ class Mon_offre extends MY_Controller {
                               }  
                            }
                     break;
-                    case "dummy3":
+                    case "dummy3":                           
                            foreach($val as $val2){
                                switch($val2["Categorie"]){
                                    case "BOUQUET_TV":
@@ -273,6 +274,9 @@ class Mon_offre extends MY_Controller {
                                    break;
                                    case "OPTION_TV":
                                        array_push($optionTvArr, array($val2["Libelle"]["string"]=>$val2["Tarif"]));
+                                   break;
+                                   case "VOD_PVR":
+                                        array_push($vodPvr, array(utf8_encode($val2["Libelle"]["string"])=>$val2["Tarif"]));
                                    break;
                                }
                            }
@@ -301,7 +305,7 @@ class Mon_offre extends MY_Controller {
              }
          }
          
-         $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr;
+         $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr; $data["vodPvr"] = $vodPvr;
           
 
             $id_crm = $this->input->post("id_crm");
@@ -312,6 +316,10 @@ class Mon_offre extends MY_Controller {
             {
               if($val["Categorie"]=="FORFAIT"&&$val["Id_crm"]==$id_crm)
               {
+                  //id crm forfait dummy1
+                  $this->session->set_userdata("forfaitDummy1Crm",$id_crm);
+                  $this->session->set_userdata("locationIadDummy4Crm",$this->iad["Id_crm"]);
+                                   
                   $data["donne_forfait"]    = $val;
                   $data["totalParMois"] = $this->getTotal((($val["Tarif_promo"]>0)?$val["Tarif_promo"]:$val["Tarif"]));                 
                   $this->session->set_userdata("donne_forfait",$val);
@@ -324,7 +332,7 @@ class Mon_offre extends MY_Controller {
                   $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
                   
                   $this->colonneDroite["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
-                  $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
+                  //$this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
                   $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);    
               }     
               if($val["Categorie"]=="TELEVISION")
@@ -373,7 +381,7 @@ class Mon_offre extends MY_Controller {
 //            $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
 //        }
         
-        //les tarifs bouquets
+        //les tarifs bouquets tv dans le cas décocher
         $tarifBouqTv = $this->session->userdata("tarifBouqTv");
         if(!empty($tarifBouqTv)){
            $data["totalParMois"] = $this->getTotal(-$tarifBouqTv); 
@@ -390,6 +398,14 @@ class Mon_offre extends MY_Controller {
                                 
                    //total par mois
                    $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
+                   
+                   //mettre $locationDecTvDummy4Crm en session
+                   foreach($dummyPanier["dummy4"] as $key=>$val){
+                       if($val["Categorie"]=="STB"){
+                           $this->session->set_userdata("locationDecTvDummy4Crm",($decoder_tv!="uncheck")?$val["Id_crm"]:"");
+                       }
+                   }
+                   
             break;
             case "dummy7":
                    $data["beneficierTv"]  = "";
@@ -399,6 +415,11 @@ class Mon_offre extends MY_Controller {
                    
                     //total par mois
                    $data["totalParMois"] = $this->session->userdata('totalParMois');
+                   
+                   //mettre oneshotDummy7Crm en session
+                   foreach($dummyPanier["dummy7"] as $key=>$val){
+                       $this->session->set_userdata("oneshotDummy7Crm",($decoder_tv!="uncheck")?$val["Id_crm"]:"");
+                   }
             break;
         }
         
@@ -444,9 +465,60 @@ class Mon_offre extends MY_Controller {
               $data["totalParMois"] = $this->getTotal(-$tarifOptionBein);
               $this->session->set_userdata("tarifOptionBein","");
               
+             //mettre les Id_crm en session 
+             $this->session->set_userdata("bouquetTvDummy3Crm","");
+             $this->session->set_userdata("optionTvEdenDummy3Crm","");
+             $this->session->set_userdata("optionTvBeinDummy3Crm","");
+             $this->session->set_userdata("vodPvrOneshotDummy3Crm","");
+             $this->session->set_userdata("vodPvrRecurrentDummy3Crm","");
             }
             $data["totalParMois"] = $this->getTotal($bouquetTv[1]);
-            $this->session->set_userdata("tarifBouqTv",$bouquetTv[1]);           
+            if(!empty($bouquetTv[3])&&$bouquetTv[3]!="inclus")
+            {
+                 $data["totalParMois"] = $this->getTotal($bouquetTv[3]);
+            }    
+             if(!empty($bouquetTv[4])&&$bouquetTv[4]!="inclus")
+            {
+                 $data["totalParMois"] = $this->getTotal($bouquetTv[4]);
+            } 
+            $this->session->set_userdata("tarifBouqTv",$bouquetTv[1]); 
+            
+            
+             //mettre les Id_crm en session
+              foreach($dummyPanier["dummy3"] as $key=>$val){ 
+                  switch($val["Categorie"]){
+                      case "BOUQUET_TV": //bouquetTvDummy3Crm;               
+                          if($val["Tarif"]==$bouquetTv[1]){
+                              $this->session->set_userdata("bouquetTvDummy3Crm",$val["Id_crm"]);
+                          }
+                      break;  
+                      case "OPTION_TV": //optionTvEdenDummy3Crm;               
+                          switch($val["Libelle"]["string"]){
+                            case "Eden":
+                                $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Id_crm"]);    
+                            break;
+                            case "BeIN Sport":
+                                    $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Id_crm"]);    
+                            break;
+                          }
+                         
+                      break;
+                      case "VOD_PVR": //vodPvrDummy3Crm;  
+                         switch($val["Type"])
+                         {
+                            case "ONESHOT":  //Enregistreur numérique
+                                $this->session->set_userdata("vodPvrOneshotDummy3Crm",$val["Id_crm"]);
+                            break;
+                            case "RECURRENT":  // Vidéo à la demande
+                                $this->session->set_userdata("vodPvrRecurrentDummy3Crm",$val["Id_crm"]);
+                            break;
+                         }
+                      break; 
+                  }
+               
+              }
+           // $data["vodTarif"]       = $bouquetTv[3];
+           // $data["numriquEnreg"]   = $bouquetTv[4];
          }
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
@@ -472,6 +544,10 @@ class Mon_offre extends MY_Controller {
                     if(!empty($tarifOptionEden)&&$checkOption=="uncheck"){
                       $data["totalParMois"] = $this->getTotal(-$tarifOptionEden);
                       $this->session->set_userdata("tarifOptionEden","");
+                      
+                      //unset les id_crm 
+                      $this->session->set_userdata("optionTvEdenDummy3Crm","");
+            
                     }else{
                         $data["totalParMois"] = $this->getTotal($optionTv[1]);
                         $this->session->set_userdata("tarifOptionEden",$optionTv[1]);
@@ -483,6 +559,8 @@ class Mon_offre extends MY_Controller {
                     if(!empty($tarifOptionBein)&&$checkOption=="uncheck"){
                       $data["totalParMois"] = $this->getTotal(-$tarifOptionBein);
                       $this->session->set_userdata("tarifOptionBein","");
+                      
+                       $this->session->set_userdata("optionTvBeinDummy3Crm","");
                     }else{
                         $data["totalParMois"] = $this->getTotal($optionTv[1]);
                         $this->session->set_userdata("tarifOptionBein",$optionTv[1]);
@@ -518,15 +596,6 @@ class Mon_offre extends MY_Controller {
         redirect("mon_offre");
     }
     
-    //get total par mois
-    public function getTotal($amount){
-        $this->totalParMois = $this->session->userdata('totalParMois');
-        $this->totalParMois += (double)$amount;
-        $this->session->set_userdata('totalParMois',$this->totalParMois);
-        return $this->totalParMois;
-    }
-    
-    
     
     public function testFlux()
     {
@@ -548,10 +617,10 @@ class Mon_offre extends MY_Controller {
         }*/
         
         //promo
-        $promo = $this->session->userdata("promo");
-        echo "<pre>";
-        print_r($promo);
-        echo "</pre>";
+//        $promo = $this->session->userdata("promo");
+//        echo "<pre>";
+//        print_r($promo);
+//        echo "</pre>";
     }
     
     public function testDummy($num_tel)

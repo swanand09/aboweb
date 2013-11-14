@@ -11,7 +11,35 @@ class Mes_coordonnees extends MY_Controller {
     public function index()
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
-        $this->data["userdata"] = $this->session->all_userdata();
+       
+        $prevState = $this->session->userdata("prevState");
+        //facturation
+        
+        $produit =  $this->session->userdata("produit");   
+        foreach($produit as $key=>$val)
+        {
+          if($val["Categorie"]=="FACTURATION"&&$val["Libelle"]=="Facture papier simple")
+          {
+              $this->data["facture_tarif"] = $val["Tarif"];              
+              $this->data["facture_tarif_promo"] = $val["Tarif_promo"];
+              $this->data["facture_duree_promo"] = $val["Duree_mois_promo"];
+          }
+        }
+        
+        $dummyPanier            = $this->session->userdata("dummyPanier");
+        $data["dummyPanier"]    = $dummyPanier;
+         $data["typeFacture"] = array("facture","electronique");
+        $prevState[1]["envoie_facture_dummy6"]  =   $this->load->view("general/type_facturation_dummy6",$data,true);
+      // $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
+//        if(isset($dummyPanier["dummy6"])){
+//            foreach($dummyPanier["dummy6"] as $val){
+//                $data["totalParMois"] = $this->getTotal($val["Tarif"]);             
+//            }
+//         }
+       
+         $this->session->set_userdata('prevState',$prevState);
+         $this->data["userdata"] = $this->session->all_userdata();
+        
         $wsVille = $this->session->userdata("ws_ville");
         $codePostal = "";
         $codeVille  = "";
@@ -27,11 +55,11 @@ class Mes_coordonnees extends MY_Controller {
         }
         
         //re initialise session pour le panier partie parrainage
-        $prevState = $this->session->userdata("prevState");
+       // $prevState = $this->session->userdata("prevState");
         //$data["test"] = "test";
         /*$this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);        
         $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true); */       
-        $this->session->set_userdata('prevState',$prevState);
+        //$this->session->set_userdata('prevState',$prevState);
         /*
         //configuring rules
         $this->form_validation->set_rules('civilite_aa', 'civilite des adresses abonnement', 'required');
@@ -306,6 +334,35 @@ class Mes_coordonnees extends MY_Controller {
            $this->session->set_userdata("id_parrain",(isset($resultVerifParain["Id_parrain"])&&!empty($resultVerifParain["Id_parrain"]))?$resultVerifParain["Id_parrain"]:0);
            echo json_encode($resultVerifParain);
         }
+    }
+    
+    public function updateFacture(){
+       $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+       $typeFacture =  $this->input->post("typeFacture");
+       $typeFacture = explode("_",$typeFacture);
+       $data["typeFacture"] = $typeFacture;
+       $this->session->set_userdata("facture","electronique");
+       $data["totalParMois"] = $this->session->userdata('totalParMois');
+       switch($typeFacture["1"]){
+          case "papier": 
+            $this->session->set_userdata("facture","papier");
+            $data["totalParMois"] = $this->getTotal($typeFacture["2"]);
+            $this->session->set_userdata("tarif_papier",$typeFacture["2"]);
+          break;
+          case "electronique":
+            $this->session->set_userdata("facture","electronique");
+            $tarif_papier =   $this->session->userdata("tarif_papier"); 
+            if(!empty($tarif_papier)){
+                $data["totalParMois"] = $this->getTotal(-$tarif_papier);
+            }
+          break;
+       }
+        
+       $prevState = $this->session->userdata("prevState");
+       $prevState[1]["envoie_facture_dummy6"] = $this->load->view("general/type_facturation_dummy6",$data,true);     
+       $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
+       $this->session->set_userdata("prevState",$prevState);
+       echo json_encode(array("envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
     }
 }
 /* End of file mes_coordonnees.php */

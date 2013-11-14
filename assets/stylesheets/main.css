@@ -1,7 +1,9 @@
 /*
 * Misc CSS
 */
-
+.clear{
+	clear: both;
+}
 ul.accordion > li.active {
 
 border-top: 3px solid #b2d376;
@@ -33,6 +35,7 @@ hr.sexy {
 .right-content hr {
 	border-top: 1px solid #7CB334;
 	border-bottom: 1px solid #b8d67f;
+	margin:10px 0px;
 }
 .box-o-shadow {
     -webkit-box-shadow: 0px 0px 2px #AEAEAE;
@@ -381,9 +384,10 @@ body {
 /*
 * Main content -first step - 2
 */
+
 .forfait {
-	height: 145px;
 	margin-bottom: 20px;
+	height:140px;
 }
 .promo .prix {
 	color:#90918e;
@@ -607,10 +611,10 @@ img.prix_bare{
 	width: 724px;
 }
 .accordion .second .content  .row .ultra {
-/*	background: none repeat scroll 0 0 #EDEDED;*/
+	background: none repeat scroll 0 0 #EDEDED;
     margin-left: -19px;
     padding-left: 19px;
-/*    width: 482px;*/
+    width: 482px;
 }
 .accordion .second .content  .row .ultra.ufirst{
 	border-bottom: 1px solid;
@@ -638,11 +642,9 @@ img.prix_bare{
 	font-size:1em;
 	font-weight: normal;
 }
-#grid {
-
-}
-#grid li {
-	
+.prix_option .promo {
+	color:gray;
+	text-decoration: line-through;
 }
 
 /*
@@ -697,6 +699,7 @@ img.prix_bare{
 #mes-coordonnees input.ville { width: 180px; }
 #mes-coordonnees input.comp_numero { width: 153px; }
 #mes-coordonnees input.voie { width: 227px; }
+.facturepapier .promo { color:gray; text-decoration: line-through;}
 /*
 * Main content - Mon recapitulatif
 */
@@ -782,8 +785,9 @@ img.prix_bare{
 	font-size: 0.9em;
 }
 .forpro h3 {
-	color:#fff;
-	font-size: 1.1em;
+	color: #FFFFFF;
+    font: 1.1em freeroadregular;
+    text-transform: uppercase;
 }
 .forpro h3 a {
 	color: #FFFFFF;
@@ -808,12 +812,30 @@ img.prix_bare{
 .forpro ul li.small-icon-telephone {
 	background: url("../images/small_icon_telephone.png") no-repeat scroll 0 2px transparent;
 }
-
-.forpro ul li.small-icon-cross{
-	background: url("../images/small_icon_cross.png") no-repeat scroll 0 3px transparent;
+.options.forpro ul li {
+	padding-bottom: 5px;
+    padding-left: 30px;
 }
-.forpro ul li.small-icon-heart{
-	background: url("../images/small_icon_heart.png") no-repeat scroll 0 3px transparent;
+.forpro ul li.mega{
+	background: url("../images/contenu/mega_icon.png") no-repeat scroll 0 3px transparent;
+}
+.forpro ul li.giga{
+	background: url("../images/contenu/giga_icon.png") no-repeat scroll 0 3px transparent;
+}
+.forpro ul li.ultra{
+	background: url("../images/contenu/ultra_icon.png") no-repeat scroll 0 3px transparent;
+}
+.forpro ul li.sport{
+	background: url("../images/contenu/sport_icon.png") no-repeat scroll 0 3px transparent;
+}
+.forpro ul li.eden{
+	background: url("../images/contenu/eden_icon.png") no-repeat scroll 0 3px transparent;
+}
+.forpro ul li.vod{
+	background: url("../images/contenu/vod_icon.png") no-repeat scroll 0 3px transparent;
+}
+.forpro ul li.dvr{
+	background: url("../images/contenu/dvr_icon.png") no-repeat scroll 0 3px transparent;
 }
 
 .modem-deco h3{
@@ -823,15 +845,12 @@ img.prix_bare{
 .modem-deco,.total {
 	width: 100%;
 }
-.total {
-	background-color: #87BF48;
-	margin-top: -21px;
-    padding-top: 15px;
-}
 .total h3{
 	color: #FFFFFF;
-    font-size: 1.1em;
-    font-weight: normal;
+   font-family: freeroadregular;
+   font-size: 1.1em;
+   font-weight: normal;
+   text-transform: uppercase;
 }
 
 #ligne {
@@ -867,10 +886,9 @@ img.prix_bare{
 	font-size:13px;
 }
 .parrainage {
-	background: url("../images/small_icon_parrainage.png") no-repeat scroll 0 3px transparent;	
+	background: url("../images/like.png") no-repeat scroll 0 3px transparent;	
 	padding-left: 22px;
 	float: left;
-	margin-left: 10px;
 }
 /*
 * Sidebar options
@@ -881,4 +899,8 @@ img.prix_bare{
 
 .forpro.promotion ul li{
 	background: url("../images/like.png") no-repeat scroll 0 3px transparent;
+}
+
+.notitle.forpro ul li{
+	padding-left: 0;
 }

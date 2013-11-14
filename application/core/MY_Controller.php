@@ -11,7 +11,33 @@ class MY_Controller extends CI_Controller {
         var $totalParMois;
         var $iad;
         var $validPrefix   = array();
-       
+        
+        //donnés dummy
+//        var $dummyData1;
+//        var $dummyData2;
+//        var $dummyData3;
+//        var $dummyData4;
+//        var $dummyData5;
+//        var $dummyData6;
+//        var $dummyData7;
+        
+        //id_crm les produits souscris
+        var $forfaitDummy1Crm;
+        
+        var $bouquetTvDummy3Crm;
+        var $optionTvEdenDummy3Crm;
+        var $optionTvBeinDummy3Crm;
+        var $vodPvrOneshotDummy3Crm;
+        var $vodPvrRecurrentDummy3Crm;
+         
+        var $locationIadDummy4Crm;
+        var $locationDecTvDummy4Crm;
+        
+        var $cautionDummy5Crm;
+        var $factureDummy6Crm;
+        
+        var $oneshotDummy7Crm;
+        
         public function __construct()
 	{
             parent::__construct(); 
@@ -126,6 +152,14 @@ class MY_Controller extends CI_Controller {
                             ->title('title', 'Merci')
                             ->set_partial('contenu', 'merci/merci')                          
                             ->build('page');
+        }
+        
+        //get total par mois
+        public function getTotal($amount){
+            $this->totalParMois = $this->session->userdata('totalParMois');
+            $this->totalParMois += (double)$amount;
+            $this->session->set_userdata('totalParMois',$this->totalParMois);
+            return $this->totalParMois;
         }
 }
 

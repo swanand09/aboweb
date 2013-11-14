@@ -68,7 +68,8 @@
     var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
     var updateBouquet           = '<?php echo base_url('mon_offre/updateBouquet');?>';  
-    var updateOptions            = '<?php echo base_url('mon_offre/updateOptions');?>';
+    var updateOptions           = '<?php echo base_url('mon_offre/updateOptions');?>';
+    var updateFacture           = '<?php echo base_url('mes_coordonnees/updateFacture') ?>';
 </script>
 <?php echo js('main_functions.js');?>
   <!--MAIN SECTION-->

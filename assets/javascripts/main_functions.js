@@ -226,6 +226,34 @@ var preload = function(){
 
           }
           
+          //choix facturation
+          function choixFacture(id)
+          {
+               preload();    
+                var typeFacture   = $("#"+id).val(); 
+                 $.post(
+                    updateFacture,
+                     {
+                        typeFacture      : typeFacture,
+                     },
+                    function(data){                          
+                      $("#recap_contenu").children("#colFacture").remove();  
+                      $("#recap_contenu").append(data.envoie_facture_dummy6);
+                      $("#total_mois").empty().append(data.total_par_mois);  
+                      $("#"+id).attr("Disabled","Disabled");
+                      switch(id){
+                          case "type_facture1":
+                               $("#type_facture2").removeAttr("Disabled");
+                          break;
+                          case "type_facture2":
+                               $("#type_facture1").removeAttr("Disabled");
+                          break;
+                      }
+                      $.unblockUI();                       
+                    },"json"
+               ); 
+          }
+          
           function gotoMesCoord(){
                 $.post(
                     mesCoordonnes,
