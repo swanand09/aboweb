@@ -76,6 +76,7 @@ class Mon_offre extends MY_Controller {
         {   
             $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->interrogeEligibilite($num_tel);
+           
             if(!empty($result))
             {
                 $data["result"] = $result;               
@@ -377,9 +378,7 @@ class Mon_offre extends MY_Controller {
         $decoder_tv   =  $this->input->post('decoder_tv');     
         $beneficierTv  = explode("_",$beneficierTv);             
         $data["decoder_tv"]    = $decoder_tv; 
-//        if($beneficierTv[0]=="dummy4"){
-//            $data["totalParMois"] = $this->getTotal(($decoder_tv!="uncheck")?$beneficierTv[1]:-$beneficierTv[1]);
-//        }
+        $dummyPanier = $this->session->userdata("dummyPanier");
         
         //les tarifs bouquets tv dans le cas décocher
         $tarifBouqTv = $this->session->userdata("tarifBouqTv");
@@ -393,6 +392,7 @@ class Mon_offre extends MY_Controller {
             case "dummy4":
                    $data["beneficierTv"]  = $beneficierTv[1];
                    $data["oneshot_dummy7"] = "";
+                   $data["dummy4"] = $dummyPanier["dummy4"];
                    $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
                    $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
                                 
@@ -409,6 +409,7 @@ class Mon_offre extends MY_Controller {
             break;
             case "dummy7":
                    $data["beneficierTv"]  = "";
+                   $data["dummy7"] = $dummyPanier["dummy7"];
                    $data["oneshot_dummy7"] = $beneficierTv[1];
                    $prevState[1]["location_equipements_dummy4"] = $this->load->view("general/location_equipements_dummy4",$data,true);
                    $prevState[1]["frais_activation_facture_dummy7"] = $this->load->view("general/frais_oneshot_dummy7",$data,true);
@@ -427,7 +428,7 @@ class Mon_offre extends MY_Controller {
         $prevState[1]["caution_decodeur_dummy5"] = "";
         $data["caution_dummy5"] = $this->session->userdata("caution_dummy5");
         if(!empty($data["caution_dummy5"])){    
-            
+             $data["dummy5"] = $dummyPanier["dummy5"];
             $prevState[1]["caution_decodeur_dummy5"] = ($decoder_tv=="uncheck")?"": $this->load->view("general/caution_dummy5",$data,true);  
         }
         
@@ -483,7 +484,8 @@ class Mon_offre extends MY_Controller {
             } 
             $this->session->set_userdata("tarifBouqTv",$bouquetTv[1]); 
             
-            
+             $dummyPanier = $this->session->userdata("dummyPanier");
+             $data["dummy3"] = $dummyPanier["dummy3"];
              //mettre les Id_crm en session
               foreach($dummyPanier["dummy3"] as $key=>$val){ 
                   switch($val["Categorie"]){
@@ -536,6 +538,24 @@ class Mon_offre extends MY_Controller {
         $optionTv =  $this->input->post("optionTv");
         $checkOption =  $this->input->post("checkOption");
         $data["optionTv"] = $optionTv;
+        
+        $dummyPanier = $this->session->userdata("dummyPanier");
+        $data["dummy3"] = $dummyPanier["dummy3"];
+        
+        foreach($dummyPanier["dummy3"] as $key=>$val){ 
+                if($val["Categorie"]=="OPTION_TV"){
+              //optionTvEdenDummy3Crm;               
+                    switch($val["Libelle"]["string"]){
+                      case "Eden":
+                          $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Id_crm"]);    
+                      break;
+                      case "BeIN Sport":
+                              $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Id_crm"]);    
+                      break;
+                    }
+                }
+         }
+        
          if(!empty($optionTv)){           
             $optionTv = explode("_",$optionTv); 
             switch($optionTv[0]){
@@ -569,6 +589,7 @@ class Mon_offre extends MY_Controller {
                 break;
             }        
          }
+        
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
