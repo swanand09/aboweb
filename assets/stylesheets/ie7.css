@@ -8,7 +8,6 @@ input[type='text'] {
 /*
 * Header
 */
-
 .header .service-client {
 	text-align: left;
 	width: 180px;
@@ -52,8 +51,8 @@ input[type='text'] {
 .main-content .left-content {
 	width: 720px !important;
 }
-.main-content .right-content {
-	width:220px;
+body .main-content .right-content {
+	width:220px !!important;
 }
 
 .left-etape-content h3 {
@@ -74,7 +73,12 @@ input[type='text'] {
 .left-etape-content .six {
 	width:330px;
 }
-
+/*
+* Main content - mon offre 1
+*/
+.services-mediaserv li {
+	height: 49px;
+}
 /*
 * Main content - mon offre 2
 */
@@ -112,4 +116,85 @@ input[type='text'] {
 */
 .frm-etape-tester #ligne{
 	width:323px;
+}
+
+/*
+* Sidebar
+*/
+.frm-etape-tester-block #ligne {
+	width:177px !important;
+}
+.right-content .degroupage {
+	width: 189px;
+	margin-bottom:0;
+}
+.right-content h3 .right {
+	margin-top:-16px;
+}
+.right-content .total {
+	width:220px;
+}
+.right-content .parrainage {
+	margin-bottom:0;
+}
+.parrain-section {
+	padding-left:0;
+	padding-right:0;
+}
+.right-content .parrain-section input[type='text'] {
+	width:164px;
+}
+.right-content .modem-deco {
+	width:220px;
+}
+
+/*
+* Page TV
+*/
+.row.chaines-tv > .column.eight {
+	width:455px;
+}
+.row.chaines-tv > .column.four {
+	width:211px;
+}
+#filter .columns.five{ width:73px; }
+#filter .columns.seven{ width:120px; }
+.accordion .four.bouquet { width: 235px; }
+.accordion .eight.chaines { width: 443px; }
+.accordion .eight.chaines .ultra{ width: 463px !important; }
+
+/*
+* Page mes coordonnées
+*/
+#email_mediaserv { width: 320px; }
+.postfix { width:160px; }
+.row form .row .columns { padding-right: 15px; }
+input.code_postal{ width: 144px; }
+input.telephone { width:144px; }
+
+/*
+* Page paiement
+*/
+.row.prelevement > .column.twelve,
+.section-automatique > .row > .twelve {
+	width: 720px; 
+}
+.section-automatique input { padding-left:0;padding-right:0;}
+.section-automatique input#domiciliation { width:500px; }
+.section-automatique .column.two { width:96px; }
+.section-automatique .column.three { width:150px; }
+.section-automatique .column.four { width:232px; }
+.section-automatique .column.five { width:293px; }
+
+.section-carte-bancaire .column.three { width:150px;}
+.section-carte-bancaire #numerodecarte { width:400px;}
+.prelevement .automatique.box-shadow,.prelevement .cartebancaire.box-shadow { border:2px solid #AEAEAE; }
+.prelevement .automatique,.prelevement .cartebancaire { padding-bottom: 0;}
+.prelevement .automatique .three,.prelevement .cartebancaire .three{ width: 90px; }
+.prelevement .automatique .nine,.prelevement .cartebancaire .nine{ width:329px; }
+
+.modem-deco li strong .right,.caution-deco li strong .right,.mfacturation li strong .right { float: right;margin-top: -20px;}
+.forpro h3 {
+	margin-top:0;
+	margin-bottom:0;
 }

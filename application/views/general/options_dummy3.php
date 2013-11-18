@@ -5,10 +5,12 @@ if(isset($bouquetTv)&&!empty($bouquetTv)){
  
 ?>
 <!--OPTIONS DUMMY 3-->
-<div class="custom-column forpro options p10">
-    <h3>Options</h3>
-    <ul class="bottom-20">
-      <li class="small-icon-cross bottom-10"><strong><?php echo $bouquetTv[0]; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($bouquetTv[1],2,',',' ')."€/mois"; ?><!--<br><a href="javascript:prevState('forfait');">Modifier</a>--></span><br><?php echo $bouquetTv[2]; ?> chaînes</li>
+<div class="forpro options">
+    <h3>Options<span class="right"><a href="#">Modifier</a></span></h3>
+    <ul>
+        <li class="<?php echo strtolower($bouquetTv[0]); ?>">
+          <strong><?php echo $bouquetTv[0]; ?></strong><span class="right"><?php echo number_format($bouquetTv[1],2,',',' ')."€/mois"; ?></span></strong><br><?php echo $bouquetTv[2]; ?> chaînes
+      </li>
       <?php if(!empty($tarifOptionEden)&&isset($tarifOptionEden)){ ?>    
               <li class="small-icon-heart"><strong><?php echo isset($dummy3[3]["Libelle"]["string"])?$dummy3[3]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionEden,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
       <?php } 
@@ -27,3 +29,20 @@ if(isset($bouquetTv)&&!empty($bouquetTv)){
 <!--END OF OPTIONS DUMMY 3-->
 <?php }?>
 </div>
+
+<!--
+OPTIONS
+       <div class="forpro options">
+         <h3>Options<span class="right"><a href="#">Modifier</a></span></h3>
+         <ul>
+           <li class="mega"><strong>Méga<span class="right">10€</span></strong><br>60 chaînes</li>
+           <li class="giga"><strong>Giga<span class="right">10€</span></strong><br>60 chaînes</li>
+           <li class="ultra"><strong>Ultra<span class="right">10€</span></strong><br>60 chaînes</li>
+           <li class="sport"><strong>Bein Sport<span class="right">10€</span></strong><br>60 chaînes</li>
+           <li class="eden"><strong>Eden<span class="right">10€</span></strong><br>(Réservé à un public adulte)</li>
+           <li class="vod"><strong>Vidéo à la demande<span class="right">inclus</span></strong></li>
+           <li class="dvr"><strong>Option Enregistreur Numérique<span class="right">inclus</span></strong></li>
+         </ul>
+       </div>
+       END OF OPTIONS
+       <hr>-->

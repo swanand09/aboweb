@@ -88,8 +88,16 @@
     $tarif_mega = 0;
     $tarif_giga = 0;
     $tarif_ultra = 0;
+    $bouquet_libelle = array();
+    $bouquet_tarif = array();
     if(!empty($bouqTvArr)&&isset($bouqTvArr)){
         foreach($bouqTvArr as $key=>$val){
+            
+            foreach($val as $key2=>$val2){
+                array_push($bouquet_libelle,$key2);
+                array_push($bouquet_tarif,$val2);
+            }
+            /*
             if(isset($val["Mega"])){
                 $tarif_mega = $val["Mega"];
             }
@@ -99,6 +107,8 @@
             if(isset($val["Ultra"])){
                 $tarif_ultra = $val["Ultra"];
             }
+             * 
+             */
         }
     }
     //option tv
@@ -197,24 +207,24 @@
          <div class="column four bouquet mega">
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineMega; ?></h4> chaines</div>
             <div class="column eight">
-              <a href="#" id="link-mega">bouquet mega<br><?php echo $tarif_mega; ?> €</a> 
-              <label><input type="radio" value="mega_<?php echo $tarif_mega; ?>_25_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
+              <a href="#" id="link-mega">bouquet mega<br><?php echo $bouquet_tarif[0]; ?> €</a> 
+              <label><input type="radio" value="<?php echo $bouquet_libelle[0]; ?>_<?php echo $bouquet_tarif[0]; ?>_25_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_mega" onclick="javascript: choixBouquet('bouquet_mega');"  name="bouquet"><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option giga-->
           <div class="column four bouquet giga">
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineGiga; ?></h4> chaines</div>
             <div class="column eight">
-              <a href="#" id="link-giga">bouquet giga<br><?php echo $tarif_giga; ?> € </a>
-              <label><input type="radio" value="giga_<?php echo $tarif_giga; ?>_33_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
+              <a href="#" id="link-giga">bouquet giga<br><?php echo $bouquet_tarif[1]; ?> € </a>
+              <label><input type="radio" value="<?php echo $bouquet_libelle[1]; ?>_<?php echo $bouquet_tarif[1]; ?>_33_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_giga" name="bouquet" onclick="javascript: choixBouquet('bouquet_giga');" ><span>Sélectionner</span></label>
             </div>
           </div>
           <!--option ultra -->
           <div class="column four bouquet ultra">
             <div class="column four border-right-gray"><h4 class="no-margin-bottom no-margin-top">+<?php echo $nombreChaineUltra; ?></h4> chaines</div>
             <div class="column eight">
-              <a href="#" id="link-ultra">bouquet ultra<br><?php echo $tarif_ultra; ?> € </a>
-              <label><input type="radio" value="ultra_<?php echo $tarif_ultra; ?>_38_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
+              <a href="#" id="link-ultra">bouquet ultra<br><?php echo $bouquet_tarif[2]; ?> € </a>
+              <label><input type="radio" value="<?php echo $bouquet_libelle[2]; ?>_<?php echo $bouquet_tarif[2]; ?>_38_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>" id="bouquet_ultra" name="bouquet" onclick="javascript: choixBouquet('bouquet_ultra');"><span>Sélectionner</span></label>
             </div>
           </div>
            

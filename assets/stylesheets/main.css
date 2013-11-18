@@ -385,7 +385,7 @@ body {
 * Main content -first step - 2
 */
 
-.forfait {
+.left-etape-content .forfait {
 	margin-bottom: 20px;
 	height:140px;
 }
@@ -536,6 +536,7 @@ ul.bqt {
 ul.bqt li{
     display: inline;
     list-style: none outside none;
+    padding: 0 2px;
 }
 
 
@@ -595,8 +596,13 @@ img.prix_bare{
 #filter li .seven .prix {
 	font-size: 34px;
 }
+#filter li .seven .promo {
+	color: #C5DD94;
+	font-size: 25px;
+	background: url("../images/small_promo.png") no-repeat scroll 2px 7px transparent;
+}
 #filter li .seven label {
-	font-size: 18px;
+	font-size: 17px;
     margin-bottom: -10px;
 }
 
