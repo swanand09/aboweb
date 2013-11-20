@@ -18,7 +18,7 @@ class Mes_coordonnees extends MY_Controller {
         $produit =  $this->session->userdata("produit");   
         foreach($produit as $key=>$val)
         {
-          if($val["Categorie"]=="FACTURATION"&&$val["Libelle"]=="Facture papier simple")
+          if($val["Categorie"]=="FACTURATION"&&($val["Libelle"]=="Facture papier simple"||$val["Libelle"]=="Facture papier"))
           {
               $this->data["facture_tarif"] = $val["Tarif"];              
               $this->data["facture_tarif_promo"] = $val["Tarif_promo"];

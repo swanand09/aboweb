@@ -64,8 +64,8 @@ $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_rec
              }
 ?>       
 <p><strong>Voici les résultats d’éligibilité liés à votre ligne</strong></p>
- <div class='row debit-adsl'>
-    <div class='column twelve'><h3 class='no-margin-bottom'>VOTRE DEBIT ADSL</h3></div>
+<h3 class='no-margin-bottom'>VOTRE DEBIT ADSL</h3>
+ <div class='row debit-adsl'>    
     <div class='column six debit_emission'><div id="g1"></div></div><div class='column six debit_reception'><div id="g2"></div></div>
   </div>
 <div>
