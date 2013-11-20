@@ -644,6 +644,13 @@ class Mon_offre extends MY_Controller {
 //        echo "</pre>";
     }
     
+    public function retrieveChaines(){
+         $this->load->model('stb_model','stb'); 
+       echo "<pre>";
+       print_r($this->stb->retrievChainesList());
+       echo "</pre>";
+    } 
+    
     public function testDummy($num_tel)
     {
         $result = $this->Wsdl_interrogeligib->retrieveInfo($num_tel);

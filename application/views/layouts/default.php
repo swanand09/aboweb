@@ -64,14 +64,15 @@
     var forfait                 = '<?php echo base_url('mon_offre/forfait');?>';
     var refreshRecapCol         = '<?php echo base_url('mon_offre/refreshRecapCol');?>'; 
     var updateTvDecodeur        = '<?php echo base_url('mon_offre/updateTvDecodeur');?>'; 
-    var mesCoordonnes            = '<?php echo base_url('mon_offre/mesCoordonnes');?>';     
+    var mesCoordonnes           = '<?php echo base_url('mon_offre/mesCoordonnes');?>';     
     var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
     var updateBouquet           = '<?php echo base_url('mon_offre/updateBouquet');?>';  
     var updateOptions           = '<?php echo base_url('mon_offre/updateOptions');?>';
-    var updateFacture           = '<?php echo base_url('mes_coordonnees/updateFacture') ?>';
+    var updateFacture           = '<?php echo base_url('mes_coordonnees/updateFacture'); ?>';
+    //var option_tv               = '<?php echo base_url('assets/javascripts/tv_option.js'); ?>';
 </script>
-<?php echo js('main_functions.js');?>
+<?php  echo js('tv_option.js'); echo js('main_functions.js');?>
   <!--MAIN SECTION-->
   <section class='row main-content'>
     <section class='nine columns left-content'>
@@ -117,10 +118,10 @@
         echo js('jquery.maskedinput.min.js');
         echo js('jquery.validationEngine.js');
         echo js('languages/jquery.validationEngine-fr.js');
-//        echo js('tv_option.js');
         echo js('custom.js');
         echo js('custom_autocomplete.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
+          
    ?> 
   <h3 id="prlodtxt">Veuillez patienter...</h3> 
 </body>

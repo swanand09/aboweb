@@ -648,6 +648,11 @@ img.prix_bare{
 	font-size:1em;
 	font-weight: normal;
 }
+.prix_option.inclus{
+	font-weight:bold;
+	color: #9AC447;
+}
+
 .prix_option .promo {
 	color:gray;
 	text-decoration: line-through;
@@ -678,10 +683,11 @@ img.prix_bare{
 * Main content - Mes coordonnées
 */
 #mes-coordonnees label {
-	font-size: 13px;
-    font-weight: bold;
-    padding-top: 15px;
+	font-size: 15px;
+   /*  font-weight: bold; 
+    /* padding-top: 15px; */
 	color:#000;
+	font-family: freeroadregular;
 }
 #mes-coordonnees .row {
 	padding-left: 28px;
@@ -695,15 +701,15 @@ img.prix_bare{
 .lfsection_space {
 	margin-top: 30px;
 }
-#mes-coordonnees input.prenom { width: 260px; }
+/* #mes-coordonnees input.prenom { width: 260px; }
 #mes-coordonnees input.adresse_suite { width: 227px; }
 #mes-coordonnees input.ensemble { width: 257px; }
 #mes-coordonnees input.batiment { width: 254px; }
-#mes-coordonnees input.escalier { width: 261px; }
-#mes-coordonnees input.logo { width: 108px; }
+#mes-coordonnees input.escalier { width: 261px; } */
+/* #mes-coordonnees input.logo { width: 108px; }
 #mes-coordonnees input.etage { width: 75px; }
-#mes-coordonnees input.ville { width: 180px; }
-#mes-coordonnees input.comp_numero { width: 153px; }
+#mes-coordonnees input.ville { width: 180px; } */
+/* #mes-coordonnees input.comp_numero { width: 153px; } */
 #mes-coordonnees input.voie { width: 227px; }
 .facturepapier .promo { color:gray; text-decoration: line-through;}
 /*

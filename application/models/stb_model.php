@@ -41,9 +41,9 @@ class Stb_model extends CI_Model
                      WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 ORDER BY F.order
                   ) C
                  INNER JOIN `mod_wa_bouquets` D
-                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
+                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(1,4,5,6,7,8) ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
-        
+       
        $query1 = $this->db->query($sql1, array($this->deptId)); 
        
        if($query1->num_rows() > 0)
@@ -52,26 +52,35 @@ class Stb_model extends CI_Model
          $prevCategorie = "";
          $counter =0;
          $chaineArr = array();
+         $countNoChain = 0;
+        // $bouquet
          
          foreach($query1->result() as $key=>$val)
          {
-             if(($counter==0)||($prevBouquet == $val->nom_bouquet&&$prevCategorie ==  $val->nom_categorie)){
+            if(($counter==0)||($prevBouquet == $val->nom_bouquet&&$prevCategorie ==  $val->nom_categorie)){
               array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon));
+             
             }   
             
             if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie))){
-                $this->maTv[$prevBouquet][$prevCategorie] = $chaineArr;    
+                $this->maTv[$prevBouquet][$prevCategorie] = $chaineArr;  
                 $chaineArr = array();
                 array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon)); 
             }
-              $prevBouquet   = $val->nom_bouquet;
-              $prevCategorie = $val->nom_categorie;
-            
-              $counter++;
+            $countNoChain++;
+            if($prevBouquet!=$val->nom_bouquet){
+                $this->maTv[$prevBouquet]["nombreChaine"] = $countNoChain;  
+                $countNoChain = 0;
+            }
+           
+             $prevBouquet   = $val->nom_bouquet;
+             $prevCategorie = $val->nom_categorie;
+             
+             $counter++;
          }
-            $this->maTv["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
-            $this->maTv["GIGA"] = array_filter($this->maTv["GIGA"],array(new retrieveUnikChaine($this->maTv["MEGA"]),'filterUnique'));
-         }
+         $this->maTv["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
+         $this->maTv["GIGA"] = array_filter($this->maTv["GIGA"],array(new retrieveUnikChaine($this->maTv["MEGA"]),'filterUnique'));
+       }
        return $this->maTv;
     }
     

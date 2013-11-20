@@ -64,14 +64,14 @@ $(function () {
 	/*-------------------------------------/
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
-         $('.numero').mask("99999");
-         $('#ligne,.telephone').mask("9999999999");
-         $('#cle').mask("99");
-         $('#banque').mask("99999");
-         $('#guichet').mask("99999");
-         $('#cryptogramme').mask("999");
-         $('#numerodecarte').mask("9999999999999999");
-         
+	$('.numero').mask("99999");
+	$('#ligne,.telephone').mask("9999999999");
+	$('#cle').mask("99");
+	$('#banque').mask("99999");
+	$('#guichet').mask("99999");
+	$('#cryptogramme').mask("999");
+	$('#numerodecarte').mask("9999999999999999");
+	//$('#numero_de_compte').mask("AAAAAAAAAAA");
 
 	/*-------------------------------------/
 	* Validation Engine
@@ -145,99 +145,53 @@ $(function () {
 		$(this).addClass('box-shadow');
 		$('.section-automatique').show();
 		$('.section-carte-bancaire').hide();
-                $("input[id=mode_pay]").val("rib");              
 	});
 	$('.prelevement .cartebancaire').click( function(){
 		$('.prelevement div').removeClass('box-shadow');
 		$(this).addClass('box-shadow');
 		$('.section-automatique').hide();
 		$('.section-carte-bancaire').show();
-                $("input[id=mode_pay]").val("cartebleue");                 
 	});
 
 	/*------------------------------------
-	* Page TV checkbox event
+	* Page Mes coordonées checkbox event
 	------------------------------------*/
-	$('.frm-tv #beneficier').click(function(){
-		if($(this).is(":checked"))
-		{
-			$("input#decodeur-tv-netgem").prop('checked', true);
-			$('.accordion .first').addClass('active');	
-			$('.accordion .first .content').css({ display: 'block'});
+	//on click
+	$('#check-adresse-facturation').click(function(){
+		if($(this).is(":checked")) {
+			$('.adresse-facturation').addClass('hide');
 		}
 		else
 		{
-			$("input#decodeur-tv-netgem").prop('checked', false);
-			$('.accordion .first').removeClass('active');	
-			$('.accordion .second').removeClass('active');
-			$('.accordion .first .content').css({ display: 'none'});
-			$('.accordion .second .content').css({ display: 'none'});
+			$('.adresse-facturation').removeClass('hide');
 		}
-		
 	});
-
-        /*------------------------------------
-         * Page Mes coordonées checkbox event
-         ------------------------------------*/
-        //on click
-        $('#check-adresse-facturation').click(function() {
-            if ($(this).is(":checked")) {
-                $('.adresse-facturation').addClass('hide');
-            }
-            else
-            {
-                $('.adresse-facturation').removeClass('hide');
-            }
-        });
-        //on load
-        if ($('#check-adresse-facturation').is(":checked")) {
-            $('.adresse-facturation').addClass('hide');
-        }
-        else
-        {
-            $('.adresse-facturation').removeClass('hide');
-        }
-        //on click
-        $('#check-adresse-livraison').click(function() {
-            if ($(this).is(":checked")) {
-                $('.adresse-livraison').addClass('hide');
-            }
-            else
-            {
-                $('.adresse-livraison').removeClass('hide');
-            }
-        });
-        //on load
-        if ($('#check-adresse-livraison').is(":checked")) {
-            $('.adresse-livraison').addClass('hide');
-        }
-        else
-        {
-            $('.adresse-livraison').removeClass('hide');
-        }
-
-	/*---------------------------------
-	* JQuery Shuffle Plugin
-	-----------------------------------*/
-
-/*	$('.accordion li.second').click(function (e) {
-		e.preventDefault();
-		$('#filter a').removeClass('active');
-		$('#filter > li a').addClass('active');
-		$('.grid').shuffle('shuffle', 'mega' );
+	//on load
+	if($('#check-adresse-facturation').is(":checked")) {
+		$('.adresse-facturation').addClass('hide');
+	}
+	else
+	{
+		$('.adresse-facturation').removeClass('hide');
+	}
+	//on click
+	$('#check-adresse-livraison').click(function(){
+		if($(this).is(":checked")) {
+			$('.adresse-livraison').addClass('hide');
+		}
+		else
+		{
+			$('.adresse-livraison').removeClass('hide');
+		}
 	});
-
-	$('#filter a').click(function (e) {
-		e.preventDefault();
-		// set active class
-		$('#filter a').removeClass('active');
-		$(this).addClass('active');
-		// get group name from clicked item
-		var groupName = $(this).attr('data-group');
-		// reshuffle grid
-		$('.grid').shuffle('shuffle', groupName );
-	});
-*/
+	//on load
+	if($('#check-adresse-livraison').is(":checked")) {
+		$('.adresse-livraison').addClass('hide');
+	}
+	else
+	{
+		$('.adresse-livraison').removeClass('hide');
+	}
 });
 
 
@@ -286,7 +240,6 @@ var etape4 = function() {
 /*------------------------------------------------
 * Jquery Meter Gauge
 ------------------------------------------------*/
-/*
 window.onload = function () {
 
 	if($('.debit_emission').length > 0 )
@@ -313,4 +266,3 @@ window.onload = function () {
 		});	
 	}
 }
-*/

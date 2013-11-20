@@ -109,7 +109,11 @@ var preload = function(){
                               (key!="total_par_mois")?$("#recap_contenu").append(data[1][key]):$("#total_mois").empty().append(data[1][key]);                            
                                 count++;
                             }
-
+                           //Disable 'list of bouquet' on startup
+                           $('.four.bouquet').fadeTo('slow',.6);
+                           $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>'); 
+                           promoInitialText = $('.prix_option').html();
+                            //$.getScript(option_tv);        
                             $.unblockUI();  
                             $( "html,body" ).scrollTop(0); 
                          }else{
@@ -176,17 +180,17 @@ var preload = function(){
 
             }
             
-          function choixBouquet(id)
+          function choixBouquet(valeur)
           {    
 
                 preload();    
 //                var beneficierTv = "";
-               var bouquet = $("#"+id).val();  
+               //var bouquet = $("#"+id).val();  
                
                 $.post(
                     updateBouquet,
                      {
-                        bouquetTv : bouquet
+                        bouquetTv : valeur
                      },
                     function(data){                          
                       $("#recap_contenu").children("#options").remove();  

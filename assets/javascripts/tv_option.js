@@ -1,195 +1,107 @@
-
 $(function() {
 
-  //set initial state of TV chaines
-  $('#mega, #giga').css({ opacity:0.2 });
+  //Disable 'list of bouquet' on startup
+  $('.four.bouquet').fadeTo('slow',.6);
+  $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
 
+  //Enable/Disable 'list of bouquet' on Click/Checkbox
+  //Open accordion on Click/ Checkbox
+  $(document).on('click','#beneficier',function(){
 
-  /*---------------------------------
-  * MOUSEOVER / MOUSEOUT
-  ----------------------------------*/
-  // Mega option
-  $(".options_tab .mega").mouseover(function() {
+    if($(this).is(":checked"))
+    {
+      $('#decodeur-tv-netgem').attr('disabled', true);
+      $('.four.bouquet').fadeTo('slow',1);
+      $('.disabled-div').hide();
+      $('#decodeur-tv-netgem').prop('checked', true);
+      $('.accordion .first').addClass('active');  
+      $('.accordion .first .content').css({ display: 'block'});
+    }
+    else
+    {
+      $('.four.bouquet').fadeTo('slow',.6);
+      $('.disabled-div').show();
+      $('#decodeur-tv-netgem').prop('checked', false);
+      $('.accordion .first').removeClass('active'); 
+      $('.accordion .second').removeClass('active');
+      $('.accordion .first .content').css({ display: 'none'});
+      $('.accordion .second .content').css({ display: 'none'});
+    }
+  });
 
-    $('#giga').css({ opacity:0.2 });
-    $('#mega').css({ opacity:1});
-    $('.options_tab .mega,.options_tab .giga,.options_tab .ultra').removeClass( 'active');
+  //initial Promotion text before selecting Ultra
+  var promoInitialText = $('.prix_option').html();
+  //Default selected 'Bouquet'
+  //chainesFilter($('.eight.chaines .grid li'),'mega');
+
+  $(document).on('click','#filter li',function(e){
+    e.preventDefault();
+    $('#filter li').removeClass('active');
     $(this).addClass('active');
+    var datagroup = $(this).children('a').attr('data-group');
+    var selector = $('.eight.chaines .grid li');
 
-  }).mouseout(function() {
-    if($(".frm-tv input[type='radio']:checked").length > 0 )
+    //if ultra is selected, option ultra will be checked
+    if(datagroup == 'ultra')
     {
-      retainState();
+      addUltraOptions('INCLUS');
     }
-    else 
+    else //option ultra will be unchecked
     {
-      $('#mega').css({ opacity:0.2});
-      $(this).removeClass('active');
-
+      removeUltraoptions(promoInitialText);
     }
-
-  });
-
- 
-  // Giga option
-  $(".options_tab .giga").mouseover(function() {
-
-    $('#mega, #giga').css({ opacity:1 });
-    $('.options_tab .mega,.options_tab .giga,.options_tab .ultra').removeClass( 'active');
-    $(this).addClass( "active" );
-
-  }).mouseout(function() {
-
-    if($(".frm-tv input[type='radio']:checked").length > 0 )
-    {
-      retainState();
-    }
-    else
-    {
-      $('#mega, #giga').css({ opacity:0.2 });
-      $(this).removeClass('active');
-    }
-
-  });
-
-
-  // Ultra option
-  $(".options_tab .ultra").mouseover(function() {
-    
-   $('#mega, #giga').css({ opacity:1 });
-   $('.options_tab .mega,.options_tab .giga,.options_tab .ultra').removeClass( 'active');
-   $(this).addClass( "active" );
-
-  }).mouseout(function() {
-
-    if($(".frm-tv input[type='radio']:checked").length > 0 )
-    {
-      retainState();
-    }
-    else
-    {
-      $('#mega, #giga').css({ opacity:0.2 });
-      $(this).removeClass('active');
-    }
-
-  });
-
-
- /*---------------------------------
-  * ON CLICK MODAL / REVEAL() JS FUNC
-  ----------------------------------*/
-  // Mega modal
-  $('#link-mega').click(function() {
-    DynamicModal('BOUQUET MEGA','mega-modal',$('#mega').html());
-    return false;
-  });
-
-  // Giga modal
-  $('#link-giga').click(function() {
-     DynamicModal('BOUQUET GIGA','giga-modal', $('#mega').html() + $('#giga').html());
-     return false;
-  });
-
-  //Ultra modal
-  $('#link-ultra').click(function() {
-
-    var content = $('#mega').html() + "<div class='row'>"+ $('#giga').html() +"</div><div class='row'>"+ $('#ultra').html() + "</div>";
-    DynamicModal('BOUQUET ULTRA','ultra-modal',content);
-    return false;
-  });
-
-  
-  /*---------------------------------
-  * RADIO BTN - ON CLICK 
-  ----------------------------------*/
-  $(".frm-tv input[type='radio']").click(function(){
-
-    switch($(this).val())
-    {
-      case "mega":
-        $('#mega').css({ opacity:1});
-        removeUltraoptions();
-      break;
-
-      case "giga":
-        $('#giga').css({ opacity:1});
-        removeUltraoptions();
-      break;
-
-      case "ultra":
-        $('#ultra').css({ opacity:1});
-        addUltraOptions();
-      break;
-    }
-
+    chainesFilter(selector,datagroup);
   });
 
 });
 
-
 /*
-* Functions 
+* Function 
+* Filter the 'chaines/logo' depending on the datagroup
 */
+var chainesFilter = function(selector,datagroup) {
+  $.each(selector,function(){
+    var datagroups = $(this).attr('data-groups');
+    datagroups = $.parseJSON(datagroups);
+    var search_result = $.inArray(datagroup, datagroups);
 
-//Create a bootstrap modal with an unique ID and content as arg
-var DynamicModal = function(title,id,content)
-{
-  if ($('#'+id).length == 0)
-  {
-    var dmodal = "<div id='"+id+"' class='reveal-modal medium modal fade chaines-mdl' role='dialog'><div class='modal-header'><a class='close-reveal-modal'>&#215;</a><h3>"+title+"</h3></div> <div class='modal-body'><div class='row'>" + content + "</div></div></div>";
-    $('body').append(dmodal);
-  }
-  $('#'+id).reveal();
+    if( search_result < 0 ) {
+      $(this).hide('slow');
+    }
+    else
+    {
+      $(this).show('slow');
+    }
+  });
 }
 
 // Checked Ultra options ( Bein & Eden )
-var addUltraOptions = function() {
+var addUltraOptions = function(new_content) {
 
   $("input[name='eden']").prop('checked', true);
   $("input[name='eden']").attr('disabled', true);
-
   $("input[name='bein']").prop('checked', true);
   $("input[name='bein']").attr('disabled', true);
   //change 9€ to INCLUS
-  $('.prix_option').html('INCLUS');
+  $('.prix_option').addClass('inclus');
+  $('.prix_option').html(new_content);
+  $('html, body').animate({
+        scrollTop: $(".row.ultra").offset().top
+    }, 1500);
 }
 
 // Uncheck Ultra options ( Bein & Eden )
-var removeUltraoptions = function() {
+var removeUltraoptions = function(initial_content) {
 
   $("input[name='eden']").prop('checked', false);
   $("input[name='eden']").attr('disabled', false);
-
   $("input[name='bein']").prop('checked', false);
   $("input[name='bein']").attr('disabled', false);
   //change INCLUS to 9€
-  $('.prix_option').html('9€');
+  $('.prix_option').removeClass('inclus');
+  $('.prix_option').html(initial_content);
 }
 
-//retain Opacity and active label of Bouquet depending on value of checked Radio button while MOUSEOUT
-var retainState = function() {
-  
-  var radioValue = $(".frm-tv input[type='radio']:checked").val();
-
-  switch(radioValue)
-  {
-    case "mega":
-      $('#mega').css({ opacity:1 });
-      $('#giga').css({ opacity:0.2 });
-      $('.options_tab .mega').addClass('active');
-    break;
-
-    case "giga":
-      $('#mega, #giga').css({ opacity:1 });
-      $('.options_tab .giga').addClass('active');
-    break;
-
-    case "ultra":
-      $('#mega, #giga').css({ opacity:1 });
-      $('.options_tab .ultra').addClass('active');
-    break;
-  }
-}
 
 
 
