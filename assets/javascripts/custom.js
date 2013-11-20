@@ -240,6 +240,7 @@ var etape4 = function() {
 /*------------------------------------------------
 * Jquery Meter Gauge
 ------------------------------------------------*/
+/*
 window.onload = function () {
 
 	if($('.debit_emission').length > 0 )
@@ -266,3 +267,4 @@ window.onload = function () {
 		});	
 	}
 }
+ */
