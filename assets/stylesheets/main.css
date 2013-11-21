@@ -557,7 +557,7 @@ img.prix_bare{
 	border: medium none;
 	padding-left: 0;
 	padding-right: 0;
-	height:40px;
+	min-height:40px;
 }
 #filter {
 	list-style: none outside none;

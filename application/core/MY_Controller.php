@@ -23,6 +23,7 @@ class MY_Controller extends CI_Controller {
         
         //id_crm les produits souscris
         var $forfaitDummy1Crm;
+        var $degroupageDummy1Crm;
         
         var $bouquetTvDummy3Crm;
         var $optionTvEdenDummy3Crm;

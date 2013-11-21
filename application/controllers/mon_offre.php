@@ -264,6 +264,7 @@ class Mon_offre extends MY_Controller {
                                   $data["dum1_degroup_tarif"] = $val2["Tarif"];
                                   $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];   
                                   $data["totalParMois"] = $this->getTotal($val2["Tarif"]);
+                                  $this->session->set_userdata("degroupageDummy1Crm",$val2["Id_crm"]);
                               }  
                            }
                     break;
@@ -283,6 +284,7 @@ class Mon_offre extends MY_Controller {
                            }
                     break;
                     case "dummy4":
+                            $data["dummy4"] = $dummyPanier["dummy4"];
                            foreach($val as $val2){
                                 $data["tarif_loca_decod"] = ($val2["Categorie"]=="STB")?"dummy4_".$val2["Tarif"]:"dummy4_0";                                
                                 $data["tarif_activ_servicetv"] = "dummy7_";
@@ -351,7 +353,7 @@ class Mon_offre extends MY_Controller {
                 $this->load->model('stb_model','stb'); 
                 $data["base_url_stb"] = BASEPATH_STB;
                 $data["bouquet_list"] = $this->stb->retrievChainesList();
-                $data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];
+                //$data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
             }else{

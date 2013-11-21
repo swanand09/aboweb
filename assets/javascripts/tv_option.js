@@ -5,6 +5,7 @@ $(function() {
   $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
 
   //Enable/Disable 'list of bouquet' on Click/Checkbox
+  //Enable/Disable checkbox Bein/Eden
   //Open accordion on Click/ Checkbox
   $(document).on('click','#beneficier',function(){
 
@@ -16,6 +17,8 @@ $(function() {
       $('#decodeur-tv-netgem').prop('checked', true);
       $('.accordion .first').addClass('active');  
       $('.accordion .first .content').css({ display: 'block'});
+      $("input[name='eden']").attr('disabled', false);
+      $("input[name='bein']").attr('disabled', false);
     }
     else
     {
@@ -26,6 +29,8 @@ $(function() {
       $('.accordion .second').removeClass('active');
       $('.accordion .first .content').css({ display: 'none'});
       $('.accordion .second .content').css({ display: 'none'});
+      $("input[name='eden']").attr('disabled', true);
+      $("input[name='bein']").attr('disabled', true);
     }
   });
 
