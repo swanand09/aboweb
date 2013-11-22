@@ -270,15 +270,15 @@ class Mon_offre extends MY_Controller {
                     break;
                     case "dummy3":                           
                            foreach($val as $val2){
-                               switch($val2["Categorie"]){
+                               switch($val2["Valeurs"]["Categorie"]){
                                    case "BOUQUET_TV":
-                                       array_push($bouqTvArr, array($val2["Libelle"]["string"]=>$val2["Tarif"]));
+                                       array_push($bouqTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                    break;
                                    case "OPTION_TV":
-                                       array_push($optionTvArr, array($val2["Libelle"]["string"]=>$val2["Tarif"]));
+                                       array_push($optionTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                    break;
                                    case "VOD_PVR":
-                                        array_push($vodPvr, array(utf8_encode($val2["Libelle"]["string"])=>$val2["Tarif"]));
+                                        array_push($vodPvr, array(utf8_encode($val2["Valeurs"]["Libelle"]["string"])=>$val2["Valeurs"]["Tarif"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                    break;
                                }
                            }
@@ -490,31 +490,31 @@ class Mon_offre extends MY_Controller {
              $data["dummy3"] = $dummyPanier["dummy3"];
              //mettre les Id_crm en session
               foreach($dummyPanier["dummy3"] as $key=>$val){ 
-                  switch($val["Categorie"]){
+                  switch($val["Valeurs"]["Categorie"]){
                       case "BOUQUET_TV": //bouquetTvDummy3Crm;               
-                          if($val["Tarif"]==$bouquetTv[1]){
-                              $this->session->set_userdata("bouquetTvDummy3Crm",$val["Id_crm"]);
+                          if($val["Valeurs"]["Tarif"]==$bouquetTv[1]){
+                              $this->session->set_userdata("bouquetTvDummy3Crm",$val["Valeurs"]["Id_crm"]);
                           }
                       break;  
                       case "OPTION_TV": //optionTvEdenDummy3Crm;               
-                          switch($val["Libelle"]["string"]){
+                          switch($val["Valeurs"]["Libelle"]["string"]){
                             case "Eden":
-                                $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Id_crm"]);    
+                                $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Valeurs"]["Id_crm"]);    
                             break;
                             case "BeIN Sport":
-                                    $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Id_crm"]);    
+                                    $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Valeurs"]["Id_crm"]);    
                             break;
                           }
                          
                       break;
                       case "VOD_PVR": //vodPvrDummy3Crm;  
-                         switch($val["Type"])
+                         switch($val["Valeurs"]["Type"])
                          {
                             case "ONESHOT":  //Enregistreur numérique
-                                $this->session->set_userdata("vodPvrOneshotDummy3Crm",$val["Id_crm"]);
+                                $this->session->set_userdata("vodPvrOneshotDummy3Crm",$val["Valeurs"]["Id_crm"]);
                             break;
                             case "RECURRENT":  // Vidéo à la demande
-                                $this->session->set_userdata("vodPvrRecurrentDummy3Crm",$val["Id_crm"]);
+                                $this->session->set_userdata("vodPvrRecurrentDummy3Crm",$val["Valeurs"]["Id_crm"]);
                             break;
                          }
                       break; 
@@ -545,14 +545,14 @@ class Mon_offre extends MY_Controller {
         $data["dummy3"] = $dummyPanier["dummy3"];
         
         foreach($dummyPanier["dummy3"] as $key=>$val){ 
-                if($val["Categorie"]=="OPTION_TV"){
+                if($val["Valeurs"]["Categorie"]=="OPTION_TV"){
               //optionTvEdenDummy3Crm;               
-                    switch($val["Libelle"]["string"]){
+                    switch($val["Valeurs"]["Libelle"]["string"]){
                       case "Eden":
-                          $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Id_crm"]);    
+                          $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Valeurs"]["Id_crm"]);    
                       break;
                       case "BeIN Sport":
-                              $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Id_crm"]);    
+                              $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Valeurs"]["Id_crm"]);    
                       break;
                     }
                 }
@@ -619,6 +619,11 @@ class Mon_offre extends MY_Controller {
         redirect("mon_offre");
     }
     
+    public function interrogEligibilite(){
+       echo "<pre>";
+        print_r($this->Wsdl_interrogeligib->interrogeEligibilite("0594306643"));
+       echo "</pre>"; 
+    }
     
     public function testFlux()
     {

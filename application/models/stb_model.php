@@ -34,14 +34,14 @@ class Stb_model extends CI_Model
                 $this->deptId = 4;
             break;
         }
-        $sql1 = "	
-                select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
+        //bouquet
+        $sql1 = "select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
                   (
                      select E.dept_ids, E.bouq_uid, E.cat_uid, F.nom as nom_categorie,F.order, E.chain_uid, G.designation as nom_chaines, G.logo,G.icon FROM `m_m_bouq_chain` E, `mod_wa_categories` F, `mod_wa_chaines` G 
                      WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 ORDER BY F.order
                   ) C
                  INNER JOIN `mod_wa_bouquets` D
-                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(1,4,5,6,7,8) ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
+                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(1,5,6,7) ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
        
        $query1 = $this->db->query($sql1, array($this->deptId)); 
@@ -59,28 +59,73 @@ class Stb_model extends CI_Model
          {
             if(($counter==0)||($prevBouquet == $val->nom_bouquet&&$prevCategorie ==  $val->nom_categorie)){
               array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon));
-             
+             $countNoChain++;
             }   
             
-            if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie))){
-                $this->maTv[$prevBouquet][$prevCategorie] = $chaineArr;  
+            if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||$key==(sizeof($query1->result())-1))){
+                $this->maTv["Bouquet"][$prevBouquet][$prevCategorie] = $chaineArr;  
                 $chaineArr = array();
                 array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon)); 
+                 $countNoChain++;
             }
-            $countNoChain++;
-            if($prevBouquet!=$val->nom_bouquet){
-                $this->maTv[$prevBouquet]["nombreChaine"] = $countNoChain;  
+             
+            if(($prevBouquet!=$val->nom_bouquet&&$prevBouquet!="")||$key==(sizeof($query1->result())-1)){
+                $this->maTv["Bouquet"][$prevBouquet]["nombreChaine"] = $countNoChain;  
                 $countNoChain = 0;
             }
            
              $prevBouquet   = $val->nom_bouquet;
              $prevCategorie = $val->nom_categorie;
-             
+            
              $counter++;
          }
-         $this->maTv["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
-         $this->maTv["GIGA"] = array_filter($this->maTv["GIGA"],array(new retrieveUnikChaine($this->maTv["MEGA"]),'filterUnique'));
+        // $this->maTv["Bouquet"]["ULTRA"] = array_filter($this->maTv["ULTRA"],array(new retrieveUnikChaine($this->maTv["GIGA"]),'filterUnique'));
+         //$this->maTv["Bouquet"]["GIGA"] = array_filter($this->maTv["GIGA"],array(new retrieveUnikChaine($this->maTv["MEGA"]),'filterUnique'));
        }
+       
+        //options
+        $sql2 = "select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
+                  (
+                     select E.dept_ids, E.bouq_uid, E.cat_uid, F.nom as nom_categorie,F.order, E.chain_uid, G.designation as nom_chaines, G.logo,G.icon FROM `m_m_bouq_chain` E, `mod_wa_categories` F, `mod_wa_chaines` G 
+                     WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 ORDER BY F.order
+                  ) C
+                 INNER JOIN `mod_wa_bouquets` D
+                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.etat=2 ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
+                ";
+        $query2 = $this->db->query($sql2, array($this->deptId)); 
+       
+        if($query2->num_rows() > 0)
+        {
+            $prevBouquet = "";
+            $prevCategorie = "";
+            $counter =0;
+            $chaineArr = array();
+          //  $countNoChain = 0;
+            foreach($query2->result() as $key=>$val)
+            {
+                if(($counter==0)||($prevBouquet == $val->nom_bouquet&&$prevCategorie ==  $val->nom_categorie)){
+                    array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon));
+                    // $countNoChain++;
+                }   
+                
+                if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||$key==(sizeof($query2->result())-1))){
+                    $this->maTv["Options"][$prevBouquet][$prevCategorie] = $chaineArr;  
+                    $chaineArr = array();
+                    array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon)); 
+                    // $countNoChain++; 
+                }
+                /*
+                if($prevBouquet!=$val->nom_bouquet&&$prevBouquet!=""||$key==(sizeof($query2->result())-1)){
+                    $this->maTv["Options"][$prevBouquet]["nombreChaine"] = $countNoChain;  
+                    $countNoChain = 0;
+                }*/
+
+                $prevBouquet   = $val->nom_bouquet;
+                $prevCategorie = $val->nom_categorie;
+
+                $counter++;
+            }
+        }
        return $this->maTv;
     }
     

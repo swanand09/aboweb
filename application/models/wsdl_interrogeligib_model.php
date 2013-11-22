@@ -48,7 +48,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                   array_push($arrDum2, $val2);
                               break;
                               case 3:
-                                  array_push($arrDum3, $val2);
+                                  array_push($arrDum3, array("Valeurs"=>$val2,"Tarif_promo"=>$val1["Tarif_promo"],"Duree_mois_promo"=>$val1["Duree_mois_promo"]));
                               break;
                               case 4:
                                   array_push($arrDum4, $val2);
@@ -75,7 +75,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                   array_push($arrDum2, $val1["Valeurs"]["WS_Produit_Valeur"]);
                               break;
                               case 3:
-                                  array_push($arrDum3, $val1["Valeurs"]["WS_Produit_Valeur"]);
+                                  array_push($arrDum3, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Tarif_promo"=>$val1["Tarif_promo"],"Duree_mois_promo"=>$val1["Duree_mois_promo"]));
                               break;
                               case 4:
                                   array_push($arrDum4, $val1["Valeurs"]["WS_Produit_Valeur"]);

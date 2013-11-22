@@ -32,6 +32,7 @@ var preload = function(){
                           if(where=="colonne droite"){
                               preload();
                                $(location).attr('href',"mon_offre");
+                               return false;
                           }
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
                           $("#recap_contenu").empty().prepend(data[1].form_test_ligne); 
