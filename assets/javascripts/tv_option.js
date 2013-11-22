@@ -1,11 +1,7 @@
 $(function() {
-
-  //Disable 'list of bouquet' on startup
-  $('.four.bouquet').fadeTo('slow',.6);
-  $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
-
   //Enable/Disable 'list of bouquet' on Click/Checkbox
   //Open accordion on Click/ Checkbox
+  var promoInitialText;
   $(document).on('click','#beneficier',function(){
 
     if($(this).is(":checked"))
@@ -29,8 +25,6 @@ $(function() {
     }
   });
 
-  //initial Promotion text before selecting Ultra
-  var promoInitialText = $('.prix_option').html();
   //Default selected 'Bouquet'
   //chainesFilter($('.eight.chaines .grid li'),'mega');
 
@@ -48,7 +42,7 @@ $(function() {
     }
     else //option ultra will be unchecked
     {
-      removeUltraoptions(promoInitialText);
+      removeUltraoptions(window.promoInitialText);
     }
     chainesFilter(selector,datagroup);
   });

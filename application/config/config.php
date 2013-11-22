@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/aboweb/';
+$config['base_url']	= 'http://localhost/git_projects/aboweb/';
 //$config['base_url']	= 'http://192.168.54.34/aboweb.mediaserv.dev/'; //online
 /*
 |--------------------------------------------------------------------------
