@@ -16,9 +16,7 @@ $(function() {
       $('.disabled-div').hide();
       $('#decodeur-tv-netgem').prop('checked', true);
       $('.accordion .first').addClass('active');  
-      $('.accordion .first .content').css({ display: 'block'});
-      $("input[name='eden']").attr('disabled', false);
-      $("input[name='bein']").attr('disabled', false);
+      $('.accordion .first .content').css({ display: 'block'});      
     }
     else
     {
@@ -31,6 +29,8 @@ $(function() {
       $('.accordion .second .content').css({ display: 'none'});
       $("input[name='eden']").attr('disabled', true);
       $("input[name='bein']").attr('disabled', true);
+	  $("input[name='eden']").prop('checked', false);
+      $("input[name='bein']").prop('checked', false);
     }
   });
 
@@ -53,6 +53,9 @@ $(function() {
     }
     else //option ultra will be unchecked
     {
+	   //Enable option Bein & Eden Checkbox
+      $("input[name='eden']").attr('disabled', false);
+      $("input[name='bein']").attr('disabled', false);	
       removeUltraoptions(promoInitialText);
     }
     chainesFilter(selector,datagroup);
