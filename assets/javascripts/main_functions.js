@@ -1,94 +1,118 @@
-var preload = function(){ 
-                      $.blockUI({                    
-                    message:$("#displayBox"),
-                      css: { border: 'none',
-                        padding: '15px',
-                        backgroundColor: '#fff',
-                        width: '60px',
-                        '-webkit-border-radius': '10px', 
-                        '-moz-border-radius': '10px',
-                        'border-radius': '10px',
-                        opacity: .5
-                         } 
-                 }); 
-              }
-          
-          function procTestEligib(where)
-          {
-               if($("#ligne").val().replace(/\s+/g, "").length==10){               
-                    preload();
-                    $.post(
-                        ajax_proc_interogeligib,
-                         {
-                            num_tel : $("#ligne").val()                                                                                  
-                         },
-                        function(data){
-                          //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                          $.unblockUI(); 
-                         if(data.error==true){
-                              alert("Veuillez re-essayer votre numéro n'est pas éligible");                              
-                              return false;
-                          }
-                          if(where=="colonne droite"){
-                              preload();
-                               $(location).attr('href',"mon_offre");
-                          }
-                          $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne); 
-                         
-                        }, "json"
-                    );
-                    return false; 
-               }else{
-                    return false; 
-                }
-          }
-          
-          function retrieveForfait()
-          {           
-              preload();
-              var redu_facture = "false";
-              var consv_num_tel = "false";
-                if($("#redu_facture").is(":checked"))
-                {
-                    redu_facture = "true";
-                }
-                if($("#consv_num_tel").is(":checked"))
-                {
-                    consv_num_tel = "true";
-                }
-                $.post(
-                    forfait,
-                     {
-                        redu_facture : redu_facture,
-                        consv_num_tel : consv_num_tel
-                     },
-                    function(data){                      
-                      $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                   
-                      var key, count = 0;
-                      for(key in data[1]) {
-                          if(count==0) {
-                            $("#recap_contenu").empty();      
-                            $("#total_mois").empty(); 
-                          }
-                          $("#recap_contenu").append(data[1][key]);
-                          count++;
-                      }
-                     
-                      $.unblockUI();     
-                      $( "html,body" ).scrollTop(0);
-                    },"json"
-                  );   
-                      return false;
-          }  
-          function prevState(page)
-          {               
-            //preload();
-            $("#cont_mon_off").empty().load('mon_offre/prevState/'+page);
-            //$.unblockUI(); 
-            $( "html,body" ).scrollTop(0);
-          }
+/*
+*----------------------------------------------------------------------------
+* Display an overlay with a preloader
+*----------------------------------------------------------------------------
+*/
+var preload = function() { 
+  $.blockUI({                    
+    message:$("#displayBox"),
+    css: { 
+      border: 'none',
+      padding: '15px',
+      backgroundColor: '#fff',
+      width: '60px',
+      '-webkit-border-radius': '10px', 
+      '-moz-border-radius': '10px',
+      'border-radius': '10px',
+      opacity: .5
+    } 
+  }); 
+}
+
+/*
+*----------------------------------------------------------------------------
+* Ajax function to interogate the method 'interrogeEligibilite' of the webservice
+*----------------------------------------------------------------------------
+* @where - parameter to check from where the function has been called
+*        - possible values = 'column droite' and 'column gauche'
+*/          
+function procTestEligib(where) {
+  if($("#ligne").val().replace(/\s+/g, "").length==10) {               
+    preload();
+    $.post(
+      ajax_proc_interogeligib,
+      {
+        num_tel : $("#ligne").val()                                                                          
+      },
+      function(data) {
+        if(data.error==true) {
+          alert("Veuillez re-essayer votre numéro n'est pas éligible");                              
+          return false;
+        }
+        // redirect the user to the page 'mon_offre' if the function was triggered from the right sidebar
+        if(where=="colonne droite") {
+          $(location).attr('href',"mon_offre");
+          return false;
+        }
+        //empty container and add new HTML content
+        $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
+        $("#recap_contenu").empty().prepend(data[1].form_test_ligne);
+        $.unblockUI(); 
+      },
+      "json"
+    );
+  }
+  return false; 
+}
+
+/*
+*----------------------------------------------------------------------------
+* Ajax function to retrieve a list of 'forfait' from this->session->userdata("produit")
+*----------------------------------------------------------------------------
+*/            
+function retrieveForfait()
+{           
+  preload();
+  var redu_facture = "false";
+  var consv_num_tel = "false";
+
+  if($("#redu_facture").is(":checked")) {
+      redu_facture = "true";
+  }
+
+  if($("#consv_num_tel").is(":checked")) {
+      consv_num_tel = "true";
+  }
+
+  $.post(
+    forfait,
+    {
+      redu_facture : redu_facture,
+      consv_num_tel : consv_num_tel
+    },
+    function(data){                      
+      $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
+      var key, count = 0;
+      for(key in data[1]) {
+        if(count==0) {
+          $("#recap_contenu").empty();      
+          $("#total_mois").empty(); 
+        }
+        $("#recap_contenu").append(data[1][key]);
+        count++;
+      }
+     
+      $.unblockUI();     
+      $( "html,body" ).scrollTop(0);
+    },"json"
+  );
+  return false;
+}  
+
+/*
+*----------------------------------------------------------------------------
+* Function to return to previous page
+*----------------------------------------------------------------------------
+* @page  - parameter of the name of the previous page
+*        - function in controller mon_offre.php/prevState
+*/        
+function prevState(page)
+{               
+  //preload();
+  $("#cont_mon_off").empty().load('mon_offre/prevState/'+page);
+  //$.unblockUI(); 
+  $( "html,body" ).scrollTop(0);
+}
           
           function choixForfait(id)
           {
