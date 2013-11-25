@@ -113,174 +113,204 @@ function prevState(page)
   //$.unblockUI(); 
   $( "html,body" ).scrollTop(0);
 }
-          
-          function choixForfait(id)
-          {
-              preload();
-                $.post(
-                    refreshRecapCol,
-                     {
-                        id_crm : id
-                     },
-                    function(data){
-                         if(data[0].contenu_html!="redirect to mes coordonnees"){
-                            $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                             var key, count = 0;
-                            for(key in data[1]) {
-                                if(count==0) {
-                                  $("#recap_contenu").empty();                                                    
-                                }
-                              (key!="total_par_mois")?$("#recap_contenu").append(data[1][key]):$("#total_mois").empty().append(data[1][key]);                            
-                                count++;
-                            }
-                           //Disable 'list of bouquet' on startup
-                           $('.four.bouquet').fadeTo('slow',.6);
-                           $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>'); 
-                           promoInitialText = $('.prix_option').html();
-                            //$.getScript(option_tv);        
-                            $.unblockUI();  
-                            $( "html,body" ).scrollTop(0); 
-                         }else{
-                               $(location).attr('href',"mes_coordonnees");
-                         }
-                    },"json"
-                  ); 
+
+/*
+*----------------------------------------------------------------------------
+* Function to add forfait information in session & panier
+*----------------------------------------------------------------------------
+* @id  - parameter of the id_crm of the 'forfait'
+*      - function in controller mon_offre.php/refreshRecapCol
+*/        
+function choixForfait(id)
+{
+  preload();
+  $.post(
+    refreshRecapCol,
+    {
+      id_crm : id
+    },
+    function(data){
+      if(data[0].contenu_html!="redirect to mes coordonnees") {
+        $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
+        var key, count = 0;
+
+        for(key in data[1]) {
+          if(count==0) {
+            $("#recap_contenu").empty();                                                    
           }
-          
-          function choixTv()
-          {    
+          (key!="total_par_mois")?$("#recap_contenu").append(data[1][key]):$("#total_mois").empty().append(data[1][key]);                            
+          count++;
+        }
+           //Disable 'list of bouquet' on startup
+           $('.four.bouquet').fadeTo('slow',.6);
+           $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>'); 
+           promoInitialText = $('.prix_option').html();
+            //$.getScript(option_tv);        
+            $.unblockUI();  
+            $( "html,body" ).scrollTop(0); 
+         }else{
+               $(location).attr('href',"mes_coordonnees");
+         }
+    },"json"
+  );
+}
 
-                preload();    
-//                var beneficierTv = "";
-               var beneficierTv = $("#beneficier").val();                
-                if($("#beneficier").is(":checked"))
-                {
-                      
-                    $.post(
-                        updateTvDecodeur,
-                         {
-                            beneficierTv : beneficierTv,  
-                            decoder_tv   : "check"
-                         },
-                        function(data){    
-                            
-                          $("#recap_contenu").children("#caution").remove();  
-                          $("#recap_contenu").append(data.caution_decodeur_dummy5);  
-                          
-                          $("#recap_contenu").children("#location").remove();  
-                          $("#recap_contenu").append(data.location_equipements_dummy4);
-                          $("#recap_contenu").children("#oneshot").remove();  
-                          $("#recap_contenu").append(data.frais_activation_facture_dummy7);
-                          $("#total_mois").empty().append(data.total_par_mois);  
-                          $.unblockUI(); 
-                          $('html, body').animate({
-                            scrollTop: $(".second").offset().top
-                          }, 500);
-                        },"json"
-                   ); 
-                }else{         
-//                     beneficierTv = "uncheck";       
-                     $.post(
-                            updateTvDecodeur,
-                             {
-                                beneficierTv : beneficierTv,
-                                decoder_tv   : "uncheck"
-                             },
-                            function(data){
-                              $("#recap_contenu").children("#caution").remove(); 
-                              $("#recap_contenu").children("#location").remove();
-                              $("#recap_contenu").children("#options").remove();  // removes any bouquet if any
-                              $("#recap_contenu").append(data.location_equipements_dummy4);
-                              $("#recap_contenu").children("#oneshot").remove(); 
-                              $("#recap_contenu").append(data.frais_activation_facture_dummy7);  
-                              $("#total_mois").empty().append(data.total_par_mois);  
-                              $.unblockUI(); 
-                              $('html, body').animate({
-                                    scrollTop: $(".second").offset().top
-                              }, 500);
-                            },"json"
-                       );         
-                }
+/*
+*----------------------------------------------------------------------------
+* Ajax function to add caution/location/oneshot information in session & panier
+*----------------------------------------------------------------------------
+*/  
+function choixTv()
+{    
+  preload();    
+  //var beneficierTv = "";
+  var beneficierTv = $("#beneficier").val();    
+  var recap_contenu = $("#recap_contenu");            
+  if($("#beneficier").is(":checked"))
+  {
+    $.post(
+      updateTvDecodeur,
+      {
+        beneficierTv : beneficierTv,  
+        decoder_tv   : "check"
+      },
+      function(data) {
+        //var recap_contenu = $("#recap_contenu");
+        recap_contenu.children("#caution").remove();  
+        recap_contenu.append(data.caution_decodeur_dummy5);  
+        recap_contenu.children("#location").remove();  
+        recap_contenu.append(data.location_equipements_dummy4);
+        recap_contenu.children("#oneshot").remove();  
+        recap_contenu.append(data.frais_activation_facture_dummy7);
+        $("#total_mois").empty().append(data.total_par_mois);  
+        $.unblockUI(); 
+        $('html, body').animate({
+          scrollTop: $(".second").offset().top
+        }, 500);
+      },"json"
+    ); 
+  } 
+  else {         
+    //beneficierTv = "uncheck";
+    $.post(
+      updateTvDecodeur,
+      {
+          beneficierTv : beneficierTv,
+          decoder_tv   : "uncheck"
+      },
+      function(data){
+        recap_contenu.children("#caution").remove(); 
+        recap_contenu.children("#location").remove();
+        recap_contenu.children("#options").remove();  // removes any bouquet if any
+        recap_contenu.append(data.location_equipements_dummy4);
+        recap_contenu.children("#oneshot").remove(); 
+        recap_contenu.append(data.frais_activation_facture_dummy7);  
+        $("#total_mois").empty().append(data.total_par_mois);  
+        $.unblockUI(); 
+        $('html, body').animate({
+              scrollTop: $(".second").offset().top
+        }, 500);
+      },"json"
+    );         
+  }
+}
 
-            }
-            
-          function choixBouquet(valeur)
-          {    
+/*
+*----------------------------------------------------------------------------
+* Ajax function to add selected bouquet information in session / panier
+* when clicking a 'bouquet' from the list - #filter>li
+*----------------------------------------------------------------------------
+* @valeur  - a concatation of 'bouquet' values -> string
+*          - function in controller mon_offre.php/updateBouquet
+* TODO: for 'valeur' use arrays instead of concatanating values into strings
+*/ 
+function choixBouquet(valeur)
+{
+  preload();
+  //var beneficierTv = "";
+  //var bouquet = $("#"+id).val();
+  $.post(
+      updateBouquet,
+      {
+        bouquetTv : valeur
+      },
+      function(data) {                          
+        $("#recap_contenu").children("#options").remove();  
+        $("#recap_contenu").append(data.options_dummy3);
+        $("#total_mois").empty().append(data.total_par_mois);  
+        $.unblockUI(); 
+        //$('html, body').animate({scrollTop: $(".sexy").offset().top}, 500);
+      },"json"
+  );
+}
 
-                preload();    
-//                var beneficierTv = "";
-               //var bouquet = $("#"+id).val();  
-               
-                $.post(
-                    updateBouquet,
-                     {
-                        bouquetTv : valeur
-                     },
-                    function(data){                          
-                      $("#recap_contenu").children("#options").remove();  
-                      $("#recap_contenu").append(data.options_dummy3);
-                      $("#total_mois").empty().append(data.total_par_mois);  
-                      $.unblockUI(); 
-//                      $('html, body').animate({
-//                                    scrollTop: $(".sexy").offset().top
-//                              }, 500);
-                    },"json"
-               ); 
+/*
+*----------------------------------------------------------------------------
+* Ajax function to add selected Option ( Eden/Bein ) information in session / panier
+* when clicking checkbox eden/bein
+*----------------------------------------------------------------------------
+* @id  - a concatation of 'bouquet' values -> string
+*      - function in controller mon_offre.php/updateBouquet
+*/
+function choixOption(id)
+{
+  preload();
+  var optionTv   = $("#"+id).val();
+  var checkOption = "uncheck";
+  if($("#"+id).is(":checked"))
+  {
+    checkOption = "check";
+  }
+  $.post(
+    updateOptions,
+    {
+      optionTv      : optionTv,
+      checkOption   : checkOption
+    },
+    function(data){
+      $("#recap_contenu").children("#options").remove();
+      $("#recap_contenu").append(data.options_dummy3);
+      $("#total_mois").empty().append(data.total_par_mois);  
+      $.unblockUI();
+    },"json"
+  );
+}
 
-            }
-          
-          function choixOption(id)
-          {    
-                preload();    
-                var optionTv   = $("#"+id).val(); 
-                var checkOption = "uncheck";
-                if($("#"+id).is(":checked"))
-                {
-                    checkOption = "check";
-                }
-                $.post(
-                    updateOptions,
-                     {
-                        optionTv      : optionTv,
-                        checkOption   : checkOption
-                     },
-                    function(data){                          
-                      $("#recap_contenu").children("#options").remove();  
-                      $("#recap_contenu").append(data.options_dummy3);
-                      $("#total_mois").empty().append(data.total_par_mois);  
-                      $.unblockUI();                       
-                    },"json"
-               ); 
-
-          }
-          
-          //choix facturation
-          function choixFacture(id)
-          {
-               preload();    
-                var typeFacture   = $("#"+id).val(); 
-                 $.post(
-                    updateFacture,
-                     {
-                        typeFacture      : typeFacture,
-                     },
-                    function(data){                          
-                      $("#recap_contenu").children("#colFacture").remove();  
-                      $("#recap_contenu").append(data.envoie_facture_dummy6);
-                      $("#total_mois").empty().append(data.total_par_mois);  
-                      $("#"+id).attr("Disabled","Disabled");
-                      switch(id){
-                          case "type_facture1":
-                               $("#type_facture2").removeAttr("Disabled");
-                          break;
-                          case "type_facture2":
-                               $("#type_facture1").removeAttr("Disabled");
-                          break;
-                      }
-                      $.unblockUI();                       
-                    },"json"
-               ); 
-          }
+/*
+*----------------------------------------------------------------------------
+* Ajax function to add cost for type of 'facturation' in session / panier
+* when clicking radio btn electronique/papier
+*----------------------------------------------------------------------------
+* @id  - the id of the radion btn clicked
+*      - function in controller mes_coordonnes.php/updateFacture
+* TODO: use $(this)
+*/
+function choixFacture(id)
+{
+  preload();    
+  var typeFacture   = $("#"+id).val(); 
+  $.post(
+    updateFacture,
+    {
+      typeFacture : typeFacture,
+    },
+    function(data){                          
+      $("#recap_contenu").children("#colFacture").remove();  
+      $("#recap_contenu").append(data.envoie_facture_dummy6);
+      $("#total_mois").empty().append(data.total_par_mois);  
+      $("#"+id).attr("Disabled","Disabled");
+      switch(id){
+        case "type_facture1":
+          $("#type_facture2").removeAttr("Disabled");
+          break;
+        case "type_facture2":
+          $("#type_facture1").removeAttr("Disabled");
+          break;
+      }
+      $.unblockUI();                       
+    },"json"
+  ); 
+}
           
           function gotoMesCoord(){
                 $.post(
