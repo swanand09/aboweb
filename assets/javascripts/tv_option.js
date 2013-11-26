@@ -2,7 +2,7 @@ $(function() {
 
   //Disable 'list of bouquet' on startup
   $('.four.bouquet').fadeTo('slow',.6);
-  $('.four.bouquet').append('<div class="disabled-div" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
+  
 
   //Enable/Disable 'list of bouquet' on Click/Checkbox
   //Enable/Disable checkbox Bein/Eden

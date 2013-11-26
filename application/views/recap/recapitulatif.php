@@ -37,7 +37,7 @@
         <?php }?>
         <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>" class="mail-link"><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>
          <label class="top-20"><strong>Type de facturation</strong></label>
-         <span class="val"><?php echo $type_de_facturation; ?></span>
+         <span class="val"><?php echo $type_de_facturation[1]; ?></span>
       </div>
     </div>
     <hr class="sexy">
@@ -50,9 +50,9 @@
       </div>
     </div>
     <hr class="sexy">
-    <form action="paiement" method="POST">
+    <form id='frm-mon-recap' action="paiement" method="POST">
         <div class="row">
-          <div class="column twelve conditions"><label><input type="checkbox" value="conditions" name="recap" class="left"><strong class="left">Je déclare avoir pris connaissance et accepté dans toutes leur teneur les Conditions Générales d’Inscriptions aux Services haut débit et de téléphonie fixe, ainsi que les descriptifs et les tarifs des offres.</strong></label></div>
+          <div class="column twelve conditions"><label><input type="checkbox" class='validate[required] left'  value="conditions" name="recap" class="left"><strong class="left">Je déclare avoir pris connaissance et accepté dans toutes leur teneur les Conditions Générales d’Inscriptions aux Services haut débit et de téléphonie fixe, ainsi que les descriptifs et les tarifs des offres.</strong></label></div>
           <div class="column twelve top-20"><label><input type="checkbox" value="mandat" name="recap"><strong>Je donne mandat à MEDIASERV……..</strong></label></div>
         </div>
 

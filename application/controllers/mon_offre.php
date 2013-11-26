@@ -91,6 +91,7 @@ class Mon_offre extends MY_Controller {
                     $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
                     $this->session->set_userdata('promo', utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
                     $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
+                    $this->session->set_userdata('context',$result["interrogeEligibiliteResult"]["Context"]);
                     $this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]));
                   
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
@@ -619,7 +620,29 @@ class Mon_offre extends MY_Controller {
         redirect("mon_offre");
     }
     
-    public function interrogEligibilite(){
+    
+    /*****************************************testing**********************************************/
+    public function arrayToXml2()
+    {
+        // Load XML writer library
+        //$this->load->library('xml_writer');
+        
+        // Initiate class
+       // $xml = new Xml_writer();
+        
+        $context = $this->session->userdata("context");
+        
+        
+        // creating object of SimpleXMLElement
+        $xmlContext = new SimpleXMLElement('<Context/>');
+
+        // function call to convert array to xml
+        //array_walk_recursive($context, array($xmlContext, 'addChild'));
+        
+        echo str_replace('<?xml version="1.0"?>', "", $this->arrayToXml($context, new SimpleXMLElement('<Context/>'))->asXML());
+    }
+    public function interrogEligibilite()
+    {
        echo "<pre>";
         print_r($this->Wsdl_interrogeligib->interrogeEligibilite("0594306643"));
        echo "</pre>"; 

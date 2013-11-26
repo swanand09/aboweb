@@ -212,7 +212,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                                                       <Telephone_bureau>'.$dataArr["information_contact"]["telephone_bureau"].'</Telephone_bureau>
                                                                       <Telephone_domicile>'.$dataArr["information_contact"]["telephone_domicile"].'</Telephone_domicile>
                                                                     </_information_contact>
-                                                                    '.$mode_paiment.'
+                                                                    '.$mode_paiment.$dataArr["context"].'
                                                                 </enregistreSouscription>','',array(),'document', 'literal'
                                                             ); 
         $this->nusoap_client->operation = "msvaboweb/enregistreSouscription";

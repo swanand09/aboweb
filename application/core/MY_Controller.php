@@ -162,6 +162,46 @@ class MY_Controller extends CI_Controller {
             $this->session->set_userdata('totalParMois',$this->totalParMois);
             return $this->totalParMois;
         }
+        
+        //convertit un tableau en xml
+        function arrayToXml(array $arr, SimpleXMLElement $xml) {
+            foreach ($arr as $k => $v) {
+
+                $attrArr = array();
+                $kArray = explode(' ',$k);
+                $tag = array_shift($kArray);
+
+                if (count($kArray) > 0) {
+                    foreach($kArray as $attrValue) {
+                        $attrArr[] = explode('=',$attrValue);                   
+                    }
+                }
+
+                if (is_array($v)) {
+                    if (is_numeric($k)) {
+                        $this->arrayToXml($v, $xml);
+                    } else {
+                        $child = $xml->addChild($tag);
+                        if (isset($attrArr)) {
+                            foreach($attrArr as $attrArrV) {
+                                $child->addAttribute($attrArrV[0],$attrArrV[1]);
+                            }
+                        }                   
+                        $this->arrayToXml($v, $child);
+                    }
+                } else {
+                    $child = $xml->addChild($tag, $v);
+                    if (isset($attrArr)) {
+                        foreach($attrArr as $attrArrV) {
+                            $child->addAttribute($attrArrV[0],$attrArrV[1]);
+                        }
+                    }
+                }               
+            }
+
+        return $xml;
+    }
+
 }
 
 /* End of file MY_Controller.php */

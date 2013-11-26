@@ -236,6 +236,7 @@ var preload = function(){
           {
                preload();    
                 var typeFacture   = $("#"+id).val(); 
+                $("#type_facturation_hid").val(typeFacture);
                  $.post(
                     updateFacture,
                      {

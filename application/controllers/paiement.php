@@ -141,7 +141,12 @@ class Paiement extends MY_Controller {
                       );
         }
         
+        $context = $this->session->userdata("context");
+        $xmlContext = new SimpleXMLElement('<_context/>');
+
+       
         
+        $dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $this->arrayToXml($context, $xmlContext)->asXML());
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
         echo "<pre>";
         print_r($result);

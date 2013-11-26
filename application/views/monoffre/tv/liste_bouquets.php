@@ -152,6 +152,7 @@
                   ?>
                
               </ul>
+              <div class="disabled-div"></div>  
             </div>
             
             <div class='columns eight chaines'>
