@@ -142,11 +142,19 @@ class Wsdl_interrogeligib_model extends CI_Model
                                          </_cartebleue>";
            break;
        }
+       $prodSouscris = '<int>0</int>';
+       if(!empty($dataArr["produits_souscris"])){
+           $prodSouscris = "";
+        foreach($dataArr["produits_souscris"] as $key=>$val){
+            $prodSouscris .= "<int>".$val."</int>";
+        }
+       }
+       
        echo '<enregistreSouscription xmlns="msvaboweb">
                                                                     <_id>'.$dataArr["id"].'</_id>
                                                                     <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
                                                                     <_produits_souscris>
-                                                                      <int>0</int>
+                                                                      '.$prodSouscris.'
                                                                     </_produits_souscris>
                                                                     <_adresse_installation>
                                                                       <Civilite>'.$dataArr["adresse_installation"]["civilite"].'</Civilite>
@@ -212,12 +220,12 @@ class Wsdl_interrogeligib_model extends CI_Model
                                                                     </_information_contact>
                                                                     '.$mode_paiment.$dataArr["context"].'
                                                                 </enregistreSouscription>';
-       $soapEligib = $this->nusoap_client->serializeEnvelope('
-                                                                <enregistreSouscription xmlns="msvaboweb">
+       
+       $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription xmlns="msvaboweb">
                                                                     <_id>'.$dataArr["id"].'</_id>
                                                                     <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
                                                                     <_produits_souscris>
-                                                                      <int>0</int>
+                                                                      '.$prodSouscris.'
                                                                     </_produits_souscris>
                                                                     <_adresse_installation>
                                                                       <Civilite>'.$dataArr["adresse_installation"]["civilite"].'</Civilite>

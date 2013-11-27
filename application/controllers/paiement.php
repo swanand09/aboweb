@@ -34,6 +34,20 @@ class Paiement extends MY_Controller {
         $dataArr = array(
                            "id"                     => $this->session->userdata("idParcours"),
                            "con_id_parrainage"      => $id_parrain,
+                           "produits_souscris"      => array(
+                                                               $this->session->userdata("forfaitDummy1Crm"),
+                                                               $this->session->userdata("degroupageDummy1Crm"),
+                                                               $this->session->userdata("bouquetTvDummy3Crm"),
+                                                               $this->session->userdata("optionTvEdenDummy3Crm"),
+                                                               $this->session->userdata("optionTvBeinDummy3Crm"),
+                                                               $this->session->userdata("vodPvrOneshotDummy3Crm"),
+                                                               $this->session->userdata("vodPvrRecurrentDummy3Crm"),
+                                                               $this->session->userdata("locationIadDummy4Crm"),
+                                                               $this->session->userdata("locationDecTvDummy4Crm"),
+                                                               $this->session->userdata("cautionDummy5Crm"),
+                                                               $this->session->userdata("factureDummy6Crm"),
+                                                               $this->session->userdata("oneshotDummy7Crm")
+                           ),
                            "adresse_installation"   => array(
                                                             "civilite"      => $this->session->userdata("civilite_aa"),
                                                             "nom"           => $this->session->userdata("nom_aa"),
@@ -150,7 +164,7 @@ class Paiement extends MY_Controller {
         $dom->formatOutput = true;
         $dom->loadXML($this->arrayToXml($context, $xmlContext)->asXML());
        
-       $dataArr["context"] = str_replace("<?xml version='1.0'?>", "", $dom->saveXML());
+       $dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $dom->saveXML());
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
         echo "<pre>";
         print_r($result);
