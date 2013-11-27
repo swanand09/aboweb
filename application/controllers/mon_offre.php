@@ -5,6 +5,7 @@ class Mon_offre extends MY_Controller {
     public function __construct()
     {
             parent::__construct();
+           // $this->output->enable_profiler(TRUE);
             $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib'); 
     }  
     
@@ -626,20 +627,25 @@ class Mon_offre extends MY_Controller {
     {
         // Load XML writer library
         //$this->load->library('xml_writer');
-        
         // Initiate class
        // $xml = new Xml_writer();
-        
         $context = $this->session->userdata("context");
-        
-        
         // creating object of SimpleXMLElement
         $xmlContext = new SimpleXMLElement('<Context/>');
-
         // function call to convert array to xml
         //array_walk_recursive($context, array($xmlContext, 'addChild'));
+        /*
+        echo "<pre>";
+        print_r(str_replace('<?xml version="1.0"?>', "", $this->arrayToXml($context, $xmlContext)->asXML()));
+        echo "</pre>";
+         * 
+         */
         
-        echo str_replace('<?xml version="1.0"?>', "", $this->arrayToXml($context, new SimpleXMLElement('<Context/>'))->asXML());
+        $dom = new DOMDocument("1.0");
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($this->arrayToXml($context, $xmlContext)->asXML());
+        echo str_replace('<?xml version="1.0"?>', "", $dom->saveXML());
     }
     public function interrogEligibilite()
     {

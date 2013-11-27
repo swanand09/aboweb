@@ -145,8 +145,12 @@ class Paiement extends MY_Controller {
         $xmlContext = new SimpleXMLElement('<_context/>');
 
        
-        
-        $dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $this->arrayToXml($context, $xmlContext)->asXML());
+        $dom = new DOMDocument("1.0");
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($this->arrayToXml($context, $xmlContext)->asXML());
+       
+       $dataArr["context"] = str_replace("<?xml version='1.0'?>", "", $dom->saveXML());
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
         echo "<pre>";
         print_r($result);
