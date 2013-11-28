@@ -312,58 +312,55 @@ function choixFacture(id)
   ); 
 }
           
-          function gotoMesCoord(){
-                $.post(
-                    mesCoordonnes,
-                     {
+function gotoMesCoord(){
+  $.post(
+    mesCoordonnes,
+    {
 
-                     },
-                   function(data){
-                       $(location).attr('href',"mes_coordonnees");
-                   },"json"
-                );
-           }
+    },
+    function(data){
+      $(location).attr('href',"mes_coordonnees");
+    },"json"
+  );
+}
             
-          function verifMailWebServ(){
-            preload();
-            $.post(                   
-               verifEmail,
-                 {
-                    email_msv : $("#email_mediaserv").val()
-                 },
-                function(data){                 
-                  alert(data.msg);             
-                  switch(data.error){
-                      case "401":
-                          $("#email_mediaserv").val("").focus();
-                      break;
-                  }
-                  $.unblockUI(); 
-                },"json"
-           ); 
-        }
+function verifMailWebServ() {
+  preload();
+  $.post(                   
+    verifEmail,
+    {
+      email_msv : $("#email_mediaserv").val()
+    },
+    function(data) {                 
+      alert(data.msg);             
+      switch(data.error) {
+        case "401":
+          $("#email_mediaserv").val("").focus();
+          break;
+      }
+      $.unblockUI(); 
+    },"json"
+  ); 
+}
           
-          function verifParainWebServ()
-          {
-                 preload();
-                   $.post(
-                        verifParain,
-                        {
-                           parrain_num_contrat : $("#parrain_num_contrat").val(),
-                           parrain_num_tel    : $("#parrain_num_tel").val()
-                        },
-                       function(data){
-                         //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                        
-                         alert(data.Error.ErrorMessage); 
-                         $.unblockUI(); 
-                         if(data.Error.ErrorMessage=="Votre parrain existe. Merci!"){
-                             return false;
-                         }
-                         
-                        $("#parrain_num_tel").focus();
-                        $("#parrain_num_contrat").focus();
-                                     
-                       }, "json"
-                   );
-            }
+function verifParainWebServ()
+{
+  preload();
+  $.post(
+    verifParain,
+    {
+      parrain_num_contrat : $("#parrain_num_contrat").val(),
+      parrain_num_tel    : $("#parrain_num_tel").val()
+    },
+    function(data){
+      //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
+      alert(data.Error.ErrorMessage); 
+      $.unblockUI(); 
+      if(data.Error.ErrorMessage=="Votre parrain existe. Merci!"){
+        return false;
+      }
+      $("#parrain_num_tel").focus();
+      $("#parrain_num_contrat").focus();
+    }, "json"
+  );
+  }
