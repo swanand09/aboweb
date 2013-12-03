@@ -84,22 +84,22 @@ class Mon_offre extends MY_Controller {
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
                {                  
                     $data["error"]  = false;
-                    $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
+                    //$this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
                     $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);                  
-                    $this->session->set_userdata('offreparrainage_id',($result["interrogeEligibiliteResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
+                   // $this->session->set_userdata('offreparrainage_id',($result["interrogeEligibiliteResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
-                    $this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
-                    $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-                    $this->session->set_userdata('promo', utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
-                    $this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
+                    //$this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
+                   // $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
+                    //$this->session->set_userdata('promo', utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
+                    //$this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
                     $this->session->set_userdata('context',$result["interrogeEligibiliteResult"]["Context"]);
-                    $this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]));
+                   // $this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]));
                   
                     $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                     
-                    if($disable_checkbox ==false){
+                    if($disable_checkbox ==false){  
                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
-                       // $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
+                        $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
                     }else
                     {
                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked','disabled'=> 'disabled');
@@ -107,12 +107,17 @@ class Mon_offre extends MY_Controller {
                     }
                     
                     //PRODUIT PORTABILITE
-                     $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled'); 
-                     foreach($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"] as $key=>$val){
-                        if($val["Categorie"]=="PORTABILITE"){
-                            $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
-                        }
+                    if($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_dégroupage_total"]=="true"){                      
+                         $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
                     }
+                     /*
+                     if(isset($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"])){
+                        foreach($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"] as $key=>$val){
+                            if($val["Categorie"]=="PORTABILITE"){
+                                $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
+                            }
+                        }
+                    }*/
                     
                     $data["input1"] = $input1;
                     $data["input2"] = $input2;                
@@ -136,7 +141,7 @@ class Mon_offre extends MY_Controller {
     }
     
     public function forfait()
-    { 
+    {         
        $this->controller_verifySessExp()? redirect('mon_offre'):"";         
        $redu_facture  = $this->input->post('redu_facture'); 
        $this->session->set_userdata("redu_facture",$redu_facture);
@@ -198,6 +203,7 @@ class Mon_offre extends MY_Controller {
     
     public function prevState($page='')
     {
+       
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         //$prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
@@ -212,24 +218,23 @@ class Mon_offre extends MY_Controller {
                 $htmlContent   = $this->session->userdata("htmlContent_testeligib");
             break;
         }
-        
-        if($redu_facture=="true")
-        {
-            $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
-        }else
-        {
-            $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />',$htmlContent);
-        }
-        $consv_num_tel = $this->session->userdata("consv_num_tel");
-        if($consv_num_tel=="true")
-        {
-            $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />',$htmlContent);
-        }else
-        {
-           $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
-        }
-       // echo utf8_encode(utf8_decode($htmlContent));
-        echo $htmlContent;
+       if(!empty($htmlContent)){
+            if($redu_facture=="true"){
+                $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
+            }else{
+                $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />',$htmlContent);
+            }
+            $consv_num_tel = $this->session->userdata("consv_num_tel");
+            if($consv_num_tel=="true"){
+                $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />',$htmlContent);
+            }else{
+               $htmlContent = str_replace('<input type="checkbox" name="consv_num_tel" value="true" checked="checked" id="consv_num_tel"  />','<input type="checkbox" name="consv_num_tel" value="true" id="consv_num_tel"  />',$htmlContent);
+            }
+             echo $htmlContent;
+       }else{
+           $this->session->destroy();
+           redirect('mon_offre');
+       }
     }
     
     public function refreshRecapCol()
