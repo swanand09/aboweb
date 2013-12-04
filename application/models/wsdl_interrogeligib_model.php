@@ -31,6 +31,17 @@ class Wsdl_interrogeligib_model extends CI_Model
         return  $result;
     }
     
+    public function recupereOffre($context)
+    {
+        $soapEligib = $this->nusoap_client->serializeEnvelope('
+                                    <recupere_offre xmlns="msvaboweb">
+                                      <_context>'.$context.'</_context>
+                                    </recupere_offre>','',array(),'document', 'literal'); 
+        $this->nusoap_client->operation = "msvaboweb/recupere_offre";
+        $result = $this->nusoap_client->send($soapEligib,$this->nusoap_client->operation);
+        return  $result;
+    }
+    
     public function recupDummyPanier($produit)
     {
         $arrDum1 = $arrDum2 = $arrDum3 = $arrDum4 = $arrDum5 = $arrDum6 = $arrDum7 = $arrDum8 = array();

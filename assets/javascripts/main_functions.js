@@ -46,7 +46,8 @@ var preload = function(){
           }
           
           function retrieveForfait()
-          {           
+          {    
+           
               preload();
               var redu_facture = "false";
               var consv_num_tel = "false";
@@ -64,9 +65,10 @@ var preload = function(){
                         redu_facture : redu_facture,
                         consv_num_tel : consv_num_tel
                      },
-                    function(data){                      
+                    function(data){
+                        
                       $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                   
+                      
                       var key, count = 0;
                       for(key in data[1]) {
                           if(count==0) {
@@ -81,7 +83,7 @@ var preload = function(){
                       $( "html,body" ).scrollTop(0);
                     },"json"
                   );   
-                      return false;
+              return false;
           }  
           function prevState(page)
           {               

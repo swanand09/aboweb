@@ -85,7 +85,7 @@ class Mon_offre extends MY_Controller {
                {                  
                     $data["error"]  = false;
                     //$this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
-                    $this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);                  
+                    //$this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);                  
                    // $this->session->set_userdata('offreparrainage_id',($result["interrogeEligibiliteResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
                     //$this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
@@ -147,8 +147,24 @@ class Mon_offre extends MY_Controller {
        $this->session->set_userdata("redu_facture",$redu_facture);
        $consv_num_tel = $this->input->post('consv_num_tel'); 
        $this->session->set_userdata("consv_num_tel",$consv_num_tel);
+       
+       //connection à la fonctionalité recupere_info du wdsl
+       $context = $this->session->userdata('context');
+       $result = $this->Wsdl_interrogeligib->recupereOffre($context);
+              
+       $this->session->set_userdata('localite',$result["recupere_offreResult"]["Localite"]);
+       $this->session->set_userdata('idParcours',$result["recupere_offreResult"]["Id"]); 
+       $this->session->set_userdata('offreparrainage_id',($result["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
+       $this->session->set_userdata('ws_ville',$result["recupere_offreResult"]["Villes"]["WS_Ville"]);
+       $this->session->set_userdata('produit',$result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
+       $this->session->set_userdata('promo', utf8_encode($result["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));
+       $this->session->set_userdata('context',$result["recupere_offreResult"]["Context"]);
+       $this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]));
+       
+       
        $produit =  $this->session->userdata("produit");
-       $data["promo_libelle"] = $this->session->userdata("promo");
+       $data["promo_libelle"] = $this->session->userdata("promo");       
+       
        $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/forfait/ma_promo",$data,true);
        $counter = 1;
        $iadArr = array("Libelle"=>"","Tarif"=>"","Tarif_promo"=>"","Duree_mois_promo"=>"");
@@ -193,12 +209,11 @@ class Mon_offre extends MY_Controller {
         
         
         //to review total
-        $this->session->set_userdata('totalParMois',"");
-//        $data["totalParMois"] = "";
-//        $this->colonneDroite["total_par_mois"] =  $this->load->view("general/total_mois",$data,true);
-       
+       $this->session->set_userdata('totalParMois',"");
+
        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
       echo json_encode(array($this->contenuGauche,$this->colonneDroite));   
+       
     } 
     
     public function prevState($page='')

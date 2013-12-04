@@ -8,6 +8,10 @@ class MY_Controller extends CI_Controller {
         var $prenum;
         var $contenuGauche = array();
         var $idParcours;
+        
+        //modif le 4 dec 2013 on s'en sert plus d'id parcous par contre on vérifie la session context
+        var $context; 
+        
         var $totalParMois;
         var $iad;
         var $validPrefix   = array();
@@ -74,8 +78,9 @@ class MY_Controller extends CI_Controller {
         //verification expiration de la session
         public function controller_verifySessExp()
         {
-          $this->idParcours = $this->session->userdata("idParcours");
-          if(empty($this->idParcours)){
+          //$this->idParcours = $this->session->userdata("idParcours");
+          $this->context =  $this->session->userdata("context");
+          if(empty($this->context)){
               $this->session->destroy();
              return true;
           }else{
