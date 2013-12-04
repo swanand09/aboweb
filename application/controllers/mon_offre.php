@@ -154,7 +154,7 @@ class Mon_offre extends MY_Controller {
               
        $this->session->set_userdata('localite',$result["recupere_offreResult"]["Localite"]);
        $this->session->set_userdata('idParcours',$result["recupere_offreResult"]["Id"]); 
-       $this->session->set_userdata('offreparrainage_id',($result["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
+       $this->session->set_userdata('offreparrainage_id',($result["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["recupere_offreResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
        $this->session->set_userdata('ws_ville',$result["recupere_offreResult"]["Villes"]["WS_Ville"]);
        $this->session->set_userdata('produit',$result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
        $this->session->set_userdata('promo', utf8_encode($result["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));
