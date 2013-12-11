@@ -29,10 +29,12 @@ class Paiement extends MY_Controller {
     public function enregistreSouscription()
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+        
+               
         $id_parrain =$this->session->userdata("id_parrain");
         $id_parrain = !empty($id_parrain)?$id_parrain:0;
         $dataArr = array(
-                           "id"                     => $this->session->userdata("idParcours"),
+                           //"id"                     => $this->session->userdata("idParcours"),
                            "con_id_parrainage"      => $id_parrain,
                            "produits_souscris"      => array(
                                                                $this->session->userdata("forfaitDummy1Crm"),
@@ -156,15 +158,15 @@ class Paiement extends MY_Controller {
         }
         
         $context = $this->session->userdata("context");
+        /*
         $xmlContext = new SimpleXMLElement('<_context/>');
-
-       
         $dom = new DOMDocument("1.0");
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = true;
         $dom->loadXML($this->arrayToXml($context, $xmlContext)->asXML());
-       
-       $dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $dom->saveXML());
+       */
+        /*$dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $dom->saveXML());*/
+        $dataArr["context"] = $context;
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
         echo "<pre>";
         print_r($result);

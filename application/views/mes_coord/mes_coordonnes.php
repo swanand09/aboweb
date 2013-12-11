@@ -21,7 +21,7 @@ echo validation_errors();
           <h3>COORDONNÉES (ADRESSES ABONNEMENT):</h3>
          <!-- Civilité-->
           <div class="row">
-            <div class="columns two bottom-10"><label>Civilité:</label></div>
+            <div class="columns two bottom-10"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
               <label class="left"><input type="radio" value="M." name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
               <label class="left"><input type="radio" value="Mme" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
@@ -31,22 +31,22 @@ echo validation_errors();
          
          <!-- Nom -->
           <div class="row">
-            <div class='columns two'><label>Nom :</label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_aa' value="<?php echo set_value("nom_aa",$nom_aa);?>" /></div>
+            <div class='columns two'><label>Nom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_aa' value="<?php echo set_value("nom_aa",$nom_aa);?>" /></div>
           </div>
           <!--Prénom -->
           <div class="row">
-            <div class='columns two'><label>Prénom :</label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_aa' value="<?php echo set_value("prenom_aa",$prenom_aa);?>" /></div>
+            <div class='columns two'><label>Prénom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_aa' value="<?php echo set_value("prenom_aa",$prenom_aa);?>" /></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class='columns two'><label>Numéro :</label></div><div class='two columns'><input type='text' class='validate[required,maxSize[5]] numero' value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
+            <div class='columns two'><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,maxSize[5]] numero' value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
             <div class='columns two'><label>Complément numéro :</label></div><div class='two columns'><input type='text' class='comp_numero' name='comp_numero_aa' value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" /></div>              
             <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='type_voie' name='type_voie_aa' value="<?php echo set_value("type_voie_aa",$type_voie_aa);?>" /></div>
           </div>
           
            <!--Addresse-->
           <div class="row">
-            <div class='columns two'><label>Adresse :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse' name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
+            <div class='columns two'><label>Adresse :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse' name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
             <div class='columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse_suite' name='adresse_suite_aa' value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" /></div>
           </div>
           
@@ -68,15 +68,21 @@ echo validation_errors();
           
           <!--Code postal & Ville & Localisation-->
            <div class="row">
-                <div class='columns two'><label>Code postal :</label></div>
+                <div class='columns two'><label>Code postal :<span class='has-tip' title='obligatoire'>*</span></label></div>
                 <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_aa' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>" id='codepostal'/></div>
-                <div class='columns one'><label>Ville :</label></div>
+                <div class='columns one'><label>Ville :<span class='has-tip' title='obligatoire'>*</span></label></div>
                 <div class='columns four end'><input type='text' class='validate[required] ville' name='ville_aa' value="<?php echo set_value("ville_aa",$ville_aa);?>" id='ville'/></div>
           </div>
   
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
-            <div class="columns"><label>Téléphone portable :</label></div><div class="columns end"><input type="text" name="telephone_portable" value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class="validate[required] telephone telephone_portable"></div>
+            <div class="columns"><label>Téléphone portable :<span class='has-tip' title='obligatoire'>*</span></label></div>
+            <div class="columns"><input type="text" name="telephone_portable" value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class="validate[required] telephone telephone_portable"></div>
+            <div class='column end'>
+                <a href='#' class='has-tip' data-width='360' title='Votre numéro de téléphone mobile vous permettra de recevoir par SMS les informations liées à l’évolution de votre activation ainsi que du suivi de votre livraison.'>
+                    <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
+                </a>
+            </div>
           </div>
           <div class="row">
             <div class="columns"><label>Téléphone de bureau :</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="telephone_bureau telephone"></div>
@@ -100,7 +106,7 @@ echo validation_errors();
         <div class="adresse-facturation hide">
          <!-- Civilité-->
           <div class="row">
-            <div class="columns bottom-10 two"><label>Civilité:</label></div>
+            <div class="columns bottom-10 two"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
               <label class="left"><input type="radio" value="M." name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
               <label class="left"><input type="radio" value="Mme" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
@@ -109,17 +115,17 @@ echo validation_errors();
           </div>
           <!-- Nom -->
           <div class="row">
-             <div class='columns two'><label>Nom :</label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_af' value="<?php echo set_value("nom_af",$nom_af);?>" /></div>
+             <div class='columns two'><label>Nom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_af' value="<?php echo set_value("nom_af",$nom_af);?>" /></div>
           </div>
           <!--Prénom -->
           <div class="row">
-             <div class='columns two'><label>Prénom :</label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_af' value="<?php echo set_value("prenom_af",$prenom_af);?>" /></div>
+             <div class='columns two'><label>Prénom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_af' value="<?php echo set_value("prenom_af",$prenom_af);?>" /></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
             <div class="columns two"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class="numero"></div>
             <div class="columns two"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" name="comp_numero_af" class="comp_numero ui-autocomplete-input"></div>              
-            <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_af' value="<?php echo set_value("type_voie_af",$type_voie_af);?>" /></div>
+            <div class='columns two'><label>Type de Voie :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_af' value="<?php echo set_value("type_voie_af",$type_voie_af);?>" /></div>
           </div>
           
           <!--Addresse suite-->
@@ -152,7 +158,7 @@ echo validation_errors();
         <div class="adresse-livraison hide">
          <!-- Civilité-->
           <div class="row">
-            <div class="columns bottom-10 two"><label>Civilité:</label></div>
+            <div class="columns bottom-10 two"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="five columns bottom-10 end">
               <label class="left"><input type="radio" value="M." name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
               <label class="left"><input type="radio" value="Mme" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
@@ -162,11 +168,11 @@ echo validation_errors();
          
           <!-- Nom -->
           <div class='row'>
-            <div class='columns two'><label>Nom :</label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_al' value="<?php echo set_value("nom_al",$nom_al);?>" /></div>
+            <div class='columns two'><label>Nom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_al' value="<?php echo set_value("nom_al",$nom_al);?>" /></div>
           </div>
           <!--Prénom -->
           <div class='row'>
-            <div class='columns two'><label>Prénom :</label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_al' value="<?php echo set_value("prenom_al",$prenom_al);?>" /></div>
+            <div class='columns two'><label>Prénom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_al' value="<?php echo set_value("prenom_al",$prenom_al);?>" /></div>
           </div>
           
           
@@ -174,7 +180,7 @@ echo validation_errors();
           <div class='row'>
             <div class='columns two'><label>Numéro :</label></div><div class='two columns'><input type='text' class='numero' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
             <div class='columns two'><label>Complément numéro:</label></div><div class='two columns'><input type='text' class='comp_numero' name='comp_numero_al' value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" /></div>              
-            <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_al' value="<?php echo set_value("type_voie_al",$type_voie_al);?>" /></div>
+            <div class='columns two'><label>Type de Voie :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_al' value="<?php echo set_value("type_voie_al",$type_voie_al);?>" /></div>
           </div>
           
           <!--Addresse-->
@@ -186,9 +192,9 @@ echo validation_errors();
           
           <!--Code postal & Ville -->
           <div class='row'>
-            <div class='columns two'><label>Code postal :</label></div>
+            <div class='columns two'><label>Code postal :<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_al' value="<?php echo set_value("code_postal_al",$code_postal_al);?>" id='codepostal3' /></div>
-            <div class='columns one'><label>Ville :</label></div>
+            <div class='columns one'><label>Ville :<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class='columns four end'><input type='text' class='validate[required] ville' name='ville_al' value="<?php echo set_value("ville_al",$ville_al);?>" id='ville3' /></div>            
           </div>
           
@@ -198,9 +204,9 @@ echo validation_errors();
            <div class="column twelve bottom-10 top-20">
             <label>
               <input type="checkbox" value="true" name="livraison_express" <?php echo ($livraison_express!="false")?"checked='checked'":"";?> class="left">
-              Je souhaite bénéficier gratuitement d'une livraison express (72 heures à partir du traitement de votre commande).<br>
+                Je souhaite être livré plus rapidement et bénéficier d’une livraison express après validation de ma commande. (72h à partir du traitement de ma commande).<br>
             </label>
-            <span class="top-10 column"><strong>IMPORTANT :</strong> dans ce cas je renonce à exercer mon droit de rétractation dans les 7 jours suivant achats.</span>
+            <span class='top-10 column'><strong>IMPORTANT :</strong> Dans ce cas, je renonce à mon droit de rétractation de 7 jours suivant l'achats.</span>
           </div>
         </div>
 
@@ -211,7 +217,7 @@ echo validation_errors();
               <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
             </div>
             <div class="column six"> 
-               <input type='text' class='validate[required]' name='email_mediaserv' value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='input-info'>rassurez-vous, nous n'aimons pas non plus le SPAM</span>
+               <input type='text' class='validate[required]' name='email_mediaserv' value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='has-tip' title='obligatoire'>*</span>
             </div>
             <div class="column three"> 
               <span class="postfix">@mediaserv.net</span>
@@ -220,10 +226,17 @@ echo validation_errors();
               <input type="button" name="VerifierEmail" onclick ="javascript:verifMailWebServ();" value="Vérifier" class="rmv-std-btn btn-verifier">
             </div>
             <div class="column twelve top-20">
-              <label>Veuillez précisez une autre adresse de messagerie</label>
-              <input type="text" name="email" value="<?php echo set_value("email",$email);?>" class="validate[required,custom[email]] six">
+              <label>Veuillez communiquer une adresse de messagerie de contact <span class='has-tip' title='obligatoire'>*</span></label> 
+<!--              <input type="text" name="email" value="<?php //echo set_value("email",$email);?>" class="validate[required,custom[email]] six">-->
             </div>
-          </div>
+            <div class='column six'>
+              <input class='validate[required,custom[email]]' value="<?php echo set_value("email",$email);?>" type='text' name='email' /><span class='input-info'>Rassurez-vous, nous n'aimons pas non plus le SPAM</span></div>
+             <div class='column end'>
+              <a href='#' class='has-tip' data-width='360' title='Votre adresse de messagerie nous permettra de vous tenir informé sur l’évolution de votre commande. Rassurez vous, aucune sollicitation commerciale ne sera effectuée.'>
+                 <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
+              </a>
+            </div>
+           </div>
 
           <!--type de facturation-->
           <h3>Type de facturation :</h3>

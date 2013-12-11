@@ -1,7 +1,7 @@
 <div class='left-etape-content' id="cont_mon_off">
  
 <?php 
-    if(!empty($userdata["idParcours"])&&array_key_exists("prevState",$userdata)){
+    if(!empty($userdata["context"])&&array_key_exists("prevState",$userdata)){
             $redu_facture = $this->session->userdata("redu_facture");
             $htmlContent = $userdata["prevState"][0]["contenu_html"];
             if($redu_facture=="true")

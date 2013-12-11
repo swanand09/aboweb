@@ -16,7 +16,7 @@
     <div class="three columns telephone">Téléphone<br><span class="green-text"><?php echo $label[0];?></span></div>
     <div class="three columns internet">Internet<br><span class="green-text"><?php echo $label[1];?></span></div>
     <!-- If television is not available, add 'not-available' to its class -->
-    <div class="three columns television <?php echo ($eligible_tv=='false'?'not-available':'available');?>">Télé</div>
+    <div class="three columns television <?php echo ($eligible_tv=='false'?'not-available':'available');?>">Télévision</div>
     <div class="three columns tarifs">
         <?php if(!empty($tarifPromo)){?>
             <div class="promo"><div class="prix"><?php echo $tarif["0"]; ?>€<sup><?php echo $tarif["1"]; ?></sup> <span>TTC/mois</span></div><?php echo image('prix_bare.png'); ?></div>

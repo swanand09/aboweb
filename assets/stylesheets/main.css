@@ -1,6 +1,18 @@
 /*
 * Misc CSS
 */
+.reveal-modal h2{
+	border-bottom: 1px dotted;
+	font-size: 14px;
+	margin-bottom: 5px;
+	padding-bottom: 9px;
+}
+.reveal-modal h4 {
+	font-size: 13px;
+}
+.blue {
+	color: #00AFE5;
+}
 .disabled-div {
 	position: absolute;
 	top:0;
@@ -11,8 +23,7 @@
 	opacity:0.5;
 	background:url("../images/sqr_trans.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-	filter: alpha(opacity=50);
-	
+	filter: alpha(opacity=50);	
 }
 .clear{
 	clear: both;
@@ -129,6 +140,7 @@ hr.sexy {
     height: 42px;
     text-align: center;
     width: 161px;
+    font-size: 11px;
 }
 .btn-green:hover,.btn-forward:hover {
 	background-position: 0 -42px;
@@ -271,20 +283,20 @@ a.mail-link {
 	padding-top: 12px;
 	 margin-top: 20px;
 }
-.main-footer .four{
+.main-footer .three{
 	height: 28px;
     padding-top: 8px;
     font-family: freeroadregular;
 }
 
 .main-footer .paiement {
-	background: url("../images/paiement_icon.png") no-repeat scroll 70px 0 transparent;
+	background: url("../images/paiement_icon.png") no-repeat scroll 35px 0 transparent;
 }
 .main-footer .livraison {
-	background: url("../images/livraison_icon.png") no-repeat scroll 68px 0 transparent;
+	background: url("../images/livraison_icon.png") no-repeat scroll 40px 0 transparent;
 }
 .main-footer .souscription {
-	background: url("../images/souscription_icon.png") no-repeat scroll 25px 0 transparent;
+	background: url("../images/souscription_icon.png") no-repeat scroll 8px 0 transparent;
 	padding-left: 30px;
 }
 
@@ -359,6 +371,18 @@ body {
 .frm-options {
 	margin-top: 10px;
 	margin-bottom:10px;
+}
+.frm-options label {
+	margin-bottom:10px;
+}
+.frm-options label input {
+	float:left;
+}
+.frm-options .options-texte {
+	float: left;
+    font-size: 11px;
+    margin-top: 20px;
+    width: 100%;
 }
 .services-mediaserv li {
 	background: url("../images/services_mediaserv.png") no-repeat scroll 0 0 transparent;
@@ -541,6 +565,30 @@ body {
 /*
 * Main content - First step 3 ( TV CHAINES)
 */
+.inclus-tv {
+	border-top: 1px solid #EAEAEA;
+	  margin-left: 7px !important;
+	  margin-right: 7px !important;
+	  margin-top: 20px !important;
+	  padding-top: 20px;
+}
+.inclus-tv h4 {
+	color: #00afe5;
+	font-size: 14px;
+	font-family: freeroadregular;
+	margin-bottom: 1px;
+    margin-top: 5px;
+}
+.inclus-tv p{
+	font-family: freeroadregular;
+  	font-size: 12px;
+  	margin-bottom: 0px;
+  	width: 185px;
+}
+.inclus-tv a{
+	font-size: 13px;
+	font-family: freeroadregular;
+}
 ul.bqt { 
     padding: 7px;
     margin:0;
@@ -735,7 +783,7 @@ img.prix_bare{
 	color: #0094d1;
 	font-size: 1em;
 }
-.conditions strong {
+#frm-mon-recap strong {
 	width:95%;
 }
 
@@ -752,6 +800,42 @@ img.prix_bare{
     box-shadow:         0px 0px 6px #AEAEAE;
 }
 .prelevement .automatique:hover,.prelevement .cartebancaire:hover { cursor: pointer; }
+#frm-paiement .section-automatique .row > .column.one {
+	margin-right: 10px;
+    padding: 0;
+}
+#frm-paiement .section-automatique .row > .column.three{
+	padding: 0;
+}
+#frm-paiement label {
+	font-family: freeroadregular;
+    font-weight: bold;
+    padding-left: 40px;
+    padding-top: 8px;
+    color: #000;
+}
+#frm-paiement label.autorise {
+	font-weight: normal;
+	text-align: justify;
+}
+#frm-paiement label.autorise span {
+	width: 95%;
+}
+#frm-paiement .autorise > input {
+    float: left;
+    margin-right: 10px;
+}
+#frm-paiement h4 {
+	font-family: freeroadregular;
+    font-weight: bold;
+    padding-left: 40px;
+    color: #000;
+    margin-top: 0;
+}
+#frm-paiement .nfirst label {
+	padding-left: 0;
+	text-align: center;
+}
 /*
 * Main content - Merci
 */
@@ -807,14 +891,17 @@ img.prix_bare{
 	padding-top:10px;
 	color: #fff;
 }
-
+.votre-offre .right .mini,.total .mini{
+	text-transform: lowercase;
+	font-size: 10px;
+}
 .degroupage {
 	color:#000;
 	font-size: 0.9em;
 }
 .forpro h3 {
 	color: #FFFFFF;
-    font: 1.1em freeroadregular;
+    font: 1em freeroadregular;
     text-transform: uppercase;
 }
 .forpro h3 a {
@@ -876,7 +963,7 @@ img.prix_bare{
 .total h3{
 	color: #FFFFFF;
    font-family: freeroadregular;
-   font-size: 1.1em;
+   font-size: 1.0em;
    font-weight: normal;
    text-transform: uppercase;
 }

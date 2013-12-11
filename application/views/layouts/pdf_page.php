@@ -2,30 +2,30 @@
 <head>
 	<title>Formulaire</title>
 	<style>
-	body { font-family:'Helvetica'}
-	h2 { color:#65b755;}
-	.box { border:1px solid #000; }
-	.box h3 {border-bottom: 1px dotted; margin: 0; text-align: center; padding: 6px; font-size: 13px;}
-	table { width:1000px; }
-	table table { width: 100%;}
-	.w2 { width:50%; }
-	.w_25 { width:25%;}
-	.w_30 { width:30%;}
-	.w_70 {width:70%;}
-	.w_75 { width:75%;}
-	.block { display:block; }
-	.inline { display: inline;}
-	.dotted-bottom { border-bottom: 1px dotted #000; }
-	.dotted-left { border-left: 1px dotted #000; }
-	.field { padding: 8px;}
-	.p10 { padding:10px;}
-	.r10 { margin-right: 10px;}
-	.l10 { margin-left: 10px;}
-	.t10 { margin-top:10px;}
-	.t20 { margin-top:20px;}
-	.text-center { text-align: center;}
-	.sqr td{ border-bottom: 1px solid;border-right: 1px solid;}
-	.sqr td.first{border-left:1px solid;}
+            body { font-family:'Helvetica'}
+            h2 { color:#65b755;}
+            .box { border:1px solid #000; }
+            .box h3 {border-bottom: 1px dotted; margin: 0; text-align: center; padding: 6px; font-size: 13px;}
+            table { width:1000px; }
+            table table { width: 100%;}
+            .w2 { width:50%; }
+            .w_25 { width:25%;}
+            .w_30 { width:30%;}
+            .w_70 {width:70%;}
+            .w_75 { width:75%;}
+            .block { display:block; }
+            .inline { display: inline;}
+            .dotted-bottom { border-bottom: 1px dotted #000; }
+            .dotted-left { border-left: 1px dotted #000; }
+            .field { padding: 8px;}
+            .p10 { padding:10px;}
+            .r10 { margin-right: 10px;}
+            .l10 { margin-left: 10px;}
+            .t10 { margin-top:10px;}
+            .t20 { margin-top:20px;}
+            .text-center { text-align: center;}
+            .sqr td{ border-bottom: 1px solid;border-right: 1px solid;}
+            .sqr td.first{border-left:1px solid;}
 	</style>
 </head>
 <body>
@@ -374,6 +374,5 @@
 			</td>
 		</tr>
 	</table>
-
 </body>
 </html>

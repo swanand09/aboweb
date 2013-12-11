@@ -78,12 +78,14 @@ class MY_Controller extends CI_Controller {
         //verification expiration de la session
         public function controller_verifySessExp()
         {
-          //$this->idParcours = $this->session->userdata("idParcours");
+          
+            //$this->idParcours = $this->session->userdata("idParcours");
           $this->context =  $this->session->userdata("context");
           if(empty($this->context)){
+             //echo "<script>alert('pas de session');</script>";
               $this->session->destroy();
              return true;
-          }else{
+          }else{ //echo $this->context;exit;
              return  false;
           }
           
@@ -171,7 +173,6 @@ class MY_Controller extends CI_Controller {
         //convertit un tableau en xml
         function arrayToXml(array $arr, SimpleXMLElement $xml) {
             foreach ($arr as $k => $v) {
-
                 $attrArr = array();
                 $kArray = explode(' ',$k);
                 $tag = array_shift($kArray);

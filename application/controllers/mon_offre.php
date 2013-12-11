@@ -121,7 +121,7 @@ class Mon_offre extends MY_Controller {
                     
                     $data["input1"] = $input1;
                     $data["input2"] = $input2;                
-                    $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'Choisir mon forfait');   
+                    $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'CHOISIR MON FORFAIT');   
                     $data["choix_forfait"] = $choix_forfait;                    
                     $this->colonneDroite["form_test_ligne"] = $this->load->view("general/form_test_ligne",$data,true);
                     
@@ -283,9 +283,9 @@ class Mon_offre extends MY_Controller {
                     case "dummy1":
                            foreach($val as $val2){
                               if($val2["Categorie"]=="DEGROUPAGE"){ 
-                                  $data["dum1_degroup_tarif"] = $val2["Tarif"];
+                                  $data["dum1_degroup_tarif"] = $val2["Tarif"]["decimal"];
                                   $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];   
-                                  $data["totalParMois"] = $this->getTotal($val2["Tarif"]);
+                                  $data["totalParMois"] = $this->getTotal($val2["Tarif"]["decimal"]);
                                   $this->session->set_userdata("degroupageDummy1Crm",$val2["Id_crm"]);
                               }  
                            }
@@ -294,13 +294,13 @@ class Mon_offre extends MY_Controller {
                            foreach($val as $val2){
                                switch($val2["Valeurs"]["Categorie"]){
                                    case "BOUQUET_TV":
-                                       array_push($bouqTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
+                                       array_push($bouqTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                    break;
                                    case "OPTION_TV":
-                                       array_push($optionTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
+                                       array_push($optionTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                    break;
                                    case "VOD_PVR":
-                                        array_push($vodPvr, array(utf8_encode($val2["Valeurs"]["Libelle"]["string"])=>$val2["Valeurs"]["Tarif"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
+                                        array_push($vodPvr, array(utf8_encode($val2["Valeurs"]["Libelle"]["string"])=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                    break;
                                }
                            }
@@ -308,22 +308,26 @@ class Mon_offre extends MY_Controller {
                     case "dummy4":
                             $data["dummy4"] = $dummyPanier["dummy4"];
                            foreach($val as $val2){
-                                $data["tarif_loca_decod"] = ($val2["Categorie"]=="STB")?"dummy4_".$val2["Tarif"]:"dummy4_0";                                
+                           $data["tarif_loca_decod"] = ($val2["Categorie"]=="STB")?"dummy4_".$val2["Tarif"]["decimal"]:"dummy4_0";                                
                                 $data["tarif_activ_servicetv"] = "dummy7_";
                            }
                     break;
-                    case "dummy5":
+                    case "dummy5":  //caution
                            foreach($val as $val2){
                                 //$data["caution_dummy5"] = $val2["Tarif"]; 
-                                $this->session->set_userdata("caution_dummy5",$val2["Tarif"]);
-                               // $data["totalParMois"] = $this->getTotal($val2["Tarif"]);       
+                                $this->session->set_userdata("caution_dummy5",$val2["Tarif"]["decimal"]);
+                                $data["total1erFact"]   = $this->session->userdata('totalParMois')+$val2["Tarif"]["decimal"][0]; 
+                                $this->session->set_userdata("total1erFact",$data["total1erFact"] );
+                                $data["total2emeFact"] = $this->session->userdata('totalParMois')+$val2["Tarif"]["decimal"][1];
+                                $this->session->set_userdata("total2emeFact",$data["total2emeFact"] );
                                // $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
                            }
                     break;
-                    case "dummy7":
+                    case "dummy7":  //oneshot
                            foreach($val as $val2){
                                   $data["tarif_loca_decod"] = "dummy4_";
-                                  $data["tarif_activ_servicetv"] = "dummy7_".$val2["Tarif"];
+                                  $data["tarif_activ_servicetv"] = "dummy7_".$val2["Tarif"]["decimal"];
+                                  $data["total1erFact"]   = $this->session->userdata('total1erFact')+$val2["Tarif"]["decimal"];
                            }
                     break;
                 }
@@ -448,6 +452,13 @@ class Mon_offre extends MY_Controller {
             break;
         }
         
+        //total 1ere facture
+        $caution_dummy5 = $this->session->userdata("caution_dummy5");
+        $this->session->set_userdata("oneshot_dummy7",$data["oneshot_dummy7"]);
+        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
+        //total 2eme facture
+        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];
+        
         //caution decodeur
         $prevState[1]["caution_decodeur_dummy5"] = "";
         $data["caution_dummy5"] = $this->session->userdata("caution_dummy5");
@@ -546,6 +557,15 @@ class Mon_offre extends MY_Controller {
            // $data["vodTarif"]       = $bouquetTv[3];
            // $data["numriquEnreg"]   = $bouquetTv[4];
          }
+        
+        //total 1ere facture
+        $caution_dummy5 = $this->session->userdata("caution_dummy5");
+        $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
+        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
+        //total 2eme facture
+        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];                    
+ 
+         
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
@@ -614,6 +634,14 @@ class Mon_offre extends MY_Controller {
             }        
          }
         
+       //total 1ere facture
+        $caution_dummy5 = $this->session->userdata("caution_dummy5");
+        $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
+        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
+        //total 2eme facture
+        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];     
+         
+         
         $prevState = $this->session->userdata("prevState");
         $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
         $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
@@ -674,13 +702,13 @@ class Mon_offre extends MY_Controller {
        echo "</pre>"; 
     }
     
-    public function testFlux()
+    public function testFlux($dummy)
     {
         //dummy
         
         $dummyPanier = $this->session->userdata("dummyPanier");
         echo "<pre>";
-        print_r($dummyPanier["dummy3"]);        
+        print_r($dummyPanier[$dummy]);        
         echo "</pre>";
         //produit degroupage
         /*

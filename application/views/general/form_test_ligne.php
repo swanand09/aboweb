@@ -1,5 +1,5 @@
 <!--VOTRE LIGNE-->
-<div class="ligne p10">
+<div class="ligne">
     <form class='frm-etape-tester-block' onsubmit='procTestEligib("colonne droite");return false;'>
       <label class='lbl-white'><strong>Votre ligne</strong></label>
       <?php echo form_input($this->data["racap_num"]);?>

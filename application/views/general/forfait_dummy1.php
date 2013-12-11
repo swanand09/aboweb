@@ -2,7 +2,7 @@
 <div class="forpro votre-offre">
     <?php echo (!empty($text))?"<strong> VOTRE OFFRE MEDIASERV</strong><br><br><span class='top-10 block'><strong>".$text."</strong></span>":""; ?>    
     <?php if(!empty($donne_forfait)){ ?>
-    <h3>Votre offre Mediaserv<span class="right"><?php echo (($donne_forfait["Tarif_promo"]>0)?number_format($donne_forfait["Tarif_promo"],2,',',' '):number_format($donne_forfait["Tarif"],2,',',' '))."€";?></span></h3>
+    <h3>Votre offre Mediaserv<span class="right"><?php echo (($donne_forfait["Tarif_promo"]>0)?number_format($donne_forfait["Tarif_promo"],2,',',' '):number_format($donne_forfait["Tarif"],2,',',' '))."€";?><span class="mini">/mois</span></span></h3>
     <?php } ?>
 </div>
  <hr>

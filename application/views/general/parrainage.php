@@ -1,6 +1,6 @@
  <!-- PARRAINAGE -->
 <form method="POST">
-     <div class="parrainage">
+     <div class="parrainage bottom-10">
           <div class="custom-column six"><strong>Avez-vous un parrain ?</strong></div>
           <div class="custom-column six">
             <label class="left"><input type="radio" value="oui" name="parrain">Oui</label>

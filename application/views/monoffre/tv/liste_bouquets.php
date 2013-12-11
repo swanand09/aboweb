@@ -64,7 +64,7 @@
 
         <div class="row">
           <div class="column twelve bottom-10">
-            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();" value="<?php echo $valBeneficier; ?>" name="beneficier"> Je souhaite bénéficier de la TV avec 35 chaînes incluses.</label>
+            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();" value="<?php echo $valBeneficier; ?>" name="beneficier"> Je souhaite bénéficier de la TV avec 41 cha&icirc;nes incluses.</label>
           </div>
         </div>
         <!--ACCORDION-->
@@ -109,6 +109,30 @@
 ?>
           </div>
         </div>
+                  
+        <div class="row inclus-tv">
+          <div class="column five vod shadow">
+            <div class="row">
+              <?php echo image("contenu/inclus_vod.jpg",NULL,array("alt"=>"INCLUS VOD","class"=>"left"));?> 
+              <div class="column seven">
+                <h4>INCLUS</h4>
+                <p>Vidéo à la Demande(VOD), disponible sans engagement. Plus de 4000 films à partir de 2,99€</p>
+                <a href="#" class="en-savoir-plus" data-reveal-id='vod-modal'>En savoir +</a>
+              </div>
+            </div>
+          </div>
+          <div class="column five pvr shadow">
+            <div class="row">
+              <?php echo image("contenu/inclus_pvr.png",NULL,array("alt"=>"INCLUS PVR","class"=>"left"));?>
+              <div class="column seven">
+                <h4>INCLUS</h4>
+                <p>Nouvelles fonctions, à l'instar du PVR et du TIME Shifting, <span class='blue'>avec un disque dur externe</span></p>
+                <a href="#" class="en-savoir-plus" data-reveal-id='pvr-modal'>En savoir +</a>
+              </div>
+            </div>
+          </div>
+        </div>        
+                  
         </div> <!--end of accordion content-->  
     </li> 
      <!--End of first accordion-->
@@ -237,3 +261,16 @@
         </div>
 
         </form>
+        
+        <!--VOD MODAL-->
+        <div id="vod-modal" class="reveal-modal [expand, xlarge]">
+          <h2>VIDEO À LA DEMANDE : LE GRAND ÉCRAN DANS VOTRE SALON</h2>
+          <p>La Vidéo à la Demande (VOD) est un service de location, sans engagement, qui vous permettra de découvrir les meilleurs films quelques mois après leur sortie au cinéma.Découvrez sans attendre dans le menu VOD de votre décodeur TV plus de 4000 films à partir de 2,99€ <sup>(9)</sup></p><p><?php echo image("contenu/video_a_la_demande.jpg",NULL,array("alt"=>"Vidéo à la ddemande"));?></p>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+        <!--PVR MODAL-->
+        <div id="pvr-modal" class="reveal-modal [expand, xlarge]">
+          <h2>PVR (enregistreur numérique) et Time Shifting (gestion du direct)</h2>
+          <h4>LE PVR </h4>C'est en reliant un disque dur externe USB(non fourni) à votre décodeur TV que vous pourrez bénéficier de L'option PVR (enregistreur numérique) et du Time Shifting (gestion du direct).<br>Avec le PVR, vous pourrez ainsi enregistrer vos programmes préférés et les visionner en accédant au menu "mes enregistrements TV". <br><span class="txtblue">Bon à savoir</span> : Pour plus de facilité et une meilleure aisance de l'option PVR, nous vous conseillons de connecter un disque dur externe d'une capacité minimum de 500 go.<h4>Time Shifting (gestion du direct)</h4>La gestion du direct, liée également à la capacité de votre disque dur externe (non fourni), vous permettra de mettre en pause un programme. Vous pourrez ainsi à tout moment effectuer un avance rapide et revenir au direct ou revenir plus tard sur la partie de votre programme sauvegardée. 
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
