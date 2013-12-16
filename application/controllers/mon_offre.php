@@ -365,6 +365,7 @@ class Mon_offre extends MY_Controller {
                               $data["tarif_loca_decod"] = ($val2["Categorie"]=="STB")?"dummy4_".$val2["Tarif"]["decimal"]:"dummy4_0";                                
                                    $data["tarif_activ_servicetv"] = "dummy7_";
                               }
+                              $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
                        break;
                        case "dummy5":  //caution
                               foreach($val as $val2){
