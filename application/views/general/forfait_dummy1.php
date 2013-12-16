@@ -5,7 +5,7 @@
     <h3>Votre offre Mediaserv<span class="right"><?php echo (($donne_forfait["Tarif_promo"]>0)?number_format($donne_forfait["Tarif_promo"],2,',',' '):number_format($donne_forfait["Tarif"],2,',',' '))."€";?><span class="mini">/mois</span></span></h3>
     <?php } ?>
 </div>
- <hr>
+
 <!--END OF VOTRE OFFRE MEDIASERV-->
 <?php 
     if(!empty($donne_forfait)){
@@ -18,20 +18,13 @@
 <!--FORFAIT-->
 <div class="forpro forfait">
   <h3>Forfait <span class="right"><a href="javascript:prevState('forfait');">Modifier</a></span></h3>
-  <?php
-   if(isset($dum1_degroup_tarif)){
-    ?>
-       <!--degroupage-->
-      <div class="degroupage end" style='min-height:20px'>
-            <span class="left"><?php echo utf8_encode($dum1_degroup_libelle); ?></span>
-            <span class="right"><strong><?php echo number_format($dum1_degroup_tarif,2,',',' ')."€"; ?></strong></span>
-       </div>
-        <!--end degroupage--> 
-    <?php
-  }?>
+  
   <ul>
     <li class="small-icon-internet"><strong>Internet</strong><br><?php echo $label_internet[1]; ?></li>
     <li class="small-icon-telephone"><strong>Téléphone</strong><br><?php echo $label_telephone[1]; ?></li>
+    <?php if(isset($eligible_tv)&&$eligible_tv=="true"){ ?>
+    <li class='small-icon-television'><strong>Télévision</strong></li>
+    <?php } ?>
   </ul>
 </div>
  <hr>

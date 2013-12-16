@@ -69,7 +69,7 @@ $(function () {
 	/*-------------------------------------/
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
-	$('.numero').mask("99999");
+	//$('.numero').mask("99999");
 	$('#ligne,.telephone').mask("9999999999");
 	$('#cle').mask("99");
 	$('#banque').mask("99999");
@@ -151,14 +151,14 @@ $(function () {
 		$(this).addClass('box-shadow');
 		$('.section-automatique').show();
 		$('.section-carte-bancaire').hide();
-                $('#mode_pay').val('rib');
+		$('#mode_pay').val('rib');
 	});
 	$('.prelevement .cartebancaire').click( function(){
 		$('.prelevement div').removeClass('box-shadow');
 		$(this).addClass('box-shadow');
 		$('.section-automatique').hide();
 		$('.section-carte-bancaire').show();
-                $('#mode_pay').val('cartebleue');
+		 $('#mode_pay').val('cartebleue');
 	});
 
 	$('#show-hide-adresse').click(function(){
@@ -258,7 +258,7 @@ var etape4 = function() {
 		//var g1, g2;
 		var g1 = new JustGage({
 	        id: "g1", 
-	        value: 0.4, 
+	        // value: 0.4, 
 	        min: 0,
 	        max: 1,
 	        title: "Débit d’émission",

@@ -16,6 +16,7 @@ class Mes_coordonnees extends MY_Controller {
         //facturation
         
         $produit =  $this->session->userdata("produit");   
+       if(isset($produit)&&!empty($produit)){
         foreach($produit as $key=>$val)
         {
           if($val["Categorie"]=="FACTURATION"&&strpos($val["Libelle"],"papier")!=false)
@@ -25,6 +26,10 @@ class Mes_coordonnees extends MY_Controller {
               $this->data["facture_duree_promo"] = $val["Duree_mois_promo"];
           }
         }
+       }else{
+           $this->session->destroy();
+           redirect('mon_offre');
+       }
         
         $dummyPanier            = $this->session->userdata("dummyPanier");
         $data["dummyPanier"]    = $dummyPanier;
@@ -244,6 +249,8 @@ class Mes_coordonnees extends MY_Controller {
         }
         if(!array_key_exists("type_de_facturation",$this->data['userdata'])){
             $this->session->set_userdata('type_de_facturation',"");
+            //update idcrm for dummy6
+            $this->session->set_userdata("factureDummy6Crm",$this->updateFactureDummy6Crm('electronique'));
         }
         
         
@@ -343,6 +350,7 @@ class Mes_coordonnees extends MY_Controller {
        $data["typeFacture"] = $typeFacture;
        $this->session->set_userdata("facture","electronique");
        $data["totalParMois"] = $this->session->userdata('totalParMois');
+       
        switch($typeFacture["1"]){
           case "papier": 
             $this->session->set_userdata("facture","papier");
@@ -357,12 +365,29 @@ class Mes_coordonnees extends MY_Controller {
             }
           break;
        }
+       $this->session->set_userdata("factureDummy6Crm",$this->updateFactureDummy6Crm($typeFacture["1"]));
+       //total 1ere facture
+        $caution_dummy5 = $this->session->userdata("caution_dummy5");
+        $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
+        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
+        //total 2eme facture
+        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];   
+        
         
        $prevState = $this->session->userdata("prevState");
        $prevState[1]["envoie_facture_dummy6"] = $this->load->view("general/type_facturation_dummy6",$data,true);     
        $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
        $this->session->set_userdata("prevState",$prevState);
        echo json_encode(array("envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+    }
+    
+    public function updateFactureDummy6Crm($typeFacture){
+       $dummyPanier = $this->session->userdata("dummyPanier"); 
+       foreach($dummyPanier["dummy6"] as $key=>$val){
+           if(strpos($this->stripAccents($val["Libelle"]["string"]),$typeFacture)==true){
+               return $val["Id_crm"];
+           }
+       }
     }
 }
 /* End of file mes_coordonnees.php */

@@ -8,28 +8,37 @@ $(function() {
   //Open accordion on Click/ Checkbox
   $(document).on('click','#beneficier',function(){
 
+    //caching DOM objects
+    var decodeurTvNetgem = $('#decodeur-tv-netgem');
+    var optionEden = $("input[name='eden']");
+    var optionBein = $("input[name='bein']");
+    var disabledDiv = $('.disabled-div');
+
+
     if($(this).is(":checked"))
     {
-      $('#decodeur-tv-netgem').attr('disabled', true);
+      decodeurTvNetgem.attr('disabled', true);
+      decodeurTvNetgem.prop('checked', true);
       $('.four.bouquet').fadeTo('slow',1);
-      $('.disabled-div').hide();
-      $('#decodeur-tv-netgem').prop('checked', true);
-      $('.accordion .first').addClass('active');  
+      disabledDiv.hide();
+      $('.accordion .first').addClass('active');
       $('.accordion .first .content').css({ display: 'block'});
+      optionEden.attr('disabled', false);
+      optionBein.attr('disabled', false);
     }
     else
     {
       $('.four.bouquet').fadeTo('slow',.6);
-      $('.disabled-div').show();
-      $('#decodeur-tv-netgem').prop('checked', false);
-      $('.accordion .first').removeClass('active'); 
+      disabledDiv.show();
+      decodeurTvNetgem.prop('checked', false);
+      $('.accordion .first').removeClass('active');
       $('.accordion .second').removeClass('active');
       $('.accordion .first .content').css({ display: 'none'});
       $('.accordion .second .content').css({ display: 'none'});
-      $("input[name='eden']").attr('disabled', true);
-      $("input[name='bein']").attr('disabled', true);
-      $("input[name='eden']").prop('checked', false);
-      $("input[name='bein']").prop('checked', false);
+      optionEden.attr('disabled', true);
+      optionBein.attr('disabled', true);
+      optionEden.prop('checked', false);
+      optionBein.prop('checked', false);
     }
   });
 
@@ -53,8 +62,6 @@ $(function() {
     else //option ultra will be unchecked
     {
       //Enable option Bein & Eden Checkbox
-      $("input[name='eden']").attr('disabled', false);
-      $("input[name='bein']").attr('disabled', false);
       removeUltraoptions(promoInitialText);
     }
     chainesFilter(selector,datagroup);

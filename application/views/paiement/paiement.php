@@ -197,16 +197,16 @@
                 <select name='date_expiration_mois'>
                   <option value='Jan'>Jan</option>
                   <option value='Jan'>Fév</option>
-                  <option value='Jan'>Mar</option>
-                  <option value='Jan'>Avr</option>
-                  <option value='Jan'>Mai</option>
-                  <option value='Jan'>Jui</option>
-                  <option value='Jan'>Jul</option>
-                  <option value='Jan'>Aou</option>
-                  <option value='Jan'>Sep</option>
-                  <option value='Jan'>Oct</option>
-                  <option value='Jan'>Nov</option>
-                  <option value='Jan'>Déc</option>
+                  <option value='Fév'>Mar</option>
+                  <option value='Avr'>Avr</option>
+                  <option value='Mai'>Mai</option>
+                  <option value='Jui'>Jui</option>
+                  <option value='Jul'>Jul</option>
+                  <option value='Aou'>Aou</option>
+                  <option value='Sep'>Sep</option>
+                  <option value='Oct'>Oct</option>
+                  <option value='Nov'>Nov</option>
+                  <option value='Déc'>Déc</option>
                 </select>
               </div>
               <div class='column three'>

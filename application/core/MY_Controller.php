@@ -91,6 +91,13 @@ class MY_Controller extends CI_Controller {
           
         }
         
+        //stripaccents
+        public function stripAccents($str) {
+            $str = strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+            return $str;
+        }
+  
+        
         //configuration de la vue principal contenu droit et gauche       
         public function controller_test_eligib_vue()
         {

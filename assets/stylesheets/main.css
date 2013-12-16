@@ -927,6 +927,9 @@ img.prix_bare{
 .forpro ul li.small-icon-telephone {
 	background: url("../images/small_icon_telephone.png") no-repeat scroll 0 2px transparent;
 }
+.forpro ul li.small-icon-television {
+	background: url("../images/small_icon_television.png") no-repeat scroll 0 2px transparent;
+}
 .options.forpro ul li {
 	padding-bottom: 5px;
     padding-left: 30px;

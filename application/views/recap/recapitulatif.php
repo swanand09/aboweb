@@ -32,7 +32,7 @@
             <?php echo $etage_al." ".$porte_al." ".$logo_al; ?><br>
             <?php echo $code_postal_al." ".$ville_al; ?><br>
         </span>
-        <?php }if(!empty($livraison_express)&&isset($livraison_express)){ ?>
+        <?php }if(!empty($livraison_express)&&isset($livraison_express)&&$livraison_express=="true"){ ?>
         <label class="top-20"><strong>Vous souhaitez une livraison express</strong></label>
         <?php }?>
         <label class="top-20"><strong>Votre adresse médiaServ est : </strong><a href="mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>" class="mail-link"><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>

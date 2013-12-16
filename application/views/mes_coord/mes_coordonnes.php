@@ -39,7 +39,7 @@ echo validation_errors();
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class='columns two'><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,maxSize[5]] numero' value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
+            <div class='columns two'><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,custom[integer],min[1],max[99999]] numero' value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
             <div class='columns two'><label>Complément numéro :</label></div><div class='two columns'><input type='text' class='comp_numero' name='comp_numero_aa' value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" /></div>              
             <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='type_voie' name='type_voie_aa' value="<?php echo set_value("type_voie_aa",$type_voie_aa);?>" /></div>
           </div>
@@ -123,7 +123,7 @@ echo validation_errors();
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class="columns two"><label>Numéro :</label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class="numero"></div>
+            <div class="columns two"><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class='numero validate[required,custom[integer],min[1],max[99999]]'></div>
             <div class="columns two"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" name="comp_numero_af" class="comp_numero ui-autocomplete-input"></div>              
             <div class='columns two'><label>Type de Voie :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_af' value="<?php echo set_value("type_voie_af",$type_voie_af);?>" /></div>
           </div>
@@ -178,7 +178,7 @@ echo validation_errors();
           
           <!--Numéro & Complément numéro 7 type de voie-->
           <div class='row'>
-            <div class='columns two'><label>Numéro :</label></div><div class='two columns'><input type='text' class='numero' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
+            <div class='columns two'><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='numero validate[required,custom[integer],min[1],max[99999]]' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
             <div class='columns two'><label>Complément numéro:</label></div><div class='two columns'><input type='text' class='comp_numero' name='comp_numero_al' value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" /></div>              
             <div class='columns two'><label>Type de Voie :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_al' value="<?php echo set_value("type_voie_al",$type_voie_al);?>" /></div>
           </div>

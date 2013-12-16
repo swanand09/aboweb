@@ -112,46 +112,52 @@ class Wsdl_interrogeligib_model extends CI_Model
     
    public function enregistreSouscription($dataArr)
    {        
-//      echo "<pre>";
-//      print_r($dataArr);
-//      echo "</pre>";
+     echo "<pre>";
+     print_r($dataArr);
+     echo "</pre>";
+    
       $mode_paiment = "";
-       
-       switch($dataArr["mode_paiement"][0]["mode_pay"]){
-           case "rib":
-                      $mode_paiment .="<_rib>
-                                            <Numero>".$dataArr["mode_paiement"][0]["numero"]."</Numero>
-                                            <Clef>".$dataArr["mode_paiement"][0]["clef"]."</Clef>
-                                            <Code_agence>".$dataArr["mode_paiement"][0]["code_agence"]." </Code_agence>
-                                            <Code_banque>".$dataArr["mode_paiement"][0]["code_banque"]." </Code_banque>
-                                            <Domiciliation>".$dataArr["mode_paiement"][0]["domiciliation"]."</Domiciliation>
-                                            <Titulaire>".$dataArr["mode_paiement"][0]["titulaire"]."</Titulaire>
-                                       </_rib>
-                                       <_cartebleue>
-                                            <Numero></Numero>
-                                            <Date_expiration></Date_expiration>
-                                            <Cryptogramme></Cryptogramme>
-                                            <Titulaire></Titulaire>
-                                         </_cartebleue>
-                                      ";
-           break;
-           case "cartebleu":                        
-                       $mode_paiment .=" 
-                                      <_rib>
-                                            <Numero></Numero>
-                                            <Clef></Clef>
-                                            <Code_agence></Code_agence>
-                                            <Code_banque></Code_banque>
-                                            <Domiciliation></Domiciliation>
-                                            <Titulaire></Titulaire>
-                                       </_rib>
+       if(isset($dataArr["mode_paiement"]["mode_pay"])){
+          
+        switch($dataArr["mode_paiement"]["mode_pay"]){
+            case "rib":
+                       $mode_paiment .="
                                         <_cartebleue>
-                                            <Numero>".$dataArr["mode_paiement"][0]["numero"]."</Numero>
-                                            <Date_expiration>".$dataArr["mode_paiement"][0]["date_expiration"]."</Date_expiration>
-                                            <Cryptogramme>".$dataArr["mode_paiement"][0]["cryptogramme"]."</Cryptogramme>
-                                            <Titulaire>".$dataArr["mode_paiement"][0]["titulaire"]."</Titulaire>
-                                         </_cartebleue>";
-           break;
+                                             <Numero></Numero>
+                                             <Date_expiration></Date_expiration>
+                                             <Cryptogramme></Cryptogramme>
+                                             <Titulaire></Titulaire>
+                                          </_cartebleue>
+                                          <_rib>
+                                             <Numero>".$dataArr["mode_paiement"]["numero"]."</Numero>
+                                             <Clef>".$dataArr["mode_paiement"]["clef"]."</Clef>
+                                             <Code_agence>".$dataArr["mode_paiement"]["code_agence"]." </Code_agence>
+                                             <Code_banque>".$dataArr["mode_paiement"]["code_banque"]." </Code_banque>
+                                             <Domiciliation>".$dataArr["mode_paiement"]["domiciliation"]."</Domiciliation>
+                                             <Titulaire>".$dataArr["mode_paiement"]["titulaire"]."</Titulaire>
+                                        </_rib>
+                                       ";
+            break;
+            case "cartebleue":                        
+                        $mode_paiment .=" 
+                                      
+                                         <_cartebleue>
+                                             <Numero>".$dataArr["mode_paiement"]["numero"]."</Numero>
+                                             <Date_expiration>".$dataArr["mode_paiement"]["date_expiration"]."</Date_expiration>
+                                             <Cryptogramme>".$dataArr["mode_paiement"]["cryptogramme"]."</Cryptogramme>
+                                             <Titulaire>".$dataArr["mode_paiement"]["titulaire"]."</Titulaire>
+                                          </_cartebleue>
+                                           <_rib>
+                                             <Numero></Numero>
+                                             <Clef></Clef>
+                                             <Code_agence></Code_agence>
+                                             <Code_banque></Code_banque>
+                                             <Domiciliation></Domiciliation>
+                                             <Titulaire></Titulaire>
+                                        </_rib>
+                                        ";
+            break;
+        }
        }
        $prodSouscris = '<int>0</int>';
        if(!empty($dataArr["produits_souscris"])){
@@ -162,8 +168,12 @@ class Wsdl_interrogeligib_model extends CI_Model
             }
         }
        }
-       
-       echo '<enregistreSouscription xmlns="msvaboweb">
+$civiliteAF = $this->session->userdata("civilite_af");
+$addFacIdIns = !empty($civiliteAF)?0:1;
+$civiliteAL = $this->session->userdata("civilite_al");
+$addLivIdIns = !empty($civiliteAL)?0:1;
+      
+echo '<enregistreSouscription xmlns="msvaboweb">
                  <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
                  <_produits_souscris>
                    '.$prodSouscris.'
@@ -186,6 +196,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                    <Code_postal>'.$dataArr["adresse_installation"]["code_postal"].'</Code_postal>
                    <Ville>'.$dataArr["adresse_installation"]["ville"].'</Ville>
                  </_adresse_installation>
+                 <_adresse_livraison_identique_instal>'.$addLivIdIns.'</_adresse_livraison_identique_instal>
                  <_adresse_livraison>
                    <Civilite>'.$dataArr["adresse_livraison"]["civilite"].'</Civilite>
                    <Nom>'.$dataArr["adresse_livraison"]["nom"].'</Nom>
@@ -204,6 +215,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                    <Code_postal>'.$dataArr["adresse_livraison"]["code_postal"].'</Code_postal>
                    <Ville>'.$dataArr["adresse_livraison"]["ville"].'</Ville>
                  </_adresse_livraison>
+                 <_adresse_facturation_identique_instal>'.$addFacIdIns.'</_adresse_facturation_identique_instal>
                  <_adresse_facturation>
                   <Civilite>'.$dataArr["adresse_facturation"]["civilite"].'</Civilite>
                    <Nom>'.$dataArr["adresse_facturation"]["nom"].'</Nom>
@@ -221,7 +233,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                    <Logo>'.$dataArr["adresse_facturation"]["logo"].'</Logo>
                    <Code_postal>'.$dataArr["adresse_facturation"]["code_postal"].'</Code_postal>
                    <Ville>'.$dataArr["adresse_facturation"]["ville"].'</Ville>
-                 </_adresse_facturation>
+                 </_adresse_facturation>                  
                  <_email>'.$dataArr["email"].'@mediaserv.net</_email>
                  <_renonce_delai_retractation>'.$dataArr["renonce_delai_retractation"].'</_renonce_delai_retractation>
                  <_information_contact>
@@ -230,9 +242,12 @@ class Wsdl_interrogeligib_model extends CI_Model
                    <Telephone_bureau>'.$dataArr["information_contact"]["telephone_bureau"].'</Telephone_bureau>
                    <Telephone_domicile>'.$dataArr["information_contact"]["telephone_domicile"].'</Telephone_domicile>
                  </_information_contact>
+                 <_moyen_paiement>'.$dataArr["moyen_paiement"].'</_moyen_paiement>
                  '.$mode_paiment.'
                  <_context>'.$dataArr["context"].'</_context>    
              </enregistreSouscription>';
+
+
 
 $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription xmlns="msvaboweb">
                  <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
@@ -257,6 +272,7 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
                    <Code_postal>'.$dataArr["adresse_installation"]["code_postal"].'</Code_postal>
                    <Ville>'.$dataArr["adresse_installation"]["ville"].'</Ville>
                  </_adresse_installation>
+                 <_adresse_livraison_identique_instal>'.$addLivIdIns.'</_adresse_livraison_identique_instal>
                  <_adresse_livraison>
                    <Civilite>'.$dataArr["adresse_livraison"]["civilite"].'</Civilite>
                    <Nom>'.$dataArr["adresse_livraison"]["nom"].'</Nom>
@@ -275,6 +291,7 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
                    <Code_postal>'.$dataArr["adresse_livraison"]["code_postal"].'</Code_postal>
                    <Ville>'.$dataArr["adresse_livraison"]["ville"].'</Ville>
                  </_adresse_livraison>
+                 <_adresse_facturation_identique_instal>'.$addFacIdIns.'</_adresse_facturation_identique_instal>
                  <_adresse_facturation>
                   <Civilite>'.$dataArr["adresse_facturation"]["civilite"].'</Civilite>
                    <Nom>'.$dataArr["adresse_facturation"]["nom"].'</Nom>
@@ -292,7 +309,7 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
                    <Logo>'.$dataArr["adresse_facturation"]["logo"].'</Logo>
                    <Code_postal>'.$dataArr["adresse_facturation"]["code_postal"].'</Code_postal>
                    <Ville>'.$dataArr["adresse_facturation"]["ville"].'</Ville>
-                 </_adresse_facturation>
+                 </_adresse_facturation>                  
                  <_email>'.$dataArr["email"].'@mediaserv.net</_email>
                  <_renonce_delai_retractation>'.$dataArr["renonce_delai_retractation"].'</_renonce_delai_retractation>
                  <_information_contact>
@@ -301,6 +318,7 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
                    <Telephone_bureau>'.$dataArr["information_contact"]["telephone_bureau"].'</Telephone_bureau>
                    <Telephone_domicile>'.$dataArr["information_contact"]["telephone_domicile"].'</Telephone_domicile>
                  </_information_contact>
+                 <_moyen_paiement>'.$dataArr["moyen_paiement"].'</_moyen_paiement>
                  '.$mode_paiment.'
                  <_context>'.$dataArr["context"].'</_context>    
              </enregistreSouscription>','',array(),'document', 'literal'

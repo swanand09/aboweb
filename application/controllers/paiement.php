@@ -29,8 +29,7 @@ class Paiement extends MY_Controller {
     public function enregistreSouscription()
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-        
-               
+      
         $id_parrain =$this->session->userdata("id_parrain");
         $id_parrain = !empty($id_parrain)?$id_parrain:0;
         $dataArr = array(
@@ -117,15 +116,8 @@ class Paiement extends MY_Controller {
                            "mode_paiement"          =>  array()
                     );
         if($this->input->post("mode_pay")=="rib"){
-            /* 
-            $this->session->set_userdata('paiement_nom',$this->input->post("nom"));
-             $this->session->set_userdata('paiement_prenom',$this->input->post("prenom"));
-             $this->session->set_userdata('paiement_banque',$this->input->post("banque"));
-             $this->session->set_userdata('paiement_guichet',$this->input->post("guichet"));
-             $this->session->set_userdata('paiement_num_compte',$this->input->post("numero_de_compte"));
-             $this->session->set_userdata('paiement_cle',$this->input->post("cle"));*/
-              
-               array_push($dataArr["mode_paiement"],
+                      
+               $dataArr["mode_paiement"]=
                           array(
                               "mode_pay"         =>  "rib",
                               "titulaire"        =>  $this->input->post("nom")." ".$this->input->post("prenom"),                              
@@ -134,30 +126,24 @@ class Paiement extends MY_Controller {
                               "domiciliation"    =>  $this->input->post("domiciliation"),
                               "numero"           =>  $this->input->post("numero_de_compte"),
                               "clef"             =>  $this->input->post("cle")
-                             )
-                        );
+                             );
+               $dataArr["moyen_paiement"]='PR';
         }
         if($this->input->post("mode_pay")=="cartebleue"){
-            /*
-            $this->session->set_userdata('paiement_typedecarte',$this->input->post("typedecarte"));
-            $this->session->set_userdata('paiement_numerodecarte',$this->input->post("numerodecarte"));
-            $this->session->set_userdata('paiement_date_expiration_mois',$this->input->post("date_expiration_mois"));
-            $this->session->set_userdata('paiement_date_expiration_annee',$this->input->post("date_expiration_annee"));
-            $this->session->set_userdata('paiement_cryptogramme',$this->input->post("cryptogramme"));   
-              */    
-            
-            array_push($dataArr["mode_paiement"],
+                      
+            $dataArr["mode_paiement"] =
                         array(
                               "mode_pay"         =>  "cartebleue",
                               "titulaire"        =>  $this->input->post("nom")." ".$this->input->post("prenom"),                              
                               "date_expiration"  =>  $this->input->post("date_expiration_mois")." ".$this->input->post("date_expiration_annee"),
                               "numero"           =>  $this->input->post("numerodecarte"),
                               "cryptogramme"     =>  $this->input->post("cryptogramme")
-                        )
-                      );
+                        );
+            $dataArr["moyen_paiement"]='CB';
         }
         
         $context = $this->session->userdata("context");
+        
         /*
         $xmlContext = new SimpleXMLElement('<_context/>');
         $dom = new DOMDocument("1.0");
