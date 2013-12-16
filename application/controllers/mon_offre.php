@@ -301,7 +301,7 @@ class Mon_offre extends MY_Controller {
                       $data["totalParMois"] = $this->getTotal((($val["Tarif_promo"]>0)?$val["Tarif_promo"]:$val["Tarif"]));                 
                       $this->session->set_userdata("donne_forfait",$val);
                       $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
-                      $this->colonneDroite["donnee_degroupage"]            = $this->load->view("general/donnee_degroupage",$data,true);
+                      
                       $data["eligible_tv"] = $this->session->userdata("eligible_tv");
                       $this->colonneDroite["forfait_dummy1"]               = $this->load->view("general/forfait_dummy1",$data,true);
                       $this->colonneDroite["libelles_promo_dummy2"]        = $this->load->view("general/libelles_promo_dummy2",$data,true);
@@ -338,6 +338,7 @@ class Mon_offre extends MY_Controller {
                                         $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];   
                                         $data["totalParMois"] = $this->getTotal($val2["Tarif"]["decimal"]);
                                         $this->session->set_userdata("degroupageDummy1Crm",$val2["Id_crm"]);
+                                        $this->colonneDroite["donnee_degroupage"]            = $this->load->view("general/donnee_degroupage",$data,true);
                                     }  
                                  }
                               }
