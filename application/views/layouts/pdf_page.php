@@ -72,7 +72,7 @@
 			<table border=1>
 				<tr>
 					<td rowspan="2" class="w_20">CODE POSTAL:</td>
-					<td class="w_30"><div class="fillintheblanks">&nbsp;</div></td>
+					<td class="w_30"><div class="fillintheblanks"><?php echo $test;?></div></td>
 					<td class="w_20">VILLE:</td>
 					<td class="w_30"><div class="fillintheblanks">&nbsp;</div></td>
 				</tr>

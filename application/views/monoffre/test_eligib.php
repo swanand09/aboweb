@@ -4,6 +4,7 @@
     if(!empty($userdata["context"])&&array_key_exists("prevState",$userdata)){
             $redu_facture = $this->session->userdata("redu_facture");
             $htmlContent = $userdata["prevState"][0]["contenu_html"];
+           
             if($redu_facture=="true")
             {
                 $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);

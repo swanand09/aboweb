@@ -15,7 +15,7 @@ class Paiement extends MY_Controller {
         return $this->controller_paiement_vue();   
     }
     
-    public function generatePdf()
+    public function generateDomPdf()
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $this->load->helper(array('dompdf', 'file'));
@@ -24,6 +24,14 @@ class Paiement extends MY_Controller {
         pdf_create($html, 'receipt');
         //$data_pdf = pdf_create($html, '', false);
         //write_file('assets/pdf/receipt.pdf', $data_pdf);
+    }
+    
+    public function generateFpdf()
+    {
+        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+        $this->load->plugin('fpdf');
+        $pdf = new PDF();
+        
     }
     
     public function enregistreSouscription()
@@ -68,6 +76,24 @@ class Paiement extends MY_Controller {
                                                             "ville"       => $this->session->userdata("ville_aa")
                                                        ),
                            "adresse_livraison"   => array(
+                                                            "civilite"      => $this->session->userdata("civilite_al"),
+                                                            "nom"           => $this->session->userdata("nom_al"),
+                                                            "prenom"        => $this->session->userdata("prenom_al"),
+                                                            "numero"        => $this->session->userdata("numero_al"),
+                                                            "complement"    => $this->session->userdata("comp_numero_al"),
+                                                            "type_voie"     => $this->session->userdata("type_voie_al"),
+                                                            "voie"          => $this->session->userdata("voie_al"),
+                                                            "voie_suite"    => $this->session->userdata("adresse_suite_al"),
+                                                            "ensemble"    => $this->session->userdata("ensemble_al"),
+                                                            "batiment"    => $this->session->userdata("batiment_al"),
+                                                            "escalier"    => $this->session->userdata("escalier_al"),
+                                                            "etage"       => $this->session->userdata("etage_al"),
+                                                            "porte"       => $this->session->userdata("porte_al"),
+                                                            "logo"        => $this->session->userdata("logo_al"),
+                                                            "code_postal" => $this->session->userdata("code_postal_al"),
+                                                            "ville"       => $this->session->userdata("ville_al")
+                                                       ),                                 
+                           "adresse_facturation"   => array(
                                                             "civilite"      => $this->session->userdata("civilite_af"),
                                                             "nom"           => $this->session->userdata("nom_af"),
                                                             "prenom"        => $this->session->userdata("prenom_af"),
@@ -85,24 +111,7 @@ class Paiement extends MY_Controller {
                                                             "code_postal" => $this->session->userdata("code_postal_af"),
                                                             "ville"       => $this->session->userdata("ville_af")
                                                        ), 
-                           "adresse_facturation"   => array(
-                                                            "civilite"      => $this->session->userdata("civilite_al"),
-                                                            "nom"           => $this->session->userdata("nom_al"),
-                                                            "prenom"        => $this->session->userdata("prenom_al"),
-                                                            "numero"        => $this->session->userdata("numero_al"),
-                                                            "complement"    => $this->session->userdata("comp_numero_al"),
-                                                            "type_voie"     => $this->session->userdata("type_voie_al"),
-                                                            "voie"          => $this->session->userdata("voie_al"),
-                                                            "voie_suite"    => $this->session->userdata("adresse_suite_al"),
-                                                            "ensemble"    => $this->session->userdata("ensemble_al"),
-                                                            "batiment"    => $this->session->userdata("batiment_al"),
-                                                            "escalier"    => $this->session->userdata("escalier_al"),
-                                                            "etage"       => $this->session->userdata("etage_al"),
-                                                            "porte"       => $this->session->userdata("porte_al"),
-                                                            "logo"        => $this->session->userdata("logo_al"),
-                                                            "code_postal" => $this->session->userdata("code_postal_al"),
-                                                            "ville"       => $this->session->userdata("ville_al")
-                                                       ),
+                           
                             "email"                 => $this->session->userdata("email_mediaserv"),
                             
                             "information_contact"   => array(
@@ -117,25 +126,84 @@ class Paiement extends MY_Controller {
                     );
         if($this->input->post("mode_pay")=="rib"){
                       
-               $dataArr["mode_paiement"]=
+               $dataArr["mode_paiement"][] =
                           array(
                               "mode_pay"         =>  "rib",
-                              "titulaire"        =>  $this->input->post("nom")." ".$this->input->post("prenom"),                              
+                              "titulaire"        =>  $this->input->post("titulaire"),                              
                               "code_banque"      =>  $this->input->post("banque"),
                               "code_agence"      =>  $this->input->post("guichet"),
                               "domiciliation"    =>  $this->input->post("domiciliation"),
                               "numero"           =>  $this->input->post("numero_de_compte"),
-                              "clef"             =>  $this->input->post("cle")
+                              "clef"             =>  $this->input->post("cle"),
+                              "iban"             =>  $this->input->post("iban1").$this->input->post("iban2").$this->input->post("iban3").$this->input->post("iban4").$this->input->post("iban5").$this->input->post("iban6").$this->input->post("iban7"),
+                              "bic"              =>  $this->input->post("bic1").$this->input->post("bic2")  
                              );
+               if($this->input->post("adresse_identique")!=1){
+                   $dataArr["mode_paiement"][] =
+                           array(
+                                "adresseIdentiqueAdresseFacturation" => 0,
+                                "civilite"                           => $this->input->post("civilite_pa"),
+                                "nom"                                => $this->input->post("nom_pa"),
+                                "prenom"                             => $this->input->post("prenom_pa"),
+                                "numero"                             => $this->input->post("numero_pa"),
+                                "complement"                         => $this->input->post("comp_numero_pa"),
+                                "type_voie"                          => "",
+                                "voie"                               => $this->input->post("voie_pa"),
+                                "voie_suite"                         => $this->input->post("adresse_suite_pa"),
+                                "ensemble"                           => "",  
+                                "batiment"                           => "",  
+                                "escalier"                           => "",
+                                "etage"                              => "",
+                                "porte"                              => "",
+                                "logo"                               => "",
+                                "code_postal"                        => $this->input->post("code_postal_pa"),
+                                "ville"                              => $this->input->post("ville_pa"),
+                                "codeInsee"                          => "",
+                                "fictifRivoli"                       => "",
+                                "fictif_pc_batiment"                 => "",
+                                "fictif_pc_escalier"                 => "",
+                                "Fictif_PC_etage"                    => "",
+                                "Fictif_pc_residence"                => "",
+                                "Fictif_pc_numeroVoie"               => ""
+                           );
+               }else{
+                    $dataArr["mode_paiement"][] =
+                           array(
+                               "adresseIdentiqueAdresseFacturation" => 1,
+                                "civilite"                           => "",
+                                "nom"                                => "",
+                                "prenom"                             => "",
+                                "numero"                             => "",
+                                "complement"                         => "",
+                                "type_voie"                          => "",
+                                "voie"                               => "",
+                                "voie_suite"                         => "",
+                                "ensemble"                           => "",  
+                                "batiment"                           => "",  
+                                "escalier"                           => "",
+                                "etage"                              => "",
+                                "porte"                              => "",
+                                "logo"                               => "",
+                                "code_postal"                        => "",
+                                "ville"                              => "",
+                                "codeInsee"                          => "",
+                                "fictifRivoli"                       => "",
+                                "fictif_pc_batiment"                 => "",
+                                "fictif_pc_escalier"                 => "",
+                                "Fictif_PC_etage"                    => "",
+                                "Fictif_pc_residence"                => "",
+                                "Fictif_pc_numeroVoie"               => ""
+                           );
+               }
                $dataArr["moyen_paiement"]='PR';
         }
         if($this->input->post("mode_pay")=="cartebleue"){
                       
-            $dataArr["mode_paiement"] =
+            $dataArr["mode_paiement"][] =
                         array(
                               "mode_pay"         =>  "cartebleue",
-                              "titulaire"        =>  $this->input->post("nom")." ".$this->input->post("prenom"),                              
-                              "date_expiration"  =>  $this->input->post("date_expiration_mois")." ".$this->input->post("date_expiration_annee"),
+                              "titulaire"        =>  $this->input->post("titulaire"),                              
+                              "date_expiration"  =>  $this->input->post("date_expiration_mois").$this->input->post("date_expiration_annee"),
                               "numero"           =>  $this->input->post("numerodecarte"),
                               "cryptogramme"     =>  $this->input->post("cryptogramme")
                         );
@@ -154,9 +222,7 @@ class Paiement extends MY_Controller {
         /*$dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $dom->saveXML());*/
         $dataArr["context"] = $context;
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
-        echo "<pre>";
-        print_r($result);
-        echo "</pre>"; 
+       redirect('merci');
     }
 }
 /* End of file paiement.php */

@@ -1,3 +1,4 @@
+<div id="msvForfait">
 <!--VOTRE OFFRE MEDIASERV-->
 <div class="forpro votre-offre">
     <?php echo (!empty($text))?"<strong> VOTRE OFFRE MEDIASERV</strong><br><br><span class='top-10 block'><strong>".$text."</strong></span>":""; ?>    
@@ -22,7 +23,7 @@
   <ul>
     <li class="small-icon-internet"><strong>Internet</strong><br><?php echo $label_internet[1]; ?></li>
     <li class="small-icon-telephone"><strong>Téléphone</strong><br><?php echo $label_telephone[1]; ?></li>
-    <?php if(isset($eligible_tv)&&$eligible_tv=="true"){ ?>
+    <?php if(isset($eligible_tv)&&$eligible_tv=="true"&&isset($decoder_tv)&&$decoder_tv!="uncheck"){ ?>
     <li class='small-icon-television'><strong>Télévision</strong></li>
     <?php } ?>
   </ul>
@@ -30,4 +31,4 @@
  <hr>
 <!--END OF FORFAIT-->
 <?php } ?>
-  
+</div>

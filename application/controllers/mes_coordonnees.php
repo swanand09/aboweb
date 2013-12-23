@@ -33,7 +33,8 @@ class Mes_coordonnees extends MY_Controller {
         
         $dummyPanier            = $this->session->userdata("dummyPanier");
         $data["dummyPanier"]    = $dummyPanier;
-         $data["typeFacture"] = array("facture","electronique");
+        //$data["typeFacture"] = array("facture","electronique");
+        $data["typeFacture"]    = $this->session->userdata("typeFacture");
         $prevState[1]["envoie_facture_dummy6"]  =   $this->load->view("general/type_facturation_dummy6",$data,true);
       // $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
 //        if(isset($dummyPanier["dummy6"])){
@@ -247,7 +248,8 @@ class Mes_coordonnees extends MY_Controller {
         if(!array_key_exists("email",$this->data['userdata'])){
             $this->session->set_userdata('email',"");
         }
-        if(!array_key_exists("type_de_facturation",$this->data['userdata'])){
+        
+        if(!array_key_exists("type_de_facturation",$this->data['userdata'])||empty($this->data['userdata']["type_de_facturation"])){
             $this->session->set_userdata('type_de_facturation',"");
             //update idcrm for dummy6
             $this->session->set_userdata("factureDummy6Crm",$this->updateFactureDummy6Crm('electronique'));
@@ -348,6 +350,7 @@ class Mes_coordonnees extends MY_Controller {
        $typeFacture =  $this->input->post("typeFacture");
        $typeFacture = explode("_",$typeFacture);
        $data["typeFacture"] = $typeFacture;
+       $this->session->set_userdata("typeFacture",$typeFacture);
        $this->session->set_userdata("facture","electronique");
        $data["totalParMois"] = $this->session->userdata('totalParMois');
        
@@ -384,7 +387,7 @@ class Mes_coordonnees extends MY_Controller {
     public function updateFactureDummy6Crm($typeFacture){
        $dummyPanier = $this->session->userdata("dummyPanier"); 
        foreach($dummyPanier["dummy6"] as $key=>$val){
-           if(strpos($this->stripAccents($val["Libelle"]["string"]),$typeFacture)==true){
+           if(strpos($this->stripAccents($val["Valeurs"]["Libelle"]["string"]),$typeFacture)==true){
                return $val["Id_crm"];
            }
        }

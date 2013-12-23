@@ -66,15 +66,15 @@ var preload = function(){
                         consv_num_tel : consv_num_tel
                      },
                     function(data){
-                        
                       $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                      
+                      //alert(data[0].contenu_html);
                       var key, count = 0;
                       for(key in data[1]) {
                           if(count==0) {
                             $("#recap_contenu").empty();      
                             $("#total_mois").empty(); 
                           }
+                         // alert(key);
                           $("#recap_contenu").append(data[1][key]);
                           count++;
                       }
@@ -142,7 +142,8 @@ var preload = function(){
                             decoder_tv   : "check"
                          },
                         function(data){    
-                            
+                           /* 
+                          $("#recap_contenu").children("#caution").remove();  
                           $("#recap_contenu").children("#caution").remove();  
                           $("#recap_contenu").append(data.caution_decodeur_dummy5);  
                           
@@ -150,7 +151,15 @@ var preload = function(){
                           $("#recap_contenu").append(data.location_equipements_dummy4);
                           $("#recap_contenu").children("#oneshot").remove();  
                           $("#recap_contenu").append(data.frais_activation_facture_dummy7);
-                          $("#total_mois").empty().append(data.total_par_mois);  
+                          $("#total_mois").empty().append(data.total_par_mois);  */
+                             var key, count = 0;
+                            for(key in data) {
+                                if(count==0) {
+                                  $("#recap_contenu").empty();                                                    
+                                }
+                              (key!="total_par_mois")?$("#recap_contenu").append(data[key]):$("#total_mois").empty().append(data[key]);                            
+                                count++;
+                            }
                           $.unblockUI(); 
                           $('html, body').animate({
                             scrollTop: $(".second").offset().top
@@ -166,6 +175,10 @@ var preload = function(){
                                 decoder_tv   : "uncheck"
                              },
                             function(data){
+                              //enlever tv dans forfait dummy1
+                             // $("#recap_contenu").remove().append("forfait_dummy1");
+                              $("#recap_contenu").children("#msvForfait").remove();
+                              $("#recap_contenu").append(data.forfait_dummy1); 
                               $("#recap_contenu").children("#caution").remove(); 
                               $("#recap_contenu").children("#location").remove();
                               $("#recap_contenu").children("#options").remove();  // removes any bouquet if any

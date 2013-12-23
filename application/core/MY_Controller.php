@@ -91,6 +91,13 @@ class MY_Controller extends CI_Controller {
           
         }
         
+        //s'il ya une perte de session on redirge vers la page mon offre
+        public function redirectMonOffre(){
+           // echo "redirect";
+            redirect('mon_offre');
+            exit();
+        }
+        
         //stripaccents
         public function stripAccents($str) {
             $str = strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');

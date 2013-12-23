@@ -189,6 +189,13 @@ echo validation_errors();
             <div class='columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse_suite' name='adresse_suite_al' value="<?php echo set_value("adresse_suite_al",$adresse_suite_al);?>" /></div>            
           </div>
          
+          <!--Ensemble, batiment & etage -->
+          <div class='row'>
+            <div class='columns two'><label>Ensemble</label></div><div class='columns two'><input type='text' class='validate[maxSize[20]] ensemble' name='ensemble_al' value="<?php echo set_value("ensemble_al",$ensemble_al);?>" /></div>
+            <div class='columns two'><label>Batiment :</label></div><div class='columns two'><input type='text' class='validate[maxSize[4]] batiment' name='batiment_al' value="<?php echo set_value("batiment_al",$batiment_al);?>" /></div>
+            <div class='columns two'><label>Etage :</label></div><div class='columns two'><input type='text' class='validate[maxSize[2]] etage' name='etage_al' size='2' value="<?php echo set_value("etage_al",$etage_al);?>" /></div>
+          </div>
+          <!--Code postal & Ville -->
           
           <!--Code postal & Ville -->
           <div class='row'>
@@ -243,8 +250,8 @@ echo validation_errors();
           <div class="row">
              <?php if(!empty($type_de_facturation)){ ?>
               <input type='hidden' name='type_facturation_hid' id="type_facturation_hid" value='<?php echo $type_de_facturation; ?>' />
-            <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="facture_electronique" name="type_de_facturation" id="type_facture1"  <?php echo $check_electronic;?>> Electronique (gratuit)</label></div>
-            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('type_facture2');" value="facture_papier_<?php echo $facture_tarif2; ?>" name="type_de_facturation" id="type_facture2" <?php echo $check_papier;?>> Facture papier <?php echo $facture_papier; ?></label></div>            
+            <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'disabled="disabled"':''; ?> name="type_de_facturation" id="type_facture1"  <?php echo $check_electronic;?>> Electronique (gratuit)</label></div>
+            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('type_facture2');" value="facture_papier_<?php echo $facture_tarif2; ?>" <?php echo ($type_de_facturation=="facture_papier_".$facture_tarif2)?'disabled="disabled"':''; ?> name="type_de_facturation" id="type_facture2" <?php echo $check_papier;?>> Facture papier <?php echo $facture_papier; ?></label></div>            
              <?php }else{ ?>
             <input type='hidden' name='type_facturation_hid' id="type_facturation_hid" value='facture_electronique' />
             <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="facture_electronique" name="type_de_facturation" id="type_facture1" disabled="disabled" checked="checked"> Electronique (gratuit)</label></div>

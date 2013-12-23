@@ -42,7 +42,7 @@ class Mon_offre extends MY_Controller {
              return $this->ajax_proc_interogeligib($num_tel);
         }
         
-        return $this->controller_test_eligib_vue($num_tel);                
+        return $this->controller_test_eligib_vue();                
     }
    
     //geolocalisation basant sur ip
@@ -84,6 +84,7 @@ class Mon_offre extends MY_Controller {
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
                {                  
                     $data["error"]  = false;
+                    $this->session->set_userdata("num_tel",$num_tel);
                     //$this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
                     //$this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);                  
                    // $this->session->set_userdata('offreparrainage_id',($result["interrogeEligibiliteResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
@@ -147,6 +148,7 @@ class Mon_offre extends MY_Controller {
        
        //reset session de type de faturation à null
        $this->session->set_userdata("type_de_facturation","");
+       $this->session->set_userdata("typeFacture",array("facture","electronique"));
        
        $redu_facture  = $this->input->post('redu_facture'); 
        $this->session->set_userdata("redu_facture",$redu_facture);
@@ -302,7 +304,7 @@ class Mon_offre extends MY_Controller {
                       $this->session->set_userdata("donne_forfait",$val);
                       $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
                       
-                      $data["eligible_tv"] = $this->session->userdata("eligible_tv");
+                      //$data["eligible_tv"] = $this->session->userdata("eligible_tv");
                       $this->colonneDroite["forfait_dummy1"]               = $this->load->view("general/forfait_dummy1",$data,true);
                       $this->colonneDroite["libelles_promo_dummy2"]        = $this->load->view("general/libelles_promo_dummy2",$data,true);
 
@@ -362,27 +364,29 @@ class Mon_offre extends MY_Controller {
                        case "dummy4":
                                $data["dummy4"] = $dummyPanier["dummy4"];
                               foreach($val as $val2){
-                              $data["tarif_loca_decod"] = ($val2["Categorie"]=="STB")?"dummy4_".$val2["Tarif"]["decimal"]:"dummy4_0";                                
-                                   $data["tarif_activ_servicetv"] = "dummy7_";
+                                $data["tarif_loca_decod"] = ($val2["Valeurs"]["Categorie"]=="STB")?"dummy4_".$val2["Valeurs"]["Tarif"]["decimal"]:"dummy4_0";                                
+                                $data["tarif_activ_servicetv"] = "dummy7_";
                               }
                               $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
                        break;
                        case "dummy5":  //caution
                               foreach($val as $val2){
                                    //$data["caution_dummy5"] = $val2["Tarif"]; 
-                                   $this->session->set_userdata("caution_dummy5",$val2["Tarif"]["decimal"]);
-                                   $data["total1erFact"]   = $this->session->userdata('totalParMois')+$val2["Tarif"]["decimal"][0]; 
-                                   $this->session->set_userdata("total1erFact",$data["total1erFact"] );
-                                   $data["total2emeFact"] = $this->session->userdata('totalParMois')+$val2["Tarif"]["decimal"][1];
-                                   $this->session->set_userdata("total2emeFact",$data["total2emeFact"] );
+                                   $this->session->set_userdata("caution_dummy5",$val2["Valeurs"]["Tarif"]["decimal"]);
+                                   //$data["total1erFact"]   = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][0]; 
+                                   $total1erFact = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][0]; 
+                                   $this->session->set_userdata("total1erFact",$total1erFact );
+                                   //$data["total2emeFact"] = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][1];
+                                   $total2emeFact = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][1];
+                                   $this->session->set_userdata("total2emeFact",$total2emeFact );
                                    // $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
                               }
                        break;
                        case "dummy7":  //oneshot
                               foreach($val as $val2){
                                      $data["tarif_loca_decod"] = "dummy4_";
-                                     $data["tarif_activ_servicetv"] = "dummy7_".$val2["Tarif"]["decimal"];
-                                     $data["total1erFact"]   = $this->session->userdata('total1erFact')+$val2["Tarif"]["decimal"];
+                                     $data["tarif_activ_servicetv"] = "dummy7_".$val2["Valeurs"]["Tarif"]["decimal"];
+                                     $data["total1erFact"]   = $this->session->userdata('total1erFact')+$val2["Valeurs"]["Tarif"]["decimal"];
                                 }
                        break;
                    }
@@ -394,13 +398,14 @@ class Mon_offre extends MY_Controller {
             //Go to bouquet tv or mes coordonnes 
             //if($count_tv>0){
            $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);   
-           $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
+           
             if(!empty($bouqTvArr)){
                 $this->load->model('stb_model','stb'); 
                 $data["base_url_stb"] = BASEPATH_STB;
                 $data["bouquet_list"] = $this->stb->retrievChainesList();
                 //$data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
+                $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
                 
             }else{
                 $this->contenuGauche["contenu_html"] = "redirect to mes coordonnees";
@@ -423,9 +428,14 @@ class Mon_offre extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $prevState = $this->session->userdata("prevState");
         $beneficierTv =  $this->input->post("beneficierTv");
-        $decoder_tv   =  $this->input->post('decoder_tv');     
-        $beneficierTv  = explode("_",$beneficierTv);             
+        $decoder_tv   =  $this->input->post('decoder_tv');    
         $data["decoder_tv"]    = $decoder_tv; 
+        //affiche icon tv dans le forfait
+        $data["donne_forfait"] = $this->session->userdata("donne_forfait");
+        $data["eligible_tv"] = $this->session->userdata("eligible_tv");            
+        $prevState[1]["forfait_dummy1"] = $this->load->view("general/forfait_dummy1",$data,true);
+        
+        $beneficierTv  = explode("_",$beneficierTv); 
         $dummyPanier = $this->session->userdata("dummyPanier");
         
         //les tarifs bouquets tv dans le cas décocher
@@ -449,7 +459,7 @@ class Mon_offre extends MY_Controller {
                    
                    //mettre $locationDecTvDummy4Crm en session
                    foreach($dummyPanier["dummy4"] as $key=>$val){
-                       if($val["Categorie"]=="STB"){
+                       if($val["Valeurs"]["Categorie"]=="STB"){
                            $this->session->set_userdata("locationDecTvDummy4Crm",($decoder_tv!="uncheck")?$val["Id_crm"]:"");
                        }
                    }
@@ -481,7 +491,7 @@ class Mon_offre extends MY_Controller {
         
         //caution decodeur
         $prevState[1]["caution_decodeur_dummy5"] = "";
-        $data["caution_dummy5"] = $this->session->userdata("caution_dummy5");
+        $data["caution_dummy5"] = $caution_dummy5;
         if(!empty($data["caution_dummy5"])){    
              $data["dummy5"] = $dummyPanier["dummy5"];
             $prevState[1]["caution_decodeur_dummy5"] = ($decoder_tv=="uncheck")?"": $this->load->view("general/caution_dummy5",$data,true);  
@@ -490,13 +500,16 @@ class Mon_offre extends MY_Controller {
         $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
       //  $prevState[0]["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);
         $this->session->set_userdata('prevState',$prevState);            
+        /*
         echo json_encode(array(
+                                "forfait_dummy1"=>$prevState[1]["forfait_dummy1"],
                                 "location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],
                                 "frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],
                                 "total_par_mois"=>$prevState[1]["total_par_mois"],
                                 "caution_decodeur_dummy5" => $prevState[1]["caution_decodeur_dummy5"]
                               )
-                        );
+                        );*/
+           echo json_encode($prevState[1]);
     }
     
     //dummy3 update bouquet
