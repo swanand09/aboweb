@@ -46,8 +46,8 @@ echo validation_errors();
           
            <!--Addresse-->
           <div class="row">
-            <div class='columns two'><label>Adresse :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse' name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
-            <div class='columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse_suite' name='adresse_suite_aa' value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" /></div>
+            <div class='columns two'><label>Adresse :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='four columns'><input type='text' class='validate[required,maxSize[200]] adresse'  name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
+            <div class='columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text'  class='validate[maxSize[64]] adresse_suite' name='adresse_suite_aa' value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" /></div>
           </div>
           
           <!--Ensemble & Batiment & Escalier-->

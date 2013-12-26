@@ -358,6 +358,12 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
+
+//fonts pour fpdf
+ $config['fonts_path']= "assets/fpdf/font/";  
+
+
 /*
 function __autoload($class)
 {

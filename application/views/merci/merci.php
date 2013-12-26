@@ -11,6 +11,7 @@
              difficillimum Caesarem convellere nisu valido cogitabat, eique deliberanti.</li>
           <li><strong class="green-text">Vbi curarum abiectis ponderibus aliis</strong> tamquam nodum et codicem  
                difficillimum Caesarem convellere nisu valido cogitabat, eique deliberanti.</li> 
+          <li><?php echo anchor("paiement/generateFpdf","télécharger pdf"); ?></li>
         </ul>
         <p class="green-background p20all">
           <strong class="black-text">Et n’oubliez pas :</strong> vous faîtes à présent parti de la belle famille Médiaserv ! Alors si vous avez la moindre question ou juste une envie de papoter un peu, notre assistance téléphonique se fera une joie de vous répondre ! 

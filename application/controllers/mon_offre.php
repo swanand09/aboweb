@@ -49,7 +49,9 @@ class Mon_offre extends MY_Controller {
     public function determine_location()
     {
        $this->load->model('geolocalisation_model','geoloca'); 
-        return $this->validPrefix[$this->geoloca->getDepartment()];
+       $pays = $this->geoloca->getDepartment();
+       $this->session->set_userdata("pays",$pays);
+        return $this->validPrefix[$pays];
     }
     
     //test prefix of numbers entered
