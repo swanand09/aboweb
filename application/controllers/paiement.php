@@ -200,7 +200,7 @@ class Paiement extends MY_Controller {
         $pdf->SetXY(78, 113);
         $pdf->Write(0, utf8_decode($bic[9]));
         $pdf->SetXY(82, 113);
-       // $pdf->Write(0, utf8_decode($bic[10]));
+        $pdf->Write(0, utf8_decode($bic[10]));
 
         $pdf->Output('MANDAT-SEPA-0913-AG-RE-HD.pdf','D');
       }
