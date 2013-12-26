@@ -559,16 +559,16 @@ class Mon_offre extends MY_Controller {
                   switch($val["Valeurs"]["Categorie"]){
                       case "BOUQUET_TV": //bouquetTvDummy3Crm;               
                           if($val["Valeurs"]["Tarif"]==$bouquetTv[1]){
-                              $this->session->set_userdata("bouquetTvDummy3Crm",$val["Valeurs"]["Id_crm"]);
+                              $this->session->set_userdata("bouquetTvDummy3Crm",$val["Id_crm"]);
                           }
                       break;  
                       case "OPTION_TV": //optionTvEdenDummy3Crm;               
                           switch($val["Valeurs"]["Libelle"]["string"]){
                             case "Eden":
-                                $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Valeurs"]["Id_crm"]);    
+                                $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Id_crm"]);    
                             break;
                             case "BeIN Sport":
-                                    $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Valeurs"]["Id_crm"]);    
+                                    $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Id_crm"]);    
                             break;
                           }
                          
@@ -577,10 +577,10 @@ class Mon_offre extends MY_Controller {
                          switch($val["Valeurs"]["Type"])
                          {
                             case "ONESHOT":  //Enregistreur numérique
-                                $this->session->set_userdata("vodPvrOneshotDummy3Crm",$val["Valeurs"]["Id_crm"]);
+                                $this->session->set_userdata("vodPvrOneshotDummy3Crm",$val["Id_crm"]);
                             break;
                             case "RECURRENT":  // Vidéo à la demande
-                                $this->session->set_userdata("vodPvrRecurrentDummy3Crm",$val["Valeurs"]["Id_crm"]);
+                                $this->session->set_userdata("vodPvrRecurrentDummy3Crm",$val["Id_crm"]);
                             break;
                          }
                       break; 

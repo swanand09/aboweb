@@ -215,16 +215,16 @@ class Wsdl_interrogeligib_model extends CI_Model
        $prodSouscris = '<int>0</int>';
        if(!empty($dataArr["produits_souscris"])){
            $prodSouscris = "";
-        foreach($dataArr["produits_souscris"] as $key=>$val){
+        foreach(array_unique($dataArr["produits_souscris"]) as $key=>$val){
             if(!empty($val)){
                 $prodSouscris .= "<int>".$val."</int>";
             }
         }
        }
     $civiliteAF = $this->session->userdata("civilite_af");
-    $addFacIdIns = !empty($civiliteAF)?0:1;
+    $addFacIdIns = !empty($civiliteAF)?false:true;
     $civiliteAL = $this->session->userdata("civilite_al");
-    $addLivIdIns = !empty($civiliteAL)?0:1;
+    $addLivIdIns = !empty($civiliteAL)?false:true;
     
 $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription xmlns="msvaboweb">
                  <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
@@ -328,7 +328,7 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
 //    $config['mailtype'] = 'html';
     //$this->email->initialize($config);
     $this->email->from('s.luthmoodoo@mediacall.mu', 'Swanand Reddy');
-    $this->email->to('s.luthmoodoo@mediacall.mu');
+    $this->email->to('s.luthmoodoo@mediacall.mu'); //sophie.lacoste@mediaserv.com
     $num_tel = $this->session->userdata("num_tel");
     $this->email->subject($num_tel.'_enregistrementSouscription_'.date('Y-m-d H:i:s'));
     $this->email->message(

@@ -141,7 +141,7 @@ class Paiement extends MY_Controller {
                if($this->input->post("adresse_identique")!=1){
                    $dataArr["mode_paiement"][] =
                            array(
-                                "adresseIdentiqueAdresseFacturation" => 0,
+                                "adresseIdentiqueAdresseFacturation" => false,
                                 "civilite"                           => $this->input->post("civilite_pa"),
                                 "nom"                                => $this->input->post("nom_pa"),
                                 "prenom"                             => $this->input->post("prenom_pa"),
@@ -169,7 +169,7 @@ class Paiement extends MY_Controller {
                }else{
                     $dataArr["mode_paiement"][] =
                            array(
-                               "adresseIdentiqueAdresseFacturation" => 1,
+                               "adresseIdentiqueAdresseFacturation" => true,
                                 "civilite"                           => "",
                                 "nom"                                => "",
                                 "prenom"                             => "",
