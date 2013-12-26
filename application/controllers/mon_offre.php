@@ -20,12 +20,21 @@ class Mon_offre extends MY_Controller {
         
         $this->data["userdata"] = $this->session->all_userdata();  
        
-        $data['num_tel'] = array(
-                                    'name' => 'num_tel',
-                                    'id' => 'ligne',
-                                    'type' => 'text',
-                                    'class' => 'validate[required,custom[onlyNumberSp],minSize[10],maxSize[10]]',
-                                    'value' => $this->determine_location()  //recuperation department 
+        $data['ligne_prefix'] = array(
+                                    'name'      => 'ligne_prefix',
+                                    'id'        => 'ligne_prefix',
+                                    'type'      => 'text',
+                                    'class'     => 'prefix',
+                                   
+                                    'value'     => $this->determine_location()  //recuperation department 
+                              );
+        $data['ligne_sufix'] = array(
+                                    'name'      => 'ligne_sufix',
+                                    'id'        => 'ligne_sufix',
+                                    'type'      => 'text',
+                                    'class'     => 'validate[required,custom[onlyNumberSp],minSize[6],maxSize[6]]',
+                                    'size'      => '6'
+                                   
                               );
         $data['test_eligb_butt'] = array(
                                             'class'=>'rmv-std-btn btn-green',

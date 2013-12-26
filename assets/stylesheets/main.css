@@ -971,7 +971,7 @@ img.prix_bare{
    text-transform: uppercase;
 }
 
-#ligne {
+#ligne,#ligne_sufix {
 	color: #9AC448;
     font-size: 1.1em;
     font-weight: bold;

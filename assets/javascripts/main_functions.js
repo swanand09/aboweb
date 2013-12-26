@@ -15,12 +15,19 @@ var preload = function(){
           
           function procTestEligib(where)
           {
-               if($("#ligne").val().replace(/\s+/g, "").length==10){               
+              // if($("#ligne").val().replace(/\s+/g, "").length==10){   
+                    var num_tel = "";
+                    if($("#ligne").attr("value")){
+                        num_tel = $("#ligne").val();
+                    }else{
+                        num_tel = $("#ligne_prefix").val()+$("#ligne_sufix").val();
+                    }
+                    
                     preload();
                     $.post(
                         ajax_proc_interogeligib,
                          {
-                            num_tel : $("#ligne").val()                                                                                  
+                            num_tel : num_tel                                                                                  
                          },
                         function(data){
                           //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
@@ -40,9 +47,9 @@ var preload = function(){
                         }, "json"
                     );
                     return false; 
-               }else{
-                    return false; 
-                }
+//               }else{
+//                    return false; 
+//                }
           }
           
           function retrieveForfait()

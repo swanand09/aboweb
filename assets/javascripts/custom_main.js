@@ -70,6 +70,7 @@ $(function () {
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
 	//$('.numero').mask("99999");
+	$('#ligne_sufix').mask("999999");
 	$('#ligne,.telephone').mask("9999999999");
 	$('#cle').mask("99");
 	$('#banque').mask("99999");
@@ -251,7 +252,8 @@ var etape4 = function() {
 /*------------------------------------------------
 * Jquery Meter Gauge
 ------------------------------------------------*/
-/*window.onload = function () {
+/*
+window.onload = function () {
 
 	if($('.debit_emission').length > 0 )
 	{

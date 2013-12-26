@@ -5,8 +5,11 @@ echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve',
        <strong class='left'>SAISISEZ VOTRE NUM&Eacute;RO DE T&Eacute;L&Eacute;PHONE</strong>
        <span class='right'><a href='#' class='has-tip' data-width='250' title='En saisissant votre numéro de téléphone à dix chiffres, vous pourrez ainsi connaitre l’éligibilité de votre ligne.'><?php echo image('info_icon.png',NULL,array('class'=>'border-gray','title'=>'Plus info','alt'=>'Plus info'));?></a></span>
     </label>
-        
-   <?php  echo form_input($num_tel);?>     
+     <div class="row">
+        <div class="column three"><?php  echo form_input($ligne_prefix);?> </div>
+        <div class="column nine"><?php  echo form_input($ligne_sufix);?></div>
+      </div>    
+       
 </div>
 <div class='five columns'>
     <?php echo form_submit($test_eligb_butt);?>
