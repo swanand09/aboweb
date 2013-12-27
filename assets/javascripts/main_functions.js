@@ -15,14 +15,15 @@ var preload = function(){
           
           function procTestEligib(where)
           {
-              // if($("#ligne").val().replace(/\s+/g, "").length==10){   
+               
                     var num_tel = "";
                     if($("#ligne").attr("value")){
                         num_tel = $("#ligne").val();
                     }else{
-                        num_tel = $("#ligne_prefix").val()+$("#ligne_sufix").val();
+                         num_tel = $("#ligne_prefix").val()+$("#ligne_sufix").val();
                     }
                     
+              if(num_tel.replace(/\s+/g, "").length==10){        
                     preload();
                     $.post(
                         ajax_proc_interogeligib,
@@ -33,7 +34,7 @@ var preload = function(){
                           //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                           $.unblockUI(); 
                          if(data.error==true){
-                              alert("Veuillez re-essayer votre numéro n'est pas éligible");                              
+                            alert(data.msg); 
                               return false;
                           }
                           if(where=="colonne droite"){
@@ -47,9 +48,9 @@ var preload = function(){
                         }, "json"
                     );
                     return false; 
-//               }else{
-//                    return false; 
-//                }
+               }else{
+                  return false; 
+                }
           }
           
           function retrieveForfait()

@@ -971,11 +971,11 @@ img.prix_bare{
    text-transform: uppercase;
 }
 
-#ligne,#ligne_sufix {
+#ligne,#ligne_sufix,#ligne_prefix{
 	color: #9AC448;
     font-size: 1.1em;
     font-weight: bold;
-    padding-left: 35px;
+    padding-left: 20px;
 }
 
 /*

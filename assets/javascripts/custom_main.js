@@ -70,6 +70,7 @@ $(function () {
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
 	//$('.numero').mask("99999");
+        $('#ligne_prefix').mask("9999");
 	$('#ligne_sufix').mask("999999");
 	$('#ligne,.telephone').mask("9999999999");
 	$('#cle').mask("99");

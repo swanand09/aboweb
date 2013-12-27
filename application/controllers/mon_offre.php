@@ -25,7 +25,7 @@ class Mon_offre extends MY_Controller {
                                     'id'        => 'ligne_prefix',
                                     'type'      => 'text',
                                     'class'     => 'prefix',
-                                   
+                                    'maxlength' => '4',
                                     'value'     => $this->determine_location()  //recuperation department 
                               );
         $data['ligne_sufix'] = array(
@@ -33,7 +33,7 @@ class Mon_offre extends MY_Controller {
                                     'id'        => 'ligne_sufix',
                                     'type'      => 'text',
                                     'class'     => 'validate[required,custom[onlyNumberSp],minSize[6],maxSize[6]]',
-                                    'size'      => '6'
+                                    'maxlength'      => '6'
                                    
                               );
         $data['test_eligb_butt'] = array(
@@ -80,13 +80,18 @@ class Mon_offre extends MY_Controller {
     {
         $from_sitebox  = false;   
        (empty($num_tel))?$num_tel = str_replace(' ', '', $this->input->post('num_tel')):$from_sitebox = true;
-        
+       $numTelSess = $this->session->userdata("num_tel"); 
+       $data["error"]  = true;
+       if(!empty($numTelSess)&&$num_tel==$numTelSess){
+           echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>"Veuillez saisir un autre numéro"));
+           exit();
+       }
         $data["num_tel"] = $num_tel; 
         $data["result"] = "";
-        $data["error"]  = true;
+       
         if($num_tel!=""&&$this->validateNum($num_tel))
         {   
-            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class' => 'validate[required,custom[onlyNumberSp],minSize[14],maxSize[14]]','type' => 'text','value' => $num_tel);
+            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->interrogeEligibilite($num_tel);
            
             if(!empty($result))
@@ -149,7 +154,7 @@ class Mon_offre extends MY_Controller {
          redirect("mon_offre");
       }
       //echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
-     echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"]));
+     echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>"Le web service ne renvoie aucunes valeurs pour ce numéro "));
     }
     
     public function forfait()
@@ -213,11 +218,11 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
         $prevState = $this->session->userdata("prevState");
         $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
-
+        /*
         $data["degrouper"]   =  ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
         $data["portabilite"] =  ($consv_num_tel=="true"&&$redu_facture=="true")?"Produit portabilité souscris ":"Un autre numéro est desiré";   
         $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
-        
+        */
         if($this->colonneDroite["forfait_dummy1"]=="")
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
@@ -346,10 +351,10 @@ class Mon_offre extends MY_Controller {
                               $redu_facture = $this->session->userdata("redu_facture");
                               if($redu_facture!='true'){
                                   foreach($val as $val2){
-                                    if($val2["Categorie"]=="DEGROUPAGE"){ 
-                                        $data["dum1_degroup_tarif"] = $val2["Tarif"]["decimal"];
-                                        $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];   
-                                        $data["totalParMois"] = $this->getTotal($val2["Tarif"]["decimal"]);
+                                    if($val2["Valeurs"]["Categorie"]=="DEGROUPAGE"){ 
+                                        $data["dum1_degroup_tarif"] = $val2["Valeurs"]["Tarif"]["decimal"];
+                                        $data["dum1_degroup_libelle"] = $val2["Valeurs"]["Libelle"]["string"];   
+                                        $data["totalParMois"] = $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
                                         $this->session->set_userdata("degroupageDummy1Crm",$val2["Id_crm"]);
                                         $this->colonneDroite["donnee_degroupage"]            = $this->load->view("general/donnee_degroupage",$data,true);
                                     }  
