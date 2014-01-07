@@ -101,6 +101,7 @@ class Recapitulatif extends MY_Controller {
                 $livraison_express = !empty($livraison_express)?$this->input->post("livraison_express"):"false";
                 $this->session->set_userdata('livraison_express',$livraison_express);
                 $this->session->set_userdata('email_mediaserv',$this->input->post("email_mediaserv"));
+                $this->session->set_userdata('verif_email',$this->input->post("verif_email"));
                 $this->session->set_userdata('email',$this->input->post("email"));
                 $this->session->set_userdata('type_de_facturation',$this->input->post("type_facturation_hid"));
               
@@ -156,6 +157,7 @@ class Recapitulatif extends MY_Controller {
             $this->data['ville_al']                     = $this->session->userdata("ville_al");
             $this->data['livraison_express']            = $this->session->userdata("livraison_express");
             $this->data['email_mediaserv']              = $this->session->userdata("email_mediaserv");
+            $this->data['verif_email']                  = $this->session->userdata("verif_email");
             $this->data['email']                        = $this->session->userdata("email");
             $this->data['type_de_facturation']          = explode("_",$this->session->userdata("type_de_facturation"));   
             

@@ -296,22 +296,32 @@ var preload = function(){
            }
             
           function verifMailWebServ(){
-            preload();
-            $.post(                   
-               verifEmail,
-                 {
-                    email_msv : $("#email_mediaserv").val()
-                 },
-                function(data){                 
-                  alert(data.msg);             
-                  switch(data.error){
-                      case "401":
-                          $("#email_mediaserv").val("").focus();
-                      break;
-                  }
-                  $.unblockUI(); 
-                },"json"
-           ); 
+            var emailMsv = $("#email_mediaserv").val();
+            if(emailMsv.length){
+                preload();
+                $.post(                   
+                   verifEmail,
+                     {
+                        email_msv : emailMsv
+                     },
+                    function(data){                 
+                      alert(data.msg);             
+                      switch(data.error){
+                          case "401":
+                              $("#email_mediaserv").val("").focus();
+                              $("#verif_email").val("faux");
+                          break;
+                          case "0":
+                              $("#verif_email").val("vraie");
+                          break;
+                      }
+                      $.unblockUI(); 
+                    },"json"
+               ); 
+            }else{
+               alert("Ce champs est requis");
+               $("#email_mediaserv").val("").focus();
+           }
         }
           
           function verifParainWebServ()

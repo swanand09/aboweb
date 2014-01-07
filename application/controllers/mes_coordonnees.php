@@ -47,6 +47,8 @@ class Mes_coordonnees extends MY_Controller {
          $this->data["userdata"] = $this->session->all_userdata();
         
         $wsVille = $this->session->userdata("ws_ville");
+        $this->data["wsVille"] = $wsVille;
+        /*
         $codePostal = "";
         $codeVille  = "";
         foreach($wsVille as $key=>$val){
@@ -58,7 +60,7 @@ class Mes_coordonnees extends MY_Controller {
                 $codePostal = $wsVille["Code_postal"];
                 $codeVille  = $wsVille["Code_ville"];
             }
-        }
+        }*/
         
         //re initialise session pour le panier partie parrainage
        // $prevState = $this->session->userdata("prevState");
@@ -131,10 +133,10 @@ class Mes_coordonnees extends MY_Controller {
             $this->session->set_userdata('logo_aa',"");
         }
         if(!array_key_exists("code_postal_aa",$this->data['userdata'])){
-            $this->session->set_userdata('code_postal_aa',$codePostal);
+            $this->session->set_userdata('code_postal_aa',"");
         }        
         if(!array_key_exists("ville_aa",$this->data['userdata'])){
-            $this->session->set_userdata('ville_aa',$codeVille);
+            $this->session->set_userdata('ville_aa',"");
         }
         if(!array_key_exists("telephone_portable",$this->data['userdata'])){
             $this->session->set_userdata('telephone_portable',"");
@@ -245,6 +247,9 @@ class Mes_coordonnees extends MY_Controller {
         if(!array_key_exists("email_mediaserv",$this->data['userdata'])){
             $this->session->set_userdata('email_mediaserv',"");
         }
+        if(!array_key_exists("verif_email",$this->data['userdata'])){
+            $this->session->set_userdata('verif_email',"faux");
+        }
         if(!array_key_exists("email",$this->data['userdata'])){
             $this->session->set_userdata('email',"");
         }
@@ -311,6 +316,7 @@ class Mes_coordonnees extends MY_Controller {
 
         $this->data["livraison_express"] = $this->session->userdata('livraison_express');
         $this->data["email_mediaserv"] = $this->session->userdata('email_mediaserv');
+        $this->data["verif_email"] = $this->session->userdata('verif_email');        
         $this->data["email"] = $this->session->userdata('email');
         $this->data["type_de_facturation"] = $this->session->userdata('type_de_facturation');
        

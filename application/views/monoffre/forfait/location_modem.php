@@ -6,8 +6,8 @@ if(!empty($iadArr["Tarif"])){
 ?>
 <div class="border-gray modem-sagem">
     <?php
-        if($iadArr["Libelle"]!="")
-        {?>
+        /*if($iadArr["Libelle"]!="")
+        {*/?>
            
                <input type='checkbox' checked='checked' disabled='disabled' class='left'>
                <?php echo image("modem_sagem.png",NULL,array("alt"=>"Modem Sagem FAST3504","class"=>"left"));?>   
@@ -27,7 +27,7 @@ if(!empty($iadArr["Tarif"])){
 
           
      <?php
-        }?>
+        //}?>
 </div>
 <?php }?>
 <div class="top-20 custom-column back-button left"><a alt="Précédent" href="javascript:prevState('test_eligib');" class="precedent">Précédent</a></div>

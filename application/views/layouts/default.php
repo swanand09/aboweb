@@ -29,7 +29,7 @@
          echo js('foundation.min.js');
          echo js('jquery-ui.js');
          echo js('jquery.blockUI.js');
-      // echo ajax()->init();
+         echo js('custom_autocomplete.js');
   ?> 
 
   <style>
@@ -121,7 +121,6 @@
         echo js('jquery.validationEngine.js');
         echo js('languages/jquery.validationEngine-fr.js');
         echo js('custom_main.js');
-        echo js('custom_autocomplete.js');
         echo js('jquery.foundation.reveal.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 

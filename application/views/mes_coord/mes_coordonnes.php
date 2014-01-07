@@ -13,8 +13,19 @@ echo validation_errors();
     $check_papier = ($facture_data[1]=="papier")?"checked='checked'":"";
  }
 ?>
+<script>
+    function verifMailCheck(){
+       var verifMail = $("#verif_email").val();
+        if(verifMail=="faux"){
+           $('#email_mediaserv').validationEngine('showPrompt', 'Veuillez verifier votre e-mail médiaserv', 'error','topRight', true);    
+           return false;
+        }else{
+            return true;
+        }
+    }
+</script>
 <div class="left-etape-content">
-    <form action="recapitulatif" method="POST" id="mes-coordonnees">
+    <form action="recapitulatif" method="POST" id="mes-coordonnees" onsubmit="javascript:return verifMailCheck();">
         <input type="hidden" name="page_3" value="mes_coordonnes" />
       <!--Adresse coordonnées-->
         <div class="adresse-abonnement">
@@ -69,9 +80,9 @@ echo validation_errors();
           <!--Code postal & Ville & Localisation-->
            <div class="row">
                 <div class='columns two'><label>Code postal :<span class='has-tip' title='obligatoire'>*</span></label></div>
-                <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_aa' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>" id='codepostal'/></div>
+                <div class='columns two'><input type='text' class='validate[required]' name='code_postal_aa' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>" id='codepostal'/></div>
                 <div class='columns one'><label>Ville :<span class='has-tip' title='obligatoire'>*</span></label></div>
-                <div class='columns four end'><input type='text' class='validate[required] ville' name='ville_aa' value="<?php echo set_value("ville_aa",$ville_aa);?>" id='ville'/></div>
+                <div class='columns four end'><input type='text' class='validate[required,funcCall[validateVilleEntryList]] ville' name='ville_aa' id='ville' value="<?php echo set_value("ville_aa",$ville_aa);?>"/></div>
           </div>
   
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
@@ -224,12 +235,13 @@ echo validation_errors();
               <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
             </div>
             <div class="column six"> 
-               <input type='text' class='validate[required]' name='email_mediaserv' value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='has-tip' title='obligatoire'>*</span>
+               <input type='text' class='validate[required]' name='email_mediaserv' onchange="javascript:$('#verif_email').val('faux');" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='has-tip' title='obligatoire'>*</span>
             </div>
             <div class="column three"> 
               <span class="postfix">@mediaserv.net</span>
             </div>
             <div class="column three"> 
+              <input type="hidden" name="verif_email" id="verif_email" value="<?php echo set_value("verif_email",$verif_email);?>">
               <input type="button" name="VerifierEmail" onclick ="javascript:verifMailWebServ();" value="Vérifier" class="rmv-std-btn btn-verifier">
             </div>
             <div class="column twelve top-20">
@@ -267,3 +279,38 @@ echo validation_errors();
           <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
         </form>
 </div>
+
+<script>
+    // List of 'codepostal' and 'ville' from webservice
+    <?php
+         $codePostalVille = "";     
+         echo "size: ".sizeof($wsVille);
+         if(sizeof($wsVille)>2){
+            foreach($wsVille as $key=>$val){
+               if($key==(sizeof($wsVille)-1)){
+                   $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'}";
+               }else{
+                   $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'},";
+               }
+           }
+         }else{
+              $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
+         }
+    ?>      
+    var WSvilleSet = { "data":[<?php echo $codePostalVille; ?>]};
+    var WScodePostalSet = new Array();
+
+    //extracting codepostal and pushing to array WScodePostalSet
+    $.each(WSvilleSet.data,function(key,value){
+      WScodePostalSet.push(value.codepostal);
+    });
+
+    //Adding the extracted codepostal as autocomplete functionality to #codepostal
+    $('#codepostal').autocomplete({ 
+      source:$.unique(WScodePostalSet), 
+      minLength:3, 
+    });
+
+    //adding autocomplete to #ville depending on extracted list of codepostal
+    autocompleteVille('#ville','#codepostal',WScodePostalSet,WSvilleSet);
+</script>
