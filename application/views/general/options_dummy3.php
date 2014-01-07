@@ -1,6 +1,9 @@
 <div id="options">
 <?php
 $bouquet_picto = "";
+echo "<pre>";
+  print_r($dummy3);
+echo "</pre>";
 if(isset($bouquetTv)&&!empty($bouquetTv)){
     $bouquetTv = explode("_",$bouquetTv);
     

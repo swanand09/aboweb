@@ -283,19 +283,23 @@ echo validation_errors();
 <script>
     // List of 'codepostal' and 'ville' from webservice
     <?php
-         $codePostalVille = "";     
-         echo "size: ".sizeof($wsVille);
-         if(sizeof($wsVille)>2){
+         $codePostalVille = ""; 
+         //if(sizeof($wsVille)>2){
             foreach($wsVille as $key=>$val){
-               if($key==(sizeof($wsVille)-1)){
-                   $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'}";
-               }else{
-                   $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'},";
-               }
+              if(is_array($val)){
+                if($key==(sizeof($wsVille)-1)){
+                    $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'}";
+                }else{
+                    $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'},";
+                }
+              }else{
+                  $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
+                  break;
+              }
            }
-         }else{
-              $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
-         }
+//         }else{
+//              $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
+//         }
     ?>      
     var WSvilleSet = { "data":[<?php echo $codePostalVille; ?>]};
     var WScodePostalSet = new Array();
