@@ -298,7 +298,8 @@ class Paiement extends MY_Controller {
         if($this->input->post("mode_pay")=="rib"){
                $iban = $this->input->post("iban1").$this->input->post("iban2").$this->input->post("iban3").$this->input->post("iban4").$this->input->post("iban5").$this->input->post("iban6").$this->input->post("iban7");
                $this->session->set_userdata("iban",$iban);
-               $bic  = $this->input->post("bic1").$this->input->post("bic2");
+               //$bic  = $this->input->post("bic1").$this->input->post("bic2");
+               $bic  = $this->input->post("bic");
                $this->session->set_userdata("bic",$bic);
                $dataArr["mode_paiement"][] =
                           array(

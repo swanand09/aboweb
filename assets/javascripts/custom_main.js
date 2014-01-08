@@ -329,10 +329,29 @@ var validateIbanFr = function( field, rules, i, options ){
 */
 var validateBic = function( field, rules, i, options ){
 	//combine the values of all textboxes #bic
-	var bic = $('#bic1').val() + $('#bic2').val();
+	//var bic = $('#bic1').val() + $('#bic2').val();
+	var bic = $('#bic').val();
 	var bicRegex = /([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/;
 	//return the error message if bic is not valid
 	if(!bicRegex.test(bic)) {
 		return 'Votre BIC n\'est pas valide';
+	}
+}
+
+/*------------------------------------------------
+* Numéro téléphone portable doit commencer par 06 ou 07
+* @param {jqObject} the field where the validation applies
+* @param {Array[String]} validation rules for this field
+* @param {int} rule index
+* @param {Map} form options
+* @return an error string if validation failed
+*/
+var validateTelephonePortable = function( field, rules, i, options ){
+	
+	var telephonePortable = field.val();
+	var telephonePortableRegex = /(^06|07)/;
+	//return the error message if string does not start with FR/fr
+	if(!telephonePortableRegex.test(telephonePortable)) {
+		return '*Le numéro du téléphone portable doit commencer par 06 ou 07 uniquement';
 	}
 }

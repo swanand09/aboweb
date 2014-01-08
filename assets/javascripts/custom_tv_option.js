@@ -39,6 +39,11 @@ $(function() {
       optionBein.attr('disabled', true);
       optionEden.prop('checked', false);
       optionBein.prop('checked', false);
+
+      //reinitiate Chaine filter group
+      $('#filter li').removeClass('active');
+      var selector = $('.eight.chaines .grid li');
+      chainesFilter(selector,'ultra');
     }
   });
 

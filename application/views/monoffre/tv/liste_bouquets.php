@@ -9,12 +9,7 @@
     }else{
         $valBeneficier = "dummy4_0";
     }
-    /*
-    echo "<pre>";
-    print_r($optionTvArr);
-    echo "</pre>";
-     * 
-     */
+
     //option tv
     $tarif_bein = 0;
     $duree_promo_bein = 0;
@@ -33,28 +28,6 @@
                 $tarif_eden = $val["Eden"];
                 $duree_promo_eden = $val[0]["Duree_mois_promo"];
                 $tarif_promo_eden = $val[0]["Tarif_promo"];               
-            }
-        }
-    }
-   
-    
-    //VOD PVR
-    
-    $vodTarif      = "";
-    $numriquEnreg = "";
-    /*
-    echo "<pre>";
-    print_r($vodPvr);
-    echo "</pre>";
-     * 
-     */
-    if(!empty($vodPvr)){
-        foreach($vodPvr as $key=>$val){
-            if(isset($val["Vidéo à la demande"])){
-                $vodTarif = ($val["Vidéo à la demande"]>0)?$val["Vidéo à la demande"]:"inclus";
-            }
-            if(isset($val["Enregistreur numérique"])){
-                $numriquEnreg = ($val["Enregistreur numérique"]>0)?$val["Enregistreur numérique"]:"inclus";
             }
         }
     }
@@ -152,7 +125,7 @@
                                 if(is_string($key2)){
                    ?>
                             <li>
-                                <a href="#" onclick='javascript: choixBouquet("<?php echo $key2; ?>_<?php echo $val2; ?>_<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?>_<?php echo $vodTarif; ?>_<?php echo $numriquEnreg; ?>");' data-group='<?php echo strtolower($key2); ?>'>
+                                <a href="#" onclick='javascript: choixBouquet("<?php echo $key2; ?>_<?php echo $val2; ?>_<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
                                   <div class='columns five'>
                                 <span class='nombre_chaines'>+<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?></span>
                                     <label>Chaines</label>

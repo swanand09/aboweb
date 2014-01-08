@@ -1,10 +1,8 @@
 <div id="options">
 <?php
 $bouquet_picto = "";
-echo "<pre>";
-  print_r($dummy3);
-echo "</pre>";
-if(isset($bouquetTv)&&!empty($bouquetTv)){
+$vodPvr = $this->session->userdata("vodPvr");
+if(!empty($vodPvr)||(isset($bouquetTv)&&!empty($bouquetTv))){
     $bouquetTv = explode("_",$bouquetTv);
     
     foreach($dummy3 as $key=>$val){
@@ -17,21 +15,38 @@ if(isset($bouquetTv)&&!empty($bouquetTv)){
 <div class="forpro options">
     <h3>Options<span class="right"><a href="#">Modifier</a></span></h3>
     <ul>
+        <?php if(!empty($bouquetTv)){ ?>
+<!--        BOUQUET_TV-->
         <li style="background: url(<?php echo base_url()."/assets/images/contenu/".$bouquet_picto; ?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);">
           <strong><?php echo $bouquetTv[0]; ?></strong><span class="right"><?php echo number_format($bouquetTv[1],2,',',' ')."€/mois"; ?></span></strong><br><?php echo $bouquetTv[2]; ?> chaînes
       </li>
-      <?php if(!empty($tarifOptionEden)&&isset($tarifOptionEden)){ ?>    
+        <?php } ?>
+<!--      OPTION_TV-->
+      <?php if(!empty($tarifOptionEden)&&isset($tarifOptionEden)&&isset($dummy3[3])){ ?>    
               <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[3]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[3]["Valeurs"]["Libelle"]["string"])?$dummy3[3]["Valeurs"]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionEden,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
       <?php } 
-            if(!empty($tarifOptionBein)&&isset($tarifOptionBein)){ ?>    
+            if(!empty($tarifOptionBein)&&isset($tarifOptionBein)&&isset($dummy3[4])){ ?>    
               <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[4]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[4]["Valeurs"]["Libelle"]["string"])?$dummy3[4]["Valeurs"]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionBein,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
       <?php } 
-             if(!empty($bouquetTv[3])&&isset($bouquetTv[3])){ ?> 
-              <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[5]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[5]["Valeurs"]["Libelle"]["string"])?utf8_encode($dummy3[5]["Valeurs"]["Libelle"]["string"]):""; ?></strong><span class="right" style="margin-left:50px;"><?php echo ($bouquetTv[3]=="inclus")?$bouquetTv[3]:number_format($bouquetTv[3],2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
-      <?php }
-             if(!empty($bouquetTv[4])&&isset($bouquetTv[4])){?>
-              <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[6]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[6]["Valeurs"]["Libelle"]["string"])?utf8_encode($dummy3[6]["Valeurs"]["Libelle"]["string"]):""; ?></strong><span class="right" style="margin-left:50px;"><?php echo ($bouquetTv[4]=="inclus")?$bouquetTv[4]:number_format($bouquetTv[4],2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>   
-      <?php } ?>
+      
+     // VOD_PVR
+       if(!empty($vodPvr)){
+        foreach($vodPvr as $key=>$val){
+            foreach($val as $key2=>$val2){
+                if($val2["promo"]["Duree_mois_promo"]>0){
+                    $vodTarif       = $val2["promo"]["Tarif_promo"];
+                    $vodDureePromo  = $val2["promo"]["Duree_mois_promo"];
+                }else{
+                    $vodTarif = ($val2["tarif"]>0)?$val2["tarif"]:"inclus";
+                }
+            ?>
+                 <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val2["picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo utf8_encode($key2); ?><span class="right"><?php echo ($vodTarif=="inclus")?$vodTarif:number_format($vodTarif,2,',',' ')."€/mois"; ?></span></strong></li>
+           <?php }
+        }
+       
+    }
+      ?>
+             
     </ul>
 </div>
 <hr>

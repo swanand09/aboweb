@@ -11,8 +11,29 @@ $(function(){
 	});
 
 	//Add autocomplete data to controls Voie & Codepostal
-	$('.type_voie').autocomplete({ source:voieSet });
-	$('.comp_numero').autocomplete({ source:complementnoSet });
+	//Type Voie
+	$('.type_voie').autocomplete({ 
+		source:voieSet,
+		minLength: 0
+	}).focus(function(req,add){ // display autocomplete data onfocus / without typing any letters
+		if ($(this).val().length == 0) {
+			{
+				$(this).autocomplete("search");
+			}
+    	}
+	});
+	//Complément numéro
+	$('.comp_numero').autocomplete({
+		source:complementnoSet,
+		minLength: 0
+	}).focus(function(req,add){ // display autocomplete data onfocus / without typing any letters
+		if ($(this).val().length == 0) {
+			{
+				$(this).autocomplete("search");
+			}
+    	}
+	});
+	//codepostal
 	$('.code_postal').autocomplete({ 
 		source:$.unique(codePostalSet), 
 		minLength:3, 
@@ -22,8 +43,6 @@ $(function(){
 	autocompleteVille('#ville2','#codepostal2',codePostalSet,villeSet);
 	autocompleteVille('#ville3','#codepostal3',codePostalSet,villeSet);
 
-	//testing 
-	validateVilleEntryList();
 });
 
 
@@ -114,6 +133,51 @@ var validateVilleEntryList = function( field, rules, i, options ){
 
 		$(ville).autocomplete("search");
 		return "Veuillez choisir une ville dans la liste";
+	}
+
+};
+
+/*------------------------------------------------
+* Function to prevent user from entering a value / the user must select the value from the list
+* @param {jqObject} the field where the validation applies
+* @param {Array[String]} validation rules for this field
+* @param {int} rule index
+* @param {Map} form options
+* @return an error string if validation failed
+*/
+var validateVoieEntryList = function( field, rules, i, options ){
+
+	var searchResult = new Array();
+	var voieSet = ['Abbaye','Agglomeration','Aire(s)','Allee(s)','Ancien chemin','Ancienne route(s)','Anse','Arcade(s)','Autoroute','Avenue','Barriere(s)','Bas chemin','Bastide','Baston','Beguinage(s)','Berge(s)','Bois','Boucle','Boulevard','Bourg','Butte','Cale','Camp','Campagne','Camping','Carre','Carreau','Carrefour','Carriere(s)','Castel','Cavee','Centre(al)','Chalet','Chapelle','Charmille','Chateau','Chaussee(s)','Chemin Rural','Chemin vicinal (aux)','Cheminement(s)','Chemin(s)','Chez','Cite(s)','Cloitre','Clos','Col','Colline(s)','Contour','Corniche(s)','Cote(au)','Cottage(s)','Cour','Cours','Darse','Degre(s)','Descente(s)','Digue(s)','Domaine(s)','Ecluse(s)','Eglise','Enceinte','Enclave','Enclos','Escalier(s)','Espace','Esplanade(s)','Faubourg','Ferme(s)','Fontaine','Fort','Forum','Fosse(s)','Foyer','Galerie(s)','Gare','Garenne','Grand boulevard','Grande(s) ensemble(s)','Grande(s) rue(s)','Grille','Grimpette','Groupement','Groupe(s)','Halle(s)','Hameau(x)','Haut(s) chemin(s)','Hippodrome','HLM','Ile','Immeuble(s)','Impasse(s)','Jardin(s)','Jetee(s)','Levee','Lieu dit','Lotissement(s)','Mail','Maison forestiere','Manoir','Marche(s)','Mas','Metro','Montee(s)','Moulin(s)','Musee','Nouvelle route','Palais','Parc(s)','Parking','Parvis','Passage','Passage a niveau','Passerelle(s)','Passe(s)','Patio','Pavillon(s)','Peripherique','Peristyle','Petite avenue','Petite impasse','Petite route','Petite rue','Petites(s) allee(s)','Place','Placis','Plage(s)','Plaine','Plan','Plateau(x)','Pointe','Pont(s)','Porche','Port','Porte','Portique(s)','Poterne','Pourtour','Pre','Presqu ile','Promenade','Quai','Quartier','Raccourci','Raidillon','Rampe','Rempart','Residence(s)','Roc(ade)','Rond point','Roquet','Rotonde','Route','Rue','Ruelle','Sente(ier)','Square','Stade','Station','Terrain','Terrasse(s)','Terre plein','Tertre(s)','Tour','Traverse','Val(lee)(lon)','Venelle(s)','Via','Vieille route','Vieux chemin','Village(s)','Villa(s)','Voie(s)','Zone','Zone a urbaniser','Zone artisanale','Zone d amenagement Concerte','Zone d amenagement Differe','Zone industrielle'];
+
+	searchResult = $.grep(voieSet,function(key, item) { return key == field.val() });
+	if(searchResult.length == 0 )
+	{
+		$(field).autocomplete("search");
+		return "Veuillez choisir une Voie dans la liste";
+	}
+
+};
+
+
+/*------------------------------------------------
+* Function to prevent user from entering a value / the user must select the value from the list
+* @param {jqObject} the field where the validation applies
+* @param {Array[String]} validation rules for this field
+* @param {int} rule index
+* @param {Map} form options
+* @return an error string if validation failed
+*/
+var validateCompNumEntryList = function( field, rules, i, options ){
+
+	var searchResult = new Array();
+	var complementnoSet = ['A','B','bis','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','ter','U','V','W','X','Y','Z'];
+
+	searchResult = $.grep(complementnoSet,function(key, item) { return key == field.val() });
+	if(searchResult.length == 0 )
+	{
+		$(field).autocomplete("search");
+		return "Veuillez choisir un Complément numéro dans la liste";
 	}
 
 };

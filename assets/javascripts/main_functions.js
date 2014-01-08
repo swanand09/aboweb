@@ -216,7 +216,7 @@ var preload = function(){
                      {
                         bouquetTv : valeur
                      },
-                    function(data){                          
+                    function(data){
                       $("#recap_contenu").children("#options").remove();  
                       $("#recap_contenu").append(data.options_dummy3);
                       $("#total_mois").empty().append(data.total_par_mois);  

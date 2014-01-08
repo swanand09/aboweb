@@ -69,13 +69,14 @@
             <div class="column one"><input type="text" class='validate[required]' name='iban4' id ="iban4" maxlength = '4'></div>
             <div class="column one"><input type="text" class='validate[required]' name='iban5' id ="iban5" maxlength = '4'></div>
             <div class="column one"><input type="text" class='validate[required]' name='iban6' id ="iban6" maxlength = '4'></div>
-            <div class="column one end"><input type="text" class='validate[required,funcCall[validateIban]]' name='iban7' id ="iban7" maxlength = '4'></div>
+            <div class="column one end"><input type="text" class='validate[required,funcCall[validateIban]]' name='iban7' id ="iban7" maxlength = '3'></div>
           </div>
           <div class="row">
             <div class="column two"><label>BIC <a href='#' class='has-tip' data-width='360' title='Le passage au format SEPA est une obligation légale qui vient remplacer le prélèvement automatique actuel. Il est constitué des éléments suivants :
             BIC (Business Identifier Code) et IBAN (International Bank Account Number) : ils remplacent votre RIB actuel. Le BIC est le code d’identification de la banque, l’IBAN est le numéro de code bancaire international.'><?php echo image('info_icon.png',NULL,array("class"=>"border-gray","alt"=>"Plus info")); ?></a></label></div>
-            <div class="column one"><input type="text" name='bic1' class="validate[required]" id="bic1" maxlength = '4'></div>
-            <div class="column three end"><input type="text" name='bic2' class="validate[required,funcCall[validateBic]]" id="bic2" maxlength ='7'></div>
+<!--            <div class="column one"><input type="text" name='bic1' class="validate[required]" id="bic1" maxlength = '4'></div>
+            <div class="column three end"><input type="text" name='bic2' class="validate[required,funcCall[validateBic]]" id="bic2" maxlength ='7'></div>-->
+               <div class="column four end"><input type="text" name='bic' class="validate[required,funcCall[validateBic]]" id="bic" maxlength ='11'></div>
           </div>
             <!--titulaire -->
           <div class="row">

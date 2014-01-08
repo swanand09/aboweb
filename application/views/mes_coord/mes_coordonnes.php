@@ -51,8 +51,8 @@ echo validation_errors();
           <!--Numéro & Complément numéro-->
           <div class="row">
             <div class='columns two'><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,custom[integer],min[1],max[99999]] numero' value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
-            <div class='columns two'><label>Complément numéro :</label></div><div class='two columns'><input type='text' class='comp_numero' name='comp_numero_aa' value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" /></div>              
-            <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='type_voie' name='type_voie_aa' value="<?php echo set_value("type_voie_aa",$type_voie_aa);?>" /></div>
+            <div class='columns two'><label>Complément numéro :</label></div><div class='two columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_aa' value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" /></div>              
+            <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='type_voie validate[funcCall[validateVoieEntryList]]' name='type_voie_aa' value="<?php echo set_value("type_voie_aa",$type_voie_aa);?>" /></div>
           </div>
           
            <!--Addresse-->
@@ -88,7 +88,7 @@ echo validation_errors();
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
             <div class="columns"><label>Téléphone portable :<span class='has-tip' title='obligatoire'>*</span></label></div>
-            <div class="columns"><input type="text" name="telephone_portable" value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class="validate[required] telephone telephone_portable"></div>
+            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' /></div>
             <div class='column end'>
                 <a href='#' class='has-tip' data-width='360' title='Votre numéro de téléphone mobile vous permettra de recevoir par SMS les informations liées à l’évolution de votre activation ainsi que du suivi de votre livraison.'>
                     <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
@@ -135,8 +135,8 @@ echo validation_errors();
           <!--Numéro & Complément numéro-->
           <div class="row">
             <div class="columns two"><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class='numero validate[required,custom[integer],min[1],max[99999]]'></div>
-            <div class="columns two"><label>Complément numéro :</label></div><div class="two columns end"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" name="comp_numero_af" class="comp_numero ui-autocomplete-input"></div>              
-            <div class='columns two'><label>Type de Voie :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_af' value="<?php echo set_value("type_voie_af",$type_voie_af);?>" /></div>
+            <div class='columns two'><label>Complément numéro :</label></div><div class='two columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_af' value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" /></div>              
+            <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='type_voie validate[funcCall[validateVoieEntryList]]' name='type_voie_af' value="<?php echo set_value("type_voie_af",$type_voie_af);?>" /></div>
           </div>
           
           <!--Addresse suite-->
@@ -190,8 +190,8 @@ echo validation_errors();
           <!--Numéro & Complément numéro 7 type de voie-->
           <div class='row'>
             <div class='columns two'><label>Numéro :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='numero validate[required,custom[integer],min[1],max[99999]]' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
-            <div class='columns two'><label>Complément numéro:</label></div><div class='two columns'><input type='text' class='comp_numero' name='comp_numero_al' value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" /></div>              
-            <div class='columns two'><label>Type de Voie :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='columns two'><input type='text' class='validate[required] type_voie' name='type_voie_al' value="<?php echo set_value("type_voie_al",$type_voie_al);?>" /></div>
+            <div class='columns two'><label>Complément numéro:</label></div><div class='two columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_al' value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" /></div>              
+            <div class='columns two'><label>Type de Voie :</label></div><div class='columns two'><input type='text' class='type_voie validate[funcCall[validateVoieEntryList]]' name='type_voie_al' value="<?php echo set_value("type_voie_al",$type_voie_al);?>" /></div>
           </div>
           
           <!--Addresse-->
@@ -200,14 +200,19 @@ echo validation_errors();
             <div class='columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse_suite' name='adresse_suite_al' value="<?php echo set_value("adresse_suite_al",$adresse_suite_al);?>" /></div>            
           </div>
          
-          <!--Ensemble, batiment & etage -->
+          <!--Ensemble & Batiment & Escalier-->
           <div class='row'>
             <div class='columns two'><label>Ensemble</label></div><div class='columns two'><input type='text' class='validate[maxSize[20]] ensemble' name='ensemble_al' value="<?php echo set_value("ensemble_al",$ensemble_al);?>" /></div>
             <div class='columns two'><label>Batiment :</label></div><div class='columns two'><input type='text' class='validate[maxSize[4]] batiment' name='batiment_al' value="<?php echo set_value("batiment_al",$batiment_al);?>" /></div>
-            <div class='columns two'><label>Etage :</label></div><div class='columns two'><input type='text' class='validate[maxSize[2]] etage' name='etage_al' size='2' value="<?php echo set_value("etage_al",$etage_al);?>" /></div>
+            <div class='columns two'><label>Escalier :</label></div><div class='columns two'><input type='text' class='validate[maxSize[2]] escalier' name='escalier_al' size='2' value="<?php echo set_value("escalier_al",$escalier_al);?>" /></div>
           </div>
-          <!--Code postal & Ville -->
           
+         <!--Etage & Porte & logo-->
+          <div class='row'>
+            <div class='columns two'><label>Etage :</label></div><div class='columns two'><input type='text' class='validate[maxSize[2]] etage' name='etage_al' size='2' value="<?php echo set_value("etage_al",$etage_al);?>" /></div>
+            <div class='columns two'><label>Porte :</label></div><div class='columns two'><input type='text' class='validate[maxSize[5]] porte' name='porte_al' value="<?php echo set_value("porte_al",$porte_al);?>" /></div>
+            <div class='columns two'><label>Logo :</label></div><div class='columns two'><input type='text' class='validate[maxSize[5]] logo' name='logo_al' value="<?php echo set_value("logo_al",$logo_al);?>" /></div>
+          </div>
           <!--Code postal & Ville -->
           <div class='row'>
             <div class='columns two'><label>Code postal :<span class='has-tip' title='obligatoire'>*</span></label></div>
@@ -312,7 +317,7 @@ echo validation_errors();
     //Adding the extracted codepostal as autocomplete functionality to #codepostal
     $('#codepostal').autocomplete({ 
       source:$.unique(WScodePostalSet), 
-      minLength:3, 
+      minLength:1, 
     });
 
     //adding autocomplete to #ville depending on extracted list of codepostal

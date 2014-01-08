@@ -372,10 +372,21 @@ class Mon_offre extends MY_Controller {
                                           array_push($optionTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
                                       break;
                                       case "VOD_PVR":
-                                           array_push($vodPvr, array(utf8_encode($val2["Valeurs"]["Libelle"]["string"])=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
+                                           array_push($vodPvr, array(
+                                                                        $val2["Valeurs"]["Libelle"]["string"]=>array(
+                                                                                                                     "tarif"=>$val2["Valeurs"]["Tarif"]["decimal"],
+                                                                                                                     "picto"=>$val2["Valeurs"]["Picto"],
+                                                                                                                     "promo"=>array(
+                                                                                                                                     "Tarif_promo"=>$val2["Tarif_promo"],
+                                                                                                                                     "Duree_mois_promo"=>$val2["Duree_mois_promo"])
+                                                                                                                                   )
+                                                                                                                     
+                                                                                                                  )
+                                                   );
                                       break;
                                   }
                               }
+                             
                        break;
                        case "dummy4":
                                $data["dummy4"] = $dummyPanier["dummy4"];
@@ -410,7 +421,7 @@ class Mon_offre extends MY_Controller {
             }
          }
            $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr; $data["vodPvr"] = $vodPvr; 
-            
+           $this->session->set_userdata("vodPvr",$vodPvr); 
             //Go to bouquet tv or mes coordonnes 
             //if($count_tv>0){
            $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);   
