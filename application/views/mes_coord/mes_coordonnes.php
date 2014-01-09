@@ -80,7 +80,7 @@ echo validation_errors();
           <!--Code postal & Ville & Localisation-->
            <div class="row">
                 <div class='columns two'><label>Code postal :<span class='has-tip' title='obligatoire'>*</span></label></div>
-                <div class='columns two'><input type='text' class='validate[required]' name='code_postal_aa' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>" id='codepostal'/></div>
+                <div class='columns two'><input type='text' class='validate[required,funcCall[validateCodePostalEntryList]]' name='code_postal_aa' id='codepostal' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>"/></div>
                 <div class='columns one'><label>Ville :<span class='has-tip' title='obligatoire'>*</span></label></div>
                 <div class='columns four end'><input type='text' class='validate[required,funcCall[validateVilleEntryList]] ville' name='ville_aa' id='ville' value="<?php echo set_value("ville_aa",$ville_aa);?>"/></div>
           </div>
@@ -288,8 +288,7 @@ echo validation_errors();
 <script>
     // List of 'codepostal' and 'ville' from webservice
     <?php
-         $codePostalVille = ""; 
-         //if(sizeof($wsVille)>2){
+         $codePostalVille = "";         
             foreach($wsVille as $key=>$val){
               if(is_array($val)){
                 if($key==(sizeof($wsVille)-1)){
@@ -302,9 +301,7 @@ echo validation_errors();
                   break;
               }
            }
-//         }else{
-//              $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
-//         }
+
     ?>      
     var WSvilleSet = { "data":[<?php echo $codePostalVille; ?>]};
     var WScodePostalSet = new Array();
@@ -322,4 +319,28 @@ echo validation_errors();
 
     //adding autocomplete to #ville depending on extracted list of codepostal
     autocompleteVille('#ville','#codepostal',WScodePostalSet,WSvilleSet);
+    
+    
+    /*------------------------------------------------
+    * Function to prevent user from entering a value / the user must select the value from the list
+    * @param {jqObject} the field where the validation applies
+    * @param {Array[String]} validation rules for this field
+    * @param {int} rule index
+    * @param {Map} form options
+    * @return an error string if validation failed
+    */
+    var validateCodePostalEntryList = function( field, rules, i, options ){
+
+      var searchResult = new Array();
+      var WSvilleSet = { "data":[<?php echo $codePostalVille; ?>]};
+
+      searchResult = $.grep(WSvilleSet.data,function(key, item) { return key.codepostal == field.val() });
+      if(searchResult.length == 0 )
+      {
+        $(field).autocomplete("search");
+        return "Veuillez choisir un Code Postal dans la liste";
+      }
+
+    };
+    
 </script>

@@ -3,11 +3,14 @@
 $bouquet_picto = "";
 $vodPvr = $this->session->userdata("vodPvr");
 if(!empty($vodPvr)||(isset($bouquetTv)&&!empty($bouquetTv))){
-    $bouquetTv = explode("_",$bouquetTv);
-    
-    foreach($dummy3 as $key=>$val){
-        if($bouquetTv[0]==$val["Valeurs"]["Libelle"]["string"]){
-          $bouquet_picto =  trim($val["Valeurs"]["Picto"]);
+    if(!empty($bouquetTv)){
+    $bouquetTv = explode("_",$bouquetTv);    
+        if(!empty($dummy3)){
+            foreach($dummy3 as $key=>$val){
+                if($bouquetTv[0]==$val["Valeurs"]["Libelle"]["string"]){
+                  $bouquet_picto =  trim($val["Valeurs"]["Picto"]);
+                }
+            }
         }
     }
 ?>
@@ -22,11 +25,11 @@ if(!empty($vodPvr)||(isset($bouquetTv)&&!empty($bouquetTv))){
       </li>
         <?php } ?>
 <!--      OPTION_TV-->
-      <?php if(!empty($tarifOptionEden)&&isset($tarifOptionEden)&&isset($dummy3[3])){ ?>    
-              <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[3]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[3]["Valeurs"]["Libelle"]["string"])?$dummy3[3]["Valeurs"]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionEden,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
+      <?php if(!empty($tarifOptionEden)&&isset($tarifOptionEden)&&!empty($dummy3)&&isset($dummy3[2])){ ?>    
+              <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[2]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[2]["Valeurs"]["Libelle"]["string"])?$dummy3[2]["Valeurs"]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionEden,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
       <?php } 
-            if(!empty($tarifOptionBein)&&isset($tarifOptionBein)&&isset($dummy3[4])){ ?>    
-              <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[4]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[4]["Valeurs"]["Libelle"]["string"])?$dummy3[4]["Valeurs"]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionBein,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
+            if(!empty($tarifOptionBein)&&isset($tarifOptionBein)&&!empty($dummy3)&&isset($dummy3[3])){ ?>    
+              <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$dummy3[3]["Valeurs"]["Picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo isset($dummy3[3]["Valeurs"]["Libelle"]["string"])?$dummy3[3]["Valeurs"]["Libelle"]["string"]:""; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($tarifOptionBein,2,',',' ')."€/mois"; ?></span><!--<br>(+18)--></li>
       <?php } 
       
      // VOD_PVR

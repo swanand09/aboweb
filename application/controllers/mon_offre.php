@@ -292,16 +292,7 @@ class Mon_offre extends MY_Controller {
          $data["totalParMois"] = $this->getTotal($this->iad["Tarif"]);
          $localite    = $this->session->userdata("localite");
          $dummyPanier = $this->session->userdata("dummyPanier");
-         //facturation
-//         if(isset($dummyPanier["dummy6"])){
-//            foreach($dummyPanier["dummy6"] as $val){
-//                $data["totalParMois"] = $this->getTotal($val["Tarif"]);             
-//            }
-//         }
-         
-         
-          
-
+  
             $id_crm = $this->input->post("id_crm");
             $produit =  $this->session->userdata("produit");           
             $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
@@ -422,6 +413,7 @@ class Mon_offre extends MY_Controller {
          }
            $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr; $data["vodPvr"] = $vodPvr; 
            $this->session->set_userdata("vodPvr",$vodPvr); 
+           $this->session->set_userdata("optionTvArr",$optionTvArr);
             //Go to bouquet tv or mes coordonnes 
             //if($count_tv>0){
            $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);   
@@ -512,9 +504,9 @@ class Mon_offre extends MY_Controller {
         //total 1ere facture
         $caution_dummy5 = $this->session->userdata("caution_dummy5");
         $this->session->set_userdata("oneshot_dummy7",$data["oneshot_dummy7"]);
-        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
+        $data["total1erFact"]  = ($decoder_tv=="uncheck")?"":$data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
         //total 2eme facture
-        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];
+        $data["total2emeFact"] = ($decoder_tv=="uncheck")?"":$data["totalParMois"]+$caution_dummy5[1];
         
         //caution decodeur
         $prevState[1]["caution_decodeur_dummy5"] = "";
@@ -525,18 +517,12 @@ class Mon_offre extends MY_Controller {
         }
         
         $prevState[1]["total_par_mois"]       = $this->load->view("general/total_mois",$data,true);
-      //  $prevState[0]["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);
+        $data["vodPvr"] = $this->session->userdata("vodPvr");
+        $data["bouquetTv"] = "";
+        $data["dummy3"]="";
+        $prevState[1]["options_dummy3"]    = ($decoder_tv=="uncheck")?"":$this->load->view("general/options_dummy3",$data,true);;
         $this->session->set_userdata('prevState',$prevState);            
-        /*
-        echo json_encode(array(
-                                "forfait_dummy1"=>$prevState[1]["forfait_dummy1"],
-                                "location_equipements_dummy4"=>$prevState[1]["location_equipements_dummy4"],
-                                "frais_activation_facture_dummy7"=>$prevState[1]["frais_activation_facture_dummy7"],
-                                "total_par_mois"=>$prevState[1]["total_par_mois"],
-                                "caution_decodeur_dummy5" => $prevState[1]["caution_decodeur_dummy5"]
-                              )
-                        );*/
-           echo json_encode($prevState[1]);
+        echo json_encode($prevState[1]);
     }
     
     //dummy3 update bouquet

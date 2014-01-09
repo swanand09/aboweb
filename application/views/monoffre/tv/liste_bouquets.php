@@ -31,7 +31,19 @@
             }
         }
     }
+    /*
+   echo "<pre>";
+   print_r($bouqTvArr);
+   echo "</pre>";
+  
+   echo "<pre>";
+   print_r($optionTvArr);
+   echo "</pre>";
    
+   echo "<pre>";
+   print_r($vodPvr);
+   echo "</pre>";
+   */
 ?>
 <form class="frm-tv" onSubmit="javascript:gotoMesCoord();return false; ">
 
@@ -214,8 +226,7 @@
            </div>
        
             <?php
-                    $count++;
-                
+                $count++;
             }
             ?>
          

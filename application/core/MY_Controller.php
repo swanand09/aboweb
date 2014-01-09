@@ -169,11 +169,12 @@ class MY_Controller extends CI_Controller {
         public function controller_merci_vue()
         {
             $this->template->set_layout('merci');
+            $this->data["moyen_paiement"] = $this->session->userdata("moyen_paiement");
             $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Merci')
                             ->set_partial('contenu', 'merci/merci')                          
-                            ->build('page');
+                            ->build('page',$this->data);
         }
         
         //get total par mois

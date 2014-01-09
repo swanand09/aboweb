@@ -203,6 +203,7 @@ class Paiement extends MY_Controller {
         $pdf->Write(0, utf8_decode($bic[10]));
 
         $pdf->Output('MANDAT-SEPA-0913-AG-RE-HD.pdf','D');
+        $this->session->destroy();
       }
     
     public function enregistreSouscription()
@@ -371,6 +372,7 @@ class Paiement extends MY_Controller {
                            );
                }
                $dataArr["moyen_paiement"]='PR';
+               $this->session->set_userdata("moyen_paiement","PR");
         }
         if($this->input->post("mode_pay")=="cartebleue"){
                       
@@ -383,6 +385,7 @@ class Paiement extends MY_Controller {
                               "cryptogramme"     =>  $this->input->post("cryptogramme")
                         );
             $dataArr["moyen_paiement"]='CB';
+            $this->session->set_userdata("moyen_paiement","CB");
         }
         
         $context = $this->session->userdata("context");

@@ -14,7 +14,7 @@ $(function(){
 	//Type Voie
 	$('.type_voie').autocomplete({ 
 		source:voieSet,
-		minLength: 0
+		minLength: 1
 	}).focus(function(req,add){ // display autocomplete data onfocus / without typing any letters
 		if ($(this).val().length == 0) {
 			{
@@ -22,10 +22,12 @@ $(function(){
 			}
     	}
 	});
+
+	
 	//Complément numéro
 	$('.comp_numero').autocomplete({
 		source:complementnoSet,
-		minLength: 0
+		minLength: 1
 	}).focus(function(req,add){ // display autocomplete data onfocus / without typing any letters
 		if ($(this).val().length == 0) {
 			{
@@ -181,3 +183,4 @@ var validateCompNumEntryList = function( field, rules, i, options ){
 	}
 
 };
+

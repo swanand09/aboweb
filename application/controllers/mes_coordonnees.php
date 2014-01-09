@@ -145,7 +145,8 @@ class Mes_coordonnees extends MY_Controller {
             $this->session->set_userdata('telephone_bureau',"");
         }
         if(!array_key_exists("telephone_domicile",$this->data['userdata'])){
-            $this->session->set_userdata('telephone_domicile',"");
+            $num_tel = $this->session->userdata("num_tel");
+            $this->session->set_userdata('telephone_domicile',$num_tel);
         }
         
         

@@ -70,7 +70,7 @@ $(function () {
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
 	//$('.numero').mask("99999");
-        $('#ligne_prefix').mask("9999");
+	$('#ligne_prefix').mask("9999");
 	$('#ligne_sufix').mask("999999");
 	$('#ligne,.telephone').mask("9999999999");
 	$('#cle').mask("99");
@@ -95,50 +95,17 @@ $(function () {
 		}
 	});
 
-	/*-------------------------------------/
-	* Right sidebar scroll ( PANIER )
-	--------------------------------------*/
 
-	var $sidebar   = $(".right-content"), 
-	    $window    = $(window),
-	    offset     = $sidebar.offset(),
-	    topPadding = 0;
-	var footerPosition = $('.main-footer').offset().top;
-	var stopScroll;
+	/*--------------------------------
+	*  Change focus after prefix
+	---------------------------------*/
+	/*$('#ligne_prefix').keydown(function(){
+		if(this.value.length > 2 )
+		{
+			$('#ligne_sufix').focus();
+		}
+	});*/
 
-
-	var lastScrollTop = 0;
-	$(window).scroll(function(event){
-		//console.clear();
-	   var st = $(this).scrollTop();
-	   if (st > lastScrollTop){ // IF scrolling Down
-
-	       if ($window.scrollTop() > offset.top ) 
-	       {
-	      	    stopScroll = $('#stopScroll').offset().top;
-
-	      	    if( stopScroll < footerPosition )
-	      	    {
-	      	    	//$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) + topPadding });
-	      	    }
-	       } 
-	   } 
-	   else //if scrolling UP
-	   {
-
-	   	if( $window.scrollTop() > offset.top ) {
-
-	      //$sidebar.stop().animate({ marginTop: $window.scrollTop() - (offset.top) });
-	  	}
-
-	   }
-	   lastScrollTop = st;
-
-	   /*console.log("stopScroll:"+stopScroll);
-	   console.log("offset top:"+offset.top);
-	   console.log("Window :"+$window.scrollTop());
-	   console.log("footerPosition:"+footerPosition);*/
-	});
 
 	/*--------------------------------
 	*  Page paiement toggle
@@ -279,7 +246,8 @@ window.onload = function () {
 		    levelColors: ['95bc46','95bc46']
 		});	
 	}
-}*/
+}
+*/
 
 /*------------------------------------------------
 * IBAN Validation
@@ -329,7 +297,6 @@ var validateIbanFr = function( field, rules, i, options ){
 */
 var validateBic = function( field, rules, i, options ){
 	//combine the values of all textboxes #bic
-	//var bic = $('#bic1').val() + $('#bic2').val();
 	var bic = $('#bic').val();
 	var bicRegex = /([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/;
 	//return the error message if bic is not valid

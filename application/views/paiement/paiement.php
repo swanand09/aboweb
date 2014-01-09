@@ -23,24 +23,7 @@
           <div class="row">
               <div class="column twelve"><label><input checked="checked" type="checkbox" name="adresse_identique" value="1" id="show-hide-adresse">Mon adresse de paiement est identique à mon adresse de facturation. </label></div>
           </div>
-          <div id='adresse-paiement' class='hide'>
-            <!-- Civilité-->
-            <div class='row'>
-              <div class='columns bottom-10 two'><label>Civilité :<span class='has-tip' title='obligatoire'>*</span></label></div>
-              <div class='columns bottom-10 end'>
-                <label class='left'><input class='validate[required]' type='radio' name='civilite_pa' value='M.'/>M.</label>
-                <label class='left'><input class='validate[required]' type='radio' name='civilite_pa' value='Mme'/>Mme</label>
-                <label class='left'><input class='validate[required]' type='radio' name='civilite_pa' value='Melle'/>Melle</label>
-              </div>
-            </div>
-            <!-- Nom -->
-            <div class='row'>
-              <div class='columns two'><label>Nom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] nom' name='nom_pa' /></div>
-            </div>
-            <!--Prénom -->
-            <div class='row'>
-              <div class='columns two'><label>Prénom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,maxSize[30]] prenom' name='prenom_pa' /></div>
-            </div>
+          <div id='adresse-paiement' class='hide'>           
             <!--Numéro & Complément numéro & Type de voie-->
             <div class='row'>
               <div class='columns two'><label>Numéro :</label></div><div class='two columns'><input type='text' class='numero' name='numero_pa' /></div>
@@ -88,7 +71,7 @@
 
     <!--Carte bancaire-->
       <div class='row section-carte-bancaire'>
-          <input type="hidden" name='titulaire' value="nom prenom" class="validate[required]" id="titulaire" maxsize = "60">
+<!--          <input type="hidden" name='titulaire' value="nom prenom" class="validate[required]" id="titulaire" maxsize = "60">-->
         <h3>CARTE BANCAIRE</h3>
         <div class='column border-gray misc-custom-5 top-20 p20all'>
           <div class='column twelve'><p>Saisissez ci-dessous les informations relatives à la carte de paiement utilisée pour effectuer le dépôt de garantie :</p></div>
