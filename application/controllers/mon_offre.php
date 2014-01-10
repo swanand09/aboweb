@@ -333,7 +333,7 @@ class Mon_offre extends MY_Controller {
             }
             
             $data["dummyPanier"] = $dummyPanier;
-         $bouqTvArr = array(); $optionTvArr = array();$vodPvr = array();
+         $bouqTvArr = array(); $optionTvArr = array();$vodPvrArr = array();
          if(isset($dummyPanier)&&!empty($dummyPanier)){
             foreach($dummyPanier as $key=>$val){
                if(!empty($val)){
@@ -357,16 +357,42 @@ class Mon_offre extends MY_Controller {
                               foreach($val as $val2){
                                   switch($val2["Valeurs"]["Categorie"]){
                                       case "BOUQUET_TV":
-                                          array_push($bouqTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
+                                          array_push($bouqTvArr, array(
+                                                                        $val2["Valeurs"]["Libelle"]["string"]=>array(
+                                                                                                                        "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
+                                                                                                                        "picto"     => $val2["Valeurs"]["Picto"],
+                                                                                                                        "id_crm"    => $val2["Id_crm"],
+                                                                                                                        "id_web"    => $val2["Valeurs"]["Id_web"],
+                                                                                                                        "promo"     => array(
+                                                                                                                                         "Tarif_promo"      =>  $val2["Tarif_promo"],
+                                                                                                                                         "Duree_mois_promo" =>  $val2["Duree_mois_promo"]
+                                                                                                                                        )
+                                                                                                                     )
+                                                                       )
+                                                      );
                                       break;
                                       case "OPTION_TV":
-                                          array_push($optionTvArr, array($val2["Valeurs"]["Libelle"]["string"]=>$val2["Valeurs"]["Tarif"]["decimal"],array("Tarif_promo"=>$val2["Tarif_promo"],"Duree_mois_promo"=>$val2["Duree_mois_promo"])));
+                                          array_push($optionTvArr, array(
+                                                                         $val2["Valeurs"]["Libelle"]["string"]=>array(
+                                                                                                                         "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
+                                                                                                                         "picto"     => $val2["Valeurs"]["Picto"],
+                                                                                                                         "id_crm"    => $val2["Id_crm"],
+                                                                                                                         "id_web"    => $val2["Valeurs"]["Id_web"],
+                                                                                                                         "promo"     => array(
+                                                                                                                                                "Tarif_promo"=>$val2["Tarif_promo"],
+                                                                                                                                                "Duree_mois_promo"=>$val2["Duree_mois_promo"]
+                                                                                                                                             )
+                                                                                                                      )
+                                                                        )
+                                                      );
                                       break;
                                       case "VOD_PVR":
-                                           array_push($vodPvr, array(
+                                           array_push($vodPvrArr, array(
                                                                         $val2["Valeurs"]["Libelle"]["string"]=>array(
                                                                                                                      "tarif"=>$val2["Valeurs"]["Tarif"]["decimal"],
                                                                                                                      "picto"=>$val2["Valeurs"]["Picto"],
+                                                                                                                     "id_crm"    => $val2["Id_crm"],
+                                                                                                                     "id_web"    => $val2["Valeurs"]["Id_web"],
                                                                                                                      "promo"=>array(
                                                                                                                                      "Tarif_promo"=>$val2["Tarif_promo"],
                                                                                                                                      "Duree_mois_promo"=>$val2["Duree_mois_promo"])
@@ -411,9 +437,11 @@ class Mon_offre extends MY_Controller {
                 }
             }
          }
-           $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr; $data["vodPvr"] = $vodPvr; 
-           $this->session->set_userdata("vodPvr",$vodPvr); 
-           $this->session->set_userdata("optionTvArr",$optionTvArr);
+           $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr; $data["vodPvr"] = $vodPvrArr; 
+           $this->session->set_userdata("bouquetTv",$bouqTvArr);
+           $this->session->set_userdata("vodPvr",$vodPvrArr); 
+           $this->session->set_userdata("optionTv",$optionTvArr);
+           
             //Go to bouquet tv or mes coordonnes 
             //if($count_tv>0){
            $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);   
@@ -421,7 +449,7 @@ class Mon_offre extends MY_Controller {
             if(!empty($bouqTvArr)){
                 $this->load->model('stb_model','stb'); 
                 $data["base_url_stb"] = BASEPATH_STB;
-                $data["bouquet_list"] = $this->stb->retrievChainesList();
+                $data["bouquet_list"] = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr));
                 //$data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
@@ -528,16 +556,16 @@ class Mon_offre extends MY_Controller {
     //dummy3 update bouquet
     public function updateBouquet(){
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-        $bouquetTv =  $this->input->post("bouquetTv");
-        $data["bouquetTv"] = $bouquetTv;
+        $bouquetChoisi =  $this->input->post("bouquetChoisi");
+        $data["bouquetTv"] = $this->session->userdata("bouquetTv");
          
         //verifier si les options en session contiennent des valeurs
         $tarifOptionEden = $this->session->userdata("tarifOptionEden"); 
         $tarifOptionBein = $this->session->userdata("tarifOptionBein");
                 
-        if(!empty($bouquetTv)){
-            $this->session->set_userdata("bouquetTv",$bouquetTv); 
-            $bouquetTv = explode("_",$bouquetTv); 
+        if(!empty($bouquetChoisi)){
+            //$this->session->set_userdata("bouquetTv",$bouquetTv); 
+            $bouquetChoisi = explode("_",$bouquetChoisi); 
             $tarifBouqTv = $this->session->userdata("tarifBouqTv");
             if(!empty($tarifBouqTv)){
               $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);
@@ -554,16 +582,16 @@ class Mon_offre extends MY_Controller {
              $this->session->set_userdata("vodPvrOneshotDummy3Crm","");
              $this->session->set_userdata("vodPvrRecurrentDummy3Crm","");
             }
-            $data["totalParMois"] = $this->getTotal($bouquetTv[1]);
-            if(!empty($bouquetTv[3])&&$bouquetTv[3]!="inclus")
+            $data["totalParMois"] = $this->getTotal($bouquetChoisi[1]);
+            if(!empty($bouquetChoisi[3])&&$bouquetChoisi[3]!="inclus")
             {
-                 $data["totalParMois"] = $this->getTotal($bouquetTv[3]);
+                 $data["totalParMois"] = $this->getTotal($bouquetChoisi[3]);
             }    
-             if(!empty($bouquetTv[4])&&$bouquetTv[4]!="inclus")
+             if(!empty($bouquetChoisi[4])&&$bouquetChoisi[4]!="inclus")
             {
-                 $data["totalParMois"] = $this->getTotal($bouquetTv[4]);
+                 $data["totalParMois"] = $this->getTotal($bouquetChoisi[4]);
             } 
-            $this->session->set_userdata("tarifBouqTv",$bouquetTv[1]); 
+            $this->session->set_userdata("tarifBouqTv",$bouquetChoisi[1]); 
             
              $dummyPanier = $this->session->userdata("dummyPanier");
              $data["dummy3"] = $dummyPanier["dummy3"];
@@ -571,7 +599,7 @@ class Mon_offre extends MY_Controller {
               foreach($dummyPanier["dummy3"] as $key=>$val){ 
                   switch($val["Valeurs"]["Categorie"]){
                       case "BOUQUET_TV": //bouquetTvDummy3Crm;               
-                          if($val["Valeurs"]["Tarif"]==$bouquetTv[1]){
+                          if($val["Valeurs"]["Tarif"]==$bouquetChoisi[1]){
                               $this->session->set_userdata("bouquetTvDummy3Crm",$val["Id_crm"]);
                           }
                       break;  
@@ -776,8 +804,10 @@ class Mon_offre extends MY_Controller {
     
     public function retrieveChaines(){
          $this->load->model('stb_model','stb'); 
+         $bouqTvArr = $this->session->userdata("bouquetTv");
+         $optionTvArr = $this->session->userdata("optionTv");
        echo "<pre>";
-       print_r($this->stb->retrievChainesList());
+       print_r($this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr)));
        echo "</pre>";
     } 
     

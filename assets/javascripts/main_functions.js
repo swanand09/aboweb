@@ -214,7 +214,7 @@ var preload = function(){
                 $.post(
                     updateBouquet,
                      {
-                        bouquetTv : valeur
+                        bouquetChoisi : valeur
                      },
                     function(data){
                       $("#recap_contenu").children("#options").remove();  

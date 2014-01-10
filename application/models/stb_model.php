@@ -16,7 +16,7 @@ class Stb_model extends CI_Model
         $this->load->database('stb');
     }
     
-    public function retrievChainesList()
+    public function retrievChainesList($fluxData)
     {
         $this->localite = $this->session->userdata("localite");   
         switch($this->localite)
@@ -34,6 +34,17 @@ class Stb_model extends CI_Model
                 $this->deptId = 4;
             break;
         }
+        
+        $idWebBouq = "1,";
+        $countId   = 0;
+        $nomBouq   = "";
+        foreach($fluxData["bouquetTv"] as $key=>$val){
+            foreach($val as $key2=>$val2){
+               $idWebBouq .=( $countId==(sizeof($val)-1))?$val2["id_web"].",":$val2["id_web"];
+               $nomBouq   .=( $countId==(sizeof($val)-1))?$key2.",":$key2;  
+               $countId++;
+            }
+        }     
         //bouquet
         $sql1 = "select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
                   (
@@ -41,9 +52,10 @@ class Stb_model extends CI_Model
                      WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 ORDER BY F.order
                   ) C
                  INNER JOIN `mod_wa_bouquets` D
-                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(1,5,6,7) ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
+                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(".$idWebBouq.") ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
        
+        
        $query1 = $this->db->query($sql1, array($this->deptId)); 
        
        if($query1->num_rows() > 0)
@@ -83,6 +95,32 @@ class Stb_model extends CI_Model
          //$this->maTv["Bouquet"]["GIGA"] = array_filter($this->maTv["GIGA"],array(new retrieveUnikChaine($this->maTv["MEGA"]),'filterUnique'));
        }
        
+       
+       //fitrer les chaines de bouquets
+      $nomBouq = explode(",", $nomBouq);
+      
+      foreach($nomBouq as $key=>$val){
+         if($key>0){
+             foreach($this->maTv["Bouquet"][strtoupper($nomBouq[0])] as $key2=>$val2){
+                 if(is_array($val2)){
+                     
+//                    foreach($val2 as $key3=>$val3){                       
+                        $this->maTv["Bouquet"][strtoupper($val)][$key2] = array_filter($this->maTv["Bouquet"][strtoupper($val)][$key2],array(new retrieveUnikChaine($val2),'filterUnique'));
+//                    }
+                 }
+             }   
+         }
+      }
+       
+       
+       $idWebOption = "";
+        $countId =0;
+        foreach($fluxData["optionTv"] as $key=>$val){
+            foreach($val as $key2=>$val2){
+               $idWebOption .=($countId==(sizeof($val)-1))?$val2["id_web"].",":$val2["id_web"];
+               $countId++;
+            }
+        }
         //options
         $sql2 = "select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
                   (
@@ -90,8 +128,10 @@ class Stb_model extends CI_Model
                      WHERE F.uid= E.cat_uid AND G.uid=E.chain_uid AND E.disable = 0 ORDER BY F.order
                   ) C
                  INNER JOIN `mod_wa_bouquets` D
-                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.etat=2 ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
+                 ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(".$idWebOption.") AND D.etat=2 ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
+        
+         
         $query2 = $this->db->query($sql2, array($this->deptId)); 
        
         if($query2->num_rows() > 0)
@@ -160,9 +200,9 @@ class retrieveBouquet
 
     function filterUnique($i) 
     {
-        if(!in_array($i,$this->bouquet)){
-            return $i;
-          }
-     
+//        if(!in_array($this->bouquet,$i)){
+//            return $i;
+//          }
+     return array_diff($i,$this->bouquet);
     }
  }
