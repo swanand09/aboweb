@@ -297,6 +297,7 @@ var preload = function(){
             
           function verifMailWebServ(){
             var emailMsv = $("#email_mediaserv").val();
+
             if(emailMsv.length){
                 preload();
                 $.post(                   
@@ -319,9 +320,9 @@ var preload = function(){
                     },"json"
                ); 
             }else{
-               alert("Ce champs est requis");
                $("#email_mediaserv").val("").focus();
            }
+           $('#email_mediaserv').validationEngine('hide');
         }
           
           function verifParainWebServ()
