@@ -1,6 +1,9 @@
 /*
 * Misc CSS
 */
+.recap-add .val{
+	line-height: 20px;
+}
 .reveal-modal h2{
 	border-bottom: 1px dotted;
 	font-size: 14px;
@@ -971,7 +974,7 @@ img.prix_bare{
    text-transform: uppercase;
 }
 
-#ligne,#ligne_sufix,#ligne_prefix{
+#ligne,#ligne_sufix,#ligne_prefix {
 	color: #9AC448;
     font-size: 1.1em;
     font-weight: bold;

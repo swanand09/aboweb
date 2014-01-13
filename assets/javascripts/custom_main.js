@@ -248,7 +248,6 @@ window.onload = function () {
 	}
 }
 */
-
 /*------------------------------------------------
 * IBAN Validation
 * @param {jqObject} the field where the validation applies
@@ -320,5 +319,27 @@ var validateTelephonePortable = function( field, rules, i, options ){
 	//return the error message if string does not start with FR/fr
 	if(!telephonePortableRegex.test(telephonePortable)) {
 		return '*Le numéro du téléphone portable doit commencer par 06 ou 07 uniquement';
+	}
+}
+
+
+/*------------------------------------------------
+* Custom email validation - validation before @mediaserv.net
+* @param {jqObject} the field where the validation applies
+* @param {Array[String]} validation rules for this field
+* @param {int} rule index
+* @param {Map} form options
+* @return an error string if validation failed
+*/
+var ValidateEmail = function( field, rules, i, options ){
+	//combine the values of all textboxes #bic
+	var email = field.val() + "@mediaserv.net";
+	var emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i;
+	console.log(email);
+	//return the error message if bic is not valid
+	if( field.val().length > 0 ) {
+		if(!emailRegex.test(email)) {
+			return 'Votre email n\'est pas valide';
+		}
 	}
 }

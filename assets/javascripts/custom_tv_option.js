@@ -4,16 +4,14 @@ $(function() {
   $('.four.bouquet').fadeTo('slow',.5);
 
   //Enable/Disable 'list of bouquet' on Click/Checkbox
-  //Enable/Disable checkbox Bein/Eden
+  //Enable/Disable checkbox Ultra options
   //Open accordion on Click/ Checkbox
   $(document).on('click','#beneficier',function(){
 
     //caching DOM objects
     var decodeurTvNetgem = $('#decodeur-tv-netgem');
-    var optionEden = $("input[name='eden']");
-    var optionBein = $("input[name='bein']");
+    var ultraOption = $('input.ultraoption');
     var disabledDiv = $('.disabled-div');
-
 
     if($(this).is(":checked"))
     {
@@ -23,8 +21,7 @@ $(function() {
       disabledDiv.hide();
       $('.accordion .first').addClass('active');
       $('.accordion .first .content').css({ display: 'block'});
-      optionEden.attr('disabled', false);
-      optionBein.attr('disabled', false);
+      ultraOption.attr('disabled', false);
     }
     else
     {
@@ -35,11 +32,10 @@ $(function() {
       $('.accordion .second').removeClass('active');
       $('.accordion .first .content').css({ display: 'none'});
       $('.accordion .second .content').css({ display: 'none'});
-      optionEden.attr('disabled', true);
-      optionBein.attr('disabled', true);
-      optionEden.prop('checked', false);
-      optionBein.prop('checked', false);
-
+      ultraOption.attr('disabled', true);
+      ultraOption.prop('checked', false);
+      $('.prix_option').removeClass('inclus');
+      $('.prix_option').html(promoInitialText);
       //reinitiate Chaine filter group
       $('#filter li').removeClass('active');
       var selector = $('.eight.chaines .grid li');
@@ -66,7 +62,6 @@ $(function() {
     }
     else //option ultra will be unchecked
     {
-      //Enable option Bein & Eden Checkbox
       removeUltraoptions(promoInitialText);
     }
     chainesFilter(selector,datagroup);
@@ -94,13 +89,12 @@ var chainesFilter = function(selector,datagroup) {
   });
 }
 
-// Checked Ultra options ( Bein & Eden )
+// Checked Ultra options 
 var addUltraOptions = function(new_content) {
 
-  $("input[name='eden']").prop('checked', true);
-  $("input[name='eden']").attr('disabled', true);
-  $("input[name='bein']").prop('checked', true);
-  $("input[name='bein']").attr('disabled', true);
+  var ultraOption = $('input.ultraoption');
+  ultraOption.prop('checked', true);
+  ultraOption.attr('disabled', true);
   //change 9€ to INCLUS
   $('.prix_option').addClass('inclus');
   $('.prix_option').html(new_content);
@@ -109,13 +103,12 @@ var addUltraOptions = function(new_content) {
     }, 1500);
 }
 
-// Uncheck Ultra options ( Bein & Eden )
+// Uncheck Ultra options 
 var removeUltraoptions = function(initial_content) {
 
-  $("input[name='eden']").prop('checked', false);
-  $("input[name='eden']").attr('disabled', false);
-  $("input[name='bein']").prop('checked', false);
-  $("input[name='bein']").attr('disabled', false);
+  var ultraOption = $('input.ultraoption');
+  ultraOption.prop('checked', false);
+  ultraOption.attr('disabled', false);
   //change INCLUS to 9€
   $('.prix_option').removeClass('inclus');
   $('.prix_option').html(initial_content);

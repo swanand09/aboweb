@@ -362,7 +362,7 @@ class Mon_offre extends MY_Controller {
                                                                                                                         "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
                                                                                                                         "picto"     => $val2["Valeurs"]["Picto"],
                                                                                                                         "id_crm"    => $val2["Id_crm"],
-                                                                                                                        "id_web"    => $val2["Valeurs"]["Id_web"],
+                                                                                                                        "id_web"    => $val2["Id_web"],
                                                                                                                         "promo"     => array(
                                                                                                                                          "Tarif_promo"      =>  $val2["Tarif_promo"],
                                                                                                                                          "Duree_mois_promo" =>  $val2["Duree_mois_promo"]
@@ -377,7 +377,7 @@ class Mon_offre extends MY_Controller {
                                                                                                                          "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
                                                                                                                          "picto"     => $val2["Valeurs"]["Picto"],
                                                                                                                          "id_crm"    => $val2["Id_crm"],
-                                                                                                                         "id_web"    => $val2["Valeurs"]["Id_web"],
+                                                                                                                         "id_web"    => $val2["Id_web"],
                                                                                                                          "promo"     => array(
                                                                                                                                                 "Tarif_promo"=>$val2["Tarif_promo"],
                                                                                                                                                 "Duree_mois_promo"=>$val2["Duree_mois_promo"]
@@ -392,7 +392,7 @@ class Mon_offre extends MY_Controller {
                                                                                                                      "tarif"=>$val2["Valeurs"]["Tarif"]["decimal"],
                                                                                                                      "picto"=>$val2["Valeurs"]["Picto"],
                                                                                                                      "id_crm"    => $val2["Id_crm"],
-                                                                                                                     "id_web"    => $val2["Valeurs"]["Id_web"],
+                                                                                                                     "id_web"    => $val2["Id_web"],
                                                                                                                      "promo"=>array(
                                                                                                                                      "Tarif_promo"=>$val2["Tarif_promo"],
                                                                                                                                      "Duree_mois_promo"=>$val2["Duree_mois_promo"])
@@ -558,7 +558,7 @@ class Mon_offre extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $bouquetChoisi =  $this->input->post("bouquetChoisi");
         $data["bouquetTv"] = $this->session->userdata("bouquetTv");
-         
+        $data["bouquetChoisi"] =  $bouquetChoisi;
         //verifier si les options en session contiennent des valeurs
         $tarifOptionEden = $this->session->userdata("tarifOptionEden"); 
         $tarifOptionBein = $this->session->userdata("tarifOptionBein");

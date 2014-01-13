@@ -379,7 +379,7 @@ class Paiement extends MY_Controller {
             $dataArr["mode_paiement"][] =
                         array(
                               "mode_pay"         =>  "cartebleue",
-                              "titulaire"        =>  $this->input->post("titulaire"),                              
+                              "titulaire"        =>  $this->input->post("titulaire_cb"),                              
                               "date_expiration"  =>  $this->input->post("date_expiration_mois").$this->input->post("date_expiration_annee"),
                               "numero"           =>  $this->input->post("numerodecarte"),
                               "cryptogramme"     =>  $this->input->post("cryptogramme")

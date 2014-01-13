@@ -98,7 +98,7 @@ class Stb_model extends CI_Model
        
        //fitrer les chaines de bouquets
       $nomBouq = explode(",", $nomBouq);
-      
+      /*
       foreach($nomBouq as $key=>$val){
          if($key>0){
              foreach($this->maTv["Bouquet"][strtoupper($nomBouq[0])] as $key2=>$val2){
@@ -110,8 +110,27 @@ class Stb_model extends CI_Model
                  }
              }   
          }
+      }*/
+      $newArr = array();
+       foreach($nomBouq as $key=>$val){
+         if($key>0){
+             foreach($this->maTv["Bouquet"][strtoupper($nomBouq[0])] as $key2=>$val2){
+                 if(is_array($val2)){
+                     
+//                    foreach($val2 as $key3=>$val3){                       
+                        //$this->maTv["Bouquet"][strtoupper($val)][$key2] = array_filter($this->maTv["Bouquet"][strtoupper($val)],array(new retrieveUnikChaine($val2),'filterUnique'));
+                    foreach($val2 as $key3=>$val3){
+                     $newArr = array_diff($this->maTv["Bouquet"][strtoupper($val)][$key2][$key3], $val3);                       
+                        if(!empty($newArr)){
+                            $this->maTv["Bouquet"][strtoupper($val)][$key2][$key3] = $newArr;
+                        }else{
+                            unset($this->maTv["Bouquet"][strtoupper($val)][$key2][$key3]);
+                        }
+                   }
+                 }
+             }   
+         }
       }
-       
        
        $idWebOption = "";
         $countId =0;
@@ -149,7 +168,7 @@ class Stb_model extends CI_Model
                 }   
                 
                 if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||$key==(sizeof($query2->result())-1))){
-                    $this->maTv["Options"][$prevBouquet][$prevCategorie] = $chaineArr;  
+                    $this->maTv["Options"][strtoupper($prevBouquet)][$prevCategorie] = $chaineArr;  
                     $chaineArr = array();
                     array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon)); 
                     // $countNoChain++; 

@@ -13,19 +13,9 @@ echo validation_errors();
     $check_papier = ($facture_data[1]=="papier")?"checked='checked'":"";
  }
 ?>
-<script>
-    function verifMailCheck(){
-       var verifMail = $("#verif_email").val();
-        if(verifMail=="faux"){
-           $('#email_mediaserv').validationEngine('showPrompt', 'Veuillez verifier votre e-mail médiaserv', 'error','topRight', true);    
-           return false;
-        }else{
-            return true;
-        }
-    }
-</script>
+
 <div class="left-etape-content">
-    <form action="recapitulatif" method="POST" id="mes-coordonnees" onsubmit="javascript:return verifMailCheck();">
+    <form action="recapitulatif" method="POST" id="mes-coordonnees">
         <input type="hidden" name="page_3" value="mes_coordonnes" />
       <!--Adresse coordonnées-->
         <div class="adresse-abonnement">
@@ -240,7 +230,7 @@ echo validation_errors();
               <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
             </div>
             <div class="column six"> 
-               <input type='text' class='validate[required]' name='email_mediaserv' onchange="javascript:$('#verif_email').val('faux');" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='has-tip' title='obligatoire'>*</span>
+               <input type='text' class='validate[required,funcCall[validateVerifyEmail]]' name='email_mediaserv' onchange="javascript:$('#verif_email').val('faux');" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='has-tip' title='obligatoire'>*</span>
             </div>
             <div class="column three"> 
               <span class="postfix">@mediaserv.net</span>
@@ -342,5 +332,10 @@ echo validation_errors();
       }
 
     };
-    
+    var validateVerifyEmail = function( field, rules, i, options ){
+        var verifMail = $("#verif_email").val();
+        if(verifMail=="faux"){
+           return "Veuillez verifier votre e-mail médiaserv";
+        }
+    }
 </script>

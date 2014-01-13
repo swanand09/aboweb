@@ -2,9 +2,9 @@
 <?php
 $bouquet_picto = "";
 $vodPvr = $this->session->userdata("vodPvr");
-if(!empty($vodPvr)||(isset($bouquetTv)&&!empty($bouquetTv))){
-    if(!empty($bouquetTv)){
-    $bouquetTv = explode("_",$bouquetTv);    
+if(!empty($vodPvr)||(isset($bouquetChoisi)&&!empty($bouquetChoisi))){
+    if(!empty($bouquetChoisi)){
+    $bouquetTv = explode("_",$bouquetChoisi);    
         if(!empty($dummy3)){
             foreach($dummy3 as $key=>$val){
                 if($bouquetTv[0]==$val["Valeurs"]["Libelle"]["string"]){

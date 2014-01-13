@@ -9,7 +9,7 @@
     }else{
         $valBeneficier = "dummy4_0";
     }
-
+  /*
     //option tv
     $tarif_bein = 0;
     $duree_promo_bein = 0;
@@ -17,6 +17,7 @@
     $tarif_eden = 0;
     $duree_promo_eden = 0;
     $tarif_promo_eden = 0;
+  
     if(!empty($optionTvArr)&&isset($optionTvArr)){
         foreach($optionTvArr as $key=>$val){
             if(isset($val["BeIN Sport"])){
@@ -42,7 +43,7 @@
    
    echo "<pre>";
    print_r($vodPvr);
-   echo "</pre>";
+   echo "</pre>";*/
    
 ?>
 <form class="frm-tv" onSubmit="javascript:gotoMesCoord();return false; ">
@@ -131,9 +132,13 @@
             <div class='columns four bouquet'>
               <ul id='filter'>
                   <?php 
+                  $nomBouq = "";
+                  $countId   = 0;
                     if(!empty($bouqTvArr)&&isset($bouqTvArr)){
                         foreach($bouqTvArr as $key=>$val){
                             foreach($val as $key2=>$val2){
+                                 $nomBouq   .=($countId==(sizeof($val)-1))?'"'.strtolower($key2).'",':'"'.strtolower($key2).'"';  
+                                  $countId++;
                    ?>
                             <li>
                                 <a href="#" onclick='javascript: choixBouquet("<?php echo $key2; ?>_<?php echo $val2["tarif"]; ?>_<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
@@ -165,105 +170,77 @@
             <div class='columns eight chaines'>
                  <?php
                     $prevBouq = "";
+                    $countBouq = 0;
                     if(!empty($bouqTvArr)&&isset($bouqTvArr)){
                            foreach($bouqTvArr as $key=>$val){
                                foreach($val as $key2=>$val2){
-                                   $prevBouq = $key2;
-                                    foreach($bouquet_list["Bouquet"][$key2] as $key3=> $val3){ 
-                                        if($key3!="nombreChaine"){?>
-                                              <div class='row'>
-                                                <h4><?php echo $key3; ?></h4>
-                                                <ul class='grid bqt no-border'>
-                                                   <?php foreach($val3 as $key4=>$val4){?>
-                                                    <li class='item' data-groups='["mega","giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val2["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                       
-                                                   <?php 
-                                                   }     
-                                                   foreach($bouquet_list["Bouquet"]["GIGA"] as $key3=> $val3){
-                                                         if($key3==$key&&$key3!="nombreChaine"){
-                                                              foreach($val3 as $key4=>$val4){
-                                                                  if(empty($bouquet_list["Bouquet"]["MEGA"][$key3][$key4])||!empty($bouquet_list["Bouquet"]["MEGA"][$key3][$key4])&&$bouquet_list["Bouquet"]["MEGA"][$key3][$key4]["nom_chaines"]!=$val4["nom_chaines"]){
-                                                               ?>
-                                                                  <li class='item' data-groups='["giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>
-                                                             <?php  }
-                                                             }  
-                                                       }
-                                                   }
-                                                   ?>
-                                                </ul>
-                                             </div>
-                                      <?php }
+                                   if($prevBouq!=""&&$prevBouq!=$key2){
+                                       $nomBouq = explode(",", $nomBouq);
+                                       unset($nomBouq[$countBouq]);
+                                       $nomBouq = implode(",",$nomBouq);
+                                       $countBouq++;
+                                   }
+                                    foreach($bouquet_list["Bouquet"][strtoupper($key2)] as $key3=> $val3){ 
+                                        if(!empty($val3)&&!preg_match('/option/',strtolower($key3))){
+                                            if($key3!="nombreChaine"){?>
+                                                  <div class='row'>
+                                                    <h4><?php echo $key3; ?></h4>
+                                                    <ul class='grid bqt no-border'>
+                                                       <?php foreach($val3 as $key4=>$val4){?>
+                                                        <li class='item' data-groups='[<?php echo $nomBouq;?>]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                       
+                                                       <?php 
+                                                       } 
+                                                       ?>
+                                                    </ul>
+                                                 </div>
+                                          <?php }
+                                        }
                                     }
+                                    $prevBouq = $key2;
                                  }
                            }
-                    }      
-                            
-                    foreach($bouquet_list["Bouquet"]["MEGA"] as $key=> $val){ 
-                        if($key!="nombreChaine"){
+                    } 
                  ?>
-                        <div class='row'>
-                           <h4><?php echo $key; ?></h4>
-                           <ul class='grid bqt no-border'>
-                              <?php foreach($val as $key2=>$val2){?>
-                               <li class='item' data-groups='["mega","giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val2["img_icon"]; ?>" alt ="<?php echo $val2["nom_chaines"]; ?>" /></li>                       
-                              <?php 
-                              }     
-                              foreach($bouquet_list["Bouquet"]["GIGA"] as $key3=> $val3){
-                                    if($key3==$key&&$key3!="nombreChaine"){
-                                         foreach($val3 as $key4=>$val4){
-                                             if(empty($bouquet_list["Bouquet"]["MEGA"][$key3][$key4])||!empty($bouquet_list["Bouquet"]["MEGA"][$key3][$key4])&&$bouquet_list["Bouquet"]["MEGA"][$key3][$key4]["nom_chaines"]!=$val4["nom_chaines"]){
-                                          ?>
-                                             <li class='item' data-groups='["giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>
-                                        <?php  }
-                                        }  
-                                  }
-                              }
-                              ?>
-                           </ul>
-                        </div>
-                <?php }
-                    }
-            $count = 0;
-            foreach($bouquet_list["Options"] as $key=> $val){
-          ?>
-           <div class='row ultra <?php echo ($count==0)?"ufirst":"";?>'>
-                <h4>
-                  <?php echo $key; ?>
-                  <span class='prix_option'>
-                      <?php //if($duree_promo_bein>0){ ?>
-                <!--<span class='promo'>9€</span>-->
-                    <span class='normal'><?php echo (strpos($key,"Eden")!==false)?$tarif_eden:$tarif_bein;?>€</span>
-                      <?php //} ?>
-                  </span>
-                </h4>
-                <ul class='bqt'>
-                     <?php foreach($val as $key2=>$val2){
-                            foreach($val2 as $key3=>$val3){
-                     ?>
-                         <li><img src="<?php echo BASEPATH_STB.$val3["img_icon"]; ?>" alt ="<?php echo $val3["nom_chaines"]; ?>" /></li>                  
-                    <?php
-                        }
-                     } 
+                        
+                <?php 
+                if(!empty($optionTvArr)&&isset($optionTvArr)){
+                   foreach($optionTvArr as $key=>$val){
+                       foreach($val as $key2=>$val2){
                     ?>
-                </ul>
-                <label class='top-10'>
-                     <?php if(strpos(strtolower($key),"eden")!==false){ ?>
-                        <input type="checkbox" disabled="disabled" value="<?php echo "Eden_".$tarif_eden; ?>" name="eden" id="option_eden" onclick="javascript: choixOption('option_eden');">
-                   <?php }else{?>
-                        <input type="checkbox" disabled="disabled" value="<?php echo "BeIN Sport_".$tarif_bein; ?>" name="bein" id="option_bein" onclick="javascript: choixOption('option_bein');">
-                   <?php } ?>
-                   <strong>Sélectionner</strong>
-                </label>
-           </div>
-       
-            <?php
-                $count++;
-            }
+                        <div class='row ultra <?php echo ($key==0)?"ufirst":"";?>'>
+                            <h4>
+                              <?php echo $key2; ?>
+                              <span class='prix_option'>
+                                  <?php if($val2["promo"]["Duree_mois_promo"]>0){?>
+                                    <span class="promo"><?php echo $val2["tarif"]; ?>€</span>
+                                    <span class="normal"><?php echo $val2["promo"]["Tarif_promo"]; ?>€</span>
+                                  <?php }else{ ?>
+                                  <span class="normal"><?php echo $val2["tarif"]; ?>€</span>
+                                  <?php } ?>
+                              </span>
+                            </h4>
+                            <ul class='bqt'>
+                                <?php
+                                foreach($bouquet_list["Options"][strtoupper($key2)] as $key3=> $val3){ 
+                                    foreach($val3 as $key4=>$val4){
+                                        ?>
+                                              <li><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                  
+                                     <?php             
+                                    }
+                                } 
+                                ?>
+                             </ul>
+                            <label class='top-10'>
+                                 <input type="checkbox" disabled="disabled" class='ultraoption'  value="<?php echo $key2."_".$val2["tarif"]; ?>" name="option_<?php echo $key; ?>" id="option_<?php echo $key; ?>" onclick="javascript: choixOption('option_<?php echo $key; ?>');">
+                               <strong>Sélectionner</strong>
+                            </label>                      
+                        </div>
+                            <?php
+                       }
+                   }
+                }
             ?>
-         
         </div>
-
-        
-        
               </div>
               <!-- end of acc content -->
             </li>

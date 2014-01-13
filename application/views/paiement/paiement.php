@@ -82,6 +82,7 @@
             <label class='left'><?php echo image("contenu/visa.png");?><input class='validate[required]' type='radio' name='typedecarte' value='visa'/></label>
             <label class='left'><?php echo image("contenu/mastercard.png");?><input class='validate[required]' type='radio' name='typedecarte' value='mastercard'/></label>
           </div>
+          <div class='column three top-10'>Titulaire</div><div class='column nine top-10'><input class='validate[required,custom[onlyLetterSp]]' type='text' name='titulaire_cb' id='titulaire_cb'/></div>
           <div class='column three top-10'>Numéro de carte</div><div class='column nine top-10'><input class='validate[required,creditCard]' type='text' name='numerodecarte' id='numerodecarte'/></div>
           <div class='column three'>Date d'expiration</div>
             <div class='column nine'>
