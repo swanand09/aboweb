@@ -30,6 +30,7 @@ class MY_Controller extends CI_Controller {
         var $degroupageDummy1Crm;
         
         var $bouquetTvDummy3Crm;
+        var $optionTvDummy3Crm;
         var $optionTvEdenDummy3Crm;
         var $optionTvBeinDummy3Crm;
         var $vodPvrOneshotDummy3Crm;

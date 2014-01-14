@@ -141,7 +141,7 @@
                                   $countId++;
                    ?>
                             <li>
-                                <a href="#" onclick='javascript: choixBouquet("<?php echo $key2; ?>_<?php echo $val2["tarif"]; ?>_<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
+                                <a href="#" onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
                                   <div class='columns five'>
                                 <span class='nombre_chaines'>+<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?></span>
                                     <label>Chaines</label>
@@ -231,7 +231,7 @@
                                 ?>
                              </ul>
                             <label class='top-10'>
-                                 <input type="checkbox" disabled="disabled" class='ultraoption'  value="<?php echo $key2."_".$val2["tarif"]; ?>" name="option_<?php echo $key; ?>" id="option_<?php echo $key; ?>" onclick="javascript: choixOption('option_<?php echo $key; ?>');">
+                                 <input type="checkbox" disabled="disabled" class='ultraoption'  value="<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$val2["id_crm"]; ?>" name="option_<?php echo $key; ?>" id="option_<?php echo $key; ?>" onclick="javascript: choixOption('option_<?php echo $key; ?>');">
                                <strong>Sélectionner</strong>
                             </label>                      
                         </div>

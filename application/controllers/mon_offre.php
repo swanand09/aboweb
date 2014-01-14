@@ -557,81 +557,30 @@ class Mon_offre extends MY_Controller {
     public function updateBouquet(){
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $bouquetChoisi =  $this->input->post("bouquetChoisi");
-        $data["bouquetTv"] = $this->session->userdata("bouquetTv");
+        $this->session->set_userdata("bouquetChoisi",$bouquetChoisi);
         $data["bouquetChoisi"] =  $bouquetChoisi;
-        //verifier si les options en session contiennent des valeurs
-        $tarifOptionEden = $this->session->userdata("tarifOptionEden"); 
-        $tarifOptionBein = $this->session->userdata("tarifOptionBein");
-                
-        if(!empty($bouquetChoisi)){
-            //$this->session->set_userdata("bouquetTv",$bouquetTv); 
-            $bouquetChoisi = explode("_",$bouquetChoisi); 
-            $tarifBouqTv = $this->session->userdata("tarifBouqTv");
-            if(!empty($tarifBouqTv)){
-              $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);
-              $this->session->set_userdata("tarifBouqTv","");
-              $data["totalParMois"] = $this->getTotal(-$tarifOptionEden);
-              $this->session->set_userdata("tarifOptionEden",""); 
-              $data["totalParMois"] = $this->getTotal(-$tarifOptionBein);
-              $this->session->set_userdata("tarifOptionBein","");
-              
-             //mettre les Id_crm en session 
-             $this->session->set_userdata("bouquetTvDummy3Crm","");
-             $this->session->set_userdata("optionTvEdenDummy3Crm","");
-             $this->session->set_userdata("optionTvBeinDummy3Crm","");
-             $this->session->set_userdata("vodPvrOneshotDummy3Crm","");
-             $this->session->set_userdata("vodPvrRecurrentDummy3Crm","");
-            }
-            $data["totalParMois"] = $this->getTotal($bouquetChoisi[1]);
-            if(!empty($bouquetChoisi[3])&&$bouquetChoisi[3]!="inclus")
-            {
-                 $data["totalParMois"] = $this->getTotal($bouquetChoisi[3]);
-            }    
-             if(!empty($bouquetChoisi[4])&&$bouquetChoisi[4]!="inclus")
-            {
-                 $data["totalParMois"] = $this->getTotal($bouquetChoisi[4]);
-            } 
-            $this->session->set_userdata("tarifBouqTv",$bouquetChoisi[1]); 
-            
-             $dummyPanier = $this->session->userdata("dummyPanier");
-             $data["dummy3"] = $dummyPanier["dummy3"];
-             //mettre les Id_crm en session
-              foreach($dummyPanier["dummy3"] as $key=>$val){ 
-                  switch($val["Valeurs"]["Categorie"]){
-                      case "BOUQUET_TV": //bouquetTvDummy3Crm;               
-                          if($val["Valeurs"]["Tarif"]==$bouquetChoisi[1]){
-                              $this->session->set_userdata("bouquetTvDummy3Crm",$val["Id_crm"]);
-                          }
-                      break;  
-                      case "OPTION_TV": //optionTvEdenDummy3Crm;               
-                          switch($val["Valeurs"]["Libelle"]["string"]){
-                            case "Eden":
-                                $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Id_crm"]);    
-                            break;
-                            case "BeIN Sport":
-                                    $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Id_crm"]);    
-                            break;
-                          }
-                         
-                      break;
-                      case "VOD_PVR": //vodPvrDummy3Crm;  
-                         switch($val["Valeurs"]["Type"])
-                         {
-                            case "ONESHOT":  //Enregistreur numérique
-                                $this->session->set_userdata("vodPvrOneshotDummy3Crm",$val["Id_crm"]);
-                            break;
-                            case "RECURRENT":  // Vidéo à la demande
-                                $this->session->set_userdata("vodPvrRecurrentDummy3Crm",$val["Id_crm"]);
-                            break;
-                         }
-                      break; 
-                  }
-               
-              }
-           // $data["vodTarif"]       = $bouquetTv[3];
-           // $data["numriquEnreg"]   = $bouquetTv[4];
-         }
         
+        $optionData = $this->session->userdata("optionData");
+        if(!empty($optionData)){
+         foreach($optionData as $key=>$val){
+               foreach($val as $key2=>$val2){
+                   $data["totalParMois"] = $this->getTotal(-$val2[2]); 
+               }
+            }
+        }
+        $this->session->set_userdata("optionData","");
+        $this->session->set_userdata("optionTvDummy3Crm","");
+        $data["optionData"] = array();
+        $tarifBouqTv = $this->session->userdata("tarifBouqTv");
+        if(!empty($bouquetChoisi)){         
+            $bouquetChoisi = explode("__",$bouquetChoisi); 
+            if(!empty($tarifBouqTv)){
+                $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);            
+            }
+            $data["totalParMois"] = $this->getTotal($bouquetChoisi[2]); 
+            $this->session->set_userdata("bouquetTvDummy3Crm",$bouquetChoisi[4]);
+         }
+        $this->session->set_userdata("tarifBouqTv",$bouquetChoisi[2]);
         //total 1ere facture
         $caution_dummy5 = $this->session->userdata("caution_dummy5");
         $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
@@ -650,63 +599,47 @@ class Mon_offre extends MY_Controller {
     //dummy3 update option
     public function updateOptions(){
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-        $data["bouquetTv"] = $this->session->userdata("bouquetTv");
-        $data["tarifOptionEden"] = $this->session->userdata("tarifOptionEden");
-        $data["tarifOptionBein"] = $this->session->userdata("tarifOptionBein");
-        $optionTv =  $this->input->post("optionTv");
+        $data["bouquetChoisi"] = $this->session->userdata("bouquetChoisi");
+        
+        $optionTv    =  $this->input->post("optionTv");
+        $optionTv    = explode("__",$optionTv);
         $checkOption =  $this->input->post("checkOption");
-        $data["optionTv"] = $optionTv;
-        
-        $dummyPanier = $this->session->userdata("dummyPanier");
-        $data["dummy3"] = $dummyPanier["dummy3"];
-        
-        foreach($dummyPanier["dummy3"] as $key=>$val){ 
-                if($val["Valeurs"]["Categorie"]=="OPTION_TV"){
-              //optionTvEdenDummy3Crm;               
-                    switch($val["Valeurs"]["Libelle"]["string"]){
-                      case "Eden":
-                          $this->session->set_userdata("optionTvEdenDummy3Crm",$val["Valeurs"]["Id_crm"]);    
-                      break;
-                      case "BeIN Sport":
-                              $this->session->set_userdata("optionTvBeinDummy3Crm",$val["Valeurs"]["Id_crm"]);    
-                      break;
-                    }
+        $optionTvDummy3Crm = $this->session->userdata("optionTvDummy3Crm");
+        $optionTvDummy3Crm = empty($optionTvDummy3Crm)?array():$optionTvDummy3Crm;
+        $optionData        = $this->session->userdata("optionData");
+        $optionData        = empty($optionData)?array():$optionData;
+      
+        if($checkOption=="uncheck"){
+            //data option dans le panier
+            foreach($optionData as $key=>$val){
+                if(isset($val[$optionTv[1]])){
+                    unset($optionData[$key][$optionTv[1]]);
                 }
-         }
-        
-         if(!empty($optionTv)){           
-            $optionTv = explode("_",$optionTv); 
-            switch($optionTv[0]){
-                case "Eden":
-                    $tarifOptionEden = $this->session->userdata("tarifOptionEden");
-                    if(!empty($tarifOptionEden)&&$checkOption=="uncheck"){
-                      $data["totalParMois"] = $this->getTotal(-$tarifOptionEden);
-                      $this->session->set_userdata("tarifOptionEden","");
-                      
-                      //unset les id_crm 
-                      $this->session->set_userdata("optionTvEdenDummy3Crm","");
+            }
             
-                    }else{
-                        $data["totalParMois"] = $this->getTotal($optionTv[1]);
-                        $this->session->set_userdata("tarifOptionEden",$optionTv[1]);
-                    }
-                    $data["tarifOptionEden"] = $this->session->userdata("tarifOptionEden");
-                break;
-                case "BeIN Sport":
-                    $tarifOptionBein = $this->session->userdata("tarifOptionBein");
-                    if(!empty($tarifOptionBein)&&$checkOption=="uncheck"){
-                      $data["totalParMois"] = $this->getTotal(-$tarifOptionBein);
-                      $this->session->set_userdata("tarifOptionBein","");
-                      
-                       $this->session->set_userdata("optionTvBeinDummy3Crm","");
-                    }else{
-                        $data["totalParMois"] = $this->getTotal($optionTv[1]);
-                        $this->session->set_userdata("tarifOptionBein",$optionTv[1]);
-                    }
-                    $data["tarifOptionBein"] = $this->session->userdata("tarifOptionBein");
-                break;
-            }        
-         }
+            //id_crm data pour les options
+            foreach($optionTvDummy3Crm as $key=>$val){
+                if(isset($val[$optionTv[1]])){
+                    unset($optionTvDummy3Crm[$key][$optionTv[1]]);
+                }
+            }   
+             
+            //calculation du prix total
+            $data["totalParMois"] = $this->getTotal(-$optionTv[2]);
+        }else{
+              //data option dans le panier
+            array_push($optionData,array($optionTv[1]=>$optionTv));            
+            
+            //id_crm data pour les options
+            array_push($optionTvDummy3Crm,array($optionTv[1]=>$optionTv[3]));
+                        
+            //calculation du prix total
+            $data["totalParMois"] = $this->getTotal($optionTv[2]);
+        }
+        $this->session->set_userdata("optionData", $optionData);
+        $this->session->set_userdata("optionTvDummy3Crm", $optionTvDummy3Crm);  
+        $data["optionData"] = $optionData;
+       
         
        //total 1ere facture
         $caution_dummy5 = $this->session->userdata("caution_dummy5");
