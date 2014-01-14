@@ -1,5 +1,8 @@
 $(function() {
 
+  //initial Promotion text before selecting Ultra
+  window.promoInitialText = getUltraInitialPrice();
+  
   //Disable 'list of bouquet' on startup
   $('.four.bouquet').fadeTo('slow',.5);
 
@@ -43,8 +46,6 @@ $(function() {
     }
   });
 
-  //initial Promotion text before selecting Ultra
-  var promoInitialText = $('.prix_option').html();
   //Default selected 'Bouquet'
   //chainesFilter($('.eight.chaines .grid li'),'mega');
 
@@ -111,9 +112,28 @@ var removeUltraoptions = function(initial_content) {
   ultraOption.attr('disabled', false);
   //change INCLUS to 9€
   $('.prix_option').removeClass('inclus');
-  $('.prix_option').html(initial_content);
+  setUltraInitialPrice(initial_content);
 }
 
+//Get initial prices of Ultra option
+var getUltraInitialPrice = function() {
 
+  var rowUltra = $('.row.ultra');
+  var initialPriceArr = new Array();
 
+  rowUltra.each(function(){
+   initialPriceArr.push($(this).find('.prix_option').html());
+  });
+  return initialPriceArr;
+}
 
+//Set initial price of Ultra Option
+var setUltraInitialPrice = function( initialText ) {
+
+  var rowUltra = $('.row.ultra');
+  var i = 0;
+  rowUltra.each(function(){
+   $(this).find('.prix_option').html(initialText[i]);
+   i++;
+  });
+}
