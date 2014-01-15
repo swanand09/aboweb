@@ -244,7 +244,7 @@ echo validation_errors();
 <!--              <input type="text" name="email" value="<?php //echo set_value("email",$email);?>" class="validate[required,custom[email]] six">-->
             </div>
             <div class='column six'>
-              <input class='validate[required,custom[email]]' value="<?php echo set_value("email",$email);?>" type='text' name='email' /><span class='input-info'>Rassurez-vous, nous n'aimons pas non plus le SPAM</span></div>
+              <input class='validate[required,funcCall[validateEmail]]' value="<?php echo set_value("email",$email);?>" type='text' name='email' /><span class='input-info'>Rassurez-vous, nous n'aimons pas non plus le SPAM</span></div>
              <div class='column end'>
               <a href='#' class='has-tip' data-width='360' title='Votre adresse de messagerie nous permettra de vous tenir informé sur l’évolution de votre commande. Rassurez vous, aucune sollicitation commerciale ne sera effectuée.'>
                  <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
@@ -332,10 +332,4 @@ echo validation_errors();
       }
 
     };
-    var validateVerifyEmail = function( field, rules, i, options ){
-        var verifMail = $("#verif_email").val();
-        if(verifMail=="faux"){
-           return "Veuillez verifier votre e-mail médiaserv";
-        }
-    }
 </script>
