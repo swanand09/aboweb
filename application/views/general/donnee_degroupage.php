@@ -17,6 +17,15 @@
         <!--end degroupage--> 
         <hr>
     <?php
+  }
+  if(isset($dum1_portab_libelle)){
+    ?>
+       <!--portabilité-->
+      <div class="degroupage end" style='min-height:20px'>
+            <span class="left"><strong><?php echo utf8_encode($dum1_portab_libelle); ?></strong></span>
+       </div>
+        <!--end of portabilité--> 
+        <hr>
+    <?php
   }?>
-
 

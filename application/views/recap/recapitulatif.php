@@ -6,12 +6,12 @@
         <div class='val civilite-prenom-nom'><?php echo $civilite_aa." ".$prenom_aa." ".$nom_aa;?></div>
         <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_aa." ".$comp_numero_aa." ".$type_voie_aa." ".$voie_aa; ?></div>
         <div class='val adresse-suite'> <?php echo $adresse_suite_aa;?></div>
-        <div class='val ensemble'>Ensemble <?php echo $ensemble_aa; ?></div>
-        <div class='val escalier-etage-porte'>Bat <?php echo $batiment_aa; ?> Escalier <?php echo $escalier_aa; ?> Etage <?php echo $etage_aa; ?> Porte <?php echo $porte_aa; ?></div>
-        <div class='val logo'>Logo <?php echo $logo_aa; ?></div>
+        <div class='val ensemble'><?php echo !empty($ensemble_aa)?"Ensemble ".$ensemble_aa:""; ?></div>
+        <div class='val escalier-etage-porte'> <?php echo !empty($batiment_aa)?"Bat ".$batiment_aa:""; ?>  <?php echo !empty($escalier_aa)?"Escalier ".$escalier_aa:""; ?>  <?php echo !empty($etage_aa)?"Etage ".$etage_aa:""; ?>  <?php echo !empty($porte_aa)?"Porte ".$porte_aa:""; ?></div>
+        <div class='val logo'> <?php echo !empty($logo_aa)?"Logo ".$logo_aa:""; ?></div>
         <div class='val code-postal-ville'><?php echo $code_postal_aa." ".$ville_aa;?></div>
-        <div class="val"><?php echo "portable: ".$telephone_portable.", bureau: ".$telephone_bureau.", domicile: ".$telephone_domicile; ?></div>
-        <label class='top-20'><strong>Votre adresse médiaServ est : </strong><a class='mail-link' href='mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>'><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>
+        <div class="val"><?php echo "portable: ".$telephone_portable;?><?php echo !empty($telephone_bureau)?", bureau: ".$telephone_bureau:"";?><?php echo !empty($telephone_domicile)?", domicile: ".$telephone_domicile:""; ?></div>
+       
      </div> 
        <?php if(empty($check_adresse_facturation)){ ?>
 <!--     FACTURATION-->
@@ -36,7 +36,9 @@
            <div class='val code-postal-ville'><?php echo $code_postal_al." ".$ville_al;?></div>
         </div>   
        <?php } ?> 
-
+ <div class='column twelve bottom-20 recap-add'>
+        <label class='top-20'><strong>Votre adresse médiaServ est : </strong><a class='mail-link' href='mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>'><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>
+ </div>        
     </div>
     <hr class="sexy">
     <div class="row">

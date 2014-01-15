@@ -39,6 +39,14 @@ $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_rec
     
 });
 
+$("#redu_facture").click(function(){
+    if(!$(this).is(":checked")){
+        $("#consv_num_tel").prop("checked",false)
+                           .attr("disabled",true);
+    }else{
+         $("#consv_num_tel").attr("disabled",false);
+    }
+});
 </script>
 <hr/> 
 
@@ -81,7 +89,9 @@ $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_rec
 <div>
 <h3>CE QUE NOUS POUVONS AUSSI VOUS PROPOSER</h3>
 <form class='frm-options' action='#' onsubmit='javascript:retrieveForfait();return false'> 
+  <?php if($produitDegroupage){?>
   <label for="checkbox3"><?php echo form_checkbox($input1); ?> Je souhaite réduire ma facture en résiliant mon abonnement chez France Télécom/Orange car je suis en zone dégroupée. <span><a href='#' title='En décochant cette option vous continuerez à payer votre abonnement téléphonique actuel auprès de votre fournisseur (généralement France Telecom) et bénéficierez d’une réduction de 5€ TTC/ mois sur l’ensemble des forfaits box mediaserv.'><?php echo image('info_icon.png',NULL,array("title"=>"Plus info", "alt"=>"Plus info","class"=>"border-gray")); ?></a></span></label>
+  <?php }?>
   <label for="checkbox3"><?php echo form_checkbox($input2);?> Je souhaite conserver mon numéro de téléphone.  <span><a href='#' title="En cochant cette case, vous conserverez votre numéro de téléphone actuel, sinon un nouveau numéro vous sera attribué."><?php echo image('info_icon.png',NULL,array("title"=>"Plus info", "alt"=>"Plus info","class"=>"border-gray")); ?></a></span></label>
   <p class='options-texte'>L’offre box mediaserv vous permet de vous connecter à Internet de façon illimitée via les technologies ADSL. Pour vous inscrire, il suffit de remplir le formulaire en ligne, avec vos coordonnées postales et vos coordonnées bancaires, le paiement de la caution pouvant se faire par prélèvement bancaire. Une fois la validation de votre dossier effectuée par Mediaserv, la création de votre ligne téléphonique sera effectuée et vos équipements vous seront envoyés.</p>
   <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent"));?></div>

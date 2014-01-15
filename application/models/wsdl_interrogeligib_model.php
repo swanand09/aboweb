@@ -56,7 +56,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                   array_push($arrDum1, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
                               break;
                               case 2:
-                                  array_push($arrDum2, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                                  array_push($arrDum2, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"],"Categorie"=>$val1["Categorie"]));
                               break;
                               case 3:
                                   array_push($arrDum3, array("Valeurs"=>$val2,"Tarif_promo"=>$val1["Tarif_promo"],"Duree_mois_promo"=>$val1["Duree_mois_promo"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
@@ -83,7 +83,7 @@ class Wsdl_interrogeligib_model extends CI_Model
                                   array_push($arrDum1, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
                               break;
                               case 2:
-                                  array_push($arrDum2, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                                  array_push($arrDum2, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"],"Categorie"=>$val1["Categorie"]));
                               break;
                               case 3:
                                   array_push($arrDum3, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Tarif_promo"=>$val1["Tarif_promo"],"Duree_mois_promo"=>$val1["Duree_mois_promo"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
