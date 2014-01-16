@@ -12,7 +12,7 @@ if(!empty($vodPvr)||(isset($bouquetChoisi)&&!empty($bouquetChoisi))){
     <ul>
         <?php if(!empty($bouquetTv)){ ?>
 <!--        BOUQUET_TV-->
-        <li style="background: url(<?php echo base_url()."/assets/images/contenu/".$bouquetTv[0]; ?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);">
+        <li style="background: url(<?php echo base_url()."/assets/images/contenu/".trim($bouquetTv[0]); ?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);">
           <strong><?php echo $bouquetTv[1]; ?></strong><span class="right"><?php echo number_format($bouquetTv[2],2,',',' ')."€/mois"; ?></span></strong><br><?php echo $bouquetTv[3]; ?> chaînes
       </li>
         <?php } ?>

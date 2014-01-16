@@ -212,15 +212,17 @@ class Paiement extends MY_Controller {
       
         $id_parrain =$this->session->userdata("id_parrain");
         $id_parrain = !empty($id_parrain)?$id_parrain:0;
+        $idOptionCrm = $this->session->userdata("optionTvDummy3Crm");
+        
+        
         $dataArr = array(
                            //"id"                     => $this->session->userdata("idParcours"),
                            "con_id_parrainage"      => $id_parrain,
                            "produits_souscris"      => array(
                                                                $this->session->userdata("forfaitDummy1Crm"),
+                                                               $this->session->userdata("portabiliteDummy1Crm"),
                                                                $this->session->userdata("degroupageDummy1Crm"),
                                                                $this->session->userdata("bouquetTvDummy3Crm"),
-                                                               $this->session->userdata("optionTvEdenDummy3Crm"),
-                                                               $this->session->userdata("optionTvBeinDummy3Crm"),
                                                                $this->session->userdata("vodPvrOneshotDummy3Crm"),
                                                                $this->session->userdata("vodPvrRecurrentDummy3Crm"),
                                                                $this->session->userdata("locationIadDummy4Crm"),
@@ -399,6 +401,13 @@ class Paiement extends MY_Controller {
        */
         /*$dataArr["context"] = str_replace('<?xml version="1.0"?>', "", $dom->saveXML());*/
         $dataArr["context"] = $context;
+        if(!empty($idOptionCrm)){
+            foreach($idOptionCrm as $key=>$val){
+                foreach($val as $key2=>$val2){
+                    array_push($dataArr["produits_souscris"],$val2);
+                }
+            }
+        }
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
        redirect('merci');
     }

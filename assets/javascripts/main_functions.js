@@ -191,6 +191,8 @@ var preload = function(){
                               $("#recap_contenu").children("#caution").remove(); 
                               $("#recap_contenu").children("#location").remove();
                               $("#recap_contenu").children("#options").remove();  // removes any bouquet if any
+                              $("#recap_contenu").children("#promo").remove();
+                              $("#recap_contenu").append(data.libelles_promo_dummy2);
                               $("#recap_contenu").append(data.location_equipements_dummy4);
                               $("#recap_contenu").children("#oneshot").remove(); 
                               $("#recap_contenu").append(data.frais_activation_facture_dummy7);  
@@ -218,6 +220,8 @@ var preload = function(){
                         bouquetChoisi : valeur
                      },
                     function(data){
+                      $("#recap_contenu").children("#promo").remove(); 
+                      $("#recap_contenu").append(data.libelles_promo_dummy2);
                       $("#recap_contenu").children("#options").remove();  
                       $("#recap_contenu").append(data.options_dummy3);
                       $("#total_mois").empty().append(data.total_par_mois);  
@@ -245,7 +249,9 @@ var preload = function(){
                         optionTv      : optionTv,
                         checkOption   : checkOption
                      },
-                    function(data){                          
+                    function(data){
+                      $("#recap_contenu").children("#promo").remove(); 
+                       $("#recap_contenu").append(data.libelles_promo_dummy2);  
                       $("#recap_contenu").children("#options").remove();  
                       $("#recap_contenu").append(data.options_dummy3);
                       $("#total_mois").empty().append(data.total_par_mois);  
@@ -266,7 +272,9 @@ var preload = function(){
                      {
                         typeFacture      : typeFacture,
                      },
-                    function(data){                          
+                    function(data){    
+                      $("#recap_contenu").children("#promo").remove(); 
+                      $("#recap_contenu").append(data.libelles_promo_dummy2);
                       $("#recap_contenu").children("#colFacture").remove();  
                       $("#recap_contenu").append(data.envoie_facture_dummy6);
                       $("#total_mois").empty().append(data.total_par_mois);  

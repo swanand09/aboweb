@@ -360,12 +360,25 @@ class Mes_coordonnees extends MY_Controller {
        $this->session->set_userdata("typeFacture",$typeFacture);
        $this->session->set_userdata("facture","electronique");
        $data["totalParMois"] = $this->session->userdata('totalParMois');
-       
+       $factureIdCrm = $this->updateFactureDummy6Crm($typeFacture["1"]);
+       $promo_libelle = $this->session->userdata("promo_libelle");
        switch($typeFacture["1"]){
           case "papier": 
             $this->session->set_userdata("facture","papier");
             $data["totalParMois"] = $this->getTotal($typeFacture["2"]);
-            $this->session->set_userdata("tarif_papier",$typeFacture["2"]);
+            $this->session->set_userdata("tarif_papier",$typeFacture["2"]);            
+           
+            //promo            
+            $dummyPanier    = $this->session->userdata("dummyPanier");
+            foreach($dummyPanier["dummy2"] as $key=>$val){
+                if($val["Categorie"]=="FACTURATION"&&$val["Id_crm"]==$factureIdCrm){                    
+                    array_push($promo_libelle,array("facturation"=>utf8_encode($val["Valeurs"]["Libelle"]["string"])));
+                }
+            }
+            $this->session->set_userdata("promo_libelle",$promo_libelle);
+            $data["promo_libelle"] = $promo_libelle;
+           
+            
           break;
           case "electronique":
             $this->session->set_userdata("facture","electronique");
@@ -373,9 +386,14 @@ class Mes_coordonnees extends MY_Controller {
             if(!empty($tarif_papier)){
                 $data["totalParMois"] = $this->getTotal(-$tarif_papier);
             }
+            foreach($promo_libelle as $key2=>$val2){
+                if(isset($val2["facturation"])){
+                   unset($promo_libelle[$key2]);
+                }
+            }
           break;
        }
-       $this->session->set_userdata("factureDummy6Crm",$this->updateFactureDummy6Crm($typeFacture["1"]));
+       $this->session->set_userdata("factureDummy6Crm",$factureIdCrm);
        //total 1ere facture
         $caution_dummy5 = $this->session->userdata("caution_dummy5");
         $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
@@ -385,10 +403,12 @@ class Mes_coordonnees extends MY_Controller {
         
         
        $prevState = $this->session->userdata("prevState");
+       $this->session->set_userdata("promo_libelle",$promo_libelle);
+       $prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$data,true);
        $prevState[1]["envoie_facture_dummy6"] = $this->load->view("general/type_facturation_dummy6",$data,true);     
        $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
        $this->session->set_userdata("prevState",$prevState);
-       echo json_encode(array("envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+       echo json_encode(array("libelles_promo_dummy2"=>$prevState[1]["libelles_promo_dummy2"],"envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
     }
     
     public function updateFactureDummy6Crm($typeFacture){
