@@ -8,6 +8,7 @@ class Wsdl_interrogeligib_model extends CI_Model
 {
    var $CI;
    var $nusoap_client;
+ 
     public function __construct()
     {
         parent::__construct();
@@ -41,6 +42,77 @@ class Wsdl_interrogeligib_model extends CI_Model
         $result = $this->nusoap_client->send($soapEligib,$this->nusoap_client->operation);
         return  $result;
     }
+    
+    
+    public function recupDummyParId($produit,$id_crm)
+    {
+        $arrDum1 = $arrDum2 = $arrDum3 = $arrDum4 = $arrDum5 = $arrDum6 = $arrDum7 = $arrDum8 = array();
+        foreach($produit as $val1){
+            if($val1["Id_crm"]==$id_crm){
+            if(!empty($val1["Valeurs"]["WS_Produit_Valeur"])){
+             foreach($val1["Valeurs"]["WS_Produit_Valeur"] as $key1=>$val2){
+                 if(is_array($val2)){
+                     foreach($val2 as $key2=>$val3){
+                      if($key2=="Dummy"){
+                          switch($val3){
+                              case 1:
+                                  array_push($arrDum1, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 2:
+                                  array_push($arrDum2, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"],"Categorie"=>$val1["Categorie"]));
+                              break;
+                              case 3:
+                                  array_push($arrDum3, array("Valeurs"=>$val2,"Tarif_promo"=>$val1["Tarif_promo"],"Duree_mois_promo"=>$val1["Duree_mois_promo"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 4:
+                                  array_push($arrDum4, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 5:
+                                  array_push($arrDum5, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 6:
+                                  array_push($arrDum6, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 7:
+                                  array_push($arrDum7, array("Valeurs"=>$val2,"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                          }
+                      }
+                     }
+                 }else{
+                     if($key1=="Dummy"){
+                          switch($val2){
+                              case 1:
+                                  array_push($arrDum1, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 2:
+                                  array_push($arrDum2, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"],"Categorie"=>$val1["Categorie"]));
+                              break;
+                              case 3:
+                                  array_push($arrDum3, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Tarif_promo"=>$val1["Tarif_promo"],"Duree_mois_promo"=>$val1["Duree_mois_promo"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 4:
+                                  array_push($arrDum4, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 5:
+                                  array_push($arrDum5, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 6:
+                                  array_push($arrDum6, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                              case 7:
+                                  array_push($arrDum7, array("Valeurs"=>$val1["Valeurs"]["WS_Produit_Valeur"],"Id_crm"=>$val1["Id_crm"],"Id_web"=>$val1["Id_web"]));
+                              break;
+                          }
+                      }
+
+                 }
+             }
+            }
+            }
+      }  
+      return array("dummy1"=>$arrDum1,"dummy2"=>$arrDum2,"dummy3"=>$arrDum3,"dummy4"=>$arrDum4,"dummy5"=>$arrDum5,"dummy6"=>$arrDum6,"dummy7"=>$arrDum7);
+  }
     
     public function recupDummyPanier($produit)
     {
@@ -108,7 +180,7 @@ class Wsdl_interrogeligib_model extends CI_Model
             }
       }  
       return array("dummy1"=>$arrDum1,"dummy2"=>$arrDum2,"dummy3"=>$arrDum3,"dummy4"=>$arrDum4,"dummy5"=>$arrDum5,"dummy6"=>$arrDum6,"dummy7"=>$arrDum7);
-    }
+  }
     
    public function enregistreSouscription($dataArr)
    {        

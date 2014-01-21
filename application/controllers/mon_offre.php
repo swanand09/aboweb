@@ -6,7 +6,7 @@ class Mon_offre extends MY_Controller {
     {
             parent::__construct();
            // $this->output->enable_profiler(TRUE);
-            $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib'); 
+           
     }  
     
     public function index($num_tel="")
@@ -100,19 +100,9 @@ class Mon_offre extends MY_Controller {
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
                {                  
                     $data["error"]  = false;
-                    $this->session->set_userdata("num_tel",$num_tel);
-                    //$this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
-                    //$this->session->set_userdata('idParcours',$result["interrogeEligibiliteResult"]["Id"]);                  
-                   // $this->session->set_userdata('offreparrainage_id',($result["interrogeEligibiliteResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["interrogeEligibiliteResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
-                    $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);
-                    //$this->session->set_userdata('ws_ville',$result["interrogeEligibiliteResult"]["Villes"]["WS_Ville"]);
-                   // $this->session->set_userdata('produit',$result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-                    //$this->session->set_userdata('promo', utf8_encode($result["interrogeEligibiliteResult"]["Catalogue"]["Promo_libelle"]));
-                    //$this->session->set_userdata('localite',$result["interrogeEligibiliteResult"]["Localite"]);
+                    $this->session->set_userdata("num_tel",$num_tel);                   
+                    $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);                    
                     $this->session->set_userdata('context',$result["interrogeEligibiliteResult"]["Context"]);
-                   // $this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"]));
-                  
-                   // $disable_checkbox = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"]=="false"?true:false;
                     
                     $eligDegPart  = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"];
                     $eligDegTotal = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_dégroupage_total"];
@@ -133,30 +123,7 @@ class Mon_offre extends MY_Controller {
                         $produitDegroupage =false;
                         $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
                     }
-                    /*
-                    if($disable_checkbox ==false){  
-                        $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
-                       // $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','disabled'=> 'disabled');   
-                    }else
-                    {
-                        $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked','disabled'=> 'disabled');
-                        $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel','value' => 'true','disabled'=> 'disabled'); 
-                    }                     
                     
-                    if($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_dégroupage_total"]=="true"){  
-                         $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','checked'=> 'checked');
-                    }else{
-                        $input1 = array('name' => 'redu_facture','id' => 'redu_facture','value' => 'true','disabled'=> 'disabled');                         
-                    }
-                    $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
-                     
-                     if(isset($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"])){
-                        foreach($result["interrogeEligibiliteResult"]["Catalogue"]["Produits"]["WS_Produit"] as $key=>$val){
-                            if($val["Categorie"]=="PORTABILITE"){
-                                $input2 = array('name' => 'consv_num_tel','id' => 'consv_num_tel', 'value' => 'true','checked'=> 'checked'); 
-                            }
-                        }
-                    }*/
                     $data["produitDegroupage"] = $produitDegroupage;
                     $data["input1"] = $input1;
                     $data["input2"] = $input2;                
@@ -244,11 +211,7 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
         $prevState = $this->session->userdata("prevState");
         $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
-        /*
-        $data["degrouper"]   =  ($redu_facture=="true")?"Produit dégroupage total desiré":"Produit dégroupage partiel souscris";
-        $data["portabilite"] =  ($consv_num_tel=="true"&&$redu_facture=="true")?"Produit portabilité souscris ":"Un autre numéro est desiré";   
-        $this->colonneDroite["donnee_degroupage"] = $this->load->view("general/donnee_degroupage",$data,true);
-        */
+       
         if($this->colonneDroite["forfait_dummy1"]=="")
         {           
             $data["text"]  = '<p>Choisissez une offre...</p>';
@@ -311,190 +274,109 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata("tarifOptionBein","");
           
          $prevState = $this->session->userdata("prevState");
-         $promo_libelle = $this->session->userdata("promo");
+         
          $this->iad = $this->session->userdata("iad");
-         $data["iad"] = $this->iad;
-         $data["totalParMois"] = $this->getTotal($this->iad["Tarif"]);
+         $this->data["iad"] = $this->iad;
+         $this->data["totalParMois"] = $this->getTotal($this->iad["Tarif"]);
          $localite    = $this->session->userdata("localite");
          $dummyPanier = $this->session->userdata("dummyPanier");  
          $id_crm = $this->input->post("id_crm");
          $produit =  $this->session->userdata("produit");           
          $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
          $this->colonneDroite["donnee_degroupage"] = $prevState[1]["donnee_degroupage"];   
-         $promo_libelle = array($promo_libelle);
-            if(isset($produit)&&!empty($produit)){
+         //$promo_libelle = array($promo_libelle);
+         
+         //MAJ PANIER
+          $this->majPanier(array("produit"=>array("DEGROUPAGE","PORTABILITE","FORFAIT","IAD"),"etape"=>"choixForfait")); 
+          $this->session->set_userdata("location_equipement",$this->data["location_equipement"]);
+          $this->session->set_userdata("promo_libelle",$this->data["promo_libelle"]);
+          $this->data["promo_libelle"] = $this->session->userdata("promo_libelle");
+          $bouqTvArr = array(); $optionTvArr = array();$vodPvrArr = array();
+          if(isset($produit)&&!empty($produit)){
                 foreach($produit as $key=>$val)
                 {
                     switch($val["Categorie"]){
-                        case "DEGROUPAGE":
-                            $redu_facture = $this->session->userdata("redu_facture");
-                            if($redu_facture=="false"){
-                               //dégroupage partiel
-                               if(utf8_encode($val["Libelle"])=="Dégroupage Partiel"){
-                                   $this->session->set_userdata("degroupageDummy1Crm",$val["Id_crm"]);
-                                   if(!empty($val["Valeurs"])){
-                                        foreach($val["Valeurs"] as $key2=>$val2){
-                                            if($val2["Categorie"]=="DEGROUPAGE"){
-                                                $data["dum1_degroup_tarif"] = $val["Tarif"];
-                                                $data["dum1_degroup_libelle"] = $val2["Libelle"]["string"];   
-                                                $this->getTotal($val2["Tarif"]["decimal"]);
-                                            }
-                                        }
-                                   }
-                               }
-                           }
-                       break;
-                       case "PORTABILITE":
-                           $consv_num_tel = $this->session->userdata("consv_num_tel");
-                            if($consv_num_tel=="true"){
-                                 $this->session->set_userdata("portabiliteDummy1Crm",$val["Id_crm"]);
-                                 $data["dum1_portab_libelle"] = $val["Libelle"];   
-                            }                  
-                       break;
-                       case "FORFAIT":
-                           if($val["Id_crm"]==$id_crm){
-                            //id crm forfait dummy1
-                             $this->session->set_userdata("forfaitDummy1Crm",$id_crm);
-                             $this->session->set_userdata("locationIadDummy4Crm",$this->iad["Id_crm"]);
-
-                             $data["donne_forfait"]    = $val;
-                             $data["totalParMois"] = $this->getTotal((($val["Tarif_promo"]>0)?$val["Tarif_promo"]:$val["Tarif"]));                 
-                             $this->session->set_userdata("donne_forfait",$val);
-                             $data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");
-
-                             //$data["eligible_tv"] = $this->session->userdata("eligible_tv");
-                             $this->colonneDroite["forfait_dummy1"]   = $this->load->view("general/forfait_dummy1",$data,true);
-                             if(!empty($val["Valeurs"])){
-                                 foreach($val["Valeurs"] as $key2=>$val2){
-                                     foreach($val2 as $key3=>$val3){
-                                              if(is_array($val3)){
-                                                if(isset($val3["Dummy"])&&$val3["Dummy"]==2&&isset($val3["Categorie"])&&$val3["Categorie"]=="PROMOTION"){
-                                                 array_push($promo_libelle,utf8_encode($val3["Libelle"]["string"]));
-                                                }                                           
-                                              }else{
-                                                   if(isset($val2["Dummy"])&&$val2["Dummy"]==2&&isset($val2["Categorie"])&&$val2["Categorie"]=="PROMOTION"){
-                                                      array_push($promo_libelle,utf8_encode($val2["Libelle"]["string"]));
-                                                   }
-                                                } 
-                                         }
-                                }
-                             }
-                           }
-                       break;
-                       
                        case "TELEVISION":
-                            $data["duree_mois_promo"]         = $val["Duree_mois_promo"];
-                            $data["decodeur_tv_tarif"]        = $val["Tarif"];
-                            $data["decodeur_tv_promo_tarif"]  = $val["Tarif_promo"];
-                       break;
-                   
-                       case "IAD":
-                            if(!empty($val["Valeurs"])){
-                                foreach($val["Valeurs"] as $key2=>$val2){
-                                    foreach($val2 as $key3=>$val3){
-                                        if(is_array($val3)){
-                                          if(isset($val3["Dummy"])&&$val3["Dummy"]==2&&isset($val3["Categorie"])&&$val3["Categorie"]=="PROMOTION"){
-                                           array_push($promo_libelle,utf8_encode($val3["Libelle"]["string"]));
-                                          }                                           
-                                        }else{
-                                             if(isset($val2["Dummy"])&&$val2["Dummy"]==2&&isset($val2["Categorie"])&&$val2["Categorie"]=="PROMOTION"){
-                                                array_push($promo_libelle,utf8_encode($val2["Libelle"]["string"]));
-                                             }
-                                        } 
-                                   }
-                               }
-                            }
-                       break;
-                    }
-                }         
-            }
-         $this->colonneDroite["donnee_degroupage"]  = $this->load->view("general/donnee_degroupage",$data,true);
-         $this->session->set_userdata("promo_libelle",$promo_libelle);
-         $data["promo_libelle"] = $promo_libelle;
-         $this->colonneDroite["libelles_promo_dummy2"]        = $this->load->view("general/libelles_promo_dummy2",$data,true);
-         $data["dummyPanier"] = $dummyPanier;
-         $bouqTvArr = array(); $optionTvArr = array();$vodPvrArr = array();
-         if(isset($dummyPanier)&&!empty($dummyPanier)){
-            foreach($dummyPanier as $key=>$val){
-               if(!empty($val)){
-                   switch($key){
-                       case "dummy3":                           
-                              foreach($val as $val2){
-                                  switch($val2["Valeurs"]["Categorie"]){
-                                      case "BOUQUET_TV":
-                                          array_push($bouqTvArr, array(
-                                                                        $val2["Valeurs"]["Libelle"]["string"]=>array(
-                                                                                                                        "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
-                                                                                                                        "picto"     => $val2["Valeurs"]["Picto"],
-                                                                                                                        "id_crm"    => $val2["Id_crm"],
-                                                                                                                        "id_web"    => $val2["Id_web"],
-                                                                                                                        "promo"     => array(
-                                                                                                                                         "Tarif_promo"      =>  $val2["Tarif_promo"],
-                                                                                                                                         "Duree_mois_promo" =>  $val2["Duree_mois_promo"]
-                                                                                                                                        )
-                                                                                                                     )
-                                                                       )
-                                                      );
-                                      break;
-                                      case "OPTION_TV":
-                                          array_push($optionTvArr, array(
-                                                                         $val2["Valeurs"]["Libelle"]["string"]=>array(
-                                                                                                                         "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
-                                                                                                                         "picto"     => $val2["Valeurs"]["Picto"],
-                                                                                                                         "id_crm"    => $val2["Id_crm"],
-                                                                                                                         "id_web"    => $val2["Id_web"],
-                                                                                                                         "promo"     => array(
-                                                                                                                                                "Tarif_promo"=>$val2["Tarif_promo"],
-                                                                                                                                                "Duree_mois_promo"=>$val2["Duree_mois_promo"]
-                                                                                                                                             )
-                                                                                                                      )
-                                                                        )
-                                                      );
-                                      break;
-                                      case "VOD_PVR":
-                                           array_push($vodPvrArr, array(
-                                                                        $val2["Valeurs"]["Libelle"]["string"]=>array(
-                                                                                                                     "tarif"=>$val2["Valeurs"]["Tarif"]["decimal"],
-                                                                                                                     "picto"=>$val2["Valeurs"]["Picto"],
-                                                                                                                     "id_crm"    => $val2["Id_crm"],
-                                                                                                                     "id_web"    => $val2["Id_web"],
-                                                                                                                     "promo"=>array(
-                                                                                                                                     "Tarif_promo"=>$val2["Tarif_promo"],
-                                                                                                                                     "Duree_mois_promo"=>$val2["Duree_mois_promo"])
-                                                                                                                                   )
-                                                                                                                     
-                                                                                                                  )
+                           //décodeur tv chaines basique
+                            $this->data["duree_mois_promo"]         = $val["Duree_mois_promo"];
+                            $this->data["decodeur_tv_tarif"]        = $val["Tarif"];
+                            $this->data["decodeur_tv_promo_tarif"]  = $val["Tarif_promo"];
+                            /*
+                            $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$val["Id_crm"]); 
+                           
+                            foreach($dummyAMaj["dummy3"] as $key2=>$val2)
+                            {
+                                array_push($vodPvrArr, array(
+                                                                $val2["Valeurs"]["Libelle"]["string"]=>array(
+                                                                                                             "tarif"=>$val2["Valeurs"]["Tarif"]["decimal"],
+                                                                                                             "picto"=>$val2["Valeurs"]["Picto"],
+                                                                                                             "id_crm"    => $val["Id_crm"],
+                                                                                                             "id_web"    => $val["Id_web"],
+                                                                                                             "promo"=>array(
+                                                                                                                             "Tarif_promo"=>$val["Tarif_promo"],
+                                                                                                                             "Duree_mois_promo"=>$val["Duree_mois_promo"])
+                                                                                                                           )
+
+                                                                                                          )
                                                    );
-                                      break;
-                                  }
-                              }
-                             
+                               
+                            } 
+                            foreach($dummyAMaj["dummy4"] as $key2=>$val2)
+                            {
+                                $this->data["tarif_loca_decod"] = ($val2["Valeurs"]["Categorie"]=="STB")?"dummy4_".$val2["Valeurs"]["Tarif"]["decimal"]:"dummy4_0";                                
+                                $this->data["tarif_activ_servicetv"] = "dummy7_";
+                            }
+                            foreach($dummyAMaj["dummy5"] as $key2=>$val2)
+                            {
+                                $this->session->set_userdata("caution_dummy5",$val2["Valeurs"]);                              
+                                $total1erFact = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][0]; 
+                                $this->session->set_userdata("total1erFact",$total1erFact );                              
+                                $total2emeFact = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][1];
+                                $this->session->set_userdata("total2emeFact",$total2emeFact );
+                            }*/
                        break;
-                       case "dummy4":
-                               $data["dummy4"] = $dummyPanier["dummy4"];
-                              foreach($val as $val2){
-                                $data["tarif_loca_decod"] = ($val2["Valeurs"]["Categorie"]=="STB")?"dummy4_".$val2["Valeurs"]["Tarif"]["decimal"]:"dummy4_0";                                
-                                $data["tarif_activ_servicetv"] = "dummy7_";
-                              }
-                              $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$data,true);
+                       case "BOUQUET_TV":
+                           $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$val["Id_crm"]); 
+                           
+                           foreach($dummyAMaj["dummy3"] as $key2=>$val2)
+                           {
+                                array_push($bouqTvArr, array(
+                                                                 $val2["Valeurs"]["Libelle"]["string"]=>array(
+                                                                                                                 "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
+                                                                                                                 "picto"     => $val2["Valeurs"]["Picto"],
+                                                                                                                 "id_crm"    => $val["Id_crm"],
+                                                                                                                 "id_web"    => $val["Id_web"],
+                                                                                                                 "promo"     => array(
+                                                                                                                                  "Tarif_promo"      =>  $val["Tarif_promo"],
+                                                                                                                                  "Duree_mois_promo" =>  $val["Duree_mois_promo"]
+                                                                                                                                 )
+                                                                                                              )
+                                                             )
+                                                 );
+                           }
                        break;
-                       case "dummy5":  //caution
-                              foreach($val as $val2){
-                                   //$data["caution_dummy5"] = $val2["Tarif"]; 
-                                   $this->session->set_userdata("caution_dummy5",$val2["Valeurs"]["Tarif"]["decimal"]);
-                                   //$data["total1erFact"]   = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][0]; 
-                                   $total1erFact = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][0]; 
-                                   $this->session->set_userdata("total1erFact",$total1erFact );
-                                   //$data["total2emeFact"] = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][1];
-                                   $total2emeFact = $this->session->userdata('totalParMois')+$val2["Valeurs"]["Tarif"]["decimal"][1];
-                                   $this->session->set_userdata("total2emeFact",$total2emeFact );
-                                   // $this->colonneDroite["caution_decodeur_dummy5"] = $this->load->view("general/caution_dummy5",$data,true);  
-                              }
-                       break;
-                       case "dummy7":  //oneshot
-                              foreach($val as $val2){
-                                     $data["tarif_loca_decod"] = "dummy4_";
-                                     $data["tarif_activ_servicetv"] = "dummy7_".$val2["Valeurs"]["Tarif"]["decimal"];
+                       case "OPTION_TV":
+                           $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$val["Id_crm"]); 
+                           foreach($dummyAMaj["dummy3"] as $key2=>$val2)
+                           {
+                               array_push($optionTvArr, array(
+                                                                $val2["Valeurs"]["Libelle"]["string"]=>array(
+                                                                                                                "tarif"     => $val2["Valeurs"]["Tarif"]["decimal"],
+                                                                                                                "picto"     => $val2["Valeurs"]["Picto"],
+                                                                                                                "id_crm"    => $val["Id_crm"],
+                                                                                                                "id_web"    => $val["Id_web"],
+                                                                                                                "promo"     => array(
+                                                                                                                                       "Tarif_promo"=>$val["Tarif_promo"],
+                                                                                                                                       "Duree_mois_promo"=>$val["Duree_mois_promo"]
+                                                                                                                                    )
+                                                                                                             )
+                                                               )
+                                                      );
+                           }                           
+                           foreach($dummyAMaj["dummy7"] as $key2=>$val2)
+                           {
+                               $this->data["tarif_loca_decod"] = "dummy4_";
+                                     $this->data["tarif_activ_servicetv"] = "dummy7_".$val2["Valeurs"]["Tarif"]["decimal"];
                                      
                                      if(isset($val2["Valeurs"]["Tarif"]["decimal"][0])){
                                         $total1erFact = $this->session->userdata('total1erFact');
@@ -506,29 +388,34 @@ class Mon_offre extends MY_Controller {
                                         $total2emeFact += $val2["Valeurs"]["Tarif"]["decimal"][1]; 
                                         $this->session->set_userdata('total2emeFact',$total2emeFact);
                                      }
-                                    
-                                    // $data["total1erFact"]   = $this->session->userdata('total1erFact')+$val2["Valeurs"]["Tarif"]["decimal"];
-                                }
+                           }
                        break;
-                   }
-                }
+                       
+                    }
+                }         
             }
-         }
-           $data["bouqTvArr"] = $bouqTvArr;  $data["optionTvArr"] = $optionTvArr; $data["vodPvr"] = $vodPvrArr; 
+         $this->colonneDroite["forfait_dummy1"]               = $this->load->view("general/forfait_dummy1",$this->data,true);
+         $this->colonneDroite["donnee_degroupage"]            = $this->load->view("general/donnee_degroupage",$this->data,true);
+         $this->colonneDroite["libelles_promo_dummy2"]        = $this->load->view("general/libelles_promo_dummy2",$this->data,true);
+         $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$this->data,true);
+         $this->colonneDroite["caution_dummy5"]               = $this->load->view("general/caution_dummy5",$this->data,true);  
+         $this->colonneDroite["frais_oneshot_dummy7"]         =  $this->load->view("general/frais_oneshot_dummy7",$this->data,true);         
+        
+           $this->data["bouqTvArr"] = $bouqTvArr;  $this->data["optionTvArr"] = $optionTvArr; //$this->data["vodPvr"] = $vodPvrArr; 
            $this->session->set_userdata("bouquetTv",$bouqTvArr);
-           $this->session->set_userdata("vodPvr",$vodPvrArr); 
+           //$this->session->set_userdata("vodPvr",$vodPvrArr); 
            $this->session->set_userdata("optionTv",$optionTvArr);
            
             //Go to bouquet tv or mes coordonnes 
             //if($count_tv>0){
-           $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);   
+           $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$this->data,true);   
            
             if(!empty($bouqTvArr)){
                 $this->load->model('stb_model','stb'); 
-                $data["base_url_stb"] = BASEPATH_STB;
-                $data["bouquet_list"] = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr));
+                $this->data["base_url_stb"] = BASEPATH_STB;
+                $this->data["bouquet_list"] = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr));
                 //$data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];
-                $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$data,true);    
+                $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$this->data,true);    
                 $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
                 
             }else{
@@ -536,7 +423,7 @@ class Mon_offre extends MY_Controller {
                 
                 $offreparrainage_id = $this->session->userdata('offreparrainage_id');
                 if(!empty($offreparrainage_id))
-                $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);
+                $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$this->data,true);
                  
                 $this->session->set_userdata('prevState',array(array("contenu_html"=>$this->session->userdata("htmlContent_forfait")),$this->colonneDroite));                
             }
@@ -553,6 +440,29 @@ class Mon_offre extends MY_Controller {
         $prevState = $this->session->userdata("prevState");
         $beneficierTv =  $this->input->post("beneficierTv");
         $decoder_tv   =  $this->input->post('decoder_tv');    
+                
+         //MAJ PANIER
+        $this->majPanier(array("produit"=>array("TELEVISION"),"etape"=>"choixTv")); 
+         
+       //dummy1
+        $this->data["decoder_tv"]    = $decoder_tv;
+        $this->data["eligible_tv"] = $this->session->userdata("eligible_tv");  
+        $prevState[1]["forfait_dummy1"] = $this->load->view("general/forfait_dummy1",$this->data,true);
+        
+        //dummy2
+        $this->session->userdata("promo_libelle",$this->data["promo_libelle"]);
+        $this->data["promo_libelle"] = $this->session->userdata("promo_libelle");
+        $prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$this->data,true);
+        
+        //dummy3
+        $prevState[1]["options_dummy3"]    = ($decoder_tv=="uncheck")?"":$this->load->view("general/options_dummy3",$this->data,true);
+        
+        //dummy4
+         $prevState[1]["location_equipements_dummy4"]    = $this->load->view("general/location_equipements_dummy4",$this->data,true);
+         
+         //dummy5
+         $prevState[1]["caution_dummy5"]    = $this->load->view("general/caution_dummy5",$this->data,true);
+        /*
         $data["decoder_tv"]    = $decoder_tv; 
         //affiche icon tv dans le forfait
         $data["donne_forfait"] = $this->session->userdata("donne_forfait");
@@ -569,6 +479,7 @@ class Mon_offre extends MY_Controller {
            $this->session->set_userdata("tarifBouqTv","");
         }
        
+        
         //promo dummy2
        $promo_libelle =  $this->session->userdata("promo_libelle");
         foreach($dummyPanier["dummy2"] as $key=>$val){
@@ -587,7 +498,7 @@ class Mon_offre extends MY_Controller {
                 }
             } 
         }
-                
+            
        
         $data["promo_libelle"] = $promo_libelle;
         $this->session->set_userdata("promo_libelle",$promo_libelle);
@@ -632,16 +543,17 @@ class Mon_offre extends MY_Controller {
         
         //total 1ere facture
         $caution_dummy5 = $this->session->userdata("caution_dummy5");
+        
         $this->session->set_userdata("oneshot_dummy7",$data["oneshot_dummy7"]);
-        $data["total1erFact"]  = ($decoder_tv=="uncheck")?"":$data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
+        $data["total1erFact"]  = ($decoder_tv=="uncheck")?"":$data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5["Tarif"]["decimal"][0];
         //total 2eme facture
-        $data["total2emeFact"] = ($decoder_tv=="uncheck")?"":$data["totalParMois"]+$caution_dummy5[1];
+        $data["total2emeFact"] = ($decoder_tv=="uncheck")?"":$data["totalParMois"]+$caution_dummy5["Tarif"]["decimal"][1];
         
         //caution decodeur
         $prevState[1]["caution_decodeur_dummy5"] = "";
         $data["caution_dummy5"] = $caution_dummy5;
         if(!empty($data["caution_dummy5"])){    
-             $data["dummy5"] = $dummyPanier["dummy5"];
+            // $data["dummy5"] = $dummyPanier["dummy5"];
             $prevState[1]["caution_decodeur_dummy5"] = ($decoder_tv=="uncheck")?"": $this->load->view("general/caution_dummy5",$data,true);  
         }
         
@@ -651,7 +563,7 @@ class Mon_offre extends MY_Controller {
         $data["dummy3"]="";
         $prevState[1]["options_dummy3"]    = ($decoder_tv=="uncheck")?"":$this->load->view("general/options_dummy3",$data,true);
         
-        
+         */   
         
         $this->session->set_userdata('prevState',$prevState);            
         echo json_encode($prevState[1]);
@@ -699,7 +611,7 @@ class Mon_offre extends MY_Controller {
         foreach($dummyPanier["dummy2"] as $key=>$val){
             if($val["Categorie"]=="BOUQUET_TV"&&$val["Id_crm"]==$bouquetChoisi[4]){
                 foreach($promo_libelle as $key2=>$val2){
-                    if(isset($val2["bouquet"])){
+                    if(is_array($val2)&&isset($val2["bouquet"])){
                        unset($promo_libelle[$key2]);
                     }
                 }
@@ -886,6 +798,12 @@ class Mon_offre extends MY_Controller {
        $produit = $this->session->userdata("produit");
        foreach($produit as $key=>$val){
            echo $val["Categorie"]."<br>";
+         
+           if($val["Categorie"]=="OPTION_TV"){
+               echo "<pre>";
+               print_r($val);
+               echo "</pre>";
+           }           
        }
     }
     
