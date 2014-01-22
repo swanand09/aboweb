@@ -13,6 +13,9 @@ class MY_Controller extends CI_Controller {
         var $context; 
         
         var $totalParMois;
+        var $total1erFacture;
+        var $total2emeFacture;
+        
         var $iad;
         var $validPrefix   = array();
         
@@ -186,6 +189,8 @@ class MY_Controller extends CI_Controller {
             $promo_libelle = array($promo_libelle);
             $this->data["promo_libelle"] = $promo_libelle;    
             $this->data["etape"] = $prodArr["etape"];
+            $this->data["caution_dummy5"] = $this->session->userdata("caution_dummy5");
+            $this->data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
             foreach($produit as $key=>$val){
                 foreach($prodArr["produit"] as $key2=>$val2){
                     switch($val2){
@@ -196,15 +201,11 @@ class MY_Controller extends CI_Controller {
                                    //dégroupage partiel
                                    if(utf8_encode($val["Libelle"])=="Dégroupage Partiel"){
                                        $this->session->set_userdata("degroupageDummy1Crm",$val["Id_crm"]);
-                                       if(!empty($val["Valeurs"])){
-                                            foreach($val["Valeurs"] as $key3=>$val3){
-                                                if($val3["Categorie"]=="DEGROUPAGE"){
-                                                    $this->data["dum1_degroup_tarif"] = $val["Tarif"];
-                                                    $this->data["dum1_degroup_libelle"] = $val3["Libelle"]["string"];   
-                                                    $this->getTotal($val3["Tarif"]["decimal"]);
-                                                }
-                                            }
-                                       }
+                                       $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$val["Id_crm"]); 
+                                       
+                                       //MAJ PANIER
+                                       $this->procDummy(array("dummyArr"=>$dummyAMaj)); 
+                                     
                                    }
                                }
                             }
@@ -224,10 +225,8 @@ class MY_Controller extends CI_Controller {
                                 $id_crm = $this->input->post("id_crm");
                                 if($val["Id_crm"]==$id_crm){
                                     //id crm forfait dummy1
-                                     $this->session->set_userdata("forfaitDummy1Crm",$id_crm);
-                                     
-                                     
-                                     $this->data["totalParMois"] = $this->getTotal((($val["Tarif_promo"]>0)?$val["Tarif_promo"]:$val["Tarif"]));
+                                     $this->session->set_userdata("forfaitDummy1Crm",$id_crm);                                                                          
+                                    
                                      $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$id_crm); 
                                      //MAJ PANIER
                                      $this->procDummy(array("dummyArr"=>$dummyAMaj));   
@@ -239,7 +238,8 @@ class MY_Controller extends CI_Controller {
                             if($val["Categorie"]=="IAD"){
                                 if(!empty($val["Valeurs"])){
                                     $this->session->set_userdata("locationIadDummy4Crm",$this->iad["Id_crm"]);
-                                    $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$this->iad["Id_crm"]);                                    
+                                    $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$this->iad["Id_crm"]);  
+                                   
                                      //MAJ PANIER
                                     $this->procDummy(array("dummyArr"=>$dummyAMaj)); 
                                     //$promo_libelle = $this->data["promo_libelle"];
@@ -248,11 +248,16 @@ class MY_Controller extends CI_Controller {
                         break;
                         case "TELEVISION":
                             if($val["Categorie"]=="TELEVISION"){
+                                
                                 $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$val["Id_crm"]); 
                                 //MAJ PANIER
                                 $this->procDummy(array("dummyArr"=>$dummyAMaj));
+                                
+                                //calculation total abonnement, 1er mois et 2eme mois
                             }
-                        break;                
+                        break;  
+                        case "BOUQUET_TV":
+                        break;
                         case "OPTION_TV":
                         break;
                         case "FACTURATION":
@@ -270,17 +275,37 @@ class MY_Controller extends CI_Controller {
                 if(!empty($val)){
                     switch($key){
                         case "dummy1":
-                            switch($this->data["etape"]){
-                                case "choixForfait":
-                                     $this->data["donne_forfait"]    = array("Valeurs"=>$val[0]["Valeurs"]);   
-                                     $this->session->set_userdata("donne_forfait",array("Valeurs"=>$val[0]["Valeurs"]));
-                                break;
-                                case "choixTv":
-                                    $this->data["donne_forfait"]    = $this->session->userdata("donne_forfait"); 
-                                    //ajout tv ou pas
-                                    
-                                    
-                                break;
+                            $donneForfait = array();
+                            foreach($val as $key2=>$val2){
+                                switch($this->data["etape"][0]){
+                                    case "choixForfait":
+                                        if($val2["Valeurs"]["Categorie"]=="FORFAIT"){
+                                            array_push($donneForfait,array("Valeurs"=>$val2["Valeurs"]));
+                                            $this->data["donne_forfait"]    = $donneForfait; 
+                                            $this->session->set_userdata("donne_forfait",$donneForfait);
+                                        }
+                                         
+                                        if($val2["Valeurs"]["Categorie"]=="DEGROUPAGE"){
+                                            $this->data["dum1_degroup_tarif"] = $val2["Valeurs"]["Tarif"]["decimal"];
+                                            $this->data["dum1_degroup_libelle"] = $val2["Valeurs"]["Libelle"]["string"]; 
+                                        }
+                                         //abonnement total par mois
+                                         //produit de type recurrent                                   
+                                         if($val2["Valeurs"]["Type"]=="RECURRENT"){
+                                              $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                         }                                    
+
+                                    break;
+                                    case "choixTv":
+                                        $this->data["donne_forfait"]    = $this->session->userdata("donne_forfait"); 
+
+                                        //ajout tv ou pas
+                                        $this->data["tvChoisi"] = ($this->data["etape"][1]=="check"&&!empty($val[0]["Valeurs"]))?true:false;                                    
+                                        if($val2["Valeurs"]["Type"]=="RECURRENT"){
+                                            $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
+                                        }
+                                    break;
+                                }
                             }
                            
                             //$this->data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");                                                     
@@ -295,7 +320,11 @@ class MY_Controller extends CI_Controller {
                         case "dummy3":
                             $vodPvrArr = array();
                             foreach($val as $key2=>$val2){
-                                  array_push($vodPvrArr, array(
+                                switch($this->data["etape"][0]){
+                                    case "choixForfait":
+                                    break;
+                                    case "choixTv":
+                                             array_push($vodPvrArr, array(
                                                                 $val2["Valeurs"]["Libelle"]["string"]=>array(
                                                                                                              "tarif"=>$val2["Valeurs"]["Tarif"]["decimal"],
                                                                                                              "picto"=>$val2["Valeurs"]["Picto"],
@@ -308,44 +337,167 @@ class MY_Controller extends CI_Controller {
 
                                                                                                           )
                                                    );
+                                        //ajout tv ou pas
+                                        $this->data["tvChoisi"] = ($this->data["etape"][1]=="check"&&!empty($val2["Valeurs"]))?true:false; 
+                                       //abonnement total
+                                        //produit de type recurrent                                         
+                                        if($val2["Valeurs"]["Type"]=="RECURRENT"){
+                                             $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
+                                        }     
+                                    break;
+                                }
+                                 
                             }
                             $this->data["vodPvr"] =  $vodPvrArr;
                                                    
                         break;
-                        case "dummy4":     
+                        case "dummy4":   
+                            $locaEquipArr = array();
+                            $decoderTvArr    = array();
                             foreach($val as $key2=>$val2){
-                                switch($this->data["etape"]){
+                                switch($this->data["etape"][0]){
                                     case "choixForfait":
-                                        $this->data["location_equipement"]    = array("Valeurs"=>$val2["Valeurs"]);
+                                        array_push($locaEquipArr,array("Valeurs"=>$val2["Valeurs"]));
+                                        $this->data["location_equipement"]    = $locaEquipArr;
+                                        if($val2["Valeurs"]["Type"]=="RECURRENT"){                                            
+                                             $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                        }
                                     break;
-                                    case "choixtv":
+                                    case "choixTv":
                                         $this->data["location_equipement"]    = $this->session->userdata("location_equipement");
-                                        $this->data["tarif_loca_decod"] = ($val2["Valeurs"]["Categorie"]=="STB")?"dummy4_".$val2["Valeurs"]["Tarif"]["decimal"]:"dummy4_0";                                
-                                        $this->data["tarif_activ_servicetv"] = "dummy7_";
+                                        //abonnement total
+                                        //produit de type recurrent                                          
+                                        if($val2["Valeurs"]["Type"]=="RECURRENT"){                                                  
+                                             $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
+                                             if($this->data["etape"][1]=="check"){
+                                                 array_push($decoderTvArr,array("Valeurs"=>$val2["Valeurs"]));
+                                             }
+                                        }    
+                                        $this->data["decodeurTv"] = $decoderTvArr;
                                     break;
                                 }
                             }
                         break;
                         case "dummy5":
-                            $this->data["caution_dummy5"] = $val[0]["Valeurs"];
+                            $cautionArr = array();
+                            foreach($val as $key2=>$val2){
+                                switch($this->data["etape"][0]){
+                                      case "choixForfait":
+                                          array_push($cautionArr,array("Valeurs"=>$val2["Valeurs"]));
+                                           $this->data["caution_dummy5"] = $cautionArr;
+                                          //produit de type recurrent                                          
+                                            if($val2["Valeurs"]["Type"]=="RECURRENT"){  
+                                                $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type CAUTION                                          
+                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
+                                                $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);        
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type ONESHOT                                          
+                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
+                                                  $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);           
+                                            } 
+                                      break;
+                                      case "choixTv":
+                                           array_push($cautionArr,array("Valeurs"=>$val2["Valeurs"]));
+                                           $this->data["caution_dummy5"] = ($this->data["etape"][1]=="check"&&!empty($cautionArr))?$cautionArr:array();
+                                            //abonnement total
+                                            //produit de type recurrent                                          
+                                            if($val2["Valeurs"]["Type"]=="RECURRENT"){  
+                                                $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type CAUTION                                          
+                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
+                                                $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);        
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type ONESHOT                                          
+                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
+                                                  $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);           
+                                            } 
+                                      break;
+                                }
+                            }
+                           
                         break;
                         case "dummy6":
                         break;
                         case "dummy7":
-                           $this->data["oneshot_dummy7"] = $val[0]["Valeurs"];                                                     
+                            $oneshotArr = array();
+                           foreach($val as $key2=>$val2){
+                                switch($this->data["etape"][0]){
+                                      case "choixForfait":       
+                                          array_push($oneshotArr,array("Valeurs"=>$val2["Valeurs"]));
+                                           $this->data["oneshot_dummy7"] = $oneshotArr;
+                                          //produit de type recurrent                                          
+                                            if($val2["Valeurs"]["Type"]=="RECURRENT"){  
+                                                $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type CAUTION                                          
+                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
+                                                $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);        
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type ONESHOT                                          
+                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
+                                                  $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);           
+                                            } 
+                                      break;
+                                      case "choixTv": 
+                                          $oneshotArr = $this->session->userdata("oneshot_dummy7");
+                                           array_push($oneshotArr,array("Valeurs"=>$val2["Valeurs"]));
+                                           $this->data["oneshot_dummy7"] = ($this->data["etape"][1]=="check"&&!empty($oneshotArr))?$oneshotArr:array();
+                                           //abonnement total
+                                            //produit de type recurrent                                          
+                                            if($val2["Valeurs"]["Type"]=="RECURRENT"){  
+                                                $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type CAUTION                                          
+                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
+                                                $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);        
+                                            } 
+
+                                             //abonnement total 1er et 2eme mois
+                                            //produit de type ONESHOT                                          
+                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
+                                                  $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);           
+                                            } 
+                                       break;
+                                }
+                            }
+                                                                        
                         break;
                     }
                 }
             }
            
         }
-        
+        //total abonnement 1er et 2eme facture 
+        public function getTotal1er2em($amount){
+            $this->total1erFacture = $this->session->userdata('total1erFacture');
+            $this->total1erFacture = !empty($this->total1erFacture)?$this->total1erFacture:$this->session->userdata('totalParMois');
+            $this->total1erFacture += (double)$amount;
+            $this->session->set_userdata('total1erFacture',$this->total1erFacture);
+            $this->session->set_userdata('total2emeFacture',$this->total1erFacture);
+        }
         //get total par mois
         public function getTotal($amount){
             $this->totalParMois = $this->session->userdata('totalParMois');
             $this->totalParMois += (double)$amount;
             $this->session->set_userdata('totalParMois',$this->totalParMois);
-            return $this->totalParMois;
+            //return $this->totalParMois;
         }
         
         //convertit un tableau en xml

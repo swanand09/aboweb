@@ -2,14 +2,18 @@
 <div id="caution">
 <?php 
     if(isset($caution_dummy5)&&  is_array($caution_dummy5)){
-        $label = utf8_encode($caution_dummy5["Libelle"]["string"]);
-        $tarifCaution = is_array($caution_dummy5["Tarif"]["decimal"])&&$caution_dummy5["Tarif"]["decimal"]>0?
-                        $caution_dummy5["Tarif"]["decimal"][0]+$caution_dummy5["Tarif"]["decimal"][1]:
-                        $caution_dummy5["Tarif"]["decimal"];
+        
 ?>
  <div class="caution-deco notitle forpro">
     <ul>
-      <li><strong><?php echo $label; ?><span class="right"><?php echo ($caution_dummy5>0?number_format($tarifCaution,2,',',' ')."€":"inclus");?></span></strong></li>
+      <?php foreach($caution_dummy5 as $key=>$val){
+                $label = utf8_encode($val["Valeurs"]["Libelle"]["string"]);
+                $tarifCaution = is_array($val["Valeurs"]["Tarif"]["decimal"])&&$val["Valeurs"]["Tarif"]["decimal"]>0?
+                        $val["Valeurs"]["Tarif"]["decimal"][0]+$val["Valeurs"]["Tarif"]["decimal"][1]:
+                        $val["Valeurs"]["Tarif"]["decimal"];
+      ?>  
+      <li><strong><?php echo $label; ?><span class="right"><?php echo ($tarifCaution>0?number_format($tarifCaution,2,',',' ')."€":"inclus");?></span></strong></li>
+    <?php }?>
     </ul>
  </div>
 

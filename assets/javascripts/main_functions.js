@@ -140,14 +140,14 @@ var preload = function(){
 
                 preload();    
 //                var beneficierTv = "";
-               var beneficierTv = $("#beneficier").val();                
+              // var beneficierTv = $("#beneficier").val();                
                 if($("#beneficier").is(":checked"))
                 {
                       
                     $.post(
                         updateTvDecodeur,
                          {
-                            beneficierTv : beneficierTv,  
+                           // beneficierTv : beneficierTv,  
                             decoder_tv   : "check"
                          },
                         function(data){    
@@ -180,7 +180,7 @@ var preload = function(){
                      $.post(
                             updateTvDecodeur,
                              {
-                                beneficierTv : beneficierTv,
+                               // beneficierTv : beneficierTv,
                                 decoder_tv   : "uncheck"
                              },
                             function(data){

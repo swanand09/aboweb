@@ -1,56 +1,8 @@
-<?php
-    $tarif_loca_decod      =  explode("_",$tarif_loca_decod);
-    $tarif_activ_servicetv =  explode("_",$tarif_activ_servicetv);
-    
-    if($tarif_loca_decod[1]>0&&empty($tarif_activ_servicetv[1])){
-       $valBeneficier = "dummy4_".$tarif_loca_decod[1];       
-    }else if(!empty($tarif_activ_servicetv[1])&&$tarif_activ_servicetv[1]>0){
-        $valBeneficier = "dummy7_".$tarif_activ_servicetv[1];
-    }else{
-        $valBeneficier = "dummy4_0";
-    }
-  /*
-    //option tv
-    $tarif_bein = 0;
-    $duree_promo_bein = 0;
-    $tarif_promo_bein = 0;
-    $tarif_eden = 0;
-    $duree_promo_eden = 0;
-    $tarif_promo_eden = 0;
-  
-    if(!empty($optionTvArr)&&isset($optionTvArr)){
-        foreach($optionTvArr as $key=>$val){
-            if(isset($val["BeIN Sport"])){
-                $tarif_bein = $val["BeIN Sport"];
-                $duree_promo_bein = $val[0]["Duree_mois_promo"];
-                $tarif_promo_bein = $val[0]["Tarif_promo"];
-            }
-            if(isset($val["Eden"])){
-                $tarif_eden = $val["Eden"];
-                $duree_promo_eden = $val[0]["Duree_mois_promo"];
-                $tarif_promo_eden = $val[0]["Tarif_promo"];               
-            }
-        }
-    }
-    
-   echo "<pre>";
-   print_r($bouqTvArr);
-   echo "</pre>";
-  
-   echo "<pre>";
-   print_r($optionTvArr);
-   echo "</pre>";
-   
-   echo "<pre>";
-   print_r($vodPvr);
-   echo "</pre>";*/
-   
-?>
 <form class="frm-tv" onSubmit="javascript:gotoMesCoord();return false; ">
 
         <div class="row">
           <div class="column twelve bottom-10">
-            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();" value="<?php echo $valBeneficier; ?>" name="beneficier"> Je souhaite bénéficier de la TV avec 41 cha&icirc;nes incluses.</label>
+            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();"  name="beneficier"> Je souhaite bénéficier de la TV avec 41 cha&icirc;nes incluses.</label>
           </div>
         </div>
         <!--ACCORDION-->

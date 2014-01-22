@@ -1,6 +1,6 @@
 <div id="options">
 <?php
-$vodPvr = $this->session->userdata("vodPvr");
+//$vodPvr = $this->session->userdata("vodPvr");
 if(!empty($vodPvr)||(isset($bouquetChoisi)&&!empty($bouquetChoisi))){
     if(!empty($bouquetChoisi)){
         $bouquetTv = explode("__",$bouquetChoisi);  
