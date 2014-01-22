@@ -445,8 +445,8 @@ class Mon_offre extends MY_Controller {
          
         $this->data["totalParMois"] = $this->session->userdata("totalParMois");
         $this->data["total1erFacture"] = $this->session->userdata("total1erFacture");
-        $this->data["total1erFacture"] = ($this->data["decoder_tv"]=="check"&&$this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total1erFacture"):$this->session->set_userdata("total1erFacture","");
-        $this->data["total2emeFacture"] = ($this->data["decoder_tv"]=="check"&&$this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total2emeFacture"):$this->session->set_userdata("total2emeFacture","");
+        $this->data["total1erFacture"] = ($this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total1erFacture"):$this->session->set_userdata("total1erFacture","");
+        $this->data["total2emeFacture"] = ($this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total2emeFacture"):$this->session->set_userdata("total2emeFacture","");
         
         $prevState[1]["total_par_mois"]  = $this->load->view("general/total_mois",$this->data,true);  
         
