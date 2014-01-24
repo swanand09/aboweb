@@ -150,18 +150,9 @@ var preload = function(){
                            // beneficierTv : beneficierTv,  
                             decoder_tv   : "check"
                          },
-                        function(data){    
-                           /* 
-                          $("#recap_contenu").children("#caution").remove();  
-                          $("#recap_contenu").children("#caution").remove();  
-                          $("#recap_contenu").append(data.caution_decodeur_dummy5);  
-                          
-                          $("#recap_contenu").children("#location").remove();  
-                          $("#recap_contenu").append(data.location_equipements_dummy4);
-                          $("#recap_contenu").children("#oneshot").remove();  
-                          $("#recap_contenu").append(data.frais_activation_facture_dummy7);
-                          $("#total_mois").empty().append(data.total_par_mois);  */
-                             var key, count = 0;
+                        function(data){   
+                         
+                            var key, count = 0;
                             for(key in data) {
                                 if(count==0) {
                                   $("#recap_contenu").empty();                                                    
@@ -220,11 +211,20 @@ var preload = function(){
                         bouquetChoisi : valeur
                      },
                     function(data){
+                        /*
                       $("#recap_contenu").children("#promo").remove(); 
                       $("#recap_contenu").append(data.libelles_promo_dummy2);
                       $("#recap_contenu").children("#options").remove();  
                       $("#recap_contenu").append(data.options_dummy3);
-                      $("#total_mois").empty().append(data.total_par_mois);  
+                      $("#total_mois").empty().append(data.total_par_mois);  */
+                      var key, count = 0;
+                            for(key in data) {
+                                if(count==0) {
+                                  $("#recap_contenu").empty();                                                    
+                                }
+                              (key!="total_par_mois")?$("#recap_contenu").append(data[key]):$("#total_mois").empty().append(data[key]);                            
+                                count++;
+                            }  
                       $.unblockUI(); 
 //                      $('html, body').animate({
 //                                    scrollTop: $(".sexy").offset().top

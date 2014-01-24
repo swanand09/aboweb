@@ -1,24 +1,25 @@
 <div id="options">
 <?php
-//$vodPvr = $this->session->userdata("vodPvr");
-if(!empty($vodPvr)||(isset($bouquetChoisi)&&!empty($bouquetChoisi))){
-    if(!empty($bouquetChoisi)){
-        $bouquetTv = explode("__",$bouquetChoisi);  
-    }
+$panierVal = $this->session->userdata("panierVal");
+if(!empty($panierVal["bouquetTvdum3"])||!empty($panierVal["optionTvdum3"])||!empty($panierVal["voddum3"])){
 ?>
 <!--OPTIONS DUMMY 3-->
 <div class="forpro options">
     <h3>Options<span class="right"><a href="#">Modifier</a></span></h3>
     <ul>
-        <?php if(!empty($bouquetTv)){ ?>
+        <?php if(!empty($panierVal["bouquetTvdum3"])){ 
+                //foreach($panierVal["bouquetTvdum3"] as $key=>$val){
+        ?>
 <!--        BOUQUET_TV-->
-        <li style="background: url(<?php echo base_url()."/assets/images/contenu/".trim($bouquetTv[0]); ?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);">
-          <strong><?php echo $bouquetTv[1]; ?></strong><span class="right"><?php echo number_format($bouquetTv[2],2,',',' ')."€/mois"; ?></span></strong><br><?php echo $bouquetTv[3]; ?> chaînes
+        <li style="background: url(<?php echo base_url()."/assets/images/contenu/".trim($panierVal["bouquetTvdum3"]["Valeurs"]["Picto"]); ?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);">
+          <strong><?php echo $panierVal["bouquetTvdum3"]["Valeurs"]["Libelle"]["string"]; ?></strong><span class="right"><?php echo number_format($panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"],2,',',' ')."€/mois"; ?></span></strong><br><?php echo $panierVal["bouquetTvdum3"]["nombreChaines"]; ?> chaînes
       </li>
-        <?php } ?>
+        <?php 
+               // }
+                } ?>
 <!--      OPTION_TV-->
       <?php 
-            if(!empty($optionData)){ 
+            if(!empty($panierVal["optionTvdum3"])){ 
                 foreach($optionData as $key=>$val){
                     foreach($val as $key2=>$val2){
                     ?>
@@ -29,8 +30,8 @@ if(!empty($vodPvr)||(isset($bouquetChoisi)&&!empty($bouquetChoisi))){
              } 
       
      // VOD_PVR
-       if(!empty($vodPvr)){
-        foreach($vodPvr as $key=>$val){
+       if(!empty($panierVal["voddum3"])){
+        foreach($panierVal["voddum3"] as $key=>$val){
             foreach($val as $key2=>$val2){
                 if($val2["promo"]["Duree_mois_promo"]>0){
                     $vodTarif       = $val2["promo"]["Tarif_promo"];

@@ -12,10 +12,10 @@ class Mon_offre extends MY_Controller {
     public function index($num_tel="")
     {
          //verificaition session
-        $prevState = $this->session->userdata("prevState");
-        if(isset($prevState[1]["parrainage"])&&!empty($prevState[1]["parrainage"])){
-            $prevState[1]["parrainage"] = "";
-            $this->session->set_userdata('prevState',$prevState);
+        $this->prevState = $this->session->userdata("prevState");
+        if(isset($this->prevState[1]["parrainage"])&&!empty($this->prevState[1]["parrainage"])){
+            $this->prevState[1]["parrainage"] = "";
+            $this->session->set_userdata('prevState',$this->prevState);
         }
         
         $this->data["userdata"] = $this->session->all_userdata();  
@@ -50,7 +50,8 @@ class Mon_offre extends MY_Controller {
         if(!empty($num_tel)){
              return $this->ajax_proc_interogeligib($num_tel);
         }
-        
+        $this->majSession(array("panierVal"=>$this->panierVal));
+        $this->majSession(array("produIdCrm"=>$this->produIdCrm));
         return $this->controller_test_eligib_vue();                
     }
    
@@ -100,6 +101,7 @@ class Mon_offre extends MY_Controller {
                if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
                {                  
                     $data["error"]  = false;
+                    $this->session->set_userdata("resultProd",""); //flux de produits
                     $this->session->set_userdata("num_tel",$num_tel);                   
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);                    
                     $this->session->set_userdata('context',$result["interrogeEligibiliteResult"]["Context"]);
@@ -162,15 +164,21 @@ class Mon_offre extends MY_Controller {
        
        //connection à la fonctionalité recupere_info du wdsl
        $context = $this->session->userdata('context');
-       $result = $this->Wsdl_interrogeligib->recupereOffre($context);
-              
-       $this->session->set_userdata('localite',$result["recupere_offreResult"]["Localite"]);
-       $this->session->set_userdata('idParcours',$result["recupere_offreResult"]["Id"]); 
-       $this->session->set_userdata('offreparrainage_id',($result["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$result["recupere_offreResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
-       $this->session->set_userdata('ws_ville',$result["recupere_offreResult"]["Villes"]["WS_Ville"]);
-       $this->session->set_userdata('produit',$result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-       $this->session->set_userdata('promo', utf8_encode($result["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));
-       $this->session->set_userdata('context',$result["recupere_offreResult"]["Context"]);
+       //verifie si on a deja les flux de produit
+       $resultProd = $this->session->userdata("resultProd");
+       if(empty($resultProd)){
+         $resultProd  = $this->Wsdl_interrogeligib->recupereOffre($context);
+         $this->session->set_userdata("resultProd",$resultProd);
+       }
+       $this->session->set_userdata('localite',$resultProd["recupere_offreResult"]["Localite"]);
+       $this->session->set_userdata('idParcours',$resultProd["recupere_offreResult"]["Id"]); 
+       $this->session->set_userdata('offreparrainage_id',($resultProd["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$resultProd["recupere_offreResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
+       $this->session->set_userdata('ws_ville',$resultProd["recupere_offreResult"]["Villes"]["WS_Ville"]);
+       $this->session->set_userdata('produit',$resultProd["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
+       $panierVal = $this->session->userdata("panierVal");
+       array_push($panierVal["promodum2"],array(utf8_encode($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])));       
+       $this->session->set_userdata("panierVal",$panierVal);
+       $this->session->set_userdata('context',$resultProd["recupere_offreResult"]["Context"]);
        //$this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]));
      
       
@@ -211,8 +219,8 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata('iad',$iadArr);
         $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
-        $prevState = $this->session->userdata("prevState");
-        $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
+        $this->prevState = $this->session->userdata("prevState");
+        $this->colonneDroite["form_test_ligne"] = $this->prevState[1]["form_test_ligne"];
        
         if($this->colonneDroite["forfait_dummy1"]=="")
         {           
@@ -232,19 +240,63 @@ class Mon_offre extends MY_Controller {
     {
        
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-        //$prevState =  $this->session->userdata("prevState"); 
+        //$this->prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
         $consv_num_tel = $this->session->userdata("consv_num_tel");
+        $resultProd = $this->session->userdata("resultProd");
+        
+         $this->produIdCrm   =   array(
+                                    "forfait"       => "",
+                                    "degroupage"    => "",
+                                    "portabilite"   => "",
+                                    "iad"           => "",
+                                    "television"    => "",
+                                    "bouquetTv"     => "",
+                                    "optionTv"      => "",
+                                    "facturation"   => "",
+            );    
+        $this->session->set_userdata("produIdCrm",$this->produIdCrm);
         switch($page)
         {
             case "forfait":
+                    $this->panierVal       = array(
+                                        "degroupagedum1"    => array(),
+                                        "portabilitedum1"   => array(),
+                                        "forfaitdum1"       => array(),
+                                        "promodum2"         => array(array(utf8_encode($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]))),
+                                        "bouquetTvdum3"     => array(),
+                                        "optionTvdum3"      => array(),
+                                        "voddum3"           => array(),
+                                        "locaEquipdum4"     => array(),
+                                        "decodEquipdum4"    => array(),
+                                        "cautiondum5"       => array(),
+                                        "facturedum6"       => array(),
+                                        "oneshotdum7"       => array()
+                );    
+               
                 $htmlContent   = $this->session->userdata("htmlContent_forfait");
             break;
         
             case "test_eligib":
+                $this->panierVal       = array(
+                                        "degroupagedum1"    => array(),
+                                        "portabilitedum1"   => array(),
+                                        "forfaitdum1"       => array(),
+                                        "promodum2"         => array(),
+                                        "bouquetTvdum3"     => array(),
+                                        "optionTvdum3"      => array(),
+                                        "voddum3"           => array(),
+                                        "locaEquipdum4"     => array(),
+                                        "decodEquipdum4"    => array(),
+                                        "cautiondum5"       => array(),
+                                        "facturedum6"       => array(),
+                                        "oneshotdum7"       => array()
+                );    
+               
                 $htmlContent   = $this->session->userdata("htmlContent_testeligib");
             break;
         }
+       $this->session->set_userdata("panierVal",$this->panierVal);
        if(!empty($htmlContent)){
             if($redu_facture=="true"){
                 $htmlContent = str_replace('<input type="checkbox" name="redu_facture" value="true" id="redu_facture"  />','<input type="checkbox" name="redu_facture" value="true" checked="checked" id="redu_facture"  />',$htmlContent);
@@ -276,25 +328,16 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata("tarifBouqTv","");
          $this->session->set_userdata("tarifOptionEden","");
          $this->session->set_userdata("tarifOptionBein","");
-          
-         $prevState = $this->session->userdata("prevState");
          
          $this->iad = $this->session->userdata("iad");
-         $this->data["iad"] = $this->iad;
-         //$this->data["totalParMois"] = $this->getTotal($this->iad["Tarif"]);
-         $localite    = $this->session->userdata("localite");
-         $dummyPanier = $this->session->userdata("dummyPanier");  
+         $this->data["iad"] = $this->iad;        
+         $localite    = $this->session->userdata("localite");       
          $id_crm = $this->input->post("id_crm");
-         $produit =  $this->session->userdata("produit");           
-         $this->colonneDroite["form_test_ligne"] = $prevState[1]["form_test_ligne"];
-         $this->colonneDroite["donnee_degroupage"] = $prevState[1]["donnee_degroupage"];   
-         //$promo_libelle = array($promo_libelle);
-         
+         $produit =  $this->session->userdata("produit");   
+        
          //MAJ PANIER
           $this->majPanier(array("produit"=>array("DEGROUPAGE","PORTABILITE","FORFAIT","IAD"),"etape"=>array("choixForfait"))); 
-          $this->session->set_userdata("location_equipement",$this->data["location_equipement"]);
-          $this->session->set_userdata("promo_libelle",$this->data["promo_libelle"]);
-          $this->data["promo_libelle"] = $this->session->userdata("promo_libelle");
+                   
           $bouqTvArr = array(); $optionTvArr = array();$vodPvrArr = array();
           if(isset($produit)&&!empty($produit)){
                 foreach($produit as $key=>$val)
@@ -347,7 +390,6 @@ class Mon_offre extends MY_Controller {
                            }                           
                            foreach($dummyAMaj["dummy7"] as $key2=>$val2)
                            {
-                               //$this->data["tarif_activ_servicetv"] = "dummy7_".$val2["Valeurs"]["Tarif"]["decimal"];                                     
                                 if(isset($val2["Valeurs"]["Tarif"]["decimal"][0])){
                                    $total1erFact = $this->session->userdata('total1erFact');
                                    $total1erFact += $val2["Valeurs"]["Tarif"]["decimal"][0]; 
@@ -364,95 +406,41 @@ class Mon_offre extends MY_Controller {
                     }
                 }         
             }
-         $this->colonneDroite["forfait_dummy1"]               = $this->load->view("general/forfait_dummy1",$this->data,true);
-         $this->colonneDroite["donnee_degroupage"]            = $this->load->view("general/donnee_degroupage",$this->data,true);
-         $this->colonneDroite["libelles_promo_dummy2"]        = $this->load->view("general/libelles_promo_dummy2",$this->data,true);
-         $this->colonneDroite["location_equipements_dummy4"]  = $this->load->view("general/location_equipements_dummy4",$this->data,true);
-         $this->session->set_userdata("caution_dummy5",$this->data["caution_dummy5"]);
-         $this->colonneDroite["caution_decodeur_dummy5"]               = $this->load->view("general/caution_dummy5",$this->data,true);  
-         $this->session->set_userdata("oneshot_dummy7",$this->data["oneshot_dummy7"]);
-         $this->colonneDroite["frais_activation_facture_dummy7"]         =  $this->load->view("general/frais_oneshot_dummy7",$this->data,true);         
-        
+          
            $this->data["bouqTvArr"] = $bouqTvArr;  $this->data["optionTvArr"] = $optionTvArr; //$this->data["vodPvr"] = $vodPvrArr; 
-           $this->session->set_userdata("bouquetTv",$bouqTvArr);
-           //$this->session->set_userdata("vodPvr",$vodPvrArr); 
+           $this->session->set_userdata("bouquetTv",$bouqTvArr);         
            $this->session->set_userdata("optionTv",$optionTvArr);
            
-            //Go to bouquet tv or mes coordonnes 
-            //if($count_tv>0){           
-           $this->data["totalParMois"] = $this->session->userdata("totalParMois");
-           $this->data["total1erFacture"] = $this->session->userdata("total1erFacture");
-           $this->data["total2emeFacture"] = $this->session->userdata("total2emeFacture");
-           $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$this->data,true);   
            
             if(!empty($bouqTvArr)){
                 $this->load->model('stb_model','stb'); 
                 $this->data["base_url_stb"] = BASEPATH_STB;
-                $this->data["bouquet_list"] = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr));
-                //$data["location_equipements_dummy4"] = $prevState[1]["location_equipements_dummy4"];
-                $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$this->data,true);    
-                $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
+                $this->data["bouquet_list"] = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr));               
+                $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$this->data,true);                   
                 
             }else{
-                $this->contenuGauche["contenu_html"] = "redirect to mes coordonnees";
-                
+                $this->contenuGauche["contenu_html"] = "redirect to mes coordonnees";                
                 $offreparrainage_id = $this->session->userdata('offreparrainage_id');
                 if(!empty($offreparrainage_id))
-                $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$this->data,true);
-                 
+                $this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$this->data,true);                 
                 $this->session->set_userdata('prevState',array(array("contenu_html"=>$this->session->userdata("htmlContent_forfait")),$this->colonneDroite));                
             }
             
-            echo json_encode(array($this->contenuGauche,$this->colonneDroite));
-
+            echo json_encode(array($this->contenuGauche,$this->colonneDroite));          
     }  
     
     //update tv decodeur
     
     public function updateTvDecodeur()
     {
-        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-        $prevState = $this->session->userdata("prevState");
-        
-        $decoder_tv   =  $this->input->post('decoder_tv');    
-                
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";              
+        $decoder_tv   =  $this->input->post('decoder_tv');                    
          //MAJ PANIER
-        $this->majPanier(array("produit"=>array("TELEVISION"),"etape"=>array("choixTv",$decoder_tv) )); 
-         
+        $this->majPanier(array("produit"=>array("TELEVISION"),"etape"=>array("choixTv",$decoder_tv) ));          
        //dummy1
         $this->data["decoder_tv"]  = $decoder_tv;
-        $this->data["eligible_tv"] = $this->session->userdata("eligible_tv");  
-        $prevState[1]["forfait_dummy1"] = $this->load->view("general/forfait_dummy1",$this->data,true);
-        
-        //dummy2
-        $this->session->userdata("promo_libelle",$this->data["promo_libelle"]);
-        $this->data["promo_libelle"] = $this->session->userdata("promo_libelle");
-        $prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$this->data,true);
-        
-        //dummy3
-        $prevState[1]["options_dummy3"]    = ($decoder_tv=="uncheck")?"":$this->load->view("general/options_dummy3",$this->data,true);
-        
-        //dummy4
-         $prevState[1]["location_equipements_dummy4"]    = $this->load->view("general/location_equipements_dummy4",$this->data,true);
-         
-         //dummy5
-          $this->session->set_userdata("caution_dummy5",$this->data["caution_dummy5"]);
-         $prevState[1]["caution_decodeur_dummy5"]    = $this->load->view("general/caution_dummy5",$this->data,true);
-         
-         //dummy7
-         $this->session->set_userdata("oneshot_dummy7",$this->data["oneshot_dummy7"]);
-         $prevState[1]["frais_activation_facture_dummy7"]    = $this->load->view("general/frais_oneshot_dummy7",$this->data,true);
-         
-        $this->data["totalParMois"] = $this->session->userdata("totalParMois");
-        $this->data["total1erFacture"] = $this->session->userdata("total1erFacture");
-        $this->data["total1erFacture"] = ($this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total1erFacture"):$this->session->set_userdata("total1erFacture","");
-        $this->data["total2emeFacture"] = ($this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total2emeFacture"):$this->session->set_userdata("total2emeFacture","");
-        
-        $prevState[1]["total_par_mois"]  = $this->load->view("general/total_mois",$this->data,true);  
-        
-        
-        $this->session->set_userdata('prevState',$prevState);            
-        echo json_encode($prevState[1]);
+        $this->data["eligible_tv"] = $this->session->userdata("eligible_tv");          
+        echo json_encode($this->colonneDroite);
     }
     
     //dummy3 update bouquet
@@ -460,58 +448,10 @@ class Mon_offre extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $bouquetChoisi =  $this->input->post("bouquetChoisi");
         $this->session->set_userdata("bouquetChoisi",$bouquetChoisi);
-        $data["bouquetChoisi"] =  $bouquetChoisi;
-        
-        $optionData = $this->session->userdata("optionData");
-        if(!empty($optionData)){
-         foreach($optionData as $key=>$val){
-               foreach($val as $key2=>$val2){
-                   $data["totalParMois"] = $this->getTotal(-$val2[2]); 
-               }
-            }
-        }
-        $this->session->set_userdata("optionData","");
-        $this->session->set_userdata("optionTvDummy3Crm","");
-        $data["optionData"] = array();
-        $tarifBouqTv = $this->session->userdata("tarifBouqTv");
-        if(!empty($bouquetChoisi)){         
-            $bouquetChoisi = explode("__",$bouquetChoisi); 
-            if(!empty($tarifBouqTv)){
-                $data["totalParMois"] = $this->getTotal(-$tarifBouqTv);            
-            }
-            $data["totalParMois"] = $this->getTotal($bouquetChoisi[2]); 
-            $this->session->set_userdata("bouquetTvDummy3Crm",$bouquetChoisi[4]);
-         }
-        $this->session->set_userdata("tarifBouqTv",$bouquetChoisi[2]);
-        //total 1ere facture
-        $caution_dummy5 = $this->session->userdata("caution_dummy5");
-        $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
-        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
-        //total 2eme facture
-        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];                    
-        
-        
-         //promo dummy2
-       $promo_libelle  = $this->session->userdata("promo_libelle");
-       $dummyPanier    = $this->session->userdata("dummyPanier");
-        foreach($dummyPanier["dummy2"] as $key=>$val){
-            if($val["Categorie"]=="BOUQUET_TV"&&$val["Id_crm"]==$bouquetChoisi[4]){
-                foreach($promo_libelle as $key2=>$val2){
-                    if(is_array($val2)&&isset($val2["bouquet"])){
-                       unset($promo_libelle[$key2]);
-                    }
-                }
-                array_push($promo_libelle,array("bouquet"=>utf8_encode($val["Valeurs"]["Libelle"]["string"])));
-            }
-        }
-        $data["promo_libelle"] = $promo_libelle;
-        $this->session->set_userdata("promo_libelle",$promo_libelle);
-        $prevState = $this->session->userdata("prevState");
-        $prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$data,true);
-        $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
-        $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
-        $this->session->set_userdata("prevState",$prevState);
-        echo json_encode(array("libelles_promo_dummy2"=>$prevState[1]["libelles_promo_dummy2"],"options_dummy3"=>$prevState[1]["options_dummy3"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+        $this->data["bouquetChoisi"] =  $bouquetChoisi;
+         //MAJ PANIER
+        $this->majPanier(array("produit"=>array("BOUQUET_TV"),"etape"=>array("choixBouquet") )); 
+        echo json_encode($this->colonneDroite);
     }
     
     //dummy3 update option
@@ -581,27 +521,27 @@ class Mon_offre extends MY_Controller {
         //total 2eme facture
         $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];  
          
-        $prevState = $this->session->userdata("prevState");
+        $this->prevState = $this->session->userdata("prevState");
         $this->session->set_userdata("promo_libelle",$promo_libelle);
         $data["promo_libelle"] = $promo_libelle;
-        $prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$data,true);
-        $prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
-        $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
-        $this->session->set_userdata("prevState",$prevState);
-        echo json_encode(array("libelles_promo_dummy2"=>$prevState[1]["libelles_promo_dummy2"],"options_dummy3"=>$prevState[1]["options_dummy3"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+        $this->prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$data,true);
+        $this->prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
+        $this->prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
+        $this->session->set_userdata("prevState",$this->prevState);
+        echo json_encode(array("libelles_promo_dummy2"=>$this->prevState[1]["libelles_promo_dummy2"],"options_dummy3"=>$this->prevState[1]["options_dummy3"],"total_par_mois"=>$this->prevState[1]["total_par_mois"]));
     }
     
     //got to mes coordonnes
     public function mesCoordonnes()
     {
          $data["test"] = "ok";   
-         $prevState = $this->session->userdata("prevState");
+         $this->prevState = $this->session->userdata("prevState");
          $offreparrainage_id = $this->session->userdata('offreparrainage_id');
          
          if(!empty($offreparrainage_id))
-         $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);
+         $this->prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);
          
-         $this->session->set_userdata('prevState',$prevState);
+         $this->session->set_userdata('prevState',$this->prevState);
          echo json_encode(array("test"=>$data["test"]));
     }
             
@@ -684,12 +624,14 @@ class Mon_offre extends MY_Controller {
        $produit = $this->session->userdata("produit");
        foreach($produit as $key=>$val){
            echo $val["Categorie"]."<br>";
-         
+         /*
            if($val["Categorie"]=="OPTION_TV"){
                echo "<pre>";
                print_r($val);
                echo "</pre>";
-           }           
+           }  
+          * 
+          */         
        }
     }
     

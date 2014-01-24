@@ -412,12 +412,12 @@ class Mes_coordonnees extends MY_Controller {
     }
     
     public function updateFactureDummy6Crm($typeFacture){
-       $dummyPanier = $this->session->userdata("dummyPanier"); 
+      /* $dummyPanier = $this->session->userdata("dummyPanier"); 
        foreach($dummyPanier["dummy6"] as $key=>$val){
            if(strpos($this->stripAccents($val["Valeurs"]["Libelle"]["string"]),$typeFacture)==true){
                return $val["Id_crm"];
            }
-       }
+       }*/
     }
 }
 /* End of file mes_coordonnees.php */
