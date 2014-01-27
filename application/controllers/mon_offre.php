@@ -456,6 +456,12 @@ class Mon_offre extends MY_Controller {
     
     //dummy3 update option
     public function updateOptions(){
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";
+        $checkOption =  $this->input->post("checkOption");
+         //MAJ PANIER
+        $this->majPanier(array("produit"=>array("OPTION_TV"),"etape"=>array("choixOption",$checkOption) )); 
+        echo json_encode($this->colonneDroite);
+        /*
         $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $data["bouquetChoisi"] = $this->session->userdata("bouquetChoisi");
         $promo_libelle = $this->session->userdata("promo_libelle");
@@ -529,6 +535,8 @@ class Mon_offre extends MY_Controller {
         $this->prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
         $this->session->set_userdata("prevState",$this->prevState);
         echo json_encode(array("libelles_promo_dummy2"=>$this->prevState[1]["libelles_promo_dummy2"],"options_dummy3"=>$this->prevState[1]["options_dummy3"],"total_par_mois"=>$this->prevState[1]["total_par_mois"]));
+         * 
+         */
     }
     
     //got to mes coordonnes

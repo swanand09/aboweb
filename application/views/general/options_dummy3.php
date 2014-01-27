@@ -19,13 +19,11 @@ if(!empty($panierVal["bouquetTvdum3"])||!empty($panierVal["optionTvdum3"])||!emp
                 } ?>
 <!--      OPTION_TV-->
       <?php 
-            if(!empty($panierVal["optionTvdum3"])){ 
-                foreach($optionData as $key=>$val){
-                    foreach($val as $key2=>$val2){
+            if(!empty($panierVal["optionTvdum3"])){
+                foreach($panierVal["optionTvdum3"] as $key=>$val){
                     ?>
-                        <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val2[0];?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo $val2[1]; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($val2[2],2,',',' ')."€/mois"; ?></span></li>
+                        <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val["Valeurs"]["Picto"];?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo $val["Valeurs"]["Libelle"]["string"]; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($val["Valeurs"]["Tarif"]["decimal"],2,',',' ')."€/mois"; ?></span></li>
                     <?php
-                    }
                 }
              } 
       

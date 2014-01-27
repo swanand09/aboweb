@@ -7,13 +7,13 @@
 </div>
 <!--END OF TOTAL-->
  <?php 
-    if(isset($total1erFacture)&&!empty($total1erFacture)&&$total1erFacture!=$totalParMois){ ?>
+    if(isset($total1erFacture)&&!empty($total1erFacture)&&$total1erFacture!=$totalParMois&&$total1erFacture>0){ ?>
         <hr>
         <div class="total">
           <h3 class="no-margin-top">Total première facture :<span class="right"><?php echo number_format($total1erFacture,2,',',' '); ?> €</span></h3>
         </div>
      <?php }
-    if(isset($total2emeFacture)&&!empty($total2emeFacture)&&$total2emeFacture!=$totalParMois){
+    if(isset($total2emeFacture)&&!empty($total2emeFacture)&&$total2emeFacture!=$totalParMois&&$total2emeFacture>0){
   ?>
     <hr>
     <div class="total">

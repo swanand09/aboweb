@@ -49,7 +49,7 @@ class MY_Controller extends CI_Controller {
                                     "iad"           => "",
                                     "television"    => "",
                                     "bouquetTv"     => "",
-                                    "optionTv"      => "",
+                                    "optionTv"      => array(),
                                     "facturation"   => "",
             );    
             
@@ -101,9 +101,11 @@ class MY_Controller extends CI_Controller {
                 switch($key){
                     case "produIdCrm":
                         $this->session->set_userdata("produIdCrm",$this->produIdCrm);
+                        $this->produIdCrm =  $this->session->userdata("produIdCrm");
                     break;
                     case "panierVal":
                         $this->session->set_userdata("panierVal",$this->panierVal);
+                        $this->panierVal = $this->session->userdata("panierVal");
                     break;
                 }
             }
@@ -305,13 +307,29 @@ class MY_Controller extends CI_Controller {
                             }
                         break;
                         case "OPTION_TV":
+                            if($val["Categorie"]=="OPTION_TV"){
+                                 $this->optionTv    =  $this->input->post("optionTv");
+                                 $this->optionTv = explode("__",$this->optionTv);
+                                 if($val["Id_crm"]==$this->optionTv[3]){
+                                      $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$this->optionTv[3]);
+                                     //MAJ PANIER
+                                      $this->procDummy(array("dummyArr"=>$dummyAMaj));
+                                      array_push($this->produIdCrm["optionTv"],$this->optionTv[3]);
+                                      $this->majSession(array("produIdCrm"=>$this->produIdCrm));
+                                 }
+                            }
                         break;
                         case "FACTURATION":
                         break;
                     }
                 }
             }
+            
+             //maj promo au cas on décoche le choix tv et il faut enlever la promo du produit BOUQUET_TV
+             // si surtout on n'a pas de promo dans produit TELEVISION
+             $this->majPromo();
              $this->majSession(array("panierVal"=>$this->panierVal));
+             $this->getTotal1er2em();            
              return $this->majVuePanier();         
         }
 
@@ -372,6 +390,30 @@ class MY_Controller extends CI_Controller {
                                         }
                                     }
                                  break;
+                                 case "choixOption":
+                                     if(!empty($this->panierVal["optionTvdum3"])){
+                                        foreach($this->panierVal["optionTvdum3"] as $key2=>$val2){
+                                            foreach($val2 as $key3=>$val3){
+                                                 foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
+                                                      if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
+                                                         unset($this->panierVal["promodum2"][$key2]);
+                                                      }
+                                                 }
+                                            }
+                                        }
+                                    }
+                                 break;
+                                 case "choixTv":
+                                     if(!empty($this->panierVal["bouquetTvdum3"])&&$this->data["etape"][1]!="check"){
+                                        foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                                            foreach($val2 as $key3=>$val3){
+                                                if($key3==$this->panierVal["bouquetTvdum3"]["idCrm"]){
+                                                   unset($this->panierVal["promodum2"][$key2]);
+                                                }
+                                            }
+                                        }
+                                    }
+                                 break;   
                              }
                                 
                              foreach($val as $key2=>$val2){
@@ -400,8 +442,7 @@ class MY_Controller extends CI_Controller {
                                                                                                           )
                                                      ):
                                               $this->panierVal["voddum3"]=array()
-                                        ;
-                                             
+                                        ;                                             
                                       
                                        //abonnement total
                                         //produit de type recurrent                                         
@@ -409,15 +450,12 @@ class MY_Controller extends CI_Controller {
                                              $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
                                         }     
                                     break;
-                                    case "choixBouquet":
-                                      
-                                        if(!empty($this->panierVal["bouquetTvdum3"])){
-                                           // foreach($this->panierVal["bouquetTvdum3"] as $key3=>$val3){
-                                                $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);
-                                           // }
+                                    case "choixBouquet":                                      
+                                        if(!empty($this->panierVal["bouquetTvdum3"])){                                          
+                                                $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
                                         }                                       
                                         if($val2["Valeurs"]["Type"]=="RECURRENT"){
-                                              $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                              $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]); 
                                         } 
                                              
                                         $this->panierVal["bouquetTvdum3"] = array(
@@ -426,13 +464,35 @@ class MY_Controller extends CI_Controller {
                                                                                     "nombreChaines" =>  $this->bouquetChoisi[3]    
                                                                             );
                                     break;
+                                    
+                                    case "choixOption":
+                                            
+                                        //ajout tv ou pas                                            
+                                        if($val2["Valeurs"]["Type"]=="RECURRENT"){
+                                            $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
+                                        }                                        
+                                        
+                                        if($this->data["etape"][1]=="check"){
+                                            array_push($this->panierVal["optionTvdum3"],array(
+                                                                                    "Valeurs"       =>  $val2["Valeurs"],
+                                                                                    "idCrm"         =>  $val2["Id_crm"]   
+                                                                            )
+                                                     );
+                                        }else{
+                                            foreach($this->panierVal["optionTvdum3"] as $key=>$val){
+                                                if($val["idCrm"]==$this->optionTv[3]){
+                                                    unset($this->panierVal["optionTvdum3"][$key]);
+                                                }
+                                            }
+                                        }
+                                        
+                                    break;
                                 }
                                  
                             }
                                                    
                         break;
-                        case "dummy4":   
-                            
+                        case "dummy4": 
                             foreach($val as $key2=>$val2){
                                 switch($this->data["etape"][0]){
                                     case "choixForfait":
@@ -465,41 +525,13 @@ class MY_Controller extends CI_Controller {
                                             if($val2["Valeurs"]["Type"]=="RECURRENT"){  
                                                 $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
                                             } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type CAUTION                                          
-                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
-                                                $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);        
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type ONESHOT                                          
-                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
-                                                  $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);           
-                                            } 
+                                           
                                       break;
                                       case "choixTv":
                                           ($this->data["etape"][1]=="check")?
                                              array_push($this->panierVal["cautiondum5"],array("Valeurs"=>$val2["Valeurs"])):
                                              $this->panierVal["cautiondum5"] = array();
-                                          
-                                            //abonnement total
-                                            //produit de type recurrent                                          
-                                            if($val2["Valeurs"]["Type"]=="RECURRENT"){  
-                                                $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type CAUTION                                          
-                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
-                                                $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);        
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type ONESHOT                                          
-                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
-                                                  $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);           
-                                            } 
+                                         
                                       break;
                                 }
                             }
@@ -516,19 +548,7 @@ class MY_Controller extends CI_Controller {
                                            //produit de type recurrent                                          
                                             if($val2["Valeurs"]["Type"]=="RECURRENT"){  
                                                 $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type CAUTION                                          
-                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
-                                                $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);        
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type ONESHOT                                          
-                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
-                                                  $this->getTotal1er2em($val2["Valeurs"]["Tarif"]["decimal"][0]);           
-                                            } 
+                                            }                                            
                                       break;
                                       case "choixTv": 
                                            ($this->data["etape"][1]=="check")?
@@ -539,20 +559,31 @@ class MY_Controller extends CI_Controller {
                                             //produit de type recurrent                                          
                                             if($val2["Valeurs"]["Type"]=="RECURRENT"){  
                                                 $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type CAUTION                                          
-                                            if($val2["Valeurs"]["Type"]=="CAUTION"){  
-                                                $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);        
-                                            } 
-
-                                             //abonnement total 1er et 2eme mois
-                                            //produit de type ONESHOT                                          
-                                            if($val2["Valeurs"]["Type"]=="ONESHOT"){  
-                                                  $this->getTotal1er2em(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"][0]:-$val2["Valeurs"]["Tarif"]["decimal"][0]);           
-                                            } 
+                                            }                                              
                                        break;
+                                       case "choixBouquet": 
+                                          array_push($this->panierVal["oneshotdum7"],array("Valeurs"=>$val2["Valeurs"]));                                          
+                                           //produit de type recurrent                                          
+                                            if($val2["Valeurs"]["Type"]=="RECURRENT"){  
+                                                $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                            }                                            
+                                      break;
+                                      case "choixOption":                                            
+                                               if($this->data["etape"][1]=="check"){
+                                                    array_push($this->panierVal["oneshotdum7"],array("Valeurs"=>$val2["Valeurs"],"idCrm"=>$val2["Id_crm"]));  
+                                                  //produit de type recurrent                                          
+                                                    if($val2["Valeurs"]["Type"]=="RECURRENT"){  
+                                                        $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
+                                                    }
+                                               }else{
+                                                    foreach($this->panierVal["oneshotdum7"] as $key3=>$val3){
+                                                        if($val3["idCrm"]==$val2["Id_crm"]&&$val2["Id_crm"]==$this->optionTv[3]){
+                                                            unset($this->panierVal["oneshotdum7"][$key3]);
+                                                           // $this->getTotal(-$val3["Valeurs"]["Tarif"]["decimal"]);
+                                                        }
+                                                    }
+                                                }
+                                      break;
                                 }
                             }
                                                                         
@@ -584,22 +615,76 @@ class MY_Controller extends CI_Controller {
              //dummy7           
             $this->colonneDroite["frais_activation_facture_dummy7"]    = $this->load->view("general/frais_oneshot_dummy7",$this->data,true);
 
-            $this->data["totalParMois"] = $this->session->userdata("totalParMois");
+            $this->data["totalParMois"] = $this->session->userdata("totalParMois");            
+            
             $this->data["total1erFacture"] = $this->session->userdata("total1erFacture");
             $this->data["total1erFacture"] = ($this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total1erFacture"):$this->session->set_userdata("total1erFacture","");
             $this->data["total2emeFacture"] = ($this->data["total1erFacture"]!=$this->data["totalParMois"])?$this->session->userdata("total2emeFacture"):$this->session->set_userdata("total2emeFacture","");
-
+            
             $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$this->data,true);  
            
             $this->session->set_userdata('prevState',array($this->prevState[0],$this->colonneDroite));  
         }
         
+        public function majPromo(){
+             if(!empty($this->panierVal["bouquetTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
+                    foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                        foreach($val2 as $key3=>$val3){
+                            if($key3==$this->panierVal["bouquetTvdum3"]["idCrm"]){
+                               unset($this->panierVal["promodum2"][$key2]);
+                            }
+                        }
+                    }
+                                                        
+                  $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
+                  $this->panierVal["bouquetTvdum3"] = array();                
+                }
+              if(!empty($this->panierVal["optionTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
+                    foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                        foreach($val2 as $key3=>$val3){
+                            foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
+                                if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
+                                    unset($this->panierVal["promodum2"][$key2]);
+                                    $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                }                                 
+                            }
+                        }
+                    }                                                                            
+                 // $this->panierVal["optionTvdum3"] = array();                
+                }  
+        }
         
         //total abonnement 1er et 2eme facture 
-        public function getTotal1er2em($amount){
-            $this->total1erFacture = $this->session->userdata('total1erFacture');
-            $this->total1erFacture = !empty($this->total1erFacture)?$this->total1erFacture:$this->session->userdata('totalParMois');
-            $this->total1erFacture += (double)$amount;
+        public function getTotal1er2em(){
+          
+            $amount = 0;
+            $amount =(double)0;
+            if(!empty($this->panierVal["cautiondum5"])){
+                foreach($this->panierVal["cautiondum5"] as $key=>$val){
+                   if($val["Valeurs"]["Type"]=="CAUTION"){
+                        $amount += (double)$val["Valeurs"]["Tarif"]["decimal"][0];
+                   }
+                }
+            }
+            if(!empty($this->panierVal["oneshotdum7"])){
+               foreach($this->panierVal["oneshotdum7"] as $key=>$val){
+                   if($val["Valeurs"]["Type"]=="ONESHOT"){
+                       if(!is_array($val["Valeurs"]["Tarif"]["decimal"])){
+                           $amount += (double)($val["Valeurs"]["Tarif"]["decimal"]/2);
+                       }else{
+                           $amount += (double)$val["Valeurs"]["Tarif"]["decimal"][0];
+                       }
+                   }
+               }
+                  
+            }
+            $this->total1erFacture = $amount;
+            if($this->total1erFacture>0){
+                $this->totalParMois = $this->session->userdata('totalParMois');
+                $this->total1erFacture += $this->totalParMois;
+            }
+            
+            $this->total2emeFacture = $this->total1erFacture;
             $this->session->set_userdata('total1erFacture',$this->total1erFacture);
             $this->session->set_userdata('total2emeFacture',$this->total1erFacture);
         }
