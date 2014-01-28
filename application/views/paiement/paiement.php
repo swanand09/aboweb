@@ -11,7 +11,7 @@
       </div>
       <div class="row cartebancaire border-gray">
         <div class="column three"><?php echo image("contenu/bancaire.png"); ?></div>
-        <div class="column nine"><strong>LE PAIEMENT PAR CARTE BANCAIRE</strong></div>
+        <div class="column nine"><strong>LA VALIDATION PAR CARTE BANCAIRE</strong></div>
       </div>
     </div>
 
@@ -74,7 +74,7 @@
 <!--          <input type="hidden" name='titulaire' value="nom prenom" class="validate[required]" id="titulaire" maxsize = "60">-->
         <h3>CARTE BANCAIRE</h3>
         <div class='column border-gray misc-custom-5 top-20 p20all'>
-          <div class='column twelve'><p>Saisissez ci-dessous les informations relatives à la carte de paiement utilisée pour effectuer le dépôt de garantie :</p></div>
+          <div class='column twelve'><p>Vous avez choisi de valider votre commande par carte bancaire.<br/><br/>Nous effectuons une simple demande de vérification du montant total de votre panier sur votre carte bancaire. Aucun montant ne sera prélevé sur votre compte bancaire.</p></div>
           <div class='column three'>Type de carte</div>
           <div class='column nine'>
             <label class='left'><?php echo image("contenu/cartebancaire.png");?><input class='validate[required]' type='radio' name='typedecarte' value='cartebancaire'/></label>

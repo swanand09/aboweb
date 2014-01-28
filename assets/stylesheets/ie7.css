@@ -6,7 +6,9 @@
 	background:url("../images/sqr_trans.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	filter: alpha(opacity=50) !important;
-	
+	background-color: #fff;
+	margin-left: 5px;
+	width:236px;
 }
 
 input[type='text'] {
@@ -81,6 +83,13 @@ body .main-content .right-content {
 .left-etape-content .six {
 	width:330px;
 }
+.frm-etape-tester .seven .row{
+	width:380px;
+}
+.frm-etape-tester #ligne_prefix{ width: 50px;}
+.frm-etape-tester #ligne_sufix{width: 150px;}
+.frm-etape-tester .seven.columns .row .three{ width:60px;}
+.frm-etape-tester .seven.columns .row .nine{margin-left: 10px;}
 /*
 * Main content - mon offre 1
 */
@@ -116,7 +125,8 @@ body .main-content .right-content {
 * Footer
 */
 .main-footer .columns {
-	width:28.33%;
+	width:23%;
+	padding-right: 0;
 }
 
 /*
@@ -206,3 +216,12 @@ input.telephone { width:144px; }
 	margin-top:0;
 	margin-bottom:0;
 }
+
+/*
+* Page mes coordonnées
+*/
+
+#mes-coordonnees .columns.two { width:94px;}
+#mes-coordonnees .columns.four { width:210px;}
+#mes-coordonnees .civilite-row{ margin-bottom: 10px;}
+input#email-contact { width:315px;}

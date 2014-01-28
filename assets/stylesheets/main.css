@@ -286,6 +286,12 @@ a.mail-link {
 	padding-top: 12px;
 	 margin-top: 20px;
 }
+.main-footer a{
+	color:#fff;
+}
+.main-footer a:hover{
+	color: #2BA6CB;
+}
 .main-footer .three{
 	height: 28px;
     padding-top: 8px;
@@ -304,10 +310,11 @@ a.mail-link {
 }
 
 .below-footer p{
+	font-size: 9px;
+	line-height: 10px;
 	text-align: center;
-	color:#bdbdbd;
-	font-size: 0.7em;
 	margin-top: 15px;
+	font-family: Arial,sans-serif;
 }
 
 /*
@@ -893,6 +900,7 @@ img.prix_bare{
 .right-content {
 	padding-top:10px;
 	color: #fff;
+	padding-bottom: 10px;
 }
 .votre-offre .right .mini,.total .mini{
 	text-transform: lowercase;
@@ -968,10 +976,11 @@ img.prix_bare{
 }
 .total h3{
 	color: #FFFFFF;
-   font-family: freeroadregular;
-   font-size: 1.0em;
-   font-weight: normal;
-   text-transform: uppercase;
+	font-family: freeroadregular;
+	font-size: 1em;
+	font-weight: normal;
+	margin-bottom: 0;
+	text-transform: uppercase;
 }
 
 #ligne,#ligne_sufix,#ligne_prefix {
@@ -1025,3 +1034,39 @@ img.prix_bare{
 .notitle.forpro ul li{
 	padding-left: 0;
 }
+
+/*
+* Form validation prompt msg
+*/
+form .formError .formErrorContent {
+	background:none repeat scroll 0 0 #ADAEAE;
+}
+
+form .formError .formErrorArrow div {
+	background:none repeat scroll 0 0 #ADAEAE;
+}
+
+.hpromo {
+	font-size: 10px;
+	margin-bottom: 10px;
+}
+
+.parrainage .parrain-section{
+	padding-left: 0;
+    padding-right: 0;
+}
+
+/*
+* Placeholder styling
+*/
+.parrain-section ::-webkit-input-placeholder {  color: #565656;font-size: 9px;font-weight: bold; }
+.parrain-section ::-moz-placeholder { color: #565656;font-size: 9px;font-weight: bold; } /* firefox 19+ */
+.parrain-section :-ms-input-placeholder { color: #565656;font-size: 9px;font-weight: bold; } /* ie */
+.parrain-section input:-moz-placeholder { color: #565656;font-size: 9px;font-weight: bold; }
+
+/*
+* Footer Modal
+*/
+#modalMentionLegale > ul{ list-style: none outside none; }
+#modalBesoinDaide h4{ color: rgb(0, 157, 219); font-size: 18px;}
+#modalBesoinDaide .pour-info{ font-size:12px; font-style: italic;}

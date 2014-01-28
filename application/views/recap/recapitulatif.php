@@ -43,11 +43,7 @@
     <hr class="sexy">
     <div class="row">
       <div class="column twelve"><label><strong>Vous profitez en plus de :</strong></label></div>
-      <div class="column six top-20"><?php echo image('promo_nouveau_forfait.png',NULL,array("title"=>"Nouveau Forfaite 49,99€ TTC par mois", "alt"=>"Nouveau Forfaite 49,99€ TTC par mois")); ?></div>
-      <div class="column six top-20 border-left-gray">
-        <h4>PARRAINEZ C'EST GAGNEZ</h4>
-        <p><strong>Parrainez vos proches et bénéficiez de 25 € d'avoir pour chaque filleul devenu client </strong></p>
-      </div>
+      <div class="column six top-20 end"><?php echo image('promo_nouveau_forfait.png',NULL,array("title"=>"Nouveau Forfaite 49,99€ TTC par mois", "alt"=>"Nouveau Forfaite 49,99€ TTC par mois")); ?></div>
     </div>
     <hr class="sexy">
     <form id='frm-mon-recap' action="paiement" method="POST">

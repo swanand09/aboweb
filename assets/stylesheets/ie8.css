@@ -1,3 +1,12 @@
 .etapes.block-grid .state2 a {
 	width:150px;
 }
+.disabled-div {
+	opacity:0.5;
+	background:url("../images/sqr_trans.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50) !important;
+	background-color: #fff;
+	margin-left: 5px;
+	width:236px;
+}

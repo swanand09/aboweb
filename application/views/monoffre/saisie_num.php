@@ -17,5 +17,5 @@ echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve',
 <?php echo form_close();?>       
    <div>
     <div class='columns six text-right'><strong class='misc-custom-1' >VOUS N'AVEZ PAS DE LIGNE FIXE ?</strong></div>
-    <div class='columns six text-left'><a class='button secondary' href='#'>CONTACTER LE SERVICE COMMERCIAL</a></div>
+    <div class='columns six text-left'><a class='btn-service-commercial' href='http://www.mediaserv.com/guadeloupe/souscrire/par-telephone.html'>CONTACTER LE SERVICE COMMERCIAL</a></div>
   </div>

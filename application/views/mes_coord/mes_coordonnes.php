@@ -24,9 +24,8 @@ echo validation_errors();
           <div class="row">
             <div class="columns two bottom-10"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Melle")?"checked='checked'":"";?> class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="Monsieur" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Monsieur")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
+              <label class="left"><input type="radio" value="Madame" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Madame")?"checked='checked'":"";?> class="validate[required]">Madame</label>
             </div>
           </div>
          
@@ -109,9 +108,8 @@ echo validation_errors();
           <div class="row">
             <div class="columns bottom-10 two"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Melle")?"checked='checked'":"";?> class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="Monsieur" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Monsieur")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
+              <label class="left"><input type="radio" value="Madame" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Madame")?"checked='checked'":"";?> class="validate[required]">Madame</label>
             </div>
           </div>
           <!-- Nom -->
@@ -161,9 +159,8 @@ echo validation_errors();
           <div class="row">
             <div class="columns bottom-10 two"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="five columns bottom-10 end">
-              <label class="left"><input type="radio" value="M." name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">M.</label>
-              <label class="left"><input type="radio" value="Mme" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Mme")?"checked='checked'":"";?> class="validate[required]">Mme</label>
-              <label class="left"><input type="radio" value="Melle" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Melle")?"checked='checked'":"";?> class="validate[required]">Melle</label>
+              <label class="left"><input type="radio" value="Monsieur" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Monsieur")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
+              <label class="left"><input type="radio" value="Madame" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Madame")?"checked='checked'":"";?> class="validate[required]">Madame</label>
             </div>
           </div>
          
