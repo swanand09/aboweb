@@ -392,16 +392,17 @@ class MY_Controller extends CI_Controller {
                                  break;
                                  case "choixOption":
                                      if(!empty($this->panierVal["optionTvdum3"])){
-                                        foreach($this->panierVal["optionTvdum3"] as $key2=>$val2){
+                                        foreach($this->panierVal["promodum2"] as $key2=>$val2){
                                             foreach($val2 as $key3=>$val3){
-                                                 foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
-                                                      if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
-                                                         unset($this->panierVal["promodum2"][$key2]);
-                                                      }
-                                                 }
+                                                foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
+                                                    if($key3==$val4["idCrm"]){
+                                                        unset($this->panierVal["promodum2"][$key2]);
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
+                                        } 
+                                     }
+                                    
                                  break;
                                  case "choixTv":
                                      if(!empty($this->panierVal["bouquetTvdum3"])&&$this->data["etape"][1]!="check"){
@@ -415,9 +416,10 @@ class MY_Controller extends CI_Controller {
                                     }
                                  break;   
                              }
-                                
-                             foreach($val as $key2=>$val2){
-                                array_push($this->panierVal["promodum2"],array($val2["Id_crm"]=>utf8_encode($val2["Valeurs"]["Libelle"]["string"])));  
+                             if((isset($this->data["etape"][1])&&$this->data["etape"][1]=="check")||!isset($this->data["etape"][1])){   
+                                foreach($val as $key2=>$val2){
+                                   array_push($this->panierVal["promodum2"],array($val2["Id_crm"]=>utf8_encode($val2["Valeurs"]["Libelle"]["string"])));  
+                                }
                              }
                         break;
                         case "dummy3":                            
@@ -448,7 +450,7 @@ class MY_Controller extends CI_Controller {
                                         //produit de type recurrent                                         
                                         if($val2["Valeurs"]["Type"]=="RECURRENT"){
                                              $this->getTotal(($this->data["etape"][1]=="check")?$val2["Valeurs"]["Tarif"]["decimal"]:-$val2["Valeurs"]["Tarif"]["decimal"]);
-                                        }     
+                                        }  
                                     break;
                                     case "choixBouquet":                                      
                                         if(!empty($this->panierVal["bouquetTvdum3"])){                                          
@@ -627,31 +629,63 @@ class MY_Controller extends CI_Controller {
         }
         
         public function majPromo(){
-             if(!empty($this->panierVal["bouquetTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
-                    foreach($this->panierVal["promodum2"] as $key2=>$val2){
-                        foreach($val2 as $key3=>$val3){
-                            if($key3==$this->panierVal["bouquetTvdum3"]["idCrm"]){
-                               unset($this->panierVal["promodum2"][$key2]);
+            switch($this->data["etape"][0]){
+                case "choixTv":
+                    if(!empty($this->panierVal["bouquetTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
+                        foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                            foreach($val2 as $key3=>$val3){
+                                if($key3==$this->panierVal["bouquetTvdum3"]["idCrm"]){
+                                   unset($this->panierVal["promodum2"][$key2]);
+                                }
                             }
                         }
+                        $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
+                        $this->panierVal["bouquetTvdum3"] = array();                
                     }
-                                                        
-                  $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
-                  $this->panierVal["bouquetTvdum3"] = array();                
-                }
-              if(!empty($this->panierVal["optionTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
-                    foreach($this->panierVal["promodum2"] as $key2=>$val2){
-                        foreach($val2 as $key3=>$val3){
-                            foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
-                                if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
-                                    unset($this->panierVal["promodum2"][$key2]);
-                                    $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
-                                }                                 
+                    if(!empty($this->panierVal["optionTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
+                        foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                            foreach($val2 as $key3=>$val3){
+                                foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
+                                    if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
+                                        unset($this->panierVal["promodum2"][$key2]);
+                                        $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                    }                                 
+                                }
+                            }
+                        }                                                                            
+                        // $this->panierVal["optionTvdum3"] = array();                
+                     }  
+                break;
+                case "choixBouquet":
+                     if(!empty($this->panierVal["bouquetTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
+                        foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                            foreach($val2 as $key3=>$val3){
+                                if($key3==$this->panierVal["bouquetTvdum3"]["idCrm"]){
+                                   unset($this->panierVal["promodum2"][$key2]);
+                                }
                             }
                         }
-                    }                                                                            
-                 // $this->panierVal["optionTvdum3"] = array();                
-                }  
+                        $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
+                        $this->panierVal["bouquetTvdum3"] = array();                
+                    }
+                break;
+                case "choixOption":
+                     if(!empty($this->panierVal["optionTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
+                        foreach($this->panierVal["promodum2"] as $key2=>$val2){
+                            foreach($val2 as $key3=>$val3){
+                                foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
+                                    if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
+                                        unset($this->panierVal["promodum2"][$key2]);
+                                        $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                    }                                 
+                                }
+                            }
+                        }                                                                            
+                        // $this->panierVal["optionTvdum3"] = array();                
+                     }  
+                break;
+            }
+            
         }
         
         //total abonnement 1er et 2eme facture 

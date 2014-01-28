@@ -387,20 +387,7 @@ class Mon_offre extends MY_Controller {
                                                                                                              )
                                                                )
                                                       );
-                           }                           
-                           foreach($dummyAMaj["dummy7"] as $key2=>$val2)
-                           {
-                                if(isset($val2["Valeurs"]["Tarif"]["decimal"][0])){
-                                   $total1erFact = $this->session->userdata('total1erFact');
-                                   $total1erFact += $val2["Valeurs"]["Tarif"]["decimal"][0]; 
-                                   $this->session->set_userdata('total1erFact',$total1erFact);
-                                }
-                                if(isset($val2["Valeurs"]["Tarif"]["decimal"][1])){
-                                   $total2emeFact = $this->session->userdata("total2emeFact");
-                                   $total2emeFact += $val2["Valeurs"]["Tarif"]["decimal"][1]; 
-                                   $this->session->set_userdata('total2emeFact',$total2emeFact);
-                                }
-                           }
+                           } 
                        break;
                        
                     }
