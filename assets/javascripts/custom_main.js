@@ -1,5 +1,18 @@
 $(function () {
 
+/***
+ * @modif reddy 2014 01 28
+ * sur test deligibilité
+ */
+$(document).on('click','#redu_facture',function(){
+     if(!$(this).is(":checked")){
+         $("#consv_num_tel").prop("checked",false)
+                            .attr("disabled",true);
+     }else{
+          $("#consv_num_tel").attr("disabled",false);
+     }
+ });
+
 	var etapeOne = $('li.etape1');
 	var etapeTwo = $('li.etape2');
 	var etapeThree = $('li.etape3');
@@ -368,3 +381,5 @@ var validateEmail = function( field, rules, i, options ){
 		}
 	}
 }
+
+

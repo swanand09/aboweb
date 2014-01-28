@@ -252,10 +252,15 @@ class Mon_offre extends MY_Controller {
                                     "iad"           => "",
                                     "television"    => "",
                                     "bouquetTv"     => "",
-                                    "optionTv"      => "",
+                                    "optionTv"      => array(),
                                     "facturation"   => "",
             );    
         $this->session->set_userdata("produIdCrm",$this->produIdCrm);
+        //
+        $this->session->set_userdata("totalParMois","");   
+        $this->session->set_userdata("total1erFacture","");
+        $this->session->set_userdata("total2emeFacture","");
+                
         switch($page)
         {
             case "forfait":
@@ -325,9 +330,6 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata('totalParMois',"");
          $this->session->set_userdata('total1erFacture',"");
          $this->session->set_userdata('total2emeFacture',"");
-         $this->session->set_userdata("tarifBouqTv","");
-         $this->session->set_userdata("tarifOptionEden","");
-         $this->session->set_userdata("tarifOptionBein","");
          
          $this->iad = $this->session->userdata("iad");
          $this->data["iad"] = $this->iad;        
@@ -335,7 +337,7 @@ class Mon_offre extends MY_Controller {
          $id_crm = $this->input->post("id_crm");
          $produit =  $this->session->userdata("produit");   
         
-         //MAJ PANIER
+         //MAJ PANIER         
           $this->majPanier(array("produit"=>array("DEGROUPAGE","PORTABILITE","FORFAIT","IAD"),"etape"=>array("choixForfait"))); 
                    
           $bouqTvArr = array(); $optionTvArr = array();$vodPvrArr = array();
@@ -448,82 +450,6 @@ class Mon_offre extends MY_Controller {
          //MAJ PANIER
         $this->majPanier(array("produit"=>array("OPTION_TV"),"etape"=>array("choixOption",$checkOption) )); 
         echo json_encode($this->colonneDroite);
-        /*
-        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-        $data["bouquetChoisi"] = $this->session->userdata("bouquetChoisi");
-        $promo_libelle = $this->session->userdata("promo_libelle");
-        $optionTv    =  $this->input->post("optionTv");
-        $optionTv    = explode("__",$optionTv);
-        $checkOption =  $this->input->post("checkOption");
-        $optionTvDummy3Crm = $this->session->userdata("optionTvDummy3Crm");
-        $optionTvDummy3Crm = empty($optionTvDummy3Crm)?array():$optionTvDummy3Crm;
-        $optionData        = $this->session->userdata("optionData");
-        $optionData        = empty($optionData)?array():$optionData;
-      
-        if($checkOption=="uncheck"){
-            //data option dans le panier
-            foreach($optionData as $key=>$val){
-                if(isset($val[$optionTv[1]])){
-                    unset($optionData[$key][$optionTv[1]]);
-                }
-            }
-            
-            //id_crm data pour les options
-            foreach($optionTvDummy3Crm as $key=>$val){
-                if(isset($val[$optionTv[1]])){
-                    unset($optionTvDummy3Crm[$key]);
-                }
-            }   
-             
-            //calculation du prix total
-            $data["totalParMois"] = $this->getTotal(-$optionTv[2]);
-            
-            //update promo
-            foreach($promo_libelle as $key2=>$val2){
-                if(isset($val2["option"])){
-                   unset($promo_libelle[$key2]);
-                }
-            } 
-        }else{
-              //data option dans le panier
-            array_push($optionData,array($optionTv[1]=>$optionTv));            
-            
-            //id_crm data pour les options
-            array_push($optionTvDummy3Crm,array($optionTv[1]=>$optionTv[3]));
-            
-            
-            $dummyPanier    = $this->session->userdata("dummyPanier");
-            foreach($dummyPanier["dummy2"] as $key=>$val){
-                if($val["Categorie"]=="OPTION_TV"&&$val["Id_crm"]==$optionTv[3]){
-                    array_push($promo_libelle,array("option"=>utf8_encode($val["Valeurs"]["Libelle"]["string"])));
-                }
-            }
-            
-            
-            //calculation du prix total
-            $data["totalParMois"] = $this->getTotal($optionTv[2]);
-        }
-        $this->session->set_userdata("optionData", $optionData);
-        $this->session->set_userdata("optionTvDummy3Crm", $optionTvDummy3Crm);  
-        $data["optionData"] = $optionData;
-        
-       //total 1ere facture
-        $caution_dummy5 = $this->session->userdata("caution_dummy5");
-        $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
-        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
-        //total 2eme facture
-        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];  
-         
-        $this->prevState = $this->session->userdata("prevState");
-        $this->session->set_userdata("promo_libelle",$promo_libelle);
-        $data["promo_libelle"] = $promo_libelle;
-        $this->prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$data,true);
-        $this->prevState[1]["options_dummy3"] = $this->load->view("general/options_dummy3",$data,true);
-        $this->prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
-        $this->session->set_userdata("prevState",$this->prevState);
-        echo json_encode(array("libelles_promo_dummy2"=>$this->prevState[1]["libelles_promo_dummy2"],"options_dummy3"=>$this->prevState[1]["options_dummy3"],"total_par_mois"=>$this->prevState[1]["total_par_mois"]));
-         * 
-         */
     }
     
     //got to mes coordonnes

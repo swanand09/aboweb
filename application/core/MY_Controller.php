@@ -217,8 +217,10 @@ class MY_Controller extends CI_Controller {
         {
             $this->controller_verifySessExp()? redirect('mon_offre'):"";
             $produit =  $this->session->userdata("produit"); 
+            empty($produit)?redirect('mon_offre'):"";
             $this->data["etape"] = $prodArr["etape"];
-            $this->panierVal = $this->session->userdata("panierVal");
+            $this->panierVal  = $this->session->userdata("panierVal");
+            $this->produIdCrm = $this->session->userdata("produIdCrm");
             foreach($produit as $key=>$val){
                 foreach($prodArr["produit"] as $key2=>$val2){
                     switch($val2){
@@ -234,8 +236,7 @@ class MY_Controller extends CI_Controller {
                                       
                                       //mettre en session les id crm
                                       $this->produIdCrm["degroupage"] = $val["Id_crm"];
-                                      $this->majSession(array("produIdCrm"=>$this->produIdCrm));
-                                     
+                                      
                                    }
                                }
                             }
@@ -261,8 +262,7 @@ class MY_Controller extends CI_Controller {
                                      
                                       //mettre en session les id crm
                                       $this->produIdCrm["forfait"] = $id_crm;
-                                      $this->majSession(array("produIdCrm"=>$this->produIdCrm));
-                                   
+                                     
                                    }
                             }
                         break;
@@ -277,7 +277,7 @@ class MY_Controller extends CI_Controller {
                                     
                                     //mettre en session les id crm
                                     $this->produIdCrm["iad"] = $this->iad["Id_crm"];
-                                    $this->majSession(array("produIdCrm"=>$this->produIdCrm));
+                                    
                                 }
                             }
                         break;
@@ -289,7 +289,9 @@ class MY_Controller extends CI_Controller {
                                 $this->procDummy(array("dummyArr"=>$dummyAMaj));
                                 //mettre en session les id crm
                                 $this->produIdCrm["television"] = ($this->data["etape"][1]=="check")?$val["Id_crm"]:"";
-                                $this->majSession(array("produIdCrm"=>$this->produIdCrm));
+                                if(!empty($this->produIdCrm["bouquetTv"])&&$this->data["etape"][1]!="check"){
+                                    $this->produIdCrm["bouquetTv"] = "";
+                                }
                             }
                         break;  
                         case "BOUQUET_TV":
@@ -302,7 +304,7 @@ class MY_Controller extends CI_Controller {
                                     $this->procDummy(array("dummyArr"=>$dummyAMaj));
                                     //mettre en session les id crm
                                     $this->produIdCrm["bouquetTv"] = $this->bouquetChoisi[4];
-                                    $this->majSession(array("produIdCrm"=>$this->produIdCrm));
+                                    
                                 }
                             }
                         break;
@@ -314,8 +316,19 @@ class MY_Controller extends CI_Controller {
                                       $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$this->optionTv[3]);
                                      //MAJ PANIER
                                       $this->procDummy(array("dummyArr"=>$dummyAMaj));
-                                      array_push($this->produIdCrm["optionTv"],$this->optionTv[3]);
-                                      $this->majSession(array("produIdCrm"=>$this->produIdCrm));
+                                      //maj id crm produits
+                                      if($this->data["etape"][1]=="check"){
+                                            array_push($this->produIdCrm["optionTv"],$this->optionTv[3]);
+                                      }else{
+                                          if(!empty($this->produIdCrm["optionTv"])){
+                                            foreach($this->produIdCrm["optionTv"] as $key11=>$val11){
+                                                 if($val11 ==$this->optionTv[3]){
+                                                     unset($this->produIdCrm["optionTv"][$key11]);
+                                                 }
+                                            }
+                                          }
+                                      }
+                                      
                                  }
                             }
                         break;
@@ -328,7 +341,7 @@ class MY_Controller extends CI_Controller {
              //maj promo au cas on décoche le choix tv et il faut enlever la promo du produit BOUQUET_TV
              // si surtout on n'a pas de promo dans produit TELEVISION
              $this->majPromo();
-             $this->majSession(array("panierVal"=>$this->panierVal));
+             $this->majSession(array("panierVal"=>$this->panierVal,"produIdCrm"=>$this->produIdCrm));
              $this->getTotal1er2em();            
              return $this->majVuePanier();         
         }
@@ -374,8 +387,7 @@ class MY_Controller extends CI_Controller {
                                     break;
                                 }
                             }
-                           
-                            //$this->data["tarifLocTvMod"] = $this->session->userdata("tarifLocTvMod");                                                     
+                                                                             
                         break;
                         case "dummy2":  
                              switch($this->data["etape"][0]){
@@ -533,14 +545,13 @@ class MY_Controller extends CI_Controller {
                                           ($this->data["etape"][1]=="check")?
                                              array_push($this->panierVal["cautiondum5"],array("Valeurs"=>$val2["Valeurs"])):
                                              $this->panierVal["cautiondum5"] = array();
-                                         
                                       break;
                                 }
                             }
                            
                         break;
                         case "dummy6":
-                            
+                            //
                         break;
                         case "dummy7":                           
                            foreach($val as $key2=>$val2){
@@ -578,12 +589,13 @@ class MY_Controller extends CI_Controller {
                                                         $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);
                                                     }
                                                }else{
-                                                    foreach($this->panierVal["oneshotdum7"] as $key3=>$val3){
-                                                        if($val3["idCrm"]==$val2["Id_crm"]&&$val2["Id_crm"]==$this->optionTv[3]){
-                                                            unset($this->panierVal["oneshotdum7"][$key3]);
-                                                           // $this->getTotal(-$val3["Valeurs"]["Tarif"]["decimal"]);
+                                                   if(!empty($this->panierVal["oneshotdum7"])){
+                                                        foreach($this->panierVal["oneshotdum7"] as $key3=>$val3){
+                                                            if(isset($val3["idCrm"])&&$val3["idCrm"]==$val2["Id_crm"]&&$val2["Id_crm"]==$this->optionTv[3]){
+                                                                unset($this->panierVal["oneshotdum7"][$key3]);
+                                                            }
                                                         }
-                                                    }
+                                                   }
                                                 }
                                       break;
                                 }
@@ -639,7 +651,9 @@ class MY_Controller extends CI_Controller {
                                 }
                             }
                         }
-                        $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
+                        if($this->panierVal["bouquetTvdum3"]["Valeurs"]["Type"]=="RECURRENT"){
+                             $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);    
+                        }                                                                             
                         $this->panierVal["bouquetTvdum3"] = array();                
                     }
                     if(!empty($this->panierVal["optionTvdum3"])&&isset($this->data["etape"][1])&&$this->data["etape"][1]!="check"){
@@ -648,7 +662,9 @@ class MY_Controller extends CI_Controller {
                                 foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
                                     if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
                                         unset($this->panierVal["promodum2"][$key2]);
-                                        $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                        if($val4["Valeurs"]["Type"]=="RECURRENT"){
+                                           $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                        }  
                                     }                                 
                                 }
                             }
@@ -665,7 +681,9 @@ class MY_Controller extends CI_Controller {
                                 }
                             }
                         }
-                        $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);                                                                                   
+                        if($this->panierVal["bouquetTvdum3"]["Valeurs"]["Type"]=="RECURRENT"){
+                             $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);    
+                        }                                                                                    
                         $this->panierVal["bouquetTvdum3"] = array();                
                     }
                 break;
@@ -676,7 +694,9 @@ class MY_Controller extends CI_Controller {
                                 foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
                                     if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
                                         unset($this->panierVal["promodum2"][$key2]);
-                                        $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                        if($val4["Valeurs"]["Type"]=="RECURRENT"){
+                                           $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                                        }  
                                     }                                 
                                 }
                             }
