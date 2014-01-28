@@ -267,7 +267,7 @@
 
     </div>
     <div class='column six'>
-      <img height="245" width="295" title="Contacter un conseiller" alt="" src="images/contenu/contact_conseiller.png">
+        <?php echo image('contenu/contact_conseiller.png',NULL,array("title"=>"Contacter un conseiller", "alt"=>"Contacter un conseiller","height"=>"245","width"=>"295")); ?>
     </div>
     <a class="close-reveal-modal">&#215;</a>
   </div>

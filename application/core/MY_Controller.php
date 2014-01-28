@@ -710,9 +710,10 @@ class MY_Controller extends CI_Controller {
         
         //total abonnement 1er et 2eme facture 
         public function getTotal1er2em(){
-          
+            $amt1erFact = 0;
+            $amt1erFact = (double)$amt1erFact;
             $amount = 0;
-            $amount =(double)0;
+            $amount =(double)$amount;
             if(!empty($this->panierVal["cautiondum5"])){
                 foreach($this->panierVal["cautiondum5"] as $key=>$val){
                    if($val["Valeurs"]["Type"]=="CAUTION"){
@@ -724,7 +725,8 @@ class MY_Controller extends CI_Controller {
                foreach($this->panierVal["oneshotdum7"] as $key=>$val){
                    if($val["Valeurs"]["Type"]=="ONESHOT"){
                        if(!is_array($val["Valeurs"]["Tarif"]["decimal"])){
-                           $amount += (double)($val["Valeurs"]["Tarif"]["decimal"]/2);
+                           $amt1erFact = $amount;
+                           $amt1erFact += (double)$val["Valeurs"]["Tarif"]["decimal"];
                        }else{
                            $amount += (double)$val["Valeurs"]["Tarif"]["decimal"][0];
                        }
@@ -732,15 +734,20 @@ class MY_Controller extends CI_Controller {
                }
                   
             }
-            $this->total1erFacture = $amount;
+            
+            $this->total1erFacture = ($amt1erFact>0)?$amt1erFact:$amount;
             if($this->total1erFacture>0){
                 $this->totalParMois = $this->session->userdata('totalParMois');
                 $this->total1erFacture += $this->totalParMois;
             }
             
-            $this->total2emeFacture = $this->total1erFacture;
+            $this->total2emeFacture = ($amt1erFact>0)?$amount:$this->total1erFacture;
+             if($this->total2emeFacture>0){
+                $this->totalParMois = $this->session->userdata('totalParMois');
+                $this->total2emeFacture += $this->totalParMois;
+            }
             $this->session->set_userdata('total1erFacture',$this->total1erFacture);
-            $this->session->set_userdata('total2emeFacture',$this->total1erFacture);
+            $this->session->set_userdata('total2emeFacture',$this->total2emeFacture);
         }
         //get total par mois
         public function getTotal($amount){
