@@ -15,8 +15,8 @@ class Wsdl_interrogeligib_model extends CI_Model
         try
         {
             $this->nusoap_client = new nusoap_client("http://192.168.64.46/WebserviceAboweb/Service.asmx?wsdl",true); 
-             $this->nusoap_client->soap_defencoding = 'UTF-8';
-             $this->nusoap_client->decode_utf8 = false;
+            $this->nusoap_client->soap_defencoding = 'UTF-8';
+            $this->nusoap_client->decode_utf8      = false;
         }catch(Exception $e){
              throw new Exception( $this->nusoap_client->getError(), 0, $e);
         }
@@ -287,11 +287,20 @@ class Wsdl_interrogeligib_model extends CI_Model
         }
        }
        $prodSouscris = '<int>0</int>';
-       if(!empty($dataArr["produits_souscris"])){
+       $produIdCrm = $this->session->userdata("produIdCrm");
+       if(!empty($produIdCrm)){
            $prodSouscris = "";
-        foreach(array_unique($dataArr["produits_souscris"]) as $key=>$val){
-            if(!empty($val)){
-                $prodSouscris .= "<int>".$val."</int>";
+        foreach($produIdCrm as $key=>$val){
+            if($key=="optionTv"){
+                if(is_array($val)){
+                    foreach($val as $key2=>$val2){
+                       $prodSouscris .= "<int>".$val2."</int>";
+                    }
+                }
+            }else{
+                if(!empty($val)){
+                    $prodSouscris .= "<int>".$val."</int>";
+                }
             }
         }
        }
@@ -300,7 +309,7 @@ class Wsdl_interrogeligib_model extends CI_Model
     $civiliteAL = $this->session->userdata("civilite_al");
     $addLivIdIns = !empty($civiliteAL)?false:true;
     
-$soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription xmlns="msvaboweb">
+    $xmlStr = '<enregistreSouscription xmlns="msvaboweb">
                  <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
                  <_produits_souscris>
                    '.$prodSouscris.'
@@ -393,8 +402,9 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
                  <_moyen_paiement>'.$dataArr["moyen_paiement"].'</_moyen_paiement>
                  '.$mode_paiment.'
                  <_context>'.$dataArr["context"].'</_context>    
-             </enregistreSouscription>','',array(),'document', 'literal'
-         ); 
+             </enregistreSouscription>';
+    
+$soapEligib = $this->nusoap_client->serializeEnvelope($xmlStr,'',array(),'document', 'literal'); 
         $this->nusoap_client->operation = "msvaboweb/enregistreSouscription";
         $result = $this->nusoap_client->send($soapEligib,'msvaboweb/enregistreSouscription');
         
@@ -405,110 +415,12 @@ $soapEligib = $this->nusoap_client->serializeEnvelope('<enregistreSouscription x
     $this->email->to('s.luthmoodoo@mediacall.mu'); //sophie.lacoste@mediaserv.com
     $num_tel = $this->session->userdata("num_tel");
     $this->email->subject($num_tel.'_enregistrementSouscription_'.date('Y-m-d H:i:s'));
-    $this->email->message(
-            '<enregistreSouscription xmlns="msvaboweb">
-                 <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>
-                 <_produits_souscris>
-                   '.$prodSouscris.'
-                 </_produits_souscris>
-                 <_adresse_installation>
-                   <Civilite>'.$dataArr["adresse_installation"]["civilite"].'</Civilite>
-                   <Nom>'.$dataArr["adresse_installation"]["nom"].'</Nom>
-                   <Prenom>'.$dataArr["adresse_installation"]["prenom"].'</Prenom>
-                   <Numero>'.$dataArr["adresse_installation"]["numero"].'</Numero>
-                   <Complement>'.$dataArr["adresse_installation"]["complement"].'</Complement>
-                   <Type_voie>'.$dataArr["adresse_installation"]["type_voie"].'</Type_voie>
-                   <Voie>'.$dataArr["adresse_installation"]["voie"].'</Voie>
-                   <Voie_suite>'.$dataArr["adresse_installation"]["voie_suite"].'</Voie_suite>
-                   <Ensemble>'.$dataArr["adresse_installation"]["ensemble"].'</Ensemble>
-                   <Batiment>'.$dataArr["adresse_installation"]["batiment"].'</Batiment>
-                   <Escalier>'.$dataArr["adresse_installation"]["escalier"].'</Escalier>
-                   <Etage>'.$dataArr["adresse_installation"]["etage"].'</Etage>
-                   <Porte>'.$dataArr["adresse_installation"]["porte"].'</Porte>
-                   <Logo>'.$dataArr["adresse_installation"]["logo"].'</Logo>
-                   <Code_postal>'.$dataArr["adresse_installation"]["code_postal"].'</Code_postal>
-                   <Ville>'.$dataArr["adresse_installation"]["ville"].'</Ville>
-                   <CodeInsee></CodeInsee>
-                   <FictifRivoli></FictifRivoli>
-                   <Fictif_PC_Batiment></Fictif_PC_Batiment>
-                   <Fictif_PC_Escalier></Fictif_PC_Escalier>
-                   <Fictif_PC_Etage></Fictif_PC_Etage>
-                   <Fictif_PC_Residence></Fictif_PC_Residence>
-                   <Fictif_PC_NumeroVoie></Fictif_PC_NumeroVoie>
-                 </_adresse_installation>
-                 <_adresse_livraison_identique_instal>'.$addLivIdIns.'</_adresse_livraison_identique_instal>
-                 <_adresse_livraison>
-                   <Civilite>'.$dataArr["adresse_livraison"]["civilite"].'</Civilite>
-                   <Nom>'.$dataArr["adresse_livraison"]["nom"].'</Nom>
-                   <Prenom>'.$dataArr["adresse_livraison"]["prenom"].'</Prenom>
-                   <Numero>'.$dataArr["adresse_livraison"]["numero"].'</Numero>
-                   <Complement>'.$dataArr["adresse_livraison"]["complement"].'</Complement>
-                   <Type_voie>'.$dataArr["adresse_livraison"]["type_voie"].'</Type_voie>
-                   <Voie>'.$dataArr["adresse_livraison"]["voie"].'</Voie>
-                   <Voie_suite>'.$dataArr["adresse_livraison"]["voie_suite"].'</Voie_suite>
-                   <Ensemble>'.$dataArr["adresse_livraison"]["ensemble"].'</Ensemble>
-                   <Batiment>'.$dataArr["adresse_livraison"]["batiment"].'</Batiment>
-                   <Escalier>'.$dataArr["adresse_livraison"]["escalier"].'</Escalier>
-                   <Etage>'.$dataArr["adresse_livraison"]["etage"].'</Etage>
-                   <Porte>'.$dataArr["adresse_livraison"]["porte"].'</Porte>
-                   <Logo>'.$dataArr["adresse_livraison"]["logo"].'</Logo>
-                   <Code_postal>'.$dataArr["adresse_livraison"]["code_postal"].'</Code_postal>
-                   <Ville>'.$dataArr["adresse_livraison"]["ville"].'</Ville>
-                   <CodeInsee></CodeInsee>
-                   <FictifRivoli></FictifRivoli>
-                   <Fictif_PC_Batiment></Fictif_PC_Batiment>
-                   <Fictif_PC_Escalier></Fictif_PC_Escalier>
-                   <Fictif_PC_Etage></Fictif_PC_Etage>
-                   <Fictif_PC_Residence></Fictif_PC_Residence>
-                   <Fictif_PC_NumeroVoie></Fictif_PC_NumeroVoie>
-                 </_adresse_livraison>
-                 <_adresse_facturation_identique_instal>'.$addFacIdIns.'</_adresse_facturation_identique_instal>
-                 <_adresse_facturation>
-                  <Civilite>'.$dataArr["adresse_facturation"]["civilite"].'</Civilite>
-                   <Nom>'.$dataArr["adresse_facturation"]["nom"].'</Nom>
-                   <Prenom>'.$dataArr["adresse_facturation"]["prenom"].'</Prenom>
-                   <Numero>'.$dataArr["adresse_facturation"]["numero"].'</Numero>
-                   <Complement>'.$dataArr["adresse_facturation"]["complement"].'</Complement>
-                   <Type_voie>'.$dataArr["adresse_facturation"]["type_voie"].'</Type_voie>
-                   <Voie>'.$dataArr["adresse_facturation"]["voie"].'</Voie>
-                   <Voie_suite>'.$dataArr["adresse_facturation"]["voie_suite"].'</Voie_suite>
-                   <Ensemble>'.$dataArr["adresse_facturation"]["ensemble"].'</Ensemble>
-                   <Batiment>'.$dataArr["adresse_facturation"]["batiment"].'</Batiment>
-                   <Escalier>'.$dataArr["adresse_facturation"]["escalier"].'</Escalier>
-                   <Etage>'.$dataArr["adresse_facturation"]["etage"].'</Etage>
-                   <Porte>'.$dataArr["adresse_facturation"]["porte"].'</Porte>
-                   <Logo>'.$dataArr["adresse_facturation"]["logo"].'</Logo>
-                   <Code_postal>'.$dataArr["adresse_facturation"]["code_postal"].'</Code_postal>
-                   <Ville>'.$dataArr["adresse_facturation"]["ville"].'</Ville>
-                   <CodeInsee></CodeInsee>
-                   <FictifRivoli></FictifRivoli>
-                   <Fictif_PC_Batiment></Fictif_PC_Batiment>
-                   <Fictif_PC_Escalier></Fictif_PC_Escalier>
-                   <Fictif_PC_Etage></Fictif_PC_Etage>
-                   <Fictif_PC_Residence></Fictif_PC_Residence>
-                   <Fictif_PC_NumeroVoie></Fictif_PC_NumeroVoie>
-                 </_adresse_facturation>                  
-                 <_email>'.$dataArr["email"].'@mediaserv.net</_email>
-                 <_renonce_delai_retractation>'.$dataArr["renonce_delai_retractation"].'</_renonce_delai_retractation>
-                 <_information_contact>
-                   <Email>'.$dataArr["information_contact"]["email"].'</Email>
-                   <Telephone_mobile>'.$dataArr["information_contact"]["telephone_mobile"].'</Telephone_mobile>
-                   <Telephone_bureau>'.$dataArr["information_contact"]["telephone_bureau"].'</Telephone_bureau>
-                   <Telephone_domicile>'.$dataArr["information_contact"]["telephone_domicile"].'</Telephone_domicile>
-                 </_information_contact>
-                 <_moyen_paiement>'.$dataArr["moyen_paiement"].'</_moyen_paiement>
-                 '.$mode_paiment.'
-                 <_context>'.$dataArr["context"].'</_context>    
-             </enregistreSouscription>
-             <Renonce_delai_retractation>'.$result["enregistreSouscriptionResult"]["Renonce_delai_retractation"].'</Renonce_delai_retractation>
-             <NumError>'.$result["enregistreSouscriptionResult"]["Erreur"]["NumError"].'</NumError>
-             <ErrorMessage>'.$result["enregistreSouscriptionResult"]["Erreur"]["ErrorMessage"].'</ErrorMessage>
-             '
-            );
-
+    $this->email->message($xmlStr.'<Renonce_delai_retractation>'.$result["enregistreSouscriptionResult"]["Renonce_delai_retractation"].'</Renonce_delai_retractation>
+                            <NumError>'.$result["enregistreSouscriptionResult"]["Erreur"]["NumError"].'</NumError>
+                            <ErrorMessage>'.$result["enregistreSouscriptionResult"]["Erreur"]["ErrorMessage"].'</ErrorMessage>'
+                          );
     $this->email->send(); 
-        
-        return  $result;
+    return  $result;
    }
    
   public function verifEmail($email_msv)

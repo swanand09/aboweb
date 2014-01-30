@@ -1,16 +1,6 @@
 <?php 
 //echo validation_errors();
-
-
- /*
- $facture_tarif2 = ($facture_tarif>$facture_tarif_promo)?$facture_tarif_promo:$facture_tarif;
- if(!empty($type_de_facturation)){
-    $facture_data   = explode("_",set_value("type_de_facturation",$type_de_facturation));
-    $check_electronic = ($facture_data[1]=="electronique")?"checked='checked'":"";
-    $check_papier = ($facture_data[1]=="papier")?"checked='checked'":"";
- }*/
 ?>
-
 <div class="left-etape-content">
     <form action="recapitulatif" method="POST" id="mes-coordonnees">
         <input type="hidden" name="page_3" value="mes_coordonnes" />
@@ -249,10 +239,11 @@
           <!--type de facturation-->
           <h3>Type de facturation :</h3>
           <div class="row">
+              <input type="hidden" name="type_facturation_hid" id="type_facturation_hid" value="<?php echo set_value("type_facturation_hid",$type_de_facturation);?>"/>
               <?php 
                     foreach($factureData as $key=>$val){
                        if(strpos($val["Libelle"],"papier")==false){?>
-                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="type_facture1" checked="checked"> Electronique (gratuit)</label></div>
+                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo (!empty($type_de_facturation)&&$type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> Electronique (gratuit)</label></div>
                       <?php
                        }else{
                                 $facture_papier = '<span class="prix">('.$val["Tarif"].'€)</span>';
@@ -260,7 +251,7 @@
                                   $facture_papier = '<span class="promo">('.$val["Tarif"].'€)</span> <span class="prix">('.$val["Tarif_promo"].'€)</span>';
                                 }
                            ?>
-                            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('type_facture2');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="type_facture2" > Facture papier <?php echo $facture_papier; ?></label></div>
+                            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('facture_papier');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_papier" <?php echo (!empty($type_de_facturation)&&$type_de_facturation=="facture_papier")?'checked="checked"':''; ?> > Facture papier <?php echo $facture_papier; ?></label></div>
                        <?php
                        }
                     } 

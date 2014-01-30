@@ -275,7 +275,7 @@ var preload = function(){
           {
                preload();    
                 var typeFacture   = $("#"+id).val(); 
-                $("#type_facturation_hid").val(typeFacture);
+                $("#type_facturation_hid").val(id);
                  $.post(
                     updateFacture,
                      {
@@ -297,11 +297,11 @@ var preload = function(){
                         }    
                       $("#"+id).attr("Disabled","Disabled");
                       switch(id){
-                          case "type_facture1":
-                               $("#type_facture2").removeAttr("Disabled");
+                          case "facture_papier":
+                               $("#facture_electronique").removeAttr("Disabled");
                           break;
-                          case "type_facture2":
-                               $("#type_facture1").removeAttr("Disabled");
+                          case "facture_electronique":
+                               $("#facture_papier").removeAttr("Disabled");
                           break;
                       }
                       $.unblockUI();                       

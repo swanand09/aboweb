@@ -12,7 +12,7 @@
         $label        = $val["Valeurs"]["Libelle"]["string"];
         $tarifLocation = $val["Valeurs"]["Tarif"]["decimal"];
    ?>  
-    <li class="bottom-10"><strong><?php echo $label; ?><span class="right"><?php echo ($tarifLocation>0)?number_format($tarifLocation,2,',',' ')."€/mois":"inclus"; ?></span></strong></li>
+    <li class="bottom-10"><strong><?php echo $label; ?><span class="right"><?php echo ($tarifLocation>0)?number_format($tarifLocation,2,',',' ')." €/mois":"inclus"; ?></span></strong></li>
     <?php 
     }
     if(!empty($panierVal["decodEquipdum4"])){

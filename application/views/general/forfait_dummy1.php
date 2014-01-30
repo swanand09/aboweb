@@ -8,7 +8,7 @@
     <?php if(!empty($panierVal["forfaitdum1"])){
            foreach($panierVal["forfaitdum1"] as $key=>$val){             
         ?>
-    <h3>Votre offre Mediaserv<span class="right"><?php echo number_format($val["tarif"],2,',',' ')."€";?><span class="mini">/mois</span></span></h3>
+    <h3>Votre offre Mediaserv<span class="right"><?php echo number_format($val["tarif"],2,',',' ')." €";?><span class="mini">/mois</span></span></h3>
     <?php 
          }
       } ?>

@@ -12,7 +12,7 @@
                         $val["Valeurs"]["Tarif"]["decimal"][0]+$val["Valeurs"]["Tarif"]["decimal"][1]:
                         $val["Valeurs"]["Tarif"]["decimal"];
       ?>  
-      <li><strong><?php echo $label; ?><span class="right"><?php echo ($tarifCaution>0?number_format($tarifCaution,2,',',' ')."€":"inclus");?></span></strong></li>
+      <li><strong><?php echo $label; ?><span class="right"><?php echo ($tarifCaution>0?number_format($tarifCaution,2,',',' ')." €":"inclus");?></span></strong></li>
     <?php }?>
     </ul>
  </div>

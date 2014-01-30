@@ -8,7 +8,7 @@
             foreach($panierVal["degroupagedum1"] as $key=>$val){
               ?>
                   <span class="left"><strong><?php echo $val["libelle"]; ?></strong></span>            
-                  <span class="right"><strong><?php echo number_format($val["tarif"],2,',',' ')."€"; ?></strong></span>
+                  <span class="right"><strong><?php echo number_format($val["tarif"],2,',',' ')." €/mois"; ?></strong></span>
             <?php
 
             }

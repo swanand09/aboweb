@@ -12,7 +12,7 @@
 ?>
  <div class="mfacturation notitle forpro">
      <ul>
-         <li class="bottom-10"><strong><?php echo $label; ?><span class="right"><?php echo number_format($tarifOneshot,2,',',' ')."€";?></span></strong></li>
+         <li class="bottom-10"><strong><?php echo $label; ?><span class="right"><?php echo number_format($tarifOneshot,2,',',' ')." €";?></span></strong></li>
      </ul>
 </div>
 <hr>

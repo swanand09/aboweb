@@ -63,6 +63,7 @@ class MY_Controller extends CI_Controller {
                                     "optionTv"      => "",
                                     "facturation"   => "",
             );    
+            $resultProd = $this->session->userdata("resultProd");
             
             $this->panierVal       = array(
                                     "degroupagedum1"    => array(),
@@ -78,6 +79,10 @@ class MY_Controller extends CI_Controller {
                                     "facturedum6"       => array(),
                                     "oneshotdum7"       => array()
             );    
+            
+            if(!empty($resultProd)){
+                $this->panierVal["promodum2"] = array(array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));
+            }
             
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";
@@ -335,6 +340,12 @@ class MY_Controller extends CI_Controller {
                         case "FACTURATION":
                             if($val["Categorie"]=="FACTURATION"){
                                 $this->typeFacture  =  $this->input->post("typeFacture");
+                               //ajout de facturation electronique
+                                if(empty($this->typeFacture)){
+                                    if($val["Libelle"]=="Facture électronique"){
+                                         $this->typeFacture = $val["Id_crm"];
+                                    }
+                                }
                                 if($val["Id_crm"]==$this->typeFacture){
                                      $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$this->typeFacture);
                                      //MAJ PANIER
@@ -737,36 +748,41 @@ class MY_Controller extends CI_Controller {
         public function getTotal1er2em(){
             $amt1erFact = 0;
             $amt1erFact = (double)$amt1erFact;
-            $amount = 0;
-            $amount =(double)$amount;
+            $amt2emeFact = 0;
+            $amt2emeFact =(double)$amt2emeFact;
             if(!empty($this->panierVal["cautiondum5"])){
                 foreach($this->panierVal["cautiondum5"] as $key=>$val){
-                   if($val["Valeurs"]["Type"]=="CAUTION"){
-                        $amount += (double)$val["Valeurs"]["Tarif"]["decimal"][0];
+                   if($val["Valeurs"]["Type"]=="CAUTION"){                       
+                       if(!is_array($val["Valeurs"]["Tarif"]["decimal"])){                           
+                           $amt1erFact += (double)$val["Valeurs"]["Tarif"]["decimal"];
+                       }else{
+                           $amt1erFact += (double)$val["Valeurs"]["Tarif"]["decimal"][1];
+                           $amt2emeFact += (double)$val["Valeurs"]["Tarif"]["decimal"][1];
+                       }
                    }
                 }
             }
             if(!empty($this->panierVal["oneshotdum7"])){
                foreach($this->panierVal["oneshotdum7"] as $key=>$val){
                    if($val["Valeurs"]["Type"]=="ONESHOT"){
-                       if(!is_array($val["Valeurs"]["Tarif"]["decimal"])){
-                           $amt1erFact = $amount;
+                       if(!is_array($val["Valeurs"]["Tarif"]["decimal"])){                           
                            $amt1erFact += (double)$val["Valeurs"]["Tarif"]["decimal"];
                        }else{
-                           $amount += (double)$val["Valeurs"]["Tarif"]["decimal"][0];
+                           $amt1erFact += (double)$val["Valeurs"]["Tarif"]["decimal"][1];
+                           $amt2emeFact += (double)$val["Valeurs"]["Tarif"]["decimal"][1];
                        }
                    }
                }
                   
             }
             
-            $this->total1erFacture = ($amt1erFact>0)?$amt1erFact:$amount;
+            $this->total1erFacture = $amt1erFact;
             if($this->total1erFacture>0){
                 $this->totalParMois = $this->session->userdata('totalParMois');
                 $this->total1erFacture += $this->totalParMois;
             }
             
-            $this->total2emeFacture = ($amt1erFact>0)?$amount:$this->total1erFacture;
+            $this->total2emeFacture = $amt2emeFact;
              if($this->total2emeFacture>0){
                 $this->totalParMois = $this->session->userdata('totalParMois');
                 $this->total2emeFacture += $this->totalParMois;

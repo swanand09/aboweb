@@ -201,7 +201,7 @@ class Paiement extends MY_Controller {
         $pdf->SetXY(82, 113);
         $pdf->Write(0, utf8_decode($bic[10]));
 
-        $pdf->Output('MANDAT-SEPA-0913-AG-RE-HD.pdf','D');
+        $pdf->Output('MANDAT-SEPA.pdf','D');
         //$pdf->Output();
         $this->session->destroy();
       }
@@ -218,7 +218,7 @@ class Paiement extends MY_Controller {
         $dataArr = array(
                            //"id"                     => $this->session->userdata("idParcours"),
                            "con_id_parrainage"      => $id_parrain,
-                           "produits_souscris"      => array(
+                          /* "produits_souscris"      => array(
                                                                $this->session->userdata("forfaitDummy1Crm"),
                                                                $this->session->userdata("portabiliteDummy1Crm"),
                                                                $this->session->userdata("degroupageDummy1Crm"),
@@ -230,7 +230,7 @@ class Paiement extends MY_Controller {
                                                                $this->session->userdata("cautionDummy5Crm"),
                                                                $this->session->userdata("factureDummy6Crm"),
                                                                $this->session->userdata("oneshotDummy7Crm")
-                           ),
+                           ),*/
                            "adresse_installation"   => array(
                                                             "civilite"      => $this->session->userdata("civilite_aa"),
                                                             "nom"           => $this->session->userdata("nom_aa"),

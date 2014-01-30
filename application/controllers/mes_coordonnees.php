@@ -12,9 +12,7 @@ class Mes_coordonnees extends MY_Controller {
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
        
-        $prevState = $this->session->userdata("prevState");
         //facturation
-        
         $produit =  $this->session->userdata("produit");
         $this->data["factureData"] = array();
        if(isset($produit)&&!empty($produit)){
@@ -29,65 +27,15 @@ class Mes_coordonnees extends MY_Controller {
            $this->session->destroy();
            redirect('mon_offre');
        }
-        
-        $dummyPanier            = $this->session->userdata("dummyPanier");
-        $data["dummyPanier"]    = $dummyPanier;
-        //$data["typeFacture"] = array("facture","electronique");
-        $data["typeFacture"]    = $this->session->userdata("typeFacture");
-        $prevState[1]["envoie_facture_dummy6"]  =   $this->load->view("general/type_facturation_dummy6",$data,true);
-      // $this->colonneDroite["envoie_facture_dummy6"]  = $this->load->view("general/type_facturation_dummy6",$data,true);
-//        if(isset($dummyPanier["dummy6"])){
-//            foreach($dummyPanier["dummy6"] as $val){
-//                $data["totalParMois"] = $this->getTotal($val["Tarif"]);             
-//            }
-//         }
-       
-         $this->session->set_userdata('prevState',$prevState);
-         $this->data["userdata"] = $this->session->all_userdata();
+        $panierVal = $this->session->userdata("panierVal"); 
+        if(empty($panierVal["facturedum6"])){
+            $this->majPanier(array("produit"=>array("FACTURATION"),"etape"=>array("choixFacture")));  
+        }
+        $this->data["userdata"] = $this->session->all_userdata();
         
         $wsVille = $this->session->userdata("ws_ville");
         $this->data["wsVille"] = $wsVille;
-        /*
-        $codePostal = "";
-        $codeVille  = "";
-        foreach($wsVille as $key=>$val){
-            if(is_array($val)){
-                $codePostal = $val["Code_postal"];
-                $codeVille  = $val["Code_ville"];
-                break;
-            }else{
-                $codePostal = $wsVille["Code_postal"];
-                $codeVille  = $wsVille["Code_ville"];
-            }
-        }*/
-        
-        //re initialise session pour le panier partie parrainage
-       // $prevState = $this->session->userdata("prevState");
-        //$data["test"] = "test";
-        /*$this->colonneDroite["parrainage"] = $this->load->view("general/parrainage",$data,true);        
-        $prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true); */       
-        //$this->session->set_userdata('prevState',$prevState);
-        /*
-        //configuring rules
-        $this->form_validation->set_rules('civilite_aa', 'civilite des adresses abonnement', 'required');
-        $this->form_validation->set_rules('nom_aa', 'nom des adresses abonnement', 'trim|required|min_length[1]|max_length[30]|xss_clean');
-        $this->form_validation->set_rules('prenom_aa', 'prenom des adresses abonnement', 'trim|required|min_length[1]|max_length[30]|xss_clean');
-//        $this->form_validation->set_rules('mobile', 'mobile', 'trim|required|min_length[5]|max_length[5]|xss_clean');
-//        $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('numero_aa', 'numero des adresses abonnement', 'required');
-        $this->form_validation->set_rules('code_postal_aa', 'codepostal des adresses abonnement', 'required');        
-        $this->form_validation->set_rules('voie_aa', 'voie des adresses abonnement', 'required');
-        
-        $this->form_validation->set_rules('NomDeLaVoie', 'nom de la voie', 'trim|required|min_length[1]|max_length[200]|xss_clean');
-        $this->form_validation->set_rules('complement', 'complement', 'required');
-        $this->form_validation->set_rules('codepostal', 'codepostal', 'required');
-        $this->form_validation->set_rules('ville', 'ville', 'required');
-        $this->form_validation->set_rules('identique', 'identique', 'required');
-        $this->form_validation->set_rules('email_mediaserv', 'email_mediaserv', 'trim|required');
-        $this->form_validation->set_rules('emailAutre', 'une autre adresse', 'trim|required|valid_email');
-        $this->form_validation->set_rules('TypeDeFacturation','type de facturation', 'required');
-        */
-        
+                
         //initialising form values
         if(!array_key_exists("civilite_aa",$this->session->all_userdata())){
             $this->session->set_userdata('civilite_aa',"");
@@ -185,7 +133,6 @@ class Mes_coordonnees extends MY_Controller {
         }
         
         
-        
         if(!array_key_exists("check_adresse_livraison",$this->data['userdata'])){
             $this->session->set_userdata('check_adresse_livraison',"check adresse livraison");
         }
@@ -238,8 +185,6 @@ class Mes_coordonnees extends MY_Controller {
         if(!array_key_exists("ville_al",$this->data['userdata'])){
             $this->session->set_userdata('ville_al',"");
         }
-        
-        
         
         if(!array_key_exists("livraison_express",$this->data['userdata'])){
             $this->session->set_userdata('livraison_express',"false");
@@ -351,77 +296,12 @@ class Mes_coordonnees extends MY_Controller {
     
     public function updateFacture(){
         $this->controller_verifySessExp()? redirect('mon_offre'):"";              
-        $decoder_tv   =  $this->input->post('decoder_tv');                    
          //MAJ PANIER
         $this->majPanier(array("produit"=>array("FACTURATION"),"etape"=>array("choixFacture") )); 
         echo json_encode($this->colonneDroite);
-        /*
-       $this->controller_verifySessExp()? redirect('mon_offre'):""; 
-       $typeFacture =  $this->input->post("typeFacture");
-       $typeFacture = explode("_",$typeFacture);
-       $data["typeFacture"] = $typeFacture;
-       $this->session->set_userdata("typeFacture",$typeFacture);
-       $this->session->set_userdata("facture","electronique");
-       $data["totalParMois"] = $this->session->userdata('totalParMois');
-       $factureIdCrm = $this->updateFactureDummy6Crm($typeFacture["1"]);
-       $promo_libelle = $this->session->userdata("promo_libelle");
-       switch($typeFacture["1"]){
-          case "papier": 
-            $this->session->set_userdata("facture","papier");
-            $data["totalParMois"] = $this->getTotal($typeFacture["2"]);
-            $this->session->set_userdata("tarif_papier",$typeFacture["2"]);            
-           
-            //promo            
-            $dummyPanier    = $this->session->userdata("dummyPanier");
-            foreach($dummyPanier["dummy2"] as $key=>$val){
-                if($val["Categorie"]=="FACTURATION"&&$val["Id_crm"]==$factureIdCrm){                    
-                    array_push($promo_libelle,array("facturation"=>utf8_encode($val["Valeurs"]["Libelle"]["string"])));
-                }
-            }
-            $this->session->set_userdata("promo_libelle",$promo_libelle);
-            $data["promo_libelle"] = $promo_libelle;
-           
-            
-          break;
-          case "electronique":
-            $this->session->set_userdata("facture","electronique");
-            $tarif_papier =   $this->session->userdata("tarif_papier"); 
-            if(!empty($tarif_papier)){
-                $data["totalParMois"] = $this->getTotal(-$tarif_papier);
-            }
-            foreach($promo_libelle as $key2=>$val2){
-                if(isset($val2["facturation"])){
-                   unset($promo_libelle[$key2]);
-                }
-            }
-          break;
-       }
-       $this->session->set_userdata("factureDummy6Crm",$factureIdCrm);
-       //total 1ere facture
-        $caution_dummy5 = $this->session->userdata("caution_dummy5");
-        $data["oneshot_dummy7"] = $this->session->userdata("oneshot_dummy7");
-        $data["total1erFact"]  = $data["totalParMois"]+$data["oneshot_dummy7"]+$caution_dummy5[0];
-        //total 2eme facture
-        $data["total2emeFact"] = $data["totalParMois"]+$caution_dummy5[1];   
-        
-        
-       $prevState = $this->session->userdata("prevState");
-       $this->session->set_userdata("promo_libelle",$promo_libelle);
-       $prevState[1]["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$data,true);
-       $prevState[1]["envoie_facture_dummy6"] = $this->load->view("general/type_facturation_dummy6",$data,true);     
-       $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
-       $this->session->set_userdata("prevState",$prevState);
-       echo json_encode(array("libelles_promo_dummy2"=>$prevState[1]["libelles_promo_dummy2"],"envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));*/
     }
     
-    public function updateFactureDummy6Crm($typeFacture){
-      /* $dummyPanier = $this->session->userdata("dummyPanier"); 
-       foreach($dummyPanier["dummy6"] as $key=>$val){
-           if(strpos($this->stripAccents($val["Valeurs"]["Libelle"]["string"]),$typeFacture)==true){
-               return $val["Id_crm"];
-           }
-       }*/
-    }
+   
 }
 /* End of file mes_coordonnees.php */
 /* Location: ./application/controllers/mes_coordonnees.php */
