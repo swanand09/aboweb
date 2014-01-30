@@ -7,7 +7,7 @@
  <div class="caution-deco notitle forpro">
     <ul>
       <?php foreach($panierVal["cautiondum5"] as $key=>$val){
-                $label = utf8_encode($val["Valeurs"]["Libelle"]["string"]);
+                $label = $val["Valeurs"]["Libelle"]["string"];
                 $tarifCaution = is_array($val["Valeurs"]["Tarif"]["decimal"])&&$val["Valeurs"]["Tarif"]["decimal"]>0?
                         $val["Valeurs"]["Tarif"]["decimal"][0]+$val["Valeurs"]["Tarif"]["decimal"][1]:
                         $val["Valeurs"]["Tarif"]["decimal"];

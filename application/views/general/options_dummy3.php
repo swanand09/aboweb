@@ -38,7 +38,7 @@ if(!empty($panierVal["bouquetTvdum3"])||!empty($panierVal["optionTvdum3"])||!emp
                     $vodTarif = ($val2["tarif"]>0)?$val2["tarif"]:"inclus";
                 }
             ?>
-                 <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val2["picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo utf8_encode($key2); ?><span class="right"><?php echo ($vodTarif=="inclus")?$vodTarif:number_format($vodTarif,2,',',' ')."€/mois"; ?></span></strong></li>
+                 <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val2["picto"]?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo $key2; ?><span class="right"><?php echo ($vodTarif=="inclus")?$vodTarif:number_format($vodTarif,2,',',' ')."€/mois"; ?></span></strong></li>
            <?php }
         }
        

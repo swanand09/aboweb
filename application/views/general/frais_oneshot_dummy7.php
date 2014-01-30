@@ -5,7 +5,7 @@
     $panierVal = $this->session->userdata("panierVal");    
     if(!empty($panierVal["oneshotdum7"])){
          foreach($panierVal["oneshotdum7"] as $key=>$val){
-            $label = utf8_encode($val["Valeurs"]["Libelle"]["string"]);
+            $label = $val["Valeurs"]["Libelle"]["string"];
             $tarifOneshot = is_array($val["Valeurs"]["Tarif"]["decimal"])&&$val["Valeurs"]["Tarif"]["decimal"]>0?
                             $val["Valeurs"]["Tarif"]["decimal"][0]+$val["Valeurs"]["Tarif"]["decimal"][1]:
                             $val["Valeurs"]["Tarif"]["decimal"];

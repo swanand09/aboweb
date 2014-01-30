@@ -1,17 +1,14 @@
 <?php 
-echo validation_errors();
+//echo validation_errors();
 
-//facturation
- $facture_papier = '<span class="prix">('.$facture_tarif.'€)</span>';
- if($facture_duree_promo>0){
-   $facture_papier = '<span class="promo">('.$facture_tarif.'€)</span> <span class="prix">('.$facture_tarif_promo.'€)</span>';
- }
+
+ /*
  $facture_tarif2 = ($facture_tarif>$facture_tarif_promo)?$facture_tarif_promo:$facture_tarif;
  if(!empty($type_de_facturation)){
     $facture_data   = explode("_",set_value("type_de_facturation",$type_de_facturation));
     $check_electronic = ($facture_data[1]=="electronique")?"checked='checked'":"";
     $check_papier = ($facture_data[1]=="papier")?"checked='checked'":"";
- }
+ }*/
 ?>
 
 <div class="left-etape-content">
@@ -252,15 +249,22 @@ echo validation_errors();
           <!--type de facturation-->
           <h3>Type de facturation :</h3>
           <div class="row">
-             <?php if(!empty($type_de_facturation)){ ?>
-              <input type='hidden' name='type_facturation_hid' id="type_facturation_hid" value='<?php echo $type_de_facturation; ?>' />
-            <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'disabled="disabled"':''; ?> name="type_de_facturation" id="type_facture1"  <?php echo $check_electronic;?>> Electronique (gratuit)</label></div>
-            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('type_facture2');" value="facture_papier_<?php echo $facture_tarif2; ?>" <?php echo ($type_de_facturation=="facture_papier_".$facture_tarif2)?'disabled="disabled"':''; ?> name="type_de_facturation" id="type_facture2" <?php echo $check_papier;?>> Facture papier <?php echo $facture_papier; ?></label></div>            
-             <?php }else{ ?>
-            <input type='hidden' name='type_facturation_hid' id="type_facturation_hid" value='facture_electronique' />
-            <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="facture_electronique" name="type_de_facturation" id="type_facture1" disabled="disabled" checked="checked"> Electronique (gratuit)</label></div>
-            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('type_facture2');" value="facture_papier_<?php echo $facture_tarif2; ?>" name="type_de_facturation" id="type_facture2" > Facture papier <?php echo $facture_papier; ?></label></div>            
-             <?php } ?>
+              <?php 
+                    foreach($factureData as $key=>$val){
+                       if(strpos($val["Libelle"],"papier")==false){?>
+                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('type_facture1');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="type_facture1" checked="checked"> Electronique (gratuit)</label></div>
+                      <?php
+                       }else{
+                                $facture_papier = '<span class="prix">('.$val["Tarif"].'€)</span>';
+                                if($val["Duree_mois_promo"]>0){
+                                  $facture_papier = '<span class="promo">('.$val["Tarif"].'€)</span> <span class="prix">('.$val["Tarif_promo"].'€)</span>';
+                                }
+                           ?>
+                            <div class="column four end facturepapier"> <label><input type="radio" onclick="javascript:choixFacture('type_facture2');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="type_facture2" > Facture papier <?php echo $facture_papier; ?></label></div>
+                       <?php
+                       }
+                    } 
+              ?>
           </div>
           
           <!-- Sexy line -->

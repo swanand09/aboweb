@@ -175,15 +175,15 @@ class Mon_offre extends MY_Controller {
        $this->session->set_userdata('offreparrainage_id',($resultProd["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$resultProd["recupere_offreResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
        $this->session->set_userdata('ws_ville',$resultProd["recupere_offreResult"]["Villes"]["WS_Ville"]);
        $this->session->set_userdata('produit',$resultProd["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-       $panierVal = $this->session->userdata("panierVal");
-       array_push($panierVal["promodum2"],array(utf8_encode($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])));       
+       $panierVal = $this->session->userdata("panierVal");       
+       array_push($panierVal["promodum2"],array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));       
        $this->session->set_userdata("panierVal",$panierVal);
        $this->session->set_userdata('context',$resultProd["recupere_offreResult"]["Context"]);
        //$this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]));
      
       
        $produit =  $this->session->userdata("produit");
-       $data["promo_libelle"] = $this->session->userdata("promo");       
+       $data["promo_libelle"] = $resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"];       
        
        $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/forfait/ma_promo",$data,true);
        $counter = 1;
@@ -268,7 +268,7 @@ class Mon_offre extends MY_Controller {
                                         "degroupagedum1"    => array(),
                                         "portabilitedum1"   => array(),
                                         "forfaitdum1"       => array(),
-                                        "promodum2"         => array(array(utf8_encode($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]))),
+                                        "promodum2"         => array(array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])),
                                         "bouquetTvdum3"     => array(),
                                         "optionTvdum3"      => array(),
                                         "voddum3"           => array(),

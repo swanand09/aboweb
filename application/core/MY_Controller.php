@@ -229,7 +229,7 @@ class MY_Controller extends CI_Controller {
                                 $redu_facture = $this->session->userdata("redu_facture");
                                 if($redu_facture=="false"){
                                    //dégroupage partiel
-                                   if(utf8_encode($val["Libelle"])=="Dégroupage Partiel"){
+                                   if($val["Libelle"]=="Dégroupage Partiel"){
                                       $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$val["Id_crm"]); 
                                       //MAJ PANIER
                                       $this->procDummy(array("dummyArr"=>$dummyAMaj)); 
@@ -333,6 +333,17 @@ class MY_Controller extends CI_Controller {
                             }
                         break;
                         case "FACTURATION":
+                            if($val["Categorie"]=="FACTURATION"){
+                                $this->typeFacture  =  $this->input->post("typeFacture");
+                                if($val["Id_crm"]==$this->typeFacture){
+                                     $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$this->typeFacture);
+                                     //MAJ PANIER
+                                     $this->procDummy(array("dummyArr"=>$dummyAMaj));
+                                     //maj id crm produits
+                                      $this->produIdCrm["facturation"] = $this->typeFacture;
+                                }
+                               
+                            }
                         break;
                     }
                 }
@@ -430,7 +441,7 @@ class MY_Controller extends CI_Controller {
                              }
                              if((isset($this->data["etape"][1])&&$this->data["etape"][1]=="check")||!isset($this->data["etape"][1])){   
                                 foreach($val as $key2=>$val2){
-                                   array_push($this->panierVal["promodum2"],array($val2["Id_crm"]=>utf8_encode($val2["Valeurs"]["Libelle"]["string"])));  
+                                   array_push($this->panierVal["promodum2"],array($val2["Id_crm"]=>$val2["Valeurs"]["Libelle"]["string"]));  
                                 }
                              }
                         break;
@@ -551,7 +562,19 @@ class MY_Controller extends CI_Controller {
                            
                         break;
                         case "dummy6":
-                            //
+                            foreach($val as $key2=>$val2){
+                                if(!empty($this->panierVal["facturedum6"])){
+                                    foreach($this->panierVal["facturedum6"] as $key3=>$val3){
+                                        if(isset($val3["Valeurs"]["Tarif"]["decimal"]))
+                                        $this->getTotal(-$val3["Valeurs"]["Tarif"]["decimal"]);   
+                                    }
+                                    $this->panierVal["facturedum6"] = array();
+                                }
+                                
+                                if(isset($val2["Valeurs"]["Tarif"]["decimal"])&&$val2["Valeurs"]["Type"]=="RECURRENT")
+                                $this->getTotal($val2["Valeurs"]["Tarif"]["decimal"]);  
+                                array_push($this->panierVal["facturedum6"],array("Valeurs"=>$val2["Valeurs"]));
+                            }
                         break;
                         case "dummy7":                           
                            foreach($val as $key2=>$val2){
@@ -626,6 +649,8 @@ class MY_Controller extends CI_Controller {
             $this->colonneDroite["location_equipements_dummy4"]    = $this->load->view("general/location_equipements_dummy4",$this->data,true);         
              //dummy5           
             $this->colonneDroite["caution_decodeur_dummy5"]    = $this->load->view("general/caution_dummy5",$this->data,true);         
+            //dummy6
+            $this->colonneDroite["envoie_facture_dummy6"]    = $this->load->view("general/type_facturation_dummy6",$this->data,true);         
              //dummy7           
             $this->colonneDroite["frais_activation_facture_dummy7"]    = $this->load->view("general/frais_oneshot_dummy7",$this->data,true);
 

@@ -19,9 +19,9 @@
     if(!empty($panierVal["forfaitdum1"])){
         foreach($panierVal["forfaitdum1"] as $key=>$val){      
      $label_internet  = isset($val["libelle"][0])?$val["libelle"][0]:$val["libelle"][0];
-     $label_internet  = explode(";",utf8_encode($label_internet));
+     $label_internet  = explode(";",$label_internet);
      $label_telephone = isset($val["libelle"][1])?$val["libelle"][1]:$val["libelle"][1];
-     $label_telephone = explode(";",utf8_encode($label_telephone));
+     $label_telephone = explode(";",$label_telephone);
      
 ?>
 <!--FORFAIT-->

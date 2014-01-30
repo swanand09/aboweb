@@ -281,12 +281,20 @@ var preload = function(){
                      {
                         typeFacture      : typeFacture,
                      },
-                    function(data){    
+                    function(data){    /*
                       $("#recap_contenu").children("#promo").remove(); 
                       $("#recap_contenu").append(data.libelles_promo_dummy2);
                       $("#recap_contenu").children("#colFacture").remove();  
                       $("#recap_contenu").append(data.envoie_facture_dummy6);
-                      $("#total_mois").empty().append(data.total_par_mois);  
+                      $("#total_mois").empty().append(data.total_par_mois);  */
+                        var key, count = 0;
+                        for(key in data) {
+                            if(count==0) {
+                              $("#recap_contenu").empty();                                                    
+                            }
+                          (key!="total_par_mois")?$("#recap_contenu").append(data[key]):$("#total_mois").empty().append(data[key]);                            
+                            count++;
+                        }    
                       $("#"+id).attr("Disabled","Disabled");
                       switch(id){
                           case "type_facture1":

@@ -15,17 +15,16 @@ class Mes_coordonnees extends MY_Controller {
         $prevState = $this->session->userdata("prevState");
         //facturation
         
-        $produit =  $this->session->userdata("produit");   
+        $produit =  $this->session->userdata("produit");
+        $this->data["factureData"] = array();
        if(isset($produit)&&!empty($produit)){
-        foreach($produit as $key=>$val)
-        {
-          if($val["Categorie"]=="FACTURATION"&&strpos($val["Libelle"],"papier")!=false)
-          {
-              $this->data["facture_tarif"] = $val["Tarif"];              
-              $this->data["facture_tarif_promo"] = $val["Tarif_promo"];
-              $this->data["facture_duree_promo"] = $val["Duree_mois_promo"];
-          }
-        }
+            foreach($produit as $key=>$val)
+            {
+              if($val["Categorie"]=="FACTURATION")
+              {
+                  array_push($this->data["factureData"],$val);
+              }
+            }
        }else{
            $this->session->destroy();
            redirect('mon_offre');
@@ -257,8 +256,6 @@ class Mes_coordonnees extends MY_Controller {
         
         if(!array_key_exists("type_de_facturation",$this->data['userdata'])||empty($this->data['userdata']["type_de_facturation"])){
             $this->session->set_userdata('type_de_facturation',"");
-            //update idcrm for dummy6
-            $this->session->set_userdata("factureDummy6Crm",$this->updateFactureDummy6Crm('electronique'));
         }
         
         
@@ -343,7 +340,7 @@ class Mes_coordonnees extends MY_Controller {
             $resultVerifParain =$this->Wsdl_interrogeligib->verifParain($this->session->userdata("offreparrainage_id"),$parrain_num_contrat,$parrain_num_tel);
             //echo json_encode(array("faultstring"=>"Le serveur n'a pas pu lire la demande. ---> Il existe une erreur dans le document XML (3, 52). ---> Le format de la chaîne d'entrée est incorrect."));
            if(!empty($resultVerifParain["Error"])){
-               $resultVerifParain["Error"]["ErrorMessage"] = utf8_encode($resultVerifParain["Error"]["ErrorMessage"]);
+               $resultVerifParain["Error"]["ErrorMessage"] = $resultVerifParain["Error"]["ErrorMessage"];
            }
            $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"Votre parrain existe. Merci!";
            if(isset($resultVerifParain["Id_parrain"]))
@@ -353,6 +350,12 @@ class Mes_coordonnees extends MY_Controller {
     }
     
     public function updateFacture(){
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";              
+        $decoder_tv   =  $this->input->post('decoder_tv');                    
+         //MAJ PANIER
+        $this->majPanier(array("produit"=>array("FACTURATION"),"etape"=>array("choixFacture") )); 
+        echo json_encode($this->colonneDroite);
+        /*
        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
        $typeFacture =  $this->input->post("typeFacture");
        $typeFacture = explode("_",$typeFacture);
@@ -408,7 +411,7 @@ class Mes_coordonnees extends MY_Controller {
        $prevState[1]["envoie_facture_dummy6"] = $this->load->view("general/type_facturation_dummy6",$data,true);     
        $prevState[1]["total_par_mois"] = $this->load->view("general/total_mois",$data,true);
        $this->session->set_userdata("prevState",$prevState);
-       echo json_encode(array("libelles_promo_dummy2"=>$prevState[1]["libelles_promo_dummy2"],"envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));
+       echo json_encode(array("libelles_promo_dummy2"=>$prevState[1]["libelles_promo_dummy2"],"envoie_facture_dummy6"=>$prevState[1]["envoie_facture_dummy6"],"total_par_mois"=>$prevState[1]["total_par_mois"]));*/
     }
     
     public function updateFactureDummy6Crm($typeFacture){

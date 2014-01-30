@@ -15,6 +15,8 @@ class Wsdl_interrogeligib_model extends CI_Model
         try
         {
             $this->nusoap_client = new nusoap_client("http://192.168.64.46/WebserviceAboweb/Service.asmx?wsdl",true); 
+             $this->nusoap_client->soap_defencoding = 'UTF-8';
+             $this->nusoap_client->decode_utf8 = false;
         }catch(Exception $e){
              throw new Exception( $this->nusoap_client->getError(), 0, $e);
         }
