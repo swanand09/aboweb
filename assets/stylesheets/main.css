@@ -447,9 +447,9 @@ body {
 	font-size: 0.6em !important;
 }
 .promo img {
-	left: 42px;
+	left: 38px;
     position: absolute;
-    top: 8px;
+    top: 11px;
 }
 .forfait .three {
 	height: 33px;
@@ -520,7 +520,7 @@ body {
 
 .modem-sagem .prix_bare {
 	margin-left: 44px;
-    margin-top: -20px !important;
+    margin-top: -13px !important;
     width: 122px;
 }
 .modem-sagem .nopromo {

@@ -33,7 +33,7 @@ class Paiement extends MY_Controller {
         define('FPDF_FONTPATH',$this->config->item('fonts_path'));
         $this->load->library('fpdi');
         //Set all writable variables
-        $reference = "shjkpaloijanjuithsbju";
+        //$reference = "shjkpaloijanjuithsbju";
         //addresse facturation et installation
         $civilteAf  = $this->session->userdata("civilite_af");
         $nom        = "";
@@ -77,7 +77,7 @@ class Paiement extends MY_Controller {
         //SetLeftMargin
         $pdf->SetMargins(0,0,0,0);
         // set the source file
-        $pdf->setSourceFile("assets/fpdf/template/MANDAT-SEPA-0913-AG-RE-HD.pdf");
+        $pdf->setSourceFile("assets/fpdf/template/MANDAT-VIERGE.pdf");
         // import page 1
         $tplIdx = $pdf->importPage(1);
         // use the imported page and place it at point 10,10 with a width of 100 mm
@@ -88,7 +88,7 @@ class Paiement extends MY_Controller {
 
 
         //REFERENCE
-        $reference = str_split($reference);
+        /* $reference = str_split($reference);
         $pdf->Text(99,21.5, utf8_decode($reference[0]));
         $pdf->Text(104,21.5, utf8_decode($reference[1]));
         $pdf->Text(109,21.5, utf8_decode($reference[2]));
@@ -109,7 +109,7 @@ class Paiement extends MY_Controller {
         $pdf->Text(184,21.5, utf8_decode($reference[17]));
         $pdf->Text(189,21.5, utf8_decode($reference[18]));
         $pdf->Text(194,21.5, utf8_decode($reference[19]));
-        $pdf->Text(199,21.5, utf8_decode($reference[20]));
+        $pdf->Text(199,21.5, utf8_decode($reference[20]));*/
 
         //VOTRE NOM
         $pdf->SetXY(35, 62);
@@ -134,47 +134,46 @@ class Paiement extends MY_Controller {
         //IBAN
         $iban = str_split($iban);
         $pdf->Text(37,102.5, utf8_decode($iban[0]));
-        $pdf->Text(41,102.5, utf8_decode($iban[1]));
+        $pdf->Text(42,102.5, utf8_decode($iban[1]));
+        $pdf->Text(46.5,102.5, utf8_decode($iban[2]));
+        $pdf->Text(51,102.5, utf8_decode($iban[3]));
 
-        $pdf->Text(47,102.5, utf8_decode($iban[2]));
-        $pdf->Text(52,102.5, utf8_decode($iban[3]));
-        $pdf->Text(56,102.5, utf8_decode($iban[4]));
-        $pdf->Text(61,102.5, utf8_decode($iban[5]));
+        $pdf->Text(57,102.5, utf8_decode($iban[4]));
+        $pdf->Text(61.5,102.5, utf8_decode($iban[5]));
+        $pdf->Text(66,102.5, utf8_decode($iban[6]));
+        $pdf->Text(70.5,102.5, utf8_decode($iban[7]));
 
-        $pdf->Text(67,102.5, utf8_decode($iban[6]));
-        $pdf->Text(71,102.5, utf8_decode($iban[7]));
-        $pdf->Text(76,102.5, utf8_decode($iban[8]));
-        $pdf->Text(80,102.5, utf8_decode($iban[9]));
+        $pdf->Text(76.5,102.5, utf8_decode($iban[8]));
+        $pdf->Text(81,102.5, utf8_decode($iban[9]));
+        $pdf->Text(85.5,102.5, utf8_decode($iban[10]));
+        $pdf->Text(90,102.5, utf8_decode($iban[11]));
 
-        $pdf->Text(86,102.5, utf8_decode($iban[10]));
-        $pdf->Text(91,102.5, utf8_decode($iban[11]));
-        $pdf->Text(95,102.5, utf8_decode($iban[12]));
-        $pdf->Text(100,102.5, utf8_decode($iban[13]));
+        $pdf->Text(95.5,102.5, utf8_decode($iban[12]));
+        $pdf->Text(101,102.5, utf8_decode($iban[13]));
+        $pdf->Text(105,102.5, utf8_decode($iban[14]));
+        $pdf->Text(110,102.5, utf8_decode($iban[15]));
 
-        $pdf->Text(106.5,102.5, utf8_decode($iban[14]));
-        $pdf->Text(111,102.5, utf8_decode($iban[15]));
-        $pdf->Text(116,102.5, utf8_decode($iban[16]));
+        $pdf->Text(115.5,102.5, utf8_decode($iban[16]));
         $pdf->Text(120,102.5, utf8_decode($iban[17]));
+        $pdf->Text(124.5,102.5, utf8_decode($iban[18]));
+        $pdf->Text(129,102.5, utf8_decode($iban[19]));
 
-        $pdf->Text(126,102.5, utf8_decode($iban[18]));
-        $pdf->Text(130,102.5, utf8_decode($iban[19]));
-        $pdf->Text(134.5,102.5, utf8_decode($iban[20]));
-        $pdf->Text(139,102.5, utf8_decode($iban[21]));
+        $pdf->Text(135,102.5, utf8_decode($iban[20]));
+        $pdf->Text(139.5,102.5, utf8_decode($iban[21]));
+        $pdf->Text(144,102.5, utf8_decode($iban[22]));
+        $pdf->Text(148.3,102.5, utf8_decode($iban[23]));
 
-        $pdf->Text(145,102.5, utf8_decode($iban[22]));
-        $pdf->Text(149.5,102.5, utf8_decode($iban[23]));
-        $pdf->Text(154,102.5, utf8_decode($iban[24]));
-        $pdf->Text(158.5,102.5, utf8_decode($iban[25]));
+        $pdf->Text(154.5,102.5, utf8_decode($iban[24]));
+        $pdf->Text(159,102.5, utf8_decode($iban[25]));
+        $pdf->Text(163.5,102.5, utf8_decode($iban[26]));
 
-        $pdf->Text(164.5,102.5, utf8_decode($iban[26]));
-        /*$pdf->Text(169,102.5, utf8_decode($iban[26]));
+        /*$pdf->Text(169.5,102.5, utf8_decode($iban[26]));
         $pdf->Text(174,102.5, utf8_decode($iban[26]));
-        $pdf->Text(178,102.5, utf8_decode($iban[26]));
-
-        $pdf->Text(184,102.5, utf8_decode($iban[26]));
-        $pdf->Text(188.5,102.5, utf8_decode($iban[26]));
-        $pdf->Text(193,102.5, utf8_decode($iban[26]));
-        $pdf->Text(197.5,102.5, utf8_decode($iban[26]));*/
+        $pdf->Text(178.5,102.5, utf8_decode($iban[26]));
+        $pdf->Text(183,102.5, utf8_decode($iban[26]));
+        $pdf->Text(187.5,102.5, utf8_decode($iban[26]));
+        $pdf->Text(192.5,102.5, utf8_decode($iban[26]));
+        $pdf->Text(197,102.5, utf8_decode($iban[26]));*/
 
 
         //BIC
@@ -203,6 +202,7 @@ class Paiement extends MY_Controller {
         $pdf->Write(0, utf8_decode($bic[10]));
 
         $pdf->Output('MANDAT-SEPA-0913-AG-RE-HD.pdf','D');
+        //$pdf->Output();
         $this->session->destroy();
       }
     
