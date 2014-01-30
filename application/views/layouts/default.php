@@ -54,7 +54,7 @@
   <!--NAV-->
   <nav class='navigation'>
     <div class='row'>
-      <div class='twelve columns'><?php echo image('logo_mediaserv.png',NULL,array("title"=>"Aboweb", "alt"=>"Mediaserv")); ?></div>
+      <div class='twelve columns'><?php echo image('logo_mediaserv.png',NULL,array("title"=>"Souscription en ligne", "alt"=>"Mediaserv","class"=>"has-tip")); ?></div>
     </div>
   </nav>
   <!--END OF NAV-->
@@ -76,7 +76,7 @@
   <section class='row main-content'>
     <section class='nine columns left-content'>
       <ul class="block-grid four-up etapes <?php echo $pageid; ?>">        
-        <li class='etape1 state1' data-nav='<?php echo $allow[0]; ?>'><?php echo image('etape.png')?><?php echo ($etapes_url[0]=="#")?"<a><span>1</span> Mon offre</a>":anchor($etapes_url[0],'<span>1</span> Mon<br/>offre'); ?></li>
+        <li class='etape1 state1' data-nav='<?php echo $allow[0]; ?>'><?php echo image('etape.png')?><?php echo ($etapes_url[0]=="#")?"<a><span>1</span>Mon<br/>offre</a>":anchor($etapes_url[0],'<span>1</span> Mon<br/>offre'); ?></li>
         <li class='etape2' data-nav='<?php echo $allow[1]; ?>'><?php echo image('etape.png')?><?php echo ($etapes_url[1]=="#")?"<a><span>2</span> Mes<br/>coordonnées</a>":anchor($etapes_url[1],'<span>2</span> Mes<br/>coordonnées'); ?></li>
         <li class='etape3' data-nav='<?php echo $allow[2]; ?>'><?php echo image('etape.png')?><?php echo ($etapes_url[2]=="#")?"<a><span>3</span> Mon<br/>récapitulatif</a>":anchor($etapes_url[2],'<span>3</span> Mon<br/>récapitulatif'); ?></li>
         <li class='etape4' data-nav='<?php echo $allow[3]; ?>'><?php echo image('etape.png')?><?php echo ($etapes_url[3]=="#")?"<a><span>4</span> Paiement</a>":anchor($etapes_url[3],'<span>4</span> Paiement'); ?></li>

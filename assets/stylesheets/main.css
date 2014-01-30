@@ -1070,3 +1070,8 @@ form .formError .formErrorArrow div {
 #modalMentionLegale > ul{ list-style: none outside none; }
 #modalBesoinDaide h4{ color: rgb(0, 157, 219); font-size: 18px;}
 #modalBesoinDaide .pour-info{ font-size:12px; font-style: italic;}
+
+/*
+* Logo tooltip
+*/
+.navigation .has-tip { border:medium none; }
