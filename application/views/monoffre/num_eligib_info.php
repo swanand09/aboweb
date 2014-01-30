@@ -3,8 +3,8 @@ if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["Error
 //if(!empty($result)){
 $debit_emis = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"],2);
 $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"],2);
-   $max_emis = 10;
-   $max_recu = 30;
+   $max_emis = 1;
+   $max_recu = 20;
    
 ?>
 <script>
@@ -67,7 +67,7 @@ $("#redu_facture").click(function(){
              }
              
              $msgtel  = "Vous êtes éligible à l’ensemble des options de notre offre téléphonie";
-             $msgadsl = "Vous êtes éligible à un débit de réception maximum de (ici affichage du débit)";
+             $msgadsl = "Vous êtes éligible à un débit de réception maximum de ".$debit_recu." Mo";
              if($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]=="false"){
                   $msgtel = "Votre ligne téléphonique n’est pas éligible à notre offre de téléphonie.";
                   $msgadsl = "Votre ligne téléphonique n’est pas éligible à notre offre internet par ADSL.";
