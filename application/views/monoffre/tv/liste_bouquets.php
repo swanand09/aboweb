@@ -89,7 +89,7 @@
                     if(!empty($bouqTvArr)&&isset($bouqTvArr)){
                         foreach($bouqTvArr as $key=>$val){
                             foreach($val as $key2=>$val2){
-                                 $nomBouq   .=($countId==(sizeof($val)-1))?'"'.strtolower($key2).'",':'"'.strtolower($key2).'"';  
+                                 $nomBouq   .='"'.strtolower($key2).'",';  
                                   $countId++;
                    ?>
                             <li>
@@ -123,6 +123,7 @@
                  <?php
                     $prevBouq = "";
                     $countBouq = 0;
+                    $nomBouq = rtrim($nomBouq, ",");
                     if(!empty($bouqTvArr)&&isset($bouqTvArr)){
                            foreach($bouqTvArr as $key=>$val){
                                foreach($val as $key2=>$val2){

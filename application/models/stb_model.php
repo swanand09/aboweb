@@ -56,7 +56,7 @@ class Stb_model extends CI_Model
                  INNER JOIN `mod_wa_bouquets` D
                  ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(".$idWebBouq.") ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
-       
+    
         
        $query1 = $this->db->query($sql1, array($this->deptId)); 
        
@@ -133,7 +133,25 @@ class Stb_model extends CI_Model
              }   
          }
       }
-       
+      foreach($nomBouq as $key=>$val){
+         if($key>1){
+             foreach($this->maTv["Bouquet"][strtoupper($nomBouq[1])] as $key2=>$val2){
+                 if(is_array($val2)){
+                     
+//                    foreach($val2 as $key3=>$val3){                       
+                        //$this->maTv["Bouquet"][strtoupper($val)][$key2] = array_filter($this->maTv["Bouquet"][strtoupper($val)],array(new retrieveUnikChaine($val2),'filterUnique'));
+                    foreach($val2 as $key3=>$val3){
+                     $newArr = array_diff($this->maTv["Bouquet"][strtoupper($val)][$key2][$key3], $val3);                       
+                        if(!empty($newArr)){
+                            $this->maTv["Bouquet"][strtoupper($val)][$key2][$key3] = $newArr;
+                        }else{
+                            unset($this->maTv["Bouquet"][strtoupper($val)][$key2][$key3]);
+                        }
+                   }
+                 }
+             }   
+         }
+      } 
        $idWebOption = "";
         $countId =0;
         foreach($fluxData["optionTv"] as $key=>$val){

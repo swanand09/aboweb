@@ -64,7 +64,7 @@ $(function() {
     else //option ultra will be unchecked
     {
       removeUltraoptions(promoInitialText);
-    }
+    }    
     chainesFilter(selector,datagroup);
   });
 
@@ -74,18 +74,18 @@ $(function() {
 * Function 
 * Filter the 'chaines/logo' depending on the datagroup
 */
-var chainesFilter = function(selector,datagroup) {
+var chainesFilter = function(selector,datagroup) { 
   $.each(selector,function(){
-    var datagroups = $(this).attr('data-groups');
-    datagroups = $.parseJSON(datagroups);
+    var datagroups = $(this).attr('data-groups');       
+    datagroups = $.parseJSON(datagroups);    
     var search_result = $.inArray(datagroup, datagroups);
 
     if( search_result < 0 ) {
-      $(this).hide('slow');
+      $(this).hide('slow');   
     }
     else
     {
-      $(this).show('slow');
+      $(this).show('slow');      
     }
   });
 }
