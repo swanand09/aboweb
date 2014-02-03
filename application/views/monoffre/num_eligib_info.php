@@ -94,7 +94,7 @@ $("#redu_facture").click(function(){
   <?php }?>
   <label for="checkbox3"><?php echo form_checkbox($input2);?> Je souhaite conserver mon numéro de téléphone.  <span><a href='#' class='has-tip' data-width='360' title="En cochant cette case, vous conserverez votre numéro de téléphone actuel, sinon un nouveau numéro vous sera attribué."><?php echo image('info_icon.png',NULL,array("title"=>"Plus info", "alt"=>"Plus info","class"=>"border-gray")); ?></a></span></label>
   <p class='options-texte'>L’offre box mediaserv vous permet de vous connecter à Internet de façon illimitée via les technologies ADSL. Pour vous inscrire, il suffit de remplir le formulaire en ligne, avec vos coordonnées postales et vos coordonnées bancaires, le paiement de la caution pouvant se faire par prélèvement bancaire. Une fois la validation de votre dossier effectuée par Mediaserv, la création de votre ligne téléphonique sera effectuée et vos équipements vous seront envoyés.</p>
-  <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent"));?></div>
+  <div class='top-20 six custom-column back-button left'><?php echo anchor('mon_offre/redirectToMonOffre',"PRECEDENT",array("class"=>"precedent","title" => "Retour à l'étape précédente"));?></div>
   <div class='top-20 six custom-column text-right'><?php echo form_submit($choix_forfait);?></div>
 </form>
 </div>

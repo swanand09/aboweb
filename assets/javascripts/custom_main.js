@@ -113,7 +113,7 @@ $(document).on('click','#redu_facture',function(){
 	/*--------------------------------
 	*  Change focus after prefix
 	---------------------------------*/
-	$('#ligne_prefix').keydown(function(e){
+	$('#ligne_prefix').keyup(function(e){
 		if(this.value.length > 3 && e.keyCode != 8 && e.keyCode != 46 )
 		{
 			$('#ligne_sufix').focus();

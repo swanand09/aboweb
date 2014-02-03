@@ -30,4 +30,4 @@ if(!empty($iadArr["Tarif"])){
         //}?>
 </div>
 <?php }?>
-<div class="top-20 custom-column back-button left"><a alt="Précédent" href="javascript:prevState('test_eligib');" class="precedent">Précédent</a></div>
+<div class="top-20 custom-column back-button left"><a alt="Précédent" href="javascript:prevState('test_eligib');" class="precedent" title="Retour à l'étape précédente">Précédent</a></div>

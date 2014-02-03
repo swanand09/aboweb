@@ -262,7 +262,7 @@
           <hr class="sexy">
 
           <!--back and submit buttom -->
-          <div class="six custom-column back-button left"><?php echo anchor('mon_offre','Précedent',array('title'=>'Précedent','class'=>'precedent','alt'=>'Précedent')); ?></div>
+          <div class="six custom-column back-button left"><?php echo anchor('mon_offre','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
           <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
         </form>
 </div>

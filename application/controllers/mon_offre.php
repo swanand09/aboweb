@@ -41,6 +41,7 @@ class Mon_offre extends MY_Controller {
                                             'name' => 'test_eligb_butt',
                                             'id' => 'test_eligb_butt',
                                             'type' => 'submit',
+                                            'title'=> 'Tester mon eligibilité',
                                             'value' => 'TESTER'
                                       );
         
@@ -201,7 +202,7 @@ class Mon_offre extends MY_Controller {
         {
            switch($val["Categorie"]){               
                case "FORFAIT":
-                   $choixArr = array('class'=>'rmv-std-btn btn-green','name' => 'button','id' => 'butt_'.$counter,"onclick" => "javascript:choixForfait(".$val["Id_crm"].")",'content' => 'CHOISIR');
+                   $choixArr = array("title"=>"CHOISIR CE FORFAIT",'class'=>'rmv-std-btn btn-green','name' => 'button','id' => 'butt_'.$counter,"onclick" => "javascript:choixForfait(".$val["Id_crm"].")",'content' => 'CHOISIR');
                    $data["val"] = $val;
                    $data["choixArr"] = $choixArr;
                    $data["counter"] = $counter; 
