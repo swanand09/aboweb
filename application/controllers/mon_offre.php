@@ -50,8 +50,10 @@ class Mon_offre extends MY_Controller {
         if(!empty($num_tel)){
              return $this->ajax_proc_interogeligib($num_tel);
         }
+       if(empty($this->prevState[0]["contenu_html"])){
         $this->majSession(array("panierVal"=>$this->panierVal));
         $this->majSession(array("produIdCrm"=>$this->produIdCrm));
+       }
         return $this->controller_test_eligib_vue();                
     }
    
@@ -457,6 +459,12 @@ class Mon_offre extends MY_Controller {
     {
          $data["test"] = "ok";   
          $this->prevState = $this->session->userdata("prevState");
+         
+         //maj contenu précédente
+          $maTv = $this->input->post("maTv");
+          $this->prevState[0]["contenu_html"] =  $maTv;
+         
+         
          $offreparrainage_id = $this->session->userdata('offreparrainage_id');
          
          if(!empty($offreparrainage_id))

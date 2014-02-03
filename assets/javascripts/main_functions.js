@@ -143,7 +143,7 @@ var preload = function(){
               // var beneficierTv = $("#beneficier").val();                
                 if($("#beneficier").is(":checked"))
                 {
-                      
+                     $("#beneficier").attr("checked","checked");  
                     $.post(
                         updateTvDecodeur,
                          {
@@ -167,7 +167,7 @@ var preload = function(){
                         },"json"
                    ); 
                 }else{         
-//                     beneficierTv = "uncheck";       
+                   $("#beneficier").removeAttr("checked"); 
                      $.post(
                             updateTvDecodeur,
                              {
@@ -241,7 +241,10 @@ var preload = function(){
                 var checkOption = "uncheck";
                 if($("#"+id).is(":checked"))
                 {
+                     $("#"+id).attr("checked","checked"); 
                     checkOption = "check";
+                }else{
+                    $("#"+id).removeAttr("checked"); 
                 }
                 $.post(
                     updateOptions,
@@ -310,10 +313,11 @@ var preload = function(){
           }
           
           function gotoMesCoord(){
+              var maTv = $("#cont_mon_off").html();
                 $.post(
                     mesCoordonnes,
                      {
-
+                      maTv : maTv          
                      },
                    function(data){
                        $(location).attr('href',"mes_coordonnees");

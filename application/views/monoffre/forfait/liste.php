@@ -1,5 +1,5 @@
 <?php
- $label = explode("@",utf8_encode($val["Libelle"]));
+ $label = explode("@",$val["Libelle"]);
  $tarif = explode(".",$val["Tarif"]);
  
  //gestion tarif promo et durée

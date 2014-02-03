@@ -1040,6 +1040,7 @@ img.prix_bare{
 */
 form .formError .formErrorContent {
 	background:none repeat scroll 0 0 #ADAEAE;
+	color: #3E3D40;
 }
 
 form .formError .formErrorArrow div {

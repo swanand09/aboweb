@@ -4,6 +4,7 @@ $(function () {
  * @modif reddy 2014 01 28
  * sur test deligibilité
  */
+
 $(document).on('click','#redu_facture',function(){
      if(!$(this).is(":checked")){
          $("#consv_num_tel").prop("checked",false)
@@ -83,8 +84,8 @@ $(document).on('click','#redu_facture',function(){
 	* Masked Input for Phone Number TODO : 
 	--------------------------------------*/
 	//$('.numero').mask("99999");
-	$('#ligne_prefix').mask("9999");
-	$('#ligne_sufix').mask("999999");
+	//$('#ligne_prefix').mask("9999");
+	//$('#ligne_sufix').mask("999999");
 	$('#ligne,.telephone').mask("9999999999");
 	$('#cle').mask("99");
 	$('#banque').mask("99999");
@@ -112,14 +113,19 @@ $(document).on('click','#redu_facture',function(){
 	/*--------------------------------
 	*  Change focus after prefix
 	---------------------------------*/
-	/*$('#ligne_prefix').keydown(function(){
-		if(this.value.length > 2 )
+	$('#ligne_prefix').keydown(function(e){
+		if(this.value.length > 3 && e.keyCode != 8 && e.keyCode != 46 )
 		{
 			$('#ligne_sufix').focus();
 		}
-	});*/
+	});
 
-
+	$('#codepostal').keyup(function(e){
+		if(this.value.length > 4 && e.keyCode != 8 && e.keyCode != 46 )
+		{
+			$('#ville').focus();
+		}
+	});
 	/*--------------------------------
 	*  Page paiement toggle
 	---------------------------------*/

@@ -39,12 +39,14 @@ class Stb_model extends CI_Model
         $countId   = 0;
         $nomBouq   = "";
         foreach($fluxData["bouquetTv"] as $key=>$val){
-            foreach($val as $key2=>$val2){
-               $idWebBouq .=( $countId==(sizeof($val)-1))?$val2["id_web"].",":$val2["id_web"];
-               $nomBouq   .=( $countId==(sizeof($val)-1))?$key2.",":$key2;  
+             foreach($val as $key2=>$val2){
+               $idWebBouq .= $val2["id_web"].",";
+               $nomBouq   .= $key2.",";  
                $countId++;
             }
         }     
+        $idWebBouq = rtrim($idWebBouq, ",");
+        $nomBouq   = rtrim($nomBouq, ",");
         //bouquet
         $sql1 = "select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
                   (

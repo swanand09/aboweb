@@ -1,8 +1,8 @@
 $(function() {
 
-  //initial Promotion text before selecting Ultra
+   //initial Promotion text before selecting Ultra
   window.promoInitialText = getUltraInitialPrice();
-  
+
   //Disable 'list of bouquet' on startup
   $('.four.bouquet').fadeTo('slow',.5);
 
@@ -95,6 +95,7 @@ var addUltraOptions = function(new_content) {
 
   var ultraOption = $('input.ultraoption');
   ultraOption.prop('checked', true);
+  ultraOption.attr('checked', 'checked');
   ultraOption.attr('disabled', true);
   //change 9€ to INCLUS
   $('.prix_option').addClass('inclus');
@@ -109,6 +110,7 @@ var removeUltraoptions = function(initial_content) {
 
   var ultraOption = $('input.ultraoption');
   ultraOption.prop('checked', false);
+  ultraOption.removeAttr('checked');
   ultraOption.attr('disabled', false);
   //change INCLUS to 9€
   $('.prix_option').removeClass('inclus');
