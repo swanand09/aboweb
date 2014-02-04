@@ -408,6 +408,7 @@ class Paiement extends MY_Controller {
                 }
             }
         }
+       
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
        redirect('merci');
     }

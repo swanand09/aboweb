@@ -415,9 +415,11 @@ $soapEligib = $this->nusoap_client->serializeEnvelope($xmlStr,'',array(),'docume
     $this->email->to('s.luthmoodoo@mediacall.mu'); //sophie.lacoste@mediaserv.com
     $num_tel = $this->session->userdata("num_tel");
     $this->email->subject($num_tel.'_enregistrementSouscription_'.date('Y-m-d H:i:s'));
-    $this->email->message($xmlStr.'<Renonce_delai_retractation>'.$result["enregistreSouscriptionResult"]["Renonce_delai_retractation"].'</Renonce_delai_retractation>
-                            <NumError>'.$result["enregistreSouscriptionResult"]["Erreur"]["NumError"].'</NumError>
-                            <ErrorMessage>'.$result["enregistreSouscriptionResult"]["Erreur"]["ErrorMessage"].'</ErrorMessage>'
+ 
+    $numError = !empty($result["enregistreSouscriptionResult"]["Erreur"]["NumError"])?$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]:"";
+    $errorMsg = !empty($result["enregistreSouscriptionResult"]["Erreur"]["ErrorMessage"])?$result["enregistreSouscriptionResult"]["Erreur"]["ErrorMessage"]:"";
+    $this->email->message($xmlStr.'<NumError>'.$numError.'</NumError>
+                            <ErrorMessage>'.$errorMsg.'</ErrorMessage>'
                           );
     $this->email->send(); 
     return  $result;

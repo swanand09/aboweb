@@ -251,7 +251,9 @@ class MY_Controller extends CI_Controller {
                              if($val["Categorie"]=="PORTABILITE"){
                                 $consv_num_tel = $this->session->userdata("consv_num_tel");
                                 if($consv_num_tel=="true"){
-                                  $this->panierVal["portabilitedum1"] = array("libelle"=>$val["Libelle"]);                                    
+                                  $this->panierVal["portabilitedum1"] = array("libelle"=>$val["Libelle"]);    
+                                  //mettre en session les id crm
+                                      $this->produIdCrm["portabilite"] = $val["Id_crm"];
                                 }  
                              }
                         break;
@@ -721,6 +723,22 @@ class MY_Controller extends CI_Controller {
                              $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);    
                         }                                                                                    
                         $this->panierVal["bouquetTvdum3"] = array();                
+                    }
+                    if($this->bouquetChoisi[1]=="Ultra"&&!empty($this->panierVal["optionTvdum3"])){
+                       foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
+                           foreach($this->panierVal["promodum2"] as $key5=>$val5){
+                              foreach($val5 as $key6=>$val6){
+                                if($key6==$val4["idCrm"]){
+                                   unset($this->panierVal["promodum2"][$key5]);
+                                }
+                             }
+                           }
+                            if($val4["Valeurs"]["Type"]=="RECURRENT"){
+                               $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
+                            }                          
+                         }
+                       $this->panierVal["optionTvdum3"] = array(); 
+                       $this->produIdCrm["bouquetTv"]  = "";
                     }
                 break;
                 case "choixOption":

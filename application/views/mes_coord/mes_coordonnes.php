@@ -11,8 +11,8 @@
           <div class="row">
             <div class="columns two bottom-10"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="Monsieur" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Monsieur")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
-              <label class="left"><input type="radio" value="Madame" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Madame")?"checked='checked'":"";?> class="validate[required]">Madame</label>
+              <label class="left"><input type="radio" value="M." name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="M.")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Mme")?"checked='checked'":"";?> class="validate[required]">Madame</label>
             </div>
           </div>
          
@@ -95,8 +95,8 @@
           <div class="row">
             <div class="columns bottom-10 two"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
-              <label class="left"><input type="radio" value="Monsieur" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Monsieur")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
-              <label class="left"><input type="radio" value="Madame" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Madame")?"checked='checked'":"";?> class="validate[required]">Madame</label>
+              <label class="left"><input type="radio" value="M." name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="M.")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Mme")?"checked='checked'":"";?> class="validate[required]">Madame</label>
             </div>
           </div>
           <!-- Nom -->
@@ -146,8 +146,8 @@
           <div class="row">
             <div class="columns bottom-10 two"><label>Civilité:<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="five columns bottom-10 end">
-              <label class="left"><input type="radio" value="Monsieur" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Monsieur")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
-              <label class="left"><input type="radio" value="Madame" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Madame")?"checked='checked'":"";?> class="validate[required]">Madame</label>
+              <label class="left"><input type="radio" value="M." name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="M.")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
+              <label class="left"><input type="radio" value="Mme" name="civilite_al" <?php echo (set_value("civilite_al",$civilite_al)=="Mme")?"checked='checked'":"";?> class="validate[required]">Madame</label>
             </div>
           </div>
          
@@ -242,9 +242,14 @@
               <input type="hidden" name="type_facturation_hid" id="type_facturation_hid" value="<?php echo set_value("type_facturation_hid",$type_de_facturation);?>"/>
               <?php 
                     foreach($factureData as $key=>$val){
-                       if(strpos($val["Libelle"],"papier")==false){?>
-                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo (!empty($type_de_facturation)&&$type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> Electronique (gratuit)</label></div>
+                       if(strpos($val["Libelle"],"papier")==false){
+                          if(empty($type_de_facturation)){
+                       ?>
+                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" checked="checked"> Electronique (gratuit)</label></div>
                       <?php
+                          }else{?>
+                             <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> Electronique (gratuit)</label></div> 
+                      <?php    }
                        }else{
                                 $facture_papier = '<span class="prix">('.$val["Tarif"].'€)</span>';
                                 if($val["Duree_mois_promo"]>0){
