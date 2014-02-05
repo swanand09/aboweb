@@ -1,5 +1,14 @@
 $(function () {
 
+
+//Alert When Phone number is not valid
+//$('#modalpaseli').reveal();
+
+
+//Populate year in expiration date - Payment page
+$('#date_expiration_annee').html(populateYear());
+
+
 /***
  * @modif reddy 2014 01 28
  * sur test deligibilité
@@ -86,12 +95,12 @@ $(document).on('click','#redu_facture',function(){
 	//$('.numero').mask("99999");
 	//$('#ligne_prefix').mask("9999");
 	//$('#ligne_sufix').mask("999999");
-	$('#ligne,.telephone').mask("9999999999");
+	//$('#ligne,.telephone').mask("9999999999");
 	$('#cle').mask("99");
 	$('#banque').mask("99999");
 	$('#guichet').mask("99999");
-	$('#cryptogramme').mask("999");
-	$('#numerodecarte').mask("9999999999999999");
+	//$('#cryptogramme').mask("999");
+	//$('#numerodecarte').mask("9999999999999999");
 	//$('#numero_de_compte').mask("AAAAAAAAAAA");
 
 	/*-------------------------------------/
@@ -267,6 +276,25 @@ window.onload = function () {
 	}
 }
 */
+
+
+/*
+* Get current year and populate select options for credit card expiration date
+*/
+var populateYear = function ()
+{
+	var currentYear = (new Date).getFullYear();
+	var options="";
+	var year;
+	
+	for( var i=0; i<=15; i++ )
+	{
+		year = currentYear+i;
+		options += "<option>"+year+"</option>";
+	}
+	return options;
+}
+
 /*------------------------------------------------
 * IBAN Validation
 * @param {jqObject} the field where the validation applies
@@ -389,3 +417,12 @@ var validateEmail = function( field, rules, i, options ){
 }
 
 
+var validateAdd = function( field, rules, i, options ){
+	var adr = field.val();
+	var adrRegex = /^[a-z0-9\s-.]+$/i;
+	if( field.val().length > 0 ) {
+		if(!adrRegex.test(adr)) {
+			return 'Votre adresse n\'est pas valide';
+		}
+	}
+}

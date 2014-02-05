@@ -30,4 +30,15 @@ if(!empty($iadArr["Tarif"])){
         //}?>
 </div>
 <?php }?>
+
+<div class='pdf-links row'>
+  <div class="column twelve">
+    <ul class="pdf top-20">
+      <li><a href="http://www.mediaserv.com/fileadmin/contenus/box/faq/flyers/GP_LR.pdf" target="_blank">Grille Tarifaire</a></li>
+      <li><a href="http://www.mediaserv.com/fileadmin/contenus/box/pdf/conditions-tarifaires-AG.pdf" target="_blank">Conditions tarifaires, Tarifs hors forfait, Tarifs N° spéciaux</a></li>
+    </ul>
+  </div>
+</div>
+
+
 <div class="top-20 custom-column back-button left"><a alt="Précédent" href="javascript:prevState('test_eligib');" class="precedent" title="Retour à l'étape précédente">Précédent</a></div>

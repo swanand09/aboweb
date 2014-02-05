@@ -75,6 +75,7 @@ hr.sexy {
 .p20all {
 	padding:10px;
 }
+.p30all{ padding:20px;}
 .no-padding-left {
 	padding-left: 0;
 }
@@ -108,6 +109,9 @@ hr.sexy {
 }
 .pleft35 {
 	padding-left: 35px;
+}
+.mleft35{
+	margin-left: 35px;
 }
 .btn-valider {
 	background: url("../images/valider_btn.png") no-repeat scroll 0 0 transparent;
@@ -186,6 +190,7 @@ hr.sexy {
     width: 98px;
     color:#000;
 }
+.precedent.back-long { background: url("../images/back_long.png") no-repeat scroll 0 0 transparent; width: 252px;font-size: 13px; font-weight: bold; width: 252px; }
 .precedent:hover,.btn-verifier:hover {
 	color:#9ac447;
 	cursor:pointer;
@@ -572,6 +577,13 @@ body {
 	width: 119px;
 }
 
+.pdf-links ul li{
+	background: url("../images/pdf_icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	height: 25px;
+	list-style: none outside none;
+	margin-bottom: 10px;
+	padding-left: 30px;
+}
 /*
 * Main content - First step 3 ( TV CHAINES)
 */
@@ -868,6 +880,19 @@ img.prix_bare{
 .page-merci .shadow.four.no-margin {
 	margin-right: 0;
 }
+.page-merci .calque { background: url("../images/calque_merci.png") no-repeat scroll 0 0 transparent; height: 110px;list-style: none; color: #FFFFFF; font-family: freeroadregular; margin: auto; width: 542px;}
+.page-merci .calque li{ float: left; width: 145px; text-align: center; }
+.page-merci .calque li.sec{ margin-left: 43px;}
+.page-merci .calque li.thi{ margin-left: 45px;}
+.page-merci .calque li h3{ color: #FFFFFF; font-family: freeroadregular; font-size: 14px;margin-bottom: 4px; margin-top: 10px; }
+.page-merci .calque li img{  }
+.page-merci .calque li p{ font-size: 13px; line-height: 1; }
+.page-merci .sf { font-size: 12px; }
+.page-merci .cwidth { width: 542px; }
+.page-merci .cwidth.three-sqr{ padding-left: 0;padding-right: 0;}
+.page-merci .cwidth.three-sqr div{ width: 167px; }
+.page-merci .cwidth ul li,.page-merci .cwidth.shadow{ font-size: 12px; font-weight: bold; }
+
 .prelevement .automatique,.prelevement .cartebancaire {
     float: left;
     height: 80px;
@@ -1071,8 +1096,36 @@ form .formError .formErrorArrow div {
 #modalMentionLegale > ul{ list-style: none outside none; }
 #modalBesoinDaide h4{ color: rgb(0, 157, 219); font-size: 18px;}
 #modalBesoinDaide .pour-info{ font-size:12px; font-style: italic;}
+#modalpaseli p{ font-size:12px;}
+#modalpaseli p .green-text{ font-size:14px;}
 
 /*
 * Logo tooltip
 */
 .navigation .has-tip { border:medium none; }
+
+/*
+* Ligne déjà activée
+*/
+.ligne-deja-activer .five.columns {
+
+}
+.ligne-deja-activer .seven.columns {
+	padding-left: 43px;
+	padding-top: 29px;
+}
+.ligne-deja-activer .seven.columns span {
+
+}
+.ligne-deja-activer .seven.columns p {
+	font-weight: bold;
+}
+.ligne-deja-activer .misc-custom-1 {
+	font-size: 12px;
+    margin-top: 10px;
+    padding-left: 27px;
+    text-align: left;
+}
+.page-refus-paiement .msg { padding-left: 191px; width: 579px;}
+.page-refus-paiement .back-button { margin: 25px; }
+.page-refus-paiement .cartebancaire .nine strong { color: #a63d44; }

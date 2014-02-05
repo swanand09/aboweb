@@ -37,7 +37,7 @@
         </div>   
        <?php } ?> 
  <div class='column twelve bottom-20 recap-add'>
-        <label class='top-20'><strong>Votre adresse médiaServ est : </strong><a class='mail-link' href='mailto:<?php echo $email_mediaserv."@mediaserv.net"; ?>'><?php echo $email_mediaserv."@mediaserv.net"; ?></a></label>
+        <label class='top-20'><strong>Votre adresse médiaServ est : </strong><span class='green-text'><?php echo $email_mediaserv."@mediaserv.net"; ?></span></label>
  </div>        
     </div>
     <hr class="sexy">
@@ -56,7 +56,7 @@
         <!--back and submit buttom -->
         <div class="row">
           <div class="six column back-button left top-20"><?php echo anchor('mes_coordonnees','Modifier',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Modifier')); ?></div>
-          <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon choix" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
+          <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon choix" name="suivant" class="btn-confirmer rmv-std-btn" title='Etape suivante : paiement'></div> 
         </div>
     </form>
 </div>
