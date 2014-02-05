@@ -123,32 +123,99 @@
                  <?php
                     $prevBouq = "";
                     $countBouq = 0;
+                   
                     $nomBouq = rtrim($nomBouq, ",");
                     if(!empty($bouqTvArr)&&isset($bouqTvArr)){
                            foreach($bouqTvArr as $key=>$val){
-                               foreach($val as $key2=>$val2){
-                                   if($prevBouq!=""&&$prevBouq!=$key2){
-                                       $nomBouq = explode(",", $nomBouq);
-                                       unset($nomBouq[$countBouq]);
-                                       $nomBouq = implode(",",$nomBouq);
-                                       $countBouq++;
+                               foreach($val as $key2=>$val2){                                   
+                                   switch(strtoupper($key2)){
+                                       case "MEGA":
+                                            foreach($bouquet_list["Bouquet"]["MEGA"] as $key3=> $val3){ 
+                                                if(!empty($val3)&&!preg_match('/option/',strtolower($key3))){
+                                                    if($key3!="nombreChaine"){
+                                                           
+                                                        ?>
+                                                          <div class='row'>
+                                                            <h4><?php echo $key3; ?></h4>
+                                                            <ul class='grid bqt no-border'>
+                                                               <?php foreach($val3 as $key4=>$val4){?>
+                                                                <li class='item' data-groups='["mega","giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                       
+                                                               <?php 
+                                                               }
+                                                                if(isset($bouquet_list["Bouquet"]["GIGA"][$key3])){                                                                          
+                                                                   foreach($bouquet_list["Bouquet"]["GIGA"][$key3] as $key5=>$val5){?>
+                                                                       <li class='item' data-groups='["giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val5["img_icon"]; ?>" alt ="<?php echo $val5["nom_chaines"]; ?>" /></li>                  
+                                                                   <?php
+                                                                   }
+                                                                   unset($bouquet_list["Bouquet"]["GIGA"][$key3]);
+                                                                }
+                                                                 if(isset($bouquet_list["Bouquet"]["ULTRA"][$key3])){  
+                                                                     foreach($bouquet_list["Bouquet"]["ULTRA"][$key3] as $key5=>$val5){?>
+                                                                       <li class='item' data-groups='["ultra"]'><img src="<?php echo BASEPATH_STB.$val5["img_icon"]; ?>" alt ="<?php echo $val5["nom_chaines"]; ?>" /></li>                  
+                                                                   <?php
+                                                                   }
+                                                                   unset($bouquet_list["Bouquet"]["ULTRA"][$key3]);
+                                                                 }
+                                                               ?>
+                                                            </ul>
+                                                         </div>
+                                                  <?php
+                                                        
+                                                   }
+                                                }
+                                            }
+                                           
+                                       break;
+                                       case "GIGA":
+                                           foreach($bouquet_list["Bouquet"]["GIGA"] as $key3=> $val3){ 
+                                                if(!empty($val3)&&!preg_match('/option/',strtolower($key3))){
+                                                    if($key3!="nombreChaine"){
+                                                           
+                                                        ?>
+                                                          <div class='row'>
+                                                            <h4><?php echo $key3; ?></h4>
+                                                            <ul class='grid bqt no-border'>
+                                                               <?php foreach($val3 as $key4=>$val4){?>
+                                                                <li class='item' data-groups='["giga","ultra"]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                       
+                                                               <?php 
+                                                               } 
+                                                                if(isset($bouquet_list["Bouquet"]["ULTRA"][$key3])){                                                                          
+                                                                   foreach($bouquet_list["Bouquet"]["ULTRA"][$key3] as $key5=>$val5){?>
+                                                                       <li class='item' data-groups='["ultra"]'><img src="<?php echo BASEPATH_STB.$val5["img_icon"]; ?>" alt ="<?php echo $val5["nom_chaines"]; ?>" /></li>                  
+                                                                   <?php
+                                                                   }
+                                                                   unset($bouquet_list["Bouquet"]["ULTRA"][$key3]);
+                                                                }
+                                                                   
+                                                               ?>
+                                                            </ul>
+                                                         </div>
+                                                  <?php
+                                                   }
+                                                }
+                                            }
+                                       break;
+                                       case "ULTRA":
+                                            foreach($bouquet_list["Bouquet"]["GIGA"] as $key3=> $val3){ 
+                                                if(!empty($val3)&&!preg_match('/option/',strtolower($key3))){
+                                                    if($key3!="nombreChaine"){
+                                                           
+                                                        ?>
+                                                          <div class='row'>
+                                                            <h4><?php echo $key3; ?></h4>
+                                                            <ul class='grid bqt no-border'>
+                                                                <?php foreach($val3 as $key4=>$val4){?>
+                                                                <li class='item' data-groups='["ultra"]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                       
+                                                             <?php 
+                                                              }?>
+                                                            </ul>
+                                                         </div>   
+                                                       <?php
+                                                         }
+                                                }
+                                            }
+                                       break;
                                    }
-                                    foreach($bouquet_list["Bouquet"][strtoupper($key2)] as $key3=> $val3){ 
-                                        if(!empty($val3)&&!preg_match('/option/',strtolower($key3))){
-                                            if($key3!="nombreChaine"){?>
-                                                  <div class='row'>
-                                                    <h4><?php echo $key3; ?></h4>
-                                                    <ul class='grid bqt no-border'>
-                                                       <?php foreach($val3 as $key4=>$val4){?>
-                                                        <li class='item' data-groups='[<?php echo $nomBouq;?>]'><img src="<?php echo BASEPATH_STB.$val4["img_icon"]; ?>" alt ="<?php echo $val4["nom_chaines"]; ?>" /></li>                       
-                                                       <?php 
-                                                       } 
-                                                       ?>
-                                                    </ul>
-                                                 </div>
-                                          <?php }
-                                        }
-                                    }
                                     $prevBouq = $key2;
                                  }
                            }

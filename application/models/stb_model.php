@@ -208,8 +208,17 @@ class Stb_model extends CI_Model
        return $this->maTv;
     }
     
-   
+   public function reformatBouquet($bouquetArr){
+       foreach($bouquetArr as $key=>$val){
+           if($key!="BASIQUE"){
+               foreach($val as $key2=>$val2){
+                   
+               }
+           }
+       }
+   }
 }
+
 
 class retrieveBouquet 
 {

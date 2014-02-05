@@ -407,7 +407,9 @@ class Mon_offre extends MY_Controller {
             if(!empty($bouqTvArr)){
                 $this->load->model('stb_model','stb'); 
                 $this->data["base_url_stb"] = BASEPATH_STB;
-                $this->data["bouquet_list"] = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr));               
+                $bouquetList = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr)); 
+                $this->data["bouquet_list"] =  $bouquetList; 
+                //$this->data["bouqReformat"] = $this->stb->reformatBouquet($bouquetList["Bouquet"]);
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$this->data,true);                   
                 
             }else{

@@ -299,6 +299,9 @@ class MY_Controller extends CI_Controller {
                                 if(!empty($this->produIdCrm["bouquetTv"])&&$this->data["etape"][1]!="check"){
                                     $this->produIdCrm["bouquetTv"] = "";
                                 }
+                                if(!empty($this->produIdCrm["optionTv"])&&$this->data["etape"][1]!="check"){
+                                    $this->produIdCrm["optionTv"] = array();
+                                }
                             }
                         break;  
                         case "BOUQUET_TV":
@@ -698,7 +701,7 @@ class MY_Controller extends CI_Controller {
                         foreach($this->panierVal["promodum2"] as $key2=>$val2){
                             foreach($val2 as $key3=>$val3){
                                 foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
-                                    if($key3==$val4["idCrm"]&&$val4["idCrm"]==$this->optionTv[3]){
+                                    if($key3==$val4["idCrm"]){
                                         unset($this->panierVal["promodum2"][$key2]);
                                         if($val4["Valeurs"]["Type"]=="RECURRENT"){
                                            $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);
@@ -722,9 +725,10 @@ class MY_Controller extends CI_Controller {
                         if($this->panierVal["bouquetTvdum3"]["Valeurs"]["Type"]=="RECURRENT"){
                              $this->getTotal(-$this->panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"]);    
                         }                                                                                    
-                        $this->panierVal["bouquetTvdum3"] = array();                
+                        $this->panierVal["bouquetTvdum3"] = array();     
+                        //$this->produIdCrm["bouquetTv"]  = "";
                     }
-                    if($this->bouquetChoisi[1]=="Ultra"&&!empty($this->panierVal["optionTvdum3"])){
+                    if(!empty($this->panierVal["optionTvdum3"])){
                        foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
                            foreach($this->panierVal["promodum2"] as $key5=>$val5){
                               foreach($val5 as $key6=>$val6){
@@ -738,7 +742,7 @@ class MY_Controller extends CI_Controller {
                             }                          
                          }
                        $this->panierVal["optionTvdum3"] = array(); 
-                       $this->produIdCrm["bouquetTv"]  = "";
+                       
                     }
                 break;
                 case "choixOption":
