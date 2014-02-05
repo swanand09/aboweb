@@ -87,7 +87,7 @@
           <div class='column three'>Date d'expiration</div>
             <div class='column nine'>
               <div class='column two no-padding-left'>
-                <select name='date_expiration_mois'>
+                <select name='date_expiration_mois' id='date_expiration_mois'>
                   <option value='01'>Jan</option>
                   <option value='02'>Fév</option>
                   <option value='03'>Mar</option>
@@ -103,7 +103,7 @@
                 </select>
               </div>
               <div class='column three'>
-                <select name='date_expiration_annee'>
+                <select name='date_expiration_annee' id='date_expiration_annee'>
                   <option value='13'>2013</option>
                   <option value='14'>2014</option>
                   <option value='15'>2015</option>
@@ -131,7 +131,7 @@
       <!---->
      <div class="row">
       <div class="six column back-button left top-20"><?php echo anchor('recapitulatif','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
-      <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon choix" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
+      <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon mode de paiement" title="Confirmer mon mode de paiement" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
     </div>
   </form>
     <!--end form-->

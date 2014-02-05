@@ -132,7 +132,7 @@ class Mon_offre extends MY_Controller {
                     $data["produitDegroupage"] = $produitDegroupage;
                     $data["input1"] = $input1;
                     $data["input2"] = $input2;                
-                    $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'CHOISIR MON FORFAIT');   
+                    $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'CHOISIR MON FORFAIT', 'title'=>'Choisir mon forfait');   
                     $data["choix_forfait"] = $choix_forfait;                    
                     $this->colonneDroite["form_test_ligne"] = $this->load->view("general/form_test_ligne",$data,true);
                     

@@ -79,7 +79,7 @@ $("#redu_facture").click(function(){
     <div class='column six debit_emission'><div id="g1"></div></div><div class='column six debit_reception'><div id="g2"></div></div>
   </div>
 <div>
-<h3 style='margin-top:0px;'>LES SERVICES MEDIASERV <span class='misc-custom-2'><a href='#'><?php echo image('info_icon.png',NULL,array("title"=>"Plus info", "alt"=>"Plus info","class"=>"border-gray")); ?></a></span></h3>
+<h3 style='margin-top:0px;'>LES SERVICES MEDIASERV</h3>
 <ul class='services-mediaserv'>
   <li class='telephone <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]=="true"?"available":"not-available");?>'><span><?php echo image('tel.png');?>T&Eacute;L&Eacute;PHONE</span> <?php echo $msgtel; ?></li>
   <li class='internet <?php echo ($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_ADSL"]=="true"?"available":"not-available");?>'><span><?php echo image('net.png');?>INTERNET</span> <?php echo $msgadsl; ?></li>

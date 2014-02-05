@@ -33,7 +33,7 @@
           
            <!--Addresse-->
           <div class="row">
-            <div class='columns two'><label>Adresse :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='four columns'><input type='text' class='validate[required,maxSize[200]] adresse'  name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
+            <div class='columns two'><label>Adresse :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='four columns'><input type='text' class='validate[required,funcCall[validateAdd]] adresse' maxlength='200' name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
             <div class='columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text'  class='validate[maxSize[64]] adresse_suite' name='adresse_suite_aa' value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" /></div>
           </div>
           
@@ -64,7 +64,7 @@
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
             <div class="columns"><label>Téléphone portable :<span class='has-tip' title='obligatoire'>*</span></label></div>
-            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' /></div>
+            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' maxlength='10'/></div>
             <div class='column end'>
                 <a href='#' class='has-tip' data-width='360' title='Votre numéro de téléphone mobile vous permettra de recevoir par SMS les informations liées à l’évolution de votre activation ainsi que du suivi de votre livraison.'>
                     <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
@@ -72,10 +72,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="columns"><label>Téléphone de bureau :</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="telephone_bureau telephone"></div>
+            <div class="columns"><label>Téléphone de bureau :</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="telephone_bureau telephone" maxlength='10'></div>
           </div>
           <div class="row">
-            <div class="columns"><label>Téléphone du domicile :</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="telephone_domicile telephone"></div>
+            <div class="columns"><label>Téléphone du domicile :</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="telephone_domicile telephone" maxlength='10'></div>
           </div>
         </div>
       <!--adresse de facturation-->
@@ -268,7 +268,7 @@
 
           <!--back and submit buttom -->
           <div class="six custom-column back-button left"><?php echo anchor('mon_offre','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
-          <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn"></div>
+          <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn" title="Etape suivante : voir le récapitulatif"></div>
         </form>
 </div>
 

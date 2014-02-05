@@ -45,9 +45,9 @@
 <!--HEADER-->
   <header class='row header'>
     <div class='three columns'><h1 class='main-title'>SOUSCRIPTION EN LIGNE</h1></div>
-    <div class='three columns service-client text-center'><?php echo image('service_client.png',NULL,array("title"=>"Service client - 0811 57 57", "alt"=>"Numéro de téléphone")); ?></div>
+    <div class='three columns service-client text-center'><?php echo image('service_client.png',NULL,array("title"=>"Service client - 0811 57 57 57", "alt"=>"Numéro de téléphone")); ?></div>
 <!--    <div class='three columns chat last-2'> Une question ?<span>CHATER AVEC MOI</span></div>-->
-    <div class='three columns end rapeler last-2'><a href='#' data-reveal-id="modalBesoinDaide">Besoin d'aide ?<span>VOUS FAIRE RAPPELER</span></a></div>
+    <div class='three columns end rapeler last-2'><a href='#' data-reveal-id="modalBesoinDaide" title="Vous faire rappeler gratuitement">Besoin d'aide ?<span>VOUS FAIRE RAPPELER</span></a></div>
   </header>
   <!--END OF HEADER-->
 
@@ -273,6 +273,16 @@
     <a class="close-reveal-modal">&#215;</a>
   </div>
   <!--end of Besoin d'aide-->
+
+  <!--Modal for invalid numbet-->
+  <div id="modalpaseli" class="reveal-modal medium">
+  <p>
+  <strong>VOTRE LIGNE <span class='green-text'>05 96 71 91 65</span> N'EST PAS ENCORE ÉLIGIBLE À NOS SERVICES.<br/><br/>
+  VOUS POUVEZ CONTACTER NOTRE SERVICE COMMERCIAL POUR PLUS D'INFORMATIONS.</strong>
+  </p>
+  <a class="close-reveal-modal">&#215;</a>
+  </div>
+  <!-- End of modal-->
   
   <!-- Included JS Files (Compressed) -->
    <?php       
