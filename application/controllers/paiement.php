@@ -4,8 +4,7 @@ class Paiement extends MY_Controller {
 	
     public function __construct()
     {
-        parent::__construct();
-        $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib'); 
+        parent::__construct();        
     }  
     
     public function index()
@@ -410,7 +409,11 @@ class Paiement extends MY_Controller {
         }
        
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
-       redirect('merci');
+       if($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701){
+           redirect('refus_de_paiement');
+       }else{
+            redirect('merci');       
+       }
     }
 }
 /* End of file paiement.php */

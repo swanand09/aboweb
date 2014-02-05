@@ -218,6 +218,22 @@ class MY_Controller extends CI_Controller {
                             ->build('page',$this->data);
         }
         
+         public function controller_refus_vue()
+        {
+             $this->data["pageid"] ="page-etape-4";
+            $this->data["etapes_url"]    = array("mon_offre","mes_coordonnees","recapitulatif","#");
+            $this->data["allow"]    = array("allowed","allowed","allowed","allowed");
+            $this->data["colonneDroite"] = $this->colonneDroite;           
+            $this->data["contenuGauche"] = $this->contenuGauche;
+            $this->template
+                            ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
+                            ->title('title', 'Refus de paiement')
+                            ->set_partial('contenu_gauche', 'refus/refus')
+                            ->set_partial('contenu_droit', 'general/module_recap')    
+                            ->build('page',$this->data);
+        }
+        
+        
         public function majPanier($prodArr)
         {
             $this->controller_verifySessExp()? redirect('mon_offre'):"";

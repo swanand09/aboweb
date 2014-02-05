@@ -29,17 +29,18 @@
             <ul>
               <li class='left'>Votre numéro de contrat: <span class='green-text'>RE123456</span></li>
               <li class='left mleft35'>Votre numéro de client: <span class='green-text'>REP123456</span></li>
-              <li class='clear'>Votre numéro de téléphone: <span class='green-text'>02 67 10 11 12</span></li>
-              <li>Votre email Mediaserv: <span class='green-text'>lahoupette@mediaserv.net</span></li>
+              <li class='clear'>Votre numéro de téléphone: <span class='green-text'><?php echo $this->session->userdata("telephone_domicile"); ?></span></li>
+              <li>Votre email Mediaserv: <span class='green-text'><?php echo $this->session->userdata("email_mediaserv")."@mediaserv.net"; ?></span></li>
             </ul>
           </div>
         </div>
         
         <div class="row">
           <div class='column cwidth twelve shadow bottom-20 p30all'>
-            <span class='green-text'>Vous avez soucrit par prélèvement automatique.</span></br>
-            Afin de compléter votre dossier, veuillez renvoyer les documents ci-dessous <br/>
-            à l'adresse suivante : MEDIASERV – CS 41077 97495 STE CLOTILDE CEDEX
+             <?php echo ($moyen_paiement=="PR")?"<span class='green-text'>Vous avez soucrit par prélèvement automatique.</span><br /> Afin de compléter votre dossier, veuillez renvoyer les documents ci-dessous <br/>
+            à l'adresse suivante : MEDIASERV – CS 41077 97495 STE CLOTILDE CEDEX":"<span class='green-text'>Vous avez valdé votre commande par Carte Bancaire. </span><br />Vous avec validé votre commande par Carte Bancaire
+Afin de compléter votre dossier, veuillez vous rendre dans l'espace Mediaserv le plus proche de chez vous muni des pièces indiquées ci-dessous: ";?>
+           
             <ul class='no-margin-bottom top-10'>
               <li>Une photocopie de votre pièce d’identité</li>
               <li>Une photocopie d’une facture récente France Télécom</li>
