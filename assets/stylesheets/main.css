@@ -135,8 +135,10 @@ hr.sexy {
 	background: url("../images/confirmer_btn.png") no-repeat scroll 0 0 transparent;
     color: #FFFFFF;
     height: 45px;
-    width: 233px;
+    width: 266px;
 }
+#frm-paiement .btn-confirmer { text-align: left; }
+
 .btn-confirmer:hover {
 	cursor: pointer;
 }
@@ -797,6 +799,9 @@ img.prix_bare{
 #mes-coordonnees input.ville { width: 180px; } */
 /* #mes-coordonnees input.comp_numero { width: 153px; } */
 #mes-coordonnees input.voie { width: 227px; }
+.confirm-loi p { font-size: 11px; }
+
+
 .facturepapier .promo { color:gray; text-decoration: line-through;}
 /*
 * Main content - Mon recapitulatif
