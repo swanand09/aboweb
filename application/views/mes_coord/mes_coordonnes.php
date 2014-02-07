@@ -261,6 +261,9 @@
                        }
                     } 
               ?>
+              <div class="column twelve top-20 confirm-loi" >
+                <p>Conformément à la loi informatique et libertés du 6/01/1978, les informations recueillies et transmises dans le cadre de la présente souscription peuvent donner lieu à l'exercice du droit d'accès et de rectification auprès de Mediaserv</p>
+              </div>
           </div>
           
           <!-- Sexy line -->

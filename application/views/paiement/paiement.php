@@ -123,10 +123,6 @@
             </div>
           <div class='column three top-10'>Cryptogramme</div><div class='column three end top-10'><input class='validate[required,custom[onlyNumberSp]]' type='text' name='cryptogramme' id='cryptogramme'/></div>
         </div>
-
-        <div class='column twelve top-20'>
-          <p>Le remboursement du dépôt de garantie se fera lors de la résiliation de votre abonnement. Si vous ne voulez pas payer de dpôt de garantie, <a href='#'>modifiez votre commande</a></p>
-        </div>
       </div>
       <!---->
      <div class="row">
