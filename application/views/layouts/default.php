@@ -54,7 +54,7 @@
   <!--NAV-->
   <nav class='navigation'>
     <div class='row'>
-      <div class='twelve columns'><?php echo image('logo_mediaserv.png',NULL,array("title"=>"Souscription en ligne", "alt"=>"Mediaserv","class"=>"has-tip")); ?></div>
+      <div class='twelve columns'><?php echo image('logo_mediaserv.png',NULL,array("title"=>"Souscription en ligne", "alt"=>"Mediaserv")); ?></div>
     </div>
   </nav>
   <!--END OF NAV-->
