@@ -52,9 +52,9 @@ Afin de compléter votre dossier, veuillez vous rendre dans l'espace Mediaserv l
         </div>
         <div class='row bottom-20'>
           <div class="column cwidth three-sqr">
-            <a href='#'><div class='column shadow four text-center'><h4>Mon espace client</h4><?php echo image('contenu/mon_espace_client.png')?></div></a>
+            <a href='http://www.mediaserv.com/guadeloupe/souscrire.html'><div class='column shadow four text-center'><h4>Mon espace client</h4><?php echo image('contenu/mon_espace_client.png')?></div></a>
             <a href='http://www.mediaserv.com/guadeloupe/ma-messagerie.html'><div class='column shadow four text-center'><h4>Mon webmail</h4><?php echo image('contenu/mon_webmail.png')?></div></a>
-            <a href='http://www.mediaserv.com/guadeloupe/souscrire/par-telephone.html'><div class='column shadow four text-center no-margin'><h4>Assistance</h4><?php echo image('contenu/assistance.png')?></div></a>
+            <a href='http://www.mediaserv.com/guadeloupe/faq/souscription-et-abonnement.html'><div class='column shadow four text-center no-margin'><h4>Assistance</h4><?php echo image('contenu/assistance.png')?></div></a>
             </div>
         </div>
     </section>
