@@ -123,7 +123,12 @@ class MY_Controller extends CI_Controller {
             //$this->idParcours = $this->session->userdata("idParcours");
           $this->context =  $this->session->userdata("context");
           if(empty($this->context)){
-             //echo "<script>alert('pas de session');</script>";
+            
+             //on verifie si la ligne est deja active error 202
+              $num_tel = $this->session->userdata("num_tel");
+              if(!empty($num_tel)){
+                  return false;
+              }
               $this->session->destroy();
              return true;
           }else{ //echo $this->context;exit;
@@ -163,6 +168,23 @@ class MY_Controller extends CI_Controller {
                             ->build('page',$this->data);
         }
      
+        //ligne deja active error 202
+        public function controller_ligne_deja_active_vue()
+        {
+            $this->data['message']       = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+            $this->data["pageid"]        = "page-etape-1";
+            $this->data["etapes_url"]    = array("#","#","#","#");
+            $this->data["allow"]    = array("allowed","not-allowed","not-allowed","not-allowed");
+            $this->data["colonneDroite"] = $this->colonneDroite;           
+            $this->data["contenuGauche"] = $this->contenuGauche;
+            $this->template
+                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
+                             ->title('title', 'Mon Offre - ligne déja active')
+                             ->set_partial('contenu_gauche', 'monoffre/ligne_deja_active')
+                             ->set_partial('contenu_droit', 'general/module_recap')    
+                             ->build('page',$this->data);
+        }
+        
         public function controller_mes_coord_vue()
         {
             $this->data["pageid"] ="page-etape-2";

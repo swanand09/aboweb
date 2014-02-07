@@ -101,13 +101,17 @@ class Mon_offre extends MY_Controller {
             if(!empty($result))
             {
                 $data["result"] = $result;               
-               if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"]))
+               if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])||$result["interrogeEligibiliteResult"]["Erreur"]["NumError"]==202)
                {                  
                     $data["error"]  = false;
                     $this->session->set_userdata("resultProd",""); //flux de produits
                     $this->session->set_userdata("num_tel",$num_tel);                   
                     $this->session->set_userdata('eligible_tv',$result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]);                    
-                    $this->session->set_userdata('context',$result["interrogeEligibiliteResult"]["Context"]);
+                    if(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+                       $this->session->set_userdata('context',$result["interrogeEligibiliteResult"]["Context"]);
+                    }else{
+                       $this->session->set_userdata('context',""); 
+                    }
                     
                     $eligDegPart  = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_degroupage_partiel"];
                     $eligDegTotal = $result["interrogeEligibiliteResult"]["Ligne"]["Eligible_dégroupage_total"];
@@ -135,19 +139,51 @@ class Mon_offre extends MY_Controller {
                     $choix_forfait = array('class'=> 'rmv-std-btn btn-forward','name' => 'choix_forfait','id' => 'choix_forfait','type' => 'submit','value' => 'CHOISIR MON FORFAIT', 'title'=>'Choisir mon forfait');   
                     $data["choix_forfait"] = $choix_forfait;                    
                     $this->colonneDroite["form_test_ligne"] = $this->load->view("general/form_test_ligne",$data,true);
+                  
+                    $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/num_eligib_info",$data,true);
                     
+                }else if($result["interrogeEligibiliteResult"]["Erreur"]["NumError"]==201){
                     
                 }
             }
       }  
-      $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/num_eligib_info",$data,true);     
+          
       $this->session->set_userdata("htmlContent_testeligib",$this->contenuGauche["contenu_html"]);      
       $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
       if($from_sitebox)
       {
          redirect("mon_offre");
       }
-      //echo json_encode(array("htmlContent"  => $htmlContent,"contenuDroit1" => $contenuDroit1,"contenuDroit2" => $contenuDroit2,"contenuDroit3" => $contenuDroit3));
+          
+    //reintialiser
+     $this->produIdCrm   =   array(
+                                    "forfait"       => "",
+                                    "degroupage"    => "",
+                                    "portabilite"   => "",
+                                    "iad"           => "",
+                                    "television"    => "",
+                                    "bouquetTv"     => "",
+                                    "optionTv"      => array(),
+                                    "facturation"   => "",
+            );     
+     $this->session->set_userdata("produIdCrm",$this->produIdCrm); 
+     $this->panierVal       = array(
+                                    "degroupagedum1"    => array(),
+                                    "portabilitedum1"   => array(),
+                                    "forfaitdum1"       => array(),
+                                    "promodum2"         => array(),
+                                    "bouquetTvdum3"     => array(),
+                                    "optionTvdum3"      => array(),
+                                    "voddum3"           => array(),
+                                    "locaEquipdum4"     => array(),
+                                    "decodEquipdum4"    => array(),
+                                    "cautiondum5"       => array(),
+                                    "facturedum6"       => array(),
+                                    "oneshotdum7"       => array()
+            );    
+     $this->session->set_userdata("panierVal",$this->panierVal);
+         
+      
      echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>"Le web service ne renvoie aucunes valeurs pour ce numéro "));
     }
     
@@ -165,8 +201,16 @@ class Mon_offre extends MY_Controller {
        $consv_num_tel = $this->input->post('consv_num_tel'); 
        $this->session->set_userdata("consv_num_tel",$consv_num_tel);
        
+        $this->prevState = $this->session->userdata("prevState");
+       
        //connection à la fonctionalité recupere_info du wdsl
        $context = $this->session->userdata('context');
+       if(empty($context)){
+           // error 202 ligne deja activé   
+            $this->colonneDroite["form_test_ligne"] = $this->prevState[1]["form_test_ligne"];
+            echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>202));   
+            exit;
+       }
        //verifie si on a deja les flux de produit
        $resultProd = $this->session->userdata("resultProd");
        if(empty($resultProd)){
@@ -222,7 +266,7 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata('iad',$iadArr);
         $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
-        $this->prevState = $this->session->userdata("prevState");
+       
         $this->colonneDroite["form_test_ligne"] = $this->prevState[1]["form_test_ligne"];
        
         if($this->colonneDroite["forfait_dummy1"]=="")
@@ -232,12 +276,17 @@ class Mon_offre extends MY_Controller {
             $this->colonneDroite["forfait_dummy1"] = $this->load->view("general/forfait_dummy1",$data,true);
         }      
         
-        
 
        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
-      echo json_encode(array($this->contenuGauche,$this->colonneDroite));   
+      echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>""));   
        
     } 
+    
+    public function ligne_active()
+    {
+        $this->data["userdata"] = $this->session->all_userdata();  
+        return $this->controller_ligne_deja_active_vue();   
+    }
     
     public function prevState($page='')
     {
@@ -333,6 +382,23 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata('totalParMois',"");
          $this->session->set_userdata('total1erFacture',"");
          $this->session->set_userdata('total2emeFacture',"");
+         //reinitialiser
+         $resultProd = $this->session->userdata("resultProd");
+         $this->panierVal       = array(
+                                        "degroupagedum1"    => array(),
+                                        "portabilitedum1"   => array(),
+                                        "forfaitdum1"       => array(),
+                                        "promodum2"         => array(array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])),
+                                        "bouquetTvdum3"     => array(),
+                                        "optionTvdum3"      => array(),
+                                        "voddum3"           => array(),
+                                        "locaEquipdum4"     => array(),
+                                        "decodEquipdum4"    => array(),
+                                        "cautiondum5"       => array(),
+                                        "facturedum6"       => array(),
+                                        "oneshotdum7"       => array()
+                );    
+         $this->session->set_userdata("panierVal",$this->panierVal);
          
          $this->iad = $this->session->userdata("iad");
          $this->data["iad"] = $this->iad;        

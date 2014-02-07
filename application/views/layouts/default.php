@@ -277,7 +277,7 @@
   <!--Modal for invalid numbet-->
   <div id="modalpaseli" class="reveal-modal medium">
   <p>
-  <strong>VOTRE LIGNE <span class='green-text'>05 96 71 91 65</span> N'EST PAS ENCORE ÉLIGIBLE À NOS SERVICES.<br/><br/>
+  <strong>VOTRE LIGNE <span class='green-text' id="modTel">05 96 71 91 65</span> N'EST PAS ENCORE ÉLIGIBLE À NOS SERVICES.<br/><br/>
   VOUS POUVEZ CONTACTER NOTRE SERVICE COMMERCIAL POUR PLUS D'INFORMATIONS.</strong>
   </p>
   <a class="close-reveal-modal">&#215;</a>

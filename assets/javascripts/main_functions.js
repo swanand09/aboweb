@@ -34,14 +34,16 @@ var preload = function(){
                           //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                           $.unblockUI(); 
                          if(data.error==true){
-                            alert(data.msg); 
+                            //alert(data.msg); 
+                            $('#modalpaseli').reveal();
+                            $('#modTel').empty().prepend(num_tel);
                               return false;
-                          }
+                          }/*
                           if(where=="colonne droite"){
                               preload();
                                $(location).attr('href',"mon_offre");
                                return false;
-                          }
+                          }*/
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
                           $("#recap_contenu").empty().prepend(data[1].form_test_ligne); 
                          
@@ -62,10 +64,12 @@ var preload = function(){
                 if($("#redu_facture").is(":checked"))
                 {
                     redu_facture = "true";
+                    console.log("test1");
                 }
                 if($("#consv_num_tel").is(":checked"))
                 {
                     consv_num_tel = "true";
+                    console.log("test2");
                 }
                 $.post(
                     forfait,
@@ -73,22 +77,28 @@ var preload = function(){
                         redu_facture : redu_facture,
                         consv_num_tel : consv_num_tel
                      },
-                    function(data){
-                      $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                      //alert(data[0].contenu_html);
-                      var key, count = 0;
-                      for(key in data[1]) {
-                          if(count==0) {
-                            $("#recap_contenu").empty();      
-                            $("#total_mois").empty(); 
-                          }
-                         // alert(key);
-                          $("#recap_contenu").append(data[1][key]);
-                          count++;
-                      }
-                     
-                      $.unblockUI();     
-                      $( "html,body" ).scrollTop(0);
+                    function(data){                        
+                        if(data.error==202){
+                              console.log("test4");
+                             $(location).attr('href',"mon_offre/ligne_active");
+                        }else{
+                               console.log("test3");
+                            $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
+                            //alert(data[0].contenu_html);
+                            var key, count = 0;
+                            for(key in data[1]) {
+                                if(count==0) {
+                                  $("#recap_contenu").empty();      
+                                  $("#total_mois").empty(); 
+                                }
+                               // alert(key);
+                                $("#recap_contenu").append(data[1][key]);
+                                count++;
+                            }
+
+                            $.unblockUI();     
+                            $( "html,body" ).scrollTop(0);
+                        }
                     },"json"
                   );   
               return false;

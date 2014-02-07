@@ -1,5 +1,5 @@
 <?php
-if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+if(!empty($result)&&(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])||$result["interrogeEligibiliteResult"]["Erreur"]["NumError"]==202)){
 //if(!empty($result)){
 $debit_emis = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_emmission"],2);
 $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_reception"],2);
@@ -53,7 +53,7 @@ $("#redu_facture").click(function(){
 <?php
 }
     if(!empty($num_tel)){
-        if(!empty($result)&&empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])){
+        if(!empty($result)&&(empty($result["interrogeEligibiliteResult"]["Erreur"]["ErrorMessage"])||$result["interrogeEligibiliteResult"]["Erreur"]["NumError"]==202)){
          //if(!empty($result))      
              $msgtv = " Vous êtes éligible à l’ensemble de nos offres TV.";
              if($result["interrogeEligibiliteResult"]["Ligne"]["Eligible_televison"]=="false"&&$result["interrogeEligibiliteResult"]["Ligne"]["Debit_tv_ok"]=="false"){
