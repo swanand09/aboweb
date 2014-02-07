@@ -37,7 +37,7 @@
         </div>   
        <?php } ?> 
  <div class='column twelve bottom-20 recap-add'>
-        <label class='top-20'><strong>Votre adresse médiaServ est : </strong><span class='green-text'><?php echo $email_mediaserv."@mediaserv.net"; ?></span></label>
+        <div class='top-20'><strong>Votre adresse médiaServ est : </strong><span class='green-text'><?php echo $email_mediaserv."@mediaserv.net"; ?></span></div>
  </div>        
     </div>
     <hr class="sexy">
