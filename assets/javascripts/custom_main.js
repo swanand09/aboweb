@@ -122,19 +122,14 @@ $(document).on('click','#redu_facture',function(){
 	/*--------------------------------
 	*  Change focus after prefix
 	---------------------------------*/
-	$('#ligne_prefix').keyup(function(e){
-		if(this.value.length > 3 && e.keyCode != 8 && e.keyCode != 46 )
-		{
-			$('#ligne_sufix').focus();
-		}
-	});
-
-	$('#codepostal').keyup(function(e){
-		if(this.value.length > 4 && e.keyCode != 8 && e.keyCode != 46 )
-		{
-			$('#ville').focus();
-		}
-	});
+	autofocus('#ligne_prefix',3,'#ligne_sufix');
+ 	autofocus('#codepostal',3,'#ville');
+ 	autofocus('#iban1',3,'#iban2');
+ 	autofocus('#iban2',3,'#iban3');
+ 	autofocus('#iban3',3,'#iban4');
+ 	autofocus('#iban4',3,'#iban5');
+ 	autofocus('#iban5',3,'#iban6');
+ 	autofocus('#iban6',3,'#iban7');
 	/*--------------------------------
 	*  Page paiement toggle
 	---------------------------------*/
@@ -424,5 +419,27 @@ var validateAdd = function( field, rules, i, options ){
 		if(!adrRegex.test(adr)) {
 			return 'Votre adresse n\'est pas valide';
 		}
+	}
+}
+
+
+//AutoChange focus
+var autofocus = function( initialSelector,length,nextSelector){
+	$(initialSelector).keyup(function(e){
+		if(this.value.length > length && e.keyCode != 8 && e.keyCode != 46 )
+		{
+			$(nextSelector).focus();
+		}
+	});
+}
+
+//Validate Expiration date
+var validateExpDate = function( field, rules, i, options ){
+	var today = new Date();
+	var mm = today.getMonth()+1;
+	var sm = +(field.val());
+
+	if( sm < mm ) {
+			return "La date n'est pas valide";
 	}
 }
