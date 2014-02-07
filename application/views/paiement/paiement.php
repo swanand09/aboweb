@@ -87,7 +87,7 @@
           <div class='column three'>Date d'expiration</div>
             <div class='column nine'>
               <div class='column two no-padding-left'>
-                <select name='date_expiration_mois' id='date_expiration_mois'>
+                <select name='date_expiration_mois' id='date_expiration_mois' class='validate[required,funcCall[validateExpDate]]>
                   <option value='01'>Jan</option>
                   <option value='02'>Fév</option>
                   <option value='03'>Mar</option>
