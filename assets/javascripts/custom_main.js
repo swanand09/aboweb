@@ -8,6 +8,13 @@ $(function () {
 //Populate year in expiration date - Payment page
 $('#date_expiration_annee').html(populateYear());
 
+//open CGU link
+$('#cgu-link').click(function(){
+	if($(this).is(":checked"))
+  	{
+		window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS.pdf','CGU');
+	}
+});
 
 /***
  * @modif reddy 2014 01 28
