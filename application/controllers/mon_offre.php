@@ -264,6 +264,7 @@ class Mon_offre extends MY_Controller {
       //  $this->colonneDroite["total_par_mois"]  = $this->load->view("general/total_mois",$data,true);   
         $data["iadArr"] = $iadArr;
         $this->session->set_userdata('iad',$iadArr);
+        $data["prefixNum"] = substr($this->session->userdata("num_tel"),0,4);
         $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
        
@@ -296,7 +297,10 @@ class Mon_offre extends MY_Controller {
         $redu_facture = $this->session->userdata("redu_facture");
         $consv_num_tel = $this->session->userdata("consv_num_tel");
         $resultProd = $this->session->userdata("resultProd");
-        
+        $promodum2Arr = "";
+        if(!empty($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])){
+          $promodum2Arr = array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]);
+        }
          $this->produIdCrm   =   array(
                                     "forfait"       => "",
                                     "degroupage"    => "",
@@ -320,7 +324,7 @@ class Mon_offre extends MY_Controller {
                                         "degroupagedum1"    => array(),
                                         "portabilitedum1"   => array(),
                                         "forfaitdum1"       => array(),
-                                        "promodum2"         => array(array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])),
+                                        "promodum2"         => array($promodum2Arr),
                                         "bouquetTvdum3"     => array(),
                                         "optionTvdum3"      => array(),
                                         "voddum3"           => array(),
@@ -384,11 +388,15 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata('total2emeFacture',"");
          //reinitialiser
          $resultProd = $this->session->userdata("resultProd");
+         $promodum2Arr = "";
+         if(!empty($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])){
+             $promodum2Arr = array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]);
+         }
          $this->panierVal       = array(
                                         "degroupagedum1"    => array(),
                                         "portabilitedum1"   => array(),
                                         "forfaitdum1"       => array(),
-                                        "promodum2"         => array(array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])),
+                                        "promodum2"         => array($promodum2Arr),
                                         "bouquetTvdum3"     => array(),
                                         "optionTvdum3"      => array(),
                                         "voddum3"           => array(),

@@ -409,7 +409,7 @@ class Paiement extends MY_Controller {
         }
        
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
-       if($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701){
+       if($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==820||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701){
            redirect('refus_de_paiement');
        }else{
             redirect('merci');       

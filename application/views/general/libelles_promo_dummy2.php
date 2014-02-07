@@ -1,7 +1,7 @@
 <div id="promo">
 <?php 
 $panierVal = $this->session->userdata("panierVal");
-if(!empty($panierVal["promodum2"])){ ?>
+if(!empty($panierVal["promodum2"][0])){ ?>
 <!--PROMOTION-->
 <div class="forpro promotion">   
   <h3>Promotion <span class="right"><a href="#">Modifier</a></span></h3>
