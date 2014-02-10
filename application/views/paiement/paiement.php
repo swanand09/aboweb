@@ -23,16 +23,33 @@
           <div class="row">
               <div class="column twelve"><label><input checked="checked" type="checkbox" name="adresse_identique" value="1" id="show-hide-adresse">Mon adresse de paiement est identique à mon adresse de facturation. </label></div>
           </div>
-          <div id='adresse-paiement' class='hide'>           
+          <div id='adresse-paiement' class='hide top-20'>
+            <!-- Civilité-->
+             <div class='row civilite-row'>
+               <div class='columns bottom-10 two'><label>Civilité :<span class='has-tip' title='obligatoire'>*</span></label></div>
+               <div class='columns bottom-10 end'>
+                 <label class='left'><input class='validate[required]' type='radio' name='civilite_pa' value='M.'/>Monsieur</label>
+                 <label class='left'><input class='validate[required]' type='radio' name='civilite_pa' value='Mme.'/>Madame</label>
+               </div>
+             </div>
+             <!-- Nom -->
+             <div class='row'>
+               <div class='columns two'><label>Nom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] nom' name='nom_pa' maxlength='30'/></div>
+             </div>
+             <!--Prénom -->
+             <div class='row'>
+               <div class='columns two'><label>Prénom :<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] prenom' name='prenom_pa' maxlength='30'/></div>
+             </div>
             <!--Numéro & Complément numéro & Type de voie-->
             <div class='row'>
               <div class='columns two'><label>Numéro :</label></div><div class='two columns'><input type='text' class='numero' name='numero_pa' /></div>
-              <div class='nfirst columns three'><label>Complément numéro :</label></div><div class='three columns end'><input type='text' class='comp_numero' name='comp_numero_pa' /></div>              
+              <div class='nfirst columns two'><label>Complément numéro :</label></div><div class='two columns end'><input type='text' class='comp_numero' name='comp_numero_pa' /></div>              
+              <div class="columns two"><label>Type de Voie :</label></div><div class="columns two"><input type="text" value="" name="type_voie_pa" class="type_voie validate[funcCall[validateVoieEntryList]]"></div>
             </div>
             <!--Addresse & Addresse suite-->
             <div class='row'>
-              <div class='columns two'><label>Adresse :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse' name='voie_pa' /></div>
-              <div class='nfirst columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text' class='validate[maxSize[64]] adresse_suite' name='adresse_suite_pa' /></div>
+              <div class='columns two'><label>Adresse :</label></div><div class='four columns'><input type='text' class='validate[required,funcCall[validateAdd]] adresse' name='voie_pa' maxlength='64'/></div>
+              <div class='nfirst columns two'><label>Adresse suite :</label></div><div class='four columns'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] adresse_suite' name='adresse_suite_pa' maxlength='64' /></div>
             </div>
             <!--Code postal & Ville -->
             <div class='row'>
