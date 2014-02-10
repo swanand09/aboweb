@@ -938,8 +938,11 @@ img.prix_bare{
 }
 .degroupage {
 	color:#000;
-	font-size: 0.9em;
+	font-size: 0.8em;
 }
+.degroupage .left{ width:60%;}
+.degroupage .right{ width:40%;}
+
 .forpro h3 {
 	color: #FFFFFF;
     font: 1em freeroadregular;
