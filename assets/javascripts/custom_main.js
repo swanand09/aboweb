@@ -443,7 +443,7 @@ var validateAdd = function( field, rules, i, options ){
 	var adrRegex = /^[a-z0-9\s-.]+$/i;
 	if( field.val().length > 0 ) {
 		if(!adrRegex.test(adr)) {
-			return 'Votre adresse n\'est pas valide';
+			return 'Ce champ n\'est pas valide';
 		}
 	}
 }
