@@ -307,11 +307,14 @@ var populateYear = function ()
 	var currentYear = (new Date).getFullYear();
 	var options="";
 	var year;
+	var twoDigit;
 	
 	for( var i=0; i<=15; i++ )
 	{
 		year = currentYear+i;
-		options += "<option>"+year+"</option>";
+		twoDigit = year + "";
+		twoDigit = twoDigit.substr(twoDigit.length - 2);
+		options += "<option value='"+twoDigit+"'>"+year+"</option>";
 	}
 	return options;
 }
