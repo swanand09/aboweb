@@ -12,9 +12,28 @@ $('#date_expiration_annee').html(populateYear());
 $('#cgu-link').click(function(){
 	if($(this).is(":checked"))
   	{
-		window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS.pdf','CGU');
+		if($(this).hasClass( "RE" ))
+		{
+			window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS-RE.pdf','CGU',"height=600,width=800");	
+		}
+		else
+		{
+			window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS.pdf','CGU',"height=600,width=800");	
+		}
+
 	}
 });
+
+$('#grille-tarifaire').click(function(){
+	window.open(this.href,'Grille tarifaire',"height=600,width=800");
+	return false;
+});
+
+$('#condition-tarifaire').click(function(){
+	window.open(this.href,'Condition tarifaire',"height=600,width=800");
+	return false;
+});
+
 
 /***
  * @modif reddy 2014 01 28

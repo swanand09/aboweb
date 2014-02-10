@@ -48,11 +48,11 @@ if(!empty($iadArr)){
   <div class="column twelve">
     <ul class="pdf top-20">
         <?php if($prefixNum!="0262"){ ?>
-      <li><a href="http://www.mediaserv.com/fileadmin/contenus/box/faq/flyers/GP_LR.pdf" target="_blank">Grille Tarifaire</a></li>
-      <li><a href="http://www.mediaserv.com/fileadmin/contenus/box/pdf/conditions-tarifaires-AG.pdf" target="_blank">Conditions tarifaires, Tarifs hors forfait, Tarifs N° spéciaux</a></li>
+      <li><a id="grille-tarifaire" href="http://www.mediaserv.com/fileadmin/contenus/box/faq/flyers/GP_LR.pdf" target="_blank">Grille Tarifaire</a></li>
+      <li><a id="condition-tarifaire" href="http://www.mediaserv.com/fileadmin/contenus/box/pdf/conditions-tarifaires-AG.pdf" target="_blank">Conditions tarifaires, Tarifs hors forfait, Tarifs N° spéciaux</a></li>
         <?php }else{ ?>
-      <li><a href="http://www.mediaserv.com/fileadmin/contenus/box/faq/flyers/RU_LR.pdf" target="_blank">Grille Tarifaire</a></li>
-      <li><a href="http://www.mediaserv.com/fileadmin/contenus/box/pdf/conditions-tarifaires-RE.pdf" target="_blank">Conditions tarifaires, Tarifs hors forfait, Tarifs N° spéciaux</a></li>
+      <li><a id="grille-tarifaire" href="http://www.mediaserv.com/fileadmin/contenus/box/faq/flyers/RU_LR.pdf" target="_blank">Grille Tarifaire</a></li>
+      <li><a id="condition-tarifaire" href="http://www.mediaserv.com/fileadmin/contenus/box/pdf/conditions-tarifaires-RE.pdf" target="_blank">Conditions tarifaires, Tarifs hors forfait, Tarifs N° spéciaux</a></li>
         <?php } ?>
     </ul>
   </div>
