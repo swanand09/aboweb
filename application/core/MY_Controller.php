@@ -262,6 +262,11 @@ class MY_Controller extends CI_Controller {
             $produit =  $this->session->userdata("produit"); 
             empty($produit)?redirect('mon_offre'):"";
             $this->data["etape"] = $prodArr["etape"];
+            
+            if(isset($prodArr["parainageId"])){
+                $this->data["parainageId"] = $prodArr["parainageId"];
+            }
+            
             $this->panierVal  = $this->session->userdata("panierVal");
             $this->produIdCrm = $this->session->userdata("produIdCrm");
             foreach($produit as $key=>$val){
@@ -352,7 +357,7 @@ class MY_Controller extends CI_Controller {
                                     $this->procDummy(array("dummyArr"=>$dummyAMaj));
                                     //mettre en session les id crm
                                     $this->produIdCrm["bouquetTv"] = $this->bouquetChoisi[4];
-                                    
+                                    $this->produIdCrm["optionTv"]  = array();
                                 }
                             }
                         break;
@@ -698,7 +703,12 @@ class MY_Controller extends CI_Controller {
             //dummy2
             $this->colonneDroite["libelles_promo_dummy2"] = $this->load->view("general/libelles_promo_dummy2",$this->data,true);        
             //dummy3
-            $this->colonneDroite["options_dummy3"]    = $this->load->view("general/options_dummy3",$this->data,true);        
+            $this->colonneDroite["options_dummy3"]    = $this->load->view("general/options_dummy3",$this->data,true);   
+            
+           if(isset($this->data["parainageId"])&&!empty($this->data["parainageId"])){
+               $this->colonneDroite["parrainage"]    = $this->load->view("general/parrainage",$this->data,true);   
+           }
+            
             //dummy4
             $this->colonneDroite["location_equipements_dummy4"]    = $this->load->view("general/location_equipements_dummy4",$this->data,true);         
              //dummy5           

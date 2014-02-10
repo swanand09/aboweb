@@ -66,7 +66,7 @@
             <div class="column two"><label>Titulaire</label></div>
             <div class="column five end"><input type="text" name='titulaire' class="validate[required]" id="titulaire" maxsize = "60"></div>
           </div>
-          <div class="row"><div class='column twelve'><label class='autorise'><input type="checkbox" name="autorise"><span class='left'>J'autorise MEDIASERV à envoyer des instructions à ma banque pour débiter mon compte, et ma banque à débiter mon compte conformément aux instructions de MEDIASERV. Je reconnais que la notification de tout prélèvement SEPA s’opère par le biais de la facture au plus tard 5 jours ouvrés avant sa date d’échéance pour le premier prélèvement et au plus tard 2 jours ouvrés pour les suivants.</span></label></div></div>
+          <div class="row"><div class='column twelve'><label class='autorise'><input type="checkbox" name="autorise" class="validate[required]"><span class='left'>J'autorise MEDIASERV à envoyer des instructions à ma banque pour débiter mon compte, et ma banque à débiter mon compte conformément aux instructions de MEDIASERV. Je reconnais que la notification de tout prélèvement SEPA s’opère par le biais de la facture au plus tard 5 jours ouvrés avant sa date d’échéance pour le premier prélèvement et au plus tard 2 jours ouvrés pour les suivants.</span></label></div></div>
       </div>      
 
     <!--Carte bancaire-->

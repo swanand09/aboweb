@@ -87,7 +87,8 @@ class Mon_offre extends MY_Controller {
        $numTelSess = $this->session->userdata("num_tel"); 
        $data["error"]  = true;
        if(!empty($numTelSess)&&$num_tel==$numTelSess){
-           echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>"Veuillez saisir un autre numéro"));
+           echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>"<p><strong>VEUILLEZ SAISIR UN AUTRE NUMERO.</strong>
+  </p><a class='close-reveal-modal'>&#215;</a>"));
            exit();
        }
         $data["num_tel"] = $num_tel; 
@@ -143,7 +144,24 @@ class Mon_offre extends MY_Controller {
                     $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/num_eligib_info",$data,true);
                     
                 }else if($result["interrogeEligibiliteResult"]["Erreur"]["NumError"]==201){
-                    
+                    echo json_encode(array(
+                                            $this->contenuGauche,
+                                            $this->colonneDroite,
+                                            "error"=>$data["error"],
+                                            "msg"=>"<p><strong>VOTRE LIGNE <span class='green-text'>".$num_tel."</span> N'EST PAS ENCORE ÉLIGIBLE À NOS SERVICES.<br/><br/>
+  VOUS POUVEZ CONTACTER NOTRE SERVICE COMMERCIAL POUR PLUS D'INFORMATIONS.</strong></p><a class='close-reveal-modal'>&#215;</a>"
+                                            )
+                            );
+                    exit;
+                }else{
+                    echo json_encode(array(
+                                            $this->contenuGauche,
+                                            $this->colonneDroite,
+                                            "error"=>$data["error"],
+                                            "msg"=>"<p><strong>".strtoupper("nos services sont actuellement indisponibles nous vous invitons a conctacter notre service commercial")."</strong></p><a class='close-reveal-modal'>&#215;</a>"
+                                            )
+                            );
+                    exit;
                 }
             }
       }  
@@ -184,7 +202,7 @@ class Mon_offre extends MY_Controller {
      $this->session->set_userdata("panierVal",$this->panierVal);
          
       
-     echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>"Le web service ne renvoie aucunes valeurs pour ce numéro "));
+     echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>$data["error"],"msg"=>""));
     }
     
     public function forfait()

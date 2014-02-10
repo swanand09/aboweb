@@ -18,7 +18,7 @@
     if(!empty($panierVal["decodEquipdum4"])){
         foreach($panierVal["decodEquipdum4"] as $key=>$val){
     ?>
-    <li><strong><?php echo $val["Valeurs"]["Libelle"]["string"]; ?><span class="right"><?php echo ($val["Valeurs"]["Tarif"]["decimal"]>0)?number_format($val["Valeurs"]["Tarif"]["decimal"],2,',',' ')."€/mois":"inclus"; ?></span></strong></li>
+    <li><strong><?php echo $val["Valeurs"]["Libelle"]["string"]; ?><span class="right"><?php echo ($val["Valeurs"]["Tarif"]["decimal"]>0)?number_format($val["Valeurs"]["Tarif"]["decimal"],2,',',' ')." €/mois":"inclus"; ?></span></strong></li>
     <?php 
             }
         } ?>

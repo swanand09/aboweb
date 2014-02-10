@@ -1,8 +1,16 @@
+<?php 
+ $basicNumChain = 0;
+ foreach($bouquet_list["Bouquet"]["BASIQUE"] as $key=> $val){ 
+     if($key=="nombreChaine"){
+         $basicNumChain = $val;
+     }
+ }
+?>                                       
 <form class="frm-tv" onSubmit="javascript:gotoMesCoord();return false; ">
 
         <div class="row">
           <div class="column twelve bottom-10">
-            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();"  name="beneficier"> Je souhaite bénéficier de la TV avec 41 cha&icirc;nes incluses.</label>
+            <label for="beneficier"><input type="checkbox" id="beneficier" <?php echo (!empty($location_equipements)?"checked=checked":""); ?> onclick="javascript: choixTv();"  name="beneficier"> Je souhaite bénéficier de la TV avec <?php echo $basicNumChain; ?> cha&icirc;nes incluses.</label>
           </div>
         </div>
         <!--ACCORDION-->
@@ -15,7 +23,7 @@
           <div class="column eight">
             <!-- BASIQUE -->
             <?php 
-            $counter =0;
+            $counter =0;           
             foreach($bouquet_list["Bouquet"]["BASIQUE"] as $key=> $val){ 
                 if($key!="nombreChaine"){
             ?>
@@ -36,7 +44,7 @@
           <div class="column four">
             <label for="decodeur-tv-netgem"><input type="checkbox" name="decodeur-tv-netgem" value="decodeur-tv-netgem" <?php echo (!empty($location_decodeur)?"checked=checked":""); ?> disabled="disabled" id="decodeur-tv-netgem"><strong>DÉCODEUR TV NETGEM</strong></label>
               <?php echo image("decodeur_tv_netgem.png",NULL,array("alt"=>"Décodeur TV netgem"));?>
-            <strong class="left"> + DE 35 CHAÎNES INCLUSES</strong>
+            <strong class="left"> + DE <?php echo $basicNumChain; ?> CHAÎNES INCLUSES</strong>
             <?php if($duree_mois_promo>0){ ?>
             <div class="prix_dec"><strong><?php echo $decodeur_tv_tarif; ?>€ TTC/MOIS</strong></div>
             <?php echo image('prix_bare.png',NULL,array("class"=>"prix_bare")); ?>          

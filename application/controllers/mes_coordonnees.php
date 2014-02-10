@@ -27,9 +27,12 @@ class Mes_coordonnees extends MY_Controller {
            $this->session->destroy();
            redirect('mon_offre');
        }
+      
         $panierVal = $this->session->userdata("panierVal"); 
         if(empty($panierVal["facturedum6"])){
-            $this->majPanier(array("produit"=>array("FACTURATION"),"etape"=>array("choixFacture")));  
+            //+ parrainage
+            $offparrainId= $this->session->userdata('offreparrainage_id');                       
+            $this->majPanier(array("produit"=>array("FACTURATION"),"etape"=>array("choixFacture"),"parainageId"=>$offparrainId));  
         }
         $this->data["userdata"] = $this->session->all_userdata();
         

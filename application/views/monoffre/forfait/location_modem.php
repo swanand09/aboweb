@@ -17,13 +17,26 @@ if(!empty($iadArr)){
                        <strong>Votre modem<br>Sagem FAST3504</strong>
                    </span>
                 </div>
-               <?php if($iadArr["Duree_mois_promo"]>0){?>
+               <?php if($iadArr["Duree_mois_promo"]>0){
+                             if($tarif[0]>0){
+                   ?>
                   <div class='left trf nopromo'><span><?php echo $tarif[0]; ?>€<sup><?php echo isset($tarif[1])?$tarif[1]:""; ?></sup></span>TTC/mois</div>
                   <?php echo image('prix_bare.png',NULL,array("class"=>"prix_bare")); ?>              
                   <div class='left trf promo'><span><?php echo $tarif_promo[0]."€"; echo (isset($tarif_promo[1])?"<sup>".$tarif_promo[1]."</sup>":"&nbsp;"); ?></span>pendant <?php echo $iadArr["Duree_mois_promo"]; ?> mois</div>
-               <?php }else{ ?>
+               <?php
+                        }else{
+                            echo  '<div class="left trf"><span>INCLUS</span></div>';
+                        }
+               
+                   }else{ 
+                            if($tarif[0]>0){
+                   ?>
                 <div class="left trf"><span><?php echo $tarif[0]; ?>€<sup><?php echo isset($tarif[1])?$tarif[1]:""; ?></sup></span>TTC/mois</div>
-              <?php } ?>
+              <?php }else{
+                    echo  '<div class="left trf"><span>INCLUS</span></div>';
+                    }
+               }
+              ?>
 
           
      <?php

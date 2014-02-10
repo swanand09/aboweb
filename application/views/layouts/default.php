@@ -59,6 +59,7 @@
   </nav>
   <!--END OF NAV-->
  <script>
+    var monOffre                = '<?php echo base_url('mon_offre');?>';
     var ajax_proc_interogeligib = '<?php echo base_url('mon_offre/ajax_proc_interogeligib');?>';
     var forfait                 = '<?php echo base_url('mon_offre/forfait');?>';
     var refreshRecapCol         = '<?php echo base_url('mon_offre/refreshRecapCol');?>'; 

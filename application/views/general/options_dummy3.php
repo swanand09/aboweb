@@ -12,7 +12,7 @@ if(!empty($panierVal["bouquetTvdum3"])||!empty($panierVal["optionTvdum3"])||!emp
         ?>
 <!--        BOUQUET_TV-->
         <li style="background: url(<?php echo base_url()."/assets/images/contenu/".trim($panierVal["bouquetTvdum3"]["Valeurs"]["Picto"]); ?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);">
-          <strong><?php echo $panierVal["bouquetTvdum3"]["Valeurs"]["Libelle"]["string"]; ?></strong><span class="right"><?php echo number_format($panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"],2,',',' ')."€/mois"; ?></span></strong><br><?php echo $panierVal["bouquetTvdum3"]["nombreChaines"]; ?> chaînes
+          <strong><?php echo $panierVal["bouquetTvdum3"]["Valeurs"]["Libelle"]["string"]; ?></strong><span class="right"><?php echo number_format($panierVal["bouquetTvdum3"]["Valeurs"]["Tarif"]["decimal"],2,',',' ')." €/mois"; ?></span></strong><br><?php echo $panierVal["bouquetTvdum3"]["nombreChaines"]; ?> chaînes
       </li>
         <?php 
                // }
@@ -22,7 +22,7 @@ if(!empty($panierVal["bouquetTvdum3"])||!empty($panierVal["optionTvdum3"])||!emp
             if(!empty($panierVal["optionTvdum3"])){
                 foreach($panierVal["optionTvdum3"] as $key=>$val){
                     ?>
-                        <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val["Valeurs"]["Picto"];?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo $val["Valeurs"]["Libelle"]["string"]; ?></strong><span class="right" style="margin-left:50px;"><?php echo number_format($val["Valeurs"]["Tarif"]["decimal"],2,',',' ')."€/mois"; ?></span></li>
+                        <li style="background: url(<?php echo base_url().'assets/images/contenu/'.$val["Valeurs"]["Picto"];?>) no-repeat scroll 0 3px rgba(0, 0, 0, 0);"><strong><?php echo $val["Valeurs"]["Libelle"]["string"]; ?><span class="right"><?php echo number_format($val["Valeurs"]["Tarif"]["decimal"],2,',',' ')." €/mois"; ?></span></strong><?php echo ($val["Valeurs"]["Libelle"]["string"]=="Eden")?"<br>(Réservé à un public adulte)":""; ?></li>
                     <?php
                 }
              } 

@@ -33,17 +33,15 @@ var preload = function(){
                         function(data){
                           //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                           $.unblockUI(); 
-                         if(data.error==true){
-                            //alert(data.msg); 
-                            $('#modalpaseli').reveal();
-                            $('#modTel').empty().prepend(num_tel);
-                              return false;
-                          }/*
+                         if(data.error==true){                           
+                            $('#modalpaseli').empty().prepend(data.msg).reveal(); 
+                            return false;
+                          }
                           if(where=="colonne droite"){
                               preload();
-                               $(location).attr('href',"mon_offre");
+                               $(location).attr('href',monOffre);
                                return false;
-                          }*/
+                          }
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
                           $("#recap_contenu").empty().prepend(data[1].form_test_ligne); 
                          
