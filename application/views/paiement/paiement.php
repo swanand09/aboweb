@@ -87,7 +87,7 @@
           <div class='column three'>Date d'expiration</div>
             <div class='column nine'>
               <div class='column two no-padding-left'>
-                <select name='date_expiration_mois' id='date_expiration_mois' class='validate[required,funcCall[validateExpDate]]>
+                <select name='date_expiration_mois' id='date_expiration_mois' class='validate[required,funcCall[validateExpDate]]'>
                   <option value='01'>Jan</option>
                   <option value='02'>Fév</option>
                   <option value='03'>Mar</option>
@@ -121,7 +121,7 @@
               </div>
               <div class='column eight'></div>
             </div>
-          <div class='column three top-10'>Cryptogramme</div><div class='column three end top-10'><input class='validate[required,custom[onlyNumberSp]]' type='text' name='cryptogramme' id='cryptogramme'/></div>
+          <div class='column three top-10'>Cryptogramme</div><div class='column three end top-10'><input class='validate[required,custom[onlyNumberSp],minSize[3]]' type='text' name='cryptogramme' id='cryptogramme'/></div>
         </div>
       </div>
       <!---->
