@@ -28,6 +28,7 @@ class MY_Controller extends CI_Controller {
 	{
             parent::__construct(); 
             $this->load->model('Wsdl_interrogeligib_model','Wsdl_interrogeligib'); 
+             //ini_set('default_socket_timeout', 3);
             $this->colonneDroite = array(
                                        "form_test_ligne"                    => "",
                                        "donnee_degroupage"                  => "",

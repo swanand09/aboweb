@@ -35,6 +35,9 @@ class Paiement extends MY_Controller {
         //$reference = "shjkpaloijanjuithsbju";
         //addresse facturation et installation
         $civilteAf  = $this->session->userdata("civilite_af");
+        
+       $enregistreSouscriptionResult = $this->session->userdata("enregistreSouscriptionResult");
+       
         $nom        = "";
         $adresse    = "";
         $codePostal = "";
@@ -42,22 +45,14 @@ class Paiement extends MY_Controller {
         $pays       = $this->session->userdata("pays");
         $iban = $this->session->userdata("iban");
         $bic = $this->session->userdata("bic");
-        if(empty($civilteAf)){
-            $nom        = $this->session->userdata("civilite_aa")." ".$this->session->userdata("nom_aa")." ".$this->session->userdata("prenom_aa");
-            $adresse    = $this->session->userdata("type_voie_aa")." ".$this->session->userdata("voie_aa")
-                          ." ".$this->session->userdata("adresse_suite_aa")." ".$this->session->userdata("ensemble_aa")." ".
-                          $this->session->userdata("batiment_aa")." ".$this->session->userdata("escalier_aa")
-                          ." ".$this->session->userdata("etage_aa")." ".$this->session->userdata("porte_aa");
-            $codePostal = $this->session->userdata("code_postal_aa");
-            $ville      = $this->session->userdata("ville_aa");
-        }else{
-             $nom = $this->session->userdata("nom_af")." ".$this->session->userdata("prenom_af");
-             $adresse    = $this->session->userdata("type_voie_af")." ".$this->session->userdata("voie_af")
-                          ." ".$this->session->userdata("adresse_suite_af")." ".$this->session->userdata("ensemble_af")." ".
-                          $this->session->userdata("batiment_af")." ".$this->session->userdata("escalier_af")
-                          ." ".$this->session->userdata("etage_af")." ".$this->session->userdata(" porte_af");
-             $codePostal = $this->session->userdata("code_postal_af");
-             $ville      = $this->session->userdata("ville_af");
+        if(isset($enregistreSouscriptionResult["ImprimerMandat"])){
+            $nom        = $enregistreSouscriptionResult["ImprimerMandat"]["Nom"];
+            $adresse    = $enregistreSouscriptionResult["ImprimerMandat"]["Voie1"]." ".$enregistreSouscriptionResult["ImprimerMandat"]["Voie2"];
+            $codePostal = $enregistreSouscriptionResult["ImprimerMandat"]["Code_postal"];
+            $ville      = $enregistreSouscriptionResult["ImprimerMandat"]["Ville"];
+            $pays       = $enregistreSouscriptionResult["ImprimerMandat"]["Pays"];
+            $iban       = $enregistreSouscriptionResult["ImprimerMandat"]["Iban"];
+            $bic        = $enregistreSouscriptionResult["ImprimerMandat"]["Bic"];
         }
         /*
         $nom = $nom;
@@ -381,7 +376,7 @@ class Paiement extends MY_Controller {
                         array(
                               "mode_pay"         =>  "cartebleue",
                               "titulaire"        =>  $this->input->post("titulaire_cb"),                              
-                              "date_expiration"  =>  $this->input->post("date_expiration_mois").$this->input->post("date_expiration_annee"),
+                              "date_expiration"  =>  $this->input->post("date_expiration_mois")."/".$this->input->post("date_expiration_annee"),
                               "numero"           =>  $this->input->post("numerodecarte"),
                               "cryptogramme"     =>  $this->input->post("cryptogramme")
                         );
@@ -409,8 +404,12 @@ class Paiement extends MY_Controller {
         }
        
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
-       if($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==820||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701){
-           redirect('refus_de_paiement');
+        
+        $this->session->set_userdata("enregistreSouscriptionResult",$result["enregistreSouscriptionResult"]);
+        
+      // if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==820||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701)){
+        if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&!empty($result["enregistreSouscriptionResult"]["Erreur"])){   
+            redirect('refus_de_paiement');
        }else{
             redirect('merci');       
        }

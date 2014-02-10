@@ -1,4 +1,8 @@
-  <section class='seven column centered page-merci'>
+<?php
+  $enregistreSouscriptionResult = $this->session->userdata("enregistreSouscriptionResult");
+  
+?>
+<section class='seven column centered page-merci'>
         <div class='row cwidth'>
           <h1 class='text-center'>FÉLICITATIONS!<br/>BIENVENUE CHEZ MEDIASERV !</h1>
           <p class='text-center'><strong>Vous pourrez très prochainement profiter de vos services !</strong></p>
@@ -27,10 +31,10 @@
               <strong> >Voici le rappel de vos informations, qui vous seront également communiquées par email.</strong>
             </p>
             <ul>
-              <li class='left'>Votre numéro de contrat: <span class='green-text'>RE123456</span></li>
-              <li class='left mleft35'>Votre numéro de client: <span class='green-text'>REP123456</span></li>
-              <li class='clear'>Votre numéro de téléphone: <span class='green-text'><?php echo $this->session->userdata("telephone_domicile"); ?></span></li>
-              <li>Votre email Mediaserv: <span class='green-text'><?php echo $this->session->userdata("email_mediaserv")."@mediaserv.net"; ?></span></li>
+              <li class='left'>Votre numéro de contrat: <span class='green-text'><?php echo  $enregistreSouscriptionResult["Numero_contrat"]; ?></span></li>
+              <li class='left mleft35'>Votre numéro de client: <span class='green-text'><?php echo  $enregistreSouscriptionResult["Numero_client"]; ?></span></li>
+              <li class='clear'>Votre numéro de téléphone: <span class='green-text'><?php echo $enregistreSouscriptionResult["Numero_telephone"]; ?></span></li>
+              <li>Votre email Mediaserv: <span class='green-text'><?php echo $enregistreSouscriptionResult["Email_client"]; ?></span></li>
             </ul>
           </div>
         </div>
@@ -38,7 +42,7 @@
         <div class="row">
           <div class='column cwidth twelve shadow bottom-20 p30all'>
              <?php echo ($moyen_paiement=="PR")?"<span class='green-text'>Vous avez soucrit par prélèvement automatique.</span><br /> Afin de compléter votre dossier, veuillez renvoyer les documents ci-dessous <br/>
-            à l'adresse suivante : MEDIASERV – CS 41077 97495 STE CLOTILDE CEDEX":"<span class='green-text'>Vous avez valdé votre commande par Carte Bancaire. </span><br />Vous avec validé votre commande par Carte Bancaire
+            à l'adresse suivante : ".$enregistreSouscriptionResult["Adresse_service_client"]:"<span class='green-text'>Vous avez valdé votre commande par Carte Bancaire. </span><br />Vous avec validé votre commande par Carte Bancaire
 Afin de compléter votre dossier, veuillez vous rendre dans l'espace Mediaserv le plus proche de chez vous muni des pièces indiquées ci-dessous: ";?>
            
             <ul class='no-margin-bottom top-10'>
