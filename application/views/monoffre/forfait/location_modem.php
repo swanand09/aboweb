@@ -25,7 +25,7 @@ if(!empty($iadArr)){
                   <div class='left trf promo'><span><?php echo $tarif_promo[0]."€"; echo (isset($tarif_promo[1])?"<sup>".$tarif_promo[1]."</sup>":"&nbsp;"); ?></span>pendant <?php echo $iadArr["Duree_mois_promo"]; ?> mois</div>
                <?php
                         }else{
-                            echo  '<div class="left trf"><span>INCLUS</span></div>';
+                            echo  '<div class="left trf"><span class="green-text">INCLUS</span></div>';
                         }
                
                    }else{ 
@@ -33,7 +33,7 @@ if(!empty($iadArr)){
                    ?>
                 <div class="left trf"><span><?php echo $tarif[0]; ?>€<sup><?php echo isset($tarif[1])?$tarif[1]:""; ?></sup></span>TTC/mois</div>
               <?php }else{
-                    echo  '<div class="left trf"><span>INCLUS</span></div>';
+                    echo  '<div class="left trf"><span class="green-text">INCLUS</span></div>';
                     }
                }
               ?>

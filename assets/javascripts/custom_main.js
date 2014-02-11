@@ -24,14 +24,14 @@ $('#cgu-link').click(function(){
 	}
 });
 
-$('#grille-tarifaire').click(function(){
-	window.open(this.href,'Grille tarifaire',"height=600,width=800");
-	return false;
+$(document).on('click','#grille-tarifaire',function(){
+ window.open(this.href,'Grille tarifaire',"height=600,width=800");
+ return false;
 });
 
-$('#condition-tarifaire').click(function(){
-	window.open(this.href,'Condition tarifaire',"height=600,width=800");
-	return false;
+$(document).on('click','#condition-tarifaire',function(){
+ window.open(this.href,'Condition tarifaire',"height=600,width=800");
+ return false;
 });
 
 
