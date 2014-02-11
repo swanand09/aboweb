@@ -4,7 +4,9 @@ $(function() {
   window.promoInitialText = getUltraInitialPrice();
 
   //Disable 'list of bouquet' on startup
-  $('.four.bouquet').fadeTo('slow',.5);
+  if(!$('#filter').find('li').hasClass('active')){
+    $('.four.bouquet').fadeTo('slow',.5);
+  }
 
   //Enable/Disable 'list of bouquet' on Click/Checkbox
   //Enable/Disable checkbox Ultra options
