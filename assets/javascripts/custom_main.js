@@ -135,6 +135,7 @@ $(document).on('click','#redu_facture',function(){
 	$("#mes-coordonnees").validationEngine();
 	$("#frm-paiement").validationEngine();
 	$("#frm-mon-recap").validationEngine();
+	$(".frm-etape-tester-block").validationEngine();
 	$(".frm-etape-tester").validationEngine({
 		'custom_error_messages': {
 			'#ligne': {
