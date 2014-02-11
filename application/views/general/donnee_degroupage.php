@@ -20,7 +20,7 @@
         if(!empty($panierVal["portabilitedum1"])){
      ?>
         <div class="degroupage end" style='min-height:20px'>
-             <span class="left"><strong><?php echo $panierVal["portabilitedum1"]["libelle"]; ?></strong></span>   
+             <span><strong><?php echo $panierVal["portabilitedum1"]["libelle"]; ?></strong></span>   
         </div>
      <?php   
         }
