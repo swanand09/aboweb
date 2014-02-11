@@ -319,7 +319,7 @@ class Paiement extends MY_Controller {
                                 "prenom"                             => $this->input->post("prenom_pa"),
                                 "numero"                             => $this->input->post("numero_pa"),
                                 "complement"                         => $this->input->post("comp_numero_pa"),
-                                "type_voie"                          => "",
+                                "type_voie"                          => $this->input->post("type_voie_pa"),
                                 "voie"                               => $this->input->post("voie_pa"),
                                 "voie_suite"                         => $this->input->post("adresse_suite_pa"),
                                 "ensemble"                           => "",  

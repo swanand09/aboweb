@@ -782,11 +782,14 @@ class MY_Controller extends CI_Controller {
                     if(!empty($this->panierVal["optionTvdum3"])){
                        foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
                            foreach($this->panierVal["promodum2"] as $key5=>$val5){
-                              foreach($val5 as $key6=>$val6){
-                                if($key6==$val4["idCrm"]){
-                                   unset($this->panierVal["promodum2"][$key5]);
-                                }
-                             }
+                               if(!empty($val5)){
+                                   foreach($val5 as $key6=>$val6){
+                                        if($key6==$val4["idCrm"]){
+                                           unset($this->panierVal["promodum2"][$key5]);
+                                        }
+                                   } 
+                               }
+                              
                            }
                             if($val4["Valeurs"]["Type"]=="RECURRENT"){
                                $this->getTotal(-$val4["Valeurs"]["Tarif"]["decimal"]);

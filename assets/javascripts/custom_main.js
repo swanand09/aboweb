@@ -464,12 +464,24 @@ var autofocus = function( initialSelector,length,nextSelector){
 }
 
 //Validate Expiration date
+//Validate Expiration date
 var validateExpDate = function( field, rules, i, options ){
-	var today = new Date();
-	var mm = today.getMonth()+1;
-	var sm = +(field.val());
+ var today = new Date();
+ var currentYear = (new Date).getFullYear();
 
-	if( sm < mm ) {
-			return "La date n'est pas valide";
-	}
+ //convert currentYear to string and assign to var twoDigit
+ var twoDigit = currentYear + "";
+
+ //Get last two digit ( characters )
+ twoDigit = twoDigit.substr(twoDigit.length - 2);
+
+ //current month
+ var mm = today.getMonth()+1;
+ //select month
+ var sm = +(field.val());
+
+ if( sm < mm && $('#date_expiration_annee').val() == twoDigit ) {
+   return "La date n'est pas valide";
+ }
 }
+ket
