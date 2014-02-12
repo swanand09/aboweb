@@ -1089,7 +1089,15 @@ form .formError .formErrorArrow div {
 	padding-left: 0;
     padding-right: 0;
 }
-
+.parrainage-accepte {
+	background: url("../images/accepted.png") no-repeat scroll right 0 rgba(0, 0, 0, 0);
+	color: #516036;
+	font-family: freeroadregular;
+	font-size: 15px;
+	height: 27px;
+	padding-left: 0;
+	padding-top: 5px;
+}
 /*
 * Placeholder styling
 */
