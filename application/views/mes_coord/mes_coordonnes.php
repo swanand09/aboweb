@@ -225,10 +225,10 @@
           <h3 class="lfsection_space">Adresse de messagerie principale :</h3>
           <div class="row">
             <div class="column twelve bottom-10">
-              <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo</label>
+              <label>Vous bénéficiez d’un compte e-mail médiaserv<br> avec une messagerie de 100 mo <span class='has-tip' title='obligatoire'>*</span></label>
             </div>
             <div class="column six"> 
-               <input type='text' class='validate[required,funcCall[validateVerifyEmail]]' name='email_mediaserv' onchange="javascript:$('#verif_email').val('faux');" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/><span class='has-tip' title='obligatoire'>*</span>
+               <input type='text' class='validate[required,funcCall[validateVerifyEmail]]' name='email_mediaserv' onchange="javascript:$('#verif_email').val('faux');" value="<?php echo set_value("email_mediaserv",$email_mediaserv);?>" id='email_mediaserv'/>
             </div>
             <div class="column three"> 
               <span class="postfix">@mediaserv.net</span>
