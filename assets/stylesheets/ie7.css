@@ -225,3 +225,16 @@ input.telephone { width:144px; }
 #mes-coordonnees .columns.four { width:210px;}
 #mes-coordonnees .civilite-row{ margin-bottom: 10px;}
 input#email-contact { width:315px;}
+
+/*
+* Parrainage
+*/
+.parrainage-accepte{ width: 162px !important;}
+
+/*
+* PDF LINK
+*/
+.pdf-links{
+	float:left;
+	width: 100% !important;
+}
