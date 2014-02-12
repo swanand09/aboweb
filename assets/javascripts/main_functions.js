@@ -104,7 +104,14 @@ var preload = function(){
           function prevState(page)
           {               
             //preload();
-            $("#cont_mon_off").empty().load('mon_offre/prevState/'+page);
+            if( $('#cont_mon_off').length )
+            {
+              $("#cont_mon_off").empty().load('mon_offre/prevState/'+page);
+            }
+            else
+            {
+              $(location).attr('href',monOffre);
+            }
             //$.unblockUI(); 
             $( "html,body" ).scrollTop(0);
           }
