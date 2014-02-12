@@ -408,19 +408,20 @@ class Paiement extends MY_Controller {
         $this->session->set_userdata("enregistreSouscriptionResult",$result["enregistreSouscriptionResult"]);
         switch($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]){
             case "700":
-                redirect('refus_de_paiement/index/CB');
+                redirect('refus_de_paiement/index/cb');
             break;
             case "701":
-                redirect('refus_de_paiement/index/CB');
+                redirect('refus_de_paiement/index/cb');
             break;
             case "820":
-                redirect('refus_de_paiement/index/RIB');
+                redirect('refus_de_paiement/index/rib');
             break;
         }
       // if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==820||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701)){
-       /* if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&!empty($result["enregistreSouscriptionResult"]["Erreur"])){   
-            redirect('refus_de_paiement');
-       }else{*/
+        if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&!empty($result["enregistreSouscriptionResult"]["Erreur"])){   
+            
+            redirect('refus_de_paiement/index/fail');
+        }
             redirect('merci');       
       // }
     }

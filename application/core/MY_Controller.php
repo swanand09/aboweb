@@ -249,10 +249,16 @@ class MY_Controller extends CI_Controller {
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
             $refus = "";
-            if($type=="CB"){
-               $refus = "refus_cb";
-            }else{
-               $refus = "refus_rib";
+            switch($type){
+               case "cb":
+                    $refus = "refus_cb";
+               break;
+               case "rib":
+                   $refus = "refus_rib";
+               break; 
+               case "fail":
+                   $refus = "service_indispo";
+               break;
             }
             $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
