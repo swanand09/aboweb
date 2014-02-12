@@ -4,7 +4,7 @@ $panierVal = $this->session->userdata("panierVal");
 if(!empty($panierVal["promodum2"][0])){ ?>
 <!--PROMOTION-->
 <div class="forpro promotion">   
-  <h3>Promotion <span class="right"><a href="#">Modifier</a></span></h3>
+  <h3>Promotion</h3>
   <ul>
       <?php 
             foreach($panierVal["promodum2"] as $key=>$val){
