@@ -102,7 +102,12 @@ $(document).on('click','#redu_facture',function(){
 	}
 
 	//hide parrain textboxes on load
-	$('.parrain-section').hide();
+	if($('.parrain-section').hasClass('open')) {
+		$('.parrain-section').show();
+	}
+	else {
+		$('.parrain-section').hide();	
+	}
 
 	// hide or show depending on Value of radio button
 	$(document).on("click","input[name='parrain']",function(){
