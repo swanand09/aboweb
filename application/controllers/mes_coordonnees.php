@@ -287,8 +287,9 @@ class Mes_coordonnees extends MY_Controller {
         }else{
             $resultVerifParain =$this->Wsdl_interrogeligib->verifParain($this->session->userdata("offreparrainage_id"),$parrain_num_contrat,$parrain_num_tel);
             //echo json_encode(array("faultstring"=>"Le serveur n'a pas pu lire la demande. ---> Il existe une erreur dans le document XML (3, 52). ---> Le format de la chaîne d'entrée est incorrect."));
-           if(!empty($resultVerifParain["Error"])){
-               $resultVerifParain["Error"]["ErrorMessage"] = $resultVerifParain["Error"]["ErrorMessage"];
+           if(empty($resultVerifParain["Error"])){           
+              $this->session->set_userdata("parainNumCont",$parrain_num_contrat);
+              $this->session->set_userdata("parainNumTel",$parrain_num_tel);
            }
            $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"Votre parrain existe. Merci!";
            if(isset($resultVerifParain["Id_parrain"]))

@@ -2,7 +2,7 @@
  $basicNumChain = 0;
  foreach($bouquet_list["Bouquet"]["BASIQUE"] as $key=> $val){ 
      if($key=="nombreChaine"){
-         $basicNumChain = $val;
+         $basicNumChain = $val-1;
      }
  }
 ?>                                       
@@ -99,7 +99,25 @@
                             foreach($val as $key2=>$val2){
                                  $nomBouq   .='"'.strtolower($key2).'",';  
                                   $countId++;
+                              if($val2["promo"]["Duree_mois_promo"]>0){
                    ?>
+                                <li class='promo'>
+                                <a href="#" onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
+                                  <div class='columns five'>
+                                <span class='nombre_chaines'>+<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?></span>
+                                    <label>Chaines</label>
+                                  </div>
+                                  <div class='columns seven'>
+                                      <label>BOUQUET <?php echo strtoupper($key2); ?></label>
+                                      <span class='prix'><?php echo $val2["tarif"]; ?>€</span>
+                                      <span class='nouveau-prix'><?php echo $val2["promo"]["Tarif_promo"]; ?>€</span>
+                                      <span class='nouveau-prix-mois'>/mois</span>
+                                      <span class='nouveau-prix-text'>pendant <?php echo $val2["promo"]["Duree_mois_promo"]; ?> mois</span>
+                                  </div>
+                                </a>
+                              </li>
+                  
+                          <?php }else{ ?>
                             <li>
                                 <a href="#" onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
                                   <div class='columns five'>
@@ -108,16 +126,12 @@
                                   </div>
                                   <div class='columns seven'>
                                       <label>BOUQUET <?php echo strtoupper($key2); ?></label>
-                                      <?php if($val2["promo"]["Duree_mois_promo"]>0){ ?>
-                                       <span class='promo'><?php echo $val2["tarif"]; ?>€</span>
-                                       <span class='prix'><?php echo $val2["promo"]["Tarif_promo"]; ?>€</span>
-                                      <?php }else{?>
-                                    <span class='prix'><?php echo $val2["tarif"]; ?>€</span>
-                                      <?php }?>
+                                      <span class='prix'><?php echo $val2["tarif"]; ?>€</span>
                                   </div>
                                 </a>
                               </li>
-                       <?php      
+                       <?php    
+                                }
                             }
                         }
                     }

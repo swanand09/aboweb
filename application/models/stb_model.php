@@ -79,8 +79,9 @@ class Stb_model extends CI_Model
             if($counter>0&&(($prevBouquet == $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||($prevBouquet != $val->nom_bouquet&&$prevCategorie !=  $val->nom_categorie)||$key==(sizeof($query1->result())-1))){
                 $this->maTv["Bouquet"][$prevBouquet][$prevCategorie] = $chaineArr;  
                 $chaineArr = array();
-                array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon)); 
-                 $countNoChain++;
+                array_push($chaineArr, array("nom_chaines"=> $val->nom_chaines, "img_icon"=>$val->img_icon));
+                $countNoChain++;
+             
             }
              
             if(($prevBouquet!=$val->nom_bouquet&&$prevBouquet!="")||$key==(sizeof($query1->result())-1)){

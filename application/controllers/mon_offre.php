@@ -229,12 +229,14 @@ class Mon_offre extends MY_Controller {
             echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>202));   
             exit;
        }
+       try{
        //verifie si on a deja les flux de produit
        $resultProd = $this->session->userdata("resultProd");
        if(empty($resultProd)){
          $resultProd  = $this->Wsdl_interrogeligib->recupereOffre($context);
          $this->session->set_userdata("resultProd",$resultProd);
        }
+       if(empty($resultProd["recupere_offreResult"]["Erreur"])){
        $this->session->set_userdata('localite',$resultProd["recupere_offreResult"]["Localite"]);
        $this->session->set_userdata('idParcours',$resultProd["recupere_offreResult"]["Id"]); 
        $this->session->set_userdata('offreparrainage_id',($resultProd["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$resultProd["recupere_offreResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
@@ -296,8 +298,17 @@ class Mon_offre extends MY_Controller {
         }      
         
 
-       $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
-      echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>""));   
+        $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
+        echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>"")); 
+       }else{
+           throw new Exception("Nos services sont actuellement indisponibles nous vous invitons a conctacter notre service commercial");
+       }
+       
+       }catch(Exception $e){
+           $this->session->destroy();           
+           echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>"redirect","msg"=>"<p><strong>".strtoupper($e->getMessage())."</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")); 
+       }
        
     } 
     

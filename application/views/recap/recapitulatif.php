@@ -12,20 +12,20 @@
         <div class='val code-postal-ville'><?php echo $code_postal_aa." ".$ville_aa;?></div>
         <div class="val"><?php echo "portable: ".$telephone_portable;?><?php echo !empty($telephone_bureau)?", bureau: ".$telephone_bureau:"";?><?php echo !empty($telephone_domicile)?", domicile: ".$telephone_domicile:""; ?></div>
        
-     </div> 
+<!--     </div> -->
        <?php if(empty($check_adresse_facturation)){ ?>
 <!--     FACTURATION-->
-        <div class='column twelve bottom-20 recap-add'>
+<!--        <div class='column twelve bottom-20 recap-add'>-->
            <label class='top-20'><strong>Adresse de facturation</strong></label>
            <div class='val civilite-prenom-nom'> <?php echo $civilite_af." ".$prenom_af." ".$nom_af; ?></div>
            <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_af." ".$comp_numero_af." ".$type_voie_af." ".$voie_af; ?></div>
            <div class='val adresse-suite'>  <?php echo $adresse_suite_af;?></div>
            <div class='val code-postal-ville'><?php echo $code_postal_af." ".$ville_af;?></div>     
-        </div>     
+<!--        </div>     -->
        <?php } 
        if(empty($check_adresse_livraison)){ ?>
 <!--        LIVRAISON -->
-        <div class='column twelve bottom-20 recap-add'>
+<!--        <div class='column twelve bottom-20 recap-add'>-->
            <label class='top-20'><strong>Adresse de livraison</strong></label>
            <div class='val civilite-prenom-nom'> <?php echo $civilite_al." ".$prenom_al." ".$nom_al; ?></div>
            <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_al." ".$comp_numero_al." ".$type_voie_al." ".$voie_al; ?></div>
@@ -34,11 +34,29 @@
            <div class='val escalier-etage-porte'>Bat <?php echo $batiment_al; ?> Escalier <?php echo $escalier_al; ?> Etage <?php echo $etage_al; ?> Porte <?php echo $porte_al; ?></div>
            <div class='val logo'>Logo <?php echo $logo_al; ?></div>
            <div class='val code-postal-ville'><?php echo $code_postal_al." ".$ville_al;?></div>
-        </div>   
+<!--        </div>   -->
        <?php } ?> 
- <div class='column twelve bottom-20 recap-add'>
+
+<?php if($livraison_express=="true"){ ?>
+<!--<div class='column twelve bottom-20 recap-add'>-->
+    <div class="top-20">
+        <div class="top-20">
+          <p><strong>Vous souhaitez bénéficier d'une livraison express et vous renoncez ainsi au délai de rétractation de 7 jours.</strong></p>
+        </div>
+    </div>
+<!--</div>   -->
+<?php }else{ ?>
+<!--<div class='column twelve bottom-20 recap-add'>-->
+    <div class="top-20">
+        <div class="top-20">
+          <p><strong>Conformément à la loi informatique et libertés du 6/01/1978, les informations recueillies et transmises dans le cadre de la présente souscription peuvent donner lieu à l'exercice du droit d'accès et de rectification auprès de Mediaserv</strong></p>
+        </div>
+    </div>
+<!--</div>   -->
+<?php } ?>
+<!-- <div class='column twelve bottom-20 recap-add'>-->
         <div class='top-20'><strong>Votre adresse médiaServ est : </strong><span class='green-text'><?php echo $email_mediaserv."@mediaserv.net"; ?></span></div>
- </div>        
+     </div>        
     </div>
     <hr class="sexy">
     <div class="row">

@@ -376,7 +376,7 @@ class Paiement extends MY_Controller {
                         array(
                               "mode_pay"         =>  "cartebleue",
                               "titulaire"        =>  $this->input->post("titulaire_cb"),                              
-                              "date_expiration"  =>  $this->input->post("date_expiration_mois")."/".$this->input->post("date_expiration_annee"),
+                              "date_expiration"  =>  $this->input->post("date_expiration_mois").$this->input->post("date_expiration_annee"),
                               "numero"           =>  $this->input->post("numerodecarte"),
                               "cryptogramme"     =>  $this->input->post("cryptogramme")
                         );
@@ -406,13 +406,23 @@ class Paiement extends MY_Controller {
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
         
         $this->session->set_userdata("enregistreSouscriptionResult",$result["enregistreSouscriptionResult"]);
-        
+        switch($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]){
+            case "700":
+                redirect('refus_de_paiement/index/CB');
+            break;
+            case "701":
+                redirect('refus_de_paiement/index/CB');
+            break;
+            case "820":
+                redirect('refus_de_paiement/index/RIB');
+            break;
+        }
       // if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==820||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701)){
-        if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&!empty($result["enregistreSouscriptionResult"]["Erreur"])){   
+       /* if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&!empty($result["enregistreSouscriptionResult"]["Erreur"])){   
             redirect('refus_de_paiement');
-       }else{
+       }else{*/
             redirect('merci');       
-       }
+      // }
     }
 }
 /* End of file paiement.php */

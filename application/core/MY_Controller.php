@@ -241,17 +241,23 @@ class MY_Controller extends CI_Controller {
                             ->build('page',$this->data);
         }
         
-         public function controller_refus_vue()
-        {
+         public function controller_refus_vue($type)
+         {
              $this->data["pageid"] ="page-etape-4";
             $this->data["etapes_url"]    = array("mon_offre","mes_coordonnees","recapitulatif","#");
             $this->data["allow"]    = array("allowed","allowed","allowed","allowed");
             $this->data["colonneDroite"] = $this->colonneDroite;           
             $this->data["contenuGauche"] = $this->contenuGauche;
+            $refus = "";
+            if($type=="CB"){
+               $refus = "refus_cb";
+            }else{
+               $refus = "refus_rib";
+            }
             $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
                             ->title('title', 'Refus de paiement')
-                            ->set_partial('contenu_gauche', 'refus/refus')
+                            ->set_partial('contenu_gauche', 'refus/'.$refus)
                             ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
         }
@@ -706,7 +712,12 @@ class MY_Controller extends CI_Controller {
             //dummy3
             $this->colonneDroite["options_dummy3"]    = $this->load->view("general/options_dummy3",$this->data,true);   
             
-           if(isset($this->data["parainageId"])&&!empty($this->data["parainageId"])){
+            
+            //verif parainage
+            $offparrainId = $this->session->userdata('offreparrainage_id');          
+            $this->data["parainNumCont"] = $this->session->userdata("parainNumCont");
+            $this->data["parainNumTel"] = $this->session->userdata("parainNumTel");
+           if((isset($this->data["parainageId"])&&!empty($this->data["parainageId"]))||!empty($offparrainId)){
                $this->colonneDroite["parrainage"]    = $this->load->view("general/parrainage",$this->data,true);   
            }
             
@@ -779,7 +790,7 @@ class MY_Controller extends CI_Controller {
                         $this->panierVal["bouquetTvdum3"] = array();     
                         //$this->produIdCrm["bouquetTv"]  = "";
                     }
-                    if(!empty($this->panierVal["optionTvdum3"])){
+                    if(!empty($this->panierVal["optionTvdum3"])&&strtoupper($this->bouquetChoisi[1])=="ULTRA"){
                        foreach($this->panierVal["optionTvdum3"] as $key4=>$val4){
                            foreach($this->panierVal["promodum2"] as $key5=>$val5){
                                if(!empty($val5)){

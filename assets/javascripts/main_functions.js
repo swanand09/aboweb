@@ -75,7 +75,13 @@ var preload = function(){
                         redu_facture : redu_facture,
                         consv_num_tel : consv_num_tel
                      },
-                    function(data){                        
+                    function(data){   
+                         if(data.error=="redirect"){     
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                        }
                         if(data.error==202){
                               console.log("test4");
                              $(location).attr('href',"mon_offre/ligne_active");

@@ -7,11 +7,11 @@ class Refus_de_paiement extends MY_Controller {
         parent::__construct();        
     }  
     
-    public function index()
+    public function index($type)
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $this->data["userdata"] = $this->session->all_userdata();  
-        return $this->controller_refus_vue();   
+        return $this->controller_refus_vue($type);   
     }
     
 }
