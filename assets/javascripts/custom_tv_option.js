@@ -63,10 +63,10 @@ $(function() {
     {
       addUltraOptions('INCLUS');
     }
-    else //option ultra will be unchecked
+   /* else //option ultra will be unchecked
     {
       removeUltraoptions(promoInitialText);
-    }    
+    }   */ 
     chainesFilter(selector,datagroup);
   });
 
