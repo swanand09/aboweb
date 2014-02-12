@@ -105,12 +105,11 @@ $(document).on('click','#redu_facture',function(){
 	$('.parrain-section').hide();
 
 	// hide or show depending on Value of radio button
-	$("input[name='parrain']").click(function(){
+	$(document).on("click","input[name='parrain']",function(){
 		if( $(this).val() == 'oui' ) {
 			$('.parrain-section').slideDown('slow');
 		}
-		else
-		{
+		else {
 			$('.parrain-section').slideUp();
 		}
 	});
@@ -484,4 +483,3 @@ var validateExpDate = function( field, rules, i, options ){
    return "La date n'est pas valide";
  }
 }
-ket
