@@ -37,10 +37,11 @@ $(function() {
       $('.accordion .second').removeClass('active');
       $('.accordion .first .content').css({ display: 'none'});
       $('.accordion .second .content').css({ display: 'none'});
-      ultraOption.attr('disabled', true);
-      ultraOption.prop('checked', false);
-      $('.prix_option').removeClass('inclus');
-      $('.prix_option').html(promoInitialText);
+      if(ultraOption.is(":checked"))
+      {
+        removeUltraoptions(promoInitialText);
+        ultraOption.attr('disabled', true);
+      }
       //reinitiate Chaine filter group
       $('#filter li').removeClass('active');
       var selector = $('.eight.chaines .grid li');
