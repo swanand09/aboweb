@@ -54,6 +54,14 @@ $(function() {
 
   $(document).on('click','#filter li',function(e){
     e.preventDefault();
+
+
+    if($('#filter li').hasClass('active')){
+      var option = $('#filter li.active').find('a');
+     if(option.attr('data-group') == "ultra"){
+      removeUltraoptions(promoInitialText)
+     }
+    }
     $('#filter li').removeClass('active');
     $(this).addClass('active');
     var datagroup = $(this).children('a').attr('data-group');
