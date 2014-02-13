@@ -425,7 +425,8 @@ class MY_Controller extends CI_Controller {
              // si surtout on n'a pas de promo dans produit TELEVISION
              $this->majPromo();
              $this->majSession(array("panierVal"=>$this->panierVal,"produIdCrm"=>$this->produIdCrm));
-             $this->getTotal1er2em();            
+             $this->getTotal1er2em();      
+             log_message('error', 'this is a test');
              return $this->majVuePanier();         
         }
 
@@ -698,6 +699,8 @@ class MY_Controller extends CI_Controller {
                                                                         
                         break;
                     }
+                }else{                  
+                    log_message('error', 'There are no dummy values');
                 }
             }
            

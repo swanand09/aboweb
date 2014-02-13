@@ -93,7 +93,7 @@ class Mon_offre extends MY_Controller {
        }
         $data["num_tel"] = $num_tel; 
         $data["result"] = "";
-       
+       try{
         if($num_tel!=""&&$this->validateNum($num_tel))
         {   
             $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class'=>'validate[required,custom[onlyNumberSp],minSize[10]]','maxlength'=>'10','type' => 'text','value' => $num_tel);
@@ -164,7 +164,19 @@ class Mon_offre extends MY_Controller {
                     exit;
                 }
             }
-      }  
+      }else{
+          throw new Exception("VOTRE NUMERO EST INVALIDE. VEUILLEZ RESSAYER.");
+      }
+       }catch(Exception $e){
+            echo json_encode(array(
+                                            $this->contenuGauche,
+                                            $this->colonneDroite,
+                                            "error"=>$data["error"],
+                                            "msg"=>"<p><strong>".$e->getMessage()."</strong></p><a class='close-reveal-modal'>&#215;</a>"
+                                            ));
+            exit;
+            
+       }
           
       $this->session->set_userdata("htmlContent_testeligib",$this->contenuGauche["contenu_html"]);      
       $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));

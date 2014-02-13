@@ -61,13 +61,11 @@ var preload = function(){
               var consv_num_tel = "false";
                 if($("#redu_facture").is(":checked"))
                 {
-                    redu_facture = "true";
-                    console.log("test1");
+                    redu_facture = "true";                   
                 }
                 if($("#consv_num_tel").is(":checked"))
                 {
-                    consv_num_tel = "true";
-                    console.log("test2");
+                    consv_num_tel = "true";                   
                 }
                 $.post(
                     forfait,
@@ -82,11 +80,9 @@ var preload = function(){
                              $.unblockUI();     
                             return false;
                         }
-                        if(data.error==202){
-                              console.log("test4");
+                        if(data.error==202){                              
                              $(location).attr('href',"mon_offre/ligne_active");
-                        }else{
-                               console.log("test3");
+                        }else{                             
                             $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
                             //alert(data[0].contenu_html);
                             var key, count = 0;
@@ -357,7 +353,8 @@ var preload = function(){
                         email_msv : emailMsv
                      },
                     function(data){                 
-                      alert(data.msg);             
+                     // alert(data.msg);  
+                       $('#modalpaseli').empty().prepend("<p><strong>"+data.msg+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal(); 
                       switch(data.error){
                           case "401":
                               $("#email_mediaserv").val("").focus();
@@ -386,17 +383,25 @@ var preload = function(){
                            parrain_num_tel    : $("#parrain_num_tel").val()
                         },
                        function(data){
-                         //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
-                        
-                         alert(data.Error.ErrorMessage); 
-                         $.unblockUI(); 
-                         if(data.Error.ErrorMessage=="Votre parrain existe. Merci!"){
-                             return false;
-                         }
-                         
+                        $('#modalpaseli').empty().prepend("<p><strong>"+data.Error.ErrorMessage+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal(); 
+                        $.unblockUI(); 
+                        if(data.Error.ErrorMessage=="VOTRE PARRAIN EXISTE. MERCI!"){
+                            $("#verifAccParai").addClass("parrainage-accepte").empty().html("Parrainage accepté");
+                            return false;
+                        }                         
                         $("#parrain_num_tel").focus();
-                        $("#parrain_num_contrat").focus();
-                                     
+                        $("#parrain_num_contrat").focus();                                     
                        }, "json"
                    );
             }
+            /*
+            $("#cancelParrain").click(function(){
+                 preload();
+                   $.post(
+                       cancelParain,                        
+                       function(data){                       
+                        $('#modalpaseli').empty().prepend("<p><strong>"+data.msg+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal();                        
+                        $.unblockUI();
+                       }, "json"
+                   );
+            });*/

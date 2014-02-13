@@ -67,6 +67,7 @@
     var mesCoordonnes           = '<?php echo base_url('mon_offre/mesCoordonnes');?>';     
     var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
+    var cancelParain             = '<?php echo base_url('mes_coordonnees/cancelParain');?>';
     var updateBouquet           = '<?php echo base_url('mon_offre/updateBouquet');?>';  
     var updateOptions           = '<?php echo base_url('mon_offre/updateOptions');?>';
     var updateFacture           = '<?php echo base_url('mes_coordonnees/updateFacture'); ?>';

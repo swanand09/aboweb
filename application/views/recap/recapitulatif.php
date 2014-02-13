@@ -49,7 +49,7 @@
        <?php }
        else {
         ?>
-        <label class='top-20'><strong>ADRESSE DE FACTURATION IDENTIQUE</strong></label>
+        <label class='top-20'><strong>ADRESSE DE LIVRAISON IDENTIQUE</strong></label>
         <?php
        } ?> 
 

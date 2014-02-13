@@ -274,16 +274,16 @@ class Mes_coordonnees extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";       
         $email_msv = $this->input->post("email_msv");
         $resultVerifEmail =$this->Wsdl_interrogeligib->verifEmail($email_msv);
-        echo json_encode(array("msg"=>(empty($resultVerifEmail["Error"])?"Cet email est disponible":"Cet email n'est pas disponible"),"error"=>($resultVerifEmail["Disponible"]=="false"?"401":"0")));
+        echo json_encode(array("msg"=>(empty($resultVerifEmail["Error"])?"CET EMAIL EST DISPONIBLE":"CET EMAIL N'EST PAS DISPONIBLE"),"error"=>($resultVerifEmail["Disponible"]=="false"?"401":"0")));
       
     }
     
     public function verifParain(){
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
-        $parrain_num_contrat = $this->input->post('parrain_num_contrat');
-        $parrain_num_tel    = $this->input->post('parrain_num_tel');
+        $parrain_num_contrat = trim($this->input->post('parrain_num_contrat'));
+        $parrain_num_tel    = trim($this->input->post('parrain_num_tel'));
         if(empty($parrain_num_contrat)||empty($parrain_num_tel)){
-            echo json_encode(array("Error"=>array("ErrorMessage"=>"Veuillez saisir le numéro de contrat et le numéro de téléphone de votre parrain!")));
+            echo json_encode(array("Error"=>array("ErrorMessage"=>"VEUILLEZ SAISIR LE NUMERO DE CONTRAT ET LE NUMERO DE TELEPHONE DE VOTRE PARRAIN!")));
         }else{
             $resultVerifParain =$this->Wsdl_interrogeligib->verifParain($this->session->userdata("offreparrainage_id"),$parrain_num_contrat,$parrain_num_tel);
             //echo json_encode(array("faultstring"=>"Le serveur n'a pas pu lire la demande. ---> Il existe une erreur dans le document XML (3, 52). ---> Le format de la chaîne d'entrée est incorrect."));
@@ -291,11 +291,20 @@ class Mes_coordonnees extends MY_Controller {
               $this->session->set_userdata("parainNumCont",$parrain_num_contrat);
               $this->session->set_userdata("parainNumTel",$parrain_num_tel);
            }
-           $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"Votre parrain existe. Merci!";
+           $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"VOTRE PARRAIN EXISTE. MERCI!";
            if(isset($resultVerifParain["Id_parrain"]))
            $this->session->set_userdata("id_parrain",(isset($resultVerifParain["Id_parrain"])&&!empty($resultVerifParain["Id_parrain"]))?$resultVerifParain["Id_parrain"]:0);
            echo json_encode($resultVerifParain);
         }
+    }
+    
+    public function cancelParain(){
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";
+        $this->session->set_userdata("parainNumCont","");
+        $this->session->set_userdata("parainNumTel","");
+        $this->session->set_userdata("id_parrain","");
+        $resCancelParain = array("msg"=>"VOTRE PARRAINAGE A ETE ANNULE!");
+        echo json_encode($resCancelParain);
     }
     
     public function updateFacture(){
