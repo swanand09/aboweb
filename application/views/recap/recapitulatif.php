@@ -2,31 +2,42 @@
     <div class="row">
 <!--    INSTALLATION    -->
     <div class='column twelve bottom-20 recap-add'>
-        <label class='top-20'><strong>Vos coordonnées</strong></label>
+        <label class='top-20'><strong>VOS COORDONNÉES</strong></label>
         <div class='val civilite-prenom-nom'><?php echo $civilite_aa." ".$prenom_aa." ".$nom_aa;?></div>
+        <div class="val">Téléphone: <?php echo $telephone_portable;?></div>
+        <div class="val"><?php echo !empty($telephone_bureau)?", Bureau: ".$telephone_bureau:"";?></div>
+        <div class="val"><?php echo !empty($telephone_domicile)?" Domicile: ".$telephone_domicile:""; ?></div>
+        <div class="val">Mail: <?php echo $email;?></div>
+       
+        <label class='top-20'><strong>ADRESSE D'INSTALLATION</strong></label>
         <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_aa." ".$comp_numero_aa." ".$type_voie_aa." ".$voie_aa; ?></div>
         <div class='val adresse-suite'> <?php echo $adresse_suite_aa;?></div>
         <div class='val ensemble'><?php echo !empty($ensemble_aa)?"Ensemble ".$ensemble_aa:""; ?></div>
         <div class='val escalier-etage-porte'> <?php echo !empty($batiment_aa)?"Bat ".$batiment_aa:""; ?>  <?php echo !empty($escalier_aa)?"Escalier ".$escalier_aa:""; ?>  <?php echo !empty($etage_aa)?"Etage ".$etage_aa:""; ?>  <?php echo !empty($porte_aa)?"Porte ".$porte_aa:""; ?></div>
         <div class='val logo'> <?php echo !empty($logo_aa)?"Logo ".$logo_aa:""; ?></div>
         <div class='val code-postal-ville'><?php echo $code_postal_aa." ".$ville_aa;?></div>
-        <div class="val"><?php echo "portable: ".$telephone_portable;?><?php echo !empty($telephone_bureau)?", bureau: ".$telephone_bureau:"";?><?php echo !empty($telephone_domicile)?", domicile: ".$telephone_domicile:""; ?></div>
-       
+
 <!--     </div> -->
        <?php if(empty($check_adresse_facturation)){ ?>
 <!--     FACTURATION-->
 <!--        <div class='column twelve bottom-20 recap-add'>-->
-           <label class='top-20'><strong>Adresse de facturation</strong></label>
+           <label class='top-20'><strong>ADRESSE DE FACTURATION</strong></label>
            <div class='val civilite-prenom-nom'> <?php echo $civilite_af." ".$prenom_af." ".$nom_af; ?></div>
            <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_af." ".$comp_numero_af." ".$type_voie_af." ".$voie_af; ?></div>
            <div class='val adresse-suite'>  <?php echo $adresse_suite_af;?></div>
            <div class='val code-postal-ville'><?php echo $code_postal_af." ".$ville_af;?></div>     
 <!--        </div>     -->
        <?php } 
+       else
+       {
+        ?>
+        <label class='top-20'><strong>ADRESSE DE FACTURATION IDENTIQUE</strong></label>
+        <?php
+       }
        if(empty($check_adresse_livraison)){ ?>
 <!--        LIVRAISON -->
 <!--        <div class='column twelve bottom-20 recap-add'>-->
-           <label class='top-20'><strong>Adresse de livraison</strong></label>
+           <label class='top-20'><strong>ADRESSE DE LIVRAISON</strong></label>
            <div class='val civilite-prenom-nom'> <?php echo $civilite_al." ".$prenom_al." ".$nom_al; ?></div>
            <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_al." ".$comp_numero_al." ".$type_voie_al." ".$voie_al; ?></div>
            <div class='val adresse-suite'>  <?php echo $adresse_suite_al;?></div>
@@ -35,7 +46,12 @@
            <div class='val logo'>Logo <?php echo $logo_al; ?></div>
            <div class='val code-postal-ville'><?php echo $code_postal_al." ".$ville_al;?></div>
 <!--        </div>   -->
-       <?php } ?> 
+       <?php }
+       else {
+        ?>
+        <label class='top-20'><strong>ADRESSE DE FACTURATION IDENTIQUE</strong></label>
+        <?php
+       } ?> 
 
 <?php if($livraison_express=="true"){ ?>
 <!--<div class='column twelve bottom-20 recap-add'>-->
