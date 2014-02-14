@@ -1,5 +1,8 @@
 <?php
   $enregistreSouscriptionResult = $this->session->userdata("enregistreSouscriptionResult");
+  $livraison = $this->session->userdata("livraison_express");
+  $commande = ( $livraison == "true" ) ? "2" : "7";
+  $services = ( $livraison == "true" ) ? "7" : "10";
   
 ?>
 <section class='seven column centered page-merci'>
@@ -13,12 +16,12 @@
               <p>VOUS complétez et<br/>envoyer votre dossier</p>
             </li>
             <li class='sec'>
-              <h3>DANS <span>7</span> JOURS</h3>
+              <h3>DANS <span><?php print $commande; ?></span> JOURS</h3>
               <?php echo image('contenu/merci_7.png')?>
               <p>NOUS expedions<br/>votre commande</p>
             </li>
             <li class='thi'>
-              <h3>APRÉS <span>10</span> JOURS</h3>
+              <h3>APRÉS <span><?php print $services; ?></span> JOURS</h3>
               <?php echo image('contenu/merci_10.png')?>
               <p>Nous activons<br/>vos services</p>
             </li> 
