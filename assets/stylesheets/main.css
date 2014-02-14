@@ -1,6 +1,9 @@
 /*
 * Misc CSS
 */
+form label {
+padding-top: 5px;
+}
 .recap-add .val{
 	line-height: 20px;
 }
