@@ -11,10 +11,12 @@
            }
            $prevState = $this->session->userdata('prevState');
            if(isset($prevState[1]["parrainage"])){
-             $prevState[1]["parrainage"] = $this->colonneDroite["parrainage"];            
+             $prevState[1]["parrainage"] = $this->colonneDroite["parrainage"];   
+             $this->session->set_userdata('prevState',array($prevState[0],$prevState[1])); 
+              $prevState = $this->session->userdata('prevState');
            }
-           $this->session->set_userdata('prevState',array($prevState[0],$prevState[1]));  
-           $prevState = $this->session->userdata('prevState');
+            
+          
           if(!empty($prevState[1])&&isset($prevState[1])){
            foreach($prevState[1] as $key=>$val){
                if($key!="total_par_mois"){
