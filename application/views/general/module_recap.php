@@ -15,7 +15,8 @@
            }
            $this->session->set_userdata('prevState',array($prevState[0],$prevState[1]));  
            $prevState = $this->session->userdata('prevState');
-            foreach($prevState[1] as $key=>$val){
+          if(!empty($prevState[1])&&isset($prevState[1])){
+           foreach($prevState[1] as $key=>$val){
                if($key!="total_par_mois"){
                    if(!empty($val)){
                      if(!is_array($val)){
@@ -31,6 +32,7 @@
                
                
             }
+          }
        }
     ?>
    
