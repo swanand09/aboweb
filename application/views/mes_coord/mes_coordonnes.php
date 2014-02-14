@@ -122,11 +122,11 @@
           
           <!--Addresse suite-->
           <div class="row">
-            <div class='columns two'><label>ADRESSE </label></div><div class='ten columns'><input type='text' class='validate[maxSize[64]] adresse' name='voie_af' value="<?php echo set_value("voie_af",$voie_af);?>" /></div>
+            <div class='columns two'><label>ADRESSE </label></div><div class='ten columns'><input type='text' class='validate[maxSize[32]] adresse' name='voie_af' value="<?php echo set_value("voie_af",$voie_af);?>" /></div>
           </div>
           <!--Complement d'adresse-->
           <div class='row'>
-            <div class='columns three'><label>COMPLÉMENT D'ADRESSE</label></div><div class='nine columns'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] adresse_suite' maxlength='64' name='adresse_suite_af' value="<?php echo set_value("adresse_suite_af",$adresse_suite_af);?>" /></div>
+            <div class='columns three'><label>COMPLÉMENT D'ADRESSE</label></div><div class='nine columns'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] adresse_suite' maxlength='30' name='adresse_suite_af' value="<?php echo set_value("adresse_suite_af",$adresse_suite_af);?>" /></div>
           </div>
           <!--Code postal & Ville -->
           <div class="row">
@@ -182,7 +182,7 @@
           
           <!--Addresse-->
           <div class='row'>
-            <div class='columns two'><label>ADRESSE </label></div><div class='ten columns'><input type='text' class='validate[maxSize[64]] adresse' name='voie_al' value="<?php echo set_value("voie_al",$voie_al);?>" /></div>
+            <div class='columns two'><label>ADRESSE </label></div><div class='ten columns'><input type='text' class='adresse' name='voie_al' maxlength='200' value="<?php echo set_value("voie_al",$voie_al);?>" /></div>
           </div>
           <div class='row'>
             <div class='columns three'><label>COMPLÉMENT D'ADRESSE</label></div><div class='nine columns'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] adresse_suite' maxlength='64' name='adresse_suite_al' value="<?php echo set_value("adresse_suite_al",$adresse_suite_al);?>" /></div>            
