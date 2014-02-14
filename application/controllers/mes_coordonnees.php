@@ -23,6 +23,11 @@ class Mes_coordonnees extends MY_Controller {
                   array_push($this->data["factureData"],$val);
               }
             }
+            $panierVal = $this->session->userdata("panierVal");
+            if(isset($panierVal["forfaitdum1"])&&empty($panierVal["forfaitdum1"])){
+             redirect('mon_offre');
+            }
+            $this->session->set_userdata("etapePasse",1); //identifier les etapes traverser
        }else{
            $this->session->destroy();
            redirect('mon_offre');
@@ -282,6 +287,7 @@ class Mes_coordonnees extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $parrain_num_contrat = trim($this->input->post('parrain_num_contrat'));
         $parrain_num_tel    = trim($this->input->post('parrain_num_tel'));
+         $this->session->set_userdata("parrain","non");
         if(empty($parrain_num_contrat)||empty($parrain_num_tel)){
             echo json_encode(array("Error"=>array("ErrorMessage"=>"VEUILLEZ SAISIR LE NUMERO DE CONTRAT ET LE NUMERO DE TELEPHONE DE VOTRE PARRAIN!")));
         }else{
@@ -290,6 +296,7 @@ class Mes_coordonnees extends MY_Controller {
            if(empty($resultVerifParain["Error"])){           
               $this->session->set_userdata("parainNumCont",$parrain_num_contrat);
               $this->session->set_userdata("parainNumTel",$parrain_num_tel);
+               $this->session->set_userdata("parrain","oui");
            }
            $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"VOTRE PARRAIN EXISTE. MERCI!";
            if(isset($resultVerifParain["Id_parrain"]))
@@ -300,10 +307,16 @@ class Mes_coordonnees extends MY_Controller {
     
     public function cancelParain(){
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
-        $this->session->set_userdata("parainNumCont","");
-        $this->session->set_userdata("parainNumTel","");
-        $this->session->set_userdata("id_parrain","");
-        $resCancelParain = array("msg"=>"VOTRE PARRAINAGE A ETE ANNULE!");
+        $idParrain = $this->session->userdata("id_parrain");
+        $this->session->set_userdata("parrain","non");
+        if(!empty($idParrain)){
+            $this->session->set_userdata("parainNumCont","");
+            $this->session->set_userdata("parainNumTel","");
+            $this->session->set_userdata("id_parrain","");
+            $resCancelParain = array("msg"=>"VOTRE PARRAINAGE A ETE ANNULE!");
+        }else{
+            $resCancelParain = array("msg"=>"VOUS N'AVEZ PAS DE PARRAIN!");
+        }
         echo json_encode($resCancelParain);
     }
     

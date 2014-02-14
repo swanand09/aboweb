@@ -144,6 +144,8 @@ class Mon_offre extends MY_Controller {
                     $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/num_eligib_info",$data,true);
                     
                 }else if($result["interrogeEligibiliteResult"]["Erreur"]["NumError"]==201){
+                    log_message('error', 'erreur '.$result["interrogeEligibiliteResult"]["Erreur"]["NumError"]);
+                    log_message('error', $num_tel." n'est pas éligible.");
                     echo json_encode(array(
                                             $this->contenuGauche,
                                             $this->colonneDroite,
@@ -154,6 +156,8 @@ class Mon_offre extends MY_Controller {
                             );
                     exit;
                 }else{
+                    log_message('error', 'erreur '.$result["interrogeEligibiliteResult"]["Erreur"]["NumError"]);
+                    log_message('error', "services indisponibles, numéro: ".$num_tel);
                     echo json_encode(array(
                                             $this->contenuGauche,
                                             $this->colonneDroite,
@@ -168,6 +172,7 @@ class Mon_offre extends MY_Controller {
           throw new Exception("VOTRE NUMERO EST INVALIDE. VEUILLEZ RESSAYER.");
       }
        }catch(Exception $e){
+           log_message('error', $num_tel." est invalide");
             echo json_encode(array(
                                             $this->contenuGauche,
                                             $this->colonneDroite,
@@ -231,15 +236,18 @@ class Mon_offre extends MY_Controller {
        $consv_num_tel = $this->input->post('consv_num_tel'); 
        $this->session->set_userdata("consv_num_tel",$consv_num_tel);
        
-        $this->prevState = $this->session->userdata("prevState");
+       $this->prevState = $this->session->userdata("prevState");
        
+       $num_tel = $this->session->userdata("num_tel"); 
        //connection à la fonctionalité recupere_info du wdsl
        $context = $this->session->userdata('context');
        if(empty($context)){
            // error 202 ligne deja activé   
-            $this->colonneDroite["form_test_ligne"] = $this->prevState[1]["form_test_ligne"];
-            echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>202));   
-            exit;
+           log_message('error', 'erreur 202');
+           log_message('error', "services indisponibles, numéro: ".$num_tel);
+           $this->colonneDroite["form_test_ligne"] = $this->prevState[1]["form_test_ligne"];
+           echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>202));   
+           exit;
        }
        try{
        //verifie si on a deja les flux de produit
@@ -316,7 +324,8 @@ class Mon_offre extends MY_Controller {
            throw new Exception("Nos services sont actuellement indisponibles nous vous invitons a conctacter notre service commercial");
        }
        
-       }catch(Exception $e){
+       }catch(Exception $e){             
+           log_message('error', "services indisponibles, numéro: ".$num_tel);
            $this->session->destroy();           
            echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>"redirect","msg"=>"<p><strong>".strtoupper($e->getMessage())."</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")); 

@@ -1,6 +1,6 @@
 <div class="left-etape-content ligne-deja-activer">
     <div class="seven columns">
-        <p>NOS SERVICES SONT ACTUELLEMENT INDISPONIBLES.</p>
+        <p>NOS SERVICES SONT ACTUELLEMENT INDISPONIBLES/UNE ERREUR EST SURVENUE.</p>
     </div>
     <div class="five columns">
         <?php echo image('contenu/unconseiller.png',NULL,array("title"=>"Contacter")); ?>      

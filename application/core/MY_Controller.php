@@ -699,8 +699,6 @@ class MY_Controller extends CI_Controller {
                                                                         
                         break;
                     }
-                }else{                  
-                    log_message('error', 'There are no dummy values');
                 }
             }
            
@@ -723,7 +721,8 @@ class MY_Controller extends CI_Controller {
             
             
             //verif parainage
-            $offparrainId = $this->session->userdata('offreparrainage_id');          
+            $offparrainId = $this->session->userdata('offreparrainage_id');  
+            $this->data["parrain"] =  $this->session->userdata("parrain");
             $this->data["parainNumCont"] = $this->session->userdata("parainNumCont");
             $this->data["parainNumTel"] = $this->session->userdata("parainNumTel");
            if((isset($this->data["parainageId"])&&!empty($this->data["parainageId"]))||!empty($offparrainId)){

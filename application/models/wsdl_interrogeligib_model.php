@@ -306,9 +306,9 @@ class Wsdl_interrogeligib_model extends CI_Model
         }
        }
     $civiliteAF = $this->session->userdata("civilite_af");
-    $addFacIdIns = !empty($civiliteAF)?false:true;
+    $addFacIdIns = !empty($civiliteAF)?0:1;
     $civiliteAL = $this->session->userdata("civilite_al");
-    $addLivIdIns = !empty($civiliteAL)?false:true;
+    $addLivIdIns = !empty($civiliteAL)?0:1;
     
     $xmlStr = '<enregistreSouscription xmlns="msvaboweb">
                  <_con_id_parrainage>'.$dataArr["con_id_parrainage"].'</_con_id_parrainage>

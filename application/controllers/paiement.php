@@ -11,7 +11,29 @@ class Paiement extends MY_Controller {
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $this->data["userdata"] = $this->session->all_userdata();  
-        return $this->controller_paiement_vue();   
+        $etapePasse = $this->session->userdata("etapePasse");
+         if($this->input->post("page_3")=="recapitulatif"&&$etapePasse>=2){
+               $this->session->set_userdata("etapePasse",3); //identifier les etapes traverser
+              return $this->controller_paiement_vue();   
+         }else{
+              $produit =  $this->session->userdata("produit");
+                if(!isset($produit)&&empty($produit)){
+                     $this->session->destroy();
+                     redirect('mon_offre');
+                }
+                switch($etapePasse){
+                    case 1:
+                          redirect("mes_coordonnees");
+                    break;
+                    case 2:
+                        redirect("recapitulatif");
+                    break;
+                    default:
+                        redirect("mon_offre");
+                }
+         }
+        
+       
     }
     
     public function generateDomPdf()
@@ -313,7 +335,7 @@ class Paiement extends MY_Controller {
                if($this->input->post("adresse_identique")!=1){
                    $dataArr["mode_paiement"][] =
                            array(
-                                "adresseIdentiqueAdresseFacturation" => false,
+                                "adresseIdentiqueAdresseFacturation" => 0,
                                 "civilite"                           => $this->input->post("civilite_pa"),
                                 "nom"                                => $this->input->post("nom_pa"),
                                 "prenom"                             => $this->input->post("prenom_pa"),
@@ -341,7 +363,7 @@ class Paiement extends MY_Controller {
                }else{
                     $dataArr["mode_paiement"][] =
                            array(
-                               "adresseIdentiqueAdresseFacturation" => true,
+                               "adresseIdentiqueAdresseFacturation" => 1,
                                 "civilite"                           => "",
                                 "nom"                                => "",
                                 "prenom"                             => "",
@@ -405,20 +427,28 @@ class Paiement extends MY_Controller {
        
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
         
-        $this->session->set_userdata("enregistreSouscriptionResult",$result["enregistreSouscriptionResult"]);
-        switch($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]){
-            case "700":
-                redirect('refus_de_paiement/index/cb');
-            break;
-            case "701":
-                redirect('refus_de_paiement/index/cb');
-            break;
-            case "820":
-                redirect('refus_de_paiement/index/rib');
-            break;
+        if(!isset($result["enregistreSouscriptionResult"]["Numero_contrat"])||empty($result["enregistreSouscriptionResult"]["Numero_contrat"])){
+            log_message('error', 'pas de numéro de contrat');
+            redirect('refus_de_paiement/index/fail');
         }
+        
+        $this->session->set_userdata("enregistreSouscriptionResult",$result["enregistreSouscriptionResult"]);
+       
       // if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==820||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==700||$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]==701)){
         if(isset($result["enregistreSouscriptionResult"]["Erreur"])&&!empty($result["enregistreSouscriptionResult"]["Erreur"])){   
+             log_message('error', 'erreur '.$result["enregistreSouscriptionResult"]["Erreur"]["NumError"]);
+             log_message('error', $result["enregistreSouscriptionResult"]["Erreur"]["ErrorMessage"]);
+           switch($result["enregistreSouscriptionResult"]["Erreur"]["NumError"]){
+                case "700":
+                    redirect('refus_de_paiement/index/cb');
+                break;
+                case "701":
+                    redirect('refus_de_paiement/index/cb');
+                break;
+                case "820":
+                    redirect('refus_de_paiement/index/rib');
+                break;
+          }
             
             redirect('refus_de_paiement/index/fail');
         }

@@ -157,10 +157,12 @@ class Stb_model extends CI_Model
         $countId =0;
         foreach($fluxData["optionTv"] as $key=>$val){
             foreach($val as $key2=>$val2){
-               $idWebOption .=($countId==(sizeof($val)-1))?$val2["id_web"].",":$val2["id_web"];
+             //  $idWebOption .=($countId==(sizeof($val)-1))?$val2["id_web"].",":$val2["id_web"];
+                $idWebOption .= $val2["id_web"].",";
                $countId++;
             }
         }
+       $idWebOption =  rtrim($idWebOption, ",");
         //options
         $sql2 = "select C.dept_ids,C.bouq_uid,D.designation as nom_bouquet, C.cat_uid, C.nom_categorie, C.chain_uid, C.nom_chaines, C.logo as img_logo, C.icon as img_icon,C.order FROM 
                   (

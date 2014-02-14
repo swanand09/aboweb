@@ -12,8 +12,11 @@ class Recapitulatif extends MY_Controller {
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $this->data["userdata"] = $this->session->all_userdata();
-        
-        if($this->input->post("page_3")=="mes_coordonnes"){
+         $etapePasse = $this->session->userdata("etapePasse");
+        if($this->input->post("page_2")=="mes_coordonnees"||$etapePasse>=2){
+            if($etapePasse==1){
+            $this->session->set_userdata("etapePasse",2); //identifier les etapes traverser
+            
             $this->session->set_userdata('civilite_aa',$this->input->post("civilite_aa"));
             $this->session->set_userdata('nom_aa',$this->input->post("nom_aa"));
             $this->session->set_userdata('prenom_aa',$this->input->post("prenom_aa"));
@@ -68,7 +71,13 @@ class Recapitulatif extends MY_Controller {
             $this->session->set_userdata('verif_email',$this->input->post("verif_email"));
             $this->session->set_userdata('email',$this->input->post("email"));
             $this->session->set_userdata('type_de_facturation',$this->input->post("type_facturation_hid"));
-
+            }
+        }else{           
+            if(isset($etapePasse)&&$etapePasse==1){
+                redirect("mes_coordonnees");
+            }else{
+                redirect("mon_offre");
+            }
         }
         //display values
 

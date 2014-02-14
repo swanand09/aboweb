@@ -81,6 +81,7 @@
     </div>
     <hr class="sexy">
     <form id='frm-mon-recap' action="paiement" method="POST">
+         <input type="hidden" name="page_3" value="recapitulatif" />
         <div class="row">
           <?php
           $prefixNum= substr($this->session->userdata("num_tel"),0,4);
