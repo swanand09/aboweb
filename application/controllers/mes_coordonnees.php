@@ -315,6 +315,9 @@ class Mes_coordonnees extends MY_Controller {
             $this->session->set_userdata("id_parrain","");
             $resCancelParain = array("msg"=>"VOTRE PARRAINAGE A ETE ANNULE!");
         }else{
+            $this->session->set_userdata("parainNumCont","");
+            $this->session->set_userdata("parainNumTel","");
+            $this->session->set_userdata("id_parrain","");
             $resCancelParain = array("msg"=>"VOUS N'AVEZ PAS DE PARRAIN!");
         }
         echo json_encode($resCancelParain);

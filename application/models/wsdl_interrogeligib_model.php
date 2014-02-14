@@ -407,8 +407,15 @@ class Wsdl_interrogeligib_model extends CI_Model
     
 $soapEligib = $this->nusoap_client->serializeEnvelope($xmlStr,'',array(),'document', 'literal'); 
         $this->nusoap_client->operation = "msvaboweb/enregistreSouscription";
-        $result = $this->nusoap_client->send($soapEligib,'msvaboweb/enregistreSouscription');
-        
+        try{
+            $result = $this->nusoap_client->send($soapEligib,'msvaboweb/enregistreSouscription');
+            if(!isset($result)||empty($result)){
+                throw new Exception("Le webservice a pris trop de temps à proceder l'enregistrement de la souscription");
+            }
+        }catch(Exception $e){
+            log_message('error',$e->getMessage());
+            return array();
+        }
     $this->load->library('email');
 //    $config['mailtype'] = 'html';
     //$this->email->initialize($config);

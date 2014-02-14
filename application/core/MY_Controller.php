@@ -426,7 +426,6 @@ class MY_Controller extends CI_Controller {
              $this->majPromo();
              $this->majSession(array("panierVal"=>$this->panierVal,"produIdCrm"=>$this->produIdCrm));
              $this->getTotal1er2em();      
-             log_message('error', 'this is a test');
              return $this->majVuePanier();         
         }
 
