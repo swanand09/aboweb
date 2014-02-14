@@ -39,5 +39,7 @@
     ?>
    
 </div>
+<?php  if(!empty($prevState[1])&&isset($prevState[1])){?>
 <div id ="total_mois"><?php echo (array_key_exists("prevState",$userdata))?$userdata["prevState"][1]["total_par_mois"]:""; ?></div>
+<?php } ?>
  <div id="stopScroll"></div>
