@@ -1,3 +1,4 @@
+<?php  $prevState = $this->session->userdata('prevState'); ?>
 <div id="recap_contenu">    
    <?php
         if(array_key_exists("prevState",$userdata)){
@@ -9,7 +10,7 @@
            if((isset($this->data["parainageId"])&&!empty($this->data["parainageId"]))||!empty($offparrainId)){
                $this->colonneDroite["parrainage"]    = $this->load->view("general/parrainage",$this->data,true);   
            }
-           $prevState = $this->session->userdata('prevState');
+          
            if(isset($prevState[1]["parrainage"])){
              $prevState[1]["parrainage"] = $this->colonneDroite["parrainage"];   
              $this->session->set_userdata('prevState',array($prevState[0],$prevState[1])); 
@@ -39,7 +40,7 @@
     ?>
    
 </div>
-<?php  if(!empty($prevState[1])&&isset($prevState[1])){?>
-<div id ="total_mois"><?php echo (array_key_exists("prevState",$userdata))?$userdata["prevState"][1]["total_par_mois"]:""; ?></div>
-<?php } ?>
+<?php  //if(!empty($prevState[1])&&isset($prevState[1])){?>
+<div id ="total_mois"><?php echo  (!empty($prevState[1])&&isset($prevState[1]))? $prevState[1]["total_par_mois"]:""; //echo (array_key_exists("prevState",$userdata))?$userdata["prevState"][1]["total_par_mois"]:""; ?></div>
+<?php //} ?>
  <div id="stopScroll"></div>
