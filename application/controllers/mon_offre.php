@@ -32,7 +32,7 @@ class Mon_offre extends MY_Controller {
                                     'name'      => 'ligne_sufix',
                                     'id'        => 'ligne_sufix',
                                     'type'      => 'text',
-                                    'class'     => 'validate[required,custom[onlyNumberSp],minSize[6],maxSize[6]]',
+                                    'class'     => 'validate[required,custom[integer],minSize[6],maxSize[6]]',
                                     'maxlength'      => '6'
                                    
                               );

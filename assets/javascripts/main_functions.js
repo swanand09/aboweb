@@ -15,7 +15,10 @@ var preload = function(){
           
           function procTestEligib(where)
           {
-               
+               if(!$(".frm-etape-tester").validationEngine('validate')){
+                  return false;
+               }
+
                     var num_tel = "";
                     if($("#ligne").attr("value")){
                         num_tel = $("#ligne").val();

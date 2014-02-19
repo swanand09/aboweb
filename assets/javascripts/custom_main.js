@@ -171,9 +171,9 @@ $(document).on('click','#redu_facture',function(){
 	$(".frm-etape-tester-block").validationEngine();
 	$(".frm-etape-tester").validationEngine({
 		'custom_error_messages': {
-			'#ligne': {
-				'minSize': {'message' :" * 10 caractères requis"},
-				'maxSize': {'message' :" * 10 caractères requis"}
+			'#ligne_sufix': {
+				'custom[integer]': {'message' :" * Seuls les chiffres sont acceptés"},
+				
 			}
 		}
 	});
