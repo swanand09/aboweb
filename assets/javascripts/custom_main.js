@@ -129,14 +129,20 @@ $(document).on('click','#redu_facture',function(){
                          preload();
                          $.post(
                             cancelParain,                        
-                            function(data){       
-                            if(data.msg!="VOUS N'AVEZ PAS DE PARRAIN!"){
-                              $('#modalpaseli').empty().prepend("<p><strong>"+data.msg+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal();                        
-                            }
-                                    $.unblockUI();
-                             $("#parrain_num_contrat").val("");
-                             $("#parrain_num_tel").val("");
-                             $("#verifAccParai").removeClass("parrainage-accepte").empty().html("<a href='javascript:verifParainWebServ();'>Verifier</a> ");
+                            function(data){  
+                               if(data.error=="redirect"){  
+                                    $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                                   //$(location).attr('href',monOffre);
+                                    $.unblockUI();     
+                                   return false;
+                               }                                 
+                                if(data.msg!="VOUS N'AVEZ PAS DE PARRAIN!"){
+                                  $('#modalpaseli').empty().prepend("<p><strong>"+data.msg+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal();                        
+                                }
+                                        $.unblockUI();
+                                 $("#parrain_num_contrat").val("");
+                                 $("#parrain_num_tel").val("");
+                                 $("#verifAccParai").removeClass("parrainage-accepte").empty().html("<a href='javascript:verifParainWebServ();'>Verifier</a> ");
                             }, "json"
                          );
 		}

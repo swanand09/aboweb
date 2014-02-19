@@ -224,7 +224,16 @@ class Mon_offre extends MY_Controller {
     
     public function forfait()
     {         
-       $this->controller_verifySessExp()? redirect('mon_offre'):"";     
+      if($this->controller_verifySessExp()==true){
+         echo json_encode(
+                            array(
+                                    "error"=>"redirect",
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                          );
+        exit;
+         
+      }     
        
        
        //reset session de type de faturation à null
@@ -341,8 +350,16 @@ class Mon_offre extends MY_Controller {
     
     public function prevState($page='')
     {
-       
-        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+       if($this->controller_verifySessExp()==true){
+          echo json_encode(
+                            array(
+                                    "error"=>"redirect",
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                          );
+        exit;                 
+       }     
+       // $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         //$this->prevState =  $this->session->userdata("prevState"); 
         $redu_facture = $this->session->userdata("redu_facture");
         $consv_num_tel = $this->session->userdata("consv_num_tel");
@@ -430,7 +447,16 @@ class Mon_offre extends MY_Controller {
     
     public function refreshRecapCol()
     {
-         $this->controller_verifySessExp()? redirect('mon_offre'):"";
+         if($this->controller_verifySessExp()==true){
+            echo json_encode(
+                              array(
+                                      "error"=>"redirect",
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+    </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                            );
+          exit;              
+         } 
+         //$this->controller_verifySessExp()? redirect('mon_offre'):"";
          
          //initialiser les tarifs a zéro pour le panier
          $this->session->set_userdata('totalParMois',"");
@@ -551,7 +577,16 @@ class Mon_offre extends MY_Controller {
     
     public function updateTvDecodeur()
     {
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";              
+        //$this->controller_verifySessExp()? redirect('mon_offre'):"";              
+        if($this->controller_verifySessExp()==true){
+            echo json_encode(
+                              array(
+                                      "error"=>"redirect",
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+    </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                            );
+          exit;                
+       } 
         $decoder_tv   =  $this->input->post('decoder_tv');                    
          //MAJ PANIER
         $this->majPanier(array("produit"=>array("TELEVISION"),"etape"=>array("choixTv",$decoder_tv) ));          
@@ -563,7 +598,16 @@ class Mon_offre extends MY_Controller {
     
     //dummy3 update bouquet
     public function updateBouquet(){
-        $this->controller_verifySessExp()? redirect('mon_offre'):""; 
+        if($this->controller_verifySessExp()==true){
+            echo json_encode(
+                              array(
+                                      "error"=>"redirect",
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+    </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                            );
+          exit;              
+       }                
+        // $this->controller_verifySessExp()? redirect('mon_offre'):""; 
         $bouquetChoisi =  $this->input->post("bouquetChoisi");
         $this->session->set_userdata("bouquetChoisi",$bouquetChoisi);
         $this->data["bouquetChoisi"] =  $bouquetChoisi;
@@ -574,7 +618,16 @@ class Mon_offre extends MY_Controller {
     
     //dummy3 update option
     public function updateOptions(){
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";
+       if($this->controller_verifySessExp()==true){
+          echo json_encode(
+                            array(
+                                    "error"=>"redirect",
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                          );
+        exit;            
+       } 
+        // $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $checkOption =  $this->input->post("checkOption");
          //MAJ PANIER
         $this->majPanier(array("produit"=>array("OPTION_TV"),"etape"=>array("choixOption",$checkOption) )); 

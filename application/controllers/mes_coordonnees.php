@@ -276,7 +276,16 @@ class Mes_coordonnees extends MY_Controller {
     }
     
     public function verifEmail(){
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";       
+        //$this->controller_verifySessExp()? redirect('mon_offre'):"";       
+        if($this->controller_verifySessExp()==true){
+          echo json_encode(
+                            array(
+                                    "error"=>"redirect",
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                          );
+        exit;               
+       } 
         $email_msv = $this->input->post("email_msv");
         $resultVerifEmail =$this->Wsdl_interrogeligib->verifEmail($email_msv);
         echo json_encode(array("msg"=>(empty($resultVerifEmail["Error"])?"CET EMAIL EST DISPONIBLE":"CET EMAIL N'EST PAS DISPONIBLE"),"error"=>($resultVerifEmail["Disponible"]=="false"?"401":"0")));
@@ -284,7 +293,16 @@ class Mes_coordonnees extends MY_Controller {
     }
     
     public function verifParain(){
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";
+      // $this->controller_verifySessExp()? redirect('mon_offre'):"";
+        if($this->controller_verifySessExp()==true){
+         echo json_encode(
+                            array(
+                                    "error"=>"redirect",
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                          );
+        exit;                
+       } 
         $parrain_num_contrat = trim($this->input->post('parrain_num_contrat'));
         $parrain_num_tel    = trim($this->input->post('parrain_num_tel'));
          $this->session->set_userdata("parrain","non");
@@ -306,7 +324,16 @@ class Mes_coordonnees extends MY_Controller {
     }
     
     public function cancelParain(){
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";
+       // $this->controller_verifySessExp()? redirect('mon_offre'):"";
+        if($this->controller_verifySessExp()==true){
+          echo json_encode(
+                            array(
+                                    "error"=>"redirect",
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+  </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                          );
+         exit;               
+       } 
         $idParrain = $this->session->userdata("id_parrain");
         $this->session->set_userdata("parrain","non");
         if(!empty($idParrain)){
@@ -324,7 +351,16 @@ class Mes_coordonnees extends MY_Controller {
     }
     
     public function updateFacture(){
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";              
+       // $this->controller_verifySessExp()? redirect('mon_offre'):"";              
+       if($this->controller_verifySessExp()==true){
+            echo json_encode(
+                              array(
+                                      "error"=>"redirect",
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+    </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
+                            );
+          exit;              
+       } 
          //MAJ PANIER
         $this->majPanier(array("produit"=>array("FACTURATION"),"etape"=>array("choixFacture") )); 
         echo json_encode($this->colonneDroite);

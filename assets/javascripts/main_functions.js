@@ -73,9 +73,9 @@ var preload = function(){
                         redu_facture : redu_facture,
                         consv_num_tel : consv_num_tel
                      },
-                    function(data){   
-                         if(data.error=="redirect"){     
-                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
+                    function(data){
+                         if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -126,7 +126,13 @@ var preload = function(){
                      {
                         id_crm : id
                      },
-                    function(data){
+                    function(data){  
+                         if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                        }
                          if(data[0].contenu_html!="redirect to mes coordonnees"){
                             $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
                              var key, count = 0;
@@ -168,6 +174,13 @@ var preload = function(){
                             decoder_tv   : "check"
                          },
                         function(data){   
+                            
+                             if(data.error=="redirect"){  
+                                    $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                                   //$(location).attr('href',monOffre);
+                                    $.unblockUI();     
+                                   return false;
+                               }
                          
                             var key, count = 0;
                             for(key in data) {
@@ -192,6 +205,12 @@ var preload = function(){
                                 decoder_tv   : "uncheck"
                              },
                             function(data){
+                               if(data.error=="redirect"){  
+                                    $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                                   //$(location).attr('href',monOffre);
+                                    $.unblockUI();     
+                                   return false;
+                                }
                               //enlever tv dans forfait dummy1
                              // $("#recap_contenu").remove().append("forfait_dummy1");
                               $("#recap_contenu").children("#msvForfait").remove();
@@ -228,12 +247,12 @@ var preload = function(){
                         bouquetChoisi : valeur
                      },
                     function(data){
-                        /*
-                      $("#recap_contenu").children("#promo").remove(); 
-                      $("#recap_contenu").append(data.libelles_promo_dummy2);
-                      $("#recap_contenu").children("#options").remove();  
-                      $("#recap_contenu").append(data.options_dummy3);
-                      $("#total_mois").empty().append(data.total_par_mois);  */
+                        if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                        }
                       var key, count = 0;
                             for(key in data) {
                                 if(count==0) {
@@ -270,12 +289,12 @@ var preload = function(){
                         checkOption   : checkOption
                      },
                     function(data){
-                        /*
-                      $("#recap_contenu").children("#promo").remove(); 
-                       $("#recap_contenu").append(data.libelles_promo_dummy2);  
-                      $("#recap_contenu").children("#options").remove();  
-                      $("#recap_contenu").append(data.options_dummy3);
-                      $("#total_mois").empty().append(data.total_par_mois);  */
+                        if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                        }
                        var key, count = 0;
                         for(key in data) {
                             if(count==0) {
@@ -301,12 +320,13 @@ var preload = function(){
                      {
                         typeFacture      : typeFacture,
                      },
-                    function(data){    /*
-                      $("#recap_contenu").children("#promo").remove(); 
-                      $("#recap_contenu").append(data.libelles_promo_dummy2);
-                      $("#recap_contenu").children("#colFacture").remove();  
-                      $("#recap_contenu").append(data.envoie_facture_dummy6);
-                      $("#total_mois").empty().append(data.total_par_mois);  */
+                    function(data){    
+                         if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                        }
                         var key, count = 0;
                         for(key in data) {
                             if(count==0) {
@@ -353,7 +373,12 @@ var preload = function(){
                         email_msv : emailMsv
                      },
                     function(data){                 
-                     // alert(data.msg);  
+                     if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                     }
                        $('#modalpaseli').empty().prepend("<p><strong>"+data.msg+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal(); 
                       switch(data.error){
                           case "401":
@@ -383,6 +408,12 @@ var preload = function(){
                            parrain_num_tel    : $("#parrain_num_tel").val()
                         },
                        function(data){
+                        if(data.error=="redirect"){  
+                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                            //$(location).attr('href',monOffre);
+                             $.unblockUI();     
+                            return false;
+                        }
                         $('#modalpaseli').empty().prepend("<p><strong>"+data.Error.ErrorMessage+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal(); 
                         $.unblockUI(); 
                         if(data.Error.ErrorMessage=="VOTRE PARRAIN EXISTE. MERCI!"){
