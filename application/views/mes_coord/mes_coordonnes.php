@@ -59,7 +59,7 @@
           <!--Code postal & Ville & Localisation-->
            <div class="row">
                 <div class='columns two'><label>CODE POSTAL <span class='has-tip' title='obligatoire'>*</span></label></div>
-                <div class='columns two'><input type='text' class='validate[required,funcCall[validateCodePostalEntryList]]' name='code_postal_aa' id='codepostal' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>"/></div>
+                <div class='columns two'><input type='text' class='validate[required,funcCall[validateCodePostalEntryList]]' name='code_postal_aa' id='codepostal' maxlength='5' value="<?php echo set_value("code_postal_aa",$code_postal_aa);?>"/></div>
                 <div class='columns two'><label>VILLE<span class='has-tip' title='obligatoire'>*</span></label></div>
                 <div class='columns six'><input type='text' class='validate[required,funcCall[validateVilleEntryList]] ville' name='ville_aa' id='ville' value="<?php echo set_value("ville_aa",$ville_aa);?>"/></div>
           </div>
@@ -67,7 +67,7 @@
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
             <div class="columns"><label>TÉLÉPHONE PORTABLE<span class='has-tip' title='obligatoire'>*</span></label></div>
-            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' maxlength='10'/></div>
+            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,custom[integer],funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' maxlength='10'/></div>
             <div class='column end'>
                 <a href='#' class='has-tip' data-width='360' title='Votre numéro de téléphone mobile vous permettra de recevoir par SMS les informations liées à l’évolution de votre activation ainsi que du suivi de votre livraison.'>
                     <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
@@ -75,10 +75,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="columns"><label>TÉLÉPHONE DE BUREAU</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="telephone_bureau telephone" maxlength='10'></div>
+            <div class="columns"><label>TÉLÉPHONE DE BUREAU</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="validate[condRequired[custom[integer]]] telephone_bureau telephone" maxlength='10'></div>
           </div>
           <div class="row">
-            <div class="columns"><label>TÉLÉPHONE DU DOMICILE</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="telephone_domicile telephone" maxlength='10'></div>
+            <div class="columns"><label>TÉLÉPHONE DU DOMICILE</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="validate[condRequired[custom[integer]]] telephone_domicile telephone" maxlength='10'></div>
           </div>
         </div>
       <!--adresse de facturation-->
@@ -131,7 +131,7 @@
           <!--Code postal & Ville -->
           <div class="row">
             <div class='columns two'><label>CODE POSTAL </label></div>
-            <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_af' id='codepostal2' value="<?php echo set_value("code_postal_af",$code_postal_af);?>" /></div>
+            <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_af' id='codepostal2' maxlength='5' value="<?php echo set_value("code_postal_af",$code_postal_af);?>" /></div>
             <div class='columns two'><label>VILLE</label></div>
             <div class='columns six'><input type='text' class='validate[required] ville' name='ville_af' value="<?php echo set_value("ville_af",$ville_af);?>" id='ville2' /></div>
           </div>
@@ -204,7 +204,7 @@
           <!--Code postal & Ville -->
           <div class='row'>
             <div class='columns two'><label>CODE POSTAL <span class='has-tip' title='obligatoire'>*</span></label></div>
-            <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_al' value="<?php echo set_value("code_postal_al",$code_postal_al);?>" id='codepostal3' /></div>
+            <div class='columns two'><input type='text' class='validate[required] code_postal' name='code_postal_al' value="<?php echo set_value("code_postal_al",$code_postal_al);?>" id='codepostal3' maxlength='5' /></div>
             <div class='columns two'><label>VILLE<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class='columns six'><input type='text' class='validate[required] ville' name='ville_al' value="<?php echo set_value("ville_al",$ville_al);?>" id='ville3' /></div>            
           </div>
