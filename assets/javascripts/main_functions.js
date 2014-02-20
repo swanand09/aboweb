@@ -361,8 +361,8 @@ var preload = function(){
                       maTv : maTv          
                      },
                    function(data){
-                       $.unblockUI();   
                        $(location).attr('href',"mes_coordonnees");
+                       $.unblockUI();  
                    },"json"
                 );
            }
