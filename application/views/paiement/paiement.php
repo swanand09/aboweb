@@ -141,7 +141,7 @@
               </div>
               <div class='column eight'></div>
             </div>
-          <div class='column three top-10'>Cryptogramme</div><div class='column three end top-10'><input class='validate[required,custom[onlyNumberSp],minSize[3]]' type='text' name='cryptogramme' id='cryptogramme'/></div>
+          <div class='column three top-10'>Cryptogramme</div><div class='column three end top-10'><input class='validate[required,custom[onlyNumberSp],minSize[3]]' maxlength='3' type='text' name='cryptogramme' id='cryptogramme'/></div>
         </div>
       </div>
       <!---->
