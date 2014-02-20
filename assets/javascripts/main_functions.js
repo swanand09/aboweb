@@ -353,6 +353,7 @@ var preload = function(){
           }
           
           function gotoMesCoord(){
+              preload();    
               var maTv = $("#cont_mon_off").html();
                 $.post(
                     mesCoordonnes,
@@ -360,6 +361,7 @@ var preload = function(){
                       maTv : maTv          
                      },
                    function(data){
+                       $.unblockUI();   
                        $(location).attr('href',"mes_coordonnees");
                    },"json"
                 );
