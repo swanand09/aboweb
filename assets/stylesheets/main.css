@@ -1175,3 +1175,14 @@ form .formError .formErrorArrow div {
 .page-refus-paiement .back-button { margin: 25px; }
 .page-refus-paiement .cartebancaire .nine strong { color: #a63d44; }
 .parrain-section a{ color:#fff;}
+
+.no-script{
+	background-color: #CD3627;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}

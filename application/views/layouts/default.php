@@ -41,7 +41,9 @@
   </style>
 </head>
 <body>
-
+<noscript>
+  <div class='no-script'>Javascript est désactivé sur votre navigateur. Veuillez l'activer pour continuer. </div>
+  </noscript>
 <!--HEADER-->
   <header class='row header'>
     <div class='three columns'><h1 class='main-title'>SOUSCRIPTION EN LIGNE</h1></div>
