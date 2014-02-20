@@ -12,73 +12,13 @@ class Recapitulatif extends MY_Controller {
     {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $this->data["userdata"] = $this->session->all_userdata();
-         $etapePasse = $this->session->userdata("etapePasse");
-        if($this->input->post("page_2")=="mes_coordonnees"||$etapePasse>=2){
-            if($etapePasse==1){
-            $this->session->set_userdata("etapePasse",2); //identifier les etapes traverser
-            
-            $this->session->set_userdata('civilite_aa',$this->input->post("civilite_aa"));
-            $this->session->set_userdata('nom_aa',$this->input->post("nom_aa"));
-            $this->session->set_userdata('prenom_aa',$this->input->post("prenom_aa"));
-            $this->session->set_userdata('numero_aa',$this->input->post("numero_aa"));
-            $this->session->set_userdata('comp_numero_aa',$this->input->post("comp_numero_aa"));
-            $this->session->set_userdata('type_voie_aa',$this->input->post("type_voie_aa"));
-            $this->session->set_userdata('voie_aa',$this->input->post("voie_aa"));
-            $this->session->set_userdata('adresse_suite_aa',$this->input->post("adresse_suite_aa"));
-            $this->session->set_userdata('ensemble_aa',$this->input->post("ensemble_aa"));
-            $this->session->set_userdata('batiment_aa',$this->input->post("batiment_aa"));
-            $this->session->set_userdata('escalier_aa',$this->input->post("escalier_aa"));
-            $this->session->set_userdata('etage_aa',$this->input->post("etage_aa"));
-            $this->session->set_userdata('porte_aa',$this->input->post("porte_aa"));
-            $this->session->set_userdata('logo_aa',$this->input->post("logo_aa"));
-            $this->session->set_userdata('code_postal_aa',$this->input->post("code_postal_aa"));
-            $this->session->set_userdata('ville_aa',$this->input->post("ville_aa"));
-            $this->session->set_userdata('telephone_portable',$this->input->post("telephone_portable"));
-            $this->session->set_userdata('telephone_bureau',$this->input->post("telephone_bureau"));
-            $this->session->set_userdata('telephone_domicile',$this->input->post("telephone_domicile"));
-            $this->session->set_userdata('check_adresse_facturation',$this->input->post("check_adresse_facturation"));
-            $this->session->set_userdata('civilite_af',$this->input->post("civilite_af"));
-            $this->session->set_userdata('nom_af',$this->input->post("nom_af"));
-            $this->session->set_userdata('prenom_af',$this->input->post("prenom_af"));
-            $this->session->set_userdata('numero_af',$this->input->post("numero_af"));
-            $this->session->set_userdata('comp_numero_af',$this->input->post("comp_numero_af"));
-            $this->session->set_userdata('type_voie_af',$this->input->post("type_voie_af"));
-            $this->session->set_userdata('voie_af',$this->input->post("voie_af"));
-            $this->session->set_userdata('adresse_suite_af',$this->input->post("adresse_suite_af"));
-            $this->session->set_userdata('code_postal_af',$this->input->post("code_postal_af"));
-            $this->session->set_userdata('ville_af',$this->input->post("ville_af"));
-            $this->session->set_userdata('check_adresse_livraison',$this->input->post("check_adresse_livraison"));
-            $this->session->set_userdata('civilite_al',$this->input->post("civilite_al"));
-            $this->session->set_userdata('nom_al',$this->input->post("nom_al"));
-            $this->session->set_userdata('prenom_al',$this->input->post("prenom_al"));
-            $this->session->set_userdata('numero_al',$this->input->post("numero_al"));
-            $this->session->set_userdata('comp_numero_al',$this->input->post("comp_numero_al"));
-            $this->session->set_userdata('type_voie_al',$this->input->post("type_voie_al"));
-            $this->session->set_userdata('voie_al',$this->input->post("voie_al"));
-            $this->session->set_userdata('adresse_suite_al',$this->input->post("adresse_suite_al"));
-            $this->session->set_userdata('ensemble_al',$this->input->post("ensemble_al"));
-            $this->session->set_userdata('batiment_al',$this->input->post("batiment_al"));
-            $this->session->set_userdata('escalier_al',$this->input->post("escalier_al"));
-            $this->session->set_userdata('etage_al',$this->input->post("etage_al"));
-            $this->session->set_userdata('porte_al',$this->input->post("porte_al"));
-            $this->session->set_userdata('logo_al',$this->input->post("logo_al"));
-            $this->session->set_userdata('code_postal_al',$this->input->post("code_postal_al"));
-            $this->session->set_userdata('ville_al',$this->input->post("ville_al"));
-            $livraison_express = $this->input->post("livraison_express");
-            $livraison_express = !empty($livraison_express)?$this->input->post("livraison_express"):"false";
-            $this->session->set_userdata('livraison_express',$livraison_express);
-            $this->session->set_userdata('email_mediaserv',$this->input->post("email_mediaserv"));
-            $this->session->set_userdata('verif_email',$this->input->post("verif_email"));
-            $this->session->set_userdata('email',$this->input->post("email"));
-            $this->session->set_userdata('type_de_facturation',$this->input->post("type_facturation_hid"));
-            }
-        }else{           
-            if(isset($etapePasse)&&$etapePasse==1){
-                redirect("mes_coordonnees");
-            }else{
-                redirect("mon_offre");
-            }
-        }
+        
+         
+        
+        
+         
+        
+ 
         //display values
 
          $this->data['civilite_aa']                  = $this->session->userdata("civilite_aa");

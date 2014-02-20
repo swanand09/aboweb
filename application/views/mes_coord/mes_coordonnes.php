@@ -1,15 +1,15 @@
 <?php 
-//echo validation_errors();
+echo validation_errors();
 ?>
 <div class="left-etape-content">
-    <form action="recapitulatif" method="POST" id="mes-coordonnees">
+    <form action="mes_coordonnees" method="POST" id="mes-coordonnees">
         <input type="hidden" name="page_2" value="mes_coordonnees" />
       <!--Adresse coordonnées-->
         <div class="adresse-abonnement">
           <h3>COORDONNÉES (ADRESSES ABONNEMENT):</h3>
          <!-- Civilité-->
           <div class="row">
-            <div class="columns two bottom-10"><label>Civilité<span class='has-tip' title='obligatoire'>*</span></label></div>
+            <div class="columns two bottom-10"><label>CIVILIT&Eacute;<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
               <label class="left"><input type="radio" value="M." name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="M.")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
               <label class="left"><input type="radio" value="Mme" name="civilite_aa" <?php echo (set_value("civilite_aa",$civilite_aa)=="Mme")?"checked='checked'":"";?> class="validate[required]">Madame</label>
