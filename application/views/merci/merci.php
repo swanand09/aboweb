@@ -45,8 +45,7 @@
         <div class="row">
           <div class='column cwidth twelve shadow bottom-20 p30all'>
              <?php echo ($moyen_paiement=="PR")?"<span class='green-text'>Vous avez soucrit par prélèvement automatique.</span><br /> Afin de compléter votre dossier, veuillez renvoyer les documents ci-dessous <br/>
-            à l'adresse suivante : ".$enregistreSouscriptionResult["Adresse_service_client"]:"<span class='green-text'>Vous avez valdé votre commande par Carte Bancaire. </span><br />Vous avec validé votre commande par Carte Bancaire
-Afin de compléter votre dossier, veuillez vous rendre dans l'espace Mediaserv le plus proche de chez vous muni des pièces indiquées ci-dessous: ";?>
+            à l'adresse suivante : ".$enregistreSouscriptionResult["Adresse_service_client"]:"<span class='green-text'>Vous avez validé votre commande par Carte Bancaire. </span><br />Afin de compléter votre dossier, veuillez vous rendre dans l'espace Mediaserv le plus proche de chez vous muni des pièces indiquées ci-dessous: ";?>
            
             <ul class='no-margin-bottom top-10'>
               <li>Une photocopie de votre pièce d’identité</li>
