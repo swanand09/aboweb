@@ -131,7 +131,7 @@ $(document).on('click','#redu_facture',function(){
                             cancelParain,                        
                             function(data){  
                                if(data.error=="redirect"){  
-                                    $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                                    $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                                    //$(location).attr('href',monOffre);
                                     $.unblockUI();     
                                    return false;

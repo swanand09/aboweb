@@ -36,9 +36,9 @@ var preload = function(){
                         function(data){
                           //var content = $(data+'<div><div class="prev_next"><a href="javascript:void(0);" id="butt_prev">Précédent</a></div><div class="prev_next"><a href="javascript:void(0);" id="choose_forfait">Choisr Mon fortait</a></div></div>');
                           $.unblockUI(); 
-                         if(data.error==true){                           
-                            $('#modalpaseli').empty().prepend(data.msg).reveal(); 
-                            return false;
+                         if(data.error==true){ 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
+                           return false;
                           }
                           if(where=="colonne droite"){
                               preload();
@@ -46,7 +46,7 @@ var preload = function(){
                                return false;
                           }
                           $("#cont_mon_off").empty().prepend(data[0].contenu_html); 
-                          $("#recap_contenu").empty().prepend(data[1].form_test_ligne); 
+                          $("#recap_contenu").removeClass("medium").addClass("small").empty().prepend(data[1].form_test_ligne); 
                          
                         }, "json"
                     );
@@ -78,7 +78,7 @@ var preload = function(){
                      },
                     function(data){
                          if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -131,7 +131,7 @@ var preload = function(){
                      },
                     function(data){  
                          if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -179,7 +179,7 @@ var preload = function(){
                         function(data){   
                             
                              if(data.error=="redirect"){  
-                                    $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                                    $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                                    //$(location).attr('href',monOffre);
                                     $.unblockUI();     
                                    return false;
@@ -209,7 +209,7 @@ var preload = function(){
                              },
                             function(data){
                                if(data.error=="redirect"){  
-                                    $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                                    $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                                    //$(location).attr('href',monOffre);
                                     $.unblockUI();     
                                    return false;
@@ -251,7 +251,7 @@ var preload = function(){
                      },
                     function(data){
                         if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -293,7 +293,7 @@ var preload = function(){
                      },
                     function(data){
                         if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -325,7 +325,7 @@ var preload = function(){
                      },
                     function(data){    
                          if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -379,7 +379,7 @@ var preload = function(){
                      },
                     function(data){                 
                      if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
@@ -414,7 +414,7 @@ var preload = function(){
                         },
                        function(data){
                         if(data.error=="redirect"){  
-                             $('#modalpaseli').removeClass("medium").addClass("small").empty().prepend(data.msg).reveal(); 
+                             $('#modalpaseli').empty().prepend(data.msg).reveal(); 
                             //$(location).attr('href',monOffre);
                              $.unblockUI();     
                             return false;
