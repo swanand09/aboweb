@@ -296,9 +296,12 @@ class Mon_offre extends MY_Controller {
            switch($val["Categorie"]){               
                case "FORFAIT":
                    $choixArr = array("title"=>"CHOISIR CE FORFAIT",'class'=>'rmv-std-btn btn-green','name' => 'button','id' => 'butt_'.$counter,"onclick" => "javascript:choixForfait(".$val["Id_crm"].")",'content' => 'CHOISIR');
-                   $data["val"] = $val;
+                   $label            = explode("@",$val["Libelle"]);
+                   $data["labelTel"] = $this->my_ucfirst($label[0]);
+                   $data["labelNet"] = $this->my_ucfirst($label[1]);
+                   $data["val"]      = $val;
                    $data["choixArr"] = $choixArr;
-                   $data["counter"] = $counter; 
+                   $data["counter"]  = $counter; 
                    $data["eligible_tv"] = $this->session->userdata("eligible_tv");
                    $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/liste",$data,true);
                    $counter++;
@@ -444,6 +447,8 @@ class Mon_offre extends MY_Controller {
            redirect('mon_offre');
        }
     }
+    
+   
     
     public function refreshRecapCol()
     {
@@ -651,6 +656,7 @@ class Mon_offre extends MY_Controller {
          $this->prevState[1]["parrainage"] = $this->load->view("general/parrainage",$data,true);
          
          $this->session->set_userdata('prevState',$this->prevState);
+       // redirect('mes_coordonnees');
          echo json_encode(array("test"=>$data["test"]));
     }
             
