@@ -1186,3 +1186,15 @@ form .formError .formErrorArrow div {
     padding-top: 10px;
     text-align: center;
 }
+
+.all-errors .errormsg{
+	font-size: 13px;
+	line-height: 20px;
+}
+.all-errors{
+	background-color: #E5C4C4;
+    border: 1px solid #803C3C;
+    color: #803C3C;
+    font-weight: bold;
+    padding: 10px;
+}

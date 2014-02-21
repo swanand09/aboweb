@@ -1,6 +1,4 @@
-<?php 
-echo validation_errors();
-?>
+<?php echo (validation_errors() != NULL )? "<div class='all-errors'>".validation_errors('<div class="errormsg">', '</div>')."</div>" :""; ?>
 <div class="left-etape-content">
     <form action="mes_coordonnees" method="POST" id="mes-coordonnees">
         <input type="hidden" name="page_2" value="mes_coordonnees" />
