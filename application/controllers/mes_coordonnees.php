@@ -388,7 +388,7 @@ class Mes_coordonnees extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";       
         $resultVerifEmail = $this->Wsdl_interrogeligib->verifEmail($email_msv);      
         if(!empty($resultVerifEmail["Error"])&&$resultVerifEmail["Error"]["NumError"]>0){
-            $this->form_validation->set_message('validMsvEmail', "Votre email mediaserv '".$email_msv."' n'est pas disponible. Veuillez ressayer.");
+            $this->form_validation->set_message('validMsvEmail', "Votre %s '".$email_msv."@mediaserv.net' n'est pas disponible. Veuillez ressayer.");
             return false;
         }
         return true;

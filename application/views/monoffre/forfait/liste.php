@@ -1,5 +1,5 @@
 <?php
- $label = explode("@",$val["Libelle"]);
+ //$label = explode("@",$val["Libelle"]);
  $tarif = explode(".",$val["Tarif"]);
  
  //gestion tarif promo et durée
@@ -9,12 +9,13 @@
  if($dureePromo>0){
     $tarifPromo = explode(".",$val["Tarif_promo"]);   
  }
+ 
 ?>
 <div class="forfait">
     <h3>Forfait n&deg;<?php echo $counter; ?></h3>
 <!--     <label><?php //echo $val["promo_libelle"]; ?></label>-->
-    <div class="three columns telephone">Téléphone<br><span class="green-text"><?php echo $label[0];?></span></div>
-    <div class="three columns internet">Internet<br><span class="green-text"><?php echo $label[1];?></span></div>
+    <div class="three columns telephone">Téléphone<br><span class="green-text"><?php echo $labelTel;?></span></div>
+    <div class="three columns internet">Internet<br><span class="green-text"><?php echo $labelNet;?></span></div>
     <!-- If television is not available, add 'not-available' to its class -->
     <div class="three columns television <?php echo ($eligible_tv=='false'?'not-available':'available');?>">Télévision</div>
     <div class="three columns tarifs">
