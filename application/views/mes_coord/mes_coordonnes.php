@@ -15,15 +15,15 @@
           </div>
          <!-- Nom -->
           <div class="row">
-            <div class='columns two'><label>NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] nom' maxlength='30' name='nom_aa' value="<?php echo set_value("nom_aa",$nom_aa);?>" /></div>
+            <div class='columns two'><label>NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] nom' maxlength='30' name='nom_aa' value="<?php echo set_value("nom_aa",$nom_aa);?>" /></div>
           </div>
           <!--Prénom -->
           <div class="row">
-            <div class='columns two'><label>PR&Eacute;NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] prenom' maxlength='30' name='prenom_aa' value="<?php echo set_value("prenom_aa",$prenom_aa);?>" /></div>
+            <div class='columns two'><label>PR&Eacute;NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] prenom' maxlength='30' name='prenom_aa' value="<?php echo set_value("prenom_aa",$prenom_aa);?>" /></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class='columns two'><label>NUM&Eacute;RO<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,custom[integer],min[1],max[99999]] numero' value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
+            <div class='columns two'><label>NUM&Eacute;RO<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,custom[integer],min[1],max[99999]] numero' maxlength="5" value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
             <div class='columns two'><label>COMPL&Eacute;MENT N&ordm;</label></div><div class='three columns end'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_aa' value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" /></div>              
           </div>
           <!--Type de voie-->
@@ -102,15 +102,15 @@
           </div>
           <!-- Nom -->
           <div class="row">
-             <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] nom' maxlength='30' name='nom_af' value="<?php echo set_value("nom_af",$nom_af);?>" /></div>
+             <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] nom' maxlength='30' name='nom_af' value="<?php echo set_value("nom_af",$nom_af);?>" /></div>
           </div>
           <!--Prénom -->
           <div class="row">
-             <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] prenom' maxlength='30' name='prenom_af' value="<?php echo set_value("prenom_af",$prenom_af);?>" /></div>
+             <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] prenom' maxlength='30' name='prenom_af' value="<?php echo set_value("prenom_af",$prenom_af);?>" /></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class="columns two"><label>NUMÉRO <span class='has-tip' title='obligatoire'>*</span></label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class='numero validate[required,custom[integer],min[1],max[99999]]'></div>
+            <div class="columns two"><label>NUMÉRO <span class='has-tip' title='obligatoire'>*</span></label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class='numero validate[required,custom[integer],min[1],max[99999]]' maxlength='5'></div>
             <div class='columns two'><label>COMPLÉMENT N&ordm; </label></div><div class='three end columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_af' value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" /></div>
           </div>
           <!--type de voie-->
@@ -120,7 +120,7 @@
           
           <!--Addresse suite-->
           <div class="row">
-            <div class='columns two'><label>ADRESSE </label></div><div class='ten columns'><input type='text' class='validate[maxSize[32]] adresse' name='voie_af' value="<?php echo set_value("voie_af",$voie_af);?>" /></div>
+            <div class='columns two'><label>ADRESSE </label></div><div class='ten columns'><input type='text' class='validate[maxSize[32]] adresse' maxlength='32' name='voie_af' value="<?php echo set_value("voie_af",$voie_af);?>" /></div>
           </div>
           <!--Complement d'adresse-->
           <div class='row'>
@@ -160,17 +160,17 @@
          
           <!-- Nom -->
           <div class='row'>
-            <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] nom' maxlength='30' name='nom_al' value="<?php echo set_value("nom_al",$nom_al);?>" /></div>
+            <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] nom' maxlength='30' name='nom_al' value="<?php echo set_value("nom_al",$nom_al);?>" /></div>
           </div>
           <!--Prénom -->
           <div class='row'>
-            <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] prenom' maxlength='30' name='prenom_al' value="<?php echo set_value("prenom_al",$prenom_al);?>" /></div>
+            <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] prenom' maxlength='30' name='prenom_al' value="<?php echo set_value("prenom_al",$prenom_al);?>" /></div>
           </div>
           
           
           <!--Numéro & Complément numéro 7 type de voie-->
           <div class='row'>
-            <div class='columns two'><label>NUMÉRO <span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='numero validate[required,custom[integer],min[1],max[99999]]' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
+            <div class='columns two'><label>NUMÉRO <span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='numero validate[required,custom[integer],min[1],max[99999]]' maxlength='5' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
             <div class='columns two'><label>COMPLÉMENT N&ordm;</label></div><div class='three end columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_al' value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" /></div>
           </div>
           <!--type de voie-->
