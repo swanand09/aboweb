@@ -151,7 +151,7 @@ class Mon_offre extends MY_Controller {
                                             $this->colonneDroite,
                                             "error"=>$data["error"],
                                             "msg"=>"<p><strong>VOTRE LIGNE <span class='green-text'>".$num_tel."</span> N'EST PAS ENCORE ÉLIGIBLE À NOS SERVICES.<br/><br/>
-  VOUS POUVEZ CONTACTER NOTRE SERVICE COMMERCIAL POUR PLUS D'INFORMATIONS.</strong></p><a class='close-reveal-modal'>&#215;</a>"
+  VOUS POUVEZ CONTACTER NOTRE SERVICE COMMERCIAL POUR PLUS D'INFORMATION.</strong></p><a class='close-reveal-modal'>&#215;</a>"
                                             )
                             );
                     exit;
