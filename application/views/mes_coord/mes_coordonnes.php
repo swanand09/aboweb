@@ -65,7 +65,7 @@
           <h3 class="lfsection_space">TÉLÉPHONES</h3>
           <div class="row">
             <div class="columns"><label>TÉLÉPHONE PORTABLE<span class='has-tip' title='obligatoire'>*</span></label></div>
-            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,custom[integer],funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' maxlength='10'/></div>
+            <div class='columns '><input type='text' value="<?php echo set_value("telephone_portable",$telephone_portable);?>" class='validate[required,custom[integer],minSize[10],funcCall[validateTelephonePortable]] telephone telephone_portable' name='telephone_portable' maxlength='10'/></div>
             <div class='column end'>
                 <a href='#' class='has-tip' data-width='360' title='Votre numéro de téléphone mobile vous permettra de recevoir par SMS les informations liées à l’évolution de votre activation ainsi que du suivi de votre livraison.'>
                     <?php echo image('info_icon.png',NULL,array("class"=>"border-gray", "alt"=>"Plus info")); ?>
@@ -73,10 +73,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="columns"><label>TÉLÉPHONE DE BUREAU</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="validate[condRequired[custom[integer]]] telephone_bureau telephone" maxlength='10'></div>
+            <div class="columns"><label>TÉLÉPHONE DE BUREAU</label></div><div class="columns end"><input type="text" name="telephone_bureau" value="<?php echo set_value("telephone_bureau",$telephone_bureau);?>" class="validate[condRequired[custom[integer],minSize[10]]] telephone_bureau telephone" maxlength='10'></div>
           </div>
           <div class="row">
-            <div class="columns"><label>TÉLÉPHONE DU DOMICILE</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="validate[condRequired[custom[integer]]] telephone_domicile telephone" maxlength='10'></div>
+            <div class="columns"><label>TÉLÉPHONE DU DOMICILE</label></div><div class="columns end"><input type="text" name="telephone_domicile" value="<?php echo set_value("telephone_domicile",$telephone_domicile);?>" class="validate[condRequired[custom[integer],minSize[10]]] telephone_domicile telephone" maxlength='10'></div>
           </div>
         </div>
       <!--adresse de facturation-->
