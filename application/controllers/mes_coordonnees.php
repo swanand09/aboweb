@@ -385,10 +385,16 @@ class Mes_coordonnees extends MY_Controller {
     }
        
      public function validMsvEmail($email_msv=""){
-        $this->controller_verifySessExp()? redirect('mon_offre'):"";       
-        $resultVerifEmail = $this->Wsdl_interrogeligib->verifEmail($email_msv);      
-        if(!empty($resultVerifEmail["Error"])&&$resultVerifEmail["Error"]["NumError"]>0){
-            $this->form_validation->set_message('validMsvEmail', "Votre %s '".$email_msv."@mediaserv.net' n'est pas disponible. Veuillez ressayer.");
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";  
+        $this->load->helper('email');
+        if(valid_email($email_msv."@mediaserv.net")){
+            $resultVerifEmail = $this->Wsdl_interrogeligib->verifEmail($email_msv);      
+            if(!empty($resultVerifEmail["Error"])&&$resultVerifEmail["Error"]["NumError"]>0){
+                $this->form_validation->set_message('validMsvEmail', "Votre %s '".$email_msv."@mediaserv.net' n'est pas disponible. Veuillez ressayer.");
+                return false;
+            }
+        }else{
+            $this->form_validation->set_message('validMsvEmail', "Votre %s '".$email_msv."@mediaserv.net' n'est pas valide. Veuillez ressayer.");
             return false;
         }
         return true;
