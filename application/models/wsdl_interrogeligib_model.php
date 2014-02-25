@@ -421,7 +421,11 @@ $soapEligib = $this->nusoap_client->serializeEnvelope($xmlStr,'',array(),'docume
 //    $config['mailtype'] = 'html';
     //$this->email->initialize($config);
     $this->email->from('s.luthmoodoo@mediacall.mu', 'Swanand Reddy');
-    $this->email->to('s.luthmoodoo@mediacall.mu'); //sophie.lacoste@mediaserv.com
+    if($_SERVER['HTTP_HOST']=="localhost"){
+        $this->email->to('s.luthmoodoo@mediacall.mu');
+    }else{
+        $this->email->to('sophie.lacoste@mediaserv.com');
+    }    
     $num_tel = $this->session->userdata("num_tel");
     $this->email->subject($num_tel.'_enregistrementSouscription_'.date('Y-m-d H:i:s'));
  

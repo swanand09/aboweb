@@ -10,7 +10,7 @@ FS#4906 - Tunnel Web - Mon Récapitulatif - Affichage de l'adresse de livraison
 FS#4909 - Tunnel Web - Coordonnées - Champ Nom/Prenom n'accepte pas les caractères comme '-'
 FS#4910 - Tunnel Web - Coordonnées - Nombre maximal de caractères accepté
 FS#4911 - Tunnel Web - Panier - Lien 'Modifier' sur la zone OPTIONS ne marche pas
-
+FS#4912 - Tunnel Web - Affichage du panier après une modification d'option TV 
 ---------------------------------------------------------------------------------------
 
 v3.0.0
