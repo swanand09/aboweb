@@ -5,7 +5,7 @@ if(!empty($panierVal["bouquetTvdum3"])||!empty($panierVal["optionTvdum3"])||!emp
 ?>
 <!--OPTIONS DUMMY 3-->
 <div class="forpro options">
-    <h3>Options<span class="right"><a href="#">Modifier</a></span></h3>
+    <h3>Options<span class="right"><a id="modifier-option" href="#">Modifier</a></span></h3>
     <ul>
         <?php if(!empty($panierVal["bouquetTvdum3"])){ 
                 //foreach($panierVal["bouquetTvdum3"] as $key=>$val){

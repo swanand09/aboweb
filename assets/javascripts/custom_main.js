@@ -1,5 +1,9 @@
 $(function () {
 
+//
+$(document).on('click','#modifier-option',function(){
+	$(location).attr('href',monOffre);
+});
 
 //parrainage
 $(document).on('keyup','#parrain_num_contrat',function(){  
