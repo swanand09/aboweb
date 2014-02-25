@@ -1,4 +1,5 @@
- <!-- PARRAINAGE -->
+<div id="panierParrain">
+<!-- PARRAINAGE -->
 <form method="POST">
      <div class="parrainage bottom-10">
           <div class="custom-column six"><strong>Avez-vous un parrain ?</strong></div>
@@ -24,3 +25,4 @@
     
 <!-- END OF PARRAINAGE -->
 <hr>
+</div>

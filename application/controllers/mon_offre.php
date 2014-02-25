@@ -617,7 +617,7 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata("bouquetChoisi",$bouquetChoisi);
         $this->data["bouquetChoisi"] =  $bouquetChoisi;
          //MAJ PANIER
-        $this->majPanier(array("produit"=>array("BOUQUET_TV"),"etape"=>array("choixBouquet") )); 
+        $this->majPanier(array("produit"=>array("BOUQUET_TV"),"etape"=>array("choixBouquet") ));        
         echo json_encode($this->colonneDroite);
     }
     
