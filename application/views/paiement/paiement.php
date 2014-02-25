@@ -115,7 +115,7 @@
                   <option value='05'>Mai</option>
                   <option value='06'>Jui</option>
                   <option value='07'>Jul</option>
-                  <option value='08'>Aou</option>
+                  <option value='08'>Ao&ucirc;</option>
                   <option value='09'>Sep</option>
                   <option value='10'>Oct</option>
                   <option value='11'>Nov</option>
