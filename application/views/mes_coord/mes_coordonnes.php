@@ -23,7 +23,7 @@
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class='columns two'><label>NUM&Eacute;RO<span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='validate[required,custom[integer],min[1],max[99999]] numero' maxlength="5" value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
+            <div class='columns two'><label>NUM&Eacute;RO</label></div><div class='two columns'><input type='text' class='validate[condRequired[custom[integer],min[1],max[99999]]] numero' maxlength="5" value="<?php echo set_value("numero_aa",$numero_aa);?>" name='numero_aa' /></div>
             <div class='columns two'><label>COMPL&Eacute;MENT N&ordm;</label></div><div class='three columns end'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_aa' value="<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>" /></div>              
           </div>
           <!--Type de voie-->
