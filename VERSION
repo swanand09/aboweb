@@ -1,0 +1,16 @@
+v3.1.0
+Corrections apportées:
+ 
+FS#4898 - Tunnel Web - Champs obligatoires (validation PHP a été intégrée)
+FS#4900 - Tunnel Web - Connexion est lente
+FS#4901 - Tunnel Web - Champ Téléphone portable accepte numéro non valide 
+FS#4903 - Tunnel Web - Test d'éligibilité - Numéro de téléphone non valide 
+FS#4904 - Tunnel Web - Paiement par carte bancaire - Validation du champ Cryptogramme 
+FS#4906 - Tunnel Web - Mon Récapitulatif - Affichage de l'adresse de livraison 
+FS#4909 - Tunnel Web - Coordonnées - Champ Nom/Prenom n'accepte pas les caractères comme '-'
+FS#4910 - Tunnel Web - Coordonnées - Nombre maximal de caractères accepté
+FS#4911 - Tunnel Web - Panier - Lien 'Modifier' sur la zone OPTIONS ne marche pas
+
+---------------------------------------------------------------------------------------
+
+v3.0.0
