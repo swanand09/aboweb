@@ -187,7 +187,7 @@ $(document).on('click','#redu_facture',function(){
 	*  Change focus after prefix
 	---------------------------------*/
 	autofocus('#ligne_prefix',3,'#ligne_sufix');
- 	autofocus('#codepostal',3,'#ville');
+ 	autofocus('#codepostal',4,'#ville');
  	autofocus('#iban1',3,'#iban2');
  	autofocus('#iban2',3,'#iban3');
  	autofocus('#iban3',3,'#iban4');
