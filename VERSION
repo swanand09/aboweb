@@ -11,6 +11,7 @@ FS#4909 - Tunnel Web - Coordonnées - Champ Nom/Prenom n'accepte pas les caract�
 FS#4910 - Tunnel Web - Coordonnées - Nombre maximal de caractères accepté
 FS#4911 - Tunnel Web - Panier - Lien 'Modifier' sur la zone OPTIONS ne marche pas
 FS#4912 - Tunnel Web - Affichage du panier après une modification d'option TV 
+FS#4916 - Tunnel Web- saisie tel port et bureau sur 2 caractères autorisé
 FS#4918 - Tunnel Web- faute adresse livraison
 FS#4919 - Tunnel Web- faute page recap
 FS#4921 - Tunnel Web-format email non respecté
