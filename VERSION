@@ -13,6 +13,7 @@ FS#4911 - Tunnel Web - Panier - Lien 'Modifier' sur la zone OPTIONS ne marche pa
 FS#4912 - Tunnel Web - Affichage du panier après une modification d'option TV 
 FS#4918 - Tunnel Web- faute adresse livraison
 FS#4919 - Tunnel Web- faute page recap
+FS#4921 - Tunnel Web-format email non respecté
 ---------------------------------------------------------------------------------------
 
 v3.0.0
