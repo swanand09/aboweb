@@ -13,12 +13,12 @@
             <li class='fir'>
               <h3>AUJOURD'HUI</h3>
               <?php echo image('contenu/merci_auj.png')?>
-              <p>VOUS complétez et<br/>envoyer votre dossier</p>
+              <p>VOUS complétez et<br/>envoyez votre dossier</p>
             </li>
             <li class='sec'>
               <h3>DANS <span><?php print $commande; ?></span> JOURS</h3>
               <?php echo image('contenu/merci_7.png')?>
-              <p>NOUS expedions<br/>votre commande</p>
+              <p>NOUS expédions<br/>votre commande</p>
             </li>
             <li class='thi'>
               <h3>APRÉS <span><?php print $services; ?></span> JOURS</h3>
