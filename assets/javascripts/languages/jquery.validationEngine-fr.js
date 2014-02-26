@@ -61,7 +61,7 @@
                 },
                 "creditCard": {
                     "regex": "none",
-                    "alertText": "* Numéro de carte bancaire valide"
+                    "alertText": "* Numéro de carte bancaire invalide"
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
