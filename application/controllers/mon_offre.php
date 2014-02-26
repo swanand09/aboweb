@@ -162,14 +162,14 @@ class Mon_offre extends MY_Controller {
                                             $this->contenuGauche,
                                             $this->colonneDroite,
                                             "error"=>$data["error"],
-                                            "msg"=>"<p><strong>".strtoupper("nos services sont actuellement indisponibles nous vous invitons a conctacter notre service commercial")."</strong></p><a class='close-reveal-modal'>&#215;</a>"
+                                            "msg"=>"<p><strong>".strtoupper("nos services sont actuellement indisponibles nous vous invitons a contacter notre service commercial")."</strong></p><a class='close-reveal-modal'>&#215;</a>"
                                             )
                             );
                     exit;
                 }
             }
       }else{
-          throw new Exception("VOTRE NUMERO EST INVALIDE. VEUILLEZ RESSAYER.");
+          throw new Exception("VOTRE NUMERO EST INVALIDE. VEUILLEZ RÉ-ESSAYER.");
       }
        }catch(Exception $e){
            log_message('error', $num_tel." est invalide");
@@ -228,7 +228,7 @@ class Mon_offre extends MY_Controller {
          echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;
@@ -333,7 +333,7 @@ class Mon_offre extends MY_Controller {
         $this->session->set_userdata('prevState',array($this->contenuGauche,$this->colonneDroite));
         echo json_encode(array($this->contenuGauche,$this->colonneDroite,"error"=>"")); 
        }else{
-           throw new Exception("Nos services sont actuellement indisponibles nous vous invitons a conctacter notre service commercial");
+           throw new Exception("Nos services sont actuellement indisponibles nous vous invitons a contacter notre service commercial");
        }
        
        }catch(Exception $e){             
@@ -357,7 +357,7 @@ class Mon_offre extends MY_Controller {
           echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;                 
@@ -456,7 +456,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;              
@@ -563,6 +563,17 @@ class Mon_offre extends MY_Controller {
                 $this->load->model('stb_model','stb'); 
                 $this->data["base_url_stb"] = BASEPATH_STB;
                 $bouquetList = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr)); 
+               /*
+                if(isset($bouquetList["error"])&&!empty($bouquetList["error"])){
+                     echo json_encode(
+                              array(
+                                      "error"=>"redirect",
+                                      "msg"=>"<p><strong>".$bouquetList["error"]."</strong>
+                                                </p><a class='close-reveal-modal'>&#215;</a>")
+                                   );
+                              exit;              
+                }*/
+                
                 $this->data["bouquet_list"] =  $bouquetList; 
                 //$this->data["bouqReformat"] = $this->stb->reformatBouquet($bouquetList["Bouquet"]);
                 $this->contenuGauche["contenu_html"] = $this->load->view("monoffre/tv/liste_bouquets",$this->data,true);                   
@@ -587,7 +598,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;                
@@ -607,7 +618,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;              
@@ -627,7 +638,7 @@ class Mon_offre extends MY_Controller {
           echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;            

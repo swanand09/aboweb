@@ -407,7 +407,7 @@ class Mes_coordonnees extends MY_Controller {
           echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;               
@@ -424,7 +424,7 @@ class Mes_coordonnees extends MY_Controller {
          echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;                
@@ -455,7 +455,7 @@ class Mes_coordonnees extends MY_Controller {
           echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
          exit;               
@@ -482,7 +482,7 @@ class Mes_coordonnees extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A ETE EXPIRE. VEUILLEZ RÉ-ESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;              
