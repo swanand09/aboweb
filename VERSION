@@ -5,7 +5,8 @@ FS#4898 - Tunnel Web - Champs obligatoires (validation PHP a été intégrée)
 FS#4900 - Tunnel Web - Connexion est lente
 FS#4901 - Tunnel Web - Champ Téléphone portable accepte numéro non valide 
 FS#4903 - Tunnel Web - Test d'éligibilité - Numéro de téléphone non valide 
-FS#4904 - Tunnel Web - Paiement par carte bancaire - Validation du champ Cryptogramme 
+FS#4904 - Tunnel Web - Paiement par carte bancaire - Validation du champ Cryptogramme
+FS#4905 - Tunnel Web - Impossible d'agrandir fichier PDF sur IE version 11.0
 FS#4906 - Tunnel Web - Mon Récapitulatif - Affichage de l'adresse de livraison 
 FS#4909 - Tunnel Web - Coordonnées - Champ Nom/Prenom n'accepte pas les caractères comme '-'
 FS#4910 - Tunnel Web - Coordonnées - Nombre maximal de caractères accepté
@@ -17,6 +18,7 @@ FS#4918 - Tunnel Web- faute adresse livraison
 FS#4919 - Tunnel Web- faute page recap
 FS#4921 - Tunnel Web-format email non respecté
 FS#4922 - Tunnel Web-coordonnée code postal :aide a la saisie genante
+FS#4925 - Tunnel Web- saisie n° cb erroné= incompatible avec le message
 ---------------------------------------------------------------------------------------
 
 v3.0.0
