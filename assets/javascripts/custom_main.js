@@ -28,23 +28,23 @@ $('#cgu-link').click(function(){
   	{
 		if($(this).hasClass( "RE" ))
 		{
-			window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS-RE.pdf','CGU',"height=600,width=800");	
+			window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS-RE.pdf','_blank',"resizable=yes,height=600,width=800");	
 		}
 		else
 		{
-			window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS.pdf','CGU',"height=600,width=800");	
+			window.open('http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS.pdf','_blank',"resizable=yes,height=600,width=800");	
 		}
 
 	}
 });
 
 $(document).on('click','#grille-tarifaire',function(){
- window.open(this.href,'Grille tarifaire',"height=600,width=800");
+ window.open(this.href,'_blank',"resizable=yes,height=600,width=800");
  return false;
 });
 
 $(document).on('click','#condition-tarifaire',function(){
- window.open(this.href,'Condition tarifaire',"height=600,width=800");
+ window.open(this.href,'_blank',"resizable=yes,height=600,width=800");
  return false;
 });
 
