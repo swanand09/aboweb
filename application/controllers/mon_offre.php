@@ -96,7 +96,7 @@ class Mon_offre extends MY_Controller {
        try{
         if($num_tel!=""&&$this->validateNum($num_tel))
         {   
-            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class'=>'validate[required,custom[onlyNumberSp],minSize[10]]','maxlength'=>'10','type' => 'text','value' => $num_tel);
+            $this->data["racap_num"] = array('name' => 'recap_num','id' => 'ligne','class'=>'validate[required,custom[integer],minSize[10]]','maxlength'=>'10','type' => 'text','value' => $num_tel);
             $result = $this->Wsdl_interrogeligib->interrogeEligibilite($num_tel);
            
             if(!empty($result))

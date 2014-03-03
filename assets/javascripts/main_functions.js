@@ -19,6 +19,11 @@ var preload = function(){
                   return false;
                }
 
+               if(!$(".frm-etape-tester-block").validationEngine('validate')){
+                  return false;
+               }
+
+
                     var num_tel = "";
                     if($("#ligne").attr("value")){
                         num_tel = $("#ligne").val();
