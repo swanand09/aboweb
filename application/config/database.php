@@ -93,13 +93,13 @@ $db['stb']['database'] = 'stb_wb';
 $db['stb']['dbdriver'] = 'mysql';
 $db['stb']['dbprefix'] = '';
 $db['stb']['pconnect'] = TRUE;
-$db['stb']['db_debug'] = TRUE;
+$db['stb']['db_debug'] = FALSE;
 $db['stb']['cache_on'] = FALSE;
 $db['stb']['cachedir'] = '';
 $db['stb']['char_set'] = 'utf8';
 $db['stb']['dbcollat'] = 'utf8_general_ci';
 $db['stb']['swap_pre'] = '';
-$db['stb']['autoinit'] = TRUE;
+$db['stb']['autoinit'] = FALSE;
 $db['stb']['stricton'] = FALSE;
 
 /* End of file database.php */

@@ -276,7 +276,7 @@ class Mes_coordonnees extends MY_Controller {
         $this->form_validation->set_rules('civilite_aa', 'CIVILITÉ', 'required');
         $this->form_validation->set_rules('nom_aa', 'NOM', 'trim|required|min_length[1]|max_length[30]|xss_clean');
         $this->form_validation->set_rules('prenom_aa', 'PRÉNOM', 'trim|required|min_length[1]|max_length[30]|xss_clean');        
-        $this->form_validation->set_rules('numero_aa', 'NUMÉRO', 'required');
+       //$this->form_validation->set_rules('numero_aa', 'NUMÉRO', 'required');
         $this->form_validation->set_rules('voie_aa', 'ADRESSE', 'required');
         //$this->form_validation->set_rules('mobile', 'mobile', 'trim|required|xss_clean');
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
@@ -414,7 +414,7 @@ class Mes_coordonnees extends MY_Controller {
        } 
         $email_msv = $this->input->post("email_msv");
         $resultVerifEmail =$this->Wsdl_interrogeligib->verifEmail($email_msv);
-        echo json_encode(array("msg"=>(empty($resultVerifEmail["Error"])?"CET EMAIL EST DISPONIBLE":"CET EMAIL N'EST PAS DISPONIBLE"),"error"=>($resultVerifEmail["Disponible"]=="false"?"401":"0")));
+        echo json_encode(array("msg"=>(empty($resultVerifEmail["Erreur"])?"CET EMAIL EST DISPONIBLE":"CET EMAIL N'EST PAS DISPONIBLE"),"error"=>($resultVerifEmail["Disponible"]=="false"?"401":"0")));
       
     }
     

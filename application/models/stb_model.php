@@ -10,14 +10,29 @@ class Stb_model extends CI_Model
    var $localite;
    var $deptId;
    var $maTv = array();
+   var $dbObj;
+   var $connected;
     public function __construct()
     {
         parent::__construct();
-        $this->load->database('stb');
+         try{ 
+            $this->dbObj = $this->load->database('stb',TRUE);         
+            $this->connected = $this->dbObj->initialize();
+            if($this->connected==FALSE){
+                  throw new Exception("UNE ERREUR S'EST PRODUITE. VEUILLEZ RÉ-ESSAYER.");
+            }
+        }catch(Exception $e){
+          $this->maTv = array("error"=>$e->getMessage());
+        }
+        
     }
     
     public function retrievChainesList($fluxData)
     {
+        if(isset($this->maTv["error"])){
+            return $this->maTv;
+        }
+        
         $this->localite = $this->session->userdata("localite");   
         switch($this->localite)
         {
@@ -57,9 +72,9 @@ class Stb_model extends CI_Model
                  ON C.bouq_uid = D.uid WHERE D.disable = 0 AND C.dept_ids like '%?%' AND D.ValidExterne in(".$idWebBouq.") ORDER BY D.uid,C.cat_uid, C.order,C.chain_uid
                 ";
     
-        
-       $query1 = $this->db->query($sql1, array($this->deptId)); 
        
+       $query1 = $this->dbObj->query($sql1, array($this->deptId)); 
+      
        if($query1->num_rows() > 0)
        {
          $prevBouquet = "";
@@ -174,7 +189,7 @@ class Stb_model extends CI_Model
                 ";
         
          
-        $query2 = $this->db->query($sql2, array($this->deptId)); 
+        $query2 = $this->dbObj->query($sql2, array($this->deptId)); 
        
         if($query2->num_rows() > 0)
         {

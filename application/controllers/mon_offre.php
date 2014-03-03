@@ -563,7 +563,7 @@ class Mon_offre extends MY_Controller {
                 $this->load->model('stb_model','stb'); 
                 $this->data["base_url_stb"] = BASEPATH_STB;
                 $bouquetList = $this->stb->retrievChainesList(array("bouquetTv"=>$bouqTvArr,"optionTv"=>$optionTvArr)); 
-               /*
+               
                 if(isset($bouquetList["error"])&&!empty($bouquetList["error"])){
                      echo json_encode(
                               array(
@@ -572,7 +572,7 @@ class Mon_offre extends MY_Controller {
                                                 </p><a class='close-reveal-modal'>&#215;</a>")
                                    );
                               exit;              
-                }*/
+                }
                 
                 $this->data["bouquet_list"] =  $bouquetList; 
                 //$this->data["bouqReformat"] = $this->stb->reformatBouquet($bouquetList["Bouquet"]);
