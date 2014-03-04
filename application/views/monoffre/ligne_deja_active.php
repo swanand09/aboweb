@@ -1,9 +1,9 @@
 <div class="left-etape-content ligne-deja-activer">
     <div class="seven columns">
         <p>VOTRE LIGNE <span class="green-text"><?php echo $this->session->userdata("num_tel"); ?></span> EST DÉJÀ<br>
-        ACTIVEE PAR NOS SERVICES.<br>
+        ACTIVÉE PAR NOS SERVICES.<br>
         <br>
-        VOUS N'ETES PAS CLIENT BOX MEDIASERV ? </p>
+        VOUS N'&Ecirc;TES PAS CLIENT BOX MEDIASERV ? </p>
     </div>
     <div class="five columns">
         <?php echo image('contenu/unconseiller.png',NULL,array("title"=>"Contacter")); ?>      
