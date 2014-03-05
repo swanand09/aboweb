@@ -13,7 +13,7 @@
         <div class='val numero-complement-numero-type-de-voie'>  <?php echo $numero_aa." ".$comp_numero_aa." ".$type_voie_aa." ".$voie_aa; ?></div>
         <div class='val adresse-suite'> <?php echo $adresse_suite_aa;?></div>
         <div class='val ensemble'><?php echo !empty($ensemble_aa)?"Ensemble ".$ensemble_aa:""; ?></div>
-        <div class='val escalier-etage-porte'> <?php echo !empty($batiment_aa)?"Batiment ".$batiment_aa:""; ?>  <?php echo !empty($escalier_aa)?"Escalier ".$escalier_aa:""; ?>  <?php echo !empty($etage_aa)?"Etage ".$etage_aa:""; ?>  <?php echo !empty($porte_aa)?"Porte ".$porte_aa:""; ?></div>
+        <div class='val escalier-etage-porte'> <?php echo !empty($batiment_aa)?"B&acirc;timent ".$batiment_aa:""; ?>  <?php echo !empty($escalier_aa)?"Escalier ".$escalier_aa:""; ?>  <?php echo !empty($etage_aa)?"&Eacute;tage ".$etage_aa:""; ?>  <?php echo !empty($porte_aa)?"Porte ".$porte_aa:""; ?></div>
         <div class='val logo'> <?php echo !empty($logo_aa)?"Logo ".$logo_aa:""; ?></div>
         <div class='val code-postal-ville'><?php echo $code_postal_aa." ".$ville_aa;?></div>
 
@@ -43,9 +43,9 @@
            <div class='val adresse-suite'>  <?php echo $adresse_suite_al;?></div>
            <div class='val ensemble'><?php echo !empty($ensemble_al)?"Ensemble ".$ensemble_al : "" ; ?> </div>
            <div class='val escalier-etage-porte'>
-              <?php echo !empty($batiment_al)?"Batiment ".$batiment_al : "" ; ?> 
+              <?php echo !empty($batiment_al)?"B&acute;timent ".$batiment_al : "" ; ?> 
               <?php echo !empty($escalier_al)?"Escalier ".$escalier_al : "" ; ?> 
-              <?php echo !empty($etage_al)?"Etage ".$etage_al : "" ; ?> 
+              <?php echo !empty($etage_al)?"&Eacute;tage ".$etage_al : "" ; ?> 
               <?php echo !empty($porte_al)?"Porte ".$porte_al : "" ; ?> 
             </div>
            <div class='val logo'><?php echo !empty($logo_al)?"Logo ".$logo_al : "" ; ?></div>

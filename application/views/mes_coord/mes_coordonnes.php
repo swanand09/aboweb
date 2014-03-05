@@ -41,18 +41,16 @@
           <!--Ensemble & Batiment & Escalier-->
           <div class="row">
             <div class='columns two'><label>ENSEMBLE</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] ensemble' maxlength='20' value="<?php echo set_value("ensemble_aa",$ensemble_aa);?>" name='ensemble_aa' /></div>
-            <div class='columns two'><label>BATIMENT</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] batiment' maxlength='4' name='batiment_aa' value="<?php echo set_value("batiment_aa",$batiment_aa);?>" /></div>
+            <div class='columns two'><label>B&Acirc;TIMENT</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] batiment' maxlength='4' name='batiment_aa' value="<?php echo set_value("batiment_aa",$batiment_aa);?>" /></div>
             <div class='columns two'><label>ESCALIER</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] escalier' maxlength='2' value="<?php echo set_value("escalier_aa",$escalier_aa);?>" name='escalier_aa' size='2' /></div>
           </div>
           
           <!--Etage & Porte & logo-->
           <div class="row">
-            <div class='columns two'><label>ETAGE</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] etage' maxlength='2' name='etage_aa' value="<?php echo set_value("etage_aa",$etage_aa);?>" size='2' /></div>
+            <div class='columns two'><label>&Eacute;TAGE</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] etage' maxlength='2' name='etage_aa' value="<?php echo set_value("etage_aa",$etage_aa);?>" size='2' /></div>
             <div class='columns two'><label>PORTE</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] porte' maxlength='5' name='porte_aa' value="<?php echo set_value("porte_aa",$porte_aa);?>" /></div>
             <div class='columns two'><label>LOGO</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] logo' maxlength='5' name='logo_aa' value="<?php echo set_value("logo_aa",$logo_aa);?>" /></div>
           </div> 
-          
-         
           
           <!--Code postal & Ville & Localisation-->
            <div class="row">
@@ -94,7 +92,7 @@
         <div class="adresse-facturation hide">
          <!-- Civilité-->
           <div class="row">
-            <div class="columns bottom-10 two"><label>Civilité<span class='has-tip' title='obligatoire'>*</span></label></div>
+            <div class="columns bottom-10 two"><label>CIVILIT&Eacute;<span class='has-tip' title='obligatoire'>*</span></label></div>
             <div class="columns bottom-10 end">
               <label class="left"><input type="radio" value="M." name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="M.")?"checked='checked'":"";?> class="validate[required]">Monsieur</label>
               <label class="left"><input type="radio" value="Mme" name="civilite_af" <?php echo (set_value("civilite_af",$civilite_af)=="Mme")?"checked='checked'":"";?> class="validate[required]">Madame</label>
@@ -189,13 +187,13 @@
           <!--Ensemble & Batiment & Escalier-->
           <div class='row'>
             <div class='columns two'><label>ENSEMBLE</label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] ensemble' maxlength='20' name='ensemble_al' value="<?php echo set_value("ensemble_al",$ensemble_al);?>" /></div>
-            <div class='columns two'><label>BATIMENT </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] batiment' maxlength='4' name='batiment_al' value="<?php echo set_value("batiment_al",$batiment_al);?>" /></div>
+            <div class='columns two'><label>B&Acirc;TIMENT </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] batiment' maxlength='4' name='batiment_al' value="<?php echo set_value("batiment_al",$batiment_al);?>" /></div>
             <div class='columns two'><label>ESCALIER </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] escalier' maxlength='2' name='escalier_al' size='2' value="<?php echo set_value("escalier_al",$escalier_al);?>" /></div>
           </div>
           
          <!--Etage & Porte & logo-->
           <div class='row'>
-            <div class='columns two'><label>ETAGE </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] etage' maxlength='2' name='etage_al' size='2' value="<?php echo set_value("etage_al",$etage_al);?>" /></div>
+            <div class='columns two'><label>&Eacute;TAGE </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] etage' maxlength='2' name='etage_al' size='2' value="<?php echo set_value("etage_al",$etage_al);?>" /></div>
             <div class='columns two'><label>PORTE </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] porte' maxlength='5' name='porte_al' value="<?php echo set_value("porte_al",$porte_al);?>" /></div>
             <div class='columns two'><label>LOGO </label></div><div class='columns two'><input type='text' class='validate[condRequired[funcCall[validateAdd]]] logo' maxlength='5' name='logo_al' value="<?php echo set_value("logo_al",$logo_al);?>" /></div>
           </div>
@@ -257,10 +255,10 @@
                        if(strpos($val["Libelle"],"papier")==false){
                           if(empty($type_de_facturation)){
                        ?>
-                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" checked="checked"> Electronique (gratuit)</label></div>
+                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" checked="checked"> &Eacute;LECTRONIQUE (gratuit)</label></div>
                       <?php
                           }else{?>
-                             <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> Electronique (gratuit)</label></div> 
+                             <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> &Eacute;LECTRONIQUE (gratuit)</label></div> 
                       <?php    }
                        }else{
                                 $tarifPapier = $val["Tarif"]>0?$val["Tarif"].'€':'gratuite';    
@@ -286,7 +284,7 @@
           <hr class="sexy">
 
           <!--back and submit buttom -->
-          <div class="six custom-column back-button left"><?php echo anchor('mon_offre','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
+          <div class="six custom-column back-button left"><?php echo anchor('mon_offre','Précédent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
           <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn" title="Etape suivante : voir le récapitulatif"></div>
         </form>
 </div>

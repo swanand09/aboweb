@@ -62,7 +62,7 @@
             </div>
           </div>
           <!--Coordonnées de votre compte-->
-          <div class='row'><div class='column twelve top-20'><h4>LES COORDONNEES DE VOTRE COMPTE</h4></div></div>
+          <div class='row'><div class='column twelve top-20'><h4>LES COORDONN&Eacute;ES DE VOTRE COMPTE</h4></div></div>
           <div class="row">
             <div class="column two"><label>IBAN <a href='#' class='has-tip' data-width='360' title='Le passage au format SEPA est une obligation légale qui vient remplacer le prélèvement automatique actuel. Il est constitué des éléments suivants :
             BIC (Business Identifier Code) et IBAN (International Bank Account Number) : ils remplacent votre RIB actuel. Le BIC est le code d’identification de la banque, l’IBAN est le numéro de code bancaire international.'><?php echo image('info_icon.png',NULL,array("class"=>"border-gray","alt"=>"Plus info")); ?></a></label></div>
@@ -113,7 +113,7 @@
                   <option value='03'>Mar</option>
                   <option value='04'>Avr</option>
                   <option value='05'>Mai</option>
-                  <option value='06'>Jui</option>
+                  <option value='06'>Jun</option>
                   <option value='07'>Jul</option>
                   <option value='08'>Ao&ucirc;</option>
                   <option value='09'>Sep</option>
@@ -146,7 +146,7 @@
       </div>
       <!---->
      <div class="row">
-      <div class="six column back-button left top-20"><?php echo anchor('recapitulatif','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
+      <div class="six column back-button left top-20"><?php echo anchor('recapitulatif','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précédent')); ?></div>
       <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon mode de paiement" title="Confirmer mon mode de paiement" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
     </div>
   </form>
