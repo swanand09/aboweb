@@ -263,7 +263,7 @@
                              <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> Electronique (gratuit)</label></div> 
                       <?php    }
                        }else{
-                                $tarifPapier = $val["Tarif"]>0?$val["Tarif"].'€':'gratuit';    
+                                $tarifPapier = $val["Tarif"]>0?$val["Tarif"].'€':'gratuite';    
                                 $facture_papier = '<span class="prix">('.$tarifPapier.')</span>';
                                 if($val["Duree_mois_promo"]>0){
                                   $facture_papier = '<span class="promo">('.$val["Tarif"].'€)</span> <span class="prix">('.$val["Tarif_promo"].'€)</span>';
