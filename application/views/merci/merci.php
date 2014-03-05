@@ -23,7 +23,7 @@
             <li class='thi'>
               <h3>APRÉS <span><?php print $services; ?></span> JOURS</h3>
               <?php echo image('contenu/merci_10.png')?>
-              <p>Nous activons<br/>vos services</p>
+              <p>NOUS activons<br/>vos services</p>
             </li> 
           </ul>
         </div>
