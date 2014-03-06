@@ -101,7 +101,7 @@
     <div class='main-footer'>
       <div class='row'>
         <div class='three columns text-left'><a href="#" data-reveal-id="modalMentionLegale" title="Mentions légales">Mentions légales</a> | <a href="http://www.mediaserv.com/fileadmin/contenus/box/pdf/CUS.pdf" target="_blank" title="Conditions Générales d'Utilisation">CGU</a></div>
-        <div class='paiement three columns text-center' title="Paiement sécurisé">PAIEMENT SECURISE</div>
+        <div class='paiement three columns text-center' title="Paiement sécurisé">PAIEMENT S&Eacute;CURIS&Eacute;</div>
         <div class='livraison three columns text-center' title='Livraison gratuite'>LIVRAISON GRATUITE</div>
         <div class='souscription three columns text-right' title='Souscription en mode express'>SOUSCRIPTION EN MODE EXPRESS</div>
       </div>
