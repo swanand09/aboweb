@@ -24,7 +24,7 @@ class Mon_offre extends MY_Controller {
                                     'name'      => 'ligne_prefix',
                                     'id'        => 'ligne_prefix',
                                     'type'      => 'text',
-                                    'class'     => 'prefix',
+                                    'class'     => 'validate[required,custom[integer],minSize[4],maxSize[4]]',
                                     'maxlength' => '4',
                                     'value'     => $this->determine_location()  //recuperation department 
                               );
