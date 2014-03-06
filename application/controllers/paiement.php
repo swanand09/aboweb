@@ -14,6 +14,8 @@ class Paiement extends MY_Controller {
         $etapePasse = $this->session->userdata("etapePasse");
          if($this->input->post("page_3")=="recapitulatif"&&$etapePasse>=2){
                $this->session->set_userdata("etapePasse",3); //identifier les etapes traverser
+               $this->session->set_userdata('recapChk1',$this->input->post('recap'));
+               $this->session->set_userdata('recapChk2',$this->input->post('mandat'));
               return $this->controller_paiement_vue();   
          }else{
               $produit =  $this->session->userdata("produit");

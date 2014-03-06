@@ -13,11 +13,6 @@ class Recapitulatif extends MY_Controller {
         $this->controller_verifySessExp()? redirect('mon_offre'):"";
         $this->data["userdata"] = $this->session->all_userdata();
         
-         
-        
-        
-         
-        
  
         //display values
 
@@ -74,6 +69,10 @@ class Recapitulatif extends MY_Controller {
          $this->data['email']                        = $this->session->userdata("email");
          $this->data['type_de_facturation']          = explode("_",$this->session->userdata("type_de_facturation"));   
 
+        
+         //les checkbox
+         $this->data['recapChk1'] = $this->session->userdata('recapChk1');
+         $this->data['recapChk2'] = $this->session->userdata('recapChk2');
          return $this->controller_recap_vue();       
     }
     
