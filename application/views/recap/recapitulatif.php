@@ -5,7 +5,7 @@
         <label class='top-20'><strong>VOS COORDONNÉES</strong></label>
         <div class='val civilite-prenom-nom'><?php echo $civilite_aa." ".$prenom_aa." ".$nom_aa;?></div>
         <div class="val">Téléphone: <?php echo $telephone_portable;?></div>
-        <div class="val"><?php echo !empty($telephone_bureau)?", Bureau: ".$telephone_bureau:"";?></div>
+        <div class="val"><?php echo !empty($telephone_bureau)?"Bureau: ".$telephone_bureau:"";?></div>
         <div class="val"><?php echo !empty($telephone_domicile)?" Domicile: ".$telephone_domicile:""; ?></div>
         <div class="val">Mail: <?php echo $email;?></div>
        
