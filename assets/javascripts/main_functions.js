@@ -160,7 +160,7 @@ var preload = function(){
                             $.unblockUI();  
                             $( "html,body" ).scrollTop(0); 
                          }else{
-                               $(location).attr('href',"mes_coordonnees");
+                               $(location).attr('href',mesCoordonnees2);
                          }
                     },"json"
                   ); 
@@ -381,7 +381,7 @@ var preload = function(){
                       maTv : maTv          
                      },
                    function(data){
-                       $(location).attr('href',"mes_coordonnees");
+                       $(location).attr('href',mesCoordonnees2);
                        $.unblockUI();  
                    },"json"
                 );

@@ -66,7 +66,8 @@
     var forfait                 = '<?php echo base_url('mon_offre/forfait');?>';
     var refreshRecapCol         = '<?php echo base_url('mon_offre/refreshRecapCol');?>'; 
     var updateTvDecodeur        = '<?php echo base_url('mon_offre/updateTvDecodeur');?>'; 
-    var mesCoordonnes           = '<?php echo base_url('mon_offre/mesCoordonnes');?>';     
+    var mesCoordonnes           = '<?php echo base_url('mon_offre/mesCoordonnes');?>';   
+    var mesCoordonnees2           = '<?php echo base_url('mes_coordonnees');?>';  
     var verifEmail              = '<?php echo base_url('mes_coordonnees/verifEmail');?>';
     var verifParain             = '<?php echo base_url('mes_coordonnees/verifParain');?>';
     var cancelParain             = '<?php echo base_url('mes_coordonnees/cancelParain');?>';
