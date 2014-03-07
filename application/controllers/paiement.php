@@ -428,11 +428,11 @@ class Paiement extends MY_Controller {
         }
        
         $result = $this->Wsdl_interrogeligib->enregistreSouscription($dataArr);
-        
+        /*
         if(!isset($result["enregistreSouscriptionResult"]["Numero_contrat"])||empty($result["enregistreSouscriptionResult"]["Numero_contrat"])){
             log_message('error', 'pas de numéro de contrat');
             redirect('refus_de_paiement/index/fail');
-        }
+        }*/
         
         $this->session->set_userdata("enregistreSouscriptionResult",$result["enregistreSouscriptionResult"]);
        
@@ -452,6 +452,11 @@ class Paiement extends MY_Controller {
                 break;
           }
             
+            redirect('refus_de_paiement/index/fail');
+        }
+        
+        if(!isset($result["enregistreSouscriptionResult"]["Numero_contrat"])||empty($result["enregistreSouscriptionResult"]["Numero_contrat"])){
+            log_message('error', 'pas de numéro de contrat');
             redirect('refus_de_paiement/index/fail');
         }
             redirect('merci');       
