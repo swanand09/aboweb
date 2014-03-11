@@ -51,8 +51,9 @@
             <div class="prix_promo"><strong><?php echo $decodeur_tv_promo_tarif; ?>€ durant <?php echo $duree_mois_promo; ?>mois</strong></div>
             <?php }else{?>
                  <div class="prix_promo"><strong><?php echo $decodeur_tv_tarif; ?>€ TTC/MOIS</strong></div>
-          <?php  }
-?>
+          <?php  } ?>
+          <!-- Frais d'accès au service : 35 € ttc <br/>
+          Dépôt de garantie de 50 € restituable <br/> -->
           </div>
         </div>
                   
@@ -304,6 +305,6 @@
         <!--PVR MODAL-->
         <div id="pvr-modal" class="reveal-modal [expand, xlarge]">
           <h2>PVR (enregistreur numérique) et Time Shifting (gestion du direct)</h2>
-          <h4>LE PVR </h4>C'est en reliant un disque dur externe USB(non fourni) à votre décodeur TV que vous pourrez bénéficier de L'option PVR (enregistreur numérique) et du Time Shifting (gestion du direct).<br>Avec le PVR, vous pourrez ainsi enregistrer vos programmes préférés et les visionner en accédant au menu "mes enregistrements TV". <br><span class="txtblue">Bon à savoir</span> : Pour plus de facilité et une meilleure aisance de l'option PVR, nous vous conseillons de connecter un disque dur externe d'une capacité minimum de 500 go.«disque dur externe USB non fourni»<h4>Time Shifting (gestion du direct)</h4>La gestion du direct, liée également à la capacité de votre disque dur externe (non fourni), vous permettra de mettre en pause un programme. Vous pourrez ainsi à tout moment effectuer un avance rapide et revenir au direct ou revenir plus tard sur la partie de votre programme sauvegardée. 
+          <h4>LE PVR </h4>C'est en reliant un disque dur externe USB(non fourni) à votre décodeur TV que vous pourrez bénéficier de L'option PVR (enregistreur numérique) et du Time Shifting (gestion du direct).<br>Avec le PVR, vous pourrez ainsi enregistrer vos programmes préférés et les visionner en accédant au menu "mes enregistrements TV". <br><span class="txtblue">Bon à savoir</span> : Pour plus de facilité et une meilleure aisance de l'option PVR, nous vous conseillons de connecter un disque dur externe d'une capacité minimum de 500 go.( Disque dur externe USB non fourni)<h4>Time Shifting (gestion du direct)</h4>La gestion du direct, liée également à la capacité de votre disque dur externe (non fourni), vous permettra de mettre en pause un programme. Vous pourrez ainsi à tout moment effectuer un avance rapide et revenir au direct ou revenir plus tard sur la partie de votre programme sauvegardée. 
           <a class="close-reveal-modal">&#215;</a>
         </div>
