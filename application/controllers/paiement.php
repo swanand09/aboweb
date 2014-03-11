@@ -447,6 +447,9 @@ class Paiement extends MY_Controller {
                 case "701":
                     redirect('refus_de_paiement/index/cb');
                 break;
+                case "819":
+                    redirect('refus_de_paiement/index/cb');
+                break;
                 case "820":
                     redirect('refus_de_paiement/index/rib');
                 break;
