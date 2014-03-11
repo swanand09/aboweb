@@ -211,7 +211,7 @@
            <div class="column twelve bottom-10 top-20">
             <label>
               <input type="checkbox" value="true" name="livraison_express" <?php echo ($livraison_express!="false")?"checked='checked'":"";?> class="left">
-                Je souhaite être livré plus rapidement et bénéficier d’une livraison express après validation de ma commande. (72h à partir du traitement de ma commande).<br>
+                Je souhaite être livré plus rapidement et bénéficier d’une livraison express gratuite après validation de ma commande. (72h à partir du traitement de ma commande).<br>
             </label>
             <span class='top-10 column'><strong>IMPORTANT :</strong> Dans ce cas, je renonce à mon droit de rétractation de 7 jours suivant l'achat.</span>
           </div>

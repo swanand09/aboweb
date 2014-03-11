@@ -76,12 +76,12 @@
 <!--</div>   -->
 <?php } ?>
 <!-- <div class='column twelve bottom-20 recap-add'>-->
-        <div class='top-20'><strong>Votre adresse médiaServ est : </strong><span class='green-text'><?php echo $email_mediaserv."@mediaserv.net"; ?></span></div>
+        <div class='top-20'><strong>Votre adresse Mediaserv est : </strong><span class='green-text'><?php echo $email_mediaserv."@mediaserv.net"; ?></span></div>
      </div>        
     </div>
     <hr class="sexy">
     <div class="row">
-      <div class="column twelve"><label><strong>Vous profitez en plus de :</strong></label></div>
+      <div class="column twelve"><label><strong>Vous bénéficiez de:</strong></label></div>
       <div class="column six top-20 end"><?php echo image('promo_nouveau_forfait.png',NULL,array("title"=>"Nouveau Forfaite 49,99€ TTC par mois", "alt"=>"Nouveau Forfaite 49,99€ TTC par mois")); ?></div>
     </div>
     <hr class="sexy">
