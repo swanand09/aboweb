@@ -124,6 +124,14 @@
 }
 
 /*adjustments*/
-.block-grid.etapes etape1.state4 a span {
+.block-grid.etapes .etape1.state4 a  {
   float: left;
+  padding-left: 46px;
+  text-align: left;
+}
+.block-grid.etapes .etape1.state4 a span {
+  float: left;
+  height: 26px;
+  line-height: 1;
+  width: 16px;
 }
