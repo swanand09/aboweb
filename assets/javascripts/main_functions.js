@@ -450,14 +450,28 @@ var preload = function(){
                        }, "json"
                    );
             }
-            /*
-            $("#cancelParrain").click(function(){
-                 preload();
-                   $.post(
-                       cancelParain,                        
-                       function(data){                       
-                        $('#modalpaseli').empty().prepend("<p><strong>"+data.msg+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal();                        
-                        $.unblockUI();
-                       }, "json"
-                   );
-            });*/
+            $(document).on('click','#prevEtape2A1',function(){
+                var redirePg = true;
+               $("#mes-coordonnees input[type=text]").each(function() {
+                  if($(this).val()!=$(this).prop("defaultValue")){
+                     redirePg = false;
+                       $('#modalpaseli').empty().prepend("<p><strong>Vous n\'avez pas validé vos coordonnées. Si vous quittez la saisie sans passer à l’étape suivante, vos données ne seront pas conservées.<br><br>Procéder?</strong></p><div class='text-center'><a class='button' id='btnOuiPrev'>Oui</a>&nbsp;<a class='button close-reveal-modal' id='btnNon'>Non</a></div>").reveal(); 
+                  }
+               });
+               $("#mes-coordonnees input[type=radio], #mes-coordonnees input[type=checkbox]").each(function() {
+                  if($(this).prop("defaultChecked") !=  $(this).prop("checked")){
+                      redirePg =false;
+                       $('#modalpaseli').empty().prepend("<p><strong>Vous n\'avez pas validé vos coordonnées. Si vous quittez la saisie sans passer à l’étape suivante, vos données ne seront pas conservées.<br><br>Procéder?</strong></p><div class='text-center'><a class='button' id='btnOuiPrev'>Oui</a>&nbsp;<a class='button close-reveal-modal' id='btnNon'>Non</a></div>").reveal(); 
+                  }
+               });
+               
+               if(redirePg==true){
+                   $(location).attr('href',monOffre);
+               }
+            });
+             $(document).on('click','#btnOuiPrev',function(){
+                 $(location).attr('href',monOffre);
+             });
+           $(document).on('click','#btnNon',function(){
+                 $('#modalpaseli').trigger('reveal:close');
+             });

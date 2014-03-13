@@ -284,7 +284,7 @@
           <hr class="sexy">
 
           <!--back and submit buttom -->
-          <div class="six custom-column back-button left"><?php echo anchor('mon_offre','Précédent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précedent')); ?></div>
+          <div class="six custom-column back-button left"><a  id="prevEtape2A1" class="precedent" title="Retour à l'étape précédente" alt="Précedent">Précédent</a><?php //echo anchor('#','Précédent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','id'=>'prevEtape2A1','alt'=>'Précedent')); ?></div>
           <div class="six custom-column text-right"> <input type="submit" value="SUIVANT" name="suivant" class="btn-forward rmv-std-btn" title="Etape suivante : voir le récapitulatif"></div>
         </form>
 </div>
