@@ -53,7 +53,7 @@ $(function() {
   //chainesFilter($('.eight.chaines .grid li'),'mega');
 
   $(document).on('click','#filter li',function(e){
-   
+   var selector = $('.eight.chaines .grid li');
    if(!$(this).hasClass('select'))
    {
      e.preventDefault();
@@ -67,7 +67,7 @@ $(function() {
      $('#filter li').removeClass('active');
      $(this).addClass('active');
      var datagroup = $(this).children('a').attr('data-group');
-     var selector = $('.eight.chaines .grid li');
+     
 
      //if ultra is selected, option ultra will be checked
      if(datagroup == 'ultra')
@@ -90,6 +90,18 @@ $(function() {
 
     $('#filter li').removeClass('active');
     $(this).prev().addClass('active');
+
+    var datagroup = $(this).prev().children('a').attr('data-group');
+    //if ultra is selected, option ultra will be checked
+    if(datagroup == 'ultra')
+    {
+      addUltraOptions('INCLUS');
+    }
+    else
+    {
+      removeUltraoptions(promoInitialText);
+    }
+    chainesFilter(selector,datagroup);
    }
 
   });
