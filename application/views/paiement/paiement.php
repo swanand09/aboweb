@@ -146,7 +146,7 @@
       </div>
       <!---->
      <div class="row">
-      <div class="six column back-button left top-20"><?php echo anchor('recapitulatif','Précedent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précédent')); ?></div>
+      <div class="six column back-button left top-20"><?php echo anchor('recapitulatif','Précédent',array('title'=>"Retour à l'étape précédente",'class'=>'precedent','alt'=>'Précédent')); ?></div>
       <div class="six column text-right top-20"> <input type="submit" value="Confirmer mon mode de paiement" title="Confirmer mon mode de paiement" name="suivant" class="btn-confirmer rmv-std-btn"></div> 
     </div>
   </form>

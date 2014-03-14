@@ -108,7 +108,7 @@
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
-            <div class="columns two"><label>NUMÉRO <span class='has-tip' title='obligatoire'>*</span></label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class='numero validate[required,custom[integer],min[1],max[99999]]' maxlength='5'></div>
+            <div class="columns two"><label>NUMÉRO</label></div><div class="two columns"><input type="text" name="numero_af" value="<?php echo set_value("numero_af",$numero_af);?>" class='numero validate[condRequired[custom[integer],min[1],max[99999]]]' maxlength='5'></div>
             <div class='columns two'><label>COMPLÉMENT N&ordm; </label></div><div class='three end columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_af' value="<?php echo set_value("comp_numero_af",$comp_numero_af);?>" /></div>
           </div>
           <!--type de voie-->
@@ -168,7 +168,7 @@
           
           <!--Numéro & Complément numéro 7 type de voie-->
           <div class='row'>
-            <div class='columns two'><label>NUMÉRO <span class='has-tip' title='obligatoire'>*</span></label></div><div class='two columns'><input type='text' class='numero validate[required,custom[integer],min[1],max[99999]]' maxlength='5' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
+            <div class='columns two'><label>NUMÉRO</label></div><div class='two columns'><input type='text' class='numero validate[condRequired[custom[integer],min[1],max[99999]]]' maxlength='5' name='numero_al' value="<?php echo set_value("numero_al",$numero_al);?>" /></div>
             <div class='columns two'><label>COMPLÉMENT N&ordm;</label></div><div class='three end columns'><input type='text' class='comp_numero validate[funcCall[validateCompNumEntryList]]' name='comp_numero_al' value="<?php echo set_value("comp_numero_al",$comp_numero_al);?>" /></div>
           </div>
           <!--type de voie-->
