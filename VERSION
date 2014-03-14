@@ -1,3 +1,10 @@
+v3.3.0
+FS#4902 - Tunnel Web - Coordonnées disparaissent pendant la modification d’offre
+FS#4962 - Tunnel Web - Retours juridiques
+FS#4971 - Tunnel Web - Affichage message d'erreur
+
+---------------------------------------------------------------------------------------
+
 v3.2.0
 Corrections apportées:
 FS#4903 - Tunnel Web - Test d'éligibilité - Numéro de téléphone non valide

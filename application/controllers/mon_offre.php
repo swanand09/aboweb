@@ -317,6 +317,7 @@ class Mon_offre extends MY_Controller {
         $data["iadArr"] = $iadArr;
         $this->session->set_userdata('iad',$iadArr);
         $data["prefixNum"] = substr($this->session->userdata("num_tel"),0,4);
+        $this->session->set_userdata('prefixNum',$data["prefixNum"]);
         $this->contenuGauche["contenu_html"] .= $this->load->view("monoffre/forfait/location_modem",$data,true);
         $this->session->set_userdata('htmlContent_forfait',$this->contenuGauche["contenu_html"]);
        

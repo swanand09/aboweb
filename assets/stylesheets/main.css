@@ -495,6 +495,7 @@ body {
 .forfait .tarifs {
 	padding-left: 0;
 	text-align: center;
+	font-size: 13px;
 }
 .forfait .tarifs span {
 	font-size: 1.9em;
@@ -656,7 +657,7 @@ img.prix_bare{
 	list-style: none outside none;
     margin-left: 0;
 }
-#filter .columns.five { margin-top: 9px;}
+#filter .columns.five { margin-top: -5px;}
 #filter .columns.seven { margin-top: 22px;}
 #filter li.active span,#filter li.active label,#filter li:hover span,#filter li:hover label{
 	color: #9AC447;
@@ -681,7 +682,7 @@ img.prix_bare{
 	font-weight: bold;
 	color: #AAAAAA;
 }
-#filter li label { color:#AAA;}
+#filter li label { color:#AAA; cursor:pointer !important;}
 #filter li .five .nombre_chaines {
 	font-size: 42px;
 }
@@ -727,6 +728,11 @@ img.prix_bare{
 	margin-top: -17px;
 	width: 100%;
 }
+
+#filter .select{ background-color: rgba(0, 0, 0, 0); margin-top: -28px; text-align:left; }
+#filter .select:hover{ background-color: rgba(0, 0, 0, 0); }
+#filter .select label{ font-size: 12px; margin-top: 0; }
+#filter .select input{ float: left; z-index: 200;}
 
 .columns.eight.chaines {
     color: #F6F5F5;

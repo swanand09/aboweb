@@ -53,31 +53,48 @@ $(function() {
   //chainesFilter($('.eight.chaines .grid li'),'mega');
 
   $(document).on('click','#filter li',function(e){
-    e.preventDefault();
+   
+   if(!$(this).hasClass('select'))
+   {
+     e.preventDefault();
 
-
-    if($('#filter li').hasClass('active')){
-      var option = $('#filter li.active').find('a');
-     if(option.attr('data-group') == "ultra"){
-      removeUltraoptions(promoInitialText)
+     if($('#filter li').hasClass('active')){
+       var option = $('#filter li.active').find('a');
+      if(option.attr('data-group') == "ultra"){
+       removeUltraoptions(promoInitialText)
+      }
      }
-    }
-    $('#filter li').removeClass('active');
-    $(this).addClass('active');
-    var datagroup = $(this).children('a').attr('data-group');
-    var selector = $('.eight.chaines .grid li');
+     $('#filter li').removeClass('active');
+     $(this).addClass('active');
+     var datagroup = $(this).children('a').attr('data-group');
+     var selector = $('.eight.chaines .grid li');
 
-    //if ultra is selected, option ultra will be checked
-    if(datagroup == 'ultra')
-    {
-      addUltraOptions('INCLUS');
-    }
-   /* else //option ultra will be unchecked
-    {
-      removeUltraoptions(promoInitialText);
-    }   */ 
-    chainesFilter(selector,datagroup);
+     //if ultra is selected, option ultra will be checked
+     if(datagroup == 'ultra')
+     {
+       addUltraOptions('INCLUS');
+     }
+    /* else //option ultra will be unchecked
+     {
+       removeUltraoptions(promoInitialText);
+     }   */ 
+     chainesFilter(selector,datagroup);
+   }
+   else
+   {
+    $('#filter li.select').find('input').prop('checked',false);
+    $('#filter li.select').find('input').removeAttr('checked');
+
+    $(this).find('input').prop('checked',true);
+    $(this).find('input').attr('checked','checked');
+
+    $('#filter li').removeClass('active');
+    $(this).prev().addClass('active');
+   }
+
   });
+
+
 
 });
 

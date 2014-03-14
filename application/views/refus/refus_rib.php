@@ -8,7 +8,7 @@
       </div>
 
       <div class="row clear">
-        <div class="column eleven end pleft35 top-20 msg"><p class="top-10"><strong>Une erreur est survenue lors de la saisie de votre<br><br>numéro IBAN/BIC. Nous vous invitons à renouveler <br>la validation de votre commande ou à modifier votre mode de règlement</strong></p></div>
+        <div class="column eleven end pleft35 top-20 msg"><p class="top-10"><strong>Une erreur est survenue lors de la saisie de votre<br>numéro IBAN/BIC. Nous vous invitons à renouveler <br>la validation de votre commande ou à modifier votre mode de règlement</strong></p></div>
         <div class="six column back-button end top-20"><?php echo anchor('paiement','REVENIR AU MODE DE RÈGLEMENT',array('title'=>"Retour à l'étape précédente",'class'=>'precedent back-long','alt'=>'Précedent')); ?></div>
       </div>
 

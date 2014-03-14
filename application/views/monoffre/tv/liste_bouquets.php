@@ -54,6 +54,23 @@
           <?php  } ?>
           <!-- Frais d'accès au service : 35 € ttc <br/>
           Dépôt de garantie de 50 € restituable <br/> -->
+
+          <?php
+
+          if($this->session->userdata("prefixNum") !='0262') {
+          ?>
+          <div class='CDE top-20'><strong>Caution de votre décodeur TV : 50€ TTC</strong></div>
+          <?php
+          }
+          else
+          {
+          ?>
+          <div class='FASTV top-20'><strong>Frais d’accés au service TV : 35€ TTC <small>(sur votre première facture uniquement)</small></strong></div>
+          <?php
+          }
+          ?>
+          
+          
           </div>
         </div>
                   
@@ -103,10 +120,11 @@
                               if($val2["promo"]["Duree_mois_promo"]>0){
                    ?>
                                 <li class='promo'>
-                                <a href="#" onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
+                                <a href="#" data-group='<?php echo strtolower($key2); ?>'>
                                   <div class='columns five'>
                                 <span class='nombre_chaines'>+<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?></span>
                                     <label>Chaines</label>
+                                    <div class='select'><label><input onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");' type="radio" name='bouquet' value="<?php echo strtolower($key2); ?>"/>Sélectionner</label></div>
                                   </div>
                                   <div class='columns seven'>
                                       <label>BOUQUET <?php echo strtoupper($key2); ?></label>
@@ -120,7 +138,7 @@
                   
                           <?php }else{ ?>
                             <li>
-                                <a href="#" onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");' data-group='<?php echo strtolower($key2); ?>'>
+                                <a href="#" data-group='<?php echo strtolower($key2); ?>'>
                                   <div class='columns five'>
                                 <span class='nombre_chaines'>+<?php echo $bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]; ?></span>
                                     <label>Chaines</label>
@@ -131,6 +149,7 @@
                                   </div>
                                 </a>
                               </li>
+                              <li class='select'><label onclick='javascript: choixBouquet("<?php echo $val2["picto"]."__".$key2."__".$val2["tarif"]."__".$bouquet_list["Bouquet"][strtoupper($key2)]["nombreChaine"]."__".$val2["id_crm"]; ?>");'><span><input type="radio" name='bouquet' value="<?php echo strtolower($key2); ?>"/></span>Sélectionner</label></li>
                        <?php    
                                 }
                             }
