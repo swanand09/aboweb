@@ -3,7 +3,7 @@ echo form_open('#',array('class'=>'border-gray frm-etape-tester columns twelve',
 <div class='seven columns'>
     <label class='misc-custom-3'>
        <strong class='left'>SAISISSEZ VOTRE NUM&Eacute;RO DE T&Eacute;L&Eacute;PHONE</strong>
-       <span class='right'><a href='#' class='has-tip' data-width='250' title='En saisissant votre numéro de téléphone à dix chiffres, vous pourrez ainsi connaitre l’éligibilité de votre ligne.'><?php echo image('info_icon.png',NULL,array('class'=>'border-gray','title'=>' ','alt'=>'Plus info'));?></a></span>
+       <span class='right'><a href='#' class='has-tip' data-width='250' title='En saisissant votre numéro de téléphone à dix chiffres, vous pourrez ainsi connaitre l’éligibilité de votre ligne.'><?php echo image('info_icon.png',NULL,array('class'=>'border-gray','title'=>'','alt'=>'Plus info'));?></a></span>
     </label>
      <div class="row">
         <div class="column three"><?php  echo form_input($ligne_prefix);?> </div>
