@@ -259,6 +259,38 @@ $(document).on('click','#redu_facture',function(){
 	{
 		$('.adresse-livraison').removeClass('hide');
 	}
+
+
+
+	//
+	$(document).on('click','.etape1',function(){
+
+		if($('ul.etapes').hasClass('page-etape-2'))
+		{
+			var redirePg = true;
+			$("#mes-coordonnees input[type=text]").each(function() {
+			   if($(this).val()!=$(this).prop("defaultValue")) {
+			      redirePg = false;
+			      $('#modalpaseli').empty().prepend("<p><strong>Vous n\'avez pas validé vos coordonnées. Si vous quittez la saisie sans passer à l’étape suivante, vos données ne seront pas conservées.<br><br>Procéder?</strong></p><div class='text-center'><a class='button' id='btnOuiPrev'>Oui</a>&nbsp;<a class='button close-reveal-modal' id='btnNon'>Non</a></div>").reveal(); 
+			   }
+			});
+
+			$("#mes-coordonnees input[type=radio], #mes-coordonnees input[type=checkbox]").each(function() {
+			   if($(this).prop("defaultChecked") !=  $(this).prop("checked")){
+			       redirePg =false;
+			       $('#modalpaseli').empty().prepend("<p><strong>Vous n\'avez pas validé vos coordonnées. Si vous quittez la saisie sans passer à l’étape suivante, vos données ne seront pas conservées.<br><br>Procéder?</strong></p><div class='text-center'><a class='button' id='btnOuiPrev'>Oui</a>&nbsp;<a class='button close-reveal-modal' id='btnNon'>Non</a></div>").reveal(); 
+			   }
+			});
+			
+			if(redirePg==true) {
+			   $(location).attr( 'href', monOffre );
+			}
+			else
+			{
+				return false;
+			}
+		}
+	});
 });
 
 
