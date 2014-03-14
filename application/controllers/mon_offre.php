@@ -169,7 +169,7 @@ class Mon_offre extends MY_Controller {
                 }
             }
       }else{
-          throw new Exception("VOTRE NUMERO EST INVALIDE. VEUILLEZ RÉ-ESSAYER.");
+          throw new Exception("VOTRE NUMERO EST INVALIDE. VEUILLEZ RÉESSAYER.");
       }
        }catch(Exception $e){
            log_message('error', $num_tel." est invalide");
@@ -228,7 +228,7 @@ class Mon_offre extends MY_Controller {
          echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉ-ESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;
@@ -358,7 +358,7 @@ class Mon_offre extends MY_Controller {
           echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉ-ESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;                 
@@ -457,7 +457,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉ-ESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;              
@@ -599,7 +599,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉ-ESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;                
@@ -619,7 +619,7 @@ class Mon_offre extends MY_Controller {
             echo json_encode(
                               array(
                                       "error"=>"redirect",
-                                      "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉ-ESSAYER.</strong>
+                                      "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉESSAYER.</strong>
     </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                             );
           exit;              
@@ -639,7 +639,7 @@ class Mon_offre extends MY_Controller {
           echo json_encode(
                             array(
                                     "error"=>"redirect",
-                                    "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉ-ESSAYER.</strong>
+                                    "msg"=>"<p><strong>VOTRE SESSION A EXPIRÉ. VEUILLEZ RÉESSAYER.</strong>
   </p><a class='close-reveal-modal' onclick='javascript:$(location).attr(\"href\",monOffre);'>&#215;</a>")
                           );
         exit;            

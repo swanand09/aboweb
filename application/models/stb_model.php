@@ -19,7 +19,7 @@ class Stb_model extends CI_Model
             $this->dbObj = $this->load->database('stb',TRUE);         
             $this->connected = $this->dbObj->initialize();
             if($this->connected==FALSE){
-                  throw new Exception("UNE ERREUR S'EST PRODUITE. VEUILLEZ RÉ-ESSAYER.");
+                  throw new Exception("UNE ERREUR S'EST PRODUITE. VEUILLEZ RÉESSAYER.");
             }
         }catch(Exception $e){
           $this->maTv = array("error"=>$e->getMessage());
