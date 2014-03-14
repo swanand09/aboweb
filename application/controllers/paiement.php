@@ -30,6 +30,9 @@ class Paiement extends MY_Controller {
                     case 2:
                         redirect("recapitulatif");
                     break;
+                    case 3:
+                        return $this->controller_paiement_vue();   
+                    break;
                     default:
                         redirect("mon_offre");
                 }

@@ -2,7 +2,7 @@ v3.3.0
 FS#4902 - Tunnel Web - Coordonnées disparaissent pendant la modification d’offre
 FS#4962 - Tunnel Web - Retours juridiques
 FS#4971 - Tunnel Web - Affichage message d'erreur
-
+FS#4972 - Tunnel Web - Refus de paiement - Bouton 'Revenir au mode de règlement'
 ---------------------------------------------------------------------------------------
 
 v3.2.0
