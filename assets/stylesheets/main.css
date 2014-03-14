@@ -1163,9 +1163,8 @@ form .formError .formErrorArrow div {
 /*
 * Ligne déjà activée
 */
-.ligne-deja-activer .five.columns {
 
-}
+
 .ligne-deja-activer .seven.columns {
 	padding-left: 43px;
 	padding-top: 29px;
@@ -1208,4 +1207,15 @@ form .formError .formErrorArrow div {
     color: #803C3C;
     font-weight: bold;
     padding: 10px;
+}
+
+#btnOuiPrev,
+#btnNon {
+background-color: #9AC447;
+border: medium none;
+}
+
+#btnOuiPrev:hover,
+#btnNon:hover {
+background-color: #519435;
 }

@@ -43,7 +43,7 @@
            <div class='val adresse-suite'>  <?php echo $adresse_suite_al;?></div>
            <div class='val ensemble'><?php echo !empty($ensemble_al)?"Ensemble ".$ensemble_al : "" ; ?> </div>
            <div class='val escalier-etage-porte'>
-              <?php echo !empty($batiment_al)?"B&acute;timent ".$batiment_al : "" ; ?> 
+              <?php echo !empty($batiment_al)?"B&acirc;timent ".$batiment_al : "" ; ?> 
               <?php echo !empty($escalier_al)?"Escalier ".$escalier_al : "" ; ?> 
               <?php echo !empty($etage_al)?"&Eacute;tage ".$etage_al : "" ; ?> 
               <?php echo !empty($porte_al)?"Porte ".$porte_al : "" ; ?> 

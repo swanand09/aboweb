@@ -255,7 +255,7 @@
                        if(strpos($val["Libelle"],"papier")==false){
                           if(empty($type_de_facturation)){
                        ?>
-                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" checked="checked"> &Eacute;LECTRONIQUE (gratuit)</label></div>
+                           <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" checked="checked"> &Eacute;lectronique (gratuit)</label></div>
                       <?php
                           }else{?>
                              <div class="column four"><label><input type="radio" onclick="javascript:choixFacture('facture_electronique');" value="<?php echo $val["Id_crm"]; ?>" name="type_de_facturation" id="facture_electronique" <?php echo ($type_de_facturation=="facture_electronique")?'checked="checked"':''; ?>> &Eacute;lectronique (gratuit)</label></div> 
