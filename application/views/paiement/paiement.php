@@ -43,7 +43,7 @@
             <!--Numéro & Complément numéro -->
             <div class='row'>
               <div class='columns two'><label>Numéro </label></div><div class='two columns'><input type='text' class='numero' name='numero_pa' /></div>
-              <div class='nfirst columns two'><label>Complément &ordm;</label></div><div class='three columns end'><input type='text' class='comp_numero' name='comp_numero_pa' /></div>              
+              <div class='nfirst columns two'><label>Complément N&ordm;</label></div><div class='three columns end'><input type='text' class='comp_numero' name='comp_numero_pa' /></div>              
             </div>
             <!--type de voie-->
             <div class='row'>
