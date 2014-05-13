@@ -181,7 +181,7 @@ $(document).on('click','#redu_facture',function(){
 			}
 		}
 	});
-
+        $("#frmParrain").validationEngine();
 
 	/*--------------------------------
 	*  Change focus after prefix

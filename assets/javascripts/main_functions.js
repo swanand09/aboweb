@@ -425,7 +425,8 @@ var preload = function(){
           
           function verifParainWebServ()
           {
-                 preload();
+                if($("#frmParrain").validationEngine('validate')){        
+                   preload();
                    $.post(
                         verifParain,
                         {
@@ -441,6 +442,11 @@ var preload = function(){
                         }
                         $('#modalpaseli').empty().prepend("<p><strong>"+data.Error.ErrorMessage+"</strong></p><a class='close-reveal-modal'>&#215;</a>").reveal(); 
                         $.unblockUI(); 
+                        /*var errVar = 'Error';
+                        if("Erreur" in data ){
+                            alert("toto");
+                            errVar = 'Erreur';
+                        }*/
                         if(data.Error.ErrorMessage=="VOTRE PARRAIN EXISTE. MERCI!"){
                             $("#verifAccParai").addClass("parrainage-accepte").empty().html("Parrainage accepté");
                             return false;
@@ -449,6 +455,7 @@ var preload = function(){
                         $("#parrain_num_contrat").focus();                                     
                        }, "json"
                    );
+                }
             }
             $(document).on('click','#prevEtape2A1',function(){
                 var redirePg = true;

@@ -437,12 +437,13 @@ class Mes_coordonnees extends MY_Controller {
         }else{
             $resultVerifParain =$this->Wsdl_interrogeligib->verifParain($this->session->userdata("offreparrainage_id"),$parrain_num_contrat,$parrain_num_tel);
             //echo json_encode(array("faultstring"=>"Le serveur n'a pas pu lire la demande. ---> Il existe une erreur dans le document XML (3, 52). ---> Le format de la chaîne d'entrée est incorrect."));
-           if(empty($resultVerifParain["Error"])){           
+          $error = isset($resultVerifParain["Error"])?'Error':'Erreur';
+            if(empty($resultVerifParain[$error])){           
               $this->session->set_userdata("parainNumCont",$parrain_num_contrat);
               $this->session->set_userdata("parainNumTel",$parrain_num_tel);
                $this->session->set_userdata("parrain","oui");
            }
-           $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain["Error"])?$resultVerifParain["Error"]["ErrorMessage"]:"VOTRE PARRAIN EXISTE. MERCI!";
+           $resultVerifParain["Error"]["ErrorMessage"] = !empty($resultVerifParain[$error])?$resultVerifParain[$error]["ErrorMessage"]:"VOTRE PARRAIN EXISTE. MERCI!";
            if(isset($resultVerifParain["Id_parrain"]))
            $this->session->set_userdata("id_parrain",(isset($resultVerifParain["Id_parrain"])&&!empty($resultVerifParain["Id_parrain"]))?$resultVerifParain["Id_parrain"]:0);
            echo json_encode($resultVerifParain);
