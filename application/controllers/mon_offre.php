@@ -266,14 +266,16 @@ class Mon_offre extends MY_Controller {
          $this->session->set_userdata("resultProd",$resultProd);
        }
        if(empty($resultProd["recupere_offreResult"]["Erreur"])){
+       $delaiRetrac = isset($resultProd["recupere_offreResult"]["Delai_rectraction"])?$resultProd["recupere_offreResult"]["Delai_rectraction"]:"7";
+       $this->session->set_userdata('delaiRetrac',$delaiRetrac);    
        $this->session->set_userdata('localite',$resultProd["recupere_offreResult"]["Localite"]);
        $this->session->set_userdata('idParcours',$resultProd["recupere_offreResult"]["Id"]); 
        $this->session->set_userdata('offreparrainage_id',($resultProd["recupere_offreResult"]["Catalogue"]["Autorise_parrainage"]=="true")?$resultProd["recupere_offreResult"]["Catalogue"]["Offreparrainage_id"]:"");                  
        $this->session->set_userdata('ws_ville',$resultProd["recupere_offreResult"]["Villes"]["WS_Ville"]);
        $this->session->set_userdata('produit',$resultProd["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]);   
-       $panierVal = $this->session->userdata("panierVal");       
+     /* $panierVal = $this->session->userdata("panierVal");       
        array_push($panierVal["promodum2"],array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));       
-       $this->session->set_userdata("panierVal",$panierVal);
+       $this->session->set_userdata("panierVal",$panierVal);*/
        $this->session->set_userdata('context',$resultProd["recupere_offreResult"]["Context"]);
        //$this->session->set_userdata('dummyPanier',$this->Wsdl_interrogeligib->recupDummyPanier($result["recupere_offreResult"]["Catalogue"]["Produits"]["WS_Produit"]));
      
@@ -369,9 +371,10 @@ class Mon_offre extends MY_Controller {
         $consv_num_tel = $this->session->userdata("consv_num_tel");
         $resultProd = $this->session->userdata("resultProd");
         $promodum2Arr = "";
+        /*
         if(!empty($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])){
           $promodum2Arr = array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]);
-        }
+        }*/
          $this->produIdCrm   =   array(
                                     "forfait"       => "",
                                     "degroupage"    => "",
@@ -395,7 +398,7 @@ class Mon_offre extends MY_Controller {
                                         "degroupagedum1"    => array(),
                                         "portabilitedum1"   => array(),
                                         "forfaitdum1"       => array(),
-                                        "promodum2"         => array($promodum2Arr),
+                                        "promodum2"         => array(),
                                         "bouquetTvdum3"     => array(),
                                         "optionTvdum3"      => array(),
                                         "voddum3"           => array(),
@@ -471,14 +474,15 @@ class Mon_offre extends MY_Controller {
          //reinitialiser
          $resultProd = $this->session->userdata("resultProd");
          $promodum2Arr = "";
+         /*
          if(!empty($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"])){
              $promodum2Arr = array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]);
-         }
+         }*/
          $this->panierVal       = array(
                                         "degroupagedum1"    => array(),
                                         "portabilitedum1"   => array(),
                                         "forfaitdum1"       => array(),
-                                        "promodum2"         => array($promodum2Arr),
+                                        "promodum2"         => array(),
                                         "bouquetTvdum3"     => array(),
                                         "optionTvdum3"      => array(),
                                         "voddum3"           => array(),

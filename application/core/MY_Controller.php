@@ -80,10 +80,10 @@ class MY_Controller extends CI_Controller {
                                     "facturedum6"       => array(),
                                     "oneshotdum7"       => array()
             );    
-            
+            /*
             if(!empty($resultProd)){
                 $this->panierVal["promodum2"] = array(array($resultProd["recupere_offreResult"]["Catalogue"]["Promo_libelle"]));
-            }
+            }*/
             
             $this->contenuGauche = array("contenu_html"  => "");
             $this->prenum = "";
@@ -329,15 +329,11 @@ class MY_Controller extends CI_Controller {
                             if($val["Categorie"]=="FORFAIT"){
                                 $id_crm = $this->input->post("id_crm");
                                 if($val["Id_crm"]==$id_crm){
-                                                                                                           
-                                    
                                      $dummyAMaj = $this->Wsdl_interrogeligib->recupDummyParId($produit,$id_crm); 
                                      //MAJ PANIER
-                                     $this->procDummy(array("dummyArr"=>$dummyAMaj));   
-                                     
-                                      //mettre en session les id crm
-                                      $this->produIdCrm["forfait"] = $id_crm;
-                                     
+                                     $this->procDummy(array("dummyArr"=>$dummyAMaj));  
+                                     //mettre en session les id crm
+                                     $this->produIdCrm["forfait"] = $id_crm;
                                    }
                             }
                         break;

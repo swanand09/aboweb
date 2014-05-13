@@ -1,4 +1,7 @@
-<?php echo (validation_errors() != NULL )? "<div class='all-errors'>".validation_errors('<div class="errormsg">', '</div>')."</div>" :""; ?>
+<?php 
+echo (validation_errors() != NULL )? "<div class='all-errors'>".validation_errors('<div class="errormsg">', '</div>')."</div>" :""; 
+$delaiRetrac = $this->session->userdata("delaiRetrac");
+?>
 <div class="left-etape-content">
     <form action="mes_coordonnees" method="POST" id="mes-coordonnees">
         <input type="hidden" name="page_2" value="mes_coordonnees" />
@@ -213,7 +216,7 @@
               <input type="checkbox" value="true" name="livraison_express" <?php echo ($livraison_express!="false")?"checked='checked'":"";?> class="left">
                 Je souhaite être livré plus rapidement et bénéficier d’une livraison express gratuite après validation de ma commande. (72h à partir du traitement de ma commande).<br>
             </label>
-            <span class='top-10 column'><strong>IMPORTANT :</strong> Dans ce cas, je renonce à mon droit de rétractation de 7 jours suivant l'achat.</span>
+            <span class='top-10 column'><strong>IMPORTANT :</strong> Dans ce cas, je renonce à mon droit de rétractation de <?php echo $delaiRetrac; ?> jours suivant l'achat.</span>
           </div>
         </div>
 
