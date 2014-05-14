@@ -1219,3 +1219,7 @@ border: medium none;
 #btnNon:hover {
 background-color: #519435;
 }
+
+input.telephone_portable { margin-left: 10px; width: 195px;}
+input.telephone_bureau { margin-left: 12px; width: 195px;}
+input.telephone_domicile { width: 195px; }
