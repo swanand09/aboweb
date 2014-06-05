@@ -35,11 +35,11 @@ $delaiRetrac = $this->session->userdata("delaiRetrac");
           </div>
            <!--Addresse-->
           <div class="row">
-            <div class='columns two'><label>ADRESSE<span class='has-tip' title='obligatoire'>*</span></label></div><div class='ten columns'><input type='text' class='validate[required,funcCall[validateAdd]] adresse' maxlength='200' name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
+            <div class='columns two'><label>ADRESSE<span class='has-tip' title='obligatoire'>*</span></label></div><div class='ten columns'><input type='text' class='validate[required,funcCall[validateAdd]] adresse' maxlength='40' name='voie_aa' value="<?php echo set_value("voie_aa",$voie_aa);?>" /></div>
           </div>
           <!--Complément d'adresse-->
           <div class="row">
-            <div class='columns three'><label>COMPLÉMENT D'ADRESSE</label></div><div class='nine columns'><input type='text'  class='validate[condRequired[funcCall[validateAdd]]] adresse_suite' name='adresse_suite_aa' maxlength='64' value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" /></div>
+            <div class='columns three'><label>COMPLÉMENT D'ADRESSE</label></div><div class='nine columns'><input type='text'  class='validate[condRequired[funcCall[validateAdd]]] adresse_suite' name='adresse_suite_aa' maxlength='60' value="<?php echo set_value("adresse_suite_aa",$adresse_suite_aa);?>" /></div>
           </div>
           <!--Ensemble & Batiment & Escalier-->
           <div class="row">
