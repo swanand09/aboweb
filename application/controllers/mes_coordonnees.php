@@ -274,8 +274,10 @@ class Mes_coordonnees extends MY_Controller {
         
         //configuring rules
         $this->form_validation->set_rules('civilite_aa', 'CIVILITÉ', 'required');
-        $this->form_validation->set_rules('nom_aa', 'NOM', 'trim|required|min_length[1]|max_length[30]|xss_clean');
-        $this->form_validation->set_rules('prenom_aa', 'PRÉNOM', 'trim|required|min_length[1]|max_length[30]|xss_clean');        
+        $nomAa = $this->input->post('nom_aa');
+        $this->form_validation->set_rules('nom_aa', 'NOM', 'trim|required|min_length[1]|max_length[30]|xss_clean|callback_validName['.$nomAa.']');
+         $prenomAa = $this->input->post('prenom_aa');
+        $this->form_validation->set_rules('prenom_aa', 'PRÉNOM', 'trim|required|min_length[1]|max_length[30]|xss_clean|callback_validName['.$prenomAa.']');        
        //$this->form_validation->set_rules('numero_aa', 'NUMÉRO', 'required');
         $this->form_validation->set_rules('voie_aa', 'ADRESSE', 'required');
         //$this->form_validation->set_rules('mobile', 'mobile', 'trim|required|xss_clean');
@@ -383,6 +385,8 @@ class Mes_coordonnees extends MY_Controller {
         
         return $this->controller_mes_coord_vue();                
     }
+    
+    ///valid email
        
      public function validMsvEmail($email_msv=""){
         $this->controller_verifySessExp()? redirect('mon_offre'):"";  
@@ -399,6 +403,17 @@ class Mes_coordonnees extends MY_Controller {
         }
         return true;
     }
+    
+    //valid name
+     public function validName($nom=""){
+        $this->controller_verifySessExp()? redirect('mon_offre'):"";  
+        if(!preg_match("/^[a-zA-Z ]*$/",$nom)){
+            $this->form_validation->set_message('validName', "Votre %s '".$nom."' n'est pas valide. Veuillez ressayer.");
+            return false;
+        }
+        return true;
+    }
+    
     
     
     public function verifEmail(){
