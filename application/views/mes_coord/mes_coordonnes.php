@@ -18,11 +18,11 @@ $delaiRetrac = $this->session->userdata("delaiRetrac");
           </div>
          <!-- Nom -->
           <div class="row">
-            <div class='columns two'><label>NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] nom' maxlength='30' name='nom_aa' value="<?php echo set_value("nom_aa",$nom_aa);?>" /></div>
+            <div class='columns two'><label>NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required] nom' maxlength='30' name='nom_aa' value="<?php echo set_value("nom_aa",$nom_aa);?>" /></div>
           </div>
           <!--Prénom -->
           <div class="row">
-            <div class='columns two'><label>PR&Eacute;NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] prenom' maxlength='30' name='prenom_aa' value="<?php echo set_value("prenom_aa",$prenom_aa);?>" /></div>
+            <div class='columns two'><label>PR&Eacute;NOM<span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required] prenom' maxlength='30' name='prenom_aa' value="<?php echo set_value("prenom_aa",$prenom_aa);?>" /></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
@@ -103,11 +103,11 @@ $delaiRetrac = $this->session->userdata("delaiRetrac");
           </div>
           <!-- Nom -->
           <div class="row">
-             <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] nom' maxlength='30' name='nom_af' value="<?php echo set_value("nom_af",$nom_af);?>" /></div>
+             <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required] nom' maxlength='30' name='nom_af' value="<?php echo set_value("nom_af",$nom_af);?>" /></div>
           </div>
           <!--Prénom -->
           <div class="row">
-             <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] prenom' maxlength='30' name='prenom_af' value="<?php echo set_value("prenom_af",$prenom_af);?>" /></div>
+             <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required] prenom' maxlength='30' name='prenom_af' value="<?php echo set_value("prenom_af",$prenom_af);?>" /></div>
           </div>
           <!--Numéro & Complément numéro-->
           <div class="row">
@@ -161,11 +161,11 @@ $delaiRetrac = $this->session->userdata("delaiRetrac");
          
           <!-- Nom -->
           <div class='row'>
-            <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] nom' maxlength='30' name='nom_al' value="<?php echo set_value("nom_al",$nom_al);?>" /></div>
+            <div class='columns two'><label>NOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required] nom' maxlength='30' name='nom_al' value="<?php echo set_value("nom_al",$nom_al);?>" /></div>
           </div>
           <!--Prénom -->
           <div class='row'>
-            <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required] prenom' maxlength='30' name='prenom_al' value="<?php echo set_value("prenom_al",$prenom_al);?>" /></div>
+            <div class='columns two'><label>PRÉNOM <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required] prenom' maxlength='30' name='prenom_al' value="<?php echo set_value("prenom_al",$prenom_al);?>" /></div>
           </div>
           
           

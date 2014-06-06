@@ -510,6 +510,16 @@ var validateEmail = function( field, rules, i, options ){
 	}
 }
 
+var validateName = function( field, rules, i, options ){
+	var name = field.val();
+	var nameRegex = /(‘|"|`|%|!|#)/;
+	if( field.val().length > 0 ) {
+		if(nameRegex.test(name)) {
+			console.log("testing");
+			return 'Ce champ n\'est pas valide';
+		}
+	}
+}
 
 var validateAdd = function( field, rules, i, options ){
 	var adr = field.val();
@@ -532,7 +542,6 @@ var autofocus = function( initialSelector,length,nextSelector){
 	});
 }
 
-//Validate Expiration date
 //Validate Expiration date
 var validateExpDate = function( field, rules, i, options ){
  var today = new Date();

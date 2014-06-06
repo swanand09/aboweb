@@ -34,11 +34,11 @@
              </div>
              <!-- Nom -->
              <div class='row'>
-               <div class='columns two'><label>Nom <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] nom' name='nom_pa' maxlength='30'/></div>
+               <div class='columns two'><label>Nom <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required,custom[onlyLetterSp]] nom' name='nom_pa' maxlength='30'/></div>
              </div>
              <!--Prénom -->
              <div class='row'>
-               <div class='columns two'><label>Prénom <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[required,custom[onlyLetterSp]] prenom' name='prenom_pa' maxlength='30'/></div>
+               <div class='columns two'><label>Prénom <span class='has-tip' title='obligatoire'>*</span></label></div><div class='seven columns end'><input type='text' class='validate[funcCall[validateName],required,custom[onlyLetterSp]] prenom' name='prenom_pa' maxlength='30'/></div>
              </div>
             <!--Numéro & Complément numéro -->
             <div class='row'>
