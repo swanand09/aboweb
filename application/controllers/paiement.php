@@ -72,6 +72,10 @@ class Paiement extends MY_Controller {
         $pays       = $this->session->userdata("pays");
         $iban = $this->session->userdata("iban");
         $bic = $this->session->userdata("bic");
+        $numContrat = "";
+        if(isset($enregistreSouscriptionResult["Numero_contrat"])){
+            $numContrat = $enregistreSouscriptionResult["Numero_contrat"];
+        }
         if(isset($enregistreSouscriptionResult["ImprimerMandat"])){
             $nom        = $enregistreSouscriptionResult["ImprimerMandat"]["Nom"];
             $adresse    = $enregistreSouscriptionResult["ImprimerMandat"]["Voie1"]." ".$enregistreSouscriptionResult["ImprimerMandat"]["Voie2"];
@@ -222,6 +226,11 @@ class Paiement extends MY_Controller {
         $pdf->SetXY(82, 113);
         $pdf->Write(0, utf8_decode($bic[10]));
 
+        //Numéro de contrat
+        $pdf->SetFontSize(9);
+        $pdf->SetXY(37, 253);
+        $pdf->Write(0, utf8_decode($numContrat));
+        
         $pdf->Output('MANDAT-SEPA.pdf','D');
         //$pdf->Output();
         $this->session->destroy();

@@ -207,7 +207,7 @@ class MY_Controller extends CI_Controller {
             $this->data["contenuGauche"] = $this->contenuGauche;
             $this->template
                             ->prepend_metadata(header("Cache-Control: no-cache, must-revalidate"))
-                            ->title('title', 'Mes coordonnés')
+                            ->title('title', 'Mes coordonnées')
                             ->set_partial('contenu_gauche', 'mes_coord/mes_coordonnes')
                             ->set_partial('contenu_droit', 'general/module_recap')    
                             ->build('page',$this->data);
