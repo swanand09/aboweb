@@ -1,3 +1,4 @@
+<?php $delaiRetrac = $this->session->userdata("delaiRetrac"); ?>
 <div class="left-etape-content recapitulatif">
     <div class="row">
 <!--    INSTALLATION    -->
@@ -62,7 +63,7 @@
 <!--<div class='column twelve bottom-20 recap-add'>-->
     <div class="top-20">
         <div class="top-20">
-          <p><strong>Vous souhaitez bénéficier d'une livraison express et vous renoncez ainsi au délai de rétractation de 7 jours.</strong></p>
+          <p><strong>Vous souhaitez bénéficier d'une livraison express et vous renoncez ainsi au délai de rétractation de <?php echo $delaiRetrac; ?> jours.</strong></p>
         </div>
     </div>
 <!--</div>   -->
