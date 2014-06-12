@@ -176,8 +176,7 @@ $(document).on('click','#redu_facture',function(){
 	$(".frm-etape-tester").validationEngine({
 		'custom_error_messages': {
 			'#ligne_sufix': {
-				'custom[integer]': {'message' :" * Seuls les chiffres sont acceptés"},
-				
+				'custom[integer]': {'message' :" * Seuls les chiffres sont acceptés"}
 			}
 		}
 	});

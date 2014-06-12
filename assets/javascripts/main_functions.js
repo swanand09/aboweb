@@ -341,7 +341,7 @@ var preload = function(){
                  $.post(
                     updateFacture,
                      {
-                        typeFacture      : typeFacture,
+                        typeFacture      : typeFacture
                      },
                     function(data){    
                          if(data.error=="redirect"){  

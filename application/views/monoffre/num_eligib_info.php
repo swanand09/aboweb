@@ -22,7 +22,7 @@ $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_rec
                   max: <?php echo $max_emis; ?>,
                   title: "Débit d’émission",
                   label: "Mbps",
-                  levelColors: ['95bc46','95bc46'],
+                  levelColors: ['95bc46','95bc46']
                 });
 
             var g2 = new JustGage({
@@ -32,7 +32,7 @@ $debit_recu = round($result["interrogeEligibiliteResult"]["Ligne"]["Debit_de_rec
                   max: <?php echo $max_recu; ?>,
                   title: "Débit de réception",
                   label: "Mbps",
-                  levelColors: ['95bc46','95bc46'],
+                  levelColors: ['95bc46','95bc46']
                 });
          }
     
