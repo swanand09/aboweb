@@ -19,6 +19,7 @@
         echo css('font.css'); 
         echo css('validationEngine.jquery.css');
         echo css('jquery-ui.css');
+        echo css('combobox.css');
   ?>
    <!--[if IE 7]><?php echo css('ie7.css');?><![endif]-->
   <!--[if IE 8]><?php echo css('ie8.css');?><![endif]-->
@@ -301,6 +302,7 @@
         echo js('languages/jquery.validationEngine-fr.js');
         echo js('custom_main.js');
         echo js('jquery.foundation.reveal.js');
+        echo js('combobox.js');
         echo image('ajax-loader.gif',NULL,array("style"=>"display:none;","id"=>"displayBox"));
    ?> 
   <h3 id="prlodtxt">Veuillez patienter...</h3> 
