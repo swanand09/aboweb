@@ -238,3 +238,6 @@ input#email-contact { width:315px;}
 	float:left;
 	width: 100% !important;
 }
+
+.custom-combobox-input { float: left; width: 170px !important; }
+a.custom-combobox-toggle { height: 32px !important; margin-top:-2px;}

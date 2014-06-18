@@ -10,3 +10,6 @@
 	margin-left: 5px;
 	width:236px;
 }
+
+.custom-combobox-input { float: left; width: 170px !important; }
+a.custom-combobox-toggle { height: 32px !important; }
