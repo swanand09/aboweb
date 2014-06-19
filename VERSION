@@ -1,6 +1,7 @@
 v3.4.1
 FS#5246 - Tunnel Web - Téléchargement Mandat SEPA - Site Page Confirmation 
 FS#5243 - Tunnel Web- saisie du champ adresse =nbre caractères autorisés trop grand
+FS#5233 - Tunnel Web- saisie type de voie ou complement numero eronné= message erreur incoherent 
 FS#5239 - Tunnel Web- saisie mode de paiement CB. saisie du nom du titulaire non limité en nombre de caractère
 FS#5238 - Tunnel Web- fautre orthographe dans le nom de l'onglet de la page web: "coordonnés" 
 FS#4980 - Tunnel Web - Erreur de souscription lors d'une saisie de valeur maximale
