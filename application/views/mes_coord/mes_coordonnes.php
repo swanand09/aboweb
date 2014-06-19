@@ -1608,21 +1608,22 @@ $delaiRetrac = $this->session->userdata("delaiRetrac");
 <script>
     // List of 'codepostal' and 'ville' from webservice
     <?php
-         $codePostalVille = ""; 
-            foreach($wsVille as $key=>$val){
-              if(is_array($val)){
-                if($key==(sizeof($wsVille)-1)){
-                    $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'}";
-                }else{
-                    $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'},";
-                }
-              }else{
-                  $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
-                  break;
-              }
-           }
-
+        $codePostalVille = ""; 
+        foreach($wsVille as $key=>$val){
+          if(is_array($val)){
+            if($key==(sizeof($wsVille)-1)){
+                $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'}";
+            }else{
+                $codePostalVille .= "{'codepostal':'".$val["Code_postal"]."','ville':'".$val["Code_ville"]."'},";
+            }
+          }else{
+              $codePostalVille .= "{'codepostal':'".$wsVille["Code_postal"]."','ville':'".$wsVille["Code_ville"]."'}";
+              break;
+          }
+       }
     ?>
+
+    var WsVilleSet = { "data":[<?php echo $codePostalVille; ?>]};
 
     //ADRESSES ABONNEMENT
     setSelectDefault('#comp_numero_aa', '<?php echo set_value("comp_numero_aa",$comp_numero_aa);?>' );
@@ -1641,5 +1642,11 @@ $delaiRetrac = $this->session->userdata("delaiRetrac");
     setSelectDefault('#type_voie_al', '<?php echo set_value("type_voie_al",$type_voie_al);?>' );
     setSelectDefault('#code_postal_al', '<?php echo set_value("code_postal_al",$code_postal_al);?>' );
     setSelectDefault('#ville_al', '<?php echo set_value("ville_al",$ville_al);?>' );
+
+    $(function(){
+        $('#cmb-code_postal_aa').blur(function(){
+            SetVilleOptions($(this).val(), '#ville_aa', WsVilleSet); 
+        });
+    });
 
 </script>
